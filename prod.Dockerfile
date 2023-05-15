@@ -1,5 +1,5 @@
 # Build environment.
-FROM node:14-alpine AS builder
+FROM node:20-alpine AS builder
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
@@ -25,24 +25,27 @@ RUN echo "$REACT_APP_API_PROTOCOL"
 RUN echo "$REACT_APP_WWW_DOMAIN"
 RUN echo "$REACT_APP_WWW_PROTOCOL"
 
-# Install dependencies
-COPY package.json ./
-COPY yarn.lock ./
-RUN yarn install --frozen-lockfile --network-timeout 1000000
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json /app/
 
-# Copy source code.
-COPY . .
+RUN npm install --production
 
-# Build production instance.
-RUN yarn build
+# Bundle app source
+COPY ./ /app/
+
+RUN npm run build
 
 # Copy into minimalist Nginx server.
 # # SPECIAL THANKS: https://rsbh.dev/blog/dockerize-react-app
-FROM nginx:1.19-alpine AS server
-COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=builder ./app/build /usr/share/nginx/html
+FROM nginx:1.24-alpine AS server
+COPY --from=builder /app/build/ /usr/share/nginx/html
+COPY --from=builder /app/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
-EXPOSE 3000
+EXPOSE 80
+
+# run nginx with global directives and daemon off
 CMD ["nginx", "-g", "daemon off;"]
 
 ### BUILD
