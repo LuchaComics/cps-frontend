@@ -1,0 +1,67 @@
+import { React, useState } from "react";
+import 'bulma/css/bulma.min.css';
+import './index.css';
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route
+} from "react-router-dom";
+import { RecoilRoot } from 'recoil';
+
+import RetailerDashboard from "./Components/Retailer/Dashboard";
+import RetailerSubmissionAdd from "./Components/Retailer/Submission/Add";
+import RetailerSubmissionDetail from "./Components/Retailer/Submission/Detail";
+import RetailerSubmissionUpdate from "./Components/Retailer/Submission/Update";
+import LogoutRedirector from "./Components/Gateway/LogoutRedirector";
+import Login from "./Components/Gateway/Login";
+import Register from "./Components/Gateway/Register";
+import RegisterSuccessful from "./Components/Gateway/RegisterSuccessful";
+import Index from "./Components/Gateway/Index";
+import TopAlertBanner from "./Components/Misc/TopAlertBanner";
+import TopNavigation from "./Components/Misc/TopNavigation";
+import SideNavigation from "./Components/Misc/SideNavigation";
+import NotFoundError from "./Components/Misc/NotFoundError";
+
+
+function AppRoute() {
+    return (
+        <>
+            <RecoilRoot>
+                <Router>
+                    <div>
+                        <TopAlertBanner />
+                        <TopNavigation />
+                    </div>
+                    <section class="main-content columns is-fullheight">
+                        <SideNavigation />
+                        <Routes>
+                            <Route exact path="/dashboard" element={<RetailerDashboard/>}/>
+                            <Route exact path="/submissions" element={<RetailerDashboard/>}/>
+                            <Route exact path="/submissions/add" element={<RetailerSubmissionAdd/>}/>
+                            <Route exact path="/submission/:id" element={<RetailerSubmissionDetail/>}/>
+                            <Route exact path="/submission/:id/edit" element={<RetailerSubmissionUpdate/>}/>
+                            <Route exact path="/register" element={<Register/>}/>
+                            <Route exact path="/register-successful" element={<RegisterSuccessful/>}/>
+                            <Route exact path="/login" element={<Login/>}/>
+                            <Route exact path="/logout" element={<LogoutRedirector/>}/>
+                            <Route exact path="/" element={<Index/>}/>
+                            <Route path="*" element={<NotFoundError/>}/>
+                        </Routes>
+                    </section>
+                    <div>
+                        {/* DEVELOPERS NOTE: Mobile tab-bar menu can go here */}
+                    </div>
+                    <footer class="footer is-hidden">
+                        <div class="container">
+                            <div class="content has-text-centered">
+                                <p>Hello</p>
+                            </div>
+                        </div>
+                    </footer>
+                </Router>
+            </RecoilRoot>
+        </>
+    );
+}
+
+export default AppRoute;
