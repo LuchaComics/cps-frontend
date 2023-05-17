@@ -41,6 +41,7 @@ function RetailerSubmissionAdd() {
     const [issueVol, setIssueVol] = useState("");
     const [issueNo, setIssueNo] = useState("");
     const [issueCoverDate, setIssueCoverDate] = useState("");
+    const [publisherName, setPublisherName] = useState("");
     const [creasesFinding, setCreasesFinding] = useState("");
     const [tearsFinding, setTearsFinding] = useState("");
     const [missingPartsFinding, setMissingPartsFinding] = useState("");
@@ -48,8 +49,7 @@ function RetailerSubmissionAdd() {
     const [distortionFinding, setDistortionFinding] = useState("");
     const [paperQualityFinding, setPaperQualityFinding] = useState("");
     const [spineFinding, setSpineFinding] = useState("");
-    const [otherFinding, setOtherFinding] = useState("");
-    const [otherFindingText, setOtherFindingText] = useState("");
+    const [coverFinding, setCoverFinding] = useState("");
     const [overallLetterGrade, setOverallLetterGrade] = useState("");
 
     ////
@@ -70,6 +70,10 @@ function RetailerSubmissionAdd() {
 
     const onIssueCoverDateChange = (e) => {
         setIssueCoverDate(e.target.value);
+    }
+
+    const onPublisherNameChange = (e) => {
+        setPublisherName(e.target.value);
     }
 
     const onCreasesFindingChange = (e) => {
@@ -104,18 +108,13 @@ function RetailerSubmissionAdd() {
         setSpineFinding(e.target.value);
     }
 
-    const onOtherFindingChange = (e) => {
-        setOtherFinding(e.target.value);
-    }
-
-    const onOtherFindingTextChange = (e) => {
-        setOtherFindingText(e.target.value);
+    const onCoverFindingChange = (e) => {
+        setCoverFinding(e.target.value);
     }
 
     const onOverallLetterGradeChange = (e) => {
         setOverallLetterGrade(e.target.value);
     }
-
 
     const onSubmitClick = (e) => {
         console.log("onSubmitClick: Beginning...");
@@ -124,6 +123,7 @@ function RetailerSubmissionAdd() {
             IssueVol: issueVol,
             IssueNo: issueNo,
             IssueCoverDate: issueCoverDate,
+            PublisherName: publisherName,
             CreasesFinding: creasesFinding,
             TearsFinding: tearsFinding,
             MissingPartsFinding: missingPartsFinding,
@@ -131,8 +131,7 @@ function RetailerSubmissionAdd() {
             DistortionFinding: distortionFinding,
             PaperQualityFinding: paperQualityFinding,
             SpineFinding: spineFinding,
-            OtherFinding: otherFinding,
-            OtherFindingText: otherFindingText,
+            CoverFinding: coverFinding,
             OverallLetterGrade: overallLetterGrade,
         };
         console.log("onSubmitClick, submission:", submission);
@@ -279,6 +278,18 @@ function RetailerSubmissionAdd() {
                                 onChange={onIssueCoverDateChange}
                                 isRequired={true}
                                 maxWidth="180px"
+                            />
+
+                            <FormInputField
+                                label="Publisher Name"
+                                name="publisherName"
+                                placeholder="Text input"
+                                value={publisherName}
+                                errorText={errors && errors.publisherName}
+                                helpText=""
+                                onChange={onPublisherNameChange}
+                                isRequired={true}
+                                maxWidth="280px"
                             />
 
                             <FormRadioField
@@ -443,9 +454,9 @@ function RetailerSubmissionAdd() {
                             />
 
                             <FormRadioField
-                                label="Other Finding"
-                                name="otherFinding"
-                                value={otherFinding}
+                                label="Cover Finding"
+                                name="coverFinding"
+                                value={coverFinding}
                                 opt1Value="pr"
                                 opt1Label="Poor"
                                 opt2Value="fr"
@@ -460,23 +471,10 @@ function RetailerSubmissionAdd() {
                                 opt6Label="Very Fine"
                                 opt7Value="nm"
                                 opt7Label="Near Mint"
-                                errorText={errors && errors.otherFinding}
-                                onChange={onOtherFindingChange}
+                                errorText={errors && errors.coverFinding}
+                                onChange={onCoverFindingChange}
                                 maxWidth="180px"
                             />
-
-                            {otherFinding !== "" &&
-                            <FormInputField
-                                label="Other Finding (Please specify)"
-                                name="otherFindingText"
-                                placeholder="Text input"
-                                value={otherFindingText}
-                                errorText={errors && errors.otherFindingText}
-                                helpText=""
-                                onChange={onOtherFindingTextChange}
-                                isRequired={true}
-                                maxWidth="180px"
-                            />}
 
                             <FormSelectField
                                 label="Overall Letter Grade"
