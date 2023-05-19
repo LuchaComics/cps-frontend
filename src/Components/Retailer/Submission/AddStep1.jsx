@@ -50,6 +50,17 @@ function RetailerSubmissionAddStep1() {
     const [spineFinding, setSpineFinding] = useState("");
     const [coverFinding, setCoverFinding] = useState("");
     const [overallLetterGrade, setOverallLetterGrade] = useState("");
+    const [specialNotesLine1, setSpecialNotesLine1] = useState("");
+    const [specialNotesLine2, setSpecialNotesLine2] = useState("");
+    const [specialNotesLine3, setSpecialNotesLine3] = useState("");
+    const [specialNotesLine4, setSpecialNotesLine4] = useState("");
+    const [specialNotesLine5, setSpecialNotesLine5] = useState("");
+    const [gradingNotesLine1, setGradingNotesLine1] = useState("");
+    const [gradingNotesLine2, setGradingNotesLine2] = useState("");
+    const [gradingNotesLine3, setGradingNotesLine3] = useState("");
+    const [gradingNotesLine4, setGradingNotesLine4] = useState("");
+    const [gradingNotesLine5, setGradingNotesLine5] = useState("");
+    const [showsSignsOfTamperingOrRestoration, setShowsSignsOfTamperingOrRestoration] = useState("");
 
     ////
     //// Event handling.
@@ -115,6 +126,50 @@ function RetailerSubmissionAddStep1() {
         setOverallLetterGrade(e.target.value);
     }
 
+    const onSpecialNotesLine1Change = (e) => {
+        setSpecialNotesLine1(e.target.value);
+    }
+
+    const onSpecialNotesLine2Change = (e) => {
+        setSpecialNotesLine2(e.target.value);
+    }
+
+    const onSpecialNotesLine3Change = (e) => {
+        setSpecialNotesLine3(e.target.value);
+    }
+
+    const onSpecialNotesLine4Change = (e) => {
+        setSpecialNotesLine4(e.target.value);
+    }
+
+    const onSpecialNotesLine5Change = (e) => {
+        setSpecialNotesLine5(e.target.value);
+    }
+
+    const onGradingNotesLine1Change = (e) => {
+        setGradingNotesLine1(e.target.value);
+    }
+
+    const onGradingNotesLine2Change = (e) => {
+        setGradingNotesLine2(e.target.value);
+    }
+
+    const onGradingNotesLine3Change = (e) => {
+        setGradingNotesLine3(e.target.value);
+    }
+
+    const onGradingNotesLine4Change = (e) => {
+        setGradingNotesLine4(e.target.value);
+    }
+
+    const onGradingNotesLine5Change = (e) => {
+        setGradingNotesLine5(e.target.value);
+    }
+
+    const onShowsSignsOfTamperingOrRestorationChange = (e) => {
+        setShowsSignsOfTamperingOrRestoration(e.target.value);
+    }
+
     const onSubmitClick = (e) => {
         console.log("onSubmitClick: Beginning...");
         const submission = {
@@ -123,6 +178,16 @@ function RetailerSubmissionAddStep1() {
             IssueNo: issueNo,
             IssueCoverDate: issueCoverDate,
             PublisherName: publisherName,
+            SpecialNotesLine1: specialNotesLine1,
+            SpecialNotesLine2: specialNotesLine2,
+            SpecialNotesLine3: specialNotesLine3,
+            SpecialNotesLine4: specialNotesLine4,
+            SpecialNotesLine5: specialNotesLine5,
+            GradingNotesLine1: gradingNotesLine1,
+            GradingNotesLine2: gradingNotesLine2,
+            GradingNotesLine3: gradingNotesLine3,
+            GradingNotesLine4: gradingNotesLine4,
+            GradingNotesLine5: gradingNotesLine5,
             CreasesFinding: creasesFinding,
             TearsFinding: tearsFinding,
             MissingPartsFinding: missingPartsFinding,
@@ -132,6 +197,7 @@ function RetailerSubmissionAddStep1() {
             SpineFinding: spineFinding,
             CoverFinding: coverFinding,
             OverallLetterGrade: overallLetterGrade,
+            ShowsSignsOfTamperingOrRestoration: showsSignsOfTamperingOrRestoration === "true",
         };
         console.log("onSubmitClick, submission:", submission);
         postSubmissionCreateAPI(submission, onSubmissionCreateSuccess, onSubmissionCreateError, onSubmissionCreateDone);
@@ -220,7 +286,9 @@ function RetailerSubmissionAddStep1() {
                         <p class="title is-3"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission</p>
                         <FormErrorBox errors={errors} />
 
-                        <p class="subtitle is-4">Details</p>
+                        <p class="pb-4">Please fill out all the required fields before submitting this form.</p>
+
+                        <p class="subtitle is-4">Comic Book Information</p>
 
                         {isFetching && <div class="columns is-centered" style={{paddingTop: "20px"}}>
                             <div class="column has-text-centered is-2">
@@ -290,6 +358,73 @@ function RetailerSubmissionAddStep1() {
                                 isRequired={true}
                                 maxWidth="280px"
                             />
+
+                            <FormInputField
+                                label="Special Note - Line 1 (Optional)"
+                                name="specialNotesLine1"
+                                placeholder="Text input"
+                                value={specialNotesLine1}
+                                errorText={errors && errors.specialNotesLine1}
+                                helpText=""
+                                onChange={onSpecialNotesLine1Change}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 17 characters"}
+                            />
+
+                            <FormInputField
+                                label="Special Note - Line 2 (Optional)"
+                                name="specialNotesLine2"
+                                placeholder="Text input"
+                                value={specialNotesLine2}
+                                errorText={errors && errors.specialNotesLine2}
+                                helpText=""
+                                onChange={onSpecialNotesLine2Change}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 17 characters"}
+                            />
+
+                            <FormInputField
+                                label="Special Note - Line 3 (Optional)"
+                                name="specialNotesLine3"
+                                placeholder="Text input"
+                                value={specialNotesLine3}
+                                errorText={errors && errors.specialNotesLine3}
+                                helpText=""
+                                onChange={onSpecialNotesLine3Change}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 17 characters"}
+                            />
+
+                            <FormInputField
+                                label="Special Note - Line 4 (Optional)"
+                                name="specialNotesLine4"
+                                placeholder="Text input"
+                                value={specialNotesLine4}
+                                errorText={errors && errors.specialNotesLine4}
+                                helpText=""
+                                onChange={onSpecialNotesLine4Change}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 17 characters"}
+                            />
+
+                            <FormInputField
+                                label="Special Note - Line 5 (Optional)"
+                                name="specialNotesLine5"
+                                placeholder="Text input"
+                                value={specialNotesLine5}
+                                errorText={errors && errors.specialNotesLine5}
+                                helpText=""
+                                onChange={onSpecialNotesLine5Change}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 17 characters"}
+                            />
+
+                            <p class="subtitle is-4">Summary of Findings</p>
 
                             <FormRadioField
                                 label="Creases Finding"
@@ -475,6 +610,88 @@ function RetailerSubmissionAddStep1() {
                                 maxWidth="180px"
                             />
 
+                            <FormRadioField
+                                label="Shows signs of tampering/restoration"
+                                name="showsSignsOfTamperingOrRestoration"
+                                value={showsSignsOfTamperingOrRestoration}
+                                opt1Value={"false"}
+                                opt1Label="No"
+                                opt2Value={"true"}
+                                opt2Label="Yes"
+                                errorText={errors && errors.showsSignsOfTamperingOrRestoration}
+                                onChange={onShowsSignsOfTamperingOrRestorationChange}
+                                maxWidth="180px"
+                            />
+
+                            {showsSignsOfTamperingOrRestoration === "true" && <>
+                                <FormInputField
+                                    label="Grading Note - Line 1 (Optional)"
+                                    name="gradingNotesLine1"
+                                    placeholder="Text input"
+                                    value={gradingNotesLine1}
+                                    errorText={errors && errors.gradingNotesLine1}
+                                    helpText=""
+                                    onChange={onGradingNotesLine1Change}
+                                    isRequired={true}
+                                    maxWidth="280px"
+                                    helpText={"Max 17 characters"}
+                                />
+
+                                <FormInputField
+                                    label="Grading Note - Line 2 (Optional)"
+                                    name="gradingNotesLine2"
+                                    placeholder="Text input"
+                                    value={gradingNotesLine2}
+                                    errorText={errors && errors.gradingNotesLine2}
+                                    helpText=""
+                                    onChange={onGradingNotesLine2Change}
+                                    isRequired={true}
+                                    maxWidth="280px"
+                                    helpText={"Max 17 characters"}
+                                />
+
+                                <FormInputField
+                                    label="Grading Note - Line 3 (Optional)"
+                                    name="gradingNotesLine3"
+                                    placeholder="Text input"
+                                    value={gradingNotesLine3}
+                                    errorText={errors && errors.gradingNotesLine3}
+                                    helpText=""
+                                    onChange={onGradingNotesLine3Change}
+                                    isRequired={true}
+                                    maxWidth="280px"
+                                    helpText={"Max 17 characters"}
+                                />
+
+                                <FormInputField
+                                    label="Grading Note - Line 4 (Optional)"
+                                    name="gradingNotesLine4"
+                                    placeholder="Text input"
+                                    value={gradingNotesLine4}
+                                    errorText={errors && errors.gradingNotesLine4}
+                                    helpText=""
+                                    onChange={onGradingNotesLine4Change}
+                                    isRequired={true}
+                                    maxWidth="280px"
+                                    helpText={"Max 17 characters"}
+                                />
+
+                                <FormInputField
+                                    label="Grading Note - Line 5 (Optional)"
+                                    name="gradingNotesLine5"
+                                    placeholder="Text input"
+                                    value={gradingNotesLine5}
+                                    errorText={errors && errors.gradingNotesLine5}
+                                    helpText=""
+                                    onChange={onGradingNotesLine5Change}
+                                    isRequired={true}
+                                    maxWidth="280px"
+                                    helpText={"Max 17 characters"}
+                                />
+                            </>}
+
+                            <p class="subtitle is-4">Grading</p>
+
                             <FormSelectField
                                 label="Overall Letter Grade"
                                 name="overallLetterGrade"
@@ -485,7 +702,6 @@ function RetailerSubmissionAddStep1() {
                                 onChange={onOverallLetterGradeChange}
                                 options={FINDING_OPTIONS}
                             />
-
 
                             <div class="columns">
                                 <div class="column is-half">
