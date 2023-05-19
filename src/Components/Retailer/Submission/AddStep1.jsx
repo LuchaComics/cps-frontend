@@ -288,8 +288,6 @@ function RetailerSubmissionAddStep1() {
 
                         <p class="pb-4">Please fill out all the required fields before submitting this form.</p>
 
-                        <p class="subtitle is-4">Comic Book Information</p>
-
                         {isFetching && <div class="columns is-centered" style={{paddingTop: "20px"}}>
                             <div class="column has-text-centered is-2">
                             <div class="loader-wrapper is-centered">
@@ -299,6 +297,8 @@ function RetailerSubmissionAddStep1() {
                         </div>}
 
                         {!isFetching && <div class="container">
+
+                            <p class="subtitle is-4">Comic Book Information</p>
                             <FormInputField
                                 label="Series Title"
                                 name="seriesTitle"

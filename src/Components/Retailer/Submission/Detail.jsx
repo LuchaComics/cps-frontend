@@ -116,8 +116,6 @@ function RetailerSubmissionDetail() {
                         <p class="title is-3"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission</p>
                         <FormErrorBox errors={errors} />
 
-                        <p class="subtitle is-4">Details</p>
-
                         {isFetching && <div class="columns is-centered" style={{paddingTop: "20px"}}>
                             <div class="column has-text-centered is-2">
                             <div class="loader-wrapper is-centered">
@@ -127,6 +125,9 @@ function RetailerSubmissionDetail() {
                         </div>}
 
                         {!isFetching && <div class="container">
+
+                            <p class="subtitle is-4">Comic Book Information</p>
+
                             {submission && <FormInputField
                                 label="Series Title"
                                 name="seriesTitle"
@@ -170,6 +171,74 @@ function RetailerSubmissionDetail() {
                                 maxWidth="180px"
                                 disabled={true}
                             />}
+
+                            <FormInputField
+                                label="Publisher Name"
+                                name="publisherName"
+                                placeholder="Text input"
+                                value={submission.publisherName}
+                                helpText=""
+                                isRequired={true}
+                                maxWidth="280px"
+                                disabled={true}
+                            />
+
+                            <FormInputField
+                                label="Special Note - Line 1 (Optional)"
+                                name="specialNotesLine1"
+                                placeholder="Text input"
+                                value={submission.specialNotesLine1}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 17 characters"}
+                                disabled={true}
+                            />
+
+                            <FormInputField
+                                label="Special Note - Line 2 (Optional)"
+                                name="specialNotesLine2"
+                                placeholder="Text input"
+                                value={submission.specialNotesLine2}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 17 characters"}
+                                disabled={true}
+                            />
+
+                            <FormInputField
+                                label="Special Note - Line 3 (Optional)"
+                                name="specialNotesLine3"
+                                placeholder="Text input"
+                                value={submission.specialNotesLine3}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 17 characters"}
+                                disabled={true}
+                            />
+
+                            <FormInputField
+                                label="Special Note - Line 4 (Optional)"
+                                name="specialNotesLine4"
+                                placeholder="Text input"
+                                value={submission.specialNotesLine4}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 17 characters"}
+                                disabled={true}
+                            />
+
+                            <FormInputField
+                                label="Special Note - Line 5 (Optional)"
+                                name="specialNotesLine5"
+                                placeholder="Text input"
+                                value={submission.specialNotesLine5}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 17 characters"}
+                                disabled={true}
+                            />
+
+                            <p class="subtitle is-4">Summary of Findings</p>
 
                             {submission && <FormRadioField
                                 label="Creases Finding"
@@ -325,39 +394,76 @@ function RetailerSubmissionDetail() {
                                 disabled={true}
                             />}
 
-                            {submission && <FormRadioField
-                                label="Other Finding"
-                                name="otherFinding"
-                                value={submission.otherFinding}
-                                opt1Value="pr"
-                                opt1Label="Poor"
-                                opt2Value="fr"
-                                opt2Label="Fair"
-                                opt3Value="gd"
-                                opt3Label="Good"
-                                opt4Value="vg"
-                                opt4Label="Very good"
-                                opt5Value="fn"
-                                opt5Label="Fine"
-                                opt6Value="vf"
-                                opt6Label="Very Fine"
-                                opt7Value="nm"
-                                opt7Label="Near Mint"
+                            <FormRadioField
+                                label="Shows signs of tampering/restoration"
+                                name="showsSignsOfTamperingOrRestoration"
+                                value={submission.showsSignsOfTamperingOrRestoration}
+                                opt1Value={"false"}
+                                opt1Label="No"
+                                opt2Value={"true"}
+                                opt2Label="Yes"
                                 maxWidth="180px"
                                 disabled={true}
-                            />}
+                            />
 
-                            {submission && submission.otherFinding !== "" &&
-                            <FormInputField
-                                label="Other Finding (Please specify)"
-                                name="otherFindingText"
-                                placeholder="Text input"
-                                value={submission.otherFindingText}
-                                helpText=""
-                                isRequired={true}
-                                maxWidth="180px"
-                                disabled={true}
-                            />}
+                            {submission.showsSignsOfTamperingOrRestoration === "true" && <>
+                                <FormInputField
+                                    label="Grading Note - Line 1 (Optional)"
+                                    name="gradingNotesLine1"
+                                    placeholder="Text input"
+                                    value={submission.gradingNotesLine1}
+                                    isRequired={true}
+                                    maxWidth="280px"
+                                    helpText={"Max 17 characters"}
+                                    disabled={true}
+                                />
+
+                                <FormInputField
+                                    label="Grading Note - Line 2 (Optional)"
+                                    name="gradingNotesLine2"
+                                    placeholder="Text input"
+                                    value={submission.gradingNotesLine2}
+                                    isRequired={true}
+                                    maxWidth="280px"
+                                    helpText={"Max 17 characters"}
+                                    disabled={true}
+                                />
+
+                                <FormInputField
+                                    label="Grading Note - Line 3 (Optional)"
+                                    name="gradingNotesLine3"
+                                    placeholder="Text input"
+                                    value={submission.gradingNotesLine3}
+                                    isRequired={true}
+                                    maxWidth="280px"
+                                    helpText={"Max 17 characters"}
+                                    disabled={true}
+                                />
+
+                                <FormInputField
+                                    label="Grading Note - Line 4 (Optional)"
+                                    name="gradingNotesLine4"
+                                    placeholder="Text input"
+                                    value={submission.gradingNotesLine4}
+                                    isRequired={true}
+                                    maxWidth="280px"
+                                    helpText={"Max 17 characters"}
+                                    disabled={true}
+                                />
+
+                                <FormInputField
+                                    label="Grading Note - Line 5 (Optional)"
+                                    name="gradingNotesLine5"
+                                    placeholder="Text input"
+                                    value={submission.gradingNotesLine5}
+                                    isRequired={true}
+                                    maxWidth="280px"
+                                    helpText={"Max 17 characters"}
+                                    disabled={true}
+                                />
+                            </>}
+
+                            <p class="subtitle is-4">Grading</p>
 
                             {submission && <FormSelectField
                                 label="Overall Letter Grade"

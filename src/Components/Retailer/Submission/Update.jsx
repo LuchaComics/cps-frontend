@@ -347,8 +347,6 @@ function RetailerSubmissionUpdate() {
 
                         <p class="pb-4">Please fill out all the required fields before submitting this form.</p>
 
-                        <p class="subtitle is-4">Comic Book Information</p>
-
                         {isFetching && <div class="columns is-centered" style={{paddingTop: "20px"}}>
                             <div class="column has-text-centered is-2">
                             <div class="loader-wrapper is-centered">
@@ -358,6 +356,9 @@ function RetailerSubmissionUpdate() {
                         </div>}
 
                         {!isFetching && <div class="container">
+
+                            <p class="subtitle is-4">Comic Book Information</p>
+
                             <FormInputField
                                 label="Series Title"
                                 name="seriesTitle"
@@ -764,8 +765,8 @@ function RetailerSubmissionUpdate() {
 
                             <div class="columns">
                                 <div class="column is-half">
-                                    <Link to={`/submissions`} class="button is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                    <Link to={`/submissions`} class="button is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                    <Link to={`/submission/${id}`} class="button is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                    <Link to={`/submission/${id}`} class="button is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                 </div>
                                 <div class="column is-half has-text-right">
                                     <button class="button is-primary is-hidden-touch" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
