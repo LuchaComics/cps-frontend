@@ -71,6 +71,12 @@ export function getSubmissionDetailAPI(submissionID, onSuccessCallback, onErrorC
         // Snake-case from API to camel-case for React.
         const data = camelizeKeys(responseData);
 
+        // Minor bugfix.
+        data.showsSignsOfTamperingOrRestoration = String(data.showsSignsOfTamperingOrRestoration);
+
+        // For debugging purposeso pnly.
+        console.log(data);
+
         // Return the callback data.
         onSuccessCallback(data);
     }).catch( (exception) => {
