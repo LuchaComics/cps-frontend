@@ -9,7 +9,8 @@ import {
 import { RecoilRoot } from 'recoil';
 
 import RetailerDashboard from "./Components/Retailer/Dashboard";
-import RetailerSubmissionAdd from "./Components/Retailer/Submission/Add";
+import RetailerSubmissionAddStep1 from "./Components/Retailer/Submission/AddStep1";
+import RetailerSubmissionAddStep2 from "./Components/Retailer/Submission/AddStep2";
 import RetailerSubmissionDetail from "./Components/Retailer/Submission/Detail";
 import RetailerSubmissionUpdate from "./Components/Retailer/Submission/Update";
 import LogoutRedirector from "./Components/Gateway/LogoutRedirector";
@@ -37,7 +38,8 @@ function AppRoute() {
                         <Routes>
                             <Route exact path="/dashboard" element={<RetailerDashboard/>}/>
                             <Route exact path="/submissions" element={<RetailerDashboard/>}/>
-                            <Route exact path="/submissions/add" element={<RetailerSubmissionAdd/>}/>
+                            <Route exact path="/submissions/add" element={<RetailerSubmissionAddStep1/>}/>
+                            <Route exact path="/submissions/add/:id/confirmation" element={<RetailerSubmissionAddStep2/>}/>
                             <Route exact path="/submission/:id" element={<RetailerSubmissionDetail/>}/>
                             <Route exact path="/submission/:id/edit" element={<RetailerSubmissionUpdate/>}/>
                             <Route exact path="/register" element={<Register/>}/>

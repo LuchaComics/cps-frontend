@@ -3,7 +3,6 @@ import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
-import Select from 'react-select'
 import { useRecoilState } from 'recoil';
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
@@ -18,7 +17,7 @@ import { FINDING_OPTIONS } from "../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
-function RetailerSubmissionAdd() {
+function RetailerSubmissionAddStep1() {
     ////
     ////
     ////
@@ -157,7 +156,7 @@ function RetailerSubmissionAdd() {
         }, 2000);
 
         // Redirect the user to a new page.
-        setForceURL("/submission/"+response.id);
+        setForceURL("/submissions/add/"+response.id+"/confirmation");
     }
 
     function onSubmissionCreateError(apiErr) {
@@ -507,4 +506,4 @@ function RetailerSubmissionAdd() {
     );
 }
 
-export default RetailerSubmissionAdd;
+export default RetailerSubmissionAddStep1;
