@@ -370,12 +370,11 @@ function RetailerSubmissionDetail() {
                             />}
 
                             <div class="column is-half">
-                                <a href={submission.fileUploadDownloadableFileURL} target="_blank" class="button is-hidden-touch"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Download PDF</a>
-                                <a href={submission.fileUploadDownloadableFileURL} target="_blank" class="button is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Download PDF</a>
+                                <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-hidden-touch"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Download PDF</a>
+                                <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Download PDF</a>
                             </div>
 
-
-                            <div class="columns">
+                            <div class="columns pt-4">
                                 <div class="column is-half">
                                     <Link to={`/submissions`} class="button is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                     <Link to={`/submissions`} class="button is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
