@@ -684,72 +684,70 @@ function RetailerSubmissionUpdate() {
                                 maxWidth="180px"
                             />
 
-                            {showsSignsOfTamperingOrRestoration === "true" && <>
-                                <FormInputField
-                                    label="Grading Note - Line 1 (Optional)"
-                                    name="gradingNotesLine1"
-                                    placeholder="Text input"
-                                    value={gradingNotesLine1}
-                                    errorText={errors && errors.gradingNotesLine1}
-                                    helpText=""
-                                    onChange={onGradingNotesLine1Change}
-                                    isRequired={true}
-                                    maxWidth="280px"
-                                    helpText={"Max 17 characters"}
-                                />
+                            <FormInputField
+                                label="Grading Note - Line 1 (Optional)"
+                                name="gradingNotesLine1"
+                                placeholder="Text input"
+                                value={gradingNotesLine1}
+                                errorText={errors && errors.gradingNotesLine1}
+                                helpText=""
+                                onChange={onGradingNotesLine1Change}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 17 characters"}
+                            />
 
-                                <FormInputField
-                                    label="Grading Note - Line 2 (Optional)"
-                                    name="gradingNotesLine2"
-                                    placeholder="Text input"
-                                    value={gradingNotesLine2}
-                                    errorText={errors && errors.gradingNotesLine2}
-                                    helpText=""
-                                    onChange={onGradingNotesLine2Change}
-                                    isRequired={true}
-                                    maxWidth="280px"
-                                    helpText={"Max 17 characters"}
-                                />
+                            <FormInputField
+                                label="Grading Note - Line 2 (Optional)"
+                                name="gradingNotesLine2"
+                                placeholder="Text input"
+                                value={gradingNotesLine2}
+                                errorText={errors && errors.gradingNotesLine2}
+                                helpText=""
+                                onChange={onGradingNotesLine2Change}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 17 characters"}
+                            />
 
-                                <FormInputField
-                                    label="Grading Note - Line 3 (Optional)"
-                                    name="gradingNotesLine3"
-                                    placeholder="Text input"
-                                    value={gradingNotesLine3}
-                                    errorText={errors && errors.gradingNotesLine3}
-                                    helpText=""
-                                    onChange={onGradingNotesLine3Change}
-                                    isRequired={true}
-                                    maxWidth="280px"
-                                    helpText={"Max 17 characters"}
-                                />
+                            <FormInputField
+                                label="Grading Note - Line 3 (Optional)"
+                                name="gradingNotesLine3"
+                                placeholder="Text input"
+                                value={gradingNotesLine3}
+                                errorText={errors && errors.gradingNotesLine3}
+                                helpText=""
+                                onChange={onGradingNotesLine3Change}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 17 characters"}
+                            />
 
-                                <FormInputField
-                                    label="Grading Note - Line 4 (Optional)"
-                                    name="gradingNotesLine4"
-                                    placeholder="Text input"
-                                    value={gradingNotesLine4}
-                                    errorText={errors && errors.gradingNotesLine4}
-                                    helpText=""
-                                    onChange={onGradingNotesLine4Change}
-                                    isRequired={true}
-                                    maxWidth="280px"
-                                    helpText={"Max 17 characters"}
-                                />
+                            <FormInputField
+                                label="Grading Note - Line 4 (Optional)"
+                                name="gradingNotesLine4"
+                                placeholder="Text input"
+                                value={gradingNotesLine4}
+                                errorText={errors && errors.gradingNotesLine4}
+                                helpText=""
+                                onChange={onGradingNotesLine4Change}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 17 characters"}
+                            />
 
-                                <FormInputField
-                                    label="Grading Note - Line 5 (Optional)"
-                                    name="gradingNotesLine5"
-                                    placeholder="Text input"
-                                    value={gradingNotesLine5}
-                                    errorText={errors && errors.gradingNotesLine5}
-                                    helpText=""
-                                    onChange={onGradingNotesLine5Change}
-                                    isRequired={true}
-                                    maxWidth="280px"
-                                    helpText={"Max 17 characters"}
-                                />
-                            </>}
+                            <FormInputField
+                                label="Grading Note - Line 5 (Optional)"
+                                name="gradingNotesLine5"
+                                placeholder="Text input"
+                                value={gradingNotesLine5}
+                                errorText={errors && errors.gradingNotesLine5}
+                                helpText=""
+                                onChange={onGradingNotesLine5Change}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 17 characters"}
+                            />
 
                             <p class="subtitle is-4">Grading</p>
 
