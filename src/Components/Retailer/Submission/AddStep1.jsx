@@ -13,7 +13,7 @@ import FormTextareaField from "../../Element/FormTextareaField";
 import FormRadioField from "../../Element/FormRadioField";
 import FormMultiSelectField from "../../Element/FormMultiSelectField";
 import FormSelectField from "../../Element/FormSelectField";
-import { FINDING_OPTIONS } from "../../../Constants/FieldOptions";
+import { FINDING_WITH_EMPTY_OPTIONS } from "../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
@@ -700,7 +700,7 @@ function RetailerSubmissionAddStep1() {
                                 errorText={errors && errors.overallLetterGrade}
                                 helpText=""
                                 onChange={onOverallLetterGradeChange}
-                                options={FINDING_OPTIONS}
+                                options={FINDING_WITH_EMPTY_OPTIONS}
                             />
 
                             <div class="columns">
