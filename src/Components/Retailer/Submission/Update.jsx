@@ -227,6 +227,7 @@ function RetailerSubmissionUpdate() {
         setDistortionFinding(response.distortionFinding);
         setPaperQualityFinding(response.paperQualityFinding);
         setSpineFinding(response.spineFinding);
+        setCoverFinding(response.coverFinding);
         setOverallLetterGrade(response.overallLetterGrade);
         setSpecialNotesLine1(response.specialNotesLine1);
         setSpecialNotesLine2(response.specialNotesLine2);
