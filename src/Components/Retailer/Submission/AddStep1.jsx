@@ -13,7 +13,7 @@ import FormTextareaField from "../../Element/FormTextareaField";
 import FormRadioField from "../../Element/FormRadioField";
 import FormMultiSelectField from "../../Element/FormMultiSelectField";
 import FormSelectField from "../../Element/FormSelectField";
-import { FINDING_WITH_EMPTY_OPTIONS, OVERALL_GRADE_WITH_EMPTY_OPTIONS } from "../../../Constants/FieldOptions";
+import { FINDING_WITH_EMPTY_OPTIONS, OVERALL_GRADE_WITH_EMPTY_OPTIONS, PUBLISHER_NAME_WITH_EMPTY_OPTIONS } from "../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
@@ -41,6 +41,7 @@ function RetailerSubmissionAddStep1() {
     const [issueNo, setIssueNo] = useState("");
     const [issueCoverDate, setIssueCoverDate] = useState("");
     const [publisherName, setPublisherName] = useState("");
+    const [publisherNameOther, setPublisherNameOther] = useState("");
     const [creasesFinding, setCreasesFinding] = useState("");
     const [tearsFinding, setTearsFinding] = useState("");
     const [missingPartsFinding, setMissingPartsFinding] = useState("");
@@ -85,6 +86,10 @@ function RetailerSubmissionAddStep1() {
 
     const onPublisherNameChange = (e) => {
         setPublisherName(e.target.value);
+    }
+
+    const onPublisherNameOtherChange = (e) => {
+        setPublisherNameOther(e.target.value);
     }
 
     const onCreasesFindingChange = (e) => {
@@ -185,6 +190,7 @@ function RetailerSubmissionAddStep1() {
             IssueNo: issueNo,
             IssueCoverDate: issueCoverDate,
             PublisherName: publisherName,
+            PublisherNameOther: publisherNameOther,
             SpecialNotesLine1: specialNotesLine1,
             SpecialNotesLine2: specialNotesLine2,
             SpecialNotesLine3: specialNotesLine3,
@@ -357,17 +363,28 @@ function RetailerSubmissionAddStep1() {
                                 maxWidth="180px"
                             />
 
-                            <FormInputField
+                            <FormSelectField
                                 label="Publisher Name"
                                 name="publisherName"
-                                placeholder="Text input"
-                                value={publisherName}
+                                placeholder="Publisher Name"
+                                selectedValue={publisherName}
                                 errorText={errors && errors.publisherName}
                                 helpText=""
                                 onChange={onPublisherNameChange}
+                                options={PUBLISHER_NAME_WITH_EMPTY_OPTIONS}
+                            />
+
+                            {publisherName === "Other" && <FormInputField
+                                label="Publisher Name (Other)"
+                                name="publisherNameOther"
+                                placeholder="Text input"
+                                value={publisherNameOther}
+                                errorText={errors && errors.publisherNameOther}
+                                helpText=""
+                                onChange={onPublisherNameOtherChange}
                                 isRequired={true}
                                 maxWidth="280px"
-                            />
+                            />}
 
                             <FormInputField
                                 label="Special Note - Line 1 (Optional)"

@@ -79,3 +79,28 @@ export const OVERALL_GRADE_WITH_EMPTY_OPTIONS = [
     { value:9.8, label: '9.8' },
     { value:10.0, label: '10.0' }
 ];
+
+export const PUBLISHER_NAME_WITH_EMPTY_OPTIONS = [
+    { value: "", label: "Please select" }, // EMPTY OPTION
+    { value: "DC", label: 'DC' },
+    { value: "Marvel", label: 'Marvel' },
+    { value: "Image", label: 'Image' },
+    { value: "Studiocomix", label: 'Studiocomix' },
+    { value: "Lucha", label: 'Lucha' },
+    { value: "Boom! Studios", label: 'Boom! Studios' },
+    { value: "Dark Horse Comics", label: 'Dark Horse Comics' },
+    { value: "IDW", label: 'IDW' },
+    { value: "Other", label: 'Other (Please specify)' },
+];
+
+export const PUBLISHER_NAME_OPTIONS = [
+    { value: "DC", label: 'DC' },
+    { value: "Marvel", label: 'Marvel' },
+    { value: "Image", label: 'Image' },
+    { value: "Studiocomix", label: 'Studiocomix' },
+    { value: "Lucha", label: 'Lucha' },
+    { value: "Boom! Studios", label: 'Boom! Studios' },
+    { value: "Dark Horse Comics", label: 'Dark Horse Comics' },
+    { value: "IDW", label: 'IDW' },
+    { value: "Other", label: 'Other (Please specify)' },
+];

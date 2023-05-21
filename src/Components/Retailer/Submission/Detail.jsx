@@ -15,7 +15,7 @@ import FormTextareaField from "../../Element/FormTextareaField";
 import FormRadioField from "../../Element/FormRadioField";
 import FormMultiSelectField from "../../Element/FormMultiSelectField";
 import FormSelectField from "../../Element/FormSelectField";
-import { FINDING_OPTIONS, OVERALL_GRADE_OPTIONS } from "../../../Constants/FieldOptions";
+import { FINDING_OPTIONS, OVERALL_GRADE_OPTIONS, PUBLISHER_NAME_OPTIONS } from "../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
@@ -172,16 +172,26 @@ function RetailerSubmissionDetail() {
                                 disabled={true}
                             />}
 
-                            <FormInputField
+                            <FormSelectField
                                 label="Publisher Name"
                                 name="publisherName"
+                                placeholder="Publisher Name"
+                                selectedValue={submission.publisherName}
+                                helpText=""
+                                options={PUBLISHER_NAME_OPTIONS}
+                                disabled={true}
+                            />
+
+                            {submission.publisherName === "Other" && <FormInputField
+                                label="Publisher Name (Other)"
+                                name="publisherNameOther"
                                 placeholder="Text input"
-                                value={submission.publisherName}
+                                value={submission.publisherNameOther}
                                 helpText=""
                                 isRequired={true}
                                 maxWidth="280px"
                                 disabled={true}
-                            />
+                            />}
 
                             <FormInputField
                                 label="Special Note - Line 1 (Optional)"
