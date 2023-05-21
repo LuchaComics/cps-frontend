@@ -15,7 +15,7 @@ import FormTextareaField from "../../Element/FormTextareaField";
 import FormRadioField from "../../Element/FormRadioField";
 import FormMultiSelectField from "../../Element/FormMultiSelectField";
 import FormSelectField from "../../Element/FormSelectField";
-import { FINDING_OPTIONS } from "../../../Constants/FieldOptions";
+import { FINDING_OPTIONS, OVERALL_GRADE_OPTIONS } from "../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
@@ -398,9 +398,9 @@ function RetailerSubmissionDetail() {
                                 label="Shows signs of tampering/restoration"
                                 name="showsSignsOfTamperingOrRestoration"
                                 value={submission.showsSignsOfTamperingOrRestoration}
-                                opt1Value={"false"}
+                                opt1Value={"2"}
                                 opt1Label="No"
-                                opt2Value={"true"}
+                                opt2Value={"1"}
                                 opt2Label="Yes"
                                 maxWidth="180px"
                                 disabled={true}
@@ -470,6 +470,16 @@ function RetailerSubmissionDetail() {
                                 selectedValue={submission.overallLetterGrade}
                                 helpText=""
                                 options={FINDING_OPTIONS}
+                                disabled={true}
+                            />}
+
+                            {submission && <FormSelectField
+                                label="Overall Grade"
+                                name="overallGrade"
+                                placeholder="Overall Grade"
+                                selectedValue={submission.overallGrade}
+                                helpText=""
+                                options={OVERALL_GRADE_OPTIONS}
                                 disabled={true}
                             />}
 

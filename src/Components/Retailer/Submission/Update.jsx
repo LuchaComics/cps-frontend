@@ -15,7 +15,7 @@ import FormTextareaField from "../../Element/FormTextareaField";
 import FormRadioField from "../../Element/FormRadioField";
 import FormMultiSelectField from "../../Element/FormMultiSelectField";
 import FormSelectField from "../../Element/FormSelectField";
-import { FINDING_OPTIONS } from "../../../Constants/FieldOptions";
+import { FINDING_OPTIONS, OVERALL_GRADE_OPTIONS } from "../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
@@ -54,6 +54,7 @@ function RetailerSubmissionUpdate() {
     const [spineFinding, setSpineFinding] = useState("");
     const [coverFinding, setCoverFinding] = useState("");
     const [overallLetterGrade, setOverallLetterGrade] = useState("");
+    const [overallGrade, setOverallGrade] = useState("");
     const [specialNotesLine1, setSpecialNotesLine1] = useState("");
     const [specialNotesLine2, setSpecialNotesLine2] = useState("");
     const [specialNotesLine3, setSpecialNotesLine3] = useState("");
@@ -130,6 +131,10 @@ function RetailerSubmissionUpdate() {
         setOverallLetterGrade(e.target.value);
     }
 
+    const onOverallGradeChange = (e) => {
+        setOverallGrade(e.target.value);
+    }
+
     const onSpecialNotesLine1Change = (e) => {
         setSpecialNotesLine1(e.target.value);
     }
@@ -177,6 +182,8 @@ function RetailerSubmissionUpdate() {
 
     const onSubmitClick = (e) => {
         console.log("onSubmitClick: Beginning...");
+
+        // Generate the payload.
         const submission = {
             ID: id,
             SeriesTitle: seriesTitle,
@@ -203,8 +210,11 @@ function RetailerSubmissionUpdate() {
             SpineFinding: spineFinding,
             CoverFinding: coverFinding,
             OverallLetterGrade: overallLetterGrade,
-            ShowsSignsOfTamperingOrRestoration: showsSignsOfTamperingOrRestoration === "true",
+            OverallGrade: parseFloat(overallGrade),
+            ShowsSignsOfTamperingOrRestoration: parseInt(showsSignsOfTamperingOrRestoration)
         };
+
+        // Submit to the backend.
         console.log("onSubmitClick, submission:", submission);
         putSubmissionUpdateAPI(submission, onSubmissionUpdateSuccess, onSubmissionUpdateError, onSubmissionUpdateDone);
     }
@@ -229,6 +239,7 @@ function RetailerSubmissionUpdate() {
         setSpineFinding(response.spineFinding);
         setCoverFinding(response.coverFinding);
         setOverallLetterGrade(response.overallLetterGrade);
+        setOverallGrade(response.overallGrade);
         setSpecialNotesLine1(response.specialNotesLine1);
         setSpecialNotesLine2(response.specialNotesLine2);
         setSpecialNotesLine3(response.specialNotesLine3);
@@ -675,9 +686,9 @@ function RetailerSubmissionUpdate() {
                                 label="Shows signs of tampering/restoration"
                                 name="showsSignsOfTamperingOrRestoration"
                                 value={showsSignsOfTamperingOrRestoration}
-                                opt1Value={"false"}
+                                opt1Value={"2"}
                                 opt1Label="No"
-                                opt2Value={"true"}
+                                opt2Value={"1"}
                                 opt2Label="Yes"
                                 errorText={errors && errors.showsSignsOfTamperingOrRestoration}
                                 onChange={onShowsSignsOfTamperingOrRestorationChange}
@@ -760,6 +771,17 @@ function RetailerSubmissionUpdate() {
                                 helpText=""
                                 onChange={onOverallLetterGradeChange}
                                 options={FINDING_OPTIONS}
+                            />
+
+                            <FormSelectField
+                                label="Overall Grade"
+                                name="overallGrade"
+                                placeholder="Overall Grade"
+                                selectedValue={overallGrade}
+                                errorText={errors && errors.overallGrade}
+                                helpText=""
+                                onChange={onOverallGradeChange}
+                                options={OVERALL_GRADE_OPTIONS}
                             />
 
                             <div class="columns">
