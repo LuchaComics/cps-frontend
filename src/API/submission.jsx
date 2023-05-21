@@ -91,7 +91,28 @@ export function putSubmissionUpdateAPI(data, onSuccessCallback, onErrorCallback,
     // To Snake-case for API from camel-case in React.
     let decamelizedData = decamelizeKeys(data);
 
+    // Minor bugfixes.
     decamelizedData.id = data.ID;
+    decamelizedData.special_notes_line_1 = decamelizedData.special_notes_line1;
+    decamelizedData.special_notes_line_2 = decamelizedData.special_notes_line2;
+    decamelizedData.special_notes_line_3 = decamelizedData.special_notes_line3;
+    decamelizedData.special_notes_line_4 = decamelizedData.special_notes_line4;
+    decamelizedData.special_notes_line_5 = decamelizedData.special_notes_line5;
+    delete decamelizedData.special_notes_line1;
+    delete decamelizedData.special_notes_line2;
+    delete decamelizedData.special_notes_line3;
+    delete decamelizedData.special_notes_line4;
+    delete decamelizedData.special_notes_line5;
+    decamelizedData.grading_notes_line_1 = decamelizedData.grading_notes_line1;
+    decamelizedData.grading_notes_line_2 = decamelizedData.grading_notes_line2;
+    decamelizedData.grading_notes_line_3 = decamelizedData.grading_notes_line3;
+    decamelizedData.grading_notes_line_4 = decamelizedData.grading_notes_line4;
+    decamelizedData.grading_notes_line_5 = decamelizedData.grading_notes_line5;
+    delete decamelizedData.grading_notes_line1;
+    delete decamelizedData.grading_notes_line2;
+    delete decamelizedData.grading_notes_line3;
+    delete decamelizedData.grading_notes_line4;
+    delete decamelizedData.grading_notes_line5;
 
     axios.put(CPS_SUBMISSION_API_ENDPOINT.replace("{id}", decamelizedData.id), decamelizedData).then((successResponse) => {
         const responseData = successResponse.data;
