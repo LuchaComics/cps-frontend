@@ -13,7 +13,12 @@ import FormTextareaField from "../../Element/FormTextareaField";
 import FormRadioField from "../../Element/FormRadioField";
 import FormMultiSelectField from "../../Element/FormMultiSelectField";
 import FormSelectField from "../../Element/FormSelectField";
-import { FINDING_WITH_EMPTY_OPTIONS, OVERALL_GRADE_WITH_EMPTY_OPTIONS, PUBLISHER_NAME_WITH_EMPTY_OPTIONS } from "../../../Constants/FieldOptions";
+import {
+    FINDING_WITH_EMPTY_OPTIONS,
+    OVERALL_NUMBER_GRADE_WITH_EMPTY_OPTIONS,
+    PUBLISHER_NAME_WITH_EMPTY_OPTIONS,
+    CPS_PERCENTAGE_GRADE_WITH_EMPTY_OPTIONS
+} from "../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
@@ -50,8 +55,10 @@ function RetailerSubmissionAddStep1() {
     const [paperQualityFinding, setPaperQualityFinding] = useState("");
     const [spineFinding, setSpineFinding] = useState("");
     const [coverFinding, setCoverFinding] = useState("");
+    const [gradingScale, setGradingScale] = useState(0);
     const [overallLetterGrade, setOverallLetterGrade] = useState("");
-    const [overallGrade, setOverallGrade] = useState("");
+    const [overallNumberGrade, setOverallNumberGrade] = useState("");
+    const [cpsPercentageGrade, setCpsPercentageGrade] = useState("");
     const [specialNotesLine1, setSpecialNotesLine1] = useState("");
     const [specialNotesLine2, setSpecialNotesLine2] = useState("");
     const [specialNotesLine3, setSpecialNotesLine3] = useState("");
@@ -128,12 +135,20 @@ function RetailerSubmissionAddStep1() {
         setCoverFinding(e.target.value);
     }
 
+    const onGradingScaleChange = (e) => {
+        setGradingScale(parseInt(e.target.value));
+    }
+
     const onOverallLetterGradeChange = (e) => {
         setOverallLetterGrade(e.target.value);
     }
 
-    const onOverallGradeChange = (e) => {
-        setOverallGrade(e.target.value);
+    const onOverallNumberGradeChange = (e) => {
+        setOverallNumberGrade(e.target.value);
+    }
+
+    const onCpsPercentageGradeChange = (e) => {
+        setCpsPercentageGrade(e.target.value);
     }
 
     const onSpecialNotesLine1Change = (e) => {
@@ -209,8 +224,10 @@ function RetailerSubmissionAddStep1() {
             PaperQualityFinding: paperQualityFinding,
             SpineFinding: spineFinding,
             CoverFinding: coverFinding,
+            GradingScale: parseInt(gradingScale),
             OverallLetterGrade: overallLetterGrade,
-            OverallGrade: parseFloat(overallGrade),
+            OverallNumberGrade: parseFloat(overallNumberGrade),
+            CpsPercentageGrade: parseFloat(cpsPercentageGrade),
             ShowsSignsOfTamperingOrRestoration: parseInt(showsSignsOfTamperingOrRestoration)
         };
 
@@ -717,7 +734,22 @@ function RetailerSubmissionAddStep1() {
 
                             <p class="subtitle is-4">Grading</p>
 
-                            <FormSelectField
+                            <FormRadioField
+                                label="Which type of grading scale would you prefer?"
+                                name="gradingScale"
+                                value={gradingScale}
+                                opt1Value={1}
+                                opt1Label="Letter Grade (Poor-Near Mint)"
+                                opt2Value={2}
+                                opt2Label="Numbers (0.5-10.0)"
+                                opt3Value={3}
+                                opt3Label="CPS Percentage (5%-100%)"
+                                errorText={errors && errors.gradingScale}
+                                onChange={onGradingScaleChange}
+                                maxWidth="180px"
+                            />
+
+                            {gradingScale === 1 && <FormSelectField
                                 label="Overall Letter Grade"
                                 name="overallLetterGrade"
                                 placeholder="Overall Letter Grade"
@@ -726,18 +758,29 @@ function RetailerSubmissionAddStep1() {
                                 helpText=""
                                 onChange={onOverallLetterGradeChange}
                                 options={FINDING_WITH_EMPTY_OPTIONS}
-                            />
+                            />}
 
-                            <FormSelectField
-                                label="Overall Grade"
-                                name="overallGrade"
-                                placeholder="Overall Grade"
-                                selectedValue={overallGrade}
-                                errorText={errors && errors.overallGrade}
+                            {gradingScale === 2 && <FormSelectField
+                                label="Overall Number Grade"
+                                name="overallNumberGrade"
+                                placeholder="Overall Number Grade"
+                                selectedValue={overallNumberGrade}
+                                errorText={errors && errors.overallNumberGrade}
                                 helpText=""
-                                onChange={onOverallGradeChange}
-                                options={OVERALL_GRADE_WITH_EMPTY_OPTIONS}
-                            />
+                                onChange={onOverallNumberGradeChange}
+                                options={OVERALL_NUMBER_GRADE_WITH_EMPTY_OPTIONS}
+                            />}
+
+                            {gradingScale === 3 && <FormSelectField
+                                label="CPS Percentage Grade"
+                                name="cpsPercentageGrade"
+                                placeholder="CPS Percentage Grade"
+                                selectedValue={cpsPercentageGrade}
+                                errorText={errors && errors.cpsPercentageGrade}
+                                helpText=""
+                                onChange={onCpsPercentageGradeChange}
+                                options={CPS_PERCENTAGE_GRADE_WITH_EMPTY_OPTIONS}
+                            />}
 
                             <div class="columns">
                                 <div class="column is-half">

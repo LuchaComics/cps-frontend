@@ -15,7 +15,12 @@ import FormTextareaField from "../../Element/FormTextareaField";
 import FormRadioField from "../../Element/FormRadioField";
 import FormMultiSelectField from "../../Element/FormMultiSelectField";
 import FormSelectField from "../../Element/FormSelectField";
-import { FINDING_OPTIONS, OVERALL_GRADE_OPTIONS, PUBLISHER_NAME_OPTIONS } from "../../../Constants/FieldOptions";
+import {
+    FINDING_OPTIONS,
+    OVERALL_NUMBER_GRADE_OPTIONS,
+    PUBLISHER_NAME_OPTIONS,
+    CPS_PERCENTAGE_GRADE_OPTIONS
+} from "../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
@@ -473,7 +478,20 @@ function RetailerSubmissionDetail() {
 
                             <p class="subtitle is-4">Grading</p>
 
-                            {submission && <FormSelectField
+                            <FormRadioField
+                                label="Which type of grading scale would you prefer?"
+                                name="gradingScale"
+                                value={parseInt(submission.gradingScale)}
+                                opt1Value={1}
+                                opt1Label="Letter Grade (Poor-Near Mint)"
+                                opt2Value={2}
+                                opt2Label="Numbers (0.5-10.0)"
+                                opt3Value={3}
+                                opt3Label="CPS Percentage (5%-100%)"
+                                maxWidth="180px"
+                            />
+
+                            {submission && submission.gradingScale === 1 && <FormSelectField
                                 label="Overall Letter Grade"
                                 name="overallLetterGrade"
                                 placeholder="Overall Letter Grade"
@@ -483,13 +501,23 @@ function RetailerSubmissionDetail() {
                                 disabled={true}
                             />}
 
-                            {submission && <FormSelectField
-                                label="Overall Grade"
-                                name="overallGrade"
-                                placeholder="Overall Grade"
-                                selectedValue={submission.overallGrade}
+                            {submission && submission.gradingScale === 2 && <FormSelectField
+                                label="Overall Number Grade"
+                                name="overallNumberGrade"
+                                placeholder="Overall Number Grade"
+                                selectedValue={submission.overallNumberGrade}
                                 helpText=""
-                                options={OVERALL_GRADE_OPTIONS}
+                                options={OVERALL_NUMBER_GRADE_OPTIONS}
+                                disabled={true}
+                            />}
+
+                            {submission && submission.gradingScale === 3 && <FormSelectField
+                                label="CPS Percentage Grade"
+                                name="cpsPercentageGrade"
+                                placeholder="CPS Percentage Grade"
+                                selectedValue={submission.cpsPercentageGrade}
+                                helpText=""
+                                options={CPS_PERCENTAGE_GRADE_OPTIONS}
                                 disabled={true}
                             />}
 
