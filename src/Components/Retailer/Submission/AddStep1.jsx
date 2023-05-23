@@ -558,7 +558,7 @@ function RetailerSubmissionAddStep1() {
                             />
 
                             <FormRadioField
-                                label="Stains Finding"
+                                label="Stains/Marks/Substances"
                                 name="stainsFinding"
                                 value={stainsFinding}
                                 opt1Value="pr"

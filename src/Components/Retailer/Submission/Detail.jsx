@@ -322,7 +322,7 @@ function RetailerSubmissionDetail() {
                             />}
 
                             {submission && <FormRadioField
-                                label="Stains Finding"
+                                label="Stains/Marks/Substances"
                                 name="stainsFinding"
                                 value={submission.stainsFinding}
                                 opt1Value="pr"
