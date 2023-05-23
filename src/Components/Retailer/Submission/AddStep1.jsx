@@ -70,6 +70,7 @@ function RetailerSubmissionAddStep1() {
     const [gradingNotesLine4, setGradingNotesLine4] = useState("");
     const [gradingNotesLine5, setGradingNotesLine5] = useState("");
     const [showsSignsOfTamperingOrRestoration, setShowsSignsOfTamperingOrRestoration] = useState("");
+    const [showCancelWarning, setShowCancelWarning] = useState(false);
 
     ////
     //// Event handling.
@@ -316,6 +317,23 @@ function RetailerSubmissionAddStep1() {
                         </ul>
                     </nav>
                     <nav class="box">
+                        <div class={`modal ${showCancelWarning ? 'is-active' : ''}`}>
+                            <div class="modal-background"></div>
+                            <div class="modal-card">
+                                <header class="modal-card-head">
+                                    <p class="modal-card-title">Are you sure?</p>
+                                    <button class="delete" aria-label="close" onClick={(e)=>setShowCancelWarning(false)}></button>
+                                </header>
+                                <section class="modal-card-body">
+                                    Your submission will be cancelled and your work will be lost. This cannot be undone. Do you want to continue?
+                                </section>
+                                <footer class="modal-card-foot">
+                                    <Link class="button is-success" to={`/dashboard`}>Yes</Link>
+                                    <button class="button" onClick={(e)=>setShowCancelWarning(false)}>No</button>
+                                </footer>
+                            </div>
+                        </div>
+
                         <p class="title is-3"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission</p>
                         <FormErrorBox errors={errors} />
 
@@ -784,8 +802,8 @@ function RetailerSubmissionAddStep1() {
 
                             <div class="columns">
                                 <div class="column is-half">
-                                    <Link to={`/submissions`} class="button is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                    <Link to={`/submissions`} class="button is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                    <button class="button is-hidden-touch" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
+                                    <button class="button is-fullwidth is-hidden-desktop" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
                                 </div>
                                 <div class="column is-half has-text-right">
                                     <button class="button is-primary is-hidden-touch" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
