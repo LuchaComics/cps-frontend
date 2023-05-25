@@ -3,7 +3,9 @@ import { camelizeKeys, decamelizeKeys } from 'humps';
 import {
     CPS_LOGIN_API_ENDPOINT,
     CPS_VERSION_ENDPOINT,
-    CPS_REGISTER_API_ENDPOINT
+    CPS_REGISTER_API_ENDPOINT,
+    CPS_EMAIL_VERIFICATION_API_ENDPOINT,
+    CPS_LOGOUT_API_ENDPOINT
 } from "../Constants/API";
 
 import {
@@ -119,6 +121,49 @@ export function getVersionAPI(onSuccessCallback, onErrorCallback, onDoneCallback
 
         // Return the callback data.
         onSuccessCallback(data);
+    }).catch( (exception) => {
+        let errors = camelizeKeys(exception);
+        onErrorCallback(errors);
+    }).then(onDoneCallback);
+}
+
+export function postEmailVerificationAPI(verificationCode, onSuccessCallback, onErrorCallback, onDoneCallback) {
+    const axios = getCustomAxios();
+    let data = {
+        code: verificationCode,
+    };
+    axios.post(CPS_EMAIL_VERIFICATION_API_ENDPOINT, data).then((successResponse) => {
+        onSuccessCallback(null);
+    }).catch( (exception) => {
+        let responseData = null;
+        if (exception.response !== undefined && exception.response !== null) {
+            if (exception.response.data !== undefined && exception.response.data !== null) {
+                responseData = exception.response.data;
+            } else {
+                responseData = exception.response;
+            }
+        } else {
+            responseData = exception;
+        }
+        let errors = camelizeKeys(responseData);
+
+        // Check for incorrect password and enter our own custom error.
+        let errorsStr = JSON.stringify(errors);
+        if (errorsStr.includes("Incorrect email or password")) { // NOTE: This is the exact error from backend on incorrect email/pass.
+            errors = {
+                "auth": "Incorrect email or password",
+            };
+        }
+
+        onErrorCallback(errors);
+    }).then(onDoneCallback);
+}
+
+export function postLogoutAPI(onSuccessCallback, onErrorCallback, onDoneCallback) {
+    const axios = getCustomAxios();
+    let data = {};
+    axios.post(CPS_LOGOUT_API_ENDPOINT, data).then((successResponse) => {
+        onSuccessCallback(null);
     }).catch( (exception) => {
         let errors = camelizeKeys(exception);
         onErrorCallback(errors);

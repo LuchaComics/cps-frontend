@@ -65,6 +65,8 @@ function RegisterSuccessful() {
                                             <p>Thank you for registering, please wait 24 hours for an activation email to be sent to your inbox.</p>
 
                                         </form>
+                                        <br />
+                                        <p><a href="/">Back to index</a></p>
 
                                     </div>
                                     {/* End box */}

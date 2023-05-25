@@ -19,6 +19,7 @@ function TopNavigation() {
         "/index",
         "/login",
         "/logout",
+        "/verify",
     ];
     const location = useLocation();
     var arrayLength = ignorePathsArr.length;

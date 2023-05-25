@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-    faTachometer, faTasks, faSignOut
+    faTachometer, faTasks, faSignOut, faUserCircle
 } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 
@@ -23,6 +23,7 @@ function SideNavigation() {
         "/register-successful",
         "/login",
         "/logout",
+        "/verify"
     ];
     const location = useLocation();
     var arrayLength = ignorePathsArr.length;
@@ -68,18 +69,21 @@ function SideNavigation() {
                                 <FontAwesomeIcon className="fas" icon={faTachometer} />&nbsp;Dashboard
                             </Link>
                         </li>
-                        {/*
                         <li>
-                            <Link to="/dashboard" class={`has-text-grey-light ${location.pathname.includes("submission") && "is-active"}`}>
+                            <Link to="/submissions" class={`has-text-grey-light ${location.pathname.includes("submission") && "is-active"}`}>
                                 <FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions
                             </Link>
                         </li>
-                         */}
                     </ul>
                     <p class="menu-label has-text-grey-light">
                         Account
                     </p>
                     <ul class="menu-list">
+                        <li>
+                            <Link class={`has-text-grey-light ${location.pathname.includes("account") && "is-active"}`} to={`/account`}>
+                                <FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Account
+                            </Link>
+                        </li>
                         <li>
                             <Link class={`has-text-grey-light ${location.pathname.includes("logout") && "is-active"}`} onClick={(e)=>setShowLogoutWarning(true)}>
                                 <FontAwesomeIcon className="fas" icon={faSignOut} />&nbsp;Sign Off

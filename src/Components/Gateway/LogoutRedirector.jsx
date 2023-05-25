@@ -1,9 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { postLogoutAPI } from "../../API/gateway";
+import Scroll from 'react-scroll';
+
 
 function LogoutRedirector() {
-    useEffect(() => {
-        window.scrollTo(0, 0);  // Start the page at the top of the page.
-        
+
+    ////
+    //// Component states.
+    ////
+
+    const [errors, setErrors] = useState({});
+
+    ////
+    //// API.
+    ////
+
+    function onLogoutnSuccess(response){
+        console.log("onLogoutnSuccess: Starting...");
+    }
+
+    function onLogoutnError(apiErr) {
+        console.log("onLogoutnError: Starting...");
+        setErrors(apiErr);
+
+        // The following code will cause the screen to scroll to the top of
+        // the page. Please see ``react-scroll`` for more information:
+        // https://github.com/fisshy/react-scroll
+        var scroll = Scroll.animateScroll;
+        scroll.scrollToTop();
+    }
+
+    function onLogoutnDone() {
+        console.log("onLogoutnDone: Starting...");
         function onRedirect(e) {
             // Clear the entire local storage.
             localStorage.clear();
@@ -16,7 +44,31 @@ function LogoutRedirector() {
         }
 
         setTimeout(onRedirect, 250);
-    });
+    }
+
+    ////
+    //// Event handling.
+    ////
+
+    // (Do nothing)
+
+    ////
+    //// Misc.
+    ////
+
+    useEffect(() => {
+        let mounted = true;
+
+        if (mounted) {
+            postLogoutAPI(
+                onLogoutnSuccess,
+                onLogoutnError,
+                onLogoutnDone
+            );
+        }
+
+        return () => mounted = false;
+    }, []);
 
     return (
         <>
