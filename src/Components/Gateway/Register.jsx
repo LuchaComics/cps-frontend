@@ -15,7 +15,7 @@ import FormRadioField from "../Element/FormRadioField";
 import FormMultiSelectField from "../Element/FormMultiSelectField";
 import FormSelectField from "../Element/FormSelectField";
 import FormCheckboxField from "../Element/FormCheckboxField";
-// import { OVERALL_LETTER_GRADE_OPTIONS } from "../../Constants/FieldOptions";
+import { HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS } from "../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState } from "../../AppState";
 
 
@@ -53,6 +53,8 @@ function Register() {
     const [country, setCountry] = useState("");
     const [agreePromotionsEmail, setHasPromotionalEmail] = useState(true);
     const [agreeTOS, setAgreeTOS] = useState();
+    const [howDidYouHearAboutUs, setHowDidYouHearAboutUs] = useState(0);
+    const [howDidYouHearAboutUsOther, setHowDidYouHearAboutUsOther] = useState("");
 
     ////
     //// Event handling.
@@ -110,6 +112,14 @@ function Register() {
         setCountry(e.target.value);
     }
 
+    function onHowDidYouHearAboutUsChange(e) {
+        setHowDidYouHearAboutUs(parseInt(e.target.value));
+    }
+
+    function onHowDidYouHearAboutUsOtherChange(e) {
+        setHowDidYouHearAboutUsOther(e.target.value);
+    }
+
     function onAgreePromotionsEmailChange(e) {
         setHasPromotionalEmail(!agreePromotionsEmail);
     }
@@ -136,6 +146,8 @@ function Register() {
             Country: country,
             AgreeTOS: agreeTOS,
             AgreePromotionsEmail: agreePromotionsEmail,
+            HowDidYouHearAboutUs: howDidYouHearAboutUs,
+            HowDidYouHearAboutUsOther: howDidYouHearAboutUsOther,
         };
         console.log("onSubmitClick, submission:", submission);
         postRegisterAPI(submission, onRegisterSuccess, onRegisterError, onRegisterDone);
@@ -372,7 +384,7 @@ function Register() {
                                 maxWidth="380px"
                             />
 
-                            <p class="subtitle is-4">Company</p>
+                            <p class="subtitle is-4">Company & Misc.</p>
 
                             <FormInputField
                                 label="Company Name"
@@ -385,6 +397,29 @@ function Register() {
                                 isRequired={true}
                                 maxWidth="380px"
                             />
+
+                            <FormSelectField
+                                label="How did you hear about us?"
+                                name="howDidYouHearAboutUs"
+                                placeholder="Pick"
+                                selectedValue={howDidYouHearAboutUs}
+                                errorText={errors && errors.howDidYouHearAboutUs}
+                                helpText=""
+                                onChange={onHowDidYouHearAboutUsChange}
+                                options={HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS}
+                            />
+
+                            {howDidYouHearAboutUs === 1 && <FormInputField
+                                label="Other (Please specify):"
+                                name="howDidYouHearAboutUsOther"
+                                placeholder="Text input"
+                                value={howDidYouHearAboutUsOther}
+                                errorText={errors && errors.howDidYouHearAboutUsOther}
+                                helpText=""
+                                onChange={onHowDidYouHearAboutUsOtherChange}
+                                isRequired={true}
+                                maxWidth="380px"
+                            />}
 
                             <FormCheckboxField
                                 label="I agree to receive updates from CPS and its partners via email"

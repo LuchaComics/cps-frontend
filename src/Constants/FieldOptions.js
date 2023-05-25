@@ -153,3 +153,24 @@ export const CPS_PERCENTAGE_GRADE_OPTIONS = [
     { value:98, label: '98%' },
     { value:100, label: '100%' }
 ];
+
+export const HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS = [
+    { value: 0, label: "Please select" }, // EMPTY OPTION
+    { value: 2, label: 'My local comic book shop' },
+    { value: 3, label: 'CPS website' },
+    { value: 4, label: 'Comic Con booth' },
+    { value: 5, label: 'Friend' },
+    { value: 6, label: 'Social media' },
+    { value: 7, label: 'Blog post article' },
+    { value: 1, label: 'Other (Please specify)' },
+];
+
+export const HOW_DID_YOU_HEAR_ABOUT_US_OPTIONS = [
+    { value: 2, label: 'My local comic book shop' },
+    { value: 3, label: 'CPS website' },
+    { value: 4, label: 'Comic Con booth' },
+    { value: 5, label: 'Friend' },
+    { value: 6, label: 'Social media' },
+    { value: 7, label: 'Blog post article' },
+    { value: 1, label: 'Other (Please specify)' },
+];
