@@ -349,7 +349,7 @@ function Register() {
                             />
 
                             <FormInputField
-                                label="Address Line 2"
+                                label="Address Line 2 (Optional)"
                                 name="addressLine2"
                                 placeholder="Text input"
                                 value={addressLine2}
