@@ -237,18 +237,7 @@ function AccountDetail() {
                                 disabled={true}
                             />
 
-                            <p class="subtitle is-4">Company</p>
-
-                            <FormInputField
-                                label="Company Name"
-                                name="companyName"
-                                placeholder="Text input"
-                                value={profile.companyName}
-                                helpText=""
-                                isRequired={true}
-                                maxWidth="380px"
-                                disabled={true}
-                            />
+                            <p class="subtitle is-4">Misc</p>
 
                             <FormCheckboxField
                                 label="I agree to receive updates from CPS and its partners via email"

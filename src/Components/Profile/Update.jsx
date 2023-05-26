@@ -387,19 +387,7 @@ function ProfileUpdate() {
                                 maxWidth="380px"
                             />
 
-                            <p class="subtitle is-4">Company</p>
-
-                            <FormInputField
-                                label="Company Name"
-                                name="companyName"
-                                placeholder="Text input"
-                                value={companyName}
-                                errorText={errors && errors.companyName}
-                                helpText=""
-                                onChange={onCompanyNameChange}
-                                isRequired={true}
-                                maxWidth="380px"
-                            />
+                            <p class="subtitle is-4">Metrics</p>
 
                             <FormCheckboxField
                                 label="I agree to receive updates from CPS and its partners via email"

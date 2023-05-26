@@ -364,19 +364,7 @@ function RetailerCustomerAdd() {
                                 maxWidth="380px"
                             />
 
-                            <p class="subtitle is-4">Company & Metrics</p>
-
-                            <FormInputField
-                                label="Company Name"
-                                name="companyName"
-                                placeholder="Text input"
-                                value={companyName}
-                                errorText={errors && errors.companyName}
-                                helpText=""
-                                onChange={onCompanyNameChange}
-                                isRequired={true}
-                                maxWidth="380px"
-                            />
+                            <p class="subtitle is-4">Metrics</p>
 
                             <FormSelectField
                                 label="How did you hear about us?"
