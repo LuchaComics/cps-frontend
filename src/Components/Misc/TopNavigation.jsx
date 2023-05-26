@@ -36,8 +36,8 @@ function TopNavigation() {
         <>
             <nav class="navbar has-background-black" role="navigation" aria-label="main navigation">
                 <div class="navbar-brand">
-                    <a class="navbar-item" href="/dashboard">
-                    CPS
+                    <a class="navbar-item" href="/dashboard" style={{color:"white"}}>
+                        <img src="/static/CPS logo 2023 square.webp" width={54} height={28} alt="Logo Image" />&nbsp;Canadian Protective Services
                     </a>
                     <a role="button" class="navbar-burger has-text-white" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={()=>setOnHamburgerClicked(!onHamburgerClicked)}>
                         <span aria-hidden="true">
