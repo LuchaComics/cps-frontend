@@ -62,8 +62,7 @@ function RegisterSuccessful() {
                                         <form>
                                             <h1 className="title is-3 has-text-centered">Registration was Successful</h1>
                                             <FormErrorBox errors={errors} />
-                                            <p>Thank you for registering, please wait 24 hours for an activation email to be sent to your inbox.</p>
-
+                                            <p>Thank you for registering - an activation email has bee sent to you. Please be sure to check your social, promotions and spam folders if it does not arrive within 5 minutes.</p>
                                         </form>
                                         <br />
                                         <p><a href="/">Back to index</a></p>
