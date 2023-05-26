@@ -9,3 +9,5 @@ export const CPS_LOGOUT_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/logout";
 export const CPS_SUBMISSIONS_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/submissions";
 export const CPS_SUBMISSION_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/submission/{id}";
 export const CPS_PROFILE_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/profile";
+export const CPS_CUSTOMERS_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/customers";
+export const CPS_CUSTOMER_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/customer/{id}";

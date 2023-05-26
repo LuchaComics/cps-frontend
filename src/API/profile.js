@@ -29,6 +29,7 @@ export function putProfileUpdateAPI(data, onSuccessCallback, onErrorCallback, on
 
     // Minor fix.
     decamelizedData.address_line_1 = decamelizedData.address_line1;
+    decamelizedData.address_line_2 = decamelizedData.address_line2;
 
     axios.put(CPS_PROFILE_API_ENDPOINT, decamelizedData).then((successResponse) => {
         const responseData = successResponse.data;

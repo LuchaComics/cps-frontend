@@ -76,7 +76,7 @@ function RetailerDashboard() {
                               Manage the customers that belong to your organization.
                               <br />
                               <br />
-                              <i>Coming soon</i>
+                              <Link to={"/customers"}>View&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
                             </p>
                           </div>
                         </section>

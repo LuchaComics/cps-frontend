@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-    faTachometer, faTasks, faSignOut, faUserCircle
+    faTachometer, faTasks, faSignOut, faUserCircle, faUsers, faBuilding
 } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 
@@ -74,6 +74,11 @@ function SideNavigation() {
                                 <FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions
                             </Link>
                         </li>
+                        <li>
+                            <Link to="/customers" class={`has-text-grey-light ${location.pathname.includes("customer") && "is-active"}`}>
+                                <FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers
+                            </Link>
+                        </li>
                     </ul>
                     <p class="menu-label has-text-grey-light">
                         Account
@@ -82,6 +87,11 @@ function SideNavigation() {
                         <li>
                             <Link class={`has-text-grey-light ${location.pathname.includes("account") && "is-active"}`} to={`/account`}>
                                 <FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Account
+                            </Link>
+                        </li>
+                        <li>
+                            <Link class={`has-text-grey-light ${location.pathname.includes("organization") && "is-active"}`} to={`/organization`}>
+                                <FontAwesomeIcon className="fas" icon={faBuilding} />&nbsp;Organization
                             </Link>
                         </li>
                         <li>

@@ -14,6 +14,10 @@ import RetailerSubmissionAddStep1 from "./Components/Retailer/Submission/AddStep
 import RetailerSubmissionAddStep2 from "./Components/Retailer/Submission/AddStep2";
 import RetailerSubmissionDetail from "./Components/Retailer/Submission/Detail";
 import RetailerSubmissionUpdate from "./Components/Retailer/Submission/Update";
+import RetailerCustomerList from "./Components/Retailer/Customer/List";
+import RetailerCustomerAdd from "./Components/Retailer/Customer/Add";
+import RetailerCustomerDetail from "./Components/Retailer/Customer/Detail";
+import RetailerCustomerUpdate from "./Components/Retailer/Customer/Update";
 import LogoutRedirector from "./Components/Gateway/LogoutRedirector";
 import Login from "./Components/Gateway/Login";
 import Register from "./Components/Gateway/Register";
@@ -46,6 +50,10 @@ function AppRoute() {
                             <Route exact path="/submissions/add/:id/confirmation" element={<RetailerSubmissionAddStep2/>}/>
                             <Route exact path="/submission/:id" element={<RetailerSubmissionDetail/>}/>
                             <Route exact path="/submission/:id/edit" element={<RetailerSubmissionUpdate/>}/>
+                            <Route exact path="/customers" element={<RetailerCustomerList/>}/>
+                            <Route exact path="/customers/add" element={<RetailerCustomerAdd/>}/>
+                            <Route exact path="/customer/:id" element={<RetailerCustomerDetail/>}/>
+                            <Route exact path="/customer/:id/edit" element={<RetailerCustomerUpdate/>}/>
                             <Route exact path="/account" element={<ProfileDetail/>}/>
                             <Route exact path="/account/update" element={<ProfileUpdate/>}/>
                             <Route exact path="/register" element={<Register/>}/>

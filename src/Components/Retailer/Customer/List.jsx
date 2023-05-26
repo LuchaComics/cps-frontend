@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTasks, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge } from '@fortawesome/free-solid-svg-icons';
+import { faUsers, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge } from '@fortawesome/free-solid-svg-icons';
 import { useRecoilState } from 'recoil';
 
-import { getSubmissionListAPI, deleteSubmissionAPI } from "../../../API/submission";
+import { getCustomerListAPI, deleteCustomerAPI } from "../../../API/customer";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 import { SUBMISSION_STATES } from "../../../Constants/FieldOptions";
 
 
-function RetailerSubmissionList() {
+function RetailerCustomerList() {
 
     ////
     //// Global state.
@@ -24,23 +24,23 @@ function RetailerSubmissionList() {
     ////
 
     const [setErrors] = useState({});
-    const [submissions, setSubmissions] = useState("");
-    const [selectedSubmissionForDeletion, setSelectedSubmissionForDeletion] = useState("");
+    const [customers, setCustomers] = useState("");
+    const [selectedCustomerForDeletion, setSelectedCustomerForDeletion] = useState("");
     const [isFetching, setFetching] = useState(false);
 
     ////
     //// API.
     ////
 
-    function onSubmissionListSuccess(response){
-        console.log("onSubmissionListSuccess: Starting...");
+    function onCustomerListSuccess(response){
+        console.log("onCustomerListSuccess: Starting...");
         if (response.results !== null) {
-            setSubmissions(response);
+            setCustomers(response);
         }
     }
 
-    function onSubmissionListError(apiErr) {
-        console.log("onSubmissionListError: Starting...");
+    function onCustomerListError(apiErr) {
+        console.log("onCustomerListError: Starting...");
         setErrors(apiErr);
 
         // The following code will cause the screen to scroll to the top of
@@ -50,17 +50,17 @@ function RetailerSubmissionList() {
         scroll.scrollToTop();
     }
 
-    function onSubmissionListDone() {
-        console.log("onSubmissionListDone: Starting...");
+    function onCustomerListDone() {
+        console.log("onCustomerListDone: Starting...");
         setFetching(false);
     }
 
-    function onSubmissionDeleteSuccess(response){
-        console.log("onSubmissionDeleteSuccess: Starting..."); // For debugging purposes only.
+    function onCustomerDeleteSuccess(response){
+        console.log("onCustomerDeleteSuccess: Starting..."); // For debugging purposes only.
 
         // Update notification.
         setTopAlertStatus("success");
-        setTopAlertMessage("Submission deleted");
+        setTopAlertMessage("Customer deleted");
         setTimeout(() => {
             console.log("onDeleteConfirmButtonClick: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
@@ -70,15 +70,15 @@ function RetailerSubmissionList() {
         fetchList();
     }
 
-    function onSubmissionDeleteError(apiErr) {
-        console.log("onSubmissionDeleteError: Starting..."); // For debugging purposes only.
+    function onCustomerDeleteError(apiErr) {
+        console.log("onCustomerDeleteError: Starting..."); // For debugging purposes only.
         setErrors(apiErr);
 
         // Update notification.
         setTopAlertStatus("danger");
         setTopAlertMessage("Failed deleting");
         setTimeout(() => {
-            console.log("onSubmissionDeleteError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
+            console.log("onCustomerDeleteError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
         }, 2000);
 
@@ -89,8 +89,8 @@ function RetailerSubmissionList() {
         scroll.scrollToTop();
     }
 
-    function onSubmissionDeleteDone() {
-        console.log("onSubmissionDeleteDone: Starting...");
+    function onCustomerDeleteDone() {
+        console.log("onCustomerDeleteDone: Starting...");
         setFetching(false);
     }
 
@@ -100,33 +100,33 @@ function RetailerSubmissionList() {
 
     const fetchList = () => {
         setFetching(true);
-        getSubmissionListAPI(
-            onSubmissionListSuccess,
-            onSubmissionListError,
-            onSubmissionListDone
+        getCustomerListAPI(
+            onCustomerListSuccess,
+            onCustomerListError,
+            onCustomerListDone
         );
     }
 
-    const onSelectSubmissionForDeletion = (e, submission) => {
-        console.log("onSelectSubmissionForDeletion", submission);
-        setSelectedSubmissionForDeletion(submission);
+    const onSelectCustomerForDeletion = (e, customer) => {
+        console.log("onSelectCustomerForDeletion", customer);
+        setSelectedCustomerForDeletion(customer);
     }
 
-    const onDeselectSubmissionForDeletion = (e) => {
-        console.log("onDeselectSubmissionForDeletion");
-        setSelectedSubmissionForDeletion("");
+    const onDeselectCustomerForDeletion = (e) => {
+        console.log("onDeselectCustomerForDeletion");
+        setSelectedCustomerForDeletion("");
     }
 
     const onDeleteConfirmButtonClick = (e) => {
         console.log("onDeleteConfirmButtonClick"); // For debugging purposes only.
 
-        deleteSubmissionAPI(
-            selectedSubmissionForDeletion.id,
-            onSubmissionDeleteSuccess,
-            onSubmissionDeleteError,
-            onSubmissionDeleteDone
+        deleteCustomerAPI(
+            selectedCustomerForDeletion.id,
+            onCustomerDeleteSuccess,
+            onCustomerDeleteError,
+            onCustomerDeleteDone
         );
-        setSelectedSubmissionForDeletion("");
+        setSelectedCustomerForDeletion("");
 
     }
 
@@ -156,38 +156,38 @@ function RetailerSubmissionList() {
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
                             <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
-                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
+                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers</Link></li>
                         </ul>
                     </nav>
                     <nav class="box">
-                        <div class={`modal ${selectedSubmissionForDeletion ? 'is-active' : ''}`}>
+                        <div class={`modal ${selectedCustomerForDeletion ? 'is-active' : ''}`}>
                             <div class="modal-background"></div>
                             <div class="modal-card">
                                 <header class="modal-card-head">
                                     <p class="modal-card-title">Are you sure?</p>
-                                    <button class="delete" aria-label="close" onClick={onDeselectSubmissionForDeletion}></button>
+                                    <button class="delete" aria-label="close" onClick={onDeselectCustomerForDeletion}></button>
                                 </header>
                                 <section class="modal-card-body">
-                                    You are about to delete this submission and all the data inside of it. This action is cannot be undone. Are you sure you would like to continue?
+                                    You are about to delete this customer and all the data inside of it. This action is cannot be undone. Are you sure you would like to continue?
                                 </section>
                                 <footer class="modal-card-foot">
                                     <button class="button is-success" onClick={onDeleteConfirmButtonClick}>Confirm</button>
-                                    <button class="button" onClick={onDeselectSubmissionForDeletion}>Cancel</button>
+                                    <button class="button" onClick={onDeselectCustomerForDeletion}>Cancel</button>
                                 </footer>
                             </div>
                         </div>
 
                         <div class="columns">
                             <div class="column">
-                                <h1 class="title is-1"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission</h1>
+                                <h1 class="title is-1"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers</h1>
                             </div>
                             <div class="column has-text-right">
                                 {/* Mobile Specific */}
-                                <Link to={`/submissions/add`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
+                                <Link to={`/customers/add`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add
                                 </Link>
                                 {/* Desktop Specific */}
-                                <Link to={`/submissions/add`} class="button is-small is-success is-hidden-touch" type="button">
+                                <Link to={`/customers/add`} class="button is-small is-success is-hidden-touch" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add
                                 </Link>
                             </div>
@@ -207,32 +207,26 @@ function RetailerSubmissionList() {
                                     <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
                                         <thead>
                                             <tr>
-                                                <th>Title</th>
-                                                <th>Vol</th>
-                                                <th>No</th>
-                                                <th>State</th>
+                                                <th>Name</th>
                                                 <th>Created</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
 
-                                            {submissions && submissions.results && submissions.results.map(function(submission, i){
+                                            {customers && customers.results && customers.results.map(function(customer, i){
                                                 return <tr>
-                                                    <td data-label="Title">{submission.seriesTitle}</td>
-                                                    <td data-label="Vol">{submission.issueVol}</td>
-                                                    <td data-label="No">{submission.issueNo}</td>
-                                                    <td data-label="State">{SUBMISSION_STATES[submission.state]}</td>
-                                                    <td data-label="Created">{submission.createdAt}</td>
+                                                    <td data-label="Title">{customer.name}</td>
+                                                    <td data-label="Created">{customer.createdAt}</td>
                                                     <td class="is-actions-cell">
                                                         <div class="buttons is-right">
-                                                            <Link to={`/submission/${submission.id}`} class="button is-small is-primary" type="button">
+                                                            <Link to={`/customer/${customer.id}`} class="button is-small is-primary" type="button">
                                                                 <FontAwesomeIcon className="mdi" icon={faEye} />&nbsp;View
                                                             </Link>
-                                                            <Link to={`/submission/${submission.id}/edit`} class="button is-small is-warning" type="button">
+                                                            <Link to={`/customer/${customer.id}/edit`} class="button is-small is-warning" type="button">
                                                                 <FontAwesomeIcon className="mdi" icon={faPencil} />&nbsp;Edit
                                                             </Link>
-                                                            <button onClick={(e, ses) => onSelectSubmissionForDeletion(e, submission)} class="button is-small is-danger" type="button">
+                                                            <button onClick={(e, ses) => onSelectCustomerForDeletion(e, customer)} class="button is-small is-danger" type="button">
                                                                 <FontAwesomeIcon className="mdi" icon={faTrashCan} />&nbsp;Delete
                                                             </button>
                                                         </div>
@@ -251,4 +245,4 @@ function RetailerSubmissionList() {
     );
 }
 
-export default RetailerSubmissionList;
+export default RetailerCustomerList;
