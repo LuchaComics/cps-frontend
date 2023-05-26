@@ -30,6 +30,8 @@ import NotFoundError from "./Components/Misc/NotFoundError";
 import EmailVerification from "./Components/Gateway/EmailVerification";
 import ProfileDetail from "./Components/Profile/Detail";
 import ProfileUpdate from "./Components/Profile/Update";
+import OrganizationDetail from "./Components/Organization/Detail";
+import OrganizationUpdate from "./Components/Organization/Update";
 
 
 function AppRoute() {
@@ -56,6 +58,8 @@ function AppRoute() {
                             <Route exact path="/customer/:id/edit" element={<RetailerCustomerUpdate/>}/>
                             <Route exact path="/account" element={<ProfileDetail/>}/>
                             <Route exact path="/account/update" element={<ProfileUpdate/>}/>
+                            <Route exact path="/organization/" element={<OrganizationDetail/>}/>
+                            <Route exact path="/organization/update" element={<OrganizationUpdate/>}/>
                             <Route exact path="/register" element={<Register/>}/>
                             <Route exact path="/register-successful" element={<RegisterSuccessful/>}/>
                             <Route exact path="/login" element={<Login/>}/>

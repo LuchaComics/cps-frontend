@@ -30,6 +30,8 @@ export function postCustomerCreateAPI(data, onSuccessCallback, onErrorCallback, 
     // Minor fix.
     decamelizedData.address_line_1 = decamelizedData.address_line1;
     decamelizedData.address_line_2 = decamelizedData.address_line2;
+    delete decamelizedData.address_line1;
+    delete decamelizedData.address_line2;
 
     axios.post(CPS_CUSTOMERS_API_ENDPOINT, decamelizedData).then((successResponse) => {
         const responseData = successResponse.data;
@@ -73,6 +75,8 @@ export function putCustomerUpdateAPI(data, onSuccessCallback, onErrorCallback, o
     // Minor fix.
     decamelizedData.address_line_1 = decamelizedData.address_line1;
     decamelizedData.address_line_2 = decamelizedData.address_line2;
+    delete decamelizedData.address_line1;
+    delete decamelizedData.address_line2;
 
     axios.put(CPS_CUSTOMER_API_ENDPOINT.replace("{id}", decamelizedData.id), decamelizedData).then((successResponse) => {
         const responseData = successResponse.data;

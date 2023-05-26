@@ -11,3 +11,5 @@ export const CPS_SUBMISSION_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/submission
 export const CPS_PROFILE_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/profile";
 export const CPS_CUSTOMERS_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/customers";
 export const CPS_CUSTOMER_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/customer/{id}";
+export const CPS_ORGANIZATIONS_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/organizations";
+export const CPS_ORGANIZATION_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/organization/{id}";

@@ -2,12 +2,22 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight, faUser, faKey } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRight, faUser, faKey } from '@fortawesome/free-solid-svg-icons';
+import { useRecoilState } from 'recoil';
+
 import FormErrorBox from "../Element/FormErrorBox";
 import useLocalStorage from "../../Hooks/useLocalStorage";
 import { postLoginAPI } from "../../API/gateway";
+import { onHamburgerClickedState } from "../../AppState";
+
 
 function Login() {
+    ////
+    //// Global state.
+    ////
+
+    const [onHamburgerClicked, setOnHamburgerClicked] = useRecoilState(onHamburgerClickedState);
+
     ////
     //// Component states.
     ////
@@ -33,8 +43,12 @@ function Login() {
     function onLoginSuccess(profile){
         console.log("onLoginSuccess: Starting...");
 
+        // For debugging purposes only.
+        console.log("onHamburgerClicked:", onHamburgerClicked);
+
         // Save the data to local storage for persistance in this browser and
         // redirect the user to their respected dahsboard.
+        setOnHamburgerClicked(true); // Set to `true` so the side menu loads on startup of app.
         setProfile(profile);
         setForceURL("/dashboard");
     }
