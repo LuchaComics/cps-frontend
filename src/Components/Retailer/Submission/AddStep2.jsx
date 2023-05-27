@@ -150,10 +150,13 @@ function RetailerSubmissionAddStep2() {
 
                                 <article class="message pb-3" style={{width:"300px"}}>
                                   <div class="message-body">
-                                  <p class="pb-1">[Sample Address]</p>
-                                  <p class="pb-1">1234 Comic Street</p>
-                                  <p class="pb-1">Cityville, State 56789</p>
-                                  <p class="pb-1">United States</p>
+                                  <p class="pb-1">CPS</p>
+                                  <p class="pb-1">(519) 914-2685</p>
+                                  <p class="pb-1">info@cpscapsule.com</p>
+                                  <p class="pb-1">8-611 Wonderland Road North, P.M.B. 125</p>
+                                  <p class="pb-1">London, Ontario</p>
+                                  <p class="pb-1">N6H1T6</p>
+                                  <p class="pb-1">Canada</p>
                                   </div>
                                 </article>
 
