@@ -96,7 +96,7 @@ function RetailerSubmissionUpdate() {
     }
 
     const onPublisherNameChange = (e) => {
-        setPublisherName(e.target.value);
+        setPublisherName(parseInt(e.target.value));
     }
 
     const onPublisherNameOtherChange = (e) => {
@@ -456,7 +456,7 @@ function RetailerSubmissionUpdate() {
                                 options={PUBLISHER_NAME_OPTIONS}
                             />
 
-                            {publisherName === "Other" && <FormInputField
+                            {publisherName === 1 && <FormInputField
                                 label="Publisher Name (Other)"
                                 name="publisherNameOther"
                                 placeholder="Text input"

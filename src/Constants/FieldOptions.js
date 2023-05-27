@@ -81,28 +81,28 @@ export const OVERALL_NUMBER_GRADE_WITH_EMPTY_OPTIONS = [
 ];
 
 export const PUBLISHER_NAME_WITH_EMPTY_OPTIONS = [
-    { value: "", label: "Please select" }, // EMPTY OPTION
-    { value: "DC", label: 'DC' },
-    { value: "Marvel", label: 'Marvel' },
-    { value: "Image", label: 'Image' },
-    { value: "Studiocomix", label: 'Studiocomix' },
-    { value: "Lucha", label: 'Lucha' },
-    { value: "Boom! Studios", label: 'Boom! Studios' },
-    { value: "Dark Horse Comics", label: 'Dark Horse Comics' },
-    { value: "IDW", label: 'IDW' },
-    { value: "Other", label: 'Other (Please specify)' },
+    { value: 0, label: "Please select" }, // EMPTY OPTION
+    { value: 2, label: 'DC' },
+    { value: 3, label: 'Marvel' },
+    { value: 4, label: 'Image' },
+    { value: 5, label: 'Studiocomix' },
+    { value: 6, label: 'Lucha' },
+    { value: 7, label: 'Boom! Studios' },
+    { value: 8, label: 'Dark Horse Comics' },
+    { value: 9, label: 'IDW' },
+    { value: 1, label: 'Other (Please specify)' },
 ];
 
 export const PUBLISHER_NAME_OPTIONS = [
-    { value: "DC", label: 'DC' },
-    { value: "Marvel", label: 'Marvel' },
-    { value: "Image", label: 'Image' },
-    { value: "Studiocomix", label: 'Studiocomix' },
-    { value: "Lucha", label: 'Lucha' },
-    { value: "Boom! Studios", label: 'Boom! Studios' },
-    { value: "Dark Horse Comics", label: 'Dark Horse Comics' },
-    { value: "IDW", label: 'IDW' },
-    { value: "Other", label: 'Other (Please specify)' },
+    { value: 2, label: 'DC' },
+    { value: 3, label: 'Marvel' },
+    { value: 4, label: 'Image' },
+    { value: 5, label: 'Studiocomix' },
+    { value: 6, label: 'Lucha' },
+    { value: 7, label: 'Boom! Studios' },
+    { value: 8, label: 'Dark Horse Comics' },
+    { value: 9, label: 'IDW' },
+    { value: 1, label: 'Other (Please specify)' },
 ];
 
 export const CPS_PERCENTAGE_GRADE_WITH_EMPTY_OPTIONS = [
