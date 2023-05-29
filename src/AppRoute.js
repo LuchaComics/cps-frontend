@@ -10,8 +10,10 @@ import { RecoilRoot } from 'recoil';
 
 import RetailerDashboard from "./Components/Retailer/Dashboard";
 import RetailerSubmissionList from "./Components/Retailer/Submission/List";
-import RetailerSubmissionAddStep1 from "./Components/Retailer/Submission/AddStep1v2";
+import RetailerSubmissionAddStep1WithSearch from "./Components/Retailer/Submission/AddStep1WithSearch";
+import RetailerSubmissionAddStep1WithResult from "./Components/Retailer/Submission/AddStep1WithResult";
 import RetailerSubmissionAddStep2 from "./Components/Retailer/Submission/AddStep2";
+import RetailerSubmissionAddStep3 from "./Components/Retailer/Submission/AddStep3";
 import RetailerSubmissionDetail from "./Components/Retailer/Submission/Detail";
 import RetailerSubmissionUpdate from "./Components/Retailer/Submission/Update";
 import RetailerCustomerList from "./Components/Retailer/Customer/List";
@@ -48,8 +50,10 @@ function AppRoute() {
                         <Routes>
                             <Route exact path="/dashboard" element={<RetailerDashboard/>}/>
                             <Route exact path="/submissions" element={<RetailerSubmissionList/>}/>
-                            <Route exact path="/submissions/add" element={<RetailerSubmissionAddStep1/>}/>
-                            <Route exact path="/submissions/add/:id/confirmation" element={<RetailerSubmissionAddStep2/>}/>
+                            <Route exact path="/submissions/add/search" element={<RetailerSubmissionAddStep1WithSearch/>}/>
+                            <Route exact path="/submissions/add/results" element={<RetailerSubmissionAddStep1WithResult/>}/>
+                            <Route exact path="/submissions/add" element={<RetailerSubmissionAddStep2/>}/>
+                            <Route exact path="/submissions/add/:id/confirmation" element={<RetailerSubmissionAddStep3/>}/>
                             <Route exact path="/submission/:id" element={<RetailerSubmissionDetail/>}/>
                             <Route exact path="/submission/:id/edit" element={<RetailerSubmissionUpdate/>}/>
                             <Route exact path="/customers" element={<RetailerCustomerList/>}/>

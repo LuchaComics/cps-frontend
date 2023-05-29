@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useSearchParams } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faDownload, faArrowLeft, faArrowRight, faCheckCircle, faCheck, faGauge } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faDownload, faArrowLeft, faArrowRight, faCheckCircle, faCheck, faGauge, faUsers } from '@fortawesome/free-solid-svg-icons'
 import Select from 'react-select'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
@@ -21,10 +21,12 @@ import { FINDING_OPTIONS } from "../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
-function RetailerSubmissionAddStep1() {
+function RetailerSubmissionAddStep1WithResult() {
     ////
     //// URL Parameters.
     ////
+
+    const [searchParams] = useSearchParams(); // Special thanks via https://stackoverflow.com/a/65451140
 
     ////
     //// Global state.
@@ -41,34 +43,11 @@ function RetailerSubmissionAddStep1() {
     const [isFetching, setFetching] = useState(false);
     const [forceURL, setForceURL] = useState("");
     const [customers, setCustomers] = useState({});
-    const [hasCustomer, setHasCustomer] = useState(1);
     const [showCancelWarning, setShowCancelWarning] = useState(false);
-    const [searchKeyword, setSearchKeyword] = useState("");
 
     ////
     //// Event handling.
     ////
-
-    const onHasCustomerChange = (e) => {
-        setHasCustomer(parseInt(e.target.value));
-    }
-
-    const onSearchKeywordChange = (e) => {
-        setSearchKeyword(e.target.value);
-    }
-
-    const searchButtonClick = (e) => {
-        console.log("searchButtonClick: Starting.");
-        setFetching(true);
-        let queryParams=new Map()
-        queryParams.set("q", searchKeyword);
-        getCustomerListAPI(
-            queryParams,
-            onCustomerListSuccess,
-            onCustomerListError,
-            onCustomerListDone
-        );
-    }
 
     ////
     //// API.
@@ -100,6 +79,59 @@ function RetailerSubmissionAddStep1() {
     ////
     //// Misc.
     ////
+
+    useEffect(() => {
+        let mounted = true;
+
+        if (mounted) {
+            console.log("useEffect: Starting.");
+
+            window.scrollTo(0, 0);  // Start the page at the top of the page.
+            setFetching(true); // Let user knows that we are making an API endpoint.
+
+            let queryParams=new Map(); // Create the URL map we'll be using when calling the backend.
+
+            // CASE 1: Search
+            const searchKeyword = searchParams.get("search");
+            if (searchKeyword !== undefined && searchKeyword !== null && searchKeyword !== "") {
+                queryParams.set("search", searchKeyword);
+            }
+
+            // CASE 2: First name.
+            const firstName = searchParams.get("first_name");
+            if (firstName !== undefined && firstName !== null && firstName !== "") {
+                queryParams.set("first_name", firstName);
+            }
+
+            // CASE 3: Last name.
+            const lastName = searchParams.get("last_name");
+            if (lastName !== undefined && lastName !== null && lastName !== "") {
+                queryParams.set("last_name", lastName);
+            }
+
+            // CASE 4: Phone.
+            const phone = searchParams.get("phone");
+            if (phone !== undefined && phone !== null && phone !== "") {
+                queryParams.set("phone", phone);
+            }
+
+            // CASE 5: Email.
+            const email = searchParams.get("email");
+            if (email !== undefined && email !== null && email !== "") {
+                queryParams.set("email", email);
+            }
+
+            // Submit the list request to our backend.
+            getCustomerListAPI(
+                queryParams,
+                onCustomerListSuccess,
+                onCustomerListError,
+                onCustomerListDone
+            );
+        }
+
+        return () => { mounted = false; }
+    }, []);
 
     ////
     //// Component rendering.
@@ -134,7 +166,7 @@ function RetailerSubmissionAddStep1() {
                                 </section>
                                 <footer class="modal-card-foot">
                                     <Link class="button is-success" to={`/dashboard`}>Yes</Link>
-                                    <button class="button" onClick={(e)=>setShowCancelWarning(false)}>No</button>
+                                    <button class="button" onClick={(e)=>null}>No</button>
                                 </footer>
                             </div>
                         </div>
@@ -143,47 +175,37 @@ function RetailerSubmissionAddStep1() {
                         <p class="pb-4">Please fill out all the required fields before submitting this form.</p>
                         <FormErrorBox errors={errors} />
 
-                        <div class="container">
-                            <p class="subtitle is-4">Customer</p>
-                            <FormRadioField
-                                label="Do you have a customer for this submission?"
-                                name="hasCustomer"
-                                value={hasCustomer}
-                                opt1Value={2}
-                                opt1Label="No"
-                                opt2Value={1}
-                                opt2Label="Yes"
-                                errorText={errors && errors.hasCustomer}
-                                onChange={onHasCustomerChange}
-                                maxWidth="180px"
-                            />
-
-                            {hasCustomer === 1 && <div>
-                                <FormInputFieldWithButton
-                                    label="Search"
-                                    name="searchKeyword"
-                                    placeholder="Find customers"
-                                    value={searchKeyword}
-                                    errorText={errors && errors.searchKeyword}
-                                    helpText=""
-                                    onChange={onSearchKeywordChange}
-                                    isRequired={true}
-                                    maxWidth="380px"
-                                    onButtonClick={searchButtonClick}
-                                    buttonLabel="Search"
-                                />
-                            </div>}
-
+                        <div class="container pb-5">
+                            <p class="subtitle is-4"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Results</p>
+                            <div class="columns">
+                                {customers && customers.results && customers.results.map(function(customer, i){
+                                    return <div class="column is-one-quarter" key={customer.id}>
+                                    <article class="message is-primary">
+                                        <div class="message-body">
+                                            <p>{customer.name}</p>
+                                            <p>{customer.email}</p>
+                                            <p>{customer.phone}</p>
+                                            <br />
+                                            <Link class="button is-primary" to={`/submissions/add?customer_id=${customer.id}`}>
+                                                <FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Pick
+                                            </Link>
+                                        </div>
+                                    </article>
+                                    </div>;
+                                })}
+                            </div>
                         </div>
 
                         <div class="columns">
                             <div class="column is-half">
-                                <button class="button is-hidden-touch" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
-                                <button class="button is-fullwidth is-hidden-desktop" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
+                                <Link class="button is-hidden-touch" to="/submissions/add/search"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                <Link class="button is-fullwidth is-hidden-desktop" to="/submissions/add/search"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                             </div>
                             <div class="column is-half has-text-right">
+                                {/*
                                 <button class="button is-primary is-hidden-touch" onClick={null}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Next</button>
                                 <button class="button is-primary is-fullwidth is-hidden-desktop" onClick={null}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Next</button>
+                                */}
                             </div>
                         </div>
 
@@ -194,4 +216,4 @@ function RetailerSubmissionAddStep1() {
     );
 }
 
-export default RetailerSubmissionAddStep1;
+export default RetailerSubmissionAddStep1WithResult;

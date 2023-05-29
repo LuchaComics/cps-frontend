@@ -49,7 +49,7 @@ function RetailerSubmissionUpdate() {
     const [issueVol, setIssueVol] = useState("");
     const [issueNo, setIssueNo] = useState("");
     const [issueCoverDate, setIssueCoverDate] = useState("");
-    const [publisherName, setPublisherName] = useState("");
+    const [publisherName, setPublisherName] = useState(0);
     const [publisherNameOther, setPublisherNameOther] = useState("");
     const [creasesFinding, setCreasesFinding] = useState("");
     const [tearsFinding, setTearsFinding] = useState("");

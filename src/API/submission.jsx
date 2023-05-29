@@ -38,6 +38,10 @@ export function postSubmissionCreateAPI(data, onSuccessCallback, onErrorCallback
     delete decamelizedData.special_notes_line3;
     delete decamelizedData.special_notes_line4;
     delete decamelizedData.special_notes_line5;
+
+    decamelizedData.user_id = decamelizedData.user_i_d;
+    delete decamelizedData.user_i_d;
+
     decamelizedData.grading_notes_line_1 = decamelizedData.grading_notes_line1;
     decamelizedData.grading_notes_line_2 = decamelizedData.grading_notes_line2;
     decamelizedData.grading_notes_line_3 = decamelizedData.grading_notes_line3;
