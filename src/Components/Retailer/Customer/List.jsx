@@ -101,6 +101,7 @@ function RetailerCustomerList() {
     const fetchList = () => {
         setFetching(true);
         getCustomerListAPI(
+            new Map(),
             onCustomerListSuccess,
             onCustomerListError,
             onCustomerListDone

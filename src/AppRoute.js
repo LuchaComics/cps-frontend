@@ -10,7 +10,7 @@ import { RecoilRoot } from 'recoil';
 
 import RetailerDashboard from "./Components/Retailer/Dashboard";
 import RetailerSubmissionList from "./Components/Retailer/Submission/List";
-import RetailerSubmissionAddStep1 from "./Components/Retailer/Submission/AddStep1";
+import RetailerSubmissionAddStep1 from "./Components/Retailer/Submission/AddStep1v2";
 import RetailerSubmissionAddStep2 from "./Components/Retailer/Submission/AddStep2";
 import RetailerSubmissionDetail from "./Components/Retailer/Submission/Detail";
 import RetailerSubmissionUpdate from "./Components/Retailer/Submission/Update";

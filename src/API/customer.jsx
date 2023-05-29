@@ -1,13 +1,27 @@
 import getCustomAxios from "../Helpers/customAxios";
-import { camelizeKeys, decamelizeKeys } from 'humps';
+import { camelizeKeys, decamelizeKeys, decamelize } from 'humps';
 import {
     CPS_CUSTOMERS_API_ENDPOINT,
     CPS_CUSTOMER_API_ENDPOINT
 } from "../Constants/API";
 
-export function getCustomerListAPI(onSuccessCallback, onErrorCallback, onDoneCallback) {
+export function getCustomerListAPI(filtersMap=new Map(), onSuccessCallback, onErrorCallback, onDoneCallback) {
     const axios = getCustomAxios();
-    axios.get(CPS_CUSTOMERS_API_ENDPOINT).then((successResponse) => {
+
+    // The following code will generate the query parameters for the url based on the map.
+    let aURL = CPS_CUSTOMERS_API_ENDPOINT;
+    filtersMap.forEach(
+        (value, key) => {
+            let decamelizedkey = decamelize(key)
+            if (aURL.indexOf('?') > -1) {
+                aURL += "&"+decamelizedkey+"="+value;
+            } else {
+                aURL += "?"+decamelizedkey+"="+value;
+            }
+        }
+    )
+
+    axios.get(aURL).then((successResponse) => {
         const responseData = successResponse.data;
 
         // Snake-case from API to camel-case for React.
