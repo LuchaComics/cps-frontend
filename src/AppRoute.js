@@ -15,7 +15,10 @@ import RetailerSubmissionAddStep1WithResult from "./Components/Retailer/Submissi
 import RetailerSubmissionAddStep2 from "./Components/Retailer/Submission/AddStep2";
 import RetailerSubmissionAddStep3 from "./Components/Retailer/Submission/AddStep3";
 import RetailerSubmissionDetail from "./Components/Retailer/Submission/Detail";
-import RetailerSubmissionUpdate from "./Components/Retailer/Submission/Update";
+import RetailerSubmissionUpdateForSubmission from "./Components/Retailer/Submission/UpdateSubmission";
+import RetailerSubmissionUpdateForCustomer from "./Components/Retailer/Submission/UpdateCustomer";
+import RetailerSubmissionUpdatePickCustomerWithResult from "./Components/Retailer/Submission/UpdatePickCustomerWithResult";
+import RetailerSubmissionUpdatePickCustomerWithSearch from "./Components/Retailer/Submission/UpdatePickCustomerWithSearch";
 import RetailerCustomerList from "./Components/Retailer/Customer/List";
 import RetailerCustomerAdd from "./Components/Retailer/Customer/Add";
 import RetailerCustomerDetail from "./Components/Retailer/Customer/Detail";
@@ -55,7 +58,10 @@ function AppRoute() {
                             <Route exact path="/submissions/add" element={<RetailerSubmissionAddStep2/>}/>
                             <Route exact path="/submissions/add/:id/confirmation" element={<RetailerSubmissionAddStep3/>}/>
                             <Route exact path="/submission/:id" element={<RetailerSubmissionDetail/>}/>
-                            <Route exact path="/submission/:id/edit" element={<RetailerSubmissionUpdate/>}/>
+                            <Route exact path="/submission/:id/edit" element={<RetailerSubmissionUpdateForSubmission/>}/>
+                            <Route exact path="/submission/:id/edit-customer" element={<RetailerSubmissionUpdateForCustomer/>}/>
+                            <Route exact path="/submission/:id/customer/search" element={<RetailerSubmissionUpdatePickCustomerWithSearch/>}/>
+                            <Route exact path="/submission/:id/customer/results" element={<RetailerSubmissionUpdatePickCustomerWithResult/>}/>
                             <Route exact path="/customers" element={<RetailerCustomerList/>}/>
                             <Route exact path="/customers/add" element={<RetailerCustomerAdd/>}/>
                             <Route exact path="/customer/:id" element={<RetailerCustomerDetail/>}/>

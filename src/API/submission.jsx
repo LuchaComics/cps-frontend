@@ -2,7 +2,8 @@ import getCustomAxios from "../Helpers/customAxios";
 import { camelizeKeys, decamelizeKeys } from 'humps';
 import {
     CPS_SUBMISSIONS_API_ENDPOINT,
-    CPS_SUBMISSION_API_ENDPOINT
+    CPS_SUBMISSION_API_ENDPOINT,
+    CPS_SUBMISSION_CUSTOMER_SWAP_OPERATION_API_ENDPOINT
 } from "../Constants/API";
 
 export function getSubmissionListAPI(onSuccessCallback, onErrorCallback, onDoneCallback) {
@@ -135,6 +136,26 @@ export function putSubmissionUpdateAPI(data, onSuccessCallback, onErrorCallback,
 export function deleteSubmissionAPI(id, onSuccessCallback, onErrorCallback, onDoneCallback) {
     const axios = getCustomAxios();
     axios.delete(CPS_SUBMISSION_API_ENDPOINT.replace("{id}", id)).then((successResponse) => {
+        const responseData = successResponse.data;
+
+        // Snake-case from API to camel-case for React.
+        const data = camelizeKeys(responseData);
+
+        // Return the callback data.
+        onSuccessCallback(data);
+    }).catch( (exception) => {
+        let errors = camelizeKeys(exception);
+        onErrorCallback(errors);
+    }).then(onDoneCallback);
+}
+
+export function postSubmissionCustomerSwapOperationAPI(submissionID, customerID, onSuccessCallback, onErrorCallback, onDoneCallback) {
+    const axios = getCustomAxios();
+    const data = {
+        submission_id: submissionID,
+        customer_id: customerID
+    };
+    axios.post(CPS_SUBMISSION_CUSTOMER_SWAP_OPERATION_API_ENDPOINT, data).then((successResponse) => {
         const responseData = successResponse.data;
 
         // Snake-case from API to camel-case for React.

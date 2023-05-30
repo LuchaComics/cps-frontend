@@ -24,7 +24,7 @@ import {
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
-function RetailerSubmissionUpdate() {
+function RetailerSubmissionUpdateForCustomer() {
     ////
     //// URL Parameters.
     ////
@@ -376,7 +376,7 @@ function RetailerSubmissionUpdate() {
                             <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
                             <li class=""><Link to="/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
                             <li class=""><Link to={`/submission/${id}`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Details</Link></li>
-                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update</Link></li>
+                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update (Customer)</Link></li>
                         </ul>
                     </nav>
                     <nav class="box">
@@ -863,4 +863,4 @@ function RetailerSubmissionUpdate() {
     );
 }
 
-export default RetailerSubmissionUpdate;
+export default RetailerSubmissionUpdateForCustomer;

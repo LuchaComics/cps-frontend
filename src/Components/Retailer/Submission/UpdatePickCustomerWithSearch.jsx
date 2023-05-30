@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faDownload, faArrowLeft, faArrowRight, faCheckCircle, faCheck, faGauge, faArrowUpRightFromSquare, faSearch, faFilter  } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faDownload, faArrowLeft, faArrowRight, faCheckCircle, faCheck, faGauge, faArrowUpRightFromSquare, faSearch, faFilter, faEye, faPencil } from '@fortawesome/free-solid-svg-icons'
 import Select from 'react-select'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
@@ -21,10 +21,12 @@ import { FINDING_OPTIONS } from "../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
-function RetailerSubmissionAddStep1WithSearch() {
+function RetailerSubmissionUpdatePickCustomerWithSearch() {
     ////
     //// URL Parameters.
     ////
+
+    const { id } = useParams()
 
     ////
     //// Global state.
@@ -42,7 +44,6 @@ function RetailerSubmissionAddStep1WithSearch() {
     const [forceURL, setForceURL] = useState("");
     const [customers, setCustomers] = useState({});
     const [hasCustomer, setHasCustomer] = useState(1);
-    const [showCancelWarning, setShowCancelWarning] = useState(false);
     const [searchKeyword, setSearchKeyword] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -75,7 +76,7 @@ function RetailerSubmissionAddStep1WithSearch() {
 
     const onSearchButtonClicked = (e) => {
         console.log("searchButtonClick: Starting...");
-        let aURL = "/submissions/add/results";
+        let aURL = "/submission/" + id + "/customer/results";
         if (searchKeyword != "") {
             aURL += "?search="+searchKeyword;
         }
@@ -164,31 +165,14 @@ function RetailerSubmissionAddStep1WithSearch() {
                         <ul>
                             <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
                             <li class=""><Link to="/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
-                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
+                            <li class=""><Link to={`/submission/${id}`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Details</Link></li>
+                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update (Customer)</Link></li>
                         </ul>
                     </nav>
 
                     <nav class="box">
-                        <div class={`modal ${showCancelWarning ? 'is-active' : ''}`}>
-                            <div class="modal-background"></div>
-                            <div class="modal-card">
-                                <header class="modal-card-head">
-                                    <p class="modal-card-title">Are you sure?</p>
-                                    <button class="delete" aria-label="close" onClick={(e)=>setShowCancelWarning(false)}></button>
-                                </header>
-                                <section class="modal-card-body">
-                                    Your submission will be cancelled and your work will be lost. This cannot be undone. Do you want to continue?
-                                </section>
-                                <footer class="modal-card-foot">
-                                    <Link class="button is-success" to={`/dashboard`}>Yes</Link>
-                                    <button class="button" onClick={(e)=>setShowCancelWarning(false)}>No</button>
-                                </footer>
-                            </div>
-                        </div>
-
-                        <p class="title is-3"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Submission</p>
-                        <p class="pb-4">To begin, please select a customer that belongs to this customer. If you don't have a customer at this time, click <Link to="/submissions/add">here to skip pick a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link> or
-                        if you'd like to create the customer then <Link to="/customers/add" target="_blank">click here to create a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link>.</p>
+                        <p class="title is-3"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update Submission</p>
+                        <p class="pb-4">To begin, please select a customer that belongs to this customer. If you don't have a customer at this time and if you'd like to create the customer then <Link to="/customers/add" target="_blank">click here to create a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link>.</p>
                         <FormErrorBox errors={errors} />
 
                         <div class="container pb-5">
@@ -261,8 +245,8 @@ function RetailerSubmissionAddStep1WithSearch() {
 
                         <div class="columns">
                             <div class="column is-half">
-                                <button class="button is-hidden-touch" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
-                                <button class="button is-fullwidth is-hidden-desktop" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
+                                <Link to={`/submission/${id}`} class="button is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                <Link to={`/submission/${id}`} class="button is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                             </div>
                             <div class="column is-half has-text-right">
                                 <button class="button is-primary is-hidden-touch" onClick={onSearchButtonClicked}><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search</button>
@@ -277,4 +261,4 @@ function RetailerSubmissionAddStep1WithSearch() {
     );
 }
 
-export default RetailerSubmissionAddStep1WithSearch;
+export default RetailerSubmissionUpdatePickCustomerWithSearch;
