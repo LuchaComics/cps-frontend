@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faEye, faArrowLeft, faCheckCircle, faPencil, faGauge } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faEye, faArrowLeft, faCheckCircle, faPencil, faGauge, faBook, faMagnifyingGlass, faBalanceScale, faUser } from '@fortawesome/free-solid-svg-icons'
 import Select from 'react-select'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
@@ -14,12 +14,14 @@ import FormInputField from "../../Element/FormInputField";
 import FormTextareaField from "../../Element/FormTextareaField";
 import FormRadioField from "../../Element/FormRadioField";
 import FormMultiSelectField from "../../Element/FormMultiSelectField";
+import FormCheckboxField from "../../Element/FormCheckboxField";
 import FormSelectField from "../../Element/FormSelectField";
 import {
     FINDING_OPTIONS,
     OVERALL_NUMBER_GRADE_OPTIONS,
     PUBLISHER_NAME_OPTIONS,
-    CPS_PERCENTAGE_GRADE_OPTIONS
+    CPS_PERCENTAGE_GRADE_OPTIONS,
+    HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS
 } from "../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
@@ -85,7 +87,7 @@ function RetailerSubmissionDetail() {
         let mounted = true;
 
         if (mounted) {
-            window.scrollTo(0, 0);  // Start the page at the top of the page.
+            // window.scrollTo(0, 0);  // Start the page at the top of the page.
 
             setFetching(true);
             getSubmissionDetailAPI(
@@ -132,7 +134,7 @@ function RetailerSubmissionDetail() {
 
                         {!isFetching && <div class="container">
 
-                            <p class="subtitle is-4">Comic Book Information</p>
+                            <p class="subtitle is-4 pt-4"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comic Book Information</p>
 
                             {submission && <FormInputField
                                 label="Series Title"
@@ -254,7 +256,7 @@ function RetailerSubmissionDetail() {
                                 disabled={true}
                             />
 
-                            <p class="subtitle is-4">Summary of Findings</p>
+                            <p class="subtitle is-4 pt-4"><FontAwesomeIcon className="fas" icon={faMagnifyingGlass} />&nbsp;Summary of Findings</p>
 
                             {submission && <FormRadioField
                                 label="Creases Finding"
@@ -477,7 +479,7 @@ function RetailerSubmissionDetail() {
                                 disabled={true}
                             />
 
-                            <p class="subtitle is-4">Grading</p>
+                            <p class="subtitle is-4 pt-4"><FontAwesomeIcon className="fas" icon={faBalanceScale} />&nbsp;Grading</p>
 
                             <FormRadioField
                                 label="Which type of grading scale would you prefer?"
@@ -521,6 +523,126 @@ function RetailerSubmissionDetail() {
                                 options={CPS_PERCENTAGE_GRADE_OPTIONS}
                                 disabled={true}
                             />}
+
+                            {submission && submission.user !== undefined && submission.user !== null && submission.user !== "" && <>
+                                <p class="subtitle is-4 pt-4"><FontAwesomeIcon className="fas" icon={faUser} />&nbsp;Customer</p>
+                                <FormInputField
+                                    label="Name"
+                                    name="name"
+                                    placeholder="Text input"
+                                    value={submission.user.name}
+                                    isRequired={true}
+                                    maxWidth="280px"
+                                    helpText={""}
+                                    disabled={true}
+                                />
+                                <FormInputField
+                                    label="Email"
+                                    name="email"
+                                    placeholder="Text input"
+                                    value={submission.user.email}
+                                    isRequired={true}
+                                    maxWidth="280px"
+                                    helpText={""}
+                                    disabled={true}
+                                />
+                                <FormInputField
+                                    label="Phone"
+                                    name="phone"
+                                    placeholder="Text input"
+                                    value={submission.user.phone}
+                                    isRequired={true}
+                                    maxWidth="280px"
+                                    helpText={""}
+                                    disabled={true}
+                                />
+                                <FormInputField
+                                    label="Country"
+                                    name="country"
+                                    placeholder="Text input"
+                                    value={submission.user.country}
+                                    isRequired={true}
+                                    maxWidth="280px"
+                                    helpText={""}
+                                    disabled={true}
+                                />
+                                <FormInputField
+                                    label="Region"
+                                    name="region"
+                                    placeholder="Text input"
+                                    value={submission.user.region}
+                                    isRequired={true}
+                                    maxWidth="280px"
+                                    helpText={""}
+                                    disabled={true}
+                                />
+                                <FormInputField
+                                    label="City"
+                                    name="city"
+                                    placeholder="Text input"
+                                    value={submission.user.city}
+                                    isRequired={true}
+                                    maxWidth="280px"
+                                    helpText={""}
+                                    disabled={true}
+                                />
+                                <FormInputField
+                                    label="Address Line 1"
+                                    name="addressLine1"
+                                    placeholder="Text input"
+                                    value={submission.user.addressLine1}
+                                    isRequired={true}
+                                    maxWidth="280px"
+                                    helpText={""}
+                                    disabled={true}
+                                />
+                                <FormInputField
+                                    label="Address Line 2"
+                                    name="addressLine2"
+                                    placeholder="Text input"
+                                    value={submission.user.addressLine2}
+                                    isRequired={true}
+                                    maxWidth="280px"
+                                    helpText={""}
+                                    disabled={true}
+                                />
+                                <FormInputField
+                                    label="Postal Code"
+                                    name="postalCode"
+                                    placeholder="Text input"
+                                    value={submission.user.postalCode}
+                                    isRequired={true}
+                                    maxWidth="280px"
+                                    helpText={""}
+                                    disabled={true}
+                                />
+                                <FormSelectField
+                                    label="How did you hear about us?"
+                                    name="howDidYouHearAboutUs"
+                                    placeholder="Pick"
+                                    selectedValue={submission.user.howDidYouHearAboutUs}
+                                    helpText=""
+                                    options={HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS}
+                                />
+                                {submission.user.howDidYouHearAboutUs === 1 && <FormInputField
+                                    label="Other (Please specify):"
+                                    name="howDidYouHearAboutUsOther"
+                                    placeholder="Text input"
+                                    value={submission.user.howDidYouHearAboutUsOther}
+                                    helpText=""
+                                    isRequired={true}
+                                    maxWidth="380px"
+                                />}
+
+                                <FormCheckboxField
+                                    label="I agree to receive updates from CPS and its partners via email"
+                                    name="agreePromotionsEmail"
+                                    checked={submission.user.agreePromotionsEmail}
+                                    maxWidth="180px"
+                                />
+                            </>}
+
+
 
                             <div class="column is-half">
                                 <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-hidden-touch"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Download PDF</a>
