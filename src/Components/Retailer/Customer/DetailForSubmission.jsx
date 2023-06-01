@@ -225,7 +225,7 @@ function RetailerCustomerDetailForSubmission() {
                                 <button class="delete" aria-label="close" onClick={onDeselectSubmissionForDeletion}></button>
                             </header>
                             <section class="modal-card-body">
-                                You are about to <b>archive</b> this submission and all the data inside of it. This action can be undone but you'll need to contact the system administrator. Are you sure you would like to continue?
+                                You are about to <b>archive</b> this submission; it will no longer appear on your dashboard This action can be undone but you'll need to contact the system administrator. Are you sure you would like to continue?
                             </section>
                             <footer class="modal-card-foot">
                                 <button class="button is-success" onClick={onDeleteConfirmButtonClick}>Confirm</button>

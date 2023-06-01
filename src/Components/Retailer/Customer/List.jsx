@@ -169,7 +169,7 @@ function RetailerCustomerList() {
                                     <button class="delete" aria-label="close" onClick={onDeselectCustomerForDeletion}></button>
                                 </header>
                                 <section class="modal-card-body">
-                                    You are about to delete this customer and all the data inside of it. This action is cannot be undone. Are you sure you would like to continue?
+                                    You are about to <b>archive</b> this customer; it will no longer appear on your dashboard This action can be undone but you'll need to contact the system administrator. Are you sure you would like to continue?
                                 </section>
                                 <footer class="modal-card-foot">
                                     <button class="button is-success" onClick={onDeleteConfirmButtonClick}>Confirm</button>
