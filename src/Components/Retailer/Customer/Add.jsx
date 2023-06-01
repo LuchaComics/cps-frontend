@@ -293,7 +293,7 @@ function RetailerCustomerAdd() {
                             <p class="subtitle is-4">Address</p>
 
                             <FormInputField
-                                label="Country"
+                                label="Country (Optional)"
                                 name="country"
                                 placeholder="Text input"
                                 value={country}
@@ -305,7 +305,7 @@ function RetailerCustomerAdd() {
                             />
 
                             <FormInputField
-                                label="Region"
+                                label="Province/Territory (Optional)"
                                 name="region"
                                 placeholder="Text input"
                                 value={region}
@@ -317,7 +317,7 @@ function RetailerCustomerAdd() {
                             />
 
                             <FormInputField
-                                label="City"
+                                label="City (Optional)"
                                 name="city"
                                 placeholder="Text input"
                                 value={city}
@@ -329,7 +329,7 @@ function RetailerCustomerAdd() {
                             />
 
                             <FormInputField
-                                label="Address Line 1"
+                                label="Address Line 1 (Optional)"
                                 name="addressLine1"
                                 placeholder="Text input"
                                 value={addressLine1}
@@ -341,7 +341,7 @@ function RetailerCustomerAdd() {
                             />
 
                             <FormInputField
-                                label="Address Line 2"
+                                label="Address Line 2 (Optional)"
                                 name="addressLine2"
                                 placeholder="Text input"
                                 value={addressLine2}
@@ -353,7 +353,7 @@ function RetailerCustomerAdd() {
                             />
 
                             <FormInputField
-                                label="Postal Code"
+                                label="Postal Code (Optional)"
                                 name="postalCode"
                                 placeholder="Text input"
                                 value={postalCode}
