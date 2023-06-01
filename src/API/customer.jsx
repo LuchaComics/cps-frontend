@@ -1,9 +1,12 @@
 import getCustomAxios from "../Helpers/customAxios";
 import { camelizeKeys, decamelizeKeys, decamelize } from 'humps';
+import { DateTime } from "luxon";
+
 import {
     CPS_CUSTOMERS_API_ENDPOINT,
     CPS_CUSTOMER_API_ENDPOINT
 } from "../Constants/API";
+
 
 export function getCustomerListAPI(filtersMap=new Map(), onSuccessCallback, onErrorCallback, onDoneCallback) {
     const axios = getCustomAxios();
@@ -26,6 +29,18 @@ export function getCustomerListAPI(filtersMap=new Map(), onSuccessCallback, onEr
 
         // Snake-case from API to camel-case for React.
         const data = camelizeKeys(responseData);
+
+        // Bugfixes.
+        console.log("getCustomerListAPI | pre-fix | results:", data);
+        if (data.results !== undefined && data.results !== null && data.results.length > 0) {
+            data.results.forEach(
+                (item, index) => {
+                    item.createdAt = DateTime.fromISO(item.createdAt).toLocaleString(DateTime.DATETIME_MED);
+                    console.log(item, index);
+                }
+            )
+        }
+        console.log("getCustomerListAPI | post-fix | results:", data);
 
         // Return the callback data.
         onSuccessCallback(data);

@@ -36,12 +36,12 @@ export function getSubmissionListAPI(filtersMap=new Map(), onSuccessCallback, on
         if (data.results !== undefined && data.results !== null && data.results.length > 0) {
             data.results.forEach(
                 (item, index) => {
-                    item.issueCoverDate = DateTime.fromISO(item.issueCoverDate).toJSDate();
+                    item.issueCoverDate = DateTime.fromISO(item.issueCoverDate).toLocaleString(DateTime.DATETIME_MED);
+                    item.createdAt = DateTime.fromISO(item.createdAt).toLocaleString(DateTime.DATETIME_MED);
                     console.log(item, index);
                 }
             )
         }
-
         console.log("getSubmissionListAPI | post-fix | results:", data);
 
         // Return the callback data.
