@@ -270,7 +270,7 @@ function RetailerCustomerDetail() {
                             <p class="subtitle is-4">Metrics</p>
 
                             <FormCheckboxField
-                                label="I agree to receive updates from CPS and its partners via email"
+                                label="I agree to receive electronic updates from my local retailer and CPS"
                                 name="agreePromotionsEmail"
                                 checked={customer.agreePromotionsEmail}
                                 maxWidth="180px"

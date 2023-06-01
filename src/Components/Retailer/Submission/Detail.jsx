@@ -691,7 +691,7 @@ function RetailerSubmissionDetail() {
                                     />}
 
                                     <FormCheckboxField
-                                        label="I agree to receive updates from CPS and its partners via email"
+                                        label="I agree to receive electronic updates from my local retailer and CPS"
                                         name="agreePromotionsEmail"
                                         checked={submission.user.agreePromotionsEmail}
                                         maxWidth="180px"
