@@ -232,7 +232,7 @@ function Register() {
                         <FormErrorBox errors={errors} />
 
                         {!isFetching && <div class="container">
-                            <p class="subtitle is-4">Identification</p>
+                            <p class="subtitle is-4">Details</p>
 
                             <FormInputField
                                 label="First Name"
@@ -325,7 +325,7 @@ function Register() {
                             />
 
                             <FormInputField
-                                label="Region"
+                                label="Province/Territory"
                                 name="region"
                                 placeholder="Text input"
                                 value={region}
