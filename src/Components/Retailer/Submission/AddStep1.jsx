@@ -801,7 +801,7 @@ function RetailerSubmissionAddStep1() {
                                 options={CPS_PERCENTAGE_GRADE_WITH_EMPTY_OPTIONS}
                             />}
 
-                            <div class="columns">
+                            <div class="columns pt-5">
                                 <div class="column is-half">
                                     <button class="button is-hidden-touch" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
                                     <button class="button is-fullwidth is-hidden-desktop" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>

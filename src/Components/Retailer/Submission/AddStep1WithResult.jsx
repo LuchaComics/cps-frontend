@@ -196,7 +196,7 @@ function RetailerSubmissionAddStep1WithResult() {
                             </div>
                         </div>
 
-                        <div class="columns">
+                        <div class="columns pt-5">
                             <div class="column is-half">
                                 <Link class="button is-hidden-touch" to="/submissions/add/search"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                 <Link class="button is-fullwidth is-hidden-desktop" to="/submissions/add/search"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>

@@ -163,7 +163,7 @@ function RetailerSubmissionAddStep3() {
                                 <p class="pb-3">Once completed, please wait a few weeks for us to receive and process your request.</p>
                             </article>
 
-                            <div class="columns">
+                            <div class="columns pt-5">
                                 <div class="column is-half">
                                 </div>
                                 <div class="column is-half has-text-right">

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faEye, faArrowLeft, faCheckCircle, faPencil, faGauge, faBook, faMagnifyingGlass, faBalanceScale, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faEye, faArrowLeft, faCheckCircle, faPencil, faGauge, faBook, faMagnifyingGlass, faBalanceScale, faUser, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons'
 import Select from 'react-select'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
@@ -156,7 +156,7 @@ function RetailerSubmissionDetail() {
                             </div>
                         </div>}
 
-                        {!isFetching && <div class="container">
+                        {!isFetching && submission && <div class="container">
                             <div class="tabs">
                               <ul>
                                 <li class={`${tabIndex === 1 ? "is-active" : ""}`}>
@@ -578,7 +578,7 @@ function RetailerSubmissionDetail() {
                             {tabIndex === 2 && <>
                                 {submission && submission.user !== undefined && submission.user !== null && submission.user !== "" && <>
                                     <p class="subtitle is-4 pt-4"><FontAwesomeIcon className="fas" icon={faUser} />&nbsp;Customer</p>
-                                    <p class="pb-5">Click <Link to={`/customer/${submission.user.id}`} class="">here</Link> to view the customer.</p>
+                                    <p class="pb-5"><Link to={`/customer/${submission.user.id}`} target="_blank">Click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link> to view the customer.</p>
 
                                     <FormInputField
                                         label="Name"
@@ -697,7 +697,7 @@ function RetailerSubmissionDetail() {
                                         maxWidth="180px"
                                     />
 
-                                    <div class="columns pt-4">
+                                    <div class="columns pt-5">
                                         <div class="column is-half">
                                             <Link to={`/submissions`} class="button is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                             <Link to={`/submissions`} class="button is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>

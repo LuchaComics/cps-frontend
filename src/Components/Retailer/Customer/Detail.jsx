@@ -39,7 +39,8 @@ function RetailerCustomerDetail() {
     const [errors, setErrors] = useState({});
     const [isFetching, setFetching] = useState(false);
     const [forceURL, setForceURL] = useState("");
-    const [profile, setProfile] = useState({});
+    const [customer, setCustomer] = useState({});
+    const [tabIndex, setTabIndex] = useState(1);
 
     ////
     //// Event handling.
@@ -51,13 +52,13 @@ function RetailerCustomerDetail() {
     //// API.
     ////
 
-    function onProfileDetailSuccess(response){
-        console.log("onProfileDetailSuccess: Starting...");
-        setProfile(response);
+    function onCustomerDetailSuccess(response){
+        console.log("onCustomerDetailSuccess: Starting...");
+        setCustomer(response);
     }
 
-    function onProfileDetailError(apiErr) {
-        console.log("onProfileDetailError: Starting...");
+    function onCustomerDetailError(apiErr) {
+        console.log("onCustomerDetailError: Starting...");
         setErrors(apiErr);
 
         // The following code will cause the screen to scroll to the top of
@@ -67,8 +68,8 @@ function RetailerCustomerDetail() {
         scroll.scrollToTop();
     }
 
-    function onProfileDetailDone() {
-        console.log("onProfileDetailDone: Starting...");
+    function onCustomerDetailDone() {
+        console.log("onCustomerDetailDone: Starting...");
         setFetching(false);
     }
 
@@ -85,9 +86,9 @@ function RetailerCustomerDetail() {
             setFetching(true);
             getCustomerDetailAPI(
                 id,
-                onProfileDetailSuccess,
-                onProfileDetailError,
-                onProfileDetailDone
+                onCustomerDetailSuccess,
+                onCustomerDetailError,
+                onCustomerDetailDone
             );
         }
 
@@ -126,14 +127,24 @@ function RetailerCustomerDetail() {
                             </div>
                         </div>}
 
-                        {!isFetching && profile && <div class="container">
+                        {!isFetching && customer && <div class="container">
+                            <div class="tabs">
+                              <ul>
+                                <li class="is-active">
+                                    <Link>Detail</Link>
+                                </li>
+                                <li>
+                                    <Link to={`/customer/${customer.id}/submissions`}>Submissions</Link>
+                                </li>
+                              </ul>
+                            </div>
 
                             <p class="subtitle is-4">Identification</p>
                             <FormInputField
                                 label="First Name"
                                 name="firstName"
                                 placeholder="Text input"
-                                value={profile.firstName}
+                                value={customer.firstName}
                                 helpText=""
                                 isRequired={true}
                                 maxWidth="380px"
@@ -143,7 +154,7 @@ function RetailerCustomerDetail() {
                                 label="Last Name"
                                 name="lastName"
                                 placeholder="Text input"
-                                value={profile.lastName}
+                                value={customer.lastName}
                                 helpText=""
                                 isRequired={true}
                                 maxWidth="380px"
@@ -156,7 +167,7 @@ function RetailerCustomerDetail() {
                                 label="Email"
                                 name="email"
                                 placeholder="Text input"
-                                value={profile.email}
+                                value={customer.email}
                                 helpText=""
                                 isRequired={true}
                                 maxWidth="380px"
@@ -167,7 +178,7 @@ function RetailerCustomerDetail() {
                                 label="Phone"
                                 name="phone"
                                 placeholder="Text input"
-                                value={profile.phone}
+                                value={customer.phone}
                                 helpText=""
                                 isRequired={true}
                                 maxWidth="380px"
@@ -180,7 +191,7 @@ function RetailerCustomerDetail() {
                                 label="Country"
                                 name="country"
                                 placeholder="Text input"
-                                value={profile.country}
+                                value={customer.country}
                                 helpText=""
                                 isRequired={true}
                                 maxWidth="380px"
@@ -191,7 +202,7 @@ function RetailerCustomerDetail() {
                                 label="Region"
                                 name="region"
                                 placeholder="Text input"
-                                value={profile.region}
+                                value={customer.region}
                                 helpText=""
                                 isRequired={true}
                                 maxWidth="380px"
@@ -202,7 +213,7 @@ function RetailerCustomerDetail() {
                                 label="City"
                                 name="city"
                                 placeholder="Text input"
-                                value={profile.city}
+                                value={customer.city}
                                 helpText=""
                                 isRequired={true}
                                 maxWidth="380px"
@@ -213,7 +224,7 @@ function RetailerCustomerDetail() {
                                 label="Address Line 1"
                                 name="addressLine1"
                                 placeholder="Text input"
-                                value={profile.addressLine1}
+                                value={customer.addressLine1}
                                 helpText=""
                                 isRequired={true}
                                 maxWidth="380px"
@@ -224,7 +235,7 @@ function RetailerCustomerDetail() {
                                 label="Address Line 2"
                                 name="addressLine2"
                                 placeholder="Text input"
-                                value={profile.addressLine2}
+                                value={customer.addressLine2}
                                 helpText=""
                                 isRequired={true}
                                 maxWidth="380px"
@@ -235,7 +246,7 @@ function RetailerCustomerDetail() {
                                 label="Postal Code"
                                 name="postalCode"
                                 placeholder="Text input"
-                                value={profile.postalCode}
+                                value={customer.postalCode}
                                 helpText=""
                                 isRequired={true}
                                 maxWidth="380px"
@@ -247,12 +258,12 @@ function RetailerCustomerDetail() {
                             <FormCheckboxField
                                 label="I agree to receive updates from CPS and its partners via email"
                                 name="agreePromotionsEmail"
-                                checked={profile.agreePromotionsEmail}
+                                checked={customer.agreePromotionsEmail}
                                 maxWidth="180px"
                                 disabled={true}
                             />
 
-                            <div class="columns">
+                            <div class="columns pt-5">
                                 <div class="column is-half">
                                     <Link class="button is-hidden-touch" to={`/customers`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                     <Link class="button is-fullwidth is-hidden-desktop" to={`/customers`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
@@ -262,6 +273,7 @@ function RetailerCustomerDetail() {
                                     <Link to={`/customer/${id}/edit`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
                                 </div>
                             </div>
+
 
                         </div>}
                     </nav>

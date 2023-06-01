@@ -101,6 +101,7 @@ function RetailerSubmissionList() {
     const fetchList = () => {
         setFetching(true);
         getSubmissionListAPI(
+            new Map(),
             onSubmissionListSuccess,
             onSubmissionListError,
             onSubmissionListDone

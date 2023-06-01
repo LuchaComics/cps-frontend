@@ -81,7 +81,7 @@ function RetailerDashboard() {
                           </div>
                         </section>
 
-                        <section class="hero is-medium is-primary">
+                        {/* <section class="hero is-medium is-primary">
                           <div class="hero-body">
                             <p class="title">
                               Staff
@@ -93,9 +93,7 @@ function RetailerDashboard() {
                               <i>Coming soon</i>
                             </p>
                           </div>
-                        </section>
-
-
+                        </section> */}
 
                     </nav>
                 </section>

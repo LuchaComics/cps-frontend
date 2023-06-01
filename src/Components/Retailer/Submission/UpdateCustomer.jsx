@@ -844,7 +844,7 @@ function RetailerSubmissionUpdateForCustomer() {
                                 onChange={onCpsPercentageGradeChange}
                                 options={CPS_PERCENTAGE_GRADE_OPTIONS}
                             />}
-                            <div class="columns">
+                            <div class="columns pt-5">
                                 <div class="column is-half">
                                     <Link to={`/submission/${id}`} class="button is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                     <Link to={`/submission/${id}`} class="button is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
