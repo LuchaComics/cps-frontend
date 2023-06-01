@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useSearchParams } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight, faUser, faKey } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faUser, faKey, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { useRecoilState } from 'recoil';
 
 import FormErrorBox from "../Element/FormErrorBox";
@@ -12,6 +12,13 @@ import { onHamburgerClickedState } from "../../AppState";
 
 
 function Login() {
+    ////
+    //// URL Parameters.
+    ////
+
+    const [searchParams] = useSearchParams(); // Special thanks via https://stackoverflow.com/a/65451140
+    const isUnauthorized = searchParams.get("unauthorized");
+
     ////
     //// Global state.
     ////
@@ -172,6 +179,11 @@ function Login() {
                                     <div class="box is-rounded column is-one-third-tablet">
                                         <form>
                                             <h1 className="title is-3 has-text-centered">Sign In</h1>
+                                            {isUnauthorized === "true" &&
+                                                <article class="message is-danger">
+                                                  <div class="message-body"><FontAwesomeIcon className="fas" icon={faTriangleExclamation} />&nbsp;Your session has ended.<br/>Please login again</div>
+                                                </article>
+                                            }
                                             <FormErrorBox errors={errors} />
 
                                             <div class="field">

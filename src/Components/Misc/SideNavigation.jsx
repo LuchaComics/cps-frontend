@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, Navigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faTachometer, faTasks, faSignOut, faUserCircle, faUsers, faBuilding
@@ -7,7 +7,7 @@ import {
 import { useRecoilState } from 'recoil';
 
 import { onHamburgerClickedState } from "../../AppState";
-
+import { getAccessTokenFromLocalStorage } from '../../Helpers/jwtUtility';
 
 function SideNavigation() {
     // Global state
@@ -15,6 +15,7 @@ function SideNavigation() {
 
     // Local state.
     const [showLogoutWarning, setShowLogoutWarning] = useState(false);
+    const [forceURL, setForceURL] = useState("");
 
     // Get the current location and if we are at specific URL paths then we
     // will not render this component.
@@ -29,15 +30,30 @@ function SideNavigation() {
     const location = useLocation();
     var arrayLength = ignorePathsArr.length;
     for (var i = 0; i < arrayLength; i++) {
-        console.log();
         if (location.pathname === ignorePathsArr[i]) {
             return (null);
         }
     }
 
+    // If the user is not logged in then redirect back to login page.
+    const accessToken = getAccessTokenFromLocalStorage();
+    if (accessToken === undefined || accessToken === "" || accessToken === null) {
+        window.location = "/login?unauthorized=true";
+        return;
+    }
+
+    // If the user clicked the hamburger menu and
     console.log("onHamburgerClicked:", onHamburgerClicked);
     if (onHamburgerClicked === false) {
         return null;
+    }
+
+    ////
+    //// Component rendering.
+    ////
+
+    if (forceURL !== "") {
+        return <Navigate to={forceURL}  />
     }
 
     // Render the following component GUI.
