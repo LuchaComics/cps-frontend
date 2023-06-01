@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate, useSearchParams } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faGauge } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faGauge, faUsers, faEye } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
@@ -28,6 +28,8 @@ function RetailerSubmissionAddStep2() {
     ////
 
     const [searchParams] = useSearchParams(); // Special thanks via https://stackoverflow.com/a/65451140
+    const customerID = searchParams.get("customer_id");
+    const customerName = searchParams.get("customer_name");
 
     ////
     //// Global state.
@@ -235,7 +237,6 @@ function RetailerSubmissionAddStep2() {
         };
 
         console.log("onSubmitClick: Attaching customer identification.");
-        const customerID = searchParams.get("customer_id");
         if (customerID !== undefined && customerID !== null && customerID !== "") {
             submission.UserID = customerID;
         }
@@ -263,8 +264,13 @@ function RetailerSubmissionAddStep2() {
             setTopAlertMessage("");
         }, 2000);
 
+        let urlParams = "";
+        if (customerName !== null) {
+            urlParams += "?customer_id=" + customerID + "&customer_name=" + customerName;
+        }
+
         // Redirect the user to a new page.
-        setForceURL("/submissions/add/"+response.id+"/confirmation");
+        setForceURL("/submissions/add/"+response.id+"/confirmation"+urlParams);
     }
 
     function onSubmissionCreateError(apiErr) {
@@ -319,11 +325,22 @@ function RetailerSubmissionAddStep2() {
             <div class="container">
                 <section class="section">
                     <nav class="breadcrumb" aria-label="breadcrumbs">
-                        <ul>
-                            <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
-                            <li class=""><Link to="/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
-                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
-                        </ul>
+                       {customerName === null
+                           ?
+                            <ul>
+                                <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
+                                <li class=""><Link to="/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
+                                <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
+                            </ul>
+                            :
+                            <ul>
+                                <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
+                                <li class=""><Link to="/customers" aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers</Link></li>
+                                <li class=""><Link to={`/customer/${customerID}`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail</Link></li>
+                                <li class=""><Link to={`/customer/${customerID}/sub`} aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
+                                <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
+                            </ul>
+                        }
                     </nav>
                     <nav class="box">
                         <div class={`modal ${showCancelWarning ? 'is-active' : ''}`}>
@@ -810,10 +827,15 @@ function RetailerSubmissionAddStep2() {
                             />}
 
                             <div class="columns pt-5">
-                                <div class="column is-half">
-                                    <button class="button is-hidden-touch" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
-                                    <button class="button is-fullwidth is-hidden-desktop" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
-                                </div>
+                                {customerName === null
+                                    ?
+                                    <div class="column is-half">
+                                        <button class="button is-hidden-touch" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
+                                        <button class="button is-fullwidth is-hidden-desktop" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
+                                    </div>
+                                    :
+                                    <div class="column is-half"></div>
+                                }
                                 <div class="column is-half has-text-right">
                                     <button class="button is-primary is-hidden-touch" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
                                     <button class="button is-primary is-fullwidth is-hidden-desktop" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>

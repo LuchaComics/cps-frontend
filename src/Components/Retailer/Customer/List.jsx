@@ -225,6 +225,9 @@ function RetailerCustomerList() {
                                                         <td data-label="Created">{customer.createdAt}</td>
                                                         <td class="is-actions-cell">
                                                             <div class="buttons is-right">
+                                                                <Link to={`/submissions/add?customer_id=${customer.id}&customer_name=${customer.name}`} class="button is-small is-success" type="button">
+                                                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
+                                                                </Link>
                                                                 <Link to={`/customer/${customer.id}`} class="button is-small is-primary" type="button">
                                                                     <FontAwesomeIcon className="mdi" icon={faEye} />&nbsp;View
                                                                 </Link>

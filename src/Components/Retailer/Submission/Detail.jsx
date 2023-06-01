@@ -578,7 +578,7 @@ function RetailerSubmissionDetail() {
                             {tabIndex === 2 && <>
                                 {submission && submission.user !== undefined && submission.user !== null && submission.user !== "" && <>
                                     <p class="subtitle is-4 pt-4"><FontAwesomeIcon className="fas" icon={faUser} />&nbsp;Customer</p>
-                                    <p class="pb-5"><Link to={`/customer/${submission.user.id}`} target="_blank">Click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link> to view the customer.</p>
+                                    <p class="pb-5"><Link to={`/customer/${submission.user.id}`} target="_blank" rel="noreferrer">Click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link> to view the customer.</p>
 
                                     <FormInputField
                                         label="Name"

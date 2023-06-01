@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useSearchParams } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faDownload, faArrowLeft, faCheckCircle, faCheck, faGauge } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faDownload, faArrowLeft, faCheckCircle, faCheck, faGauge, faUsers, faEye } from '@fortawesome/free-solid-svg-icons'
 import Select from 'react-select'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
@@ -21,10 +21,18 @@ import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 function RetailerSubmissionAddStep3() {
     ////
-    //// URL Parameters.
+    //// URL Arguments.
     ////
 
     const { id } = useParams()
+
+    ////
+    //// URL Parameters.
+    ////
+
+    const [searchParams] = useSearchParams(); // Special thanks via https://stackoverflow.com/a/65451140
+    const customerID = searchParams.get("customer_id");
+    const customerName = searchParams.get("customer_name");
 
     ////
     //// Global state.
@@ -107,11 +115,22 @@ function RetailerSubmissionAddStep3() {
             <div class="container">
                 <section class="section">
                     <nav class="breadcrumb" aria-label="breadcrumbs">
-                        <ul>
-                            <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
-                            <li class=""><Link to="/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
-                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
-                        </ul>
+                        {customerName === null
+                            ?
+                             <ul>
+                                 <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
+                                 <li class=""><Link to="/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
+                                 <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
+                             </ul>
+                             :
+                             <ul>
+                                 <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
+                                 <li class=""><Link to="/customers" aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers</Link></li>
+                                 <li class=""><Link to={`/customer/${customerID}`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail</Link></li>
+                                 <li class=""><Link to={`/customer/${customerID}/sub`} aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
+                                 <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
+                             </ul>
+                         }
                     </nav>
 
                     <nav class="box">
@@ -166,12 +185,19 @@ function RetailerSubmissionAddStep3() {
                             <div class="columns pt-5">
                                 <div class="column is-half">
                                 </div>
-                                <div class="column is-half has-text-right">
-                                    <Link to={`/submissions`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to Dashboard</Link>
-                                    <Link to={`/submissions`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to Dashboard</Link>
-                                </div>
+                                {customerName === null
+                                    ?
+                                    <div class="column is-half has-text-right">
+                                        <Link to={`/submissions`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to Dashboard</Link>
+                                        <Link to={`/submissions`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to Dashboard</Link>
+                                    </div>
+                                    :
+                                    <div class="column is-half has-text-right">
+                                        <Link to={`/customer/${customerID}/sub`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to Submission</Link>
+                                        <Link to={`/customer/${customerID}/sub`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to Submission</Link>
+                                    </div>
+                                }
                             </div>
-
                         </div>}
                     </nav>
                 </section>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faUserCircle, faGauge, faPencil, faUsers, faEye, faArrowRight, faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faUserCircle, faGauge, faPencil, faUsers, faEye, faArrowRight, faTrashCan, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
 import { SUBMISSION_STATES } from "../../../Constants/FieldOptions";
@@ -240,11 +240,11 @@ function RetailerCustomerDetailForSubmission() {
                             </div>
                             <div class="column has-text-right">
                                 {/* Mobile Specific */}
-                                <Link to={`/submissions/add?customer_id=${id}`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
+                                <Link to={`/submissions/add?customer_id=${id}&customer_name=${customer.name}`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add Submission
                                 </Link>
                                 {/* Desktop Specific */}
-                                <Link to={`/submissions/add?customer_id=${id}`} class="button is-small is-success is-hidden-touch" type="button">
+                                <Link to={`/submissions/add?customer_id=${id}&customer_name=${customer.name}`} class="button is-small is-success is-hidden-touch" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add Submission
                                 </Link>
                             </div>
@@ -300,11 +300,11 @@ function RetailerCustomerDetailForSubmission() {
                                                             <td data-label="Created">{submission.createdAt}</td>
                                                             <td class="is-actions-cell">
                                                                 <div class="buttons is-right">
-                                                                    <Link to={`/submission/${submission.id}`} class="button is-small is-primary" type="button">
-                                                                        <FontAwesomeIcon className="mdi" icon={faEye} />&nbsp;View
+                                                                    <Link to={`/submission/${submission.id}`} target="_blank" rel="noreferrer" class="button is-small is-primary" type="button">
+                                                                        View&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
                                                                     </Link>
-                                                                    <Link to={`/submission/${submission.id}/edit`} class="button is-small is-warning" type="button">
-                                                                        <FontAwesomeIcon className="mdi" icon={faPencil} />&nbsp;Edit
+                                                                    <Link to={`/submission/${submission.id}/edit`} target="_blank" rel="noreferrer" class="button is-small is-warning" type="button">
+                                                                        Edit&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
                                                                     </Link>
                                                                     <button onClick={(e, ses) => onSelectSubmissionForDeletion(e, submission)} class="button is-small is-danger" type="button">
                                                                         <FontAwesomeIcon className="mdi" icon={faTrashCan} />&nbsp;Delete

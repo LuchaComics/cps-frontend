@@ -172,7 +172,7 @@ function RetailerSubmissionUpdatePickCustomerWithSearch() {
 
                     <nav class="box">
                         <p class="title is-3"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update Submission</p>
-                        <p class="pb-4">To begin, please select a customer that belongs to this customer. If you don't have a customer at this time and if you'd like to create the customer then <Link to="/customers/add" target="_blank">click here to create a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link>.</p>
+                        <p class="pb-4">To begin, please select a customer that belongs to this customer. If you don't have a customer at this time and if you'd like to create the customer then <Link to="/customers/add" target="_blank" rel="noreferrer">click here to create a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link>.</p>
                         <FormErrorBox errors={errors} />
 
                         <div class="container pb-5">
