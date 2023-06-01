@@ -19,6 +19,7 @@ function SideNavigation() {
     // Get the current location and if we are at specific URL paths then we
     // will not render this component.
     const ignorePathsArr = [
+        "/",
         "/register",
         "/register-successful",
         "/login",
