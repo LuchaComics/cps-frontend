@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import Select from 'react-select'
 import { useRecoilState } from 'recoil';
 
@@ -449,9 +449,11 @@ function Register() {
                                     <button class="button is-primary is-fullwidth is-hidden-desktop" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Register</button>
                                 </div>
                             </div>
-
                         </div>}
                     </nav>
+                    <span className="is-pulled-right has-text-grey">
+                        Already have an account? <Link to="/login">Click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link> to sign in.
+                    </span>
                 </section>
             </div>
         </>

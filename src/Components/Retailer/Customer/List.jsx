@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUsers, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge } from '@fortawesome/free-solid-svg-icons';
+import { faUsers, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { useRecoilState } from 'recoil';
 
 import { getCustomerListAPI, deleteCustomerAPI } from "../../../API/customer";
@@ -202,43 +202,54 @@ function RetailerCustomerList() {
                             </div>
                         </div>}
 
-                        {!isFetching && <div class="container">
-                            <div class="b-table">
-                                <div class="table-wrapper has-mobile-cards">
-                                    <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Created</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                        {!isFetching && customers && customers.results && customers.results.length > 0
+                            ?
+                            <div class="container">
+                                <div class="b-table">
+                                    <div class="table-wrapper has-mobile-cards">
+                                        <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Created</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
 
-                                            {customers && customers.results && customers.results.map(function(customer, i){
-                                                return <tr>
-                                                    <td data-label="Title">{customer.name}</td>
-                                                    <td data-label="Created">{customer.createdAt}</td>
-                                                    <td class="is-actions-cell">
-                                                        <div class="buttons is-right">
-                                                            <Link to={`/customer/${customer.id}`} class="button is-small is-primary" type="button">
-                                                                <FontAwesomeIcon className="mdi" icon={faEye} />&nbsp;View
-                                                            </Link>
-                                                            <Link to={`/customer/${customer.id}/edit`} class="button is-small is-warning" type="button">
-                                                                <FontAwesomeIcon className="mdi" icon={faPencil} />&nbsp;Edit
-                                                            </Link>
-                                                            <button onClick={(e, ses) => onSelectCustomerForDeletion(e, customer)} class="button is-small is-danger" type="button">
-                                                                <FontAwesomeIcon className="mdi" icon={faTrashCan} />&nbsp;Delete
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>;
-                                            })}
-                                        </tbody>
-                                    </table>
+                                                {customers && customers.results && customers.results.map(function(customer, i){
+                                                    return <tr>
+                                                        <td data-label="Title">{customer.name}</td>
+                                                        <td data-label="Created">{customer.createdAt}</td>
+                                                        <td class="is-actions-cell">
+                                                            <div class="buttons is-right">
+                                                                <Link to={`/customer/${customer.id}`} class="button is-small is-primary" type="button">
+                                                                    <FontAwesomeIcon className="mdi" icon={faEye} />&nbsp;View
+                                                                </Link>
+                                                                <Link to={`/customer/${customer.id}/edit`} class="button is-small is-warning" type="button">
+                                                                    <FontAwesomeIcon className="mdi" icon={faPencil} />&nbsp;Edit
+                                                                </Link>
+                                                                <button onClick={(e, ses) => onSelectCustomerForDeletion(e, customer)} class="button is-small is-danger" type="button">
+                                                                    <FontAwesomeIcon className="mdi" icon={faTrashCan} />&nbsp;Delete
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>;
+                                                })}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>}
+                                :
+                                <div class="container">
+                                    <article class="message is-dark">
+                                        <div class="message-body">
+                                            No customers. <b><Link to="/customers/add">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating a new submission.
+                                        </div>
+                                    </article>
+                                </div>
+                            }
                     </nav>
                 </section>
             </div>

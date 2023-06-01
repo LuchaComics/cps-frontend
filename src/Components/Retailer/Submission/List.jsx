@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTasks, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge } from '@fortawesome/free-solid-svg-icons';
+import { faTasks, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { useRecoilState } from 'recoil';
 
 import { getSubmissionListAPI, deleteSubmissionAPI } from "../../../API/submission";
@@ -201,49 +201,60 @@ function RetailerSubmissionList() {
                             </div>
                         </div>}
 
-                        {!isFetching && <div class="container">
-                            <div class="b-table">
-                                <div class="table-wrapper has-mobile-cards">
-                                    <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
-                                        <thead>
-                                            <tr>
-                                                <th>Title</th>
-                                                <th>Vol</th>
-                                                <th>No</th>
-                                                <th>State</th>
-                                                <th>Created</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                        {!isFetching && submissions && submissions.results && submissions.results.length > 0
+                            ?
+                            <div class="container">
+                                <div class="b-table">
+                                    <div class="table-wrapper has-mobile-cards">
+                                        <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
+                                            <thead>
+                                                <tr>
+                                                    <th>Title</th>
+                                                    <th>Vol</th>
+                                                    <th>No</th>
+                                                    <th>State</th>
+                                                    <th>Created</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
 
-                                            {submissions && submissions.results && submissions.results.map(function(submission, i){
-                                                return <tr>
-                                                    <td data-label="Title">{submission.seriesTitle}</td>
-                                                    <td data-label="Vol">{submission.issueVol}</td>
-                                                    <td data-label="No">{submission.issueNo}</td>
-                                                    <td data-label="State">{SUBMISSION_STATES[submission.state]}</td>
-                                                    <td data-label="Created">{submission.createdAt}</td>
-                                                    <td class="is-actions-cell">
-                                                        <div class="buttons is-right">
-                                                            <Link to={`/submission/${submission.id}`} class="button is-small is-primary" type="button">
-                                                                <FontAwesomeIcon className="mdi" icon={faEye} />&nbsp;View
-                                                            </Link>
-                                                            <Link to={`/submission/${submission.id}/edit`} class="button is-small is-warning" type="button">
-                                                                <FontAwesomeIcon className="mdi" icon={faPencil} />&nbsp;Edit
-                                                            </Link>
-                                                            <button onClick={(e, ses) => onSelectSubmissionForDeletion(e, submission)} class="button is-small is-danger" type="button">
-                                                                <FontAwesomeIcon className="mdi" icon={faTrashCan} />&nbsp;Delete
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>;
-                                            })}
-                                        </tbody>
-                                    </table>
+                                                {submissions && submissions.results && submissions.results.map(function(submission, i){
+                                                    return <tr>
+                                                        <td data-label="Title">{submission.seriesTitle}</td>
+                                                        <td data-label="Vol">{submission.issueVol}</td>
+                                                        <td data-label="No">{submission.issueNo}</td>
+                                                        <td data-label="State">{SUBMISSION_STATES[submission.state]}</td>
+                                                        <td data-label="Created">{submission.createdAt}</td>
+                                                        <td class="is-actions-cell">
+                                                            <div class="buttons is-right">
+                                                                <Link to={`/submission/${submission.id}`} class="button is-small is-primary" type="button">
+                                                                    <FontAwesomeIcon className="mdi" icon={faEye} />&nbsp;View
+                                                                </Link>
+                                                                <Link to={`/submission/${submission.id}/edit`} class="button is-small is-warning" type="button">
+                                                                    <FontAwesomeIcon className="mdi" icon={faPencil} />&nbsp;Edit
+                                                                </Link>
+                                                                <button onClick={(e, ses) => onSelectSubmissionForDeletion(e, submission)} class="button is-small is-danger" type="button">
+                                                                    <FontAwesomeIcon className="mdi" icon={faTrashCan} />&nbsp;Delete
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>;
+                                                })}
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-                        </div>}
+                            :
+                            <div class="container">
+                                <article class="message is-dark">
+                                    <div class="message-body">
+                                        No submissions. <b><Link to="/submissions/add/search">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating a new submission.
+                                    </div>
+                                </article>
+                            </div>
+                        }
                     </nav>
                 </section>
             </div>
