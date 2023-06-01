@@ -16,6 +16,7 @@ import FormRadioField from "../../Element/FormRadioField";
 import FormMultiSelectField from "../../Element/FormMultiSelectField";
 import FormCheckboxField from "../../Element/FormCheckboxField";
 import FormSelectField from "../../Element/FormSelectField";
+import FormDateField from "../../Element/FormDateField";
 import {
     FINDING_OPTIONS,
     OVERALL_NUMBER_GRADE_OPTIONS,
@@ -89,7 +90,7 @@ function RetailerSubmissionDetail() {
         let mounted = true;
 
         if (mounted) {
-            // window.scrollTo(0, 0);  // Start the page at the top of the page.
+            window.scrollTo(0, 0);  // Start the page at the top of the page.
 
             setFetching(true);
             getSubmissionDetailAPI(
@@ -203,14 +204,14 @@ function RetailerSubmissionDetail() {
                                     disabled={true}
                                 />}
 
-                                {submission && <FormInputField
+                                {submission && <FormDateField
                                     label="Issue Cover Date"
                                     name="issueCoverDate"
                                     placeholder="Text input"
                                     value={submission.issueCoverDate}
                                     helpText=""
                                     isRequired={true}
-                                    maxWidth="180px"
+                                    maxWidth="110px"
                                     disabled={true}
                                 />}
 

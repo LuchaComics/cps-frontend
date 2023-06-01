@@ -9,6 +9,7 @@ import useLocalStorage from "../../../Hooks/useLocalStorage";
 import { postSubmissionCreateAPI } from "../../../API/submission";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
+import FormDateField from "../../Element/FormDateField";
 import FormTextareaField from "../../Element/FormTextareaField";
 import FormRadioField from "../../Element/FormRadioField";
 import FormMultiSelectField from "../../Element/FormMultiSelectField";
@@ -80,129 +81,10 @@ function RetailerSubmissionAddStep2() {
     //// Event handling.
     ////
 
-    const onSeriesTitleChange = (e) => {
-        setSeriesTitle(e.target.value);
-    }
-
-    const onIssueVolChange = (e) => {
-        setIssueVol(e.target.value);
-    }
-
-    const onIssueNoChange = (e) => {
-        setIssueNo(e.target.value);
-    }
-
-    const onIssueCoverDateChange = (e) => {
-        setIssueCoverDate(e.target.value);
-    }
-
-    const onPublisherNameChange = (e) => {
-        setPublisherName(parseInt(e.target.value));
-    }
-
-    const onPublisherNameOtherChange = (e) => {
-        setPublisherNameOther(e.target.value);
-    }
-
-    const onCreasesFindingChange = (e) => {
-        setCreasesFinding(e.target.value);
-    }
-
-    const onTearsFindingChange = (e) => {
-        setTearsFinding(e.target.value);
-    }
-
-    const onMissingPartsFindingChange = (e) => {
-        setMissingPartsFinding(e.target.value);
-    }
-
-    const onStainsFindingdChange = (e) => {
-        setStainsFinding(e.target.value);
-    }
-
-    const onStainsFindingChange = (e) => {
-        setStainsFinding(e.target.value);
-    }
-
-    const onDistortionFindingChange = (e) => {
-        setDistortionFinding(e.target.value);
-    }
-
-    const onPaperQualityFindingChange = (e) => {
-        setPaperQualityFinding(e.target.value);
-    }
-
-    const onSpineFindingChange = (e) => {
-        setSpineFinding(e.target.value);
-    }
-
-    const onCoverFindingChange = (e) => {
-        setCoverFinding(e.target.value);
-    }
-
-    const onGradingScaleChange = (e) => {
-        setGradingScale(parseInt(e.target.value));
-    }
-
-    const onOverallLetterGradeChange = (e) => {
-        setOverallLetterGrade(e.target.value);
-    }
-
-    const onOverallNumberGradeChange = (e) => {
-        setOverallNumberGrade(e.target.value);
-    }
-
-    const onCpsPercentageGradeChange = (e) => {
-        setCpsPercentageGrade(e.target.value);
-    }
-
-    const onSpecialNotesLine1Change = (e) => {
-        setSpecialNotesLine1(e.target.value);
-    }
-
-    const onSpecialNotesLine2Change = (e) => {
-        setSpecialNotesLine2(e.target.value);
-    }
-
-    const onSpecialNotesLine3Change = (e) => {
-        setSpecialNotesLine3(e.target.value);
-    }
-
-    const onSpecialNotesLine4Change = (e) => {
-        setSpecialNotesLine4(e.target.value);
-    }
-
-    const onSpecialNotesLine5Change = (e) => {
-        setSpecialNotesLine5(e.target.value);
-    }
-
-    const onGradingNotesLine1Change = (e) => {
-        setGradingNotesLine1(e.target.value);
-    }
-
-    const onGradingNotesLine2Change = (e) => {
-        setGradingNotesLine2(e.target.value);
-    }
-
-    const onGradingNotesLine3Change = (e) => {
-        setGradingNotesLine3(e.target.value);
-    }
-
-    const onGradingNotesLine4Change = (e) => {
-        setGradingNotesLine4(e.target.value);
-    }
-
-    const onGradingNotesLine5Change = (e) => {
-        setGradingNotesLine5(e.target.value);
-    }
-
-    const onShowsSignsOfTamperingOrRestorationChange = (e) => {
-        setShowsSignsOfTamperingOrRestoration(e.target.value);
-    }
-
     const onSubmitClick = (e) => {
         console.log("onSubmitClick: Beginning...");
         console.log("onSubmitClick: Generating payload for submission.");
+
         // Generate the payload.
         const submission = {
             SeriesTitle: seriesTitle,
@@ -383,7 +265,7 @@ function RetailerSubmissionAddStep2() {
                                 value={seriesTitle}
                                 errorText={errors && errors.seriesTitle}
                                 helpText=""
-                                onChange={onSeriesTitleChange}
+                                onChange={(e)=>setSeriesTitle(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -395,7 +277,7 @@ function RetailerSubmissionAddStep2() {
                                 value={issueVol}
                                 errorText={errors && errors.issueVol}
                                 helpText=""
-                                onChange={onIssueVolChange}
+                                onChange={(e)=>setIssueVol(e.target.value)}
                                 isRequired={true}
                                 maxWidth="180px"
                             />
@@ -407,21 +289,21 @@ function RetailerSubmissionAddStep2() {
                                 value={issueNo}
                                 errorText={errors && errors.issueNo}
                                 helpText=""
-                                onChange={onIssueNoChange}
+                                onChange={(e)=>setIssueNo(e.target.value)}
                                 isRequired={true}
                                 maxWidth="180px"
                             />
 
-                            <FormInputField
+                            <FormDateField
                                 label="Issue Cover Date"
                                 name="issueCoverDate"
                                 placeholder="Text input"
                                 value={issueCoverDate}
                                 errorText={errors && errors.issueCoverDate}
                                 helpText=""
-                                onChange={onIssueCoverDateChange}
+                                onChange={setIssueCoverDate}
                                 isRequired={true}
-                                maxWidth="180px"
+                                maxWidth="110px"
                             />
 
                             <FormSelectField
@@ -431,7 +313,7 @@ function RetailerSubmissionAddStep2() {
                                 selectedValue={publisherName}
                                 errorText={errors && errors.publisherName}
                                 helpText=""
-                                onChange={onPublisherNameChange}
+                                onChange={(e)=>setPublisherName(parseInt(e.target.value))}
                                 options={PUBLISHER_NAME_WITH_EMPTY_OPTIONS}
                             />
 
@@ -442,7 +324,7 @@ function RetailerSubmissionAddStep2() {
                                 value={publisherNameOther}
                                 errorText={errors && errors.publisherNameOther}
                                 helpText=""
-                                onChange={onPublisherNameOtherChange}
+                                onChange={(e)=>setPublisherNameOther(e.target.value)}
                                 isRequired={true}
                                 maxWidth="280px"
                             />}
@@ -454,7 +336,7 @@ function RetailerSubmissionAddStep2() {
                                 value={specialNotesLine1}
                                 errorText={errors && errors.specialNotesLine1}
                                 helpText=""
-                                onChange={onSpecialNotesLine1Change}
+                                onChange={(e)=>setSpecialNotesLine1(e.target.value)}
                                 isRequired={true}
                                 maxWidth="280px"
                                 helpText={"Max 17 characters"}
@@ -467,7 +349,7 @@ function RetailerSubmissionAddStep2() {
                                 value={specialNotesLine2}
                                 errorText={errors && errors.specialNotesLine2}
                                 helpText=""
-                                onChange={onSpecialNotesLine2Change}
+                                onChange={(e)=>setSpecialNotesLine2(e.target.value)}
                                 isRequired={true}
                                 maxWidth="280px"
                                 helpText={"Max 17 characters"}
@@ -480,7 +362,7 @@ function RetailerSubmissionAddStep2() {
                                 value={specialNotesLine3}
                                 errorText={errors && errors.specialNotesLine3}
                                 helpText=""
-                                onChange={onSpecialNotesLine3Change}
+                                onChange={(e)=>setSpecialNotesLine3(e.target.value)}
                                 isRequired={true}
                                 maxWidth="280px"
                                 helpText={"Max 17 characters"}
@@ -493,7 +375,7 @@ function RetailerSubmissionAddStep2() {
                                 value={specialNotesLine4}
                                 errorText={errors && errors.specialNotesLine4}
                                 helpText=""
-                                onChange={onSpecialNotesLine4Change}
+                                onChange={(e)=>setSpecialNotesLine4(e.target.value)}
                                 isRequired={true}
                                 maxWidth="280px"
                                 helpText={"Max 17 characters"}
@@ -506,7 +388,7 @@ function RetailerSubmissionAddStep2() {
                                 value={specialNotesLine5}
                                 errorText={errors && errors.specialNotesLine5}
                                 helpText=""
-                                onChange={onSpecialNotesLine5Change}
+                                onChange={(e)=>setSpecialNotesLine5(e.target.value)}
                                 isRequired={true}
                                 maxWidth="280px"
                                 helpText={"Max 17 characters"}
@@ -533,7 +415,7 @@ function RetailerSubmissionAddStep2() {
                                 opt7Value="nm"
                                 opt7Label="Near Mint"
                                 errorText={errors && errors.creasesFinding}
-                                onChange={onCreasesFindingChange}
+                                onChange={(e)=>setCreasesFinding(e.target.value)}
                                 maxWidth="180px"
                             />
 
@@ -556,7 +438,7 @@ function RetailerSubmissionAddStep2() {
                                 opt7Value="nm"
                                 opt7Label="Near Mint"
                                 errorText={errors && errors.tearsFinding}
-                                onChange={onTearsFindingChange}
+                                onChange={(e)=>setTearsFinding(e.target.value)}
                                 maxWidth="180px"
                             />
 
@@ -579,7 +461,7 @@ function RetailerSubmissionAddStep2() {
                                 opt7Value="nm"
                                 opt7Label="Near Mint"
                                 errorText={errors && errors.missingPartsFinding}
-                                onChange={onMissingPartsFindingChange}
+                                onChange={(e)=>setMissingPartsFinding(e.target.value)}
                                 maxWidth="180px"
                             />
 
@@ -602,7 +484,7 @@ function RetailerSubmissionAddStep2() {
                                 opt7Value="nm"
                                 opt7Label="Near Mint"
                                 errorText={errors && errors.stainsFinding}
-                                onChange={onStainsFindingChange}
+                                onChange={(e)=>setStainsFinding(e.target.value)}
                                 maxWidth="180px"
                             />
 
@@ -625,7 +507,7 @@ function RetailerSubmissionAddStep2() {
                                 opt7Value="nm"
                                 opt7Label="Near Mint"
                                 errorText={errors && errors.distortionFinding}
-                                onChange={onDistortionFindingChange}
+                                onChange={(e)=>setDistortionFinding(e.target.value)}
                                 maxWidth="180px"
                             />
 
@@ -648,7 +530,7 @@ function RetailerSubmissionAddStep2() {
                                 opt7Value="nm"
                                 opt7Label="Near Mint"
                                 errorText={errors && errors.paperQualityFinding}
-                                onChange={onPaperQualityFindingChange}
+                                onChange={(e)=>setPaperQualityFinding(e.target.value)}
                                 maxWidth="180px"
                             />
 
@@ -671,7 +553,7 @@ function RetailerSubmissionAddStep2() {
                                 opt7Value="nm"
                                 opt7Label="Near Mint"
                                 errorText={errors && errors.spineFinding}
-                                onChange={onSpineFindingChange}
+                                onChange={(e)=>setSpineFinding(e.target.value)}
                                 maxWidth="180px"
                             />
 
@@ -694,7 +576,7 @@ function RetailerSubmissionAddStep2() {
                                 opt7Value="nm"
                                 opt7Label="Near Mint"
                                 errorText={errors && errors.coverFinding}
-                                onChange={onCoverFindingChange}
+                                onChange={(e)=>setCoverFinding(e.target.value)}
                                 maxWidth="180px"
                             />
 
@@ -707,7 +589,7 @@ function RetailerSubmissionAddStep2() {
                                 opt2Value={"1"}
                                 opt2Label="Yes"
                                 errorText={errors && errors.showsSignsOfTamperingOrRestoration}
-                                onChange={onShowsSignsOfTamperingOrRestorationChange}
+                                onChange={(e)=>setShowsSignsOfTamperingOrRestoration(e.target.value)}
                                 maxWidth="180px"
                             />
 
@@ -718,7 +600,7 @@ function RetailerSubmissionAddStep2() {
                                 value={gradingNotesLine1}
                                 errorText={errors && errors.gradingNotesLine1}
                                 helpText=""
-                                onChange={onGradingNotesLine1Change}
+                                onChange={(e)=>setGradingNotesLine1(e.target.value)}
                                 isRequired={true}
                                 maxWidth="280px"
                                 helpText={"Max 17 characters"}
@@ -731,7 +613,7 @@ function RetailerSubmissionAddStep2() {
                                 value={gradingNotesLine2}
                                 errorText={errors && errors.gradingNotesLine2}
                                 helpText=""
-                                onChange={onGradingNotesLine2Change}
+                                onChange={(e)=>setGradingNotesLine2(e.target.value)}
                                 isRequired={true}
                                 maxWidth="280px"
                                 helpText={"Max 17 characters"}
@@ -744,7 +626,7 @@ function RetailerSubmissionAddStep2() {
                                 value={gradingNotesLine3}
                                 errorText={errors && errors.gradingNotesLine3}
                                 helpText=""
-                                onChange={onGradingNotesLine3Change}
+                                onChange={(e)=>setGradingNotesLine3(e.target.value)}
                                 isRequired={true}
                                 maxWidth="280px"
                                 helpText={"Max 17 characters"}
@@ -757,7 +639,7 @@ function RetailerSubmissionAddStep2() {
                                 value={gradingNotesLine4}
                                 errorText={errors && errors.gradingNotesLine4}
                                 helpText=""
-                                onChange={onGradingNotesLine4Change}
+                                onChange={(e)=>setGradingNotesLine4(e.target.value)}
                                 isRequired={true}
                                 maxWidth="280px"
                                 helpText={"Max 17 characters"}
@@ -770,7 +652,7 @@ function RetailerSubmissionAddStep2() {
                                 value={gradingNotesLine5}
                                 errorText={errors && errors.gradingNotesLine5}
                                 helpText=""
-                                onChange={onGradingNotesLine5Change}
+                                onChange={(e)=>setGradingNotesLine5(e.target.value)}
                                 isRequired={true}
                                 maxWidth="280px"
                                 helpText={"Max 17 characters"}
@@ -789,7 +671,7 @@ function RetailerSubmissionAddStep2() {
                                 opt3Value={3}
                                 opt3Label="CPS Percentage (5%-100%)"
                                 errorText={errors && errors.gradingScale}
-                                onChange={onGradingScaleChange}
+                                onChange={(e)=>setGradingScale(parseInt(e.target.value))}
                                 maxWidth="180px"
                             />
 
@@ -800,7 +682,7 @@ function RetailerSubmissionAddStep2() {
                                 selectedValue={overallLetterGrade}
                                 errorText={errors && errors.overallLetterGrade}
                                 helpText=""
-                                onChange={onOverallLetterGradeChange}
+                                onChange={(e)=>setOverallLetterGrade(e.target.value)}
                                 options={FINDING_WITH_EMPTY_OPTIONS}
                             />}
 
@@ -811,7 +693,7 @@ function RetailerSubmissionAddStep2() {
                                 selectedValue={overallNumberGrade}
                                 errorText={errors && errors.overallNumberGrade}
                                 helpText=""
-                                onChange={onOverallNumberGradeChange}
+                                onChange={(e)=>setOverallNumberGrade(e.target.value)}
                                 options={OVERALL_NUMBER_GRADE_WITH_EMPTY_OPTIONS}
                             />}
 
@@ -822,7 +704,7 @@ function RetailerSubmissionAddStep2() {
                                 selectedValue={cpsPercentageGrade}
                                 errorText={errors && errors.cpsPercentageGrade}
                                 helpText=""
-                                onChange={onCpsPercentageGradeChange}
+                                onChange={(e)=>setCpsPercentageGrade(e.target.value)}
                                 options={CPS_PERCENTAGE_GRADE_WITH_EMPTY_OPTIONS}
                             />}
 
