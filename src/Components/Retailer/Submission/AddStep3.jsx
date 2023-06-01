@@ -142,11 +142,11 @@ function RetailerSubmissionAddStep3() {
                                     <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-success is-hidden-touch"><FontAwesomeIcon className="fas" icon={faDownload} />&nbsp;Download PDF</a>
                                     <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-success is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faDownload} />&nbsp;Download PDF</a>
                                 </div>
-                                <p class="pb-3">Once you've downloaded the PDF, we kindly request that you sign it with your signature. This adds a personal touch and ensures the authenticity of the document.</p>
+                                <p class="pb-3">Once you've downloaded the PDF, please sign it and keep it with the comic. This adds a personal touch and ensures the authenticity of the document.</p>
 
                                 <p class="pb-3">After signing, we ask you to attach the signed PDF to the comic book you wish to have encapsulated. Safely packaging your comic book helps protect it during transit and ensures its safe arrival at our facility.</p>
 
-                                <p class="pb-3">Next, please send the encapsulation order, including the signed PDF and your comic book, to the address provided below:</p>
+                                <p class="pb-3">If you will be submitting this comic book for grading as part of a pedigree or encapsulation order, please include the signed PDF, along with <Link>this submission order form</Link>, and send your order to the address provided below:</p>
 
                                 <article class="message pb-3" style={{width:"300px"}}>
                                   <div class="message-body">
