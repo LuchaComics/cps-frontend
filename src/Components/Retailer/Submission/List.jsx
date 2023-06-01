@@ -185,11 +185,11 @@ function RetailerSubmissionList() {
                             <div class="column has-text-right">
                                 {/* Mobile Specific */}
                                 <Link to={`/submissions/add/search`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
-                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add
+                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add Submission
                                 </Link>
                                 {/* Desktop Specific */}
                                 <Link to={`/submissions/add/search`} class="button is-small is-success is-hidden-touch" type="button">
-                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add
+                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add Submission
                                 </Link>
                             </div>
                         </div>

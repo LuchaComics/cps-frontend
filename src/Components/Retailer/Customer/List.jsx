@@ -185,11 +185,11 @@ function RetailerCustomerList() {
                             <div class="column has-text-right">
                                 {/* Mobile Specific */}
                                 <Link to={`/customers/add`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
-                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add
+                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add Customer
                                 </Link>
                                 {/* Desktop Specific */}
                                 <Link to={`/customers/add`} class="button is-small is-success is-hidden-touch" type="button">
-                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add
+                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add Customer
                                 </Link>
                             </div>
                         </div>

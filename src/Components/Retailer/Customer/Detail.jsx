@@ -114,7 +114,21 @@ function RetailerCustomerDetail() {
                         </ul>
                     </nav>
                     <nav class="box">
-                        <p class="title is-3"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Customer</p>
+                        <div class="columns">
+                            <div class="column">
+                                <p class="title is-3"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Customer</p>
+                            </div>
+                            <div class="column has-text-right">
+                                {/* Mobile Specific */}
+                                <Link to={`/submissions/add?customer_id=${id}`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
+                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add Submission
+                                </Link>
+                                {/* Desktop Specific */}
+                                <Link to={`/submissions/add?customer_id=${id}`} class="button is-small is-success is-hidden-touch" type="button">
+                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add Submission
+                                </Link>
+                            </div>
+                        </div>
                         <FormErrorBox errors={errors} />
 
                         {/* <p class="pb-4">Please fill out all the required fields before submitting this form.</p> */}
@@ -134,7 +148,7 @@ function RetailerCustomerDetail() {
                                     <Link>Detail</Link>
                                 </li>
                                 <li>
-                                    <Link to={`/customer/${customer.id}/submissions`}>Submissions</Link>
+                                    <Link to={`/customer/${customer.id}/sub`}>Submissions</Link>
                                 </li>
                               </ul>
                             </div>

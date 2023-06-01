@@ -66,7 +66,7 @@ function AppRoute() {
                             <Route exact path="/customers" element={<RetailerCustomerList/>}/>
                             <Route exact path="/customers/add" element={<RetailerCustomerAdd/>}/>
                             <Route exact path="/customer/:id" element={<RetailerCustomerDetail/>}/>
-                            <Route exact path="/customer/:id/submissions" element={<RetailerCustomerDetailForSubmission/>}/>
+                            <Route exact path="/customer/:id/sub" element={<RetailerCustomerDetailForSubmission/>}/>
                             <Route exact path="/customer/:id/edit" element={<RetailerCustomerUpdate/>}/>
                             <Route exact path="/account" element={<ProfileDetail/>}/>
                             <Route exact path="/account/update" element={<ProfileUpdate/>}/>
