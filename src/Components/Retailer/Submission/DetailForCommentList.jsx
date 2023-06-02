@@ -219,13 +219,13 @@ function RetailerSubmissionDetailForCommentList() {
                             <div class="tabs">
                               <ul>
                                 <li>
-                                    <Link to={`/submission/${id}`}>Submission</Link>
+                                    <Link to={`/submission/${id}`}>Detail</Link>
                                 </li>
                                 <li>
                                     <Link to={`/submission/${id}/cust`}>Customer</Link>
                                 </li>
                                 <li class="is-active">
-                                    <Link>Comments</Link>
+                                    <Link><b>Comments</b></Link>
                                 </li>
                               </ul>
                             </div>

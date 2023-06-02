@@ -145,7 +145,7 @@ function RetailerCustomerDetail() {
                             <div class="tabs">
                               <ul>
                                 <li class="is-active">
-                                    <Link>Detail</Link>
+                                    <Link><b>Detail</b></Link>
                                 </li>
                                 <li>
                                     <Link to={`/customer/${customer.id}/sub`}>Submissions</Link>

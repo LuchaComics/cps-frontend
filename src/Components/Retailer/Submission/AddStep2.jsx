@@ -87,35 +87,35 @@ function RetailerSubmissionAddStep2() {
 
         // Generate the payload.
         const submission = {
-            SeriesTitle: seriesTitle,
-            IssueVol: issueVol,
-            IssueNo: issueNo,
-            IssueCoverDate: issueCoverDate,
-            PublisherName: publisherName,
-            PublisherNameOther: publisherNameOther,
-            SpecialNotesLine1: specialNotesLine1,
-            SpecialNotesLine2: specialNotesLine2,
-            SpecialNotesLine3: specialNotesLine3,
-            SpecialNotesLine4: specialNotesLine4,
-            SpecialNotesLine5: specialNotesLine5,
-            GradingNotesLine1: gradingNotesLine1,
-            GradingNotesLine2: gradingNotesLine2,
-            GradingNotesLine3: gradingNotesLine3,
-            GradingNotesLine4: gradingNotesLine4,
-            GradingNotesLine5: gradingNotesLine5,
-            CreasesFinding: creasesFinding,
-            TearsFinding: tearsFinding,
-            MissingPartsFinding: missingPartsFinding,
-            StainsFinding: stainsFinding,
-            DistortionFinding: distortionFinding,
-            PaperQualityFinding: paperQualityFinding,
-            SpineFinding: spineFinding,
-            CoverFinding: coverFinding,
-            GradingScale: parseInt(gradingScale),
-            OverallLetterGrade: overallLetterGrade,
-            OverallNumberGrade: parseFloat(overallNumberGrade),
-            CpsPercentageGrade: parseFloat(cpsPercentageGrade),
-            ShowsSignsOfTamperingOrRestoration: parseInt(showsSignsOfTamperingOrRestoration)
+            seriesTitle: seriesTitle,
+            issueVol: issueVol,
+            issueNo: issueNo,
+            issueCoverDate: issueCoverDate,
+            publisherName: publisherName,
+            publisherNameOther: publisherNameOther,
+            specialNotesLine1: specialNotesLine1,
+            specialNotesLine2: specialNotesLine2,
+            specialNotesLine3: specialNotesLine3,
+            specialNotesLine4: specialNotesLine4,
+            specialNotesLine5: specialNotesLine5,
+            gradingNotesLine1: gradingNotesLine1,
+            gradingNotesLine2: gradingNotesLine2,
+            gradingNotesLine3: gradingNotesLine3,
+            gradingNotesLine4: gradingNotesLine4,
+            gradingNotesLine5: gradingNotesLine5,
+            creasesFinding: creasesFinding,
+            tearsFinding: tearsFinding,
+            missingPartsFinding: missingPartsFinding,
+            stainsFinding: stainsFinding,
+            distortionFinding: distortionFinding,
+            paperQualityFinding: paperQualityFinding,
+            spineFinding: spineFinding,
+            coverFinding: coverFinding,
+            gradingScale: parseInt(gradingScale),
+            overallLetterGrade: overallLetterGrade,
+            overallNumberGrade: parseFloat(overallNumberGrade),
+            cpsPercentageGrade: parseFloat(cpsPercentageGrade),
+            showsSignsOfTamperingOrRestoration: parseInt(showsSignsOfTamperingOrRestoration)
         };
 
         console.log("onSubmitClick: Attaching customer identification.");
@@ -236,7 +236,12 @@ function RetailerSubmissionAddStep2() {
                                     Your submission will be cancelled and your work will be lost. This cannot be undone. Do you want to continue?
                                 </section>
                                 <footer class="modal-card-foot">
-                                    <Link class="button is-success" to={`/submissions/add/search`}>Yes</Link>
+                                    {customerName === null
+                                        ?
+                                        <Link class="button is-success" to={`/submissions/add/search`}>Yes</Link>
+                                        :
+                                        <Link class="button is-success" to={`/customer/${customerID}/sub`}>Yes</Link>
+                                    }
                                     <button class="button" onClick={(e)=>setShowCancelWarning(false)}>No</button>
                                 </footer>
                             </div>
@@ -245,7 +250,7 @@ function RetailerSubmissionAddStep2() {
                         <p class="title is-3"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission</p>
                         <FormErrorBox errors={errors} />
 
-                        <p class="pb-4">Please fill out all the required fields before submitting this form.</p>
+                        <p class="pb-4 has-text-grey">Please fill out all the required fields before submitting this form.</p>
 
                         {isFetching && <div class="columns is-centered" style={{paddingTop: "20px"}}>
                             <div class="column has-text-centered is-2">
@@ -709,15 +714,10 @@ function RetailerSubmissionAddStep2() {
                             />}
 
                             <div class="columns pt-5">
-                                {customerName === null
-                                    ?
-                                    <div class="column is-half">
-                                        <button class="button is-hidden-touch" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
-                                        <button class="button is-fullwidth is-hidden-desktop" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
-                                    </div>
-                                    :
-                                    <div class="column is-half"></div>
-                                }
+                                <div class="column is-half">
+                                    <button class="button is-hidden-touch" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
+                                    <button class="button is-fullwidth is-hidden-desktop" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
+                                </div>
                                 <div class="column is-half has-text-right">
                                     <button class="button is-primary is-hidden-touch" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
                                     <button class="button is-primary is-fullwidth is-hidden-desktop" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>

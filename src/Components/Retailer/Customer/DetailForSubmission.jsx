@@ -268,7 +268,7 @@ function RetailerCustomerDetailForSubmission() {
                                     <Link to={`/customer/${customer.id}`}>Detail</Link>
                                 </li>
                                 <li class="is-active">
-                                    <Link>Submissions</Link>
+                                    <Link><b>Submissions</b></Link>
                                 </li>
                                 <li>
                                     <Link to={`/customer/${customer.id}/comments`}>Comments</Link>

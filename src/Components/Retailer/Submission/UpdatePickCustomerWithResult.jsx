@@ -230,7 +230,7 @@ function RetailerSubmissionUpdatePickCustomerWithResult() {
                         </div>
 
                         <p class="title is-3"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update Submission</p>
-                        <p class="pb-4">Please fill out all the required fields before submitting this form.</p>
+                        <p class="pb-4 has-text-grey">Please fill out all the required fields before submitting this form.</p>
                         <FormErrorBox errors={errors} />
 
                         <div class="container pb-5">

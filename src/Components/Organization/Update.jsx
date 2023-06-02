@@ -191,7 +191,7 @@ function OrganizationUpdate() {
                                 maxWidth="380px"
                             />
 
-                            <div class="columns">
+                            <div class="columns pt-5">
                                 <div class="column is-half">
                                     <Link class="button is-hidden-touch" to={"/organization"}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                     <Link class="button is-fullwidth is-hidden-desktop" to={"/organization"}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>

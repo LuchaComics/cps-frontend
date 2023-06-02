@@ -160,7 +160,7 @@ function RetailerSubmissionDetail() {
                             <div class="tabs">
                               <ul>
                                 <li class={`is-active`}>
-                                    <Link>Submission</Link>
+                                    <Link><b>Detail</b></Link>
                                 </li>
                                 <li>
                                     <Link to={`/submission/${id}/cust`}>Customer</Link>

@@ -264,7 +264,7 @@ function RetailerSubmissionUpdateForSubmission() {
                         <p class="title is-3"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission</p>
                         <FormErrorBox errors={errors} />
 
-                        <p class="pb-4">Please fill out all the required fields before submitting this form.</p>
+                        <p class="pb-4 has-text-grey">Please fill out all the required fields before submitting this form.</p>
 
                         {isFetching && <div class="columns is-centered" style={{paddingTop: "20px"}}>
                             <div class="column has-text-centered is-2">

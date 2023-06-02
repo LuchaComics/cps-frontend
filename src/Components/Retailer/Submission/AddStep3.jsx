@@ -188,13 +188,13 @@ function RetailerSubmissionAddStep3() {
                                 {customerName === null
                                     ?
                                     <div class="column is-half has-text-right">
-                                        <Link to={`/submissions`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to Dashboard</Link>
-                                        <Link to={`/submissions`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to Dashboard</Link>
+                                        <Link to={`/submissions`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to List</Link>
+                                        <Link to={`/submissions`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to List</Link>
                                     </div>
                                     :
                                     <div class="column is-half has-text-right">
-                                        <Link to={`/customer/${customerID}/sub`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to Submission</Link>
-                                        <Link to={`/customer/${customerID}/sub`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to Submission</Link>
+                                        <Link to={`/customer/${customerID}/sub`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to Customer</Link>
+                                        <Link to={`/customer/${customerID}/sub`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to Customer</Link>
                                     </div>
                                 }
                             </div>

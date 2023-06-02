@@ -137,7 +137,7 @@ function OrganizationDetail() {
                                 disabled={true}
                             />
 
-                            <div class="columns">
+                            <div class="columns pt-5">
                                 <div class="column is-half">
                                     <Link class="button is-hidden-touch" to={"/dashboard"}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                     <Link class="button is-fullwidth is-hidden-desktop" to={"/dashboard"}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
