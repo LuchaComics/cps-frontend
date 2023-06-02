@@ -84,7 +84,7 @@ export function postSubmissionCreateAPI(data, onSuccessCallback, onErrorCallback
     delete decamelizedData.grading_notes_line4;
     delete decamelizedData.grading_notes_line5;
 
-    decamelizedData.issueCoverDate = new Date(decamelizedData.issueCoverDate).toISOString();
+    decamelizedData.issue_cover_date = new Date(data.IssueCoverDate).toISOString();
 
     axios.post(CPS_SUBMISSIONS_API_ENDPOINT, decamelizedData).then((successResponse) => {
         const responseData = successResponse.data;
