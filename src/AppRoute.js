@@ -15,6 +15,8 @@ import RetailerSubmissionAddStep1WithResult from "./Components/Retailer/Submissi
 import RetailerSubmissionAddStep2 from "./Components/Retailer/Submission/AddStep2";
 import RetailerSubmissionAddStep3 from "./Components/Retailer/Submission/AddStep3";
 import RetailerSubmissionDetail from "./Components/Retailer/Submission/Detail";
+import RetailerSubmissionDetailForCommentList from "./Components/Retailer/Submission/DetailForCommentList";
+import RetailerSubmissionDetailForCustomer from "./Components/Retailer/Submission/DetailForCustomer";
 import RetailerSubmissionUpdateForSubmission from "./Components/Retailer/Submission/UpdateSubmission";
 import RetailerSubmissionUpdateForCustomer from "./Components/Retailer/Submission/UpdateCustomer";
 import RetailerSubmissionUpdatePickCustomerWithResult from "./Components/Retailer/Submission/UpdatePickCustomerWithResult";
@@ -63,6 +65,8 @@ function AppRoute() {
                             <Route exact path="/submission/:id/edit-customer" element={<RetailerSubmissionUpdateForCustomer/>}/>
                             <Route exact path="/submission/:id/customer/search" element={<RetailerSubmissionUpdatePickCustomerWithSearch/>}/>
                             <Route exact path="/submission/:id/customer/results" element={<RetailerSubmissionUpdatePickCustomerWithResult/>}/>
+                            <Route exact path="/submission/:id/comments" element={<RetailerSubmissionDetailForCommentList/>}/>
+                            <Route exact path="/submission/:id/cust" element={<RetailerSubmissionDetailForCustomer/>}/>
                             <Route exact path="/customers" element={<RetailerCustomerList/>}/>
                             <Route exact path="/customers/add" element={<RetailerCustomerAdd/>}/>
                             <Route exact path="/customer/:id" element={<RetailerCustomerDetail/>}/>

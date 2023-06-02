@@ -49,7 +49,6 @@ function RetailerSubmissionDetail() {
     const [isFetching, setFetching] = useState(false);
     const [forceURL, setForceURL] = useState("");
     const [submission, setSubmission] = useState({});
-    const [tabIndex, setTabIndex] = useState(1);
     const [showCustomerEditOptions, setShowCustomerEditOptions] = useState(false);
 
     ////
@@ -160,557 +159,423 @@ function RetailerSubmissionDetail() {
                         {!isFetching && submission && <div class="container">
                             <div class="tabs">
                               <ul>
-                                <li class={`${tabIndex === 1 ? "is-active" : ""}`}>
-                                    <Link onClick={(e) => setTabIndex(1)}>Submission</Link>
+                                <li class={`is-active`}>
+                                    <Link>Submission</Link>
                                 </li>
-                                <li class={`${tabIndex === 2 ? "is-active" : ""}`}>
-                                    <Link onClick={(e) => setTabIndex(2)}>Customer</Link>
+                                <li>
+                                    <Link to={`/submission/${id}/cust`}>Customer</Link>
+                                </li>
+                                <li>
+                                    <Link to={`/submission/${id}/comments`}>Comments</Link>
                                 </li>
                               </ul>
                             </div>
-                            {tabIndex === 1 && <>
-                                <p class="subtitle is-4 pt-4"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comic Book Information</p>
 
-                                {submission && <FormInputField
-                                    label="Series Title"
-                                    name="seriesTitle"
-                                    placeholder="Text input"
-                                    value={submission.seriesTitle}
-                                    helpText=""
-                                    isRequired={true}
-                                    maxWidth="380px"
-                                    disabled={true}
-                                />}
+                            <p class="subtitle is-4 pt-4"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comic Book Information</p>
 
-                                {submission && <FormInputField
-                                    label="Issue Vol"
-                                    name="issueVol"
-                                    placeholder="Text input"
-                                    value={submission.issueVol}
-                                    helpText=""
-                                    isRequired={true}
-                                    maxWidth="180px"
-                                    disabled={true}
-                                />}
+                            {submission && <FormInputField
+                                label="Series Title"
+                                name="seriesTitle"
+                                placeholder="Text input"
+                                value={submission.seriesTitle}
+                                helpText=""
+                                isRequired={true}
+                                maxWidth="380px"
+                                disabled={true}
+                            />}
 
-                                {submission && <FormInputField
-                                    label="Issue No"
-                                    name="issueNo"
-                                    placeholder="Text input"
-                                    value={submission.issueNo}
-                                    helpText=""
-                                    isRequired={true}
-                                    maxWidth="180px"
-                                    disabled={true}
-                                />}
+                            {submission && <FormInputField
+                                label="Issue Vol"
+                                name="issueVol"
+                                placeholder="Text input"
+                                value={submission.issueVol}
+                                helpText=""
+                                isRequired={true}
+                                maxWidth="180px"
+                                disabled={true}
+                            />}
 
-                                {submission && <FormDateField
-                                    label="Issue Cover Date"
-                                    name="issueCoverDate"
-                                    placeholder="Text input"
-                                    value={submission.issueCoverDate}
-                                    helpText=""
-                                    isRequired={true}
-                                    maxWidth="110px"
-                                    disabled={true}
-                                />}
+                            {submission && <FormInputField
+                                label="Issue No"
+                                name="issueNo"
+                                placeholder="Text input"
+                                value={submission.issueNo}
+                                helpText=""
+                                isRequired={true}
+                                maxWidth="180px"
+                                disabled={true}
+                            />}
 
-                                <FormSelectField
-                                    label="Publisher Name"
-                                    name="publisherName"
-                                    placeholder="Publisher Name"
-                                    selectedValue={submission.publisherName}
-                                    helpText=""
-                                    options={PUBLISHER_NAME_OPTIONS}
-                                    disabled={true}
-                                />
+                            {submission && <FormDateField
+                                label="Issue Cover Date"
+                                name="issueCoverDate"
+                                placeholder="Text input"
+                                value={submission.issueCoverDate}
+                                helpText=""
+                                isRequired={true}
+                                maxWidth="110px"
+                                disabled={true}
+                            />}
 
-                                {submission.publisherName === "Other" && <FormInputField
-                                    label="Publisher Name (Other)"
-                                    name="publisherNameOther"
-                                    placeholder="Text input"
-                                    value={submission.publisherNameOther}
-                                    helpText=""
-                                    isRequired={true}
-                                    maxWidth="280px"
-                                    disabled={true}
-                                />}
+                            <FormSelectField
+                                label="Publisher Name"
+                                name="publisherName"
+                                placeholder="Publisher Name"
+                                selectedValue={submission.publisherName}
+                                helpText=""
+                                options={PUBLISHER_NAME_OPTIONS}
+                                disabled={true}
+                            />
 
-                                <FormInputField
-                                    label="Special Note - Line 1 (Optional)"
-                                    name="specialNotesLine1"
-                                    placeholder="Text input"
-                                    value={submission.specialNotesLine1}
-                                    isRequired={true}
-                                    maxWidth="280px"
-                                    helpText={"Max 17 characters"}
-                                    disabled={true}
-                                />
+                            {submission.publisherName === "Other" && <FormInputField
+                                label="Publisher Name (Other)"
+                                name="publisherNameOther"
+                                placeholder="Text input"
+                                value={submission.publisherNameOther}
+                                helpText=""
+                                isRequired={true}
+                                maxWidth="280px"
+                                disabled={true}
+                            />}
 
-                                <FormInputField
-                                    label="Special Note - Line 2 (Optional)"
-                                    name="specialNotesLine2"
-                                    placeholder="Text input"
-                                    value={submission.specialNotesLine2}
-                                    isRequired={true}
-                                    maxWidth="280px"
-                                    helpText={"Max 17 characters"}
-                                    disabled={true}
-                                />
+                            <FormInputField
+                                label="Special Note - Line 1 (Optional)"
+                                name="specialNotesLine1"
+                                placeholder="Text input"
+                                value={submission.specialNotesLine1}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 17 characters"}
+                                disabled={true}
+                            />
 
-                                <FormInputField
-                                    label="Special Note - Line 3 (Optional)"
-                                    name="specialNotesLine3"
-                                    placeholder="Text input"
-                                    value={submission.specialNotesLine3}
-                                    isRequired={true}
-                                    maxWidth="280px"
-                                    helpText={"Max 17 characters"}
-                                    disabled={true}
-                                />
+                            <FormInputField
+                                label="Special Note - Line 2 (Optional)"
+                                name="specialNotesLine2"
+                                placeholder="Text input"
+                                value={submission.specialNotesLine2}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 17 characters"}
+                                disabled={true}
+                            />
 
-                                <FormInputField
-                                    label="Special Note - Line 4 (Optional)"
-                                    name="specialNotesLine4"
-                                    placeholder="Text input"
-                                    value={submission.specialNotesLine4}
-                                    isRequired={true}
-                                    maxWidth="280px"
-                                    helpText={"Max 17 characters"}
-                                    disabled={true}
-                                />
+                            <FormInputField
+                                label="Special Note - Line 3 (Optional)"
+                                name="specialNotesLine3"
+                                placeholder="Text input"
+                                value={submission.specialNotesLine3}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 17 characters"}
+                                disabled={true}
+                            />
 
-                                <FormInputField
-                                    label="Special Note - Line 5 (Optional)"
-                                    name="specialNotesLine5"
-                                    placeholder="Text input"
-                                    value={submission.specialNotesLine5}
-                                    isRequired={true}
-                                    maxWidth="280px"
-                                    helpText={"Max 17 characters"}
-                                    disabled={true}
-                                />
+                            <FormInputField
+                                label="Special Note - Line 4 (Optional)"
+                                name="specialNotesLine4"
+                                placeholder="Text input"
+                                value={submission.specialNotesLine4}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 17 characters"}
+                                disabled={true}
+                            />
 
-                                <p class="subtitle is-4 pt-4"><FontAwesomeIcon className="fas" icon={faMagnifyingGlass} />&nbsp;Summary of Findings</p>
+                            <FormInputField
+                                label="Special Note - Line 5 (Optional)"
+                                name="specialNotesLine5"
+                                placeholder="Text input"
+                                value={submission.specialNotesLine5}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 17 characters"}
+                                disabled={true}
+                            />
 
-                                {submission && <FormRadioField
-                                    label="Creases Finding"
-                                    name="creasesFinding"
-                                    value={submission.creasesFinding}
-                                    opt1Value="pr"
-                                    opt1Label="Poor"
-                                    opt2Value="fr"
-                                    opt2Label="Fair"
-                                    opt3Value="gd"
-                                    opt3Label="Good"
-                                    opt4Value="vg"
-                                    opt4Label="Very good"
-                                    opt5Value="fn"
-                                    opt5Label="Fine"
-                                    opt6Value="vf"
-                                    opt6Label="Very Fine"
-                                    opt7Value="nm"
-                                    opt7Label="Near Mint"
-                                    maxWidth="180px"
-                                    disabled={true}
-                                />}
+                            <p class="subtitle is-4 pt-4"><FontAwesomeIcon className="fas" icon={faMagnifyingGlass} />&nbsp;Summary of Findings</p>
 
-                                {submission && <FormRadioField
-                                    label="Tears Finding"
-                                    name="tearsFinding"
-                                    value={submission.tearsFinding}
-                                    opt1Value="pr"
-                                    opt1Label="Poor"
-                                    opt2Value="fr"
-                                    opt2Label="Fair"
-                                    opt3Value="gd"
-                                    opt3Label="Good"
-                                    opt4Value="vg"
-                                    opt4Label="Very good"
-                                    opt5Value="fn"
-                                    opt5Label="Fine"
-                                    opt6Value="vf"
-                                    opt6Label="Very Fine"
-                                    opt7Value="nm"
-                                    opt7Label="Near Mint"
-                                    maxWidth="180px"
-                                    disabled={true}
-                                />}
+                            {submission && <FormRadioField
+                                label="Creases Finding"
+                                name="creasesFinding"
+                                value={submission.creasesFinding}
+                                opt1Value="pr"
+                                opt1Label="Poor"
+                                opt2Value="fr"
+                                opt2Label="Fair"
+                                opt3Value="gd"
+                                opt3Label="Good"
+                                opt4Value="vg"
+                                opt4Label="Very good"
+                                opt5Value="fn"
+                                opt5Label="Fine"
+                                opt6Value="vf"
+                                opt6Label="Very Fine"
+                                opt7Value="nm"
+                                opt7Label="Near Mint"
+                                maxWidth="180px"
+                                disabled={true}
+                            />}
 
-                                {submission && <FormRadioField
-                                    label="Missing Parts Finding"
-                                    name="missingPartsFinding"
-                                    value={submission.missingPartsFinding}
-                                    opt1Value="pr"
-                                    opt1Label="Poor"
-                                    opt2Value="fr"
-                                    opt2Label="Fair"
-                                    opt3Value="gd"
-                                    opt3Label="Good"
-                                    opt4Value="vg"
-                                    opt4Label="Very good"
-                                    opt5Value="fn"
-                                    opt5Label="Fine"
-                                    opt6Value="vf"
-                                    opt6Label="Very Fine"
-                                    opt7Value="nm"
-                                    opt7Label="Near Mint"
-                                    maxWidth="180px"
-                                    disabled={true}
-                                />}
+                            {submission && <FormRadioField
+                                label="Tears Finding"
+                                name="tearsFinding"
+                                value={submission.tearsFinding}
+                                opt1Value="pr"
+                                opt1Label="Poor"
+                                opt2Value="fr"
+                                opt2Label="Fair"
+                                opt3Value="gd"
+                                opt3Label="Good"
+                                opt4Value="vg"
+                                opt4Label="Very good"
+                                opt5Value="fn"
+                                opt5Label="Fine"
+                                opt6Value="vf"
+                                opt6Label="Very Fine"
+                                opt7Value="nm"
+                                opt7Label="Near Mint"
+                                maxWidth="180px"
+                                disabled={true}
+                            />}
 
-                                {submission && <FormRadioField
-                                    label="Stains/Marks/Substances"
-                                    name="stainsFinding"
-                                    value={submission.stainsFinding}
-                                    opt1Value="pr"
-                                    opt1Label="Poor"
-                                    opt2Value="fr"
-                                    opt2Label="Fair"
-                                    opt3Value="gd"
-                                    opt3Label="Good"
-                                    opt4Value="vg"
-                                    opt4Label="Very good"
-                                    opt5Value="fn"
-                                    opt5Label="Fine"
-                                    opt6Value="vf"
-                                    opt6Label="Very Fine"
-                                    opt7Value="nm"
-                                    opt7Label="Near Mint"
-                                    maxWidth="180px"
-                                    disabled={true}
-                                />}
+                            {submission && <FormRadioField
+                                label="Missing Parts Finding"
+                                name="missingPartsFinding"
+                                value={submission.missingPartsFinding}
+                                opt1Value="pr"
+                                opt1Label="Poor"
+                                opt2Value="fr"
+                                opt2Label="Fair"
+                                opt3Value="gd"
+                                opt3Label="Good"
+                                opt4Value="vg"
+                                opt4Label="Very good"
+                                opt5Value="fn"
+                                opt5Label="Fine"
+                                opt6Value="vf"
+                                opt6Label="Very Fine"
+                                opt7Value="nm"
+                                opt7Label="Near Mint"
+                                maxWidth="180px"
+                                disabled={true}
+                            />}
 
-                                {submission && <FormRadioField
-                                    label="Distortion Finding"
-                                    name="distortionFinding"
-                                    value={submission.distortionFinding}
-                                    opt1Value="pr"
-                                    opt1Label="Poor"
-                                    opt2Value="fr"
-                                    opt2Label="Fair"
-                                    opt3Value="gd"
-                                    opt3Label="Good"
-                                    opt4Value="vg"
-                                    opt4Label="Very good"
-                                    opt5Value="fn"
-                                    opt5Label="Fine"
-                                    opt6Value="vf"
-                                    opt6Label="Very Fine"
-                                    opt7Value="nm"
-                                    opt7Label="Near Mint"
-                                    maxWidth="180px"
-                                    disabled={true}
-                                />}
+                            {submission && <FormRadioField
+                                label="Stains/Marks/Substances"
+                                name="stainsFinding"
+                                value={submission.stainsFinding}
+                                opt1Value="pr"
+                                opt1Label="Poor"
+                                opt2Value="fr"
+                                opt2Label="Fair"
+                                opt3Value="gd"
+                                opt3Label="Good"
+                                opt4Value="vg"
+                                opt4Label="Very good"
+                                opt5Value="fn"
+                                opt5Label="Fine"
+                                opt6Value="vf"
+                                opt6Label="Very Fine"
+                                opt7Value="nm"
+                                opt7Label="Near Mint"
+                                maxWidth="180px"
+                                disabled={true}
+                            />}
 
-                                {submission && <FormRadioField
-                                    label="Paper Quality Finding"
-                                    name="paperQualityFinding"
-                                    value={submission.paperQualityFinding}
-                                    opt1Value="pr"
-                                    opt1Label="Poor"
-                                    opt2Value="fr"
-                                    opt2Label="Fair"
-                                    opt3Value="gd"
-                                    opt3Label="Good"
-                                    opt4Value="vg"
-                                    opt4Label="Very good"
-                                    opt5Value="fn"
-                                    opt5Label="Fine"
-                                    opt6Value="vf"
-                                    opt6Label="Very Fine"
-                                    opt7Value="nm"
-                                    opt7Label="Near Mint"
-                                    maxWidth="180px"
-                                    disabled={true}
-                                />}
+                            {submission && <FormRadioField
+                                label="Distortion Finding"
+                                name="distortionFinding"
+                                value={submission.distortionFinding}
+                                opt1Value="pr"
+                                opt1Label="Poor"
+                                opt2Value="fr"
+                                opt2Label="Fair"
+                                opt3Value="gd"
+                                opt3Label="Good"
+                                opt4Value="vg"
+                                opt4Label="Very good"
+                                opt5Value="fn"
+                                opt5Label="Fine"
+                                opt6Value="vf"
+                                opt6Label="Very Fine"
+                                opt7Value="nm"
+                                opt7Label="Near Mint"
+                                maxWidth="180px"
+                                disabled={true}
+                            />}
 
-                                {submission && <FormRadioField
-                                    label="Spine Finding"
-                                    name="spineFinding"
-                                    value={submission.spineFinding}
-                                    opt1Value="pr"
-                                    opt1Label="Poor"
-                                    opt2Value="fr"
-                                    opt2Label="Fair"
-                                    opt3Value="gd"
-                                    opt3Label="Good"
-                                    opt4Value="vg"
-                                    opt4Label="Very good"
-                                    opt5Value="fn"
-                                    opt5Label="Fine"
-                                    opt6Value="vf"
-                                    opt6Label="Very Fine"
-                                    opt7Value="nm"
-                                    opt7Label="Near Mint"
-                                    maxWidth="180px"
-                                    disabled={true}
-                                />}
+                            {submission && <FormRadioField
+                                label="Paper Quality Finding"
+                                name="paperQualityFinding"
+                                value={submission.paperQualityFinding}
+                                opt1Value="pr"
+                                opt1Label="Poor"
+                                opt2Value="fr"
+                                opt2Label="Fair"
+                                opt3Value="gd"
+                                opt3Label="Good"
+                                opt4Value="vg"
+                                opt4Label="Very good"
+                                opt5Value="fn"
+                                opt5Label="Fine"
+                                opt6Value="vf"
+                                opt6Label="Very Fine"
+                                opt7Value="nm"
+                                opt7Label="Near Mint"
+                                maxWidth="180px"
+                                disabled={true}
+                            />}
 
-                                <FormRadioField
-                                    label="Shows signs of tampering/restoration"
-                                    name="showsSignsOfTamperingOrRestoration"
-                                    value={submission.showsSignsOfTamperingOrRestoration}
-                                    opt1Value={"2"}
-                                    opt1Label="No"
-                                    opt2Value={"1"}
-                                    opt2Label="Yes"
-                                    maxWidth="180px"
-                                    disabled={true}
-                                />
+                            {submission && <FormRadioField
+                                label="Spine Finding"
+                                name="spineFinding"
+                                value={submission.spineFinding}
+                                opt1Value="pr"
+                                opt1Label="Poor"
+                                opt2Value="fr"
+                                opt2Label="Fair"
+                                opt3Value="gd"
+                                opt3Label="Good"
+                                opt4Value="vg"
+                                opt4Label="Very good"
+                                opt5Value="fn"
+                                opt5Label="Fine"
+                                opt6Value="vf"
+                                opt6Label="Very Fine"
+                                opt7Value="nm"
+                                opt7Label="Near Mint"
+                                maxWidth="180px"
+                                disabled={true}
+                            />}
 
-                                <FormInputField
-                                    label="Grading Note - Line 1 (Optional)"
-                                    name="gradingNotesLine1"
-                                    placeholder="Text input"
-                                    value={submission.gradingNotesLine1}
-                                    isRequired={true}
-                                    maxWidth="280px"
-                                    helpText={"Max 17 characters"}
-                                    disabled={true}
-                                />
+                            <FormRadioField
+                                label="Shows signs of tampering/restoration"
+                                name="showsSignsOfTamperingOrRestoration"
+                                value={submission.showsSignsOfTamperingOrRestoration}
+                                opt1Value={"2"}
+                                opt1Label="No"
+                                opt2Value={"1"}
+                                opt2Label="Yes"
+                                maxWidth="180px"
+                                disabled={true}
+                            />
 
-                                <FormInputField
-                                    label="Grading Note - Line 2 (Optional)"
-                                    name="gradingNotesLine2"
-                                    placeholder="Text input"
-                                    value={submission.gradingNotesLine2}
-                                    isRequired={true}
-                                    maxWidth="280px"
-                                    helpText={"Max 17 characters"}
-                                    disabled={true}
-                                />
+                            <FormInputField
+                                label="Grading Note - Line 1 (Optional)"
+                                name="gradingNotesLine1"
+                                placeholder="Text input"
+                                value={submission.gradingNotesLine1}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 17 characters"}
+                                disabled={true}
+                            />
 
-                                <FormInputField
-                                    label="Grading Note - Line 3 (Optional)"
-                                    name="gradingNotesLine3"
-                                    placeholder="Text input"
-                                    value={submission.gradingNotesLine3}
-                                    isRequired={true}
-                                    maxWidth="280px"
-                                    helpText={"Max 17 characters"}
-                                    disabled={true}
-                                />
+                            <FormInputField
+                                label="Grading Note - Line 2 (Optional)"
+                                name="gradingNotesLine2"
+                                placeholder="Text input"
+                                value={submission.gradingNotesLine2}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 17 characters"}
+                                disabled={true}
+                            />
 
-                                <FormInputField
-                                    label="Grading Note - Line 4 (Optional)"
-                                    name="gradingNotesLine4"
-                                    placeholder="Text input"
-                                    value={submission.gradingNotesLine4}
-                                    isRequired={true}
-                                    maxWidth="280px"
-                                    helpText={"Max 17 characters"}
-                                    disabled={true}
-                                />
+                            <FormInputField
+                                label="Grading Note - Line 3 (Optional)"
+                                name="gradingNotesLine3"
+                                placeholder="Text input"
+                                value={submission.gradingNotesLine3}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 17 characters"}
+                                disabled={true}
+                            />
 
-                                <FormInputField
-                                    label="Grading Note - Line 5 (Optional)"
-                                    name="gradingNotesLine5"
-                                    placeholder="Text input"
-                                    value={submission.gradingNotesLine5}
-                                    isRequired={true}
-                                    maxWidth="280px"
-                                    helpText={"Max 17 characters"}
-                                    disabled={true}
-                                />
+                            <FormInputField
+                                label="Grading Note - Line 4 (Optional)"
+                                name="gradingNotesLine4"
+                                placeholder="Text input"
+                                value={submission.gradingNotesLine4}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 17 characters"}
+                                disabled={true}
+                            />
 
-                                <p class="subtitle is-4 pt-4"><FontAwesomeIcon className="fas" icon={faBalanceScale} />&nbsp;Grading</p>
+                            <FormInputField
+                                label="Grading Note - Line 5 (Optional)"
+                                name="gradingNotesLine5"
+                                placeholder="Text input"
+                                value={submission.gradingNotesLine5}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 17 characters"}
+                                disabled={true}
+                            />
 
-                                <FormRadioField
-                                    label="Which type of grading scale would you prefer?"
-                                    name="gradingScale"
-                                    value={parseInt(submission.gradingScale)}
-                                    opt1Value={1}
-                                    opt1Label="Letter Grade (Poor-Near Mint)"
-                                    opt2Value={2}
-                                    opt2Label="Numbers (0.5-10.0)"
-                                    opt3Value={3}
-                                    opt3Label="CPS Percentage (5%-100%)"
-                                    maxWidth="180px"
-                                />
+                            <p class="subtitle is-4 pt-4"><FontAwesomeIcon className="fas" icon={faBalanceScale} />&nbsp;Grading</p>
 
-                                {submission && submission.gradingScale === 1 && <FormSelectField
-                                    label="Overall Letter Grade"
-                                    name="overallLetterGrade"
-                                    placeholder="Overall Letter Grade"
-                                    selectedValue={submission.overallLetterGrade}
-                                    helpText=""
-                                    options={FINDING_OPTIONS}
-                                    disabled={true}
-                                />}
+                            <FormRadioField
+                                label="Which type of grading scale would you prefer?"
+                                name="gradingScale"
+                                value={parseInt(submission.gradingScale)}
+                                opt1Value={1}
+                                opt1Label="Letter Grade (Poor-Near Mint)"
+                                opt2Value={2}
+                                opt2Label="Numbers (0.5-10.0)"
+                                opt3Value={3}
+                                opt3Label="CPS Percentage (5%-100%)"
+                                maxWidth="180px"
+                            />
 
-                                {submission && submission.gradingScale === 2 && <FormSelectField
-                                    label="Overall Number Grade"
-                                    name="overallNumberGrade"
-                                    placeholder="Overall Number Grade"
-                                    selectedValue={submission.overallNumberGrade}
-                                    helpText=""
-                                    options={OVERALL_NUMBER_GRADE_OPTIONS}
-                                    disabled={true}
-                                />}
+                            {submission && submission.gradingScale === 1 && <FormSelectField
+                                label="Overall Letter Grade"
+                                name="overallLetterGrade"
+                                placeholder="Overall Letter Grade"
+                                selectedValue={submission.overallLetterGrade}
+                                helpText=""
+                                options={FINDING_OPTIONS}
+                                disabled={true}
+                            />}
 
-                                {submission && submission.gradingScale === 3 && <FormSelectField
-                                    label="CPS Percentage Grade"
-                                    name="cpsPercentageGrade"
-                                    placeholder="CPS Percentage Grade"
-                                    selectedValue={submission.cpsPercentageGrade}
-                                    helpText=""
-                                    options={CPS_PERCENTAGE_GRADE_OPTIONS}
-                                    disabled={true}
-                                />}
+                            {submission && submission.gradingScale === 2 && <FormSelectField
+                                label="Overall Number Grade"
+                                name="overallNumberGrade"
+                                placeholder="Overall Number Grade"
+                                selectedValue={submission.overallNumberGrade}
+                                helpText=""
+                                options={OVERALL_NUMBER_GRADE_OPTIONS}
+                                disabled={true}
+                            />}
 
+                            {submission && submission.gradingScale === 3 && <FormSelectField
+                                label="CPS Percentage Grade"
+                                name="cpsPercentageGrade"
+                                placeholder="CPS Percentage Grade"
+                                selectedValue={submission.cpsPercentageGrade}
+                                helpText=""
+                                options={CPS_PERCENTAGE_GRADE_OPTIONS}
+                                disabled={true}
+                            />}
+
+                            <div class="column is-half">
+                                <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-hidden-touch"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Download PDF</a>
+                                <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Download PDF</a>
+                            </div>
+
+                            <div class="columns pt-4">
                                 <div class="column is-half">
-                                    <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-hidden-touch"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Download PDF</a>
-                                    <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Download PDF</a>
+                                    <Link to={`/submissions`} class="button is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                    <Link to={`/submissions`} class="button is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                 </div>
-
-                                <div class="columns pt-4">
-                                    <div class="column is-half">
-                                        <Link to={`/submissions`} class="button is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                        <Link to={`/submissions`} class="button is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                    </div>
-                                    <div class="column is-half has-text-right">
-                                        <Link to={`/submission/${id}/edit`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Submission</Link>
-                                        <Link to={`/submission/${id}/edit`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Submission</Link>
-                                    </div>
+                                <div class="column is-half has-text-right">
+                                    <Link to={`/submission/${id}/edit`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Submission</Link>
+                                    <Link to={`/submission/${id}/edit`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Submission</Link>
                                 </div>
-                            </>}
-
-                            {tabIndex === 2 && <>
-                                {submission && submission.user !== undefined && submission.user !== null && submission.user !== "" && <>
-                                    <p class="subtitle is-4 pt-4"><FontAwesomeIcon className="fas" icon={faUser} />&nbsp;Customer</p>
-                                    <p class="pb-5"><Link to={`/customer/${submission.user.id}`} target="_blank" rel="noreferrer">Click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link> to view the customer.</p>
-
-                                    <FormInputField
-                                        label="Name"
-                                        name="name"
-                                        placeholder="Text input"
-                                        value={submission.user.name}
-                                        isRequired={true}
-                                        maxWidth="280px"
-                                        helpText={""}
-                                        disabled={true}
-                                    />
-                                    <FormInputField
-                                        label="Email"
-                                        name="email"
-                                        placeholder="Text input"
-                                        value={submission.user.email}
-                                        isRequired={true}
-                                        maxWidth="280px"
-                                        helpText={""}
-                                        disabled={true}
-                                    />
-                                    <FormInputField
-                                        label="Phone"
-                                        name="phone"
-                                        placeholder="Text input"
-                                        value={submission.user.phone}
-                                        isRequired={true}
-                                        maxWidth="280px"
-                                        helpText={""}
-                                        disabled={true}
-                                    />
-                                    <FormInputField
-                                        label="Country"
-                                        name="country"
-                                        placeholder="Text input"
-                                        value={submission.user.country}
-                                        isRequired={true}
-                                        maxWidth="280px"
-                                        helpText={""}
-                                        disabled={true}
-                                    />
-                                    <FormInputField
-                                        label="Region"
-                                        name="region"
-                                        placeholder="Text input"
-                                        value={submission.user.region}
-                                        isRequired={true}
-                                        maxWidth="280px"
-                                        helpText={""}
-                                        disabled={true}
-                                    />
-                                    <FormInputField
-                                        label="City"
-                                        name="city"
-                                        placeholder="Text input"
-                                        value={submission.user.city}
-                                        isRequired={true}
-                                        maxWidth="280px"
-                                        helpText={""}
-                                        disabled={true}
-                                    />
-                                    <FormInputField
-                                        label="Address Line 1"
-                                        name="addressLine1"
-                                        placeholder="Text input"
-                                        value={submission.user.addressLine1}
-                                        isRequired={true}
-                                        maxWidth="280px"
-                                        helpText={""}
-                                        disabled={true}
-                                    />
-                                    <FormInputField
-                                        label="Address Line 2"
-                                        name="addressLine2"
-                                        placeholder="Text input"
-                                        value={submission.user.addressLine2}
-                                        isRequired={true}
-                                        maxWidth="280px"
-                                        helpText={""}
-                                        disabled={true}
-                                    />
-                                    <FormInputField
-                                        label="Postal Code"
-                                        name="postalCode"
-                                        placeholder="Text input"
-                                        value={submission.user.postalCode}
-                                        isRequired={true}
-                                        maxWidth="280px"
-                                        helpText={""}
-                                        disabled={true}
-                                    />
-                                    <FormSelectField
-                                        label="How did you hear about us?"
-                                        name="howDidYouHearAboutUs"
-                                        placeholder="Pick"
-                                        selectedValue={submission.user.howDidYouHearAboutUs}
-                                        helpText=""
-                                        options={HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS}
-                                        disabled={true}
-                                    />
-                                    {submission.user.howDidYouHearAboutUs === 1 && <FormInputField
-                                        label="Other (Please specify):"
-                                        name="howDidYouHearAboutUsOther"
-                                        placeholder="Text input"
-                                        value={submission.user.howDidYouHearAboutUsOther}
-                                        helpText=""
-                                        isRequired={true}
-                                        maxWidth="380px"
-                                        disabled={true}
-                                    />}
-
-                                    <FormCheckboxField
-                                        label="I agree to receive electronic updates from my local retailer and CPS"
-                                        name="agreePromotionsEmail"
-                                        checked={submission.user.agreePromotionsEmail}
-                                        maxWidth="180px"
-                                    />
-
-                                    <div class="columns pt-5">
-                                        <div class="column is-half">
-                                            <Link to={`/submissions`} class="button is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                            <Link to={`/submissions`} class="button is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                        </div>
-                                        <div class="column is-half has-text-right">
-                                            <Link onClick={(e)=>setShowCustomerEditOptions(true)} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Customer</Link>
-                                            <Link onClick={(e)=>setShowCustomerEditOptions(true)} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Customer</Link>
-                                        </div>
-                                    </div>
-                                </>}
-                            </>}
-
+                            </div>
                         </div>}
                     </nav>
                 </section>

@@ -5,7 +5,8 @@ import { DateTime } from "luxon";
 import {
     CPS_SUBMISSIONS_API_ENDPOINT,
     CPS_SUBMISSION_API_ENDPOINT,
-    CPS_SUBMISSION_CUSTOMER_SWAP_OPERATION_API_ENDPOINT
+    CPS_SUBMISSION_CUSTOMER_SWAP_OPERATION_API_ENDPOINT,
+    CPS_SUBMISSION_CREATE_COMMENT_OPERATION_API_ENDPOINT
 } from "../Constants/API";
 
 
@@ -92,6 +93,10 @@ export function postSubmissionCreateAPI(data, onSuccessCallback, onErrorCallback
         // Snake-case from API to camel-case for React.
         const data = camelizeKeys(responseData);
 
+        // Minor bugfix.
+        data.showsSignsOfTamperingOrRestoration = parseInt(data.showsSignsOfTamperingOrRestoration);
+        data.issueCoverDate = DateTime.fromISO(data.issueCoverDate).toJSDate();
+
         // Return the callback data.
         onSuccessCallback(data);
     }).catch( (exception) => {
@@ -109,7 +114,7 @@ export function getSubmissionDetailAPI(submissionID, onSuccessCallback, onErrorC
         const data = camelizeKeys(responseData);
 
         // Minor bugfix.
-        data.showsSignsOfTamperingOrRestoration = String(data.showsSignsOfTamperingOrRestoration);
+        data.showsSignsOfTamperingOrRestoration = parseInt(data.showsSignsOfTamperingOrRestoration);
         data.issueCoverDate = DateTime.fromISO(data.issueCoverDate).toJSDate();
 
         // For debugging purposeso pnly.
@@ -129,8 +134,9 @@ export function putSubmissionUpdateAPI(data, onSuccessCallback, onErrorCallback,
     // To Snake-case for API from camel-case in React.
     let decamelizedData = decamelizeKeys(data);
 
+    console.log("putSubmissionUpdateAPI | pre-edited | decamelizedData:", decamelizedData); // For debugging purposes only.
+
     // Minor bugfixes.
-    decamelizedData.id = data.ID;
     decamelizedData.special_notes_line_1 = decamelizedData.special_notes_line1;
     decamelizedData.special_notes_line_2 = decamelizedData.special_notes_line2;
     decamelizedData.special_notes_line_3 = decamelizedData.special_notes_line3;
@@ -152,7 +158,7 @@ export function putSubmissionUpdateAPI(data, onSuccessCallback, onErrorCallback,
     delete decamelizedData.grading_notes_line4;
     delete decamelizedData.grading_notes_line5;
 
-    decamelizedData.issue_cover_date = new Date(data.IssueCoverDate).toISOString();
+    decamelizedData.issue_cover_date = new Date(decamelizedData.issue_cover_date).toISOString();
 
     console.log("putSubmissionUpdateAPI | post-edited | decamelizedData:", decamelizedData);
 
@@ -163,7 +169,7 @@ export function putSubmissionUpdateAPI(data, onSuccessCallback, onErrorCallback,
         const data = camelizeKeys(responseData);
 
         // Minor bugfix.
-        data.showsSignsOfTamperingOrRestoration = String(data.showsSignsOfTamperingOrRestoration);
+        data.showsSignsOfTamperingOrRestoration = parseInt(data.showsSignsOfTamperingOrRestoration);
         data.issueCoverDate = DateTime.fromISO(data.issueCoverDate).toJSDate();
 
         // Return the callback data.
@@ -197,6 +203,26 @@ export function postSubmissionCustomerSwapOperationAPI(submissionID, customerID,
         customer_id: customerID
     };
     axios.post(CPS_SUBMISSION_CUSTOMER_SWAP_OPERATION_API_ENDPOINT, data).then((successResponse) => {
+        const responseData = successResponse.data;
+
+        // Snake-case from API to camel-case for React.
+        const data = camelizeKeys(responseData);
+
+        // Return the callback data.
+        onSuccessCallback(data);
+    }).catch( (exception) => {
+        let errors = camelizeKeys(exception);
+        onErrorCallback(errors);
+    }).then(onDoneCallback);
+}
+
+export function postSubmissionCreateCommentOperationAPI(submissionID, content, onSuccessCallback, onErrorCallback, onDoneCallback) {
+    const axios = getCustomAxios();
+    const data = {
+        submission_id: submissionID,
+        content: content,
+    };
+    axios.post(CPS_SUBMISSION_CREATE_COMMENT_OPERATION_API_ENDPOINT, data).then((successResponse) => {
         const responseData = successResponse.data;
 
         // Snake-case from API to camel-case for React.
