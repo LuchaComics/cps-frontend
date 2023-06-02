@@ -4,7 +4,8 @@ import { DateTime } from "luxon";
 
 import {
     CPS_CUSTOMERS_API_ENDPOINT,
-    CPS_CUSTOMER_API_ENDPOINT
+    CPS_CUSTOMER_API_ENDPOINT,
+    CPS_CUSTOMER_CREATE_COMMENT_OPERATION_API_ENDPOINT
 } from "../Constants/API";
 
 
@@ -124,6 +125,26 @@ export function putCustomerUpdateAPI(data, onSuccessCallback, onErrorCallback, o
 export function deleteCustomerAPI(id, onSuccessCallback, onErrorCallback, onDoneCallback) {
     const axios = getCustomAxios();
     axios.delete(CPS_CUSTOMER_API_ENDPOINT.replace("{id}", id)).then((successResponse) => {
+        const responseData = successResponse.data;
+
+        // Snake-case from API to camel-case for React.
+        const data = camelizeKeys(responseData);
+
+        // Return the callback data.
+        onSuccessCallback(data);
+    }).catch( (exception) => {
+        let errors = camelizeKeys(exception);
+        onErrorCallback(errors);
+    }).then(onDoneCallback);
+}
+
+export function postCustomerCreateCommentOperationAPI(userID, content, onSuccessCallback, onErrorCallback, onDoneCallback) {
+    const axios = getCustomAxios();
+    const data = {
+        user_id: userID,
+        content: content,
+    };
+    axios.post(CPS_CUSTOMER_CREATE_COMMENT_OPERATION_API_ENDPOINT, data).then((successResponse) => {
         const responseData = successResponse.data;
 
         // Snake-case from API to camel-case for React.

@@ -25,6 +25,7 @@ import RetailerCustomerList from "./Components/Retailer/Customer/List";
 import RetailerCustomerAdd from "./Components/Retailer/Customer/Add";
 import RetailerCustomerDetail from "./Components/Retailer/Customer/Detail";
 import RetailerCustomerDetailForSubmission from "./Components/Retailer/Customer/DetailForSubmission";
+import RetailerCustomerDetailForCommentList from "./Components/Retailer/Customer/DetailForCommentList";
 import RetailerCustomerUpdate from "./Components/Retailer/Customer/Update";
 import LogoutRedirector from "./Components/Gateway/LogoutRedirector";
 import Login from "./Components/Gateway/Login";
@@ -72,6 +73,7 @@ function AppRoute() {
                             <Route exact path="/customer/:id" element={<RetailerCustomerDetail/>}/>
                             <Route exact path="/customer/:id/sub" element={<RetailerCustomerDetailForSubmission/>}/>
                             <Route exact path="/customer/:id/edit" element={<RetailerCustomerUpdate/>}/>
+                            <Route exact path="/customer/:id/comments" element={<RetailerCustomerDetailForCommentList/>}/>
                             <Route exact path="/account" element={<ProfileDetail/>}/>
                             <Route exact path="/account/update" element={<ProfileUpdate/>}/>
                             <Route exact path="/organization/" element={<OrganizationDetail/>}/>

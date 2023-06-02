@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faEye, faArrowLeft, faCheckCircle, faPencil, faGauge, faBook, faMagnifyingGlass, faBalanceScale, faUser, faArrowUpRightFromSquare, faComments } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faEye, faArrowLeft, faCheckCircle, faPencil, faGauge, faBook, faMagnifyingGlass, faBalanceScale, faUser, faArrowUpRightFromSquare, faComments, faUsers, faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import Select from 'react-select'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
 import { DateTime } from "luxon";
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { getSubmissionDetailAPI, postSubmissionCreateCommentOperationAPI } from "../../../API/submission";
+import { getCustomerDetailAPI, postCustomerCreateCommentOperationAPI } from "../../../API/customer";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
 import FormTextareaField from "../../Element/FormTextareaField";
@@ -28,7 +28,7 @@ import {
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
-function RetailerSubmissionDetailForCommentList() {
+function RetailerCustomerDetailForCommentList() {
     ////
     //// URL Parameters.
     ////
@@ -49,7 +49,7 @@ function RetailerSubmissionDetailForCommentList() {
     const [errors, setErrors] = useState({});
     const [isFetching, setFetching] = useState(false);
     const [forceURL, setForceURL] = useState("");
-    const [submission, setSubmission] = useState({});
+    const [customer, setCustomer] = useState({});
     const [showCustomerEditOptions, setShowCustomerEditOptions] = useState(false);
     const [content, setContent] = useState("");
 
@@ -59,22 +59,22 @@ function RetailerSubmissionDetailForCommentList() {
 
     const onSubmitClick = (e) => {
         console.log("onSubmitClick: Beginning...");// Submit to the backend.
-        console.log("onSubmitClick, submission:", submission);
+        console.log("onSubmitClick, customer:", customer);
         setErrors(null);
-        postSubmissionCreateCommentOperationAPI(id, content, onSubmissionUpdateSuccess, onSubmissionUpdateError, onSubmissionUpdateDone);
+        postCustomerCreateCommentOperationAPI(id, content, onCustomerUpdateSuccess, onCustomerUpdateError, onCustomerUpdateDone);
     }
 
     ////
     //// API.
     ////
 
-    function onSubmissionDetailSuccess(response){
-        console.log("onSubmissionDetailSuccess: Starting...");
-        setSubmission(response);
+    function onCustomerDetailSuccess(response){
+        console.log("onCustomerDetailSuccess: Starting...");
+        setCustomer(response);
     }
 
-    function onSubmissionDetailError(apiErr) {
-        console.log("onSubmissionDetailError: Starting...");
+    function onCustomerDetailError(apiErr) {
+        console.log("onCustomerDetailError: Starting...");
         setErrors(apiErr);
 
         // The following code will cause the screen to scroll to the top of
@@ -84,22 +84,22 @@ function RetailerSubmissionDetailForCommentList() {
         scroll.scrollToTop();
     }
 
-    function onSubmissionDetailDone() {
-        console.log("onSubmissionDetailDone: Starting...");
+    function onCustomerDetailDone() {
+        console.log("onCustomerDetailDone: Starting...");
         setFetching(false);
     }
 
-    function onSubmissionUpdateSuccess(response){
+    function onCustomerUpdateSuccess(response){
         // For debugging purposes only.
-        console.log("onSubmissionUpdateSuccess: Starting...");
+        console.log("onCustomerUpdateSuccess: Starting...");
         console.log(response);
 
         // Add a temporary banner message in the app and then clear itself after 2 seconds.
         setTopAlertMessage("Comment submitted");
         setTopAlertStatus("success");
         setTimeout(() => {
-            console.log("onSubmissionUpdateSuccess: Delayed for 2 seconds.");
-            console.log("onSubmissionUpdateSuccess: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
+            console.log("onCustomerUpdateSuccess: Delayed for 2 seconds.");
+            console.log("onCustomerUpdateSuccess: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
         }, 2000);
 
@@ -107,24 +107,24 @@ function RetailerSubmissionDetailForCommentList() {
         setContent("");
 
         // Fetch latest data.
-        getSubmissionDetailAPI(
+        getCustomerDetailAPI(
             id,
-            onSubmissionDetailSuccess,
-            onSubmissionDetailError,
-            onSubmissionDetailDone
+            onCustomerDetailSuccess,
+            onCustomerDetailError,
+            onCustomerDetailDone
         );
     }
 
-    function onSubmissionUpdateError(apiErr) {
-        console.log("onSubmissionUpdateError: Starting...");
+    function onCustomerUpdateError(apiErr) {
+        console.log("onCustomerUpdateError: Starting...");
         setErrors(apiErr);
 
         // Add a temporary banner message in the app and then clear itself after 2 seconds.
         setTopAlertMessage("Failed submitting");
         setTopAlertStatus("danger");
         setTimeout(() => {
-            console.log("onSubmissionUpdateError: Delayed for 2 seconds.");
-            console.log("onSubmissionUpdateError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
+            console.log("onCustomerUpdateError: Delayed for 2 seconds.");
+            console.log("onCustomerUpdateError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
         }, 2000);
 
@@ -135,8 +135,8 @@ function RetailerSubmissionDetailForCommentList() {
         scroll.scrollToTop();
     }
 
-    function onSubmissionUpdateDone() {
-        console.log("onSubmissionUpdateDone: Starting...");
+    function onCustomerUpdateDone() {
+        console.log("onCustomerUpdateDone: Starting...");
         setFetching(false);
     }
 
@@ -151,11 +151,11 @@ function RetailerSubmissionDetailForCommentList() {
             window.scrollTo(0, 0);  // Start the page at the top of the page.
 
             setFetching(true);
-            getSubmissionDetailAPI(
+            getCustomerDetailAPI(
                 id,
-                onSubmissionDetailSuccess,
-                onSubmissionDetailError,
-                onSubmissionDetailDone
+                onCustomerDetailSuccess,
+                onCustomerDetailError,
+                onCustomerDetailDone
             );
         }
 
@@ -184,9 +184,9 @@ function RetailerSubmissionDetailForCommentList() {
 
                         {/*
                             <br /><br />
-                            <Link to={`/submission/${submission.id}/edit-customer`} class="button is-primary" disabled={true}>Edit Current Customer</Link> */}
+                            <Link to={`/customer/${customer.id}/edit-customer`} class="button is-primary" disabled={true}>Edit Current Customer</Link> */}
                         <br /><br />
-                        <Link to={`/submission/${submission.id}/customer/search`} class="button is-primary">Pick a Different Customer</Link>
+                        <Link to={`/customer/${customer.id}/customer/search`} class="button is-primary">Pick a Different Customer</Link>
                     </section>
                     <footer class="modal-card-foot">
                         <button class="button" onClick={(e)=>setShowCustomerEditOptions(false)}>Close</button>
@@ -199,12 +199,26 @@ function RetailerSubmissionDetailForCommentList() {
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
                             <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
-                            <li class=""><Link to="/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
+                            <li class=""><Link to="/customers" aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers</Link></li>
                             <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail</Link></li>
                         </ul>
                     </nav>
                     <nav class="box">
-                        <p class="title is-3"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission</p>
+                        <div class="columns">
+                            <div class="column">
+                                <p class="title is-3"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Customer</p>
+                            </div>
+                            <div class="column has-text-right">
+                                {/* Mobile Specific */}
+                                <Link to={`/submissions/add?customer_id=${id}&customer_name=${customer.name}`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
+                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
+                                </Link>
+                                {/* Desktop Specific */}
+                                <Link to={`/submissions/add?customer_id=${id}&customer_name=${customer.name}`} class="button is-small is-success is-hidden-touch" type="button">
+                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
+                                </Link>
+                            </div>
+                        </div>
                         <FormErrorBox errors={errors} />
 
                         {isFetching && <div class="columns is-centered" style={{paddingTop: "20px"}}>
@@ -215,14 +229,14 @@ function RetailerSubmissionDetailForCommentList() {
                             </div>
                         </div>}
 
-                        {!isFetching && submission && <div class="container">
+                        {!isFetching && customer && <div class="container">
                             <div class="tabs">
                               <ul>
                                 <li>
-                                    <Link to={`/submission/${id}`}>Submission</Link>
+                                    <Link to={`/customer/${id}`}>Detail</Link>
                                 </li>
                                 <li>
-                                    <Link to={`/submission/${id}/cust`}>Customer</Link>
+                                    <Link to={`/customer/${id}/sub`}>Submissions</Link>
                                 </li>
                                 <li class="is-active">
                                     <Link>Comments</Link>
@@ -232,8 +246,8 @@ function RetailerSubmissionDetailForCommentList() {
 
                             <p class="subtitle is-4 pt-4"><FontAwesomeIcon className="fas" icon={faComments} />&nbsp;Comments</p>
 
-                            {submission.comments && submission.comments.length > 0 && <>
-                                {submission.comments.map(function(comment, i){
+                            {customer.comments && customer.comments.length > 0 && <>
+                                {customer.comments.map(function(comment, i){
                                     console.log(comment); // For debugging purposes only.
                                     return <div className="pb-3">
                                         <span class="is-pulled-right has-text-grey-light">{comment.createdByName} at <b>{DateTime.fromISO(comment.createdAt).toLocaleString(DateTime.DATETIME_MED)}</b></span>
@@ -264,8 +278,8 @@ function RetailerSubmissionDetailForCommentList() {
 
                             <div class="columns pt-4">
                                 <div class="column is-half">
-                                    <Link to={`/submissions`} class="button is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                    <Link to={`/submissions`} class="button is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                    <Link to={`/customers`} class="button is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                    <Link to={`/customers`} class="button is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                 </div>
                                 <div class="column is-half has-text-right">
                                     <button onClick={onSubmitClick} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comment</button>
@@ -282,4 +296,4 @@ function RetailerSubmissionDetailForCommentList() {
     );
 }
 
-export default RetailerSubmissionDetailForCommentList;
+export default RetailerCustomerDetailForCommentList;
