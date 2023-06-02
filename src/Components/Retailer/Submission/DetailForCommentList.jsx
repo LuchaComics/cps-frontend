@@ -6,6 +6,7 @@ import { faTasks, faTachometer, faPlus, faEye, faArrowLeft, faCheckCircle, faPen
 import Select from 'react-select'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
+import { DateTime } from "luxon";
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
 import { getSubmissionDetailAPI, postSubmissionCreateCommentOperationAPI } from "../../../API/submission";
@@ -101,6 +102,10 @@ function RetailerSubmissionDetailForCommentList() {
             setTopAlertMessage("");
         }, 2000);
 
+        // Reset content.
+        setContent("");
+
+        // Fetch latest data.
         getSubmissionDetailAPI(
             id,
             onSubmissionDetailSuccess,
@@ -225,17 +230,36 @@ function RetailerSubmissionDetailForCommentList() {
                             </div>
 
                             <p class="subtitle is-4 pt-4"><FontAwesomeIcon className="fas" icon={faComments} />&nbsp;Comments</p>
-                            <FormTextareaField
-                                label="Write your comment:"
-                                name="content"
-                                placeholder="Text input"
-                                value={content}
-                                errorText={errors && errors.content}
-                                helpText=""
-                                onChange={(e)=>setContent(e.target.value)}
-                                isRequired={true}
-                                maxWidth="180px"
-                            />
+
+                            {submission.comments && submission.comments.length > 0 && <>
+                                {submission.comments.map(function(comment, i){
+                                    console.log(comment); // For debugging purposes only.
+                                    return <div className="pb-3">
+                                        <span class="is-pulled-right has-text-grey-light">{comment.createdByName} at <b>{DateTime.fromISO(comment.createdAt).toLocaleString(DateTime.DATETIME_MED)}</b></span>
+                                        <br />
+                                        <article class="message">
+                                            <div class="message-body">{comment.content}</div>
+                                        </article>
+                                    </div>
+                                })}
+                            </>}
+
+                            <div class="mt-4 block has-background-success-light p-3">
+                                    <FormTextareaField
+                                        label="Write your comment here:"
+                                        name="content"
+                                        placeholder="Text input"
+                                        value={content}
+                                        errorText={errors && errors.content}
+                                        helpText=""
+                                        onChange={(e)=>setContent(e.target.value)}
+                                        isRequired={true}
+                                        maxWidth="180px"
+                                    />
+                                </div>
+
+
+
 
                             <div class="columns pt-4">
                                 <div class="column is-half">
