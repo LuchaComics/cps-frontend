@@ -245,7 +245,7 @@ function RetailerSubmissionDetail() {
                                 value={submission.specialNotesLine1}
                                 isRequired={true}
                                 maxWidth="280px"
-                                helpText={"Max 17 characters"}
+                                helpText={"Max 35 characters"}
                                 disabled={true}
                             />
 
@@ -256,7 +256,7 @@ function RetailerSubmissionDetail() {
                                 value={submission.specialNotesLine2}
                                 isRequired={true}
                                 maxWidth="280px"
-                                helpText={"Max 17 characters"}
+                                helpText={"Max 35 characters"}
                                 disabled={true}
                             />
 
@@ -267,7 +267,7 @@ function RetailerSubmissionDetail() {
                                 value={submission.specialNotesLine3}
                                 isRequired={true}
                                 maxWidth="280px"
-                                helpText={"Max 17 characters"}
+                                helpText={"Max 35 characters"}
                                 disabled={true}
                             />
 
@@ -278,7 +278,7 @@ function RetailerSubmissionDetail() {
                                 value={submission.specialNotesLine4}
                                 isRequired={true}
                                 maxWidth="280px"
-                                helpText={"Max 17 characters"}
+                                helpText={"Max 35 characters"}
                                 disabled={true}
                             />
 
@@ -289,7 +289,7 @@ function RetailerSubmissionDetail() {
                                 value={submission.specialNotesLine5}
                                 isRequired={true}
                                 maxWidth="280px"
-                                helpText={"Max 17 characters"}
+                                helpText={"Max 35 characters"}
                                 disabled={true}
                             />
 
@@ -468,7 +468,7 @@ function RetailerSubmissionDetail() {
                                 value={submission.gradingNotesLine1}
                                 isRequired={true}
                                 maxWidth="280px"
-                                helpText={"Max 17 characters"}
+                                helpText={"Max 35 characters"}
                                 disabled={true}
                             />
 
@@ -479,7 +479,7 @@ function RetailerSubmissionDetail() {
                                 value={submission.gradingNotesLine2}
                                 isRequired={true}
                                 maxWidth="280px"
-                                helpText={"Max 17 characters"}
+                                helpText={"Max 35 characters"}
                                 disabled={true}
                             />
 
@@ -490,7 +490,7 @@ function RetailerSubmissionDetail() {
                                 value={submission.gradingNotesLine3}
                                 isRequired={true}
                                 maxWidth="280px"
-                                helpText={"Max 17 characters"}
+                                helpText={"Max 35 characters"}
                                 disabled={true}
                             />
 
@@ -501,7 +501,7 @@ function RetailerSubmissionDetail() {
                                 value={submission.gradingNotesLine4}
                                 isRequired={true}
                                 maxWidth="280px"
-                                helpText={"Max 17 characters"}
+                                helpText={"Max 35 characters"}
                                 disabled={true}
                             />
 
@@ -512,7 +512,7 @@ function RetailerSubmissionDetail() {
                                 value={submission.gradingNotesLine5}
                                 isRequired={true}
                                 maxWidth="280px"
-                                helpText={"Max 17 characters"}
+                                helpText={"Max 35 characters"}
                                 disabled={true}
                             />
 

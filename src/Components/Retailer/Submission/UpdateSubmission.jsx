@@ -359,7 +359,7 @@ function RetailerSubmissionUpdateForSubmission() {
                                 onChange={(e)=>setSpecialNotesLine1(e.target.value)}
                                 isRequired={true}
                                 maxWidth="280px"
-                                helpText={"Max 17 characters"}
+                                helpText={"Max 35 characters"}
                             />
 
                             <FormInputField
@@ -372,7 +372,7 @@ function RetailerSubmissionUpdateForSubmission() {
                                 onChange={(e)=>setSpecialNotesLine2(e.target.value)}
                                 isRequired={true}
                                 maxWidth="280px"
-                                helpText={"Max 17 characters"}
+                                helpText={"Max 35 characters"}
                             />
 
                             <FormInputField
@@ -385,7 +385,7 @@ function RetailerSubmissionUpdateForSubmission() {
                                 onChange={(e)=>setSpecialNotesLine3(e.target.value)}
                                 isRequired={true}
                                 maxWidth="280px"
-                                helpText={"Max 17 characters"}
+                                helpText={"Max 35 characters"}
                             />
 
                             <FormInputField
@@ -398,7 +398,7 @@ function RetailerSubmissionUpdateForSubmission() {
                                 onChange={(e)=>setSpecialNotesLine4(e.target.value)}
                                 isRequired={true}
                                 maxWidth="280px"
-                                helpText={"Max 17 characters"}
+                                helpText={"Max 35 characters"}
                             />
 
                             <FormInputField
@@ -411,7 +411,7 @@ function RetailerSubmissionUpdateForSubmission() {
                                 onChange={(e)=>setSpecialNotesLine5(e.target.value)}
                                 isRequired={true}
                                 maxWidth="280px"
-                                helpText={"Max 17 characters"}
+                                helpText={"Max 35 characters"}
                             />
 
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faMagnifyingGlass} />&nbsp;Summary of Findings</p>
@@ -623,7 +623,7 @@ function RetailerSubmissionUpdateForSubmission() {
                                 onChange={(e)=>setGradingNotesLine1(e.target.value)}
                                 isRequired={true}
                                 maxWidth="280px"
-                                helpText={"Max 17 characters"}
+                                helpText={"Max 35 characters"}
                             />
 
                             <FormInputField
@@ -636,7 +636,7 @@ function RetailerSubmissionUpdateForSubmission() {
                                 onChange={(e)=>setGradingNotesLine2(e.target.value)}
                                 isRequired={true}
                                 maxWidth="280px"
-                                helpText={"Max 17 characters"}
+                                helpText={"Max 35 characters"}
                             />
 
                             <FormInputField
@@ -649,7 +649,7 @@ function RetailerSubmissionUpdateForSubmission() {
                                 onChange={(e)=>setGradingNotesLine3(e.target.value)}
                                 isRequired={true}
                                 maxWidth="280px"
-                                helpText={"Max 17 characters"}
+                                helpText={"Max 35 characters"}
                             />
 
                             <FormInputField
@@ -662,7 +662,7 @@ function RetailerSubmissionUpdateForSubmission() {
                                 onChange={(e)=>setGradingNotesLine4(e.target.value)}
                                 isRequired={true}
                                 maxWidth="280px"
-                                helpText={"Max 17 characters"}
+                                helpText={"Max 35 characters"}
                             />
 
                             <FormInputField
@@ -675,7 +675,7 @@ function RetailerSubmissionUpdateForSubmission() {
                                 onChange={(e)=>setGradingNotesLine5(e.target.value)}
                                 isRequired={true}
                                 maxWidth="280px"
-                                helpText={"Max 17 characters"}
+                                helpText={"Max 35 characters"}
                             />
 
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faBalanceScale} />&nbsp;Grading</p>
