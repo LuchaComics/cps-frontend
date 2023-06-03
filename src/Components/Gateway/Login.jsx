@@ -226,7 +226,7 @@ function Login() {
                                                     }
                                                 </div>
                                                 <br />
-                                                <button class="button is-block is-fullwidth is-primary" type="button" onClick={onButtonClick} style={{backgroundColor:"#FF0000"}}>
+                                                <button class="button is-medium is-block is-fullwidth is-primary" type="button" onClick={onButtonClick} style={{backgroundColor:"#FF0000"}}>
                                                     Login <FontAwesomeIcon icon={faArrowRight} />
                                                 </button>
                                             </form>
@@ -234,7 +234,7 @@ function Login() {
                                             <nav class="level">
                                                 <div class="level-item has-text-centered">
                                                     <div>
-                                                        <Link to="/forgot-password" className="is-size-7-tablet">Forgot Password?</Link>
+                                                        <Link className="is-size-7-tablet">Forgot Password?</Link>
                                                     </div>
                                                 </div>
                                                 <div class="level-item has-text-centered">
