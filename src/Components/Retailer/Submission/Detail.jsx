@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faEye, faArrowLeft, faCheckCircle, faPencil, faGauge, faBook, faMagnifyingGlass, faBalanceScale, faUser, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faEye, faArrowLeft, faCheckCircle, faPencil, faGauge, faBook, faMagnifyingGlass, faBalanceScale, faUser, faArrowUpRightFromSquare, faDownload } from '@fortawesome/free-solid-svg-icons'
 import Select from 'react-select'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
@@ -561,10 +561,16 @@ function RetailerSubmissionDetail() {
                                 disabled={true}
                             />}
 
-                            <div class="column is-half">
-                                <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-hidden-touch"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Download PDF</a>
-                                <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Download PDF</a>
-                            </div>
+                            <section class="hero has-background-white-ter">
+                                <div class="hero-body">
+                                    <p class="subtitle">
+                                        <div class="has-text-centered">
+                                            <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-large is-success is-hidden-touch"><FontAwesomeIcon className="fas" icon={faDownload} />&nbsp;Download PDF</a>
+                                            <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-large is-success is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faDownload} />&nbsp;Download PDF</a>
+                                        </div>
+                                    </p>
+                                </div>
+                            </section>
 
                             <div class="columns pt-4">
                                 <div class="column is-half">

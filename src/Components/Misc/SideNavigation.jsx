@@ -77,6 +77,13 @@ function SideNavigation() {
                 </div>
             </div>
             <div class="has-background-black is-narrow-mobile is-fullheight" style={{minWidth:"250px", padding:"25px"}}>
+                <nav class="level">
+                    <div class="level-item has-text-centered">
+                        <figure class='image'>
+                            <img src='/static/CPS logo 2023 GR.webp' style={{maxWidth:"250px"}} />
+                        </figure>
+                    </div>
+                </nav>
                 <aside class="menu">
                     <p class="menu-label has-text-grey-light">
                         Staff

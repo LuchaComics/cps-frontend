@@ -35,25 +35,30 @@ function TopNavigation() {
     // Render the following component GUI.
     return (
         <>
-            <nav class="navbar has-background-black" role="navigation" aria-label="main navigation">
-                <div class="navbar-brand">
-                    <a class="navbar-item" href="/dashboard" style={{color:"white"}}>
-                        <img src="/static/CPS logo 2023 square.webp" width={54} height={28} alt="Logo Image" />&nbsp;Collectibles Protective Services
-                    </a>
-                    <a role="button" class="navbar-burger has-text-white" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={()=>setOnHamburgerClicked(!onHamburgerClicked)}>
-                        <span aria-hidden="true">
-                        </span>
-                        <span aria-hidden="true">
-                        </span>
-                        <span aria-hidden="true">
-                        </span>
-                    </a>
-                </div>
+            <nav class="navbar has-background-black" role="navigation" aria-label="main navigation" style={{height:"75px"}}>
+                {!onHamburgerClicked
+                    ?
+                    <div class="navbar-brand">
+                        <a class="navbar-item" href="/dashboard" style={{color:"white"}}>
+                            <img src="/static/CPS logo 2023 square.webp" width={54} height={28} alt="Logo Image" />&nbsp;Collectibles Protective Services
+                        </a>
+                        <a role="button" class="navbar-burger has-text-white" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={()=>setOnHamburgerClicked(!onHamburgerClicked)}>
+                            <span aria-hidden="true">
+                            </span>
+                            <span aria-hidden="true">
+                            </span>
+                            <span aria-hidden="true">
+                            </span>
+                        </a>
+                    </div>
+                    :
+                    <></>
+                }
                 <div id="navbarBasicExample" class="navbar-menu has-text-white">
 
                     <div class="navbar-end">
                         <div class="navbar-item">
-                            <div class="buttons" onClick={()=>setOnHamburgerClicked(!onHamburgerClicked)}>
+                            <div class="buttons p-3" onClick={()=>setOnHamburgerClicked(!onHamburgerClicked)}>
                                 <FontAwesomeIcon className="fas has-text-white" icon={faBars} />
                             </div>
                         </div>
