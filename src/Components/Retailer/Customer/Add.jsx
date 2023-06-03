@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faUserCircle, faGauge, faPencil, faUsers, faIdCard, faAddressBook, faContactCard, faChartPie } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faTimesCircle, faCheckCircle, faUserCircle, faGauge, faPencil, faUsers, faIdCard, faAddressBook, faContactCard, faChartPie } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
@@ -49,6 +49,7 @@ function RetailerCustomerAdd() {
     const [agreePromotionsEmail, setHasPromotionalEmail] = useState(true);
     const [howDidYouHearAboutUs, setHowDidYouHearAboutUs] = useState(0);
     const [howDidYouHearAboutUsOther, setHowDidYouHearAboutUsOther] = useState("");
+    const [showCancelWarning, setShowCancelWarning] = useState(false);
 
     ////
     //// Event handling.
@@ -224,6 +225,23 @@ function RetailerCustomerAdd() {
                         </ul>
                     </nav>
                     <nav class="box">
+                        <div class={`modal ${showCancelWarning ? 'is-active' : ''}`}>
+                            <div class="modal-background"></div>
+                            <div class="modal-card">
+                                <header class="modal-card-head">
+                                    <p class="modal-card-title">Are you sure?</p>
+                                    <button class="delete" aria-label="close" onClick={(e)=>setShowCancelWarning(false)}></button>
+                                </header>
+                                <section class="modal-card-body">
+                                    Your customer record will be cancelled and your work will be lost. This cannot be undone. Do you want to continue?
+                                </section>
+                                <footer class="modal-card-foot">
+                                    <Link class="button is-success" to={`/customers`}>Yes</Link>
+                                    <button class="button" onClick={(e)=>setShowCancelWarning(false)}>No</button>
+                                </footer>
+                            </div>
+                        </div>
+
                         <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Customer</p>
                         <FormErrorBox errors={errors} />
 
@@ -400,8 +418,8 @@ function RetailerCustomerAdd() {
 
                             <div class="columns pt-5">
                                 <div class="column is-half">
-                                    <Link class="button is-medium is-hidden-touch" to={`/customers`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                    <Link class="button is-medium is-fullwidth is-hidden-desktop" to={`/customers`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                    <button class="button is-medium is-hidden-touch" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faTimesCircle} />&nbsp;Cancel</button>
+                                    <button class="button is-medium is-fullwidth is-hidden-desktop" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faTimesCircle} />&nbsp;Cancel</button>
                                 </div>
                                 <div class="column is-half has-text-right">
                                     <button class="button is-medium is-primary is-hidden-touch" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
