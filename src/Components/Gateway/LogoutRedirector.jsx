@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { postLogoutAPI } from "../../API/gateway";
 import Scroll from 'react-scroll';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 
 function LogoutRedirector() {
@@ -71,23 +73,23 @@ function LogoutRedirector() {
     }, []);
 
     return (
-        <>
-            <div className="w3-modal" style={{display:"block"}}>
-            <div className="w3-modal-content">
+        <div class="container column is-12">
+            <div class="section">
+                <section class="hero is-fullheight">
+                    <div class="hero-body">
 
-            <div className="w3-center">
-                <br />
-                <br />
-                <br />
-                <i className="fa fa-spinner w3-spin w3-jumbo"></i>
-                <h1>Logging out ...</h1>
-                <br />
-                <br />
-            </div>
+                        <div class="container">
+                            <div class="columns is-centered">
+                                <div class="column is-one-third-tablet">
+                                    <h1 className="is-size-1">LOGGING OFF...</h1>
+                                </div>
+                            </div>
+                        </div>
 
+                    </div>
+                </section>
             </div>
-            </div>
-        </>
+        </div>
     );
 }
 
