@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate, useSearchParams } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faGauge, faUsers, faEye, faBook, faMagnifyingGlass, faBalanceScale, faUser, } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faTimesCircle, faCheckCircle, faGauge, faUsers, faEye, faBook, faMagnifyingGlass, faBalanceScale, faUser, } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
@@ -715,8 +715,8 @@ function RetailerSubmissionAddStep2() {
 
                             <div class="columns pt-5">
                                 <div class="column is-half">
-                                    <button class="button is-medium is-hidden-touch" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
-                                    <button class="button is-medium is-fullwidth is-hidden-desktop" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
+                                    <button class="button is-medium is-hidden-touch" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faTimesCircle} />&nbsp;Cancel</button>
+                                    <button class="button is-medium is-fullwidth is-hidden-desktop" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faTimesCircle} />&nbsp;Cancel</button>
                                 </div>
                                 <div class="column is-half has-text-right">
                                     <button class="button is-medium is-primary is-hidden-touch" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
