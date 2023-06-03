@@ -171,12 +171,12 @@ function RetailerSubmissionAddStep1WithResult() {
                             </div>
                         </div>
 
-                        <p class="title is-3"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Submission</p>
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Submission</p>
                         <p class="pb-4 has-text-grey">Please select the customer from the following results.</p>
                         <FormErrorBox errors={errors} />
 
                         <div class="container pb-5">
-                            <p class="subtitle is-4"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Results</p>
+                            <p class="subtitle is-2"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Results</p>
                             <div class="columns">
                                 {customers && customers.results && customers.results.map(function(customer, i){
                                     return <div class="column is-one-quarter" key={customer.id}>

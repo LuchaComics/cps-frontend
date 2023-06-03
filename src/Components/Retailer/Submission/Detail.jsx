@@ -145,7 +145,7 @@ function RetailerSubmissionDetail() {
                         </ul>
                     </nav>
                     <nav class="box">
-                        <p class="title is-3"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission</p>
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission</p>
                         <FormErrorBox errors={errors} />
 
                         {isFetching && <div class="columns is-centered" style={{paddingTop: "20px"}}>
@@ -157,7 +157,7 @@ function RetailerSubmissionDetail() {
                         </div>}
 
                         {!isFetching && submission && <div class="container">
-                            <div class="tabs">
+                            <div class="tabs is-medium">
                               <ul>
                                 <li class={`is-active`}>
                                     <Link><b>Detail</b></Link>
@@ -171,7 +171,7 @@ function RetailerSubmissionDetail() {
                               </ul>
                             </div>
 
-                            <p class="subtitle is-4 pt-4"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comic Book Information</p>
+                            <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comic Book Information</p>
 
                             {submission && <FormInputField
                                 label="Series Title"
@@ -293,7 +293,7 @@ function RetailerSubmissionDetail() {
                                 disabled={true}
                             />
 
-                            <p class="subtitle is-4 pt-4"><FontAwesomeIcon className="fas" icon={faMagnifyingGlass} />&nbsp;Summary of Findings</p>
+                            <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faMagnifyingGlass} />&nbsp;Summary of Findings</p>
 
                             {submission && <FormRadioField
                                 label="Creases Finding"
@@ -516,7 +516,7 @@ function RetailerSubmissionDetail() {
                                 disabled={true}
                             />
 
-                            <p class="subtitle is-4 pt-4"><FontAwesomeIcon className="fas" icon={faBalanceScale} />&nbsp;Grading</p>
+                            <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faBalanceScale} />&nbsp;Grading</p>
 
                             <FormRadioField
                                 label="Which type of grading scale would you prefer?"

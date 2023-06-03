@@ -9,7 +9,7 @@ function FormInputFieldWithButton({ label, name, placeholder, value, type="text"
     return (
         <>
         <label class="label">{label}:</label>
-        <div class="field has-addons">
+        <div class="field has-addons pb-4">
 
             <div class="control">
                 <input class={classNameText}

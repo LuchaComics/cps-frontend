@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate, useSearchParams } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight, faUser, faKey, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faEnvelope, faKey, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { useRecoilState } from 'recoil';
 
 import FormErrorBox from "../Element/FormErrorBox";
@@ -176,61 +176,85 @@ function Login() {
                         <div class="hero-body">
                             <div class="container">
                                 <div class="columns is-centered">
-                                    <div class="box is-rounded column is-one-third-tablet">
-                                        <form>
-                                            <h1 className="title is-3 has-text-centered">Sign In</h1>
-                                            {isUnauthorized === "true" &&
-                                                <article class="message is-danger">
-                                                  <div class="message-body"><FontAwesomeIcon className="fas" icon={faTriangleExclamation} />&nbsp;Your session has ended.<br/>Please login again</div>
-                                                </article>
-                                            }
-                                            <FormErrorBox errors={errors} />
-
-                                            <div class="field">
-                                                <label class="label is-small has-text-grey-light">Email</label>
-                                                <div class="control has-icons-left has-icons-right">
-                                                    <input class={`input ${errors && errors.email && 'is-danger'} ${validation && validation.email && 'is-success'}`} type="text" placeholder="Email" value={email} onChange={onEmailChange}/>
-                                                    <span class="icon is-small is-left">
-                                                        <FontAwesomeIcon className="fas" icon={faUser} />
-                                                    </span>
+                                    <div class="column is-one-third-tablet">
+                                        <div class="box is-rounded">
+                                            {/* Start Logo */}
+                                            <nav class="level">
+                                                <div class="level-item has-text-centered">
+                                                    <figure class='image'>
+                                                        <img src='/static/CPS logo 2023 GR.webp' style={{width:"256px"}} />
+                                                    </figure>
                                                 </div>
-                                                {errors && errors.email &&
-                                                    <p class="help is-danger">{errors.email}</p>
+                                            </nav>
+                                            {/* End Logo */}
+                                            <form>
+                                                <h1 className="title is-2 has-text-centered">Sign In</h1>
+                                                {isUnauthorized === "true" &&
+                                                    <article class="message is-danger">
+                                                      <div class="message-body"><FontAwesomeIcon className="fas" icon={faTriangleExclamation} />&nbsp;Your session has ended.<br/>Please login again</div>
+                                                    </article>
                                                 }
-                                            </div>
+                                                <FormErrorBox errors={errors} />
 
-                                            <div class="field">
-                                                <label class="label is-small has-text-grey-light">PASSWORD</label>
-                                                <div class="control has-icons-left has-icons-right">
-                                                    <input class={`input ${errors && errors.password && 'is-danger'} ${validation && validation.password && 'is-success'}`}  type="password" placeholder="Password" value={password} onChange={onPasswordChange} />
-                                                    <span class="icon is-small is-left">
-                                                        <FontAwesomeIcon className="fas" icon={faKey} />
-                                                    </span>
+                                                <div class="field">
+                                                    <label class="label is-small has-text-grey-light">Email</label>
+                                                    <div class="control has-icons-left has-icons-right">
+                                                        <input class={`input ${errors && errors.email && 'is-danger'} ${validation && validation.email && 'is-success'}`}
+                                                                type="email"
+                                                         placeholder="Email"
+                                                               value={email}
+                                                            onChange={onEmailChange}/>
+                                                        <span class="icon is-small is-left">
+                                                            <FontAwesomeIcon className="fas" icon={faEnvelope} />
+                                                        </span>
+                                                    </div>
+                                                    {errors && errors.email &&
+                                                        <p class="help is-danger">{errors.email}</p>
+                                                    }
                                                 </div>
-                                                {errors && errors.password &&
-                                                    <p class="help is-danger">{errors.password}</p>
-                                                }
-                                            </div>
+
+                                                <div class="field">
+                                                    <label class="label is-small has-text-grey-light">PASSWORD</label>
+                                                    <div class="control has-icons-left has-icons-right">
+                                                        <input class={`input ${errors && errors.password && 'is-danger'} ${validation && validation.password && 'is-success'}`}  type="password" placeholder="Password" value={password} onChange={onPasswordChange} />
+                                                        <span class="icon is-small is-left">
+                                                            <FontAwesomeIcon className="fas" icon={faKey} />
+                                                        </span>
+                                                    </div>
+                                                    {errors && errors.password &&
+                                                        <p class="help is-danger">{errors.password}</p>
+                                                    }
+                                                </div>
+                                                <br />
+                                                <button class="button is-block is-fullwidth is-primary" type="button" onClick={onButtonClick} style={{backgroundColor:"#FF0000"}}>
+                                                    Login <FontAwesomeIcon icon={faArrowRight} />
+                                                </button>
+                                            </form>
                                             <br />
-                                            <button class="button is-block is-fullwidth is-primary" type="button" onClick={onButtonClick}>
-                                                Login <FontAwesomeIcon icon={faArrowRight} />
-                                            </button>
-                                        </form>
-                                        <br />
-                                        <nav class="level">
-                                            <div class="level-item has-text-centered">
-                                                <div>
-                                                    <Link to="/forgot-password" className="is-size-7-tablet">Forgot Password?</Link>
+                                            <nav class="level">
+                                                <div class="level-item has-text-centered">
+                                                    <div>
+                                                        <Link to="/forgot-password" className="is-size-7-tablet">Forgot Password?</Link>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="level-item has-text-centered">
-                                                <div>
-                                                    <Link to="/register" className="is-size-7-tablet">Create an Account</Link>
+                                                <div class="level-item has-text-centered">
+                                                    <div>
+                                                        <Link to="/register" className="is-size-7-tablet">Create an Account</Link>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </nav>
+                                            </nav>
+                                        </div>
+                                        {/* End box */}
+
+                                        <div className="has-text-centered">
+                                            <p>Need help?</p>
+                                            <p><Link to="Support@cpscapsule.com">Support@cpscapsule.com</Link></p>
+                                            <p><a href="tel:+15199142685">(519) 914-2685</a></p>
+                                        </div>
+                                        {/* End suppoert text. */}
+
                                     </div>
-                                    {/* End box */}
+                                    {/* End Column */}
                                 </div>
                             </div>
                             {/* End container */}

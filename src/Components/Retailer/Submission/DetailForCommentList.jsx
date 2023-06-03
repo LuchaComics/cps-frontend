@@ -204,7 +204,7 @@ function RetailerSubmissionDetailForCommentList() {
                         </ul>
                     </nav>
                     <nav class="box">
-                        <p class="title is-3"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission</p>
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission</p>
                         <FormErrorBox errors={errors} />
 
                         {isFetching && <div class="columns is-centered" style={{paddingTop: "20px"}}>
@@ -216,7 +216,7 @@ function RetailerSubmissionDetailForCommentList() {
                         </div>}
 
                         {!isFetching && submission && <div class="container">
-                            <div class="tabs">
+                            <div class="tabs is-medium">
                               <ul>
                                 <li>
                                     <Link to={`/submission/${id}`}>Detail</Link>
@@ -230,7 +230,7 @@ function RetailerSubmissionDetailForCommentList() {
                               </ul>
                             </div>
 
-                            <p class="subtitle is-4 pt-4"><FontAwesomeIcon className="fas" icon={faComments} />&nbsp;Comments</p>
+                            <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faComments} />&nbsp;Comments</p>
 
                             {submission.comments && submission.comments.length > 0 && <>
                                 {submission.comments.map(function(comment, i){

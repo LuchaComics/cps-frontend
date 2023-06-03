@@ -116,7 +116,7 @@ function RetailerCustomerDetail() {
                     <nav class="box">
                         {customer && <div class="columns">
                             <div class="column">
-                                <p class="title is-3"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Customer</p>
+                                <p class="title is-2"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Customer</p>
                             </div>
                             <div class="column has-text-right">
                                 {/* Mobile Specific */}
@@ -142,7 +142,7 @@ function RetailerCustomerDetail() {
                         </div>}
 
                         {!isFetching && customer && <div class="container">
-                            <div class="tabs">
+                            <div class="tabs is-medium">
                               <ul>
                                 <li class="is-active">
                                     <Link><b>Detail</b></Link>
@@ -156,7 +156,7 @@ function RetailerCustomerDetail() {
                               </ul>
                             </div>
 
-                            <p class="subtitle is-4">Identification</p>
+                            <p class="subtitle is-3">Identification</p>
                             <FormInputField
                                 label="First Name"
                                 name="firstName"
@@ -178,7 +178,7 @@ function RetailerCustomerDetail() {
                                 disabled={true}
                             />
 
-                            <p class="subtitle is-4">Contact Information</p>
+                            <p class="subtitle is-3">Contact Information</p>
 
                             <FormInputField
                                 label="Email"
@@ -202,7 +202,7 @@ function RetailerCustomerDetail() {
                                 disabled={true}
                             />
 
-                            <p class="subtitle is-4">Address</p>
+                            <p class="subtitle is-3">Address</p>
 
                             <FormInputField
                                 label="Country"
@@ -270,7 +270,7 @@ function RetailerCustomerDetail() {
                                 disabled={true}
                             />
 
-                            <p class="subtitle is-4">Metrics</p>
+                            <p class="subtitle is-3">Metrics</p>
 
                             <FormCheckboxField
                                 label="I agree to receive electronic updates from my local retailer and CPS"

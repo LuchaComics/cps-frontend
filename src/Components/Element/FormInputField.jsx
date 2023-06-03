@@ -7,7 +7,7 @@ function FormInputField({ label, name, placeholder, value, type="text", errorTex
         classNameText = "input is-danger";
     }
     return (
-        <div class="field">
+        <div class="field pb-4">
             <label class="label">{label}</label>
             <div class="control">
                 <input class={classNameText}

@@ -109,8 +109,8 @@ function FormRadioField({
     onChange        // The function to call when a selection occurs.
 }) {
     return (
-        <div class="field">
-            <label class="label is-small has-text-grey-light">{label}</label>
+        <div class="field pb-4">
+            <label class="label">{label}</label>
             <div class="control">
                 {opt1Label &&
                     <label class="radio">

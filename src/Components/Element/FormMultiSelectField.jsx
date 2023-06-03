@@ -23,7 +23,7 @@ function FormMultiSelectField({
         style = {maxWidth:maxWidth, borderColor:"red", borderStyle: "solid", borderWidth: "1px"};
     }
     return (
-        <div class="field">
+        <div class="field pb-4">
             <label class="label">{label}</label>
             <div class="control" style={style}>
                 <Select isMulti

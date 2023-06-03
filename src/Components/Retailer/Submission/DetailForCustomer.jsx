@@ -145,7 +145,7 @@ function RetailerSubmissionDetailForCustomer() {
                         </ul>
                     </nav>
                     <nav class="box">
-                        <p class="title is-3"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission</p>
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission</p>
                         <FormErrorBox errors={errors} />
 
                         {isFetching && <div class="columns is-centered" style={{paddingTop: "20px"}}>
@@ -157,7 +157,7 @@ function RetailerSubmissionDetailForCustomer() {
                         </div>}
 
                         {!isFetching && submission && <div class="container">
-                            <div class="tabs">
+                            <div class="tabs is-medium">
                               <ul>
                                 <li>
                                     <Link to={`/submission/${id}`}>Detail</Link>
@@ -171,7 +171,7 @@ function RetailerSubmissionDetailForCustomer() {
                               </ul>
                             </div>
                             {submission && submission.user !== undefined && submission.user !== null && submission.user !== "" && <>
-                                <p class="subtitle is-4 pt-4"><FontAwesomeIcon className="fas" icon={faUser} />&nbsp;Customer</p>
+                                <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faUser} />&nbsp;Customer</p>
                                 <p class="pb-5"><Link to={`/customer/${submission.user.id}`} target="_blank" rel="noreferrer">Click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link> to view the customer.</p>
 
                                 <FormInputField

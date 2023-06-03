@@ -380,7 +380,7 @@ function RetailerSubmissionUpdateForCustomer() {
                         </ul>
                     </nav>
                     <nav class="box">
-                        <p class="title is-3"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission</p>
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission</p>
                         <FormErrorBox errors={errors} />
 
                         <p class="pb-4 has-text-grey">Please fill out all the required fields before submitting this form.</p>
@@ -395,7 +395,7 @@ function RetailerSubmissionUpdateForCustomer() {
 
                         {!isFetching && <div class="container">
 
-                            <p class="subtitle is-4">Comic Book Information</p>
+                            <p class="subtitle is-3">Comic Book Information</p>
 
                             <FormInputField
                                 label="Series Title"
@@ -533,7 +533,7 @@ function RetailerSubmissionUpdateForCustomer() {
                                 helpText={"Max 17 characters"}
                             />
 
-                            <p class="subtitle is-4">Summary of Findings</p>
+                            <p class="subtitle is-3">Summary of Findings</p>
 
                             <FormRadioField
                                 label="Creases Finding"
@@ -797,7 +797,7 @@ function RetailerSubmissionUpdateForCustomer() {
                                 helpText={"Max 17 characters"}
                             />
 
-                            <p class="subtitle is-4">Grading</p>
+                            <p class="subtitle is-3">Grading</p>
 
                             <FormRadioField
                                 label="Which type of grading scale would you prefer?"

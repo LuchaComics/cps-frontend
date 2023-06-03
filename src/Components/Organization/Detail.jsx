@@ -110,7 +110,7 @@ function OrganizationDetail() {
                         </ul>
                     </nav>
                     <nav class="box">
-                        <p class="title is-3"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Organization</p>
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Organization</p>
                         <FormErrorBox errors={errors} />
 
                         {/* <p class="pb-4">Please fill out all the required fields before submitting this form.</p> */}
@@ -125,7 +125,7 @@ function OrganizationDetail() {
 
                         {!isFetching && organization && <div class="container">
 
-                            <p class="subtitle is-4">Identification</p>
+                            <p class="subtitle is-3">Identification</p>
                             <FormInputField
                                 label="Name"
                                 name="Name"

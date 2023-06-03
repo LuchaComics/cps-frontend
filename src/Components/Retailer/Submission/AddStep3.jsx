@@ -134,7 +134,7 @@ function RetailerSubmissionAddStep3() {
                     </nav>
 
                     <nav class="box">
-                        <p class="title is-3"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission - Confirmation</p>
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission - Confirmation</p>
                         <FormErrorBox errors={errors} />
 
 

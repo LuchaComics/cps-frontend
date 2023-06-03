@@ -86,7 +86,7 @@ function EmailVerification() {
                             <div class="columns is-centered">
                                 <div class="box is-rounded column is-one-third-tablet">
                                     <form>
-                                        <h1 className="title is-3 has-text-centered">Email was Verified</h1>
+                                        <h1 className="title is-2 has-text-centered">Email was Verified</h1>
                                         <FormErrorBox errors={errors} />
                                         <p>Thank you for verifying. You may now log into your account now via the <Link to="/login">login page&nbsp;<FontAwesomeIcon icon={faArrowRight} /></Link>.</p>
 

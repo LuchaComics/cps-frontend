@@ -20,6 +20,7 @@ function TopNavigation() {
         "/login",
         "/logout",
         "/verify",
+        "/forgot-password"
     ];
     const location = useLocation();
     var arrayLength = ignorePathsArr.length;

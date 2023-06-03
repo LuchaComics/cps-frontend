@@ -273,7 +273,7 @@ function RetailerCustomerUpdate() {
                         </ul>
                     </nav>
                     <nav class="box">
-                        <p class="title is-3"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Customer</p>
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Customer</p>
                         <FormErrorBox errors={errors} />
 
                         {/* <p class="pb-4">Please fill out all the required fields before submitting this form.</p> */}
@@ -288,7 +288,7 @@ function RetailerCustomerUpdate() {
 
                         {!isFetching && <div class="container">
 
-                            <p class="subtitle is-4">Identification</p>
+                            <p class="subtitle is-3">Identification</p>
                             <FormInputField
                                 label="First Name"
                                 name="firstName"
@@ -313,7 +313,7 @@ function RetailerCustomerUpdate() {
                                 maxWidth="380px"
                             />
 
-                            <p class="subtitle is-4">Contact Information</p>
+                            <p class="subtitle is-3">Contact Information</p>
 
                             <FormInputField
                                 label="Email"
@@ -339,7 +339,7 @@ function RetailerCustomerUpdate() {
                                 maxWidth="380px"
                             />
 
-                            <p class="subtitle is-4">Address</p>
+                            <p class="subtitle is-3">Address</p>
 
                             <FormInputField
                                 label="Country (Optional)"
@@ -413,7 +413,7 @@ function RetailerCustomerUpdate() {
                                 maxWidth="380px"
                             />
 
-                            <p class="subtitle is-4">Metrics</p>
+                            <p class="subtitle is-3">Metrics</p>
 
                             <FormSelectField
                                 label="How did you hear about us?"

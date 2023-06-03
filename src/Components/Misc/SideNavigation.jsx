@@ -25,7 +25,8 @@ function SideNavigation() {
         "/register-successful",
         "/login",
         "/logout",
-        "/verify"
+        "/verify",
+        "/forgot-password"
     ];
     const location = useLocation();
     var arrayLength = ignorePathsArr.length;

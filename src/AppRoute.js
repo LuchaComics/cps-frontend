@@ -86,6 +86,7 @@ function AppRoute() {
                             <Route exact path="/" element={<Index/>}/>
                             <Route path="*" element={<NotFoundError/>}/>
                         </Routes>
+
                     </section>
                     <div>
                         {/* DEVELOPERS NOTE: Mobile tab-bar menu can go here */}

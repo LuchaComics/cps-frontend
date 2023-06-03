@@ -186,12 +186,12 @@ function RetailerSubmissionAddStep1WithSearch() {
                             </div>
                         </div>
 
-                        <p class="title is-3"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Submission</p>
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Submission</p>
                         <p class="pb-4 has-text-grey">To begin, please select a customer for this submission. Otherwise you can <Link to="/submissions/add">click here to skip pick a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link> or if you'd like to create a new customer then <Link to="/submissions/add" target="_blank" rel="noreferrer">click here to create a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link>.</p>
                         <FormErrorBox errors={errors} />
 
                         <div class="container pb-5">
-                            <p class="subtitle is-5"><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search</p>
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search</p>
 
                             <FormInputField
                                 label="Search Keywords"
@@ -199,7 +199,7 @@ function RetailerSubmissionAddStep1WithSearch() {
                                 placeholder="Text input"
                                 value={searchKeyword}
                                 errorText={errors && errors.searchKeyword}
-                                helpText=""
+                                helpText="SEARCH FIRST NAME, LAST NAME, EMAIL, ETC"
                                 onChange={onSearchKeywordChange}
                                 isRequired={true}
                                 maxWidth="380px"
@@ -207,7 +207,7 @@ function RetailerSubmissionAddStep1WithSearch() {
                         </div>
 
                         <div class="container pb-5">
-                            <p class="subtitle is-5"><FontAwesomeIcon className="fas" icon={faFilter} />&nbsp;Filter</p>
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faFilter} />&nbsp;Filter</p>
 
                             <FormInputField
                                 label="First Name"

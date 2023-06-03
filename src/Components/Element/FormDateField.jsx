@@ -13,7 +13,7 @@ function FormDateField({ label, name, placeholder, value, type="text", errorText
     // https://reactdatepicker.com/
 
     return (
-        <div class="field">
+        <div class="field pb-4">
             <label class="label">{label}</label>
             <div class="control" style={{maxWidth:maxWidth}}>
                 <DatePicker className={classNameText}

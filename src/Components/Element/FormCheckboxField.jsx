@@ -96,7 +96,7 @@ function FormCheckboxField({
 }) {
     console.log("errorText", errorText);
     return (
-        <div class="field">
+        <div class="field pb-4">
             <label class="label is-small has-text-grey-light">{label}</label>
             <div class="control">
 

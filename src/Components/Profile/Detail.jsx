@@ -108,7 +108,7 @@ function AccountDetail() {
                         </ul>
                     </nav>
                     <nav class="box">
-                        <p class="title is-3"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Account</p>
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Account</p>
                         <FormErrorBox errors={errors} />
 
                         {/* <p class="pb-4">Please fill out all the required fields before submitting this form.</p> */}
@@ -123,7 +123,7 @@ function AccountDetail() {
 
                         {!isFetching && profile && <div class="container">
 
-                            <p class="subtitle is-4">Identification</p>
+                            <p class="subtitle is-3">Identification</p>
                             <FormInputField
                                 label="First Name"
                                 name="firstName"
@@ -145,7 +145,7 @@ function AccountDetail() {
                                 disabled={true}
                             />
 
-                            <p class="subtitle is-4">Contact Information</p>
+                            <p class="subtitle is-3">Contact Information</p>
 
                             <FormInputField
                                 label="Email"
@@ -169,7 +169,7 @@ function AccountDetail() {
                                 disabled={true}
                             />
 
-                            <p class="subtitle is-4">Address</p>
+                            <p class="subtitle is-3">Address</p>
 
                             <FormInputField
                                 label="Country"
@@ -237,7 +237,7 @@ function AccountDetail() {
                                 disabled={true}
                             />
 
-                            <p class="subtitle is-4">Misc</p>
+                            <p class="subtitle is-3">Misc</p>
 
                             <FormCheckboxField
                                 label="I agree to receive electronic updates from my local retailer and CPS"

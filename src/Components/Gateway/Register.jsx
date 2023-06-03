@@ -228,11 +228,11 @@ function Register() {
                 <section class="section">
 
                     <nav class="box">
-                        <p class="title is-3"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Register</p>
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Register</p>
                         <FormErrorBox errors={errors} />
 
                         {!isFetching && <div class="container">
-                            <p class="subtitle is-4">Details</p>
+                            <p class="subtitle is-3">Details</p>
 
                             <FormInputField
                                 label="First Name"
@@ -284,11 +284,12 @@ function Register() {
                                 maxWidth="380px"
                             />
 
-                            <p class="subtitle is-4">Contact Information</p>
+                            <p class="subtitle is-3">Contact Information</p>
 
                             <FormInputField
                                 label="Email"
                                 name="email"
+                                type="email"
                                 placeholder="Text input"
                                 value={email}
                                 errorText={errors && errors.email}
@@ -310,7 +311,7 @@ function Register() {
                                 maxWidth="380px"
                             />
 
-                            <p class="subtitle is-4">Address</p>
+                            <p class="subtitle is-3">Address</p>
 
                             <FormInputField
                                 label="Country"
@@ -384,7 +385,7 @@ function Register() {
                                 maxWidth="380px"
                             />
 
-                            <p class="subtitle is-4">Company & Misc.</p>
+                            <p class="subtitle is-3">Company & Misc.</p>
 
                             <FormInputField
                                 label="Company Name"
@@ -455,6 +456,12 @@ function Register() {
                         Already have an account? <Link to="/login">Click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link> to sign in.
                     </span>
                 </section>
+                <div className="has-text-centered">
+                    <br />
+                    <p>Need help?</p>
+                    <p><Link to="Support@cpscapsule.com">Support@cpscapsule.com</Link></p>
+                    <p><a href="tel:+15199142685">(519) 914-2685</a></p>
+                </div>
             </div>
         </>
     );

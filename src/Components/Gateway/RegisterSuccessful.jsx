@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight, faUser, faKey } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRight, faKey, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import FormErrorBox from "../Element/FormErrorBox";
 import useLocalStorage from "../../Hooks/useLocalStorage";
 import { postLoginAPI } from "../../API/gateway";
@@ -59,14 +59,17 @@ function RegisterSuccessful() {
                             <div class="container">
                                 <div class="columns is-centered">
                                     <div class="box is-rounded column is-one-third-tablet">
-                                        <form>
-                                            <h1 className="title is-3 has-text-centered">Registration was Successful</h1>
-                                            <FormErrorBox errors={errors} />
-                                            <p>Thank you for registering - an activation email has bee sent to you. Please be sure to check your social, promotions and spam folders if it does not arrive within 5 minutes.</p>
-                                        </form>
-                                        <br />
-                                        <p><a href="/">Back to index</a></p>
-
+                                        <article class="message is-primary">
+                                          <div class="message-body">
+                                                <h1 className="title is-2 has-text-centered has-text-success"><FontAwesomeIcon className="fas" icon={faEnvelope} />&nbsp;Email Sent</h1>
+                                                <FormErrorBox errors={errors} />
+                                                <p>Thank you for registering - an <b>activation email</b> has bee sent to you. Please be sure to check your social, promotions and spam folders if it does not arrive within 5 minutes.</p>
+                                                <p>
+                                                    <br />
+                                                    <Link to="/">Back to index&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
+                                                </p>
+                                          </div>
+                                        </article>
                                     </div>
                                     {/* End box */}
                                 </div>

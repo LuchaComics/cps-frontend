@@ -236,7 +236,7 @@ function RetailerCustomerDetailForSubmission() {
                     <nav class="box">
                         <div class="columns">
                             <div class="column">
-                                <p class="title is-3"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Customer</p>
+                                <p class="title is-2"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Customer</p>
                             </div>
                             <div class="column has-text-right">
                                 {/* Mobile Specific */}
@@ -262,7 +262,7 @@ function RetailerCustomerDetailForSubmission() {
                         </div>}
 
                         {!isFetching && customer && <div class="container">
-                            <div class="tabs">
+                            <div class="tabs is-medium">
                               <ul>
                                 <li>
                                     <Link to={`/customer/${customer.id}`}>Detail</Link>

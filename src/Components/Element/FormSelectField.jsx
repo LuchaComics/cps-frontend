@@ -3,8 +3,8 @@ import { startCase } from 'lodash';
 
 function FormSelectField({ label, name, placeholder, selectedValue, errorText, validationText, helpText, onChange, options, disabled }) {
     return (
-        <div class="field">
-            <label class="label is-small has-text-grey-light">{label}</label>
+        <div class="field pb-4">
+            <label class="label">{label}</label>
             <div class="control">
                 <span class="select">
                     <select class={`input ${errorText && 'is-danger'} ${validationText && 'is-success'} has-text-grey-light`}

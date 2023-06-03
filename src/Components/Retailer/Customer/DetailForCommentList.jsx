@@ -206,7 +206,7 @@ function RetailerCustomerDetailForCommentList() {
                     <nav class="box">
                         <div class="columns">
                             <div class="column">
-                                <p class="title is-3"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Customer</p>
+                                <p class="title is-2"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Customer</p>
                             </div>
                             <div class="column has-text-right">
                                 {/* Mobile Specific */}
@@ -230,7 +230,7 @@ function RetailerCustomerDetailForCommentList() {
                         </div>}
 
                         {!isFetching && customer && <div class="container">
-                            <div class="tabs">
+                            <div class="tabs is-medium">
                               <ul>
                                 <li>
                                     <Link to={`/customer/${id}`}>Detail</Link>
@@ -244,7 +244,7 @@ function RetailerCustomerDetailForCommentList() {
                               </ul>
                             </div>
 
-                            <p class="subtitle is-4 pt-4"><FontAwesomeIcon className="fas" icon={faComments} />&nbsp;Comments</p>
+                            <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faComments} />&nbsp;Comments</p>
 
                             {customer.comments && customer.comments.length > 0 && <>
                                 {customer.comments.map(function(comment, i){

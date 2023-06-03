@@ -5,7 +5,7 @@ function FormInputField({ label, name, placeholder, value, errorText, helpText, 
         classNameText = "textarea is-danger";
     }
     return (
-        <div class="field">
+        <div class="field pb-4">
             <label class="label">{label}</label>
             <div class="control">
                 <textarea className={classNameText}
