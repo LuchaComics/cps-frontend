@@ -112,6 +112,12 @@ function RetailerSubmissionAddStep1WithSearch() {
         // searched or filtered and if we did not then error.
         if (aURL.indexOf('?') <= -1) {
             setErrors({"Validation": "Please input data before submitting search."});
+
+            // The following code will cause the screen to scroll to the top of
+            // the page. Please see ``react-scroll`` for more information:
+            // https://github.com/fisshy/react-scroll
+            var scroll = Scroll.animateScroll;
+            scroll.scrollToTop();
         } else {
             setForceURL(aURL);
         }
@@ -260,12 +266,12 @@ function RetailerSubmissionAddStep1WithSearch() {
 
                         <div class="columns pt-5">
                             <div class="column is-half">
-                                <button class="button is-hidden-touch" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
-                                <button class="button is-fullwidth is-hidden-desktop" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
+                                <button class="button is-medium is-hidden-touch" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
+                                <button class="button is-medium is-fullwidth is-hidden-desktop" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
                             </div>
                             <div class="column is-half has-text-right">
-                                <button class="button is-primary is-hidden-touch" onClick={onSearchButtonClicked}><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search</button>
-                                <button class="button is-primary is-fullwidth is-hidden-desktop" onClick={onSearchButtonClicked}><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search</button>
+                                <button class="button is-medium is-primary is-hidden-touch" onClick={onSearchButtonClicked}><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search</button>
+                                <button class="button is-medium is-primary is-fullwidth is-hidden-desktop" onClick={onSearchButtonClicked}><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search</button>
                             </div>
                         </div>
 

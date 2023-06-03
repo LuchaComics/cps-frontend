@@ -157,10 +157,8 @@ function RetailerSubmissionAddStep3() {
                                 <p>
                                 We're excited to inform you that your PDF is now ready for download. Simply click the provided link, and you'll have access to your PDF file.
                                 </p>
-                                <div class="column is-half">
-                                    <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-success is-hidden-touch"><FontAwesomeIcon className="fas" icon={faDownload} />&nbsp;Download PDF</a>
-                                    <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-success is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faDownload} />&nbsp;Download PDF</a>
-                                </div>
+
+
                                 <p class="pb-3">Once you've downloaded the PDF, please sign it and keep it with the comic. This adds a personal touch and ensures the authenticity of the document.</p>
 
                                 <p class="pb-3">After signing, we ask you to attach the signed PDF to the comic book you wish to have encapsulated. Safely packaging your comic book helps protect it during transit and ensures its safe arrival at our facility.</p>
@@ -180,6 +178,17 @@ function RetailerSubmissionAddStep3() {
                                 </article>
 
                                 <p class="pb-3">Once completed, please wait a few weeks for us to receive and process your request.</p>
+
+                                <section class="hero has-background-white-ter">
+                                    <div class="hero-body">
+                                        <p class="subtitle">
+                                            <div class="has-text-centered">
+                                                <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-large is-success is-hidden-touch"><FontAwesomeIcon className="fas" icon={faDownload} />&nbsp;Download PDF</a>
+                                                <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-large is-success is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faDownload} />&nbsp;Download PDF</a>
+                                            </div>
+                                        </p>
+                                    </div>
+                                </section>
                             </article>
 
                             <div class="columns pt-5">
@@ -188,13 +197,13 @@ function RetailerSubmissionAddStep3() {
                                 {customerName === null
                                     ?
                                     <div class="column is-half has-text-right">
-                                        <Link to={`/submissions`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to List</Link>
-                                        <Link to={`/submissions`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to List</Link>
+                                        <Link to={`/submissions`} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to List</Link>
+                                        <Link to={`/submissions`} class="button is-medium is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to List</Link>
                                     </div>
                                     :
                                     <div class="column is-half has-text-right">
-                                        <Link to={`/customer/${customerID}/sub`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to Customer</Link>
-                                        <Link to={`/customer/${customerID}/sub`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to Customer</Link>
+                                        <Link to={`/customer/${customerID}/sub`} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to Customer</Link>
+                                        <Link to={`/customer/${customerID}/sub`} class="button is-medium is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to Customer</Link>
                                     </div>
                                 }
                             </div>

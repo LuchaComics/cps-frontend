@@ -113,6 +113,12 @@ function RetailerSubmissionUpdatePickCustomerWithSearch() {
         // searched or filtered and if we did not then error.
         if (aURL.indexOf('?') <= -1) {
             setErrors({"Validation": "Please input data before submitting search."});
+
+            // The following code will cause the screen to scroll to the top of
+            // the page. Please see ``react-scroll`` for more information:
+            // https://github.com/fisshy/react-scroll
+            var scroll = Scroll.animateScroll;
+            scroll.scrollToTop();
         } else {
             setForceURL(aURL);
         }
@@ -176,7 +182,7 @@ function RetailerSubmissionUpdatePickCustomerWithSearch() {
                         <FormErrorBox errors={errors} />
 
                         <div class="container pb-5">
-                            <p class="subtitle is-5"><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search</p>
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search</p>
 
                             <FormInputField
                                 label="Search Keywords"
@@ -192,7 +198,7 @@ function RetailerSubmissionUpdatePickCustomerWithSearch() {
                         </div>
 
                         <div class="container pb-5">
-                            <p class="subtitle is-5"><FontAwesomeIcon className="fas" icon={faFilter} />&nbsp;Filter</p>
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faFilter} />&nbsp;Filter</p>
 
                             <FormInputField
                                 label="First Name"
@@ -245,12 +251,12 @@ function RetailerSubmissionUpdatePickCustomerWithSearch() {
 
                         <div class="columns pt-5">
                             <div class="column is-half">
-                                <Link to={`/submission/${id}`} class="button is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                <Link to={`/submission/${id}`} class="button is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                <Link to={`/submission/${id}`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                <Link to={`/submission/${id}`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                             </div>
                             <div class="column is-half has-text-right">
-                                <button class="button is-primary is-hidden-touch" onClick={onSearchButtonClicked}><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search</button>
-                                <button class="button is-primary is-fullwidth is-hidden-desktop" onClick={onSearchButtonClicked}><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search</button>
+                                <button class="button is-medium is-primary is-hidden-touch" onClick={onSearchButtonClicked}><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search</button>
+                                <button class="button is-medium is-primary is-fullwidth is-hidden-desktop" onClick={onSearchButtonClicked}><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search</button>
                             </div>
                         </div>
 

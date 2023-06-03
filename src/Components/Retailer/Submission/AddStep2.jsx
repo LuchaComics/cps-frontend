@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate, useSearchParams } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faGauge, faUsers, faEye } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faGauge, faUsers, faEye, faBook, faMagnifyingGlass, faBalanceScale, faUser, } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
@@ -49,7 +49,7 @@ function RetailerSubmissionAddStep2() {
     const [seriesTitle, setSeriesTitle] = useState("");
     const [issueVol, setIssueVol] = useState("");
     const [issueNo, setIssueNo] = useState("");
-    const [issueCoverDate, setIssueCoverDate] = useState("");
+    const [issueCoverDate, setIssueCoverDate] = useState(null);
     const [publisherName, setPublisherName] = useState(0);
     const [publisherNameOther, setPublisherNameOther] = useState("");
     const [creasesFinding, setCreasesFinding] = useState("");
@@ -262,7 +262,7 @@ function RetailerSubmissionAddStep2() {
 
                         {!isFetching && <div class="container">
 
-                            <p class="subtitle is-3">Comic Book Information</p>
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comic Book Information</p>
                             <FormInputField
                                 label="Series Title"
                                 name="seriesTitle"
@@ -399,7 +399,7 @@ function RetailerSubmissionAddStep2() {
                                 helpText={"Max 17 characters"}
                             />
 
-                            <p class="subtitle is-3">Summary of Findings</p>
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faMagnifyingGlass} />&nbsp;Summary of Findings</p>
 
                             <FormRadioField
                                 label="Creases Finding"
@@ -663,7 +663,7 @@ function RetailerSubmissionAddStep2() {
                                 helpText={"Max 17 characters"}
                             />
 
-                            <p class="subtitle is-3">Grading</p>
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faBalanceScale} />&nbsp;Grading</p>
 
                             <FormRadioField
                                 label="Which type of grading scale would you prefer?"
@@ -715,12 +715,12 @@ function RetailerSubmissionAddStep2() {
 
                             <div class="columns pt-5">
                                 <div class="column is-half">
-                                    <button class="button is-hidden-touch" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
-                                    <button class="button is-fullwidth is-hidden-desktop" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
+                                    <button class="button is-medium is-hidden-touch" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
+                                    <button class="button is-medium is-fullwidth is-hidden-desktop" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
                                 </div>
                                 <div class="column is-half has-text-right">
-                                    <button class="button is-primary is-hidden-touch" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
-                                    <button class="button is-primary is-fullwidth is-hidden-desktop" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
+                                    <button class="button is-medium is-primary is-hidden-touch" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
+                                    <button class="button is-medium is-primary is-fullwidth is-hidden-desktop" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
                                 </div>
                             </div>
 

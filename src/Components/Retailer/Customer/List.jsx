@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUsers, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faUsers, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight, faTable } from '@fortawesome/free-solid-svg-icons';
 import { useRecoilState } from 'recoil';
 
 import { getCustomerListAPI, deleteCustomerAPI } from "../../../API/customer";
@@ -247,13 +247,16 @@ function RetailerCustomerList() {
                                     </div>
                                 </div>
                                 :
-                                <div class="container">
-                                    <article class="message is-dark">
-                                        <div class="message-body">
-                                            No customers. <b><Link to="/customers/add">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating a new submission.
-                                        </div>
-                                    </article>
-                                </div>
+                                <section class="hero is-medium has-background-white-ter">
+                                  <div class="hero-body">
+                                    <p class="title">
+                                        <FontAwesomeIcon className="fas" icon={faTable} />&nbsp;No Customers
+                                    </p>
+                                    <p class="subtitle">
+                                        No customers. <b><Link to="/customers/add">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating your first customer.
+                                    </p>
+                                  </div>
+                                </section>
                             }
                     </nav>
                 </section>

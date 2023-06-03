@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faUserCircle, faGauge, faPencil, faUsers, faEye } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faUserCircle, faGauge, faPencil, faUsers, faEye, faIdCard, faAddressBook, faContactCard, faChartPie } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
 
@@ -156,7 +156,7 @@ function RetailerCustomerDetail() {
                               </ul>
                             </div>
 
-                            <p class="subtitle is-3">Identification</p>
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Full Name</p>
                             <FormInputField
                                 label="First Name"
                                 name="firstName"
@@ -178,7 +178,7 @@ function RetailerCustomerDetail() {
                                 disabled={true}
                             />
 
-                            <p class="subtitle is-3">Contact Information</p>
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faContactCard} />&nbsp;Contact Information</p>
 
                             <FormInputField
                                 label="Email"
@@ -202,7 +202,7 @@ function RetailerCustomerDetail() {
                                 disabled={true}
                             />
 
-                            <p class="subtitle is-3">Address</p>
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faAddressBook} />&nbsp;Address</p>
 
                             <FormInputField
                                 label="Country"
@@ -270,7 +270,7 @@ function RetailerCustomerDetail() {
                                 disabled={true}
                             />
 
-                            <p class="subtitle is-3">Metrics</p>
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faChartPie} />&nbsp;Metrics</p>
 
                             <FormCheckboxField
                                 label="I agree to receive electronic updates from my local retailer and CPS"

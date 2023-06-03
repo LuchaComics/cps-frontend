@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faPencil, faEye, faGauge } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faPencil, faEye, faGauge, faBook, faMagnifyingGlass, faBalanceScale, } from '@fortawesome/free-solid-svg-icons'
 import Select from 'react-select'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
@@ -50,7 +50,7 @@ function RetailerSubmissionUpdateForSubmission() {
     const [seriesTitle, setSeriesTitle] = useState("");
     const [issueVol, setIssueVol] = useState("");
     const [issueNo, setIssueNo] = useState("");
-    const [issueCoverDate, setIssueCoverDate] = useState("");
+    const [issueCoverDate, setIssueCoverDate] = useState(null);
     const [publisherName, setPublisherName] = useState(0);
     const [publisherNameOther, setPublisherNameOther] = useState("");
     const [creasesFinding, setCreasesFinding] = useState("");
@@ -276,7 +276,7 @@ function RetailerSubmissionUpdateForSubmission() {
 
                         {!isFetching && <div class="container">
 
-                            <p class="subtitle is-3">Comic Book Information</p>
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comic Book Information</p>
 
                             <FormInputField
                                 label="Series Title"
@@ -414,7 +414,7 @@ function RetailerSubmissionUpdateForSubmission() {
                                 helpText={"Max 17 characters"}
                             />
 
-                            <p class="subtitle is-3">Summary of Findings</p>
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faMagnifyingGlass} />&nbsp;Summary of Findings</p>
 
                             <FormRadioField
                                 label="Creases Finding"
@@ -678,7 +678,7 @@ function RetailerSubmissionUpdateForSubmission() {
                                 helpText={"Max 17 characters"}
                             />
 
-                            <p class="subtitle is-3">Grading</p>
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faBalanceScale} />&nbsp;Grading</p>
 
                             <FormRadioField
                                 label="Which type of grading scale would you prefer?"

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate, useSearchParams } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faDownload, faArrowLeft, faArrowRight, faCheckCircle, faCheck, faGauge, faUsers } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faDownload, faArrowLeft, faTable, faCheckCircle, faCheck, faGauge, faUsers } from '@fortawesome/free-solid-svg-icons'
 import Select from 'react-select'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
@@ -177,29 +177,46 @@ function RetailerSubmissionAddStep1WithResult() {
 
                         <div class="container pb-5">
                             <p class="subtitle is-2"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Results</p>
-                            <div class="columns">
-                                {customers && customers.results && customers.results.map(function(customer, i){
-                                    return <div class="column is-one-quarter" key={customer.id}>
-                                    <article class="message is-primary">
-                                        <div class="message-body">
-                                            <p>{customer.name}</p>
-                                            <p>{customer.email}</p>
-                                            <p>{customer.phone}</p>
-                                            <br />
-                                            <Link class="button is-primary" to={`/submissions/add?customer_id=${customer.id}`}>
-                                                <FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Pick
-                                            </Link>
-                                        </div>
-                                    </article>
-                                    </div>;
-                                })}
-                            </div>
+
+                            {customers && customers.results && customers.results.length > 0
+                                ?
+                                <div class="columns">
+                                    {customers.results.map(function(customer, i){
+                                        return <div class="column is-one-quarter" key={customer.id}>
+                                        <article class="message is-primary">
+                                            <div class="message-body">
+                                                <p><b>{customer.name}</b></p>
+                                                <p>{customer.country}&nbsp;{customer.region}&nbsp;{customer.city}</p>
+                                                <p>{customer.addressLine1}, {customer.postalCode}</p>
+                                                <p><a href={`mailto:${customer.email}`}>{customer.email}</a></p>
+                                                <p><a href={`tel:${customer.phone}`}>{customer.phone}</a></p>
+                                                <br />
+                                                <Link class="button is-medium is-primary" to={`/submissions/add?customer_id=${customer.id}`}>
+                                                    <FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Pick
+                                                </Link>
+                                            </div>
+                                        </article>
+                                        </div>;
+                                    })}
+                                </div>
+                                :
+                                <section class="hero is-medium has-background-white-ter">
+                                  <div class="hero-body">
+                                    <p class="title">
+                                        <FontAwesomeIcon className="fas" icon={faTable} />&nbsp;No Customers
+                                    </p>
+                                    <p class="subtitle">
+                                        No results were found in the search.
+                                    </p>
+                                  </div>
+                                </section>
+                            }
                         </div>
 
                         <div class="columns pt-5">
                             <div class="column is-half">
-                                <Link class="button is-hidden-touch" to="/submissions/add/search"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                <Link class="button is-fullwidth is-hidden-desktop" to="/submissions/add/search"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                <Link class="button is-medium is-hidden-touch" to="/submissions/add/search"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                <Link class="button is-medium is-fullwidth is-hidden-desktop" to="/submissions/add/search"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                             </div>
                             <div class="column is-half has-text-right">
                                 {/*

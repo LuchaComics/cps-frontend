@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTasks, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faTasks, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight, faTable } from '@fortawesome/free-solid-svg-icons';
 import { useRecoilState } from 'recoil';
 
 import { getSubmissionListAPI, deleteSubmissionAPI } from "../../../API/submission";
@@ -248,13 +248,16 @@ function RetailerSubmissionList() {
                                 </div>
                             </div>
                             :
-                            <div class="container">
-                                <article class="message is-dark">
-                                    <div class="message-body">
-                                        No submissions. <b><Link to="/submissions/add/search">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating a new submission.
-                                    </div>
-                                </article>
-                            </div>
+                            <section class="hero is-medium has-background-white-ter">
+                              <div class="hero-body">
+                                <p class="title">
+                                    <FontAwesomeIcon className="fas" icon={faTable} />&nbsp;No Submissions
+                                </p>
+                                <p class="subtitle">
+                                    No submissions. <b><Link to="/submissions/add/search">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating your first new submission.
+                                </p>
+                              </div>
+                            </section>
                         }
                     </nav>
                 </section>

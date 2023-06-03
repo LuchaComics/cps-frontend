@@ -56,6 +56,8 @@ export function getSubmissionListAPI(filtersMap=new Map(), onSuccessCallback, on
 export function postSubmissionCreateAPI(data, onSuccessCallback, onErrorCallback, onDoneCallback) {
     const axios = getCustomAxios();
 
+    console.log("postSubmissionCreateAPI | pre-modified | data:", data);
+
     // To Snake-case for API from camel-case in React.
     let decamelizedData = decamelizeKeys(data);
 
@@ -85,7 +87,11 @@ export function postSubmissionCreateAPI(data, onSuccessCallback, onErrorCallback
     delete decamelizedData.grading_notes_line4;
     delete decamelizedData.grading_notes_line5;
 
-    decamelizedData.issue_cover_date = new Date(data.issueCoverDate).toISOString();
+    if (data.issueCoverDate != undefined && data.issueCoverDate != null && data.issueCoverDate != "") {
+        decamelizedData.issue_cover_date = new Date(data.issueCoverDate).toISOString();
+    }
+
+    console.log("postSubmissionCreateAPI | post-modified | data:", decamelizedData);
 
     axios.post(CPS_SUBMISSIONS_API_ENDPOINT, decamelizedData).then((successResponse) => {
         const responseData = successResponse.data;
@@ -158,7 +164,9 @@ export function putSubmissionUpdateAPI(data, onSuccessCallback, onErrorCallback,
     delete decamelizedData.grading_notes_line4;
     delete decamelizedData.grading_notes_line5;
 
-    decamelizedData.issue_cover_date = new Date(decamelizedData.issue_cover_date).toISOString();
+    if (data.issueCoverDate != undefined && data.issueCoverDate != null && data.issueCoverDate != "") {
+        decamelizedData.issue_cover_date = new Date(data.issueCoverDate).toISOString();
+    }
 
     console.log("putSubmissionUpdateAPI | post-edited | decamelizedData:", decamelizedData);
 
