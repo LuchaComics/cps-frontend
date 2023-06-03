@@ -238,11 +238,11 @@ function RetailerSubmissionAddStep2() {
                                 <footer class="modal-card-foot">
                                     {customerName === null
                                         ?
-                                        <Link class="button is-success" to={`/submissions/add/search`}>Yes</Link>
+                                        <Link class="button is-medium is-success" to={`/submissions/add/search`}>Yes</Link>
                                         :
-                                        <Link class="button is-success" to={`/customer/${customerID}/sub`}>Yes</Link>
+                                        <Link class="button is-medium is-success" to={`/customer/${customerID}/sub`}>Yes</Link>
                                     }
-                                    <button class="button" onClick={(e)=>setShowCancelWarning(false)}>No</button>
+                                    <button class="button is-medium " onClick={(e)=>setShowCancelWarning(false)}>No</button>
                                 </footer>
                             </div>
                         </div>

@@ -236,8 +236,8 @@ function RetailerCustomerAdd() {
                                     Your customer record will be cancelled and your work will be lost. This cannot be undone. Do you want to continue?
                                 </section>
                                 <footer class="modal-card-foot">
-                                    <Link class="button is-success" to={`/customers`}>Yes</Link>
-                                    <button class="button" onClick={(e)=>setShowCancelWarning(false)}>No</button>
+                                    <Link class="button is-medium is-success" to={`/customers`}>Yes</Link>
+                                    <button class="button is-medium" onClick={(e)=>setShowCancelWarning(false)}>No</button>
                                 </footer>
                             </div>
                         </div>
