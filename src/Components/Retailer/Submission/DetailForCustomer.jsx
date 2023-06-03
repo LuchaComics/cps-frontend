@@ -127,7 +127,7 @@ function RetailerSubmissionDetailForCustomer() {
                             <br /><br />
                             <Link to={`/submission/${submission.id}/edit-customer`} class="button is-primary" disabled={true}>Edit Current Customer</Link> */}
                         <br /><br />
-                        <Link to={`/submission/${submission.id}/customer/search`} class="button is-primary">Pick a Different Customer</Link>
+                        <Link to={`/submission/${submission.id}/cust/search`} class="button is-primary">Pick a Different Customer</Link>
                     </section>
                     <footer class="modal-card-foot">
                         <button class="button" onClick={(e)=>setShowCustomerEditOptions(false)}>Close</button>

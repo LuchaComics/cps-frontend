@@ -193,11 +193,9 @@ function RetailerSubmissionAddStep1WithSearch() {
                         </div>
 
                         <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Submission</p>
-                        <p class="pb-4 has-text-grey">To begin, please select a customer for this submission. Otherwise you can <Link to="/submissions/add">click here to skip pick a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link> or if you'd like to create a new customer then <Link to="/submissions/add" target="_blank" rel="noreferrer">click here to create a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link>.</p>
                         <FormErrorBox errors={errors} />
-
                         <div class="container pb-5">
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search</p>
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search Customers</p>
 
                             <FormInputField
                                 label="Search Keywords"
@@ -213,7 +211,7 @@ function RetailerSubmissionAddStep1WithSearch() {
                         </div>
 
                         <div class="container pb-5">
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faFilter} />&nbsp;Filter</p>
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faFilter} />&nbsp;Filter Customers</p>
 
                             <FormInputField
                                 label="First Name"
@@ -263,7 +261,12 @@ function RetailerSubmissionAddStep1WithSearch() {
                                 maxWidth="380px"
                             />
                         </div>
+                        <div class="container pb-5">
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faFilter} />&nbsp;Other Options</p>
 
+                            <Link class="is-medium is-warning" to="/customers/add" target="_blank" rel="noreferrer">Create a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link>&nbsp;&nbsp;<br /><br />
+                            <Link class="is-medium is-danger" to="/submissions/add">Skip selecting a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
+                        </div>
                         <div class="columns pt-5">
                             <div class="column is-half">
                                 <button class="button is-medium is-hidden-touch" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>

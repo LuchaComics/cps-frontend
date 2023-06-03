@@ -64,8 +64,8 @@ function AppRoute() {
                             <Route exact path="/submission/:id" element={<RetailerSubmissionDetail/>}/>
                             <Route exact path="/submission/:id/edit" element={<RetailerSubmissionUpdateForSubmission/>}/>
                             <Route exact path="/submission/:id/edit-customer" element={<RetailerSubmissionUpdateForCustomer/>}/>
-                            <Route exact path="/submission/:id/customer/search" element={<RetailerSubmissionUpdatePickCustomerWithSearch/>}/>
-                            <Route exact path="/submission/:id/customer/results" element={<RetailerSubmissionUpdatePickCustomerWithResult/>}/>
+                            <Route exact path="/submission/:id/cust/search" element={<RetailerSubmissionUpdatePickCustomerWithSearch/>}/>
+                            <Route exact path="/submission/:id/cust/results" element={<RetailerSubmissionUpdatePickCustomerWithResult/>}/>
                             <Route exact path="/submission/:id/comments" element={<RetailerSubmissionDetailForCommentList/>}/>
                             <Route exact path="/submission/:id/cust" element={<RetailerSubmissionDetailForCustomer/>}/>
                             <Route exact path="/customers" element={<RetailerCustomerList/>}/>

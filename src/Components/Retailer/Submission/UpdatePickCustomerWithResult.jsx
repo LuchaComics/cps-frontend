@@ -114,7 +114,7 @@ function RetailerSubmissionUpdatePickCustomerWithResult() {
         }, 2000);
 
         // Redirect the user to a details page.
-        setForceURL("/submission/"+id);
+        setForceURL("/submission/"+id+"/cust");
     }
 
     function onOperationError(apiErr) {
@@ -206,7 +206,7 @@ function RetailerSubmissionUpdatePickCustomerWithResult() {
                         <ul>
                             <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
                             <li class=""><Link to="/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
-                            <li class=""><Link to={`/submission/${id}`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Details</Link></li>
+                            <li class=""><Link to={`/submission/${id}/cust`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Details</Link></li>
                             <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update (Customer)</Link></li>
                         </ul>
                     </nav>
@@ -258,8 +258,8 @@ function RetailerSubmissionUpdatePickCustomerWithResult() {
 
                         <div class="columns pt-5">
                             <div class="column is-half">
-                                <Link class="button is-medium is-hidden-touch" to={`/submission/${id}/customer/search`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                <Link class="button is-medium is-fullwidth is-hidden-desktop" to={`/submission/${id}/customer/search`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                <Link class="button is-medium is-hidden-touch" to={`/submission/${id}/cust/search`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                <Link class="button is-medium is-fullwidth is-hidden-desktop" to={`/submission/${id}/cust/search`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                             </div>
                             <div class="column is-half has-text-right">
                                 {/*

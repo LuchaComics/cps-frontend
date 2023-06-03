@@ -76,7 +76,7 @@ function RetailerSubmissionUpdatePickCustomerWithSearch() {
 
     const onSearchButtonClicked = (e) => {
         console.log("searchButtonClick: Starting...");
-        let aURL = "/submission/" + id + "/customer/results";
+        let aURL = "/submission/" + id + "/cust/results";
         if (searchKeyword != "") {
             aURL += "?search="+searchKeyword;
         }
@@ -171,14 +171,13 @@ function RetailerSubmissionUpdatePickCustomerWithSearch() {
                         <ul>
                             <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
                             <li class=""><Link to="/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
-                            <li class=""><Link to={`/submission/${id}`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Details</Link></li>
+                            <li class=""><Link to={`/submission/${id}/cust`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Details</Link></li>
                             <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update (Customer)</Link></li>
                         </ul>
                     </nav>
 
                     <nav class="box">
                         <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update Submission</p>
-                        <p class="pb-4 has-text-grey">To begin, please select a customer that belongs to this customer. If you don't have a customer at this time and if you'd like to create the customer then <Link to="/customers/add" target="_blank" rel="noreferrer">click here to create a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link>.</p>
                         <FormErrorBox errors={errors} />
 
                         <div class="container pb-5">
@@ -251,8 +250,8 @@ function RetailerSubmissionUpdatePickCustomerWithSearch() {
 
                         <div class="columns pt-5">
                             <div class="column is-half">
-                                <Link to={`/submission/${id}`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                <Link to={`/submission/${id}`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                <Link to={`/submission/${id}/cust`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                <Link to={`/submission/${id}/cust`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                             </div>
                             <div class="column is-half has-text-right">
                                 <button class="button is-medium is-primary is-hidden-touch" onClick={onSearchButtonClicked}><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search</button>
