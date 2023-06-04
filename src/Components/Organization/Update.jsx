@@ -50,6 +50,8 @@ function OrganizationUpdate() {
 
     const onSubmitClick = (e) => {
         console.log("onSubmitClick: Beginning...");
+        setFetching(true);
+
         const org = {
             ID: profile.user.organizationId,
             Name: name,

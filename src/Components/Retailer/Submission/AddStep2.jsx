@@ -84,6 +84,7 @@ function RetailerSubmissionAddStep2() {
     const onSubmitClick = (e) => {
         console.log("onSubmitClick: Beginning...");
         console.log("onSubmitClick: Generating payload for submission.");
+        setFetching(true);
 
         // Generate the payload.
         const submission = {

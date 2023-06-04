@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate, useSearchParams } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faDownload, faArrowLeft, faArrowRight, faCheckCircle, faCheck, faGauge, faUsers, faEye, faPencil } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faDownload, faArrowLeft, faArrowRight, faCheckCircle, faCheck, faGauge, faUsers, faEye, faPencil, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons'
 import Select from 'react-select'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
@@ -64,6 +64,7 @@ function RetailerSubmissionUpdatePickCustomerWithResult() {
 
     const onCustomerAgreedToChangeClick = (e) => {
         setShowEditWarning(false);
+        setFetching(true);
 
         postSubmissionCustomerSwapOperationAPI(
             id, // submission id
@@ -238,19 +239,23 @@ function RetailerSubmissionUpdatePickCustomerWithResult() {
                             <div class="columns">
                                 {customers && customers.results && customers.results.map(function(customer, i){
                                     return <div class="column is-one-quarter" key={customer.id}>
-                                    <article class="message is-primary">
-                                        <div class="message-body">
-                                            <p><b>{customer.name}</b></p>
-                                            <p>{customer.country}&nbsp;{customer.region}&nbsp;{customer.city}</p>
-                                            <p>{customer.addressLine1}, {customer.postalCode}</p>
-                                            <p><a href={`mailto:${customer.email}`}>{customer.email}</a></p>
-                                            <p><a href={`tel:${customer.phone}`}>{customer.phone}</a></p>
-                                            <br />
-                                            <button class="button is-primary" onClick={(e,c)=>onCustomerPickClick(e,customer.id)}>
-                                                <FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Pick
-                                            </button>
-                                        </div>
-                                    </article>
+                                        <article class="message is-primary">
+                                            <div class="message-body">
+                                                <p>
+                                                    <Link to={`/customer/${customer.id}`} target="_blank" rel="noreferrer">
+                                                        <b>{customer.name}</b>&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
+                                                    </Link>
+                                                </p>
+                                                <p>{customer.country}&nbsp;{customer.region}&nbsp;{customer.city}</p>
+                                                <p>{customer.addressLine1}, {customer.postalCode}</p>
+                                                <p><a href={`mailto:${customer.email}`}>{customer.email}</a></p>
+                                                <p><a href={`tel:${customer.phone}`}>{customer.phone}</a></p>
+                                                <br />
+                                                <button class="button is-primary" onClick={(e,c)=>onCustomerPickClick(e,customer.id)}>
+                                                    <FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Pick
+                                                </button>
+                                            </div>
+                                        </article>
                                     </div>;
                                 })}
                             </div>

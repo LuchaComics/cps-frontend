@@ -113,6 +113,8 @@ function ProfileUpdate() {
 
     const onSubmitClick = (e) => {
         console.log("onSubmitClick: Beginning...");
+        setFetching(true);
+
         const submission = {
             Email: email,
             Phone: phone,

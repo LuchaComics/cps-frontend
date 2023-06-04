@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate, useSearchParams } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faDownload, faArrowLeft, faTable, faCheckCircle, faCheck, faGauge, faUsers } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faDownload, faArrowLeft, faTable, faCheckCircle, faCheck, faGauge, faUsers, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons'
 import Select from 'react-select'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
@@ -183,19 +183,23 @@ function RetailerSubmissionAddStep1WithResult() {
                                 <div class="columns">
                                     {customers.results.map(function(customer, i){
                                         return <div class="column is-one-quarter" key={customer.id}>
-                                        <article class="message is-primary">
-                                            <div class="message-body">
-                                                <p><b>{customer.name}</b></p>
-                                                <p>{customer.country}&nbsp;{customer.region}&nbsp;{customer.city}</p>
-                                                <p>{customer.addressLine1}, {customer.postalCode}</p>
-                                                <p><a href={`mailto:${customer.email}`}>{customer.email}</a></p>
-                                                <p><a href={`tel:${customer.phone}`}>{customer.phone}</a></p>
-                                                <br />
-                                                <Link class="button is-medium is-primary" to={`/submissions/add?customer_id=${customer.id}`}>
-                                                    <FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Pick
-                                                </Link>
-                                            </div>
-                                        </article>
+                                            <article class="message is-primary">
+                                                <div class="message-body">
+                                                    <p>
+                                                        <Link to={`/customer/${customer.id}`} target="_blank" rel="noreferrer">
+                                                            <b>{customer.name}</b>&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
+                                                        </Link>
+                                                    </p>
+                                                    <p>{customer.country}&nbsp;{customer.region}&nbsp;{customer.city}</p>
+                                                    <p>{customer.addressLine1}, {customer.postalCode}</p>
+                                                    <p><a href={`mailto:${customer.email}`}>{customer.email}</a></p>
+                                                    <p><a href={`tel:${customer.phone}`}>{customer.phone}</a></p>
+                                                    <br />
+                                                    <Link class="button is-medium is-primary" to={`/submissions/add?customer_id=${customer.id}`}>
+                                                        <FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Pick
+                                                    </Link>
+                                                </div>
+                                            </article>
                                         </div>;
                                     })}
                                 </div>

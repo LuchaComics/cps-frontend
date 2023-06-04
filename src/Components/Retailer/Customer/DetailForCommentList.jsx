@@ -95,7 +95,7 @@ function RetailerCustomerDetailForCommentList() {
         console.log(response);
 
         // Add a temporary banner message in the app and then clear itself after 2 seconds.
-        setTopAlertMessage("Comment submitted");
+        setTopAlertMessage("Comment created");
         setTopAlertStatus("success");
         setTimeout(() => {
             console.log("onCustomerUpdateSuccess: Delayed for 2 seconds.");

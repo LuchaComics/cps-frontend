@@ -131,6 +131,7 @@ function RetailerCustomerUpdate() {
 
     const onSubmitClick = (e) => {
         console.log("onSubmitClick: Beginning...");
+        setFetching(true);
         const customer = {
             id: id,
             Email: email,
@@ -194,7 +195,7 @@ function RetailerCustomerUpdate() {
         console.log(response);
 
         // Add a temporary banner message in the app and then clear itself after 2 seconds.
-        setTopAlertMessage("Profile updated");
+        setTopAlertMessage("Customer updated");
         setTopAlertStatus("success");
         setTimeout(() => {
             console.log("onRetailerCustomerUpdateSuccess: Delayed for 2 seconds.");
