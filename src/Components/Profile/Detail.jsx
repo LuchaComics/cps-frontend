@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faUserCircle, faGauge, faPencil } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faUserCircle, faGauge, faPencil, faIdCard, faAddressBook, faContactCard, faChartPie } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 
 import useLocalStorage from "../../Hooks/useLocalStorage";
@@ -123,7 +123,9 @@ function AccountDetail() {
 
                         {!isFetching && profile && <div class="container">
 
-                            <p class="subtitle is-3">Identification</p>
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Full Name</p>
+                            <hr />
+
                             <FormInputField
                                 label="First Name"
                                 name="firstName"
@@ -145,7 +147,8 @@ function AccountDetail() {
                                 disabled={true}
                             />
 
-                            <p class="subtitle is-3">Contact Information</p>
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faContactCard} />&nbsp;Contact Information</p>
+                            <hr />
 
                             <FormInputField
                                 label="Email"
@@ -169,7 +172,8 @@ function AccountDetail() {
                                 disabled={true}
                             />
 
-                            <p class="subtitle is-3">Address</p>
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faAddressBook} />&nbsp;Address</p>
+                            <hr />
 
                             <FormInputField
                                 label="Country"
@@ -237,7 +241,8 @@ function AccountDetail() {
                                 disabled={true}
                             />
 
-                            <p class="subtitle is-3">Misc</p>
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faChartPie} />&nbsp;Metrics</p>
+                            <hr />
 
                             <FormCheckboxField
                                 label="I agree to receive electronic updates from my local retailer and CPS"
@@ -250,12 +255,12 @@ function AccountDetail() {
 
                             <div class="columns pt-5">
                                 <div class="column is-half">
-                                    <Link class="button is-hidden-touch" to={"/dashboard"}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                    <Link class="button is-fullwidth is-hidden-desktop" to={"/dashboard"}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                    <Link class="button is-medium is-hidden-touch" to={"/dashboard"}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                    <Link class="button is-medium is-fullwidth is-hidden-desktop" to={"/dashboard"}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                 </div>
                                 <div class="column is-half has-text-right">
-                                    <Link to={"/account/update"} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
-                                    <Link to={"/account/update"} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
+                                    <Link to={"/account/update"} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
+                                    <Link to={"/account/update"} class="button is-medium is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
                                 </div>
                             </div>
 

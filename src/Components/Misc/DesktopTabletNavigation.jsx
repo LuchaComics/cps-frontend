@@ -72,7 +72,9 @@ function DesktopTabletNavigation() {
                 <nav class="level">
                     <div class="level-item has-text-centered">
                         <figure class='image'>
-                            <img src='/static/CPS logo 2023 GR.webp' style={{maxWidth:"250px"}} />
+                            <Link to="/dashboard">
+                                <img src='/static/CPS logo 2023 GR.webp' style={{maxWidth:"250px"}} />
+                            </Link>
                         </figure>
                     </div>
                 </nav>

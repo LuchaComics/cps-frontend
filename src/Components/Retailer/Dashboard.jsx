@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTasks, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faTasks, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { useRecoilState } from 'recoil';
 
 import { topAlertMessageState, topAlertStatusState } from "../../AppState";
@@ -56,7 +56,7 @@ function RetailerDashboard() {
                         <section class="hero is-medium is-link">
                           <div class="hero-body">
                             <p class="title">
-                              Submissions
+                                <FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions
                             </p>
                             <p class="subtitle">
                               Submit a request to encapsulate your comics by clicking below:
@@ -70,7 +70,7 @@ function RetailerDashboard() {
                         <section class="hero is-medium is-info">
                           <div class="hero-body">
                             <p class="title">
-                              Customers
+                                <FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers
                             </p>
                             <p class="subtitle">
                               Manage the customers that belong to your organization.
