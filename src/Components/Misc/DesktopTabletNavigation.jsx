@@ -51,8 +51,8 @@ function DesktopTabletNavigation() {
 
     // Render the following component GUI.
     return (
-        <div className="is-hidden-touch">
-            <div class={`modal ${showLogoutWarning ? 'is-active' : ''}`}>
+        <>
+            <div class={`is-hidden-touch modal ${showLogoutWarning ? 'is-active' : ''}`}>
                 <div class="modal-background"></div>
                 <div class="modal-card">
                     <header class="modal-card-head">
@@ -68,7 +68,7 @@ function DesktopTabletNavigation() {
                     </footer>
                 </div>
             </div>
-            <div class="has-background-black is-narrow-mobile is-fullheight" style={{minWidth:"250px", padding:"25px"}}>
+            <div class="is-hidden-touch has-background-black is-narrow-mobile" style={{minWidth:"250px", padding:"25px", minHeight:"100vh"}}>
                 <nav class="level">
                     <div class="level-item has-text-centered">
                         <figure class='image'>
@@ -119,7 +119,7 @@ function DesktopTabletNavigation() {
                     </ul>
                 </aside>
             </div>
-        </div>
+        </>
     );
 }
 

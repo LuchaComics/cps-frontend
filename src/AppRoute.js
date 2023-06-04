@@ -51,7 +51,7 @@ function AppRoute() {
                     <TopAlertBanner />
                     <MobileNavigation />
                     <section class="main-content columns is-fullheight">
-                        <DesktopTabletNavigation />                        
+                        <DesktopTabletNavigation />
                         <Routes>
                             <Route exact path="/dashboard" element={<RetailerDashboard/>}/>
                             <Route exact path="/submissions" element={<RetailerSubmissionList/>}/>
