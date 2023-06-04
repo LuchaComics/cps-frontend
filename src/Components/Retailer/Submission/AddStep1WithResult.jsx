@@ -176,7 +176,8 @@ function RetailerSubmissionAddStep1WithResult() {
                         <FormErrorBox errors={errors} />
 
                         <div class="container pb-5">
-                            <p class="subtitle is-2"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Results</p>
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Results</p>
+                            <hr />
 
                             {customers && customers.results && customers.results.length > 0
                                 ?

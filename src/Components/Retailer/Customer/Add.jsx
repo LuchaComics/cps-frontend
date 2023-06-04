@@ -260,6 +260,8 @@ function RetailerCustomerAdd() {
                         <div class="container">
 
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Full Name</p>
+                            <hr />
+
                             <FormInputField
                                 label="First Name"
                                 name="firstName"
@@ -285,6 +287,7 @@ function RetailerCustomerAdd() {
                             />
 
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faContactCard} />&nbsp;Contact Information</p>
+                            <hr />
 
                             <FormInputField
                                 label="Email"
@@ -311,6 +314,7 @@ function RetailerCustomerAdd() {
                             />
 
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faAddressBook} />&nbsp;Address</p>
+                            <hr />
 
                             <FormInputField
                                 label="Country (Optional)"
@@ -385,6 +389,7 @@ function RetailerCustomerAdd() {
                             />
 
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faChartPie} />&nbsp;Metrics</p>
+                            <hr />
 
                             <FormSelectField
                                 label="How did you hear about us?"

@@ -396,6 +396,7 @@ function RetailerSubmissionUpdateForCustomer() {
                         {!isFetching && <div class="container">
 
                             <p class="subtitle is-3">Comic Book Information</p>
+                            <hr />
 
                             <FormInputField
                                 label="Series Title"
@@ -534,6 +535,7 @@ function RetailerSubmissionUpdateForCustomer() {
                             />
 
                             <p class="subtitle is-3">Summary of Findings</p>
+                            <hr />
 
                             <FormRadioField
                                 label="Creases Finding"
@@ -798,6 +800,7 @@ function RetailerSubmissionUpdateForCustomer() {
                             />
 
                             <p class="subtitle is-3">Grading</p>
+                            <hr />
 
                             <FormRadioField
                                 label="Which type of grading scale would you prefer?"

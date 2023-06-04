@@ -245,6 +245,7 @@ function RetailerCustomerDetailForCommentList() {
                             </div>
 
                             <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faComments} />&nbsp;Comments</p>
+                            <hr />
 
                             {customer.comments && customer.comments.length > 0 && <>
                                 {customer.comments.map(function(comment, i){

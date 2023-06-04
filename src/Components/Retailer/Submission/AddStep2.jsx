@@ -264,6 +264,7 @@ function RetailerSubmissionAddStep2() {
                         {!isFetching && <div class="container">
 
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comic Book Information</p>
+                            <hr />
                             <FormInputField
                                 label="Series Title"
                                 name="seriesTitle"
@@ -401,6 +402,7 @@ function RetailerSubmissionAddStep2() {
                             />
 
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faMagnifyingGlass} />&nbsp;Summary of Findings</p>
+                            <hr />
 
                             <FormRadioField
                                 label="Creases Finding"
@@ -665,6 +667,7 @@ function RetailerSubmissionAddStep2() {
                             />
 
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faBalanceScale} />&nbsp;Grading</p>
+                            <hr />
 
                             <FormRadioField
                                 label="Which type of grading scale would you prefer?"

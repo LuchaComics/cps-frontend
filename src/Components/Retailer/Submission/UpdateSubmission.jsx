@@ -158,7 +158,6 @@ function RetailerSubmissionUpdateForSubmission() {
         setGradingNotesLine3(response.gradingNotesLine3);
         setGradingNotesLine4(response.gradingNotesLine4);
         setGradingNotesLine5(response.gradingNotesLine5);
-
     }
 
     function onSubmissionDetailError(apiErr) {
@@ -278,6 +277,7 @@ function RetailerSubmissionUpdateForSubmission() {
                         {!isFetching && <div class="container">
 
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comic Book Information</p>
+                            <hr />
 
                             <FormInputField
                                 label="Series Title"
@@ -416,6 +416,7 @@ function RetailerSubmissionUpdateForSubmission() {
                             />
 
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faMagnifyingGlass} />&nbsp;Summary of Findings</p>
+                            <hr />
 
                             <FormRadioField
                                 label="Creases Finding"
@@ -680,6 +681,7 @@ function RetailerSubmissionUpdateForSubmission() {
                             />
 
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faBalanceScale} />&nbsp;Grading</p>
+                            <hr />
 
                             <FormRadioField
                                 label="Which type of grading scale would you prefer?"
@@ -728,12 +730,12 @@ function RetailerSubmissionUpdateForSubmission() {
                             />}
                             <div class="columns pt-5">
                                 <div class="column is-half">
-                                    <Link to={`/submission/${id}`} class="button is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                    <Link to={`/submission/${id}`} class="button is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                    <Link to={`/submission/${id}`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                    <Link to={`/submission/${id}`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                 </div>
                                 <div class="column is-half has-text-right">
-                                    <button class="button is-primary is-hidden-touch" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
-                                    <button class="button is-primary is-fullwidth is-hidden-desktop" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
+                                    <button class="button is-medium is-primary is-hidden-touch" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
+                                    <button class="button is-medium is-primary is-fullwidth is-hidden-desktop" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
                                 </div>
                             </div>
 

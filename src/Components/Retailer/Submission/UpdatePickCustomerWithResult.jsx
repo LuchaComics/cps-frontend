@@ -236,6 +236,7 @@ function RetailerSubmissionUpdatePickCustomerWithResult() {
 
                         <div class="container pb-5">
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Results</p>
+                            <hr />
                             <div class="columns">
                                 {customers && customers.results && customers.results.map(function(customer, i){
                                     return <div class="column is-one-quarter" key={customer.id}>

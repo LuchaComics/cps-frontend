@@ -196,6 +196,7 @@ function RetailerSubmissionAddStep1WithSearch() {
                         <FormErrorBox errors={errors} />
                         <div class="container pb-5">
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search Customers</p>
+                            <hr />
 
                             <FormInputField
                                 label="Search Keywords"
@@ -212,6 +213,7 @@ function RetailerSubmissionAddStep1WithSearch() {
 
                         <div class="container pb-5">
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faFilter} />&nbsp;Filter Customers</p>
+                            <hr />
 
                             <FormInputField
                                 label="First Name"
@@ -263,6 +265,7 @@ function RetailerSubmissionAddStep1WithSearch() {
                         </div>
                         <div class="container pb-5">
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faFilter} />&nbsp;Other Options</p>
+                            <hr />
 
                             <Link class="is-medium is-warning" to="/customers/add" target="_blank" rel="noreferrer">Create a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link>&nbsp;&nbsp;<br /><br />
                             <Link class="is-medium is-danger" to="/submissions/add">Skip selecting a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>

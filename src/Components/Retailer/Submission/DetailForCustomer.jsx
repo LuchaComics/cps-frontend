@@ -172,6 +172,7 @@ function RetailerSubmissionDetailForCustomer() {
                             </div>
                             {submission && submission.user !== undefined && submission.user !== null && submission.user !== "" && <>
                                 <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faUser} />&nbsp;Customer</p>
+                                <hr />
                                 <p class="pb-5"><Link to={`/customer/${submission.user.id}`} target="_blank" rel="noreferrer">Click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link> to view the customer.</p>
 
                                 <FormInputField

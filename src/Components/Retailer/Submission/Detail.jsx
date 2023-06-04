@@ -172,6 +172,7 @@ function RetailerSubmissionDetail() {
                             </div>
 
                             <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comic Book Information</p>
+                            <hr />
 
                             {submission && <FormInputField
                                 label="Series Title"
@@ -294,6 +295,7 @@ function RetailerSubmissionDetail() {
                             />
 
                             <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faMagnifyingGlass} />&nbsp;Summary of Findings</p>
+                            <hr />
 
                             {submission && <FormRadioField
                                 label="Creases Finding"
@@ -517,6 +519,7 @@ function RetailerSubmissionDetail() {
                             />
 
                             <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faBalanceScale} />&nbsp;Grading</p>
+                            <hr />
 
                             <FormRadioField
                                 label="Which type of grading scale would you prefer?"

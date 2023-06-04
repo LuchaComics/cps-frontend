@@ -232,6 +232,7 @@ function RetailerSubmissionDetailForCommentList() {
                             </div>
 
                             <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faComments} />&nbsp;Comments</p>
+                            <hr />
 
                             {submission.comments && submission.comments.length > 0 && <>
                                 {submission.comments.map(function(comment, i){

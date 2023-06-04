@@ -182,6 +182,7 @@ function RetailerSubmissionUpdatePickCustomerWithSearch() {
 
                         <div class="container pb-5">
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search</p>
+                            <hr />
 
                             <FormInputField
                                 label="Search Keywords"
@@ -198,6 +199,7 @@ function RetailerSubmissionUpdatePickCustomerWithSearch() {
 
                         <div class="container pb-5">
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faFilter} />&nbsp;Filter</p>
+                            <hr />
 
                             <FormInputField
                                 label="First Name"

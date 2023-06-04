@@ -157,6 +157,8 @@ function RetailerCustomerDetail() {
                             </div>
 
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Full Name</p>
+                            <hr />
+
                             <FormInputField
                                 label="First Name"
                                 name="firstName"
@@ -179,6 +181,7 @@ function RetailerCustomerDetail() {
                             />
 
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faContactCard} />&nbsp;Contact Information</p>
+                            <hr />
 
                             <FormInputField
                                 label="Email"
@@ -203,6 +206,7 @@ function RetailerCustomerDetail() {
                             />
 
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faAddressBook} />&nbsp;Address</p>
+                            <hr />
 
                             <FormInputField
                                 label="Country"
@@ -271,6 +275,7 @@ function RetailerCustomerDetail() {
                             />
 
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faChartPie} />&nbsp;Metrics</p>
+                            <hr />
 
                             <FormCheckboxField
                                 label="I agree to receive electronic updates from my local retailer and CPS"
