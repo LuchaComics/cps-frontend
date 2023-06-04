@@ -168,6 +168,9 @@ function RetailerSubmissionDetail() {
                                 <li>
                                     <Link to={`/submission/${id}/comments`}>Comments</Link>
                                 </li>
+                                <li>
+                                    <Link to={`/submission/${id}/file`}>File</Link>
+                                </li>
                               </ul>
                             </div>
 
@@ -563,17 +566,6 @@ function RetailerSubmissionDetail() {
                                 options={CPS_PERCENTAGE_GRADE_OPTIONS}
                                 disabled={true}
                             />}
-
-                            <section class="hero has-background-white-ter">
-                                <div class="hero-body">
-                                    <p class="subtitle">
-                                        <div class="has-text-centered">
-                                            <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-large is-success is-hidden-touch"><FontAwesomeIcon className="fas" icon={faDownload} />&nbsp;Download PDF</a>
-                                            <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-large is-success is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faDownload} />&nbsp;Download PDF</a>
-                                        </div>
-                                    </p>
-                                </div>
-                            </section>
 
                             <div class="columns pt-4">
                                 <div class="column is-half">

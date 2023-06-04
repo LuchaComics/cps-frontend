@@ -168,6 +168,9 @@ function RetailerSubmissionDetailForCustomer() {
                                 <li>
                                     <Link to={`/submission/${id}/comments`}>Comments</Link>
                                 </li>
+                                <li>
+                                    <Link to={`/submission/${id}/file`}>File</Link>
+                                </li>
                               </ul>
                             </div>
                             {submission && submission.user !== undefined && submission.user !== null && submission.user !== "" && <>

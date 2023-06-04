@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faEye, faArrowLeft, faCheckCircle, faPencil, faGauge, faBook, faMagnifyingGlass, faBalanceScale, faUser, faArrowUpRightFromSquare, faComments } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faEye, faArrowLeft, faCheckCircle, faPencil, faGauge, faBook, faMagnifyingGlass, faBalanceScale, faUser, faArrowUpRightFromSquare, faDownload, faFile } from '@fortawesome/free-solid-svg-icons'
 import Select from 'react-select'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
-import { DateTime } from "luxon";
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { getSubmissionDetailAPI, postSubmissionCreateCommentOperationAPI } from "../../../API/submission";
+import { getSubmissionDetailAPI } from "../../../API/submission";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
 import FormTextareaField from "../../Element/FormTextareaField";
@@ -28,7 +27,7 @@ import {
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
-function RetailerSubmissionDetailForCommentList() {
+function RetailerSubmissionDetailForPDFFile() {
     ////
     //// URL Parameters.
     ////
@@ -51,19 +50,11 @@ function RetailerSubmissionDetailForCommentList() {
     const [forceURL, setForceURL] = useState("");
     const [submission, setSubmission] = useState({});
     const [showCustomerEditOptions, setShowCustomerEditOptions] = useState(false);
-    const [content, setContent] = useState("");
 
     ////
     //// Event handling.
     ////
 
-    const onSubmitClick = (e) => {
-        console.log("onSubmitClick: Beginning...");// Submit to the backend.
-        console.log("onSubmitClick, submission:", submission);
-        setErrors(null);
-        setFetching(true);
-        postSubmissionCreateCommentOperationAPI(id, content, onSubmissionUpdateSuccess, onSubmissionUpdateError, onSubmissionUpdateDone);
-    }
 
     ////
     //// API.
@@ -87,57 +78,6 @@ function RetailerSubmissionDetailForCommentList() {
 
     function onSubmissionDetailDone() {
         console.log("onSubmissionDetailDone: Starting...");
-        setFetching(false);
-    }
-
-    function onSubmissionUpdateSuccess(response){
-        // For debugging purposes only.
-        console.log("onSubmissionUpdateSuccess: Starting...");
-        console.log(response);
-
-        // Add a temporary banner message in the app and then clear itself after 2 seconds.
-        setTopAlertMessage("Comment submitted");
-        setTopAlertStatus("success");
-        setTimeout(() => {
-            console.log("onSubmissionUpdateSuccess: Delayed for 2 seconds.");
-            console.log("onSubmissionUpdateSuccess: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
-            setTopAlertMessage("");
-        }, 2000);
-
-        // Reset content.
-        setContent("");
-
-        // Fetch latest data.
-        getSubmissionDetailAPI(
-            id,
-            onSubmissionDetailSuccess,
-            onSubmissionDetailError,
-            onSubmissionDetailDone
-        );
-    }
-
-    function onSubmissionUpdateError(apiErr) {
-        console.log("onSubmissionUpdateError: Starting...");
-        setErrors(apiErr);
-
-        // Add a temporary banner message in the app and then clear itself after 2 seconds.
-        setTopAlertMessage("Failed submitting");
-        setTopAlertStatus("danger");
-        setTimeout(() => {
-            console.log("onSubmissionUpdateError: Delayed for 2 seconds.");
-            console.log("onSubmissionUpdateError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
-            setTopAlertMessage("");
-        }, 2000);
-
-        // The following code will cause the screen to scroll to the top of
-        // the page. Please see ``react-scroll`` for more information:
-        // https://github.com/fisshy/react-scroll
-        var scroll = Scroll.animateScroll;
-        scroll.scrollToTop();
-    }
-
-    function onSubmissionUpdateDone() {
-        console.log("onSubmissionUpdateDone: Starting...");
         setFetching(false);
     }
 
@@ -187,7 +127,7 @@ function RetailerSubmissionDetailForCommentList() {
                             <br /><br />
                             <Link to={`/submission/${submission.id}/edit-customer`} class="button is-primary" disabled={true}>Edit Current Customer</Link> */}
                         <br /><br />
-                        <Link to={`/submission/${submission.id}/customer/search`} class="button is-primary">Pick a Different Customer</Link>
+                        <Link to={`/submission/${submission.id}/customer/search`} class="button is-medum is-menu is-primary">Pick a Different Customer</Link>
                     </section>
                     <footer class="modal-card-foot">
                         <button class="button" onClick={(e)=>setShowCustomerEditOptions(false)}>Close</button>
@@ -225,47 +165,29 @@ function RetailerSubmissionDetailForCommentList() {
                                 <li>
                                     <Link to={`/submission/${id}/cust`}>Customer</Link>
                                 </li>
-                                <li class="is-active">
-                                    <Link><b>Comments</b></Link>
-                                </li>
                                 <li>
-                                    <Link to={`/submission/${id}/file`}>File</Link>
+                                    <Link to={`/submission/${id}/comments`}>Comments</Link>
+                                </li>
+                                <li class={`is-active`}>
+                                    <Link to={`/submission/${id}/file`}><b>File</b></Link>
                                 </li>
                               </ul>
                             </div>
 
-                            <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faComments} />&nbsp;Comments</p>
+                            <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faFile} />&nbsp;File</p>
                             <hr />
+                            <p class="pb-4 has-text-grey">Click the following "Download PDF" button to start downloading a copy of this submission in PDF file format to your computer.</p>
 
-                            {submission.comments && submission.comments.length > 0 && <>
-                                {submission.comments.map(function(comment, i){
-                                    console.log(comment); // For debugging purposes only.
-                                    return <div className="pb-3">
-                                        <span class="is-pulled-right has-text-grey-light">{comment.createdByName} at <b>{DateTime.fromISO(comment.createdAt).toLocaleString(DateTime.DATETIME_MED)}</b></span>
-                                        <br />
-                                        <article class="message">
-                                            <div class="message-body">{comment.content}</div>
-                                        </article>
-                                    </div>
-                                })}
-                            </>}
-
-                            <div class="mt-4 block has-background-white-ter p-3">
-                                    <FormTextareaField
-                                        label="Write your comment here:"
-                                        name="content"
-                                        placeholder="Text input"
-                                        value={content}
-                                        errorText={errors && errors.content}
-                                        helpText=""
-                                        onChange={(e)=>setContent(e.target.value)}
-                                        isRequired={true}
-                                        maxWidth="180px"
-                                    />
+                            <section class="hero has-background-white-ter">
+                                <div class="hero-body">
+                                    <p class="subtitle">
+                                        <div class="has-text-centered">
+                                            <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-large is-success is-hidden-touch"><FontAwesomeIcon className="fas" icon={faDownload} />&nbsp;Download PDF</a>
+                                            <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-large is-success is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faDownload} />&nbsp;Download PDF</a>
+                                        </div>
+                                    </p>
                                 </div>
-
-
-
+                            </section>
 
                             <div class="columns pt-4">
                                 <div class="column is-half">
@@ -273,12 +195,12 @@ function RetailerSubmissionDetailForCommentList() {
                                     <Link to={`/submissions`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                 </div>
                                 <div class="column is-half has-text-right">
-                                    <button onClick={onSubmitClick} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comment</button>
-                                    <button onClick={onSubmitClick} class="button is-medium is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comment</button>
+                                {/*
+                                    <Link to={`/submission/${id}/edit`} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Submission</Link>
+                                    <Link to={`/submission/${id}/edit`} class="button is-medium is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Submission</Link>
+                                */}
                                 </div>
                             </div>
-
-
                         </div>}
                     </nav>
                 </section>
@@ -287,4 +209,4 @@ function RetailerSubmissionDetailForCommentList() {
     );
 }
 
-export default RetailerSubmissionDetailForCommentList;
+export default RetailerSubmissionDetailForPDFFile;
