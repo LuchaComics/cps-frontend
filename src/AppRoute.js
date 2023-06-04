@@ -33,8 +33,8 @@ import Register from "./Components/Gateway/Register";
 import RegisterSuccessful from "./Components/Gateway/RegisterSuccessful";
 import Index from "./Components/Gateway/Index";
 import TopAlertBanner from "./Components/Misc/TopAlertBanner";
-import TopNavigation from "./Components/Misc/TopNavigation";
-import SideNavigation from "./Components/Misc/SideNavigation";
+import MobileNavigation from "./Components/Misc/MobileNavigation";
+import DesktopTabletNavigation from "./Components/Misc/DesktopTabletNavigation";
 import NotFoundError from "./Components/Misc/NotFoundError";
 import EmailVerification from "./Components/Gateway/EmailVerification";
 import ProfileDetail from "./Components/Profile/Detail";
@@ -48,12 +48,10 @@ function AppRoute() {
         <>
             <RecoilRoot>
                 <Router>
-                    <div>
-                        <TopAlertBanner />
-                        <TopNavigation />
-                    </div>
+                    <TopAlertBanner />
+                    <MobileNavigation />
                     <section class="main-content columns is-fullheight">
-                        <SideNavigation />
+                        <DesktopTabletNavigation />                        
                         <Routes>
                             <Route exact path="/dashboard" element={<RetailerDashboard/>}/>
                             <Route exact path="/submissions" element={<RetailerSubmissionList/>}/>

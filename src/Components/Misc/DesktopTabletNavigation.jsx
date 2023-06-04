@@ -4,16 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faTachometer, faTasks, faSignOut, faUserCircle, faUsers, faBuilding
 } from '@fortawesome/free-solid-svg-icons'
-import { useRecoilState } from 'recoil';
 
-import { onHamburgerClickedState } from "../../AppState";
 import { getAccessTokenFromLocalStorage } from '../../Helpers/jwtUtility';
 
-function SideNavigation() {
-    // Global state
-    const [onHamburgerClicked, setOnHamburgerClicked] = useRecoilState(onHamburgerClickedState);
 
-    // Local state.
+function DesktopTabletNavigation() {
+    ////
+    //// Local state.
+    ////
     const [showLogoutWarning, setShowLogoutWarning] = useState(false);
     const [forceURL, setForceURL] = useState("");
 
@@ -43,12 +41,6 @@ function SideNavigation() {
         return;
     }
 
-    // If the user clicked the hamburger menu and
-    console.log("onHamburgerClicked:", onHamburgerClicked);
-    if (onHamburgerClicked === false) {
-        return null;
-    }
-
     ////
     //// Component rendering.
     ////
@@ -59,7 +51,7 @@ function SideNavigation() {
 
     // Render the following component GUI.
     return (
-        <>
+        <div className="is-hidden-touch">
             <div class={`modal ${showLogoutWarning ? 'is-active' : ''}`}>
                 <div class="modal-background"></div>
                 <div class="modal-card">
@@ -127,8 +119,8 @@ function SideNavigation() {
                     </ul>
                 </aside>
             </div>
-        </>
+        </div>
     );
 }
 
-export default SideNavigation;
+export default DesktopTabletNavigation;
