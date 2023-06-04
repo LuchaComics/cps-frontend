@@ -57,8 +57,8 @@ function RegisterSuccessful() {
                     <section class="hero is-fullheight">
                         <div class="hero-body">
                             <div class="container">
-                                <div class="columns is-centered">
-                                    <div class="box is-rounded column is-one-third-tablet">
+                                <div class="columns is-centered p-7">
+                                    <div class="is-rounded column is-two-third-tablet">
                                         <article class="message is-primary">
                                           <div class="message-body">
                                                 <h1 className="title is-2 has-text-centered has-text-success"><FontAwesomeIcon className="fas" icon={faEnvelope} />&nbsp;Email Sent</h1>
@@ -66,7 +66,7 @@ function RegisterSuccessful() {
                                                 <p>Thank you for registering - an <b>activation email</b> has bee sent to you. Please be sure to check your social, promotions and spam folders if it does not arrive within 5 minutes.</p>
                                                 <p>
                                                     <br />
-                                                    <Link to="/">Back to index&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
+                                                    <Link to="/"><b>Back to index&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></b></Link>
                                                 </p>
                                           </div>
                                         </article>
