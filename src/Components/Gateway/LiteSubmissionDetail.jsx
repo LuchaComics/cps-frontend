@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTasks, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight, faBarcode } from '@fortawesome/free-solid-svg-icons';
+import { faTasks, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight, faBarcode, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 import FormErrorBox from "../Element/FormErrorBox";
 import { getVersionAPI } from "../../API/gateway";
 
 
-function Index() {
+function LiteSubmissionDetail() {
     // For debugging purposes only.
     console.log("REACT_APP_WWW_PROTOCOL:", process.env.REACT_APP_WWW_PROTOCOL);
     console.log("REACT_APP_WWW_DOMAIN:", process.env.REACT_APP_WWW_DOMAIN);
@@ -139,6 +139,7 @@ function Index() {
                                                 </div>
                                             </nav>
                                             {/* End Logo */}
+                                            {/*
                                             <form>
                                                 <h1 className="title is-2 has-text-centered">Check your Grading</h1>
                                                 <FormErrorBox errors={errors} />
@@ -164,9 +165,11 @@ function Index() {
                                                 <button class="button is-medium is-block is-fullwidth is-primary" type="button" onClick={onButtonClick} style={{backgroundColor:"#FF0000"}}>
                                                     Lookup CPSN <FontAwesomeIcon icon={faArrowRight} />
                                                 </button>
-
-
                                             </form>
+                                            */}
+                                            TODO: IMPL.
+
+                                            {/*
                                             <br />
                                             <nav class="level">
                                                 <div class="level-item has-text-centered">
@@ -177,6 +180,14 @@ function Index() {
                                                 <div class="level-item has-text-centered">
                                                     <div>
                                                         <Link to="/register" className="is-size-7-tablet">Create an Account</Link>
+                                                    </div>
+                                                </div>
+                                            </nav>
+                                            */}
+                                            <nav class="level">
+                                                <div class="level-item has-text-centered">
+                                                    <div>
+                                                        <Link to="/" className="is-size-7-tablet"><FontAwesomeIcon icon={faArrowLeft} />&nbsp;Back</Link>
                                                     </div>
                                                 </div>
                                             </nav>
@@ -205,4 +216,4 @@ function Index() {
       );
 }
 
-export default Index;
+export default LiteSubmissionDetail;

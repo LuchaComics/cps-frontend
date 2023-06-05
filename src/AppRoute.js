@@ -44,6 +44,7 @@ import OrganizationDetail from "./Components/Organization/Detail";
 import OrganizationUpdate from "./Components/Organization/Update";
 import ForgotPassword from "./Components/Gateway/ForgotPassword";
 import PasswordReset from "./Components/Gateway/PasswordReset";
+import LiteSubmissionDetail from "./Components/Gateway/LiteSubmissionDetail";
 
 
 function AppRoute() {
@@ -87,6 +88,7 @@ function AppRoute() {
                             <Route exact path="/verify" element={<EmailVerification/>}/>
                             <Route exact path="/forgot-password" element={<ForgotPassword/>}/>
                             <Route exact path="/password-reset" element={<PasswordReset/>}/>
+                            <Route exact path="/cpsn" element={<LiteSubmissionDetail/>}/>                            
                             <Route exact path="/" element={<Index/>}/>
                             <Route path="*" element={<NotFoundError/>}/>
                         </Routes>

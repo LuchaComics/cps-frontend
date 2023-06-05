@@ -159,13 +159,13 @@ function Login() {
         return () => mounted = false;
     }, []);
 
-    if (forceURL !== "") {
-        return <Navigate to={forceURL}  />
-    }
-
     ////
     //// Component rendering.
     ////
+
+    if (forceURL !== "") {
+        return <Navigate to={forceURL}  />
+    }
 
     return (
         <>

@@ -42,7 +42,8 @@ function MobileNavigation() {
         "/logout",
         "/verify",
         "/forgot-password",
-        "/password-reset"
+        "/password-reset",
+        "/cpsn"
     ];
     const location = useLocation();
     var arrayLength = ignorePathsArr.length;
