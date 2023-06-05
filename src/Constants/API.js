@@ -16,3 +16,5 @@ export const CPS_CUSTOMER_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/customer/{id
 export const CPS_CUSTOMER_CREATE_COMMENT_OPERATION_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/customers/operation/create-comment";
 export const CPS_ORGANIZATIONS_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/organizations";
 export const CPS_ORGANIZATION_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/organization/{id}";
+export const CPS_FORGOT_PASSWORD_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/forgot-password";
+export const CPS_PASSWORD_RESET_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/password-reset";

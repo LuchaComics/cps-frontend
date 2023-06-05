@@ -42,6 +42,8 @@ import ProfileDetail from "./Components/Profile/Detail";
 import ProfileUpdate from "./Components/Profile/Update";
 import OrganizationDetail from "./Components/Organization/Detail";
 import OrganizationUpdate from "./Components/Organization/Update";
+import ForgotPassword from "./Components/Gateway/ForgotPassword";
+import PasswordReset from "./Components/Gateway/PasswordReset";
 
 
 function AppRoute() {
@@ -83,6 +85,8 @@ function AppRoute() {
                             <Route exact path="/login" element={<Login/>}/>
                             <Route exact path="/logout" element={<LogoutRedirector/>}/>
                             <Route exact path="/verify" element={<EmailVerification/>}/>
+                            <Route exact path="/forgot-password" element={<ForgotPassword/>}/>
+                            <Route exact path="/password-reset" element={<PasswordReset/>}/>
                             <Route exact path="/" element={<Index/>}/>
                             <Route path="*" element={<NotFoundError/>}/>
                         </Routes>

@@ -234,7 +234,7 @@ function Login() {
                                             <nav class="level">
                                                 <div class="level-item has-text-centered">
                                                     <div>
-                                                        <Link className="is-size-7-tablet">Forgot Password?</Link>
+                                                        <Link to="/forgot-password" className="is-size-7-tablet">Forgot Password?</Link>
                                                     </div>
                                                 </div>
                                                 <div class="level-item has-text-centered">

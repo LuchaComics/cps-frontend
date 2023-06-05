@@ -24,7 +24,8 @@ function DesktopTabletNavigation() {
         "/login",
         "/logout",
         "/verify",
-        "/forgot-password"
+        "/forgot-password",
+        "/password-reset"
     ];
     const location = useLocation();
     var arrayLength = ignorePathsArr.length;

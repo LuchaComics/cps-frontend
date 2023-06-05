@@ -5,7 +5,9 @@ import {
     CPS_VERSION_ENDPOINT,
     CPS_REGISTER_API_ENDPOINT,
     CPS_EMAIL_VERIFICATION_API_ENDPOINT,
-    CPS_LOGOUT_API_ENDPOINT
+    CPS_LOGOUT_API_ENDPOINT,
+    CPS_FORGOT_PASSWORD_API_ENDPOINT,
+    CPS_PASSWORD_RESET_API_ENDPOINT
 } from "../Constants/API";
 
 import {
@@ -166,6 +168,68 @@ export function postLogoutAPI(onSuccessCallback, onErrorCallback, onDoneCallback
         onSuccessCallback(null);
     }).catch( (exception) => {
         let errors = camelizeKeys(exception);
+        onErrorCallback(errors);
+    }).then(onDoneCallback);
+}
+
+export function postForgotPasswordAPI(email, onSuccessCallback, onErrorCallback, onDoneCallback) {
+    const axios = getCustomAxios();
+
+    axios.post(CPS_FORGOT_PASSWORD_API_ENDPOINT, {email: email}).then((successResponse) => {
+        console.log("postForgotPasswordAPI: Success")
+        onSuccessCallback(); // Return the callback data.
+    }).catch( (exception) => {
+        let responseData = null;
+        if (exception.response !== undefined && exception.response !== null) {
+            if (exception.response.data !== undefined && exception.response.data !== null) {
+                responseData = exception.response.data;
+            } else {
+                responseData = exception.response;
+            }
+        } else {
+            responseData = exception;
+        }
+        let errors = camelizeKeys(responseData);
+
+        // Check for incorrect password and enter our own custom error.
+        let errorsStr = JSON.stringify(errors);
+        if (errorsStr.includes("Incorrect email or password")) { // NOTE: This is the exact error from backend on incorrect email/pass.
+            errors = {
+                "auth": "Incorrect email or password",
+            };
+        }
+
+        onErrorCallback(errors);
+    }).then(onDoneCallback);
+}
+
+export function postPasswordResetAPI(verificationCode, password, passwordRepeat, onSuccessCallback, onErrorCallback, onDoneCallback) {
+    const axios = getCustomAxios();
+
+    axios.post(CPS_PASSWORD_RESET_API_ENDPOINT, {verification_code: verificationCode, password: password, password_repeated: passwordRepeat}).then((successResponse) => {
+        console.log("postForgotPasswordAPI: Success")
+        onSuccessCallback(); // Return the callback data.
+    }).catch( (exception) => {
+        let responseData = null;
+        if (exception.response !== undefined && exception.response !== null) {
+            if (exception.response.data !== undefined && exception.response.data !== null) {
+                responseData = exception.response.data;
+            } else {
+                responseData = exception.response;
+            }
+        } else {
+            responseData = exception;
+        }
+        let errors = camelizeKeys(responseData);
+
+        // Check for incorrect password and enter our own custom error.
+        let errorsStr = JSON.stringify(errors);
+        if (errorsStr.includes("Incorrect email or password")) { // NOTE: This is the exact error from backend on incorrect email/pass.
+            errors = {
+                "auth": "Incorrect email or password",
+            };
+        }
+
         onErrorCallback(errors);
     }).then(onDoneCallback);
 }
