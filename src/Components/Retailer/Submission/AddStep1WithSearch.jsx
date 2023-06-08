@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faDownload, faArrowLeft, faArrowRight, faCheckCircle, faCheck, faGauge, faArrowUpRightFromSquare, faSearch, faFilter  } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faDownload, faArrowLeft, faArrowRight, faCheckCircle, faCheck, faGauge, faArrowUpRightFromSquare, faSearch, faFilter, faUsers  } from '@fortawesome/free-solid-svg-icons'
 import Select from 'react-select'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
@@ -194,6 +194,15 @@ function RetailerSubmissionAddStep1WithSearch() {
 
                         <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Submission</p>
                         <FormErrorBox errors={errors} />
+
+                        <div class="container pb-6">
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customer Options</p>
+                            <hr />
+
+                            <Link class="is-medium is-warning" to="/customers/add" target="_blank" rel="noreferrer">Create a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link>&nbsp;&nbsp;<br /><br />
+                            <Link class="is-medium is-danger" to="/submissions/add">Skip selecting a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
+                        </div>
+
                         <div class="container pb-5">
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search Customers</p>
                             <hr />
@@ -211,7 +220,7 @@ function RetailerSubmissionAddStep1WithSearch() {
                             />
                         </div>
 
-                        <div class="container pb-5">
+                        <div class="container pb-6">
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faFilter} />&nbsp;Filter Customers</p>
                             <hr />
 
@@ -262,13 +271,6 @@ function RetailerSubmissionAddStep1WithSearch() {
                                 isRequired={true}
                                 maxWidth="380px"
                             />
-                        </div>
-                        <div class="container pb-5">
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faFilter} />&nbsp;Other Options</p>
-                            <hr />
-
-                            <Link class="is-medium is-warning" to="/customers/add" target="_blank" rel="noreferrer">Create a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link>&nbsp;&nbsp;<br /><br />
-                            <Link class="is-medium is-danger" to="/submissions/add">Skip selecting a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
                         </div>
                         <div class="columns pt-5">
                             <div class="column is-half">
