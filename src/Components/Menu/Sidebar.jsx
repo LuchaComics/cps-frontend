@@ -1,19 +1,38 @@
-import React, { useState } from "react";
-import { Link, useLocation, Navigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-    faTachometer, faTasks, faSignOut, faUserCircle, faUsers, faBuilding, faBarcode
-} from '@fortawesome/free-solid-svg-icons'
-
-import { getAccessTokenFromLocalStorage } from '../../Helpers/jwtUtility';
+import { faBars, faRightFromBracket, faTachometer, faTasks, faSignOut, faUserCircle, faUsers, faBuilding } from '@fortawesome/free-solid-svg-icons'
+import { useRecoilState } from 'recoil';
 
 
-function DesktopTabletNavigation() {
+import { onHamburgerClickedState } from "../../AppState";
+
+
+export default props => {
     ////
-    //// Local state.
+    //// Global State
     ////
+    const [onHamburgerClicked, setOnHamburgerClicked] = useRecoilState(onHamburgerClickedState);
+
+    ////
+    //// Local State
+    ////
+
     const [showLogoutWarning, setShowLogoutWarning] = useState(false);
-    const [forceURL, setForceURL] = useState("");
+
+    ////
+    //// Events
+    ////
+
+    // Do nothing.
+
+    ////
+    //// Rendering.
+    ////
+
+    //-------------//
+    // CASE 1 OF 2 //
+    //-------------//
 
     // Get the current location and if we are at specific URL paths then we
     // will not render this component.
@@ -21,6 +40,7 @@ function DesktopTabletNavigation() {
         "/",
         "/register",
         "/register-successful",
+        "/index",
         "/login",
         "/logout",
         "/verify",
@@ -38,25 +58,13 @@ function DesktopTabletNavigation() {
         }
     }
 
-    // If the user is not logged in then redirect back to login page.
-    const accessToken = getAccessTokenFromLocalStorage();
-    if (accessToken === undefined || accessToken === "" || accessToken === null) {
-        window.location = "/login?unauthorized=true";
-        return;
-    }
+    //-------------//
+    // CASE 2 OF 2 //
+    //-------------//
 
-    ////
-    //// Component rendering.
-    ////
-
-    if (forceURL !== "") {
-        return <Navigate to={forceURL}  />
-    }
-
-    // Render the following component GUI.
     return (
         <>
-            <div class={`is-hidden-touch modal ${showLogoutWarning ? 'is-active' : ''}`}>
+            <div class={`modal ${showLogoutWarning ? 'is-active' : ''}`}>
                 <div class="modal-background"></div>
                 <div class="modal-card">
                     <header class="modal-card-head">
@@ -72,45 +80,33 @@ function DesktopTabletNavigation() {
                     </footer>
                 </div>
             </div>
-            <div class="is-hidden-touch has-background-black is-narrow-mobile" style={{minWidth:"250px", padding:"25px", minHeight:"100vh"}}>
-                <nav class="level">
+            <div className={`column is-one-fifth has-background-black ${onHamburgerClicked ? '' : 'is-hidden'}`}>
+                <nav class="level is-hidden-mobile">
                     <div class="level-item has-text-centered">
                         <figure class='image'>
-                            <Link to="/dashboard">
-                                <img src='/static/CPS logo 2023 GR.webp' style={{maxWidth:"250px"}} />
-                            </Link>
+                            <img src='/static/CPS logo 2023 GR.webp' style={{maxWidth:"200px"}} />
                         </figure>
                     </div>
                 </nav>
-                <aside class="menu">
+                <aside class="menu p-4">
                     <p class="menu-label has-text-grey-light">
                         Staff
                     </p>
                     <ul class="menu-list">
                         <li>
-                            <Link to="/dashboard" class={`has-text-grey-light ${location.pathname.includes("dashboard") && "is-active"}`}>
+                            <a href="/dashboard" class={`has-text-grey-light ${location.pathname.includes("dashboard") && "is-active"}`}>
                                 <FontAwesomeIcon className="fas" icon={faTachometer} />&nbsp;Dashboard
-                            </Link>
+                            </a>
                         </li>
                         <li>
-                            <Link to="/submissions" class={`has-text-grey-light ${location.pathname.includes("submission") && "is-active"}`}>
+                            <a href="/submissions" class={`has-text-grey-light ${location.pathname.includes("submission") && "is-active"}`}>
                                 <FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions
-                            </Link>
+                            </a>
                         </li>
                         <li>
-                            <Link to="/customers" class={`has-text-grey-light ${location.pathname.includes("customer") && "is-active"}`}>
+                            <a href="/customers" class={`has-text-grey-light ${location.pathname.includes("customer") && "is-active"}`}>
                                 <FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers
-                            </Link>
-                        </li>
-                    </ul>
-                    <p class="menu-label has-text-grey-light">
-                        System
-                    </p>
-                    <ul class="menu-list">
-                        <li>
-                            <Link to="/registry" class={`has-text-grey-light ${location.pathname.includes("registry") && "is-active"}`}>
-                                <FontAwesomeIcon className="fas" icon={faBarcode} />&nbsp;Registry
-                            </Link>
+                            </a>
                         </li>
                     </ul>
                     <p class="menu-label has-text-grey-light">
@@ -118,19 +114,19 @@ function DesktopTabletNavigation() {
                     </p>
                     <ul class="menu-list">
                         <li>
-                            <Link class={`has-text-grey-light ${location.pathname.includes("account") && "is-active"}`} to={`/account`}>
+                            <a href={`/account`} class={`has-text-grey-light ${location.pathname.includes("account") && "is-active"}`}>
                                 <FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Account
-                            </Link>
+                            </a>
                         </li>
                         <li>
-                            <Link class={`has-text-grey-light ${location.pathname.includes("organization") && "is-active"}`} to={`/organization`}>
+                            <a href={`/organization`} class={`has-text-grey-light ${location.pathname.includes("organization") && "is-active"}`}>
                                 <FontAwesomeIcon className="fas" icon={faBuilding} />&nbsp;Organization
-                            </Link>
+                            </a>
                         </li>
                         <li>
-                            <Link class={`has-text-grey-light ${location.pathname.includes("logout") && "is-active"}`} onClick={(e)=>setShowLogoutWarning(true)}>
+                            <a onClick={(e)=>setShowLogoutWarning(true)} class={`has-text-grey-light ${location.pathname.includes("logout") && "is-active"}`} >
                                 <FontAwesomeIcon className="fas" icon={faSignOut} />&nbsp;Sign Off
-                            </Link>
+                            </a>
                         </li>
                     </ul>
                 </aside>
@@ -138,5 +134,3 @@ function DesktopTabletNavigation() {
         </>
     );
 }
-
-export default DesktopTabletNavigation;

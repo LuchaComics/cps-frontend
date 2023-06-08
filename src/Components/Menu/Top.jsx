@@ -7,7 +7,7 @@ import { useRecoilState } from 'recoil';
 import { onHamburgerClickedState } from "../../AppState";
 
 
-function MobileNavigation() {
+function Topbar() {
     ////
     //// Global State
     ////
@@ -57,9 +57,9 @@ function MobileNavigation() {
 
     // CASE 2 OF 2
 
-    // Render the following component GUI if the user is in a mobile browser.
+    // Render the following component GUI
     return (
-        <div className="is-hidden-desktop">
+        <div className="">
             <nav class="navbar has-background-black" role="navigation" aria-label="main navigation" >
                 <div class="navbar-brand">
                     <a class="navbar-item" href="/dashboard" style={{color:"white"}}>
@@ -75,7 +75,7 @@ function MobileNavigation() {
                     </a>
                 </div>
                 <div id="navbarBasicExample" class="navbar-menu has-text-white">
-                    <div class="navbar-end">
+                    <div class="navbar-left">
                         <div class="navbar-item">
                             <div class="buttons p-3" onClick={(e)=>setOnHamburgerClicked(!onHamburgerClicked)}>
                                 <FontAwesomeIcon className="fas has-text-white" icon={faBars} />
@@ -84,59 +84,6 @@ function MobileNavigation() {
                     </div>
                 </div>
             </nav>
-            {onHamburgerClicked === true &&
-                <div class="has-background-black is-narrow-mobile is-fullheight" style={{minWidth:"250px", padding:"25px"}}>
-                    <nav class="level">
-                        <div class="level-item has-text-centered">
-                            <figure class='image'>
-                                <img src='/static/CPS logo 2023 GR.webp' style={{maxWidth:"250px"}} />
-                            </figure>
-                        </div>
-                    </nav>
-                    <aside class="menu">
-                        <p class="menu-label has-text-grey-light">
-                            Staff
-                        </p>
-                        <ul class="menu-list">
-                            <li>
-                                <a href="/dashboard" class={`has-text-grey-light ${location.pathname.includes("dashboard") && "is-active"}`}>
-                                    <FontAwesomeIcon className="fas" icon={faTachometer} />&nbsp;Dashboard
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/submissions" class={`has-text-grey-light ${location.pathname.includes("submission") && "is-active"}`}>
-                                    <FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/customers" class={`has-text-grey-light ${location.pathname.includes("customer") && "is-active"}`}>
-                                    <FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers
-                                </a>
-                            </li>
-                        </ul>
-                        <p class="menu-label has-text-grey-light">
-                            Account
-                        </p>
-                        <ul class="menu-list">
-                            <li>
-                                <a href={`/account`} class={`has-text-grey-light ${location.pathname.includes("account") && "is-active"}`}>
-                                    <FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Account
-                                </a>
-                            </li>
-                            <li>
-                                <a href={`/organization`} class={`has-text-grey-light ${location.pathname.includes("organization") && "is-active"}`}>
-                                    <FontAwesomeIcon className="fas" icon={faBuilding} />&nbsp;Organization
-                                </a>
-                            </li>
-                            <li>
-                                <a onClick={(e)=>setShowLogoutWarning(true)} class={`has-text-grey-light ${location.pathname.includes("logout") && "is-active"}`} >
-                                    <FontAwesomeIcon className="fas" icon={faSignOut} />&nbsp;Sign Off
-                                </a>
-                            </li>
-                        </ul>
-                    </aside>
-                </div>
-            }
             <div class={`modal ${showLogoutWarning ? 'is-active' : ''}`}>
                 <div class="modal-background"></div>
                 <div class="modal-card">
@@ -157,4 +104,4 @@ function MobileNavigation() {
     );
 }
 
-export default MobileNavigation;
+export default Topbar;
