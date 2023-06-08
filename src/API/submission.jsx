@@ -87,7 +87,7 @@ export function postSubmissionCreateAPI(data, onSuccessCallback, onErrorCallback
     delete decamelizedData.grading_notes_line4;
     delete decamelizedData.grading_notes_line5;
 
-    if (data.issueCoverDate != undefined && data.issueCoverDate != null && data.issueCoverDate != "") {
+    if (data.issueCoverDate !==undefined && data.issueCoverDate !==null && data.issueCoverDate !=="") {
         decamelizedData.issue_cover_date = new Date(data.issueCoverDate).toISOString();
     }
 
@@ -164,7 +164,7 @@ export function putSubmissionUpdateAPI(data, onSuccessCallback, onErrorCallback,
     delete decamelizedData.grading_notes_line4;
     delete decamelizedData.grading_notes_line5;
 
-    if (data.issueCoverDate != undefined && data.issueCoverDate != null && data.issueCoverDate != "") {
+    if (data.issueCoverDate !==undefined && data.issueCoverDate !==null && data.issueCoverDate !=="") {
         decamelizedData.issue_cover_date = new Date(data.issueCoverDate).toISOString();
     }
 

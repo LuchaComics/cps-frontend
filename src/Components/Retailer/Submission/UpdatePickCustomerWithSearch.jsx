@@ -77,31 +77,31 @@ function RetailerSubmissionUpdatePickCustomerWithSearch() {
     const onSearchButtonClicked = (e) => {
         console.log("searchButtonClick: Starting...");
         let aURL = "/submission/" + id + "/cust/results";
-        if (searchKeyword != "") {
+        if (searchKeyword !=="") {
             aURL += "?search="+searchKeyword;
         }
-        if (firstName != "") {
+        if (firstName !=="") {
             if (aURL.indexOf('?') > -1) {
                 aURL += "&first_name="+firstName;
             } else {
                 aURL += "?first_name="+firstName;
             }
         }
-        if (lastName != "") {
+        if (lastName !=="") {
             if (aURL.indexOf('?') > -1) {
                 aURL += "&last_name="+lastName;
             } else {
                 aURL += "?last_name="+lastName;
             }
         }
-        if (email != "") {
+        if (email !=="") {
             if (aURL.indexOf('?') > -1) {
                 aURL += "&email="+email;
             } else {
                 aURL += "?email="+email;
             }
         }
-        if (phone != "") {
+        if (phone !=="") {
             if (aURL.indexOf('?') > -1) {
                 aURL += "&phone="+phone;
             } else {

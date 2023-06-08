@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTasks, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight, faBarcode, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faTasks, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight, faBarcode } from '@fortawesome/free-solid-svg-icons';
 
 import FormErrorBox from "../Element/FormErrorBox";
 import { getVersionAPI } from "../../API/gateway";
 
 
-function LiteSubmissionDetail() {
+function PublicRegistrySearch() {
     // For debugging purposes only.
     console.log("REACT_APP_WWW_PROTOCOL:", process.env.REACT_APP_WWW_PROTOCOL);
     console.log("REACT_APP_WWW_DOMAIN:", process.env.REACT_APP_WWW_DOMAIN);
@@ -21,10 +21,10 @@ function LiteSubmissionDetail() {
 
     const [errors, setErrors] = useState({});
     const [validation, setValidation] = useState({
-        "cpsn": false,
+        "cpsrn": false,
     });
     const [version, setVersion] = useState("");
-    const [cpsn, setCpsn] = useState("");
+    const [cpsrn, setCpsn] = useState("");
     const [forceURL, setForceURL] = useState("");
 
     ////
@@ -58,10 +58,10 @@ function LiteSubmissionDetail() {
     function onButtonClick(e) {
         var newErrors = {};
         var newValidation = {};
-        if (cpsn === undefined || cpsn === null || cpsn === "") {
-            newErrors["cpsn"] = "value is missing";
+        if (cpsrn === undefined || cpsrn === null || cpsrn === "") {
+            newErrors["cpsrn"] = "value is missing";
         } else {
-            newValidation["cpsn"] = true
+            newValidation["cpsrn"] = true
         }
 
         /// Save to state.
@@ -88,7 +88,7 @@ function LiteSubmissionDetail() {
             //
 
             console.log("successful validation, submitting to API server.");
-            setForceURL("cpsn?v="+cpsn)
+            setForceURL("/cpsrn-result?v="+cpsrn)
 
         }
     }
@@ -139,37 +139,34 @@ function LiteSubmissionDetail() {
                                                 </div>
                                             </nav>
                                             {/* End Logo */}
-                                            {/*
                                             <form>
                                                 <h1 className="title is-2 has-text-centered">Check your Grading</h1>
                                                 <FormErrorBox errors={errors} />
                                                 <div class="field">
-                                                    <label class="label is-small has-text-grey-light">CPS #</label>
+                                                    <label class="label is-small has-text-grey-light">CPS Registry #</label>
                                                     <div class="control has-icons-left has-icons-right">
-                                                        <input class={`input ${errors && errors.cpsn && 'is-danger'} ${validation && validation.cpsn && 'is-success'}`}
-                                                                name="cpsn"
+                                                        <input class={`input ${errors && errors.cpsrn && 'is-danger'} ${validation && validation.cpsrn && 'is-success'}`}
+                                                                name="cpsrn"
                                                                 type="text"
-                                                         placeholder="Enter CPS identification number."
-                                                               value={cpsn}
+                                                         placeholder="Enter CPS registry number."
+                                                               value={cpsrn}
                                                             onChange={(e)=>setCpsn(e.target.value)}/>
                                                         <span class="icon is-small is-left">
                                                             <FontAwesomeIcon className="fas" icon={faBarcode} />
                                                         </span>
                                                     </div>
-                                                    {errors && errors.cpsn &&
-                                                        <p class="help is-danger">{errors.cpsn}</p>
+                                                    {errors && errors.cpsrn &&
+                                                        <p class="help is-danger">{errors.cpsrn}</p>
                                                     }
                                                     <p class="help">Enter the identification number found with your collectible.</p>
                                                 </div>
                                                 <br />
                                                 <button class="button is-medium is-block is-fullwidth is-primary" type="button" onClick={onButtonClick} style={{backgroundColor:"#FF0000"}}>
-                                                    Lookup CPSN <FontAwesomeIcon icon={faArrowRight} />
+                                                    Lookup CPSRN <FontAwesomeIcon icon={faArrowRight} />
                                                 </button>
-                                            </form>
-                                            */}
-                                            TODO: IMPL.
 
-                                            {/*
+
+                                            </form>
                                             <br />
                                             <nav class="level">
                                                 <div class="level-item has-text-centered">
@@ -183,14 +180,6 @@ function LiteSubmissionDetail() {
                                                     </div>
                                                 </div>
                                             </nav>
-                                            */}
-                                            <nav class="level">
-                                                <div class="level-item has-text-centered">
-                                                    <div>
-                                                        <Link to="/" className="is-size-7-tablet"><FontAwesomeIcon icon={faArrowLeft} />&nbsp;Back</Link>
-                                                    </div>
-                                                </div>
-                                            </nav>
                                         </div>
                                         {/* End box */}
 
@@ -198,6 +187,7 @@ function LiteSubmissionDetail() {
                                             <p>Need help?</p>
                                             <p><Link to="Support@cpscapsule.com">Support@cpscapsule.com</Link></p>
                                             <p><a href="tel:+15199142685">(519) 914-2685</a></p>
+                                            <p>(App version: {version})</p>
                                         </div>
                                         {/* End suppoert text. */}
 
@@ -216,4 +206,4 @@ function LiteSubmissionDetail() {
       );
 }
 
-export default LiteSubmissionDetail;
+export default PublicRegistrySearch;

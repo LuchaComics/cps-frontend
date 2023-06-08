@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useLocation, Navigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-    faTachometer, faTasks, faSignOut, faUserCircle, faUsers, faBuilding
+    faTachometer, faTasks, faSignOut, faUserCircle, faUsers, faBuilding, faBarcode
 } from '@fortawesome/free-solid-svg-icons'
 
 import { getAccessTokenFromLocalStorage } from '../../Helpers/jwtUtility';
@@ -26,11 +26,13 @@ function DesktopTabletNavigation() {
         "/verify",
         "/forgot-password",
         "/password-reset",
-        "/cpsn"
+        "/cpsrn-result",
+        "/cpsrn-registry"
     ];
     const location = useLocation();
     var arrayLength = ignorePathsArr.length;
     for (var i = 0; i < arrayLength; i++) {
+        console.log(location.pathname, "===", ignorePathsArr[i], " EQUALS ", location.pathname === ignorePathsArr[i]);
         if (location.pathname === ignorePathsArr[i]) {
             return (null);
         }
@@ -98,6 +100,16 @@ function DesktopTabletNavigation() {
                         <li>
                             <Link to="/customers" class={`has-text-grey-light ${location.pathname.includes("customer") && "is-active"}`}>
                                 <FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers
+                            </Link>
+                        </li>
+                    </ul>
+                    <p class="menu-label has-text-grey-light">
+                        System
+                    </p>
+                    <ul class="menu-list">
+                        <li>
+                            <Link to="/registry" class={`has-text-grey-light ${location.pathname.includes("registry") && "is-active"}`}>
+                                <FontAwesomeIcon className="fas" icon={faBarcode} />&nbsp;Registry
                             </Link>
                         </li>
                     </ul>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTasks, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight, faBarcode } from '@fortawesome/free-solid-svg-icons';
+import { faTasks, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight, faBarcode, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 import FormErrorBox from "../Element/FormErrorBox";
 import { getVersionAPI } from "../../API/gateway";
@@ -140,30 +140,16 @@ function Index() {
                                             </nav>
                                             {/* End Logo */}
                                             <form>
-                                                <h1 className="title is-2 has-text-centered">Check your Grading</h1>
-                                                <FormErrorBox errors={errors} />
-                                                <div class="field">
-                                                    <label class="label is-small has-text-grey-light">CPS #</label>
-                                                    <div class="control has-icons-left has-icons-right">
-                                                        <input class={`input ${errors && errors.cpsn && 'is-danger'} ${validation && validation.cpsn && 'is-success'}`}
-                                                                name="cpsn"
-                                                                type="text"
-                                                         placeholder="Enter CPS identification number."
-                                                               value={cpsn}
-                                                            onChange={(e)=>setCpsn(e.target.value)}/>
-                                                        <span class="icon is-small is-left">
-                                                            <FontAwesomeIcon className="fas" icon={faBarcode} />
-                                                        </span>
-                                                    </div>
-                                                    {errors && errors.cpsn &&
-                                                        <p class="help is-danger">{errors.cpsn}</p>
-                                                    }
-                                                    <p class="help">Enter the identification number found with your collectible.</p>
-                                                </div>
+                                                <h1 className="title is-2 has-text-centered">Welcome</h1>
+
+
+                                                <Link class="button is-medium is-block is-fullwidth is-primary" type="button" to="/login" style={{backgroundColor:"#FF0000"}}>
+                                                    Login <FontAwesomeIcon icon={faArrowRight} />
+                                                </Link>
                                                 <br />
-                                                <button class="button is-medium is-block is-fullwidth is-primary" type="button" onClick={onButtonClick} style={{backgroundColor:"#FF0000"}}>
-                                                    Lookup CPSN <FontAwesomeIcon icon={faArrowRight} />
-                                                </button>
+                                                <Link class="button is-medium is-block is-fullwidth is-info" type="button" to="/register">
+                                                    Register <FontAwesomeIcon icon={faArrowRight} />
+                                                </Link>
 
 
                                             </form>
@@ -171,12 +157,12 @@ function Index() {
                                             <nav class="level">
                                                 <div class="level-item has-text-centered">
                                                     <div>
-                                                        <Link to="/login" className="is-size-7-tablet">Login</Link>
+                                                        <a href="https://cpscapsule.com" className="is-size-7-tablet"><FontAwesomeIcon icon={faArrowLeft} /> Back Home</a>
                                                     </div>
                                                 </div>
                                                 <div class="level-item has-text-centered">
                                                     <div>
-                                                        <Link to="/register" className="is-size-7-tablet">Create an Account</Link>
+                                                        <Link to="/cpsrn-registry" className="is-size-7-tablet">CPSRN Registry <FontAwesomeIcon icon={faArrowRight} /></Link>
                                                     </div>
                                                 </div>
                                             </nav>

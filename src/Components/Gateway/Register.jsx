@@ -461,6 +461,7 @@ function Register() {
                     <p>Need help?</p>
                     <p><Link to="Support@cpscapsule.com">Support@cpscapsule.com</Link></p>
                     <p><a href="tel:+15199142685">(519) 914-2685</a></p>
+                    <p><Link to="/cpsrn-registry" className="">CPSRN Registry&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link></p>
                 </div>
             </div>
         </>

@@ -18,3 +18,4 @@ export const CPS_ORGANIZATIONS_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/organiz
 export const CPS_ORGANIZATION_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/organization/{id}";
 export const CPS_FORGOT_PASSWORD_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/forgot-password";
 export const CPS_PASSWORD_RESET_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/password-reset";
+export const CPS_REGISTRY_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/cpsrn/{id}";

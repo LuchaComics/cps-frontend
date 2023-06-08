@@ -9,6 +9,8 @@ import {
 import { RecoilRoot } from 'recoil';
 
 import RetailerDashboard from "./Components/Retailer/Dashboard";
+import RetailerRegistrySearch from "./Components/Retailer/Registry/Search";
+import RetailerRegistryResult from "./Components/Retailer/Registry/Result";
 import RetailerSubmissionList from "./Components/Retailer/Submission/List";
 import RetailerSubmissionAddStep1WithSearch from "./Components/Retailer/Submission/AddStep1WithSearch";
 import RetailerSubmissionAddStep1WithResult from "./Components/Retailer/Submission/AddStep1WithResult";
@@ -44,7 +46,8 @@ import OrganizationDetail from "./Components/Organization/Detail";
 import OrganizationUpdate from "./Components/Organization/Update";
 import ForgotPassword from "./Components/Gateway/ForgotPassword";
 import PasswordReset from "./Components/Gateway/PasswordReset";
-import LiteSubmissionDetail from "./Components/Gateway/LiteSubmissionDetail";
+import PublicRegistrySearch from "./Components/Gateway/RegistrySearch";
+import PublicRegistryResult from "./Components/Gateway/RegistryResult";
 
 
 function AppRoute() {
@@ -58,6 +61,8 @@ function AppRoute() {
                         <DesktopTabletNavigation />
                         <Routes>
                             <Route exact path="/dashboard" element={<RetailerDashboard/>}/>
+                            <Route exact path="/registry" element={<RetailerRegistrySearch/>}/>
+                            <Route exact path="/registry/:cpsn" element={<RetailerRegistryResult/>}/>
                             <Route exact path="/submissions" element={<RetailerSubmissionList/>}/>
                             <Route exact path="/submissions/add/search" element={<RetailerSubmissionAddStep1WithSearch/>}/>
                             <Route exact path="/submissions/add/results" element={<RetailerSubmissionAddStep1WithResult/>}/>
@@ -88,7 +93,8 @@ function AppRoute() {
                             <Route exact path="/verify" element={<EmailVerification/>}/>
                             <Route exact path="/forgot-password" element={<ForgotPassword/>}/>
                             <Route exact path="/password-reset" element={<PasswordReset/>}/>
-                            <Route exact path="/cpsn" element={<LiteSubmissionDetail/>}/>                            
+                            <Route exact path="/cpsrn-result" element={<PublicRegistryResult/>}/>
+                            <Route exact path="/cpsrn-registry" element={<PublicRegistrySearch/>}/>
                             <Route exact path="/" element={<Index/>}/>
                             <Route path="*" element={<NotFoundError/>}/>
                         </Routes>

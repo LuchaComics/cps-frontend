@@ -1,0 +1,413 @@
+import React, { useState, useEffect } from "react";
+import { Link, Navigate, useSearchParams } from "react-router-dom";
+import Scroll from 'react-scroll';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTasks, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight, faBarcode, faArrowLeft, faMagnifyingGlass, faBook, faBalanceScale } from '@fortawesome/free-solid-svg-icons';
+
+import FormErrorBox from "../Element/FormErrorBox";
+import FormInputField from "../Element/FormInputField";
+import FormDateField from "../Element/FormDateField";
+import FormSelectField from "../Element/FormSelectField";
+import FormRadioField from "../Element/FormRadioField";
+import { getRegistryAPI } from "../../API/registry";
+import {
+    FINDING_OPTIONS,
+    OVERALL_NUMBER_GRADE_OPTIONS,
+    PUBLISHER_NAME_OPTIONS,
+    CPS_PERCENTAGE_GRADE_OPTIONS,
+    HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS
+} from "../../Constants/FieldOptions";
+
+
+function PublicRegistryResult() {
+    ////
+    //// URL Parameters.
+    ////
+
+    const [searchParams] = useSearchParams(); // Special thanks via https://stackoverflow.com/a/65451140
+    const cpsrn = searchParams.get("v");
+
+    ////
+    //// Component states.
+    ////
+
+    const [submission, setSubmission] = useState(null);
+    const [errors, setErrors] = useState({});
+    const [forceURL, setForceURL] = useState("");
+
+    ////
+    //// API.
+    ////
+
+    function onVersionSuccess(response){
+        console.log("onVersionSuccess: Starting...");
+        console.log("registry:", response);
+        setSubmission(response);
+    }
+
+    function onVersionError(apiErr) {
+        console.log("onVersionError: Starting...");
+        setErrors(apiErr);
+
+        // The following code will cause the screen to scroll to the top of
+        // the page. Please see ``react-scroll`` for more information:
+        // https://github.com/fisshy/react-scroll
+        var scroll = Scroll.animateScroll;
+        scroll.scrollToTop();
+    }
+
+    function onVersionDone() {
+        console.log("onVersionDone: Starting...");
+    }
+
+    ////
+    //// Event handling.
+    ////
+
+
+    ////
+    //// Misc.
+    ////
+
+    useEffect(() => {
+        let mounted = true;
+
+        if (mounted) {
+            getRegistryAPI(
+                cpsrn,
+                onVersionSuccess,
+                onVersionError,
+                onVersionDone
+            );
+        }
+
+        return () => mounted = false;
+    }, []);
+
+    ////
+    //// Component rendering.
+    ////
+
+    if (forceURL !== "") {
+        return <Navigate to={forceURL}  />
+    }
+
+    return (
+        <>
+            <div class="container column is-12">
+                <div class="section">
+
+                    <section class="hero is-fullheight">
+                        <div class="hero-body">
+                            <div class="container">
+                                <div class="columns is-centered">
+                                    <div class="column is-half-tablet">
+                                        <div class="box is-rounded">
+                                            {/* Start Logo */}
+                                            <nav class="level">
+                                                <div class="level-item has-text-centered">
+                                                    <figure class='image'>
+                                                        <img src='/static/CPS logo 2023 GR.webp' style={{width:"256px"}} />
+                                                    </figure>
+                                                </div>
+                                            </nav>
+                                            {/* End Logo */}
+
+                                            {submission && <form>
+                                                <h1 className="title is-2 has-text-centered">Registry:</h1>
+
+                                                <p class="subtitle is-3 pt-4 has-text-centered"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comic Book Information</p>
+                                                <hr />
+
+                                                <div class="field pb-4">
+                                                    <label class="label">CPS #</label>
+                                                    <div class="control has-icons-left has-icons-right">
+                                                        <input class={`input`}
+                                                                name="cpsrn"
+                                                                type="text"
+                                                         placeholder="Enter CPS identification number."
+                                                               value={submission.cpsrn}
+                                                               disabled={true} />
+                                                        <span class="icon is-small is-left">
+                                                            <FontAwesomeIcon className="fas" icon={faBarcode} />
+                                                        </span>
+                                                    </div>
+                                                    {errors && errors.cpsrn &&
+                                                        <p class="help is-danger">{errors.cpsrn}</p>
+                                                    }
+                                                    <p class="help">The registry number found in our database.</p>
+                                                </div>
+                                                {submission && <FormInputField
+                                                    label="Series Title"
+                                                    name="seriesTitle"
+                                                    placeholder="Text input"
+                                                    value={submission.seriesTitle}
+                                                    helpText=""
+                                                    isRequired={true}
+                                                    maxWidth="380px"
+                                                    disabled={true}
+                                                />}
+
+                                                {submission && <FormInputField
+                                                    label="Issue Vol"
+                                                    name="issueVol"
+                                                    placeholder="Text input"
+                                                    value={submission.issueVol}
+                                                    helpText=""
+                                                    isRequired={true}
+                                                    maxWidth="180px"
+                                                    disabled={true}
+                                                />}
+
+                                                {submission && <FormInputField
+                                                    label="Issue No"
+                                                    name="issueNo"
+                                                    placeholder="Text input"
+                                                    value={submission.issueNo}
+                                                    helpText=""
+                                                    isRequired={true}
+                                                    maxWidth="180px"
+                                                    disabled={true}
+                                                />}
+
+                                                {submission && <FormDateField
+                                                    label="Issue Cover Date"
+                                                    name="issueCoverDate"
+                                                    placeholder="Text input"
+                                                    value={submission.issueCoverDate}
+                                                    helpText=""
+                                                    isRequired={true}
+                                                    maxWidth="110px"
+                                                    disabled={true}
+                                                />}
+
+                                                <FormSelectField
+                                                    label="Publisher Name"
+                                                    name="publisherName"
+                                                    placeholder="Publisher Name"
+                                                    selectedValue={submission.publisherName}
+                                                    helpText=""
+                                                    options={PUBLISHER_NAME_OPTIONS}
+                                                    disabled={true}
+                                                />
+
+                                                {submission.publisherName === "Other" && <FormInputField
+                                                    label="Publisher Name (Other)"
+                                                    name="publisherNameOther"
+                                                    placeholder="Text input"
+                                                    value={submission.publisherNameOther}
+                                                    helpText=""
+                                                    isRequired={true}
+                                                    maxWidth="280px"
+                                                    disabled={true}
+                                                />}
+
+                                                <FormInputField
+                                                    label="Special Note - Line 1 (Optional)"
+                                                    name="specialNotesLine1"
+                                                    placeholder="Text input"
+                                                    value={submission.specialNotesLine1}
+                                                    isRequired={true}
+                                                    maxWidth="280px"
+                                                    helpText={"Max 35 characters"}
+                                                    disabled={true}
+                                                />
+
+                                                <FormInputField
+                                                    label="Special Note - Line 2 (Optional)"
+                                                    name="specialNotesLine2"
+                                                    placeholder="Text input"
+                                                    value={submission.specialNotesLine2}
+                                                    isRequired={true}
+                                                    maxWidth="280px"
+                                                    helpText={"Max 35 characters"}
+                                                    disabled={true}
+                                                />
+
+                                                <FormInputField
+                                                    label="Special Note - Line 3 (Optional)"
+                                                    name="specialNotesLine3"
+                                                    placeholder="Text input"
+                                                    value={submission.specialNotesLine3}
+                                                    isRequired={true}
+                                                    maxWidth="280px"
+                                                    helpText={"Max 35 characters"}
+                                                    disabled={true}
+                                                />
+
+                                                <FormInputField
+                                                    label="Special Note - Line 4 (Optional)"
+                                                    name="specialNotesLine4"
+                                                    placeholder="Text input"
+                                                    value={submission.specialNotesLine4}
+                                                    isRequired={true}
+                                                    maxWidth="280px"
+                                                    helpText={"Max 35 characters"}
+                                                    disabled={true}
+                                                />
+
+                                                <FormInputField
+                                                    label="Special Note - Line 5 (Optional)"
+                                                    name="specialNotesLine5"
+                                                    placeholder="Text input"
+                                                    value={submission.specialNotesLine5}
+                                                    isRequired={true}
+                                                    maxWidth="280px"
+                                                    helpText={"Max 35 characters"}
+                                                    disabled={true}
+                                                />
+
+                                                <p class="subtitle is-3 pt-4 has-text-centered"><FontAwesomeIcon className="fas" icon={faMagnifyingGlass} />&nbsp;Summary of Findings</p>
+                                                <hr />
+
+                                                <FormRadioField
+                                                    label="Shows signs of tampering/restoration"
+                                                    name="showsSignsOfTamperingOrRestoration"
+                                                    value={submission.showsSignsOfTamperingOrRestoration}
+                                                    opt1Value={2}
+                                                    opt1Label="No"
+                                                    opt2Value={1}
+                                                    opt2Label="Yes"
+                                                    maxWidth="180px"
+                                                    disabled={true}
+                                                />
+
+                                                <FormInputField
+                                                    label="Grading Note - Line 1 (Optional)"
+                                                    name="gradingNotesLine1"
+                                                    placeholder="Text input"
+                                                    value={submission.gradingNotesLine1}
+                                                    isRequired={true}
+                                                    maxWidth="280px"
+                                                    helpText={"Max 35 characters"}
+                                                    disabled={true}
+                                                />
+
+                                                <FormInputField
+                                                    label="Grading Note - Line 2 (Optional)"
+                                                    name="gradingNotesLine2"
+                                                    placeholder="Text input"
+                                                    value={submission.gradingNotesLine2}
+                                                    isRequired={true}
+                                                    maxWidth="280px"
+                                                    helpText={"Max 35 characters"}
+                                                    disabled={true}
+                                                />
+
+                                                <FormInputField
+                                                    label="Grading Note - Line 3 (Optional)"
+                                                    name="gradingNotesLine3"
+                                                    placeholder="Text input"
+                                                    value={submission.gradingNotesLine3}
+                                                    isRequired={true}
+                                                    maxWidth="280px"
+                                                    helpText={"Max 35 characters"}
+                                                    disabled={true}
+                                                />
+
+                                                <FormInputField
+                                                    label="Grading Note - Line 4 (Optional)"
+                                                    name="gradingNotesLine4"
+                                                    placeholder="Text input"
+                                                    value={submission.gradingNotesLine4}
+                                                    isRequired={true}
+                                                    maxWidth="280px"
+                                                    helpText={"Max 35 characters"}
+                                                    disabled={true}
+                                                />
+
+                                                <FormInputField
+                                                    label="Grading Note - Line 5 (Optional)"
+                                                    name="gradingNotesLine5"
+                                                    placeholder="Text input"
+                                                    value={submission.gradingNotesLine5}
+                                                    isRequired={true}
+                                                    maxWidth="280px"
+                                                    helpText={"Max 35 characters"}
+                                                    disabled={true}
+                                                />
+
+                                                <p class="subtitle is-3 pt-4 has-text-centered"><FontAwesomeIcon className="fas" icon={faBalanceScale} />&nbsp;Grading</p>
+                                                <hr />
+
+                                                <FormRadioField
+                                                    label="Which type of grading scale would you prefer?"
+                                                    name="gradingScale"
+                                                    value={parseInt(submission.gradingScale)}
+                                                    opt1Value={1}
+                                                    opt1Label="Letter Grade (Poor-Near Mint)"
+                                                    opt2Value={2}
+                                                    opt2Label="Numbers (0.5-10.0)"
+                                                    opt3Value={3}
+                                                    opt3Label="CPS Percentage (5%-100%)"
+                                                    maxWidth="180px"
+                                                />
+
+                                                {submission && submission.gradingScale === 1 && <FormSelectField
+                                                    label="Overall Letter Grade"
+                                                    name="overallLetterGrade"
+                                                    placeholder="Overall Letter Grade"
+                                                    selectedValue={submission.overallLetterGrade}
+                                                    helpText=""
+                                                    options={FINDING_OPTIONS}
+                                                    disabled={true}
+                                                />}
+
+                                                {submission && submission.gradingScale === 2 && <FormSelectField
+                                                    label="Overall Number Grade"
+                                                    name="overallNumberGrade"
+                                                    placeholder="Overall Number Grade"
+                                                    selectedValue={submission.overallNumberGrade}
+                                                    helpText=""
+                                                    options={OVERALL_NUMBER_GRADE_OPTIONS}
+                                                    disabled={true}
+                                                />}
+
+                                                {submission && submission.gradingScale === 3 && <FormSelectField
+                                                    label="CPS Percentage Grade"
+                                                    name="cpsPercentageGrade"
+                                                    placeholder="CPS Percentage Grade"
+                                                    selectedValue={submission.cpsPercentageGrade}
+                                                    helpText=""
+                                                    options={CPS_PERCENTAGE_GRADE_OPTIONS}
+                                                    disabled={true}
+                                                />}
+
+                                            </form>}
+
+
+                                            <br />
+                                            <br />
+                                            <nav class="level">
+                                                <div class="level-item has-text-centered">
+                                                    <div>
+                                                        <Link to="/" className="is-size-7-tablet"><FontAwesomeIcon icon={faArrowLeft} />&nbsp;Back</Link>
+                                                    </div>
+                                                </div>
+                                            </nav>
+                                        </div>
+                                        {/* End box */}
+
+                                        <div className="has-text-centered">
+                                            <p>Need help?</p>
+                                            <p><Link to="Support@cpscapsule.com">Support@cpscapsule.com</Link></p>
+                                            <p><a href="tel:+15199142685">(519) 914-2685</a></p>
+                                        </div>
+                                        {/* End suppoert text. */}
+
+                                    </div>
+                                    {/* End Column */}
+                                </div>
+                            </div>
+                            {/* End container */}
+                        </div>
+                        {/* End hero-body */}
+                    </section>
+
+                </div>
+            </div>
+        </>
+      );
+}
+
+export default PublicRegistryResult;

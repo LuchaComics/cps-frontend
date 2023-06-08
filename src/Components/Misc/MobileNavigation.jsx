@@ -43,12 +43,13 @@ function MobileNavigation() {
         "/verify",
         "/forgot-password",
         "/password-reset",
-        "/cpsn"
+        "/cpsrn-result",
+        "/cpsrn-registry"
     ];
     const location = useLocation();
     var arrayLength = ignorePathsArr.length;
     for (var i = 0; i < arrayLength; i++) {
-        console.log();
+        console.log(location.pathname, "===", ignorePathsArr[i], " EQUALS ", location.pathname === ignorePathsArr[i]);
         if (location.pathname === ignorePathsArr[i]) {
             return (null);
         }
