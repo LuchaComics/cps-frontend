@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTasks, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faTasks, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight, faUsers, faBarcode } from '@fortawesome/free-solid-svg-icons';
 import { useRecoilState } from 'recoil';
 
 import { topAlertMessageState, topAlertStatusState } from "../../AppState";
@@ -77,6 +77,20 @@ function RetailerDashboard() {
                               <br />
                               <br />
                               <Link to={"/customers"}>View&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
+                            </p>
+                          </div>
+                        </section>
+
+                        <section class="hero is-medium is-primary">
+                          <div class="hero-body">
+                            <p class="title">
+                                <FontAwesomeIcon className="fas" icon={faBarcode} />&nbsp;Registry
+                            </p>
+                            <p class="subtitle">
+                              Have a CPS registry number? Use the following to lookup existing records:
+                              <br />
+                              <br />
+                              <Link to={"/registry"}>View&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
                             </p>
                           </div>
                         </section>
