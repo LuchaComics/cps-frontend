@@ -18,7 +18,9 @@ import {
     FINDING_WITH_EMPTY_OPTIONS,
     OVERALL_NUMBER_GRADE_WITH_EMPTY_OPTIONS,
     PUBLISHER_NAME_WITH_EMPTY_OPTIONS,
-    CPS_PERCENTAGE_GRADE_WITH_EMPTY_OPTIONS
+    CPS_PERCENTAGE_GRADE_WITH_EMPTY_OPTIONS,
+    ISSUE_COVER_YEAR_OPTIONS,
+    ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS
 } from "../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
@@ -49,7 +51,8 @@ function RetailerSubmissionAddStep2() {
     const [seriesTitle, setSeriesTitle] = useState("");
     const [issueVol, setIssueVol] = useState("");
     const [issueNo, setIssueNo] = useState("");
-    const [issueCoverDate, setIssueCoverDate] = useState(null);
+    const [issueCoverYear, setIssueCoverYear] = useState(0);
+    const [issueCoverMonth, setIssueCoverMonth] = useState(0);
     const [publisherName, setPublisherName] = useState(0);
     const [publisherNameOther, setPublisherNameOther] = useState("");
     const [creasesFinding, setCreasesFinding] = useState("");
@@ -91,7 +94,8 @@ function RetailerSubmissionAddStep2() {
             seriesTitle: seriesTitle,
             issueVol: issueVol,
             issueNo: issueNo,
-            issueCoverDate: issueCoverDate,
+            issueCoverYear: issueCoverYear,
+            issueCoverMonth: issueCoverMonth,
             publisherName: publisherName,
             publisherNameOther: publisherNameOther,
             specialNotesLine1: specialNotesLine1,
@@ -301,17 +305,31 @@ function RetailerSubmissionAddStep2() {
                                 maxWidth="180px"
                             />
 
-                            <FormDateField
-                                label="Issue Cover Date"
-                                name="issueCoverDate"
-                                placeholder="Text input"
-                                value={issueCoverDate}
-                                errorText={errors && errors.issueCoverDate}
+                            <FormSelectField
+                                label="Issue Cover Year"
+                                name="issueCoverYear"
+                                placeholder="Issue Cover Year"
+                                selectedValue={issueCoverYear}
+                                errorText={errors && errors.issueCoverYear}
                                 helpText=""
-                                onChange={setIssueCoverDate}
+                                onChange={(e)=>setIssueCoverYear(parseInt(e.target.value))}
+                                options={ISSUE_COVER_YEAR_OPTIONS}
                                 isRequired={true}
                                 maxWidth="110px"
                             />
+
+                            {issueCoverYear !== 0 && issueCoverYear !== 1 && <FormSelectField
+                                label="Issue Cover Month"
+                                name="issueCoverMonth"
+                                placeholder="Issue Cover Month"
+                                selectedValue={issueCoverMonth}
+                                errorText={errors && errors.issueCoverMonth}
+                                helpText=""
+                                onChange={(e)=>setIssueCoverMonth(parseInt(e.target.value))}
+                                options={ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS}
+                                isRequired={true}
+                                maxWidth="110px"
+                            />}
 
                             <FormSelectField
                                 label="Publisher Name"

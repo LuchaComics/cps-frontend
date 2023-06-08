@@ -22,7 +22,9 @@ import {
     OVERALL_NUMBER_GRADE_OPTIONS,
     PUBLISHER_NAME_OPTIONS,
     CPS_PERCENTAGE_GRADE_OPTIONS,
-    HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS
+    HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS,
+    ISSUE_COVER_YEAR_OPTIONS,
+    ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS
 } from "../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
@@ -210,12 +212,25 @@ function RetailerSubmissionDetail() {
                                 disabled={true}
                             />}
 
-                            {submission && <FormDateField
-                                label="Issue Cover Date"
-                                name="issueCoverDate"
-                                placeholder="Text input"
-                                value={submission.issueCoverDate}
+                            <FormSelectField
+                                label="Issue Cover Year"
+                                name="issueCoverYear"
+                                placeholder="Issue Cover Year"
+                                selectedValue={submission.issueCoverYear}
                                 helpText=""
+                                options={ISSUE_COVER_YEAR_OPTIONS}
+                                isRequired={true}
+                                maxWidth="110px"
+                                disabled={true}
+                            />
+
+                            {submission.issueCoverYear !== 0 && submission.issueCoverYear !== 1 && <FormSelectField
+                                label="Issue Cover Month"
+                                name="issueCoverMonth"
+                                placeholder="Issue Cover Month"
+                                selectedValue={submission.issueCoverMonth}
+                                helpText=""
+                                options={ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS}
                                 isRequired={true}
                                 maxWidth="110px"
                                 disabled={true}

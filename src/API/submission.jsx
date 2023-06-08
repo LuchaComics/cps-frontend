@@ -87,9 +87,9 @@ export function postSubmissionCreateAPI(data, onSuccessCallback, onErrorCallback
     delete decamelizedData.grading_notes_line4;
     delete decamelizedData.grading_notes_line5;
 
-    if (data.issueCoverDate !==undefined && data.issueCoverDate !==null && data.issueCoverDate !=="") {
-        decamelizedData.issue_cover_date = new Date(data.issueCoverDate).toISOString();
-    }
+    // if (data.issueCoverDate !==undefined && data.issueCoverDate !==null && data.issueCoverDate !=="") {
+    //     decamelizedData.issue_cover_date = new Date(data.issueCoverDate).toISOString();
+    // }
 
     console.log("postSubmissionCreateAPI | post-modified | data:", decamelizedData);
 
@@ -101,7 +101,7 @@ export function postSubmissionCreateAPI(data, onSuccessCallback, onErrorCallback
 
         // Minor bugfix.
         data.showsSignsOfTamperingOrRestoration = parseInt(data.showsSignsOfTamperingOrRestoration);
-        data.issueCoverDate = DateTime.fromISO(data.issueCoverDate).toJSDate();
+        // data.issueCoverDate = DateTime.fromISO(data.issueCoverDate).toJSDate();
 
         // Return the callback data.
         onSuccessCallback(data);
@@ -121,7 +121,7 @@ export function getSubmissionDetailAPI(submissionID, onSuccessCallback, onErrorC
 
         // Minor bugfix.
         data.showsSignsOfTamperingOrRestoration = parseInt(data.showsSignsOfTamperingOrRestoration);
-        data.issueCoverDate = DateTime.fromISO(data.issueCoverDate).toJSDate();
+        // data.issueCoverDate = DateTime.fromISO(data.issueCoverDate).toJSDate();
 
         // For debugging purposeso pnly.
         console.log(data);
@@ -164,9 +164,9 @@ export function putSubmissionUpdateAPI(data, onSuccessCallback, onErrorCallback,
     delete decamelizedData.grading_notes_line4;
     delete decamelizedData.grading_notes_line5;
 
-    if (data.issueCoverDate !==undefined && data.issueCoverDate !==null && data.issueCoverDate !=="") {
-        decamelizedData.issue_cover_date = new Date(data.issueCoverDate).toISOString();
-    }
+    // if (data.issueCoverDate !==undefined && data.issueCoverDate !==null && data.issueCoverDate !=="") {
+    //     decamelizedData.issue_cover_date = new Date(data.issueCoverDate).toISOString();
+    // }
 
     console.log("putSubmissionUpdateAPI | post-edited | decamelizedData:", decamelizedData);
 
@@ -178,7 +178,7 @@ export function putSubmissionUpdateAPI(data, onSuccessCallback, onErrorCallback,
 
         // Minor bugfix.
         data.showsSignsOfTamperingOrRestoration = parseInt(data.showsSignsOfTamperingOrRestoration);
-        data.issueCoverDate = DateTime.fromISO(data.issueCoverDate).toJSDate();
+        // data.issueCoverDate = DateTime.fromISO(data.issueCoverDate).toJSDate();
 
         // Return the callback data.
         onSuccessCallback(data);
