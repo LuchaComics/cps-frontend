@@ -312,6 +312,94 @@ function RetailerSubmissionDetail() {
                                 disabled={true}
                             />
 
+                            <FormInputField
+                                label="Special Note - Line 6 (Optional)"
+                                name="specialNotesLine6"
+                                placeholder="Text input"
+                                value={submission.specialNotesLine6}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 35 characters"}
+                                disabled={true}
+                            />
+
+                            <FormInputField
+                                label="Special Note - Line 7 (Optional)"
+                                name="specialNotesLine7"
+                                placeholder="Text input"
+                                value={submission.specialNotesLine7}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 35 characters"}
+                                disabled={true}
+                            />
+
+                            <FormInputField
+                                label="Special Note - Line 8 (Optional)"
+                                name="specialNotesLine8"
+                                placeholder="Text input"
+                                value={submission.specialNotesLine8}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 35 characters"}
+                                disabled={true}
+                            />
+
+                            <FormInputField
+                                label="Special Note - Line 9 (Optional)"
+                                name="specialNotesLine9"
+                                placeholder="Text input"
+                                value={submission.specialNotesLine9}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 35 characters"}
+                                disabled={true}
+                            />
+
+                            <FormInputField
+                                label="Special Note - Line 10 (Optional)"
+                                name="specialNotesLine10"
+                                placeholder="Text input"
+                                value={submission.specialNotesLine10}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 35 characters"}
+                                disabled={true}
+                            />
+
+                            <FormInputField
+                                label="Special Note - Line 11 (Optional)"
+                                name="specialNotesLine11"
+                                placeholder="Text input"
+                                value={submission.specialNotesLine11}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 35 characters"}
+                                disabled={true}
+                            />
+
+                            <FormInputField
+                                label="Special Note - Line 12 (Optional)"
+                                name="specialNotesLine12"
+                                placeholder="Text input"
+                                value={submission.specialNotesLine12}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 35 characters"}
+                                disabled={true}
+                            />
+
+                            <FormInputField
+                                label="Special Note - Line 13 (Optional)"
+                                name="specialNotesLine13"
+                                placeholder="Text input"
+                                value={submission.specialNotesLine13}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 35 characters"}
+                                disabled={true}
+                            />
+
                             <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faMagnifyingGlass} />&nbsp;Summary of Findings</p>
                             <hr />
 
@@ -530,6 +618,94 @@ function RetailerSubmissionDetail() {
                                 name="gradingNotesLine5"
                                 placeholder="Text input"
                                 value={submission.gradingNotesLine5}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 35 characters"}
+                                disabled={true}
+                            />
+
+                            <FormInputField
+                                label="Grading Note - Line 6 (Optional)"
+                                name="gradingNotesLine6"
+                                placeholder="Text input"
+                                value={submission.gradingNotesLine6}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 35 characters"}
+                                disabled={true}
+                            />
+
+                            <FormInputField
+                                label="Grading Note - Line 7 (Optional)"
+                                name="gradingNotesLine7"
+                                placeholder="Text input"
+                                value={submission.gradingNotesLine7}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 35 characters"}
+                                disabled={true}
+                            />
+
+                            <FormInputField
+                                label="Grading Note - Line 8 (Optional)"
+                                name="gradingNotesLine8"
+                                placeholder="Text input"
+                                value={submission.gradingNotesLine8}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 35 characters"}
+                                disabled={true}
+                            />
+
+                            <FormInputField
+                                label="Grading Note - Line 9 (Optional)"
+                                name="gradingNotesLine9"
+                                placeholder="Text input"
+                                value={submission.gradingNotesLine9}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 35 characters"}
+                                disabled={true}
+                            />
+
+                            <FormInputField
+                                label="Grading Note - Line 10 (Optional)"
+                                name="gradingNotesLine10"
+                                placeholder="Text input"
+                                value={submission.gradingNotesLine10}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 35 characters"}
+                                disabled={true}
+                            />
+
+                            <FormInputField
+                                label="Grading Note - Line 11 (Optional)"
+                                name="gradingNotesLine11"
+                                placeholder="Text input"
+                                value={submission.gradingNotesLine11}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 35 characters"}
+                                disabled={true}
+                            />
+
+                            <FormInputField
+                                label="Grading Note - Line 12 (Optional)"
+                                name="gradingNotesLine12"
+                                placeholder="Text input"
+                                value={submission.gradingNotesLine12}
+                                isRequired={true}
+                                maxWidth="280px"
+                                helpText={"Max 35 characters"}
+                                disabled={true}
+                            />
+
+                            <FormInputField
+                                label="Grading Note - Line 13 (Optional)"
+                                name="gradingNotesLine13"
+                                placeholder="Text input"
+                                value={submission.gradingNotesLine13}
                                 isRequired={true}
                                 maxWidth="280px"
                                 helpText={"Max 35 characters"}
