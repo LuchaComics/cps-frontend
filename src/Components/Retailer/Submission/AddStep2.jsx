@@ -67,32 +67,8 @@ function RetailerSubmissionAddStep2() {
     const [overallLetterGrade, setOverallLetterGrade] = useState("");
     const [overallNumberGrade, setOverallNumberGrade] = useState("");
     const [cpsPercentageGrade, setCpsPercentageGrade] = useState("");
-    const [specialNotesLine1, setSpecialNotesLine1] = useState("");
-    const [specialNotesLine2, setSpecialNotesLine2] = useState("");
-    const [specialNotesLine3, setSpecialNotesLine3] = useState("");
-    const [specialNotesLine4, setSpecialNotesLine4] = useState("");
-    const [specialNotesLine5, setSpecialNotesLine5] = useState("");
-    const [specialNotesLine6, setSpecialNotesLine6] = useState("");
-    const [specialNotesLine7, setSpecialNotesLine7] = useState("");
-    const [specialNotesLine8, setSpecialNotesLine8] = useState("");
-    const [specialNotesLine9, setSpecialNotesLine9] = useState("");
-    const [specialNotesLine10, setSpecialNotesLine10] = useState("");
-    const [specialNotesLine11, setSpecialNotesLine11] = useState("");
-    const [specialNotesLine12, setSpecialNotesLine12] = useState("");
-    const [specialNotesLine13, setSpecialNotesLine13] = useState("");
-    const [gradingNotesLine1, setGradingNotesLine1] = useState("");
-    const [gradingNotesLine2, setGradingNotesLine2] = useState("");
-    const [gradingNotesLine3, setGradingNotesLine3] = useState("");
-    const [gradingNotesLine4, setGradingNotesLine4] = useState("");
-    const [gradingNotesLine5, setGradingNotesLine5] = useState("");
-    const [gradingNotesLine6, setGradingNotesLine6] = useState("");
-    const [gradingNotesLine7, setGradingNotesLine7] = useState("");
-    const [gradingNotesLine8, setGradingNotesLine8] = useState("");
-    const [gradingNotesLine9, setGradingNotesLine9] = useState("");
-    const [gradingNotesLine10, setGradingNotesLine10] = useState("");
-    const [gradingNotesLine11, setGradingNotesLine11] = useState("");
-    const [gradingNotesLine12, setGradingNotesLine12] = useState("");
-    const [gradingNotesLine13, setGradingNotesLine13] = useState("");
+    const [specialNotes, setSpecialNotes] = useState("");
+    const [gradingNotes, setGradingNotes] = useState("");
     const [showsSignsOfTamperingOrRestoration, setShowsSignsOfTamperingOrRestoration] = useState("");
     const [showCancelWarning, setShowCancelWarning] = useState(false);
 
@@ -114,32 +90,8 @@ function RetailerSubmissionAddStep2() {
             issueCoverMonth: issueCoverMonth,
             publisherName: publisherName,
             publisherNameOther: publisherNameOther,
-            specialNotesLine1: specialNotesLine1,
-            specialNotesLine2: specialNotesLine2,
-            specialNotesLine3: specialNotesLine3,
-            specialNotesLine4: specialNotesLine4,
-            specialNotesLine5: specialNotesLine5,
-            specialNotesLine6: specialNotesLine6,
-            specialNotesLine7: specialNotesLine7,
-            specialNotesLine8: specialNotesLine8,
-            specialNotesLine9: specialNotesLine9,
-            specialNotesLine10: specialNotesLine10,
-            specialNotesLine11: specialNotesLine11,
-            specialNotesLine12: specialNotesLine12,
-            specialNotesLine13: specialNotesLine13,
-            gradingNotesLine1: gradingNotesLine1,
-            gradingNotesLine2: gradingNotesLine2,
-            gradingNotesLine3: gradingNotesLine3,
-            gradingNotesLine4: gradingNotesLine4,
-            gradingNotesLine5: gradingNotesLine5,
-            gradingNotesLine6: gradingNotesLine6,
-            gradingNotesLine6: gradingNotesLine7,
-            gradingNotesLine8: gradingNotesLine8,
-            gradingNotesLine9: gradingNotesLine9,
-            gradingNotesLine10: gradingNotesLine10,
-            gradingNotesLine11: gradingNotesLine11,
-            gradingNotesLine12: gradingNotesLine12,
-            gradingNotesLine13: gradingNotesLine13,
+            specialNotes: specialNotes,
+            gradingNotes: gradingNotes,
             creasesFinding: creasesFinding,
             tearsFinding: tearsFinding,
             missingPartsFinding: missingPartsFinding,
@@ -386,173 +338,18 @@ function RetailerSubmissionAddStep2() {
                                 maxWidth="280px"
                             />}
 
-                            <FormInputField
-                                label="Special Note - Line 1 (Optional)"
-                                name="specialNotesLine1"
+                            <FormTextareaField
+                                label="Special Note (Optional)"
+                                name="specialNotes"
                                 placeholder="Text input"
-                                value={specialNotesLine1}
+                                value={specialNotes}
                                 errorText={errors && errors.specialNotesLine1}
                                 helpText=""
-                                onChange={(e)=>setSpecialNotesLine1(e.target.value)}
+                                onChange={(e)=>setSpecialNotes(e.target.value)}
                                 isRequired={true}
                                 maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                            />
-
-                            <FormInputField
-                                label="Special Note - Line 2 (Optional)"
-                                name="specialNotesLine2"
-                                placeholder="Text input"
-                                value={specialNotesLine2}
-                                errorText={errors && errors.specialNotesLine2}
-                                helpText=""
-                                onChange={(e)=>setSpecialNotesLine2(e.target.value)}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                            />
-
-                            <FormInputField
-                                label="Special Note - Line 3 (Optional)"
-                                name="specialNotesLine3"
-                                placeholder="Text input"
-                                value={specialNotesLine3}
-                                errorText={errors && errors.specialNotesLine3}
-                                helpText=""
-                                onChange={(e)=>setSpecialNotesLine3(e.target.value)}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                            />
-
-                            <FormInputField
-                                label="Special Note - Line 4 (Optional)"
-                                name="specialNotesLine4"
-                                placeholder="Text input"
-                                value={specialNotesLine4}
-                                errorText={errors && errors.specialNotesLine4}
-                                helpText=""
-                                onChange={(e)=>setSpecialNotesLine4(e.target.value)}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                            />
-
-                            <FormInputField
-                                label="Special Note - Line 5 (Optional)"
-                                name="specialNotesLine5"
-                                placeholder="Text input"
-                                value={specialNotesLine5}
-                                errorText={errors && errors.specialNotesLine5}
-                                helpText=""
-                                onChange={(e)=>setSpecialNotesLine5(e.target.value)}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                            />
-
-                            <FormInputField
-                                label="Special Note - Line 6 (Optional)"
-                                name="specialNotesLine6"
-                                placeholder="Text input"
-                                value={specialNotesLine6}
-                                errorText={errors && errors.specialNotesLine6}
-                                helpText=""
-                                onChange={(e)=>setSpecialNotesLine6(e.target.value)}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                            />
-
-                            <FormInputField
-                                label="Special Note - Line 7 (Optional)"
-                                name="specialNotesLine7"
-                                placeholder="Text input"
-                                value={specialNotesLine7}
-                                errorText={errors && errors.specialNotesLine7}
-                                helpText=""
-                                onChange={(e)=>setSpecialNotesLine7(e.target.value)}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                            />
-
-                            <FormInputField
-                                label="Special Note - Line 8 (Optional)"
-                                name="specialNotesLine8"
-                                placeholder="Text input"
-                                value={specialNotesLine8}
-                                errorText={errors && errors.specialNotesLine8}
-                                helpText=""
-                                onChange={(e)=>setSpecialNotesLine8(e.target.value)}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                            />
-
-                            <FormInputField
-                                label="Special Note - Line 9 (Optional)"
-                                name="specialNotesLine9"
-                                placeholder="Text input"
-                                value={specialNotesLine9}
-                                errorText={errors && errors.specialNotesLine9}
-                                helpText=""
-                                onChange={(e)=>setSpecialNotesLine9(e.target.value)}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                            />
-
-                            <FormInputField
-                                label="Special Note - Line 10 (Optional)"
-                                name="specialNotesLine10"
-                                placeholder="Text input"
-                                value={specialNotesLine10}
-                                errorText={errors && errors.specialNotesLine5}
-                                helpText=""
-                                onChange={(e)=>setSpecialNotesLine10(e.target.value)}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                            />
-
-                            <FormInputField
-                                label="Special Note - Line 11 (Optional)"
-                                name="specialNotesLine11"
-                                placeholder="Text input"
-                                value={specialNotesLine11}
-                                errorText={errors && errors.specialNotesLine11}
-                                helpText=""
-                                onChange={(e)=>setSpecialNotesLine11(e.target.value)}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                            />
-
-                            <FormInputField
-                                label="Special Note - Line 12 (Optional)"
-                                name="specialNotesLine12"
-                                placeholder="Text input"
-                                value={specialNotesLine12}
-                                errorText={errors && errors.specialNotesLine12}
-                                helpText=""
-                                onChange={(e)=>setSpecialNotesLine12(e.target.value)}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                            />
-
-                            <FormInputField
-                                label="Special Note - Line 13 (Optional)"
-                                name="specialNotesLine13"
-                                placeholder="Text input"
-                                value={specialNotesLine13}
-                                errorText={errors && errors.specialNotesLine13}
-                                helpText=""
-                                onChange={(e)=>setSpecialNotesLine13(e.target.value)}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
+                                helpText={"Max 638 characters"}
+                                rows={4}
                             />
 
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faMagnifyingGlass} />&nbsp;Summary of Findings</p>
@@ -755,173 +552,18 @@ function RetailerSubmissionAddStep2() {
                                 maxWidth="180px"
                             />
 
-                            <FormInputField
-                                label="Grading Note - Line 1 (Optional)"
-                                name="gradingNotesLine1"
+                            <FormTextareaField
+                                label="Grading Notes"
+                                name="gradingNotes"
                                 placeholder="Text input"
-                                value={gradingNotesLine1}
-                                errorText={errors && errors.gradingNotesLine1}
+                                value={gradingNotes}
+                                errorText={errors && errors.gradingNotes}
                                 helpText=""
-                                onChange={(e)=>setGradingNotesLine1(e.target.value)}
+                                onChange={(e)=>setGradingNotes(e.target.value)}
                                 isRequired={true}
                                 maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                            />
-
-                            <FormInputField
-                                label="Grading Note - Line 2 (Optional)"
-                                name="gradingNotesLine2"
-                                placeholder="Text input"
-                                value={gradingNotesLine2}
-                                errorText={errors && errors.gradingNotesLine2}
-                                helpText=""
-                                onChange={(e)=>setGradingNotesLine2(e.target.value)}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                            />
-
-                            <FormInputField
-                                label="Grading Note - Line 3 (Optional)"
-                                name="gradingNotesLine3"
-                                placeholder="Text input"
-                                value={gradingNotesLine3}
-                                errorText={errors && errors.gradingNotesLine3}
-                                helpText=""
-                                onChange={(e)=>setGradingNotesLine3(e.target.value)}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                            />
-
-                            <FormInputField
-                                label="Grading Note - Line 4 (Optional)"
-                                name="gradingNotesLine4"
-                                placeholder="Text input"
-                                value={gradingNotesLine4}
-                                errorText={errors && errors.gradingNotesLine4}
-                                helpText=""
-                                onChange={(e)=>setGradingNotesLine4(e.target.value)}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                            />
-
-                            <FormInputField
-                                label="Grading Note - Line 5 (Optional)"
-                                name="gradingNotesLine5"
-                                placeholder="Text input"
-                                value={gradingNotesLine5}
-                                errorText={errors && errors.gradingNotesLine5}
-                                helpText=""
-                                onChange={(e)=>setGradingNotesLine5(e.target.value)}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                            />
-
-                            <FormInputField
-                                label="Grading Note - Line 6 (Optional)"
-                                name="gradingNotesLine6"
-                                placeholder="Text input"
-                                value={gradingNotesLine6}
-                                errorText={errors && errors.gradingNotesLine6}
-                                helpText=""
-                                onChange={(e)=>setGradingNotesLine6(e.target.value)}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                            />
-
-                            <FormInputField
-                                label="Grading Note - Line 7 (Optional)"
-                                name="gradingNotesLine7"
-                                placeholder="Text input"
-                                value={gradingNotesLine7}
-                                errorText={errors && errors.gradingNotesLine7}
-                                helpText=""
-                                onChange={(e)=>setGradingNotesLine7(e.target.value)}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                            />
-
-                            <FormInputField
-                                label="Grading Note - Line 8 (Optional)"
-                                name="gradingNotesLine8"
-                                placeholder="Text input"
-                                value={gradingNotesLine8}
-                                errorText={errors && errors.gradingNotesLine8}
-                                helpText=""
-                                onChange={(e)=>setGradingNotesLine8(e.target.value)}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                            />
-
-                            <FormInputField
-                                label="Grading Note - Line 9 (Optional)"
-                                name="gradingNotesLine9"
-                                placeholder="Text input"
-                                value={gradingNotesLine9}
-                                errorText={errors && errors.gradingNotesLine9}
-                                helpText=""
-                                onChange={(e)=>setGradingNotesLine9(e.target.value)}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                            />
-
-                            <FormInputField
-                                label="Grading Note - Line 10 (Optional)"
-                                name="gradingNotesLine10"
-                                placeholder="Text input"
-                                value={gradingNotesLine10}
-                                errorText={errors && errors.gradingNotesLine10}
-                                helpText=""
-                                onChange={(e)=>setGradingNotesLine10(e.target.value)}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                            />
-
-                            <FormInputField
-                                label="Grading Note - Line 11 (Optional)"
-                                name="gradingNotesLine11"
-                                placeholder="Text input"
-                                value={gradingNotesLine11}
-                                errorText={errors && errors.gradingNotesLine11}
-                                helpText=""
-                                onChange={(e)=>setGradingNotesLine11(e.target.value)}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                            />
-
-                            <FormInputField
-                                label="Grading Note - Line 12 (Optional)"
-                                name="gradingNotesLine12"
-                                placeholder="Text input"
-                                value={gradingNotesLine12}
-                                errorText={errors && errors.gradingNotesLine12}
-                                helpText=""
-                                onChange={(e)=>setGradingNotesLine12(e.target.value)}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                            />
-
-                            <FormInputField
-                                label="Grading Note - Line 13 (Optional)"
-                                name="gradingNotesLine13"
-                                placeholder="Text input"
-                                value={gradingNotesLine13}
-                                errorText={errors && errors.gradingNotesLine13}
-                                helpText=""
-                                onChange={(e)=>setGradingNotesLine13(e.target.value)}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
+                                helpText={"Max 638 characters"}
+                                rows={4}
                             />
 
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faBalanceScale} />&nbsp;Grading</p>
