@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faRightFromBracket, faTachometer, faTasks, faSignOut, faUserCircle, faUsers, faBuilding } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faRightFromBracket, faTachometer, faTasks, faSignOut, faUserCircle, faUsers, faBuilding, faBarcode } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 
 
@@ -109,6 +109,18 @@ export default props => {
                             </a>
                         </li>
                     </ul>
+
+                    <p class="menu-label has-text-grey-light">
+                        System
+                    </p>
+                    <ul class="menu-list">
+                        <li>
+                            <a href="/registry" class={`has-text-grey-light ${location.pathname.includes("registry") && "is-active"}`}>
+                                <FontAwesomeIcon className="fas" icon={faBarcode} />&nbsp;Registry
+                            </a>
+                        </li>
+                    </ul>
+
                     <p class="menu-label has-text-grey-light">
                         Account
                     </p>

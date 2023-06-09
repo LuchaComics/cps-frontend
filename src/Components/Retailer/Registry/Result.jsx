@@ -22,7 +22,9 @@ import {
     OVERALL_NUMBER_GRADE_OPTIONS,
     PUBLISHER_NAME_OPTIONS,
     CPS_PERCENTAGE_GRADE_OPTIONS,
-    HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS
+    HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS,
+    ISSUE_COVER_YEAR_OPTIONS,
+    ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS
 } from "../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
@@ -173,12 +175,25 @@ function RetailerRegistryResult() {
                                 disabled={true}
                             />}
 
-                            {submission && <FormDateField
-                                label="Issue Cover Date"
-                                name="issueCoverDate"
-                                placeholder="Text input"
-                                value={submission.issueCoverDate}
+                            <FormSelectField
+                                label="Issue Cover Year"
+                                name="issueCoverYear"
+                                placeholder="Issue Cover Year"
+                                selectedValue={submission.issueCoverYear}
                                 helpText=""
+                                options={ISSUE_COVER_YEAR_OPTIONS}
+                                isRequired={true}
+                                maxWidth="110px"
+                                disabled={true}
+                            />
+
+                            {submission.issueCoverYear !== 0 && submission.issueCoverYear !== 1 && <FormSelectField
+                                label="Issue Cover Month"
+                                name="issueCoverMonth"
+                                placeholder="Issue Cover Month"
+                                selectedValue={submission.issueCoverMonth}
+                                helpText=""
+                                options={ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS}
                                 isRequired={true}
                                 maxWidth="110px"
                                 disabled={true}
@@ -205,59 +220,16 @@ function RetailerRegistryResult() {
                                 disabled={true}
                             />}
 
-                            <FormInputField
-                                label="Special Note - Line 1 (Optional)"
-                                name="specialNotesLine1"
+                            <FormTextareaField
+                                label="Special Notes (Optional)"
+                                name="specialNotes"
                                 placeholder="Text input"
-                                value={submission.specialNotesLine1}
+                                value={submission.specialNotes}
                                 isRequired={true}
                                 maxWidth="280px"
-                                helpText={"Max 35 characters"}
+                                helpText={"Max 638 characters"}
                                 disabled={true}
-                            />
-
-                            <FormInputField
-                                label="Special Note - Line 2 (Optional)"
-                                name="specialNotesLine2"
-                                placeholder="Text input"
-                                value={submission.specialNotesLine2}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                                disabled={true}
-                            />
-
-                            <FormInputField
-                                label="Special Note - Line 3 (Optional)"
-                                name="specialNotesLine3"
-                                placeholder="Text input"
-                                value={submission.specialNotesLine3}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                                disabled={true}
-                            />
-
-                            <FormInputField
-                                label="Special Note - Line 4 (Optional)"
-                                name="specialNotesLine4"
-                                placeholder="Text input"
-                                value={submission.specialNotesLine4}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                                disabled={true}
-                            />
-
-                            <FormInputField
-                                label="Special Note - Line 5 (Optional)"
-                                name="specialNotesLine5"
-                                placeholder="Text input"
-                                value={submission.specialNotesLine5}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                                disabled={true}
+                                rows={4}
                             />
 
                             <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faMagnifyingGlass} />&nbsp;Summary of Findings</p>
@@ -266,68 +238,25 @@ function RetailerRegistryResult() {
                             <FormRadioField
                                 label="Shows signs of tampering/restoration"
                                 name="showsSignsOfTamperingOrRestoration"
-                                value={submission.showsSignsOfTamperingOrRestoration}
-                                opt1Value={"2"}
+                                value={parseInt(submission.showsSignsOfTamperingOrRestoration)}
+                                opt1Value={2}
                                 opt1Label="No"
-                                opt2Value={"1"}
+                                opt2Value={1}
                                 opt2Label="Yes"
                                 maxWidth="180px"
                                 disabled={true}
                             />
 
-                            <FormInputField
-                                label="Grading Note - Line 1 (Optional)"
-                                name="gradingNotesLine1"
+                            <FormTextareaField
+                                label="Grading Notes (Optional)"
+                                name="gradingNotes"
                                 placeholder="Text input"
-                                value={submission.gradingNotesLine1}
+                                value={submission.gradingNotes}
                                 isRequired={true}
                                 maxWidth="280px"
-                                helpText={"Max 35 characters"}
+                                helpText={"Max 638 characters"}
                                 disabled={true}
-                            />
-
-                            <FormInputField
-                                label="Grading Note - Line 2 (Optional)"
-                                name="gradingNotesLine2"
-                                placeholder="Text input"
-                                value={submission.gradingNotesLine2}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                                disabled={true}
-                            />
-
-                            <FormInputField
-                                label="Grading Note - Line 3 (Optional)"
-                                name="gradingNotesLine3"
-                                placeholder="Text input"
-                                value={submission.gradingNotesLine3}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                                disabled={true}
-                            />
-
-                            <FormInputField
-                                label="Grading Note - Line 4 (Optional)"
-                                name="gradingNotesLine4"
-                                placeholder="Text input"
-                                value={submission.gradingNotesLine4}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                                disabled={true}
-                            />
-
-                            <FormInputField
-                                label="Grading Note - Line 5 (Optional)"
-                                name="gradingNotesLine5"
-                                placeholder="Text input"
-                                value={submission.gradingNotesLine5}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 35 characters"}
-                                disabled={true}
+                                rows={4}
                             />
 
                             <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faBalanceScale} />&nbsp;Grading</p>
