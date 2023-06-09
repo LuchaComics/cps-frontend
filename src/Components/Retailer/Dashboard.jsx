@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTasks, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight, faUsers, faBarcode } from '@fortawesome/free-solid-svg-icons';
+import { faTasks, faGauge, faArrowRight, faUsers, faBarcode } from '@fortawesome/free-solid-svg-icons';
 import { useRecoilState } from 'recoil';
 
 import { topAlertMessageState, topAlertStatusState } from "../../AppState";
@@ -31,6 +30,21 @@ function RetailerDashboard() {
     ////
     //// Misc.
     ////
+
+    ////
+    //// Misc.
+    ////
+
+    useEffect(() => {
+        let mounted = true;
+
+        if (mounted) {
+            window.scrollTo(0, 0);  // Start the page at the top of the page.
+        }
+
+        return () => { mounted = false; }
+    }, []);
+
 
     ////
     //// Component rendering.
