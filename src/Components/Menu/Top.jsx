@@ -78,12 +78,12 @@ function Topbar() {
                 <div class="navbar-brand">
                     {currentUser.role === 1 &&
                         <Link class="navbar-item" href="/admin/dashboard" style={{color:"white"}}>
-                           <img src="/static/CPS logo 2023 square.webp" width={54} height={28} alt="Logo Image" />&nbsp;Collectibles Protective Services
+                           <img src="/static/CPS logo 2023 square.webp" width={28} height={28} alt="Logo Image" />&nbsp;Collectibles Protective Services
                         </Link>
                     }
                     {currentUser.role === 2 &&
                         <Link class="navbar-item" href="/dashboard" style={{color:"white"}}>
-                           <img src="/static/CPS logo 2023 square.webp" width={54} height={28} alt="Logo Image" />&nbsp;Collectibles Protective Services
+                           <img src="/static/CPS logo 2023 square.webp" width={28} height={28} alt="Logo Image" />&nbsp;Collectibles Protective Services
                         </Link>
                     }
                     <a role="button" class="navbar-burger has-text-white" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={(e)=>setOnHamburgerClicked(!onHamburgerClicked)}>

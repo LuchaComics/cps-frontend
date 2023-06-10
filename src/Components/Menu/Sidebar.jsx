@@ -114,37 +114,42 @@ export default props => {
                                 </a>
                             </li>
                             <li>
+                                <a href="/admin/organizations" class={`has-text-grey-light ${location.pathname.includes("organization") && "is-active"}`}>
+                                    <FontAwesomeIcon className="fas" icon={faBuilding} />&nbsp;Organizations
+                                </a>
+                            </li>
+                            {/* <li>
                                 <a href="/admin/submissions" class={`has-text-grey-light ${location.pathname.includes("submission") && "is-active"}`}>
                                     <FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions
                                 </a>
-                            </li>
-                            <li>
+                            </li> */}
+                            {/* <li>
                                 <a href="/admin/customers" class={`has-text-grey-light ${location.pathname.includes("customer") && "is-active"}`}>
                                     <FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers
                                 </a>
-                            </li>
+                            </li> */}
                         </ul>
 
-                        <p class="menu-label has-text-grey-light">
+                        {/* <p class="menu-label has-text-grey-light">
                             System
-                        </p>
-                        <ul class="menu-list">
+                        </p> */}
+                        {/* <ul class="menu-list">
                             <li>
                                 <a href="/admin/registry" class={`has-text-grey-light ${location.pathname.includes("registry") && "is-active"}`}>
                                     <FontAwesomeIcon className="fas" icon={faBarcode} />&nbsp;Registry
                                 </a>
                             </li>
-                        </ul>
+                        </ul> */}
 
                         <p class="menu-label has-text-grey-light">
                             Account
                         </p>
                         <ul class="menu-list">
-                            <li>
+                            {/* <li>
                                 <a href={`/admin/account`} class={`has-text-grey-light ${location.pathname.includes("account") && "is-active"}`}>
                                     <FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Account
                                 </a>
-                            </li>
+                            </li>*/}
                             <li>
                                 <a onClick={(e)=>setShowLogoutWarning(true)} class={`has-text-grey-light ${location.pathname.includes("logout") && "is-active"}`} >
                                     <FontAwesomeIcon className="fas" icon={faSignOut} />&nbsp;Sign Off

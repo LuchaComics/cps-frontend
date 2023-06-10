@@ -8,6 +8,13 @@ import {
 } from "react-router-dom";
 import { RecoilRoot } from 'recoil';
 
+import AdminOrganizationList from "./Components/Admin/Organization/List";
+import AdminOrganizationAdd from "./Components/Admin/Organization/Add";
+import AdminOrganizationDetail from "./Components/Admin/Organization/Detail";
+import AdminOrganizationDetailForSubmission from "./Components/Admin/Organization/DetailForSubmission";
+import AdminOrganizationDetailForUserList from "./Components/Admin/Organization/DetailForUser";
+import AdminOrganizationDetailForCommentList from "./Components/Admin/Organization/DetailForCommentList";
+import AdminOrganizationUpdate from "./Components/Admin/Organization/Update";
 import AdminDashboard from "./Components/Admin/Dashboard";
 import AdminRegistrySearch from "./Components/Admin/Registry/Search";
 import AdminRegistryResult from "./Components/Admin/Registry/Result";
@@ -82,6 +89,13 @@ function AppRoute() {
                         <div class="column">
                             <section class="main-content columns is-fullheight">
                                 <Routes>
+                                    <Route exact path="/admin/organizations" element={<AdminOrganizationList/>}/>
+                                    <Route exact path="/admin/organizations/add" element={<AdminOrganizationAdd/>}/>
+                                    <Route exact path="/admin/organization/:id" element={<AdminOrganizationDetail/>}/>
+                                    <Route exact path="/admin/organization/:id/sub" element={<AdminOrganizationDetailForSubmission/>}/>
+                                    <Route exact path="/admin/organization/:id/users" element={<AdminOrganizationDetailForUserList/>}/>
+                                    <Route exact path="/admin/organization/:id/edit" element={<AdminOrganizationUpdate/>}/>
+                                    <Route exact path="/admin/organization/:id/comments" element={<AdminOrganizationDetailForCommentList/>}/>
                                     <Route exact path="/admin/registry" element={<AdminRegistrySearch/>}/>
                                     <Route exact path="/admin/registry/:cpsn" element={<AdminRegistryResult/>}/>
                                     <Route exact path="/admin/submissions" element={<AdminSubmissionList/>}/>

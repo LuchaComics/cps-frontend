@@ -66,6 +66,21 @@ function AdminDashboard() {
                             </div>
                         </div>
 
+                        <section class="hero is-medium is-success">
+                          <div class="hero-body">
+                            <p class="title">
+                                <FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Organizations
+                            </p>
+                            <p class="subtitle">
+                               Manage the organizations that belong to your system.
+                              <br />
+                              <br />
+                              <Link to={"/admin/organizations"}>View&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
+                            </p>
+                          </div>
+                        </section>
+
+                        {/*
 
                         <section class="hero is-medium is-link">
                           <div class="hero-body">
@@ -108,6 +123,8 @@ function AdminDashboard() {
                             </p>
                           </div>
                         </section>
+
+                        */}
 
                         {/* <section class="hero is-medium is-primary">
                           <div class="hero-body">
