@@ -8,7 +8,7 @@ import { useRecoilState } from 'recoil';
 import FormErrorBox from "../Element/FormErrorBox";
 import useLocalStorage from "../../Hooks/useLocalStorage";
 import { postLoginAPI } from "../../API/gateway";
-import { onHamburgerClickedState } from "../../AppState";
+import { onHamburgerClickedState, currentUserState } from "../../AppState";
 
 
 function Login() {
@@ -24,6 +24,7 @@ function Login() {
     ////
 
     const [onHamburgerClicked, setOnHamburgerClicked] = useRecoilState(onHamburgerClickedState);
+    const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
 
     ////
     //// Component states.
@@ -47,17 +48,29 @@ function Login() {
     //// API.
     ////
 
-    function onLoginSuccess(profile){
+    function onLoginSuccess(response){
         console.log("onLoginSuccess: Starting...");
-
-        // For debugging purposes only.
-        console.log("onHamburgerClicked:", onHamburgerClicked);
 
         // Save the data to local storage for persistance in this browser and
         // redirect the user to their respected dahsboard.
         setOnHamburgerClicked(true); // Set to `true` so the side menu loads on startup of app.
-        setProfile(profile);
-        setForceURL("/dashboard");
+        if (response.user !== undefined && response.user !== null && response.user !== "") {
+            // For debugging purposes only.
+            console.log("onLoginSuccess | authenticated user:", response.user);
+
+            // Store in persistance storage in the browser.
+            setCurrentUser(response.user);
+
+            if (response.user.role === 1) {
+                setForceURL("/admin/dashboard");                
+            }
+            if (response.user.role === 2) {
+                setForceURL("/dashboard");
+            }
+
+            // For debugging purposes only.
+            console.log("currentUser:", currentUser);
+        }
     }
 
     function onLoginError(apiErr) {

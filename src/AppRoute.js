@@ -8,6 +8,13 @@ import {
 } from "react-router-dom";
 import { RecoilRoot } from 'recoil';
 
+import AdminCustomerList from "./Components/Admin/Customer/List";
+import AdminCustomerAdd from "./Components/Admin/Customer/Add";
+import AdminCustomerDetail from "./Components/Admin/Customer/Detail";
+import AdminCustomerDetailForSubmission from "./Components/Admin/Customer/DetailForSubmission";
+import AdminCustomerDetailForCommentList from "./Components/Admin/Customer/DetailForCommentList";
+import AdminCustomerUpdate from "./Components/Admin/Customer/Update";
+import AdminDashboard from "./Components/Admin/Dashboard";
 import RetailerDashboard from "./Components/Retailer/Dashboard";
 import RetailerRegistrySearch from "./Components/Retailer/Registry/Search";
 import RetailerRegistryResult from "./Components/Retailer/Registry/Result";
@@ -62,6 +69,13 @@ function AppRoute() {
                         <div class="column">
                             <section class="main-content columns is-fullheight">
                                 <Routes>
+                                    <Route exact path="/admin/customers" element={<AdminCustomerList/>}/>
+                                    <Route exact path="/admin/customers/add" element={<AdminCustomerAdd/>}/>
+                                    <Route exact path="/admin/customer/:id" element={<AdminCustomerDetail/>}/>
+                                    <Route exact path="/admin/customer/:id/sub" element={<AdminCustomerDetailForSubmission/>}/>
+                                    <Route exact path="/admin/customer/:id/edit" element={<AdminCustomerUpdate/>}/>
+                                    <Route exact path="/admin/customer/:id/comments" element={<AdminCustomerDetailForCommentList/>}/>
+                                    <Route exact path="/admin/dashboard" element={<AdminDashboard/>}/>
                                     <Route exact path="/dashboard" element={<RetailerDashboard/>}/>
                                     <Route exact path="/registry" element={<RetailerRegistrySearch/>}/>
                                     <Route exact path="/registry/:cpsn" element={<RetailerRegistryResult/>}/>

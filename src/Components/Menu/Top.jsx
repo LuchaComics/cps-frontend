@@ -4,14 +4,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faRightFromBracket, faTachometer, faTasks, faSignOut, faUserCircle, faUsers, faBuilding } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 
-import { onHamburgerClickedState } from "../../AppState";
+import { onHamburgerClickedState, currentUserState } from "../../AppState";
 
 
 function Topbar() {
     ////
     //// Global State
     ////
+
     const [onHamburgerClicked, setOnHamburgerClicked] = useRecoilState(onHamburgerClickedState);
+    const [currentUser] = useRecoilState(currentUserState);
 
     ////
     //// Local State
@@ -29,7 +31,9 @@ function Topbar() {
     //// Rendering.
     ////
 
-    // CASE 1 OF 2
+    //-------------//
+    // CASE 1 OF 3 //
+    //-------------//
 
     // Get the current location and if we are at specific URL paths then we
     // will not render this component.
@@ -49,22 +53,39 @@ function Topbar() {
     const location = useLocation();
     var arrayLength = ignorePathsArr.length;
     for (var i = 0; i < arrayLength; i++) {
-        console.log(location.pathname, "===", ignorePathsArr[i], " EQUALS ", location.pathname === ignorePathsArr[i]);
+        // console.log(location.pathname, "===", ignorePathsArr[i], " EQUALS ", location.pathname === ignorePathsArr[i]);
         if (location.pathname === ignorePathsArr[i]) {
             return (null);
         }
     }
 
-    // CASE 2 OF 2
+    //-------------//
+    // CASE 2 OF 3 //
+    //-------------//
+
+    if (currentUser === null) {
+        return (null);
+    }
+
+    //-------------//
+    // CASE 3 OF 3 //
+    //-------------//
 
     // Render the following component GUI
     return (
         <div className="">
             <nav class="navbar has-background-black" role="navigation" aria-label="main navigation" >
                 <div class="navbar-brand">
-                    <a class="navbar-item" href="/dashboard" style={{color:"white"}}>
-                       <img src="/static/CPS logo 2023 square.webp" width={54} height={28} alt="Logo Image" />&nbsp;Collectibles Protective Services
-                    </a>
+                    {currentUser.role === 1 &&
+                        <Link class="navbar-item" href="/admin/dashboard" style={{color:"white"}}>
+                           <img src="/static/CPS logo 2023 square.webp" width={54} height={28} alt="Logo Image" />&nbsp;Collectibles Protective Services
+                        </Link>
+                    }
+                    {currentUser.role === 2 &&
+                        <Link class="navbar-item" href="/dashboard" style={{color:"white"}}>
+                           <img src="/static/CPS logo 2023 square.webp" width={54} height={28} alt="Logo Image" />&nbsp;Collectibles Protective Services
+                        </Link>
+                    }
                     <a role="button" class="navbar-burger has-text-white" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={(e)=>setOnHamburgerClicked(!onHamburgerClicked)}>
                         <span aria-hidden="true">
                         </span>

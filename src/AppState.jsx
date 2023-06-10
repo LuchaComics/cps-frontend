@@ -4,7 +4,9 @@ import {
   selector,
   useRecoilState,
   useRecoilValue,
+  AtomEffect
 } from 'recoil';
+import { recoilPersist } from 'recoil-persist'
 
 
 // Control whether the hamburer menu icon was clicked or not. This state is
@@ -24,4 +26,12 @@ export const topAlertMessageState = atom({
 export const topAlertStatusState = atom({
   key: 'topBannerAlertStatus',
   default: "success",
+});
+
+// https://github.com/polemius/recoil-persist
+const { persistAtom } = recoilPersist()
+export const currentUserState = atom({
+  key: 'currentUser',
+  default: null,
+  effects_UNSTABLE: [persistAtom],
 });

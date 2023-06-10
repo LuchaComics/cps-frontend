@@ -4,15 +4,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faRightFromBracket, faTachometer, faTasks, faSignOut, faUserCircle, faUsers, faBuilding, faBarcode } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 
-
-import { onHamburgerClickedState } from "../../AppState";
+import { onHamburgerClickedState, currentUserState } from "../../AppState";
 
 
 export default props => {
     ////
     //// Global State
     ////
+
     const [onHamburgerClicked, setOnHamburgerClicked] = useRecoilState(onHamburgerClickedState);
+    const [currentUser] = useRecoilState(currentUserState);
 
     ////
     //// Local State
@@ -31,7 +32,7 @@ export default props => {
     ////
 
     //-------------//
-    // CASE 1 OF 2 //
+    // CASE 1 OF 3 //
     //-------------//
 
     // Get the current location and if we are at specific URL paths then we
@@ -52,14 +53,22 @@ export default props => {
     const location = useLocation();
     var arrayLength = ignorePathsArr.length;
     for (var i = 0; i < arrayLength; i++) {
-        console.log(location.pathname, "===", ignorePathsArr[i], " EQUALS ", location.pathname === ignorePathsArr[i]);
+        // console.log(location.pathname, "===", ignorePathsArr[i], " EQUALS ", location.pathname === ignorePathsArr[i]);
         if (location.pathname === ignorePathsArr[i]) {
             return (null);
         }
     }
 
     //-------------//
-    // CASE 2 OF 2 //
+    // CASE 2 OF 3 //
+    //-------------//
+
+    if (currentUser === null) {
+        return (null);
+    }
+
+    //-------------//
+    // CASE 3 OF 3 //
     //-------------//
 
     return (
@@ -80,69 +89,141 @@ export default props => {
                     </footer>
                 </div>
             </div>
-            <div className={`column is-one-fifth has-background-black ${onHamburgerClicked ? '' : 'is-hidden'}`}>
-                <nav class="level is-hidden-mobile">
-                    <div class="level-item has-text-centered">
-                        <figure class='image'>
-                            <img src='/static/CPS logo 2023 GR.webp' style={{maxWidth:"200px"}} />
-                        </figure>
-                    </div>
-                </nav>
-                <aside class="menu p-4">
-                    <p class="menu-label has-text-grey-light">
-                        Staff
-                    </p>
-                    <ul class="menu-list">
-                        <li>
-                            <a href="/dashboard" class={`has-text-grey-light ${location.pathname.includes("dashboard") && "is-active"}`}>
-                                <FontAwesomeIcon className="fas" icon={faTachometer} />&nbsp;Dashboard
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/submissions" class={`has-text-grey-light ${location.pathname.includes("submission") && "is-active"}`}>
-                                <FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/customers" class={`has-text-grey-light ${location.pathname.includes("customer") && "is-active"}`}>
-                                <FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers
-                            </a>
-                        </li>
-                    </ul>
+            {/*
+                -----
+                STAFF
+                -----
+            */}
+            {currentUser.role === 1 &&
+                <div className={`column is-one-fifth has-background-black ${onHamburgerClicked ? '' : 'is-hidden'}`}>
+                    <nav class="level is-hidden-mobile">
+                        <div class="level-item has-text-centered">
+                            <figure class='image'>
+                                <img src='/static/CPS logo 2023 GR.webp' style={{maxWidth:"200px"}} />
+                            </figure>
+                        </div>
+                    </nav>
+                    <aside class="menu p-4">
+                        <p class="menu-label has-text-grey-light">
+                            Staff
+                        </p>
+                        <ul class="menu-list">
+                            <li>
+                                <a href="/admin/dashboard" class={`has-text-grey-light ${location.pathname.includes("dashboard") && "is-active"}`}>
+                                    <FontAwesomeIcon className="fas" icon={faTachometer} />&nbsp;Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/submissions" class={`has-text-grey-light ${location.pathname.includes("submission") && "is-active"}`}>
+                                    <FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/customers" class={`has-text-grey-light ${location.pathname.includes("customer") && "is-active"}`}>
+                                    <FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers
+                                </a>
+                            </li>
+                        </ul>
 
-                    <p class="menu-label has-text-grey-light">
-                        System
-                    </p>
-                    <ul class="menu-list">
-                        <li>
-                            <a href="/registry" class={`has-text-grey-light ${location.pathname.includes("registry") && "is-active"}`}>
-                                <FontAwesomeIcon className="fas" icon={faBarcode} />&nbsp;Registry
-                            </a>
-                        </li>
-                    </ul>
+                        <p class="menu-label has-text-grey-light">
+                            System
+                        </p>
+                        <ul class="menu-list">
+                            <li>
+                                <a href="/admin/registry" class={`has-text-grey-light ${location.pathname.includes("registry") && "is-active"}`}>
+                                    <FontAwesomeIcon className="fas" icon={faBarcode} />&nbsp;Registry
+                                </a>
+                            </li>
+                        </ul>
 
-                    <p class="menu-label has-text-grey-light">
-                        Account
-                    </p>
-                    <ul class="menu-list">
-                        <li>
-                            <a href={`/account`} class={`has-text-grey-light ${location.pathname.includes("account") && "is-active"}`}>
-                                <FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Account
-                            </a>
-                        </li>
-                        <li>
-                            <a href={`/organization`} class={`has-text-grey-light ${location.pathname.includes("organization") && "is-active"}`}>
-                                <FontAwesomeIcon className="fas" icon={faBuilding} />&nbsp;Organization
-                            </a>
-                        </li>
-                        <li>
-                            <a onClick={(e)=>setShowLogoutWarning(true)} class={`has-text-grey-light ${location.pathname.includes("logout") && "is-active"}`} >
-                                <FontAwesomeIcon className="fas" icon={faSignOut} />&nbsp;Sign Off
-                            </a>
-                        </li>
-                    </ul>
-                </aside>
-            </div>
+                        <p class="menu-label has-text-grey-light">
+                            Account
+                        </p>
+                        <ul class="menu-list">
+                            <li>
+                                <a href={`/admin/account`} class={`has-text-grey-light ${location.pathname.includes("account") && "is-active"}`}>
+                                    <FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Account
+                                </a>
+                            </li>
+                            <li>
+                                <a onClick={(e)=>setShowLogoutWarning(true)} class={`has-text-grey-light ${location.pathname.includes("logout") && "is-active"}`} >
+                                    <FontAwesomeIcon className="fas" icon={faSignOut} />&nbsp;Sign Off
+                                </a>
+                            </li>
+                        </ul>
+                    </aside>
+                </div>
+            }
+            {/*
+                --------
+                RETAILER
+                --------
+            */}
+            {currentUser.role === 2 &&
+                <div className={`column is-one-fifth has-background-black ${onHamburgerClicked ? '' : 'is-hidden'}`}>
+                    <nav class="level is-hidden-mobile">
+                        <div class="level-item has-text-centered">
+                            <figure class='image'>
+                                <img src='/static/CPS logo 2023 GR.webp' style={{maxWidth:"200px"}} />
+                            </figure>
+                        </div>
+                    </nav>
+                    <aside class="menu p-4">
+                        <p class="menu-label has-text-grey-light">
+                            Staff
+                        </p>
+                        <ul class="menu-list">
+                            <li>
+                                <a href="/dashboard" class={`has-text-grey-light ${location.pathname.includes("dashboard") && "is-active"}`}>
+                                    <FontAwesomeIcon className="fas" icon={faTachometer} />&nbsp;Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/submissions" class={`has-text-grey-light ${location.pathname.includes("submission") && "is-active"}`}>
+                                    <FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/customers" class={`has-text-grey-light ${location.pathname.includes("customer") && "is-active"}`}>
+                                    <FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers
+                                </a>
+                            </li>
+                        </ul>
+
+                        <p class="menu-label has-text-grey-light">
+                            System
+                        </p>
+                        <ul class="menu-list">
+                            <li>
+                                <a href="/registry" class={`has-text-grey-light ${location.pathname.includes("registry") && "is-active"}`}>
+                                    <FontAwesomeIcon className="fas" icon={faBarcode} />&nbsp;Registry
+                                </a>
+                            </li>
+                        </ul>
+
+                        <p class="menu-label has-text-grey-light">
+                            Account
+                        </p>
+                        <ul class="menu-list">
+                            <li>
+                                <a href={`/account`} class={`has-text-grey-light ${location.pathname.includes("account") && "is-active"}`}>
+                                    <FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Account
+                                </a>
+                            </li>
+                            <li>
+                                <a href={`/organization`} class={`has-text-grey-light ${location.pathname.includes("organization") && "is-active"}`}>
+                                    <FontAwesomeIcon className="fas" icon={faBuilding} />&nbsp;Organization
+                                </a>
+                            </li>
+                            <li>
+                                <a onClick={(e)=>setShowLogoutWarning(true)} class={`has-text-grey-light ${location.pathname.includes("logout") && "is-active"}`} >
+                                    <FontAwesomeIcon className="fas" icon={faSignOut} />&nbsp;Sign Off
+                                </a>
+                            </li>
+                        </ul>
+                    </aside>
+                </div>
+            }
         </>
     );
 }
