@@ -8,13 +8,27 @@ import {
 } from "react-router-dom";
 import { RecoilRoot } from 'recoil';
 
+import AdminDashboard from "./Components/Admin/Dashboard";
+import AdminRegistrySearch from "./Components/Admin/Registry/Search";
+import AdminRegistryResult from "./Components/Admin/Registry/Result";
+import AdminSubmissionList from "./Components/Admin/Submission/List";
+import AdminSubmissionAddStep1WithSearch from "./Components/Admin/Submission/AddStep1WithSearch";
+import AdminSubmissionAddStep1WithResult from "./Components/Admin/Submission/AddStep1WithResult";
+import AdminSubmissionAddStep2 from "./Components/Admin/Submission/AddStep2";
+import AdminSubmissionAddStep3 from "./Components/Admin/Submission/AddStep3";
+import AdminSubmissionDetail from "./Components/Admin/Submission/Detail";
+import AdminSubmissionDetailForCommentList from "./Components/Admin/Submission/DetailForCommentList";
+import AdminSubmissionDetailForCustomer from "./Components/Admin/Submission/DetailForCustomer";
+import AdminSubmissionDetailForPDFFile from "./Components/Admin/Submission/DetailForPDFFile";
+import AdminSubmissionUpdateForSubmission from "./Components/Admin/Submission/UpdateSubmission";
+import AdminSubmissionUpdatePickCustomerWithResult from "./Components/Admin/Submission/UpdatePickCustomerWithResult";
+import AdminSubmissionUpdatePickCustomerWithSearch from "./Components/Admin/Submission/UpdatePickCustomerWithSearch";
 import AdminCustomerList from "./Components/Admin/Customer/List";
 import AdminCustomerAdd from "./Components/Admin/Customer/Add";
 import AdminCustomerDetail from "./Components/Admin/Customer/Detail";
 import AdminCustomerDetailForSubmission from "./Components/Admin/Customer/DetailForSubmission";
 import AdminCustomerDetailForCommentList from "./Components/Admin/Customer/DetailForCommentList";
 import AdminCustomerUpdate from "./Components/Admin/Customer/Update";
-import AdminDashboard from "./Components/Admin/Dashboard";
 import RetailerDashboard from "./Components/Retailer/Dashboard";
 import RetailerRegistrySearch from "./Components/Retailer/Registry/Search";
 import RetailerRegistryResult from "./Components/Retailer/Registry/Result";
@@ -28,7 +42,6 @@ import RetailerSubmissionDetailForCommentList from "./Components/Retailer/Submis
 import RetailerSubmissionDetailForCustomer from "./Components/Retailer/Submission/DetailForCustomer";
 import RetailerSubmissionDetailForPDFFile from "./Components/Retailer/Submission/DetailForPDFFile";
 import RetailerSubmissionUpdateForSubmission from "./Components/Retailer/Submission/UpdateSubmission";
-import RetailerSubmissionUpdateForCustomer from "./Components/Retailer/Submission/UpdateCustomer";
 import RetailerSubmissionUpdatePickCustomerWithResult from "./Components/Retailer/Submission/UpdatePickCustomerWithResult";
 import RetailerSubmissionUpdatePickCustomerWithSearch from "./Components/Retailer/Submission/UpdatePickCustomerWithSearch";
 import RetailerCustomerList from "./Components/Retailer/Customer/List";
@@ -69,6 +82,20 @@ function AppRoute() {
                         <div class="column">
                             <section class="main-content columns is-fullheight">
                                 <Routes>
+                                    <Route exact path="/admin/registry" element={<AdminRegistrySearch/>}/>
+                                    <Route exact path="/admin/registry/:cpsn" element={<AdminRegistryResult/>}/>
+                                    <Route exact path="/admin/submissions" element={<AdminSubmissionList/>}/>
+                                    <Route exact path="/admin/submissions/add/search" element={<AdminSubmissionAddStep1WithSearch/>}/>
+                                    <Route exact path="/admin/submissions/add/results" element={<AdminSubmissionAddStep1WithResult/>}/>
+                                    <Route exact path="/admin/submissions/add" element={<AdminSubmissionAddStep2/>}/>
+                                    <Route exact path="/admin/submissions/add/:id/confirmation" element={<AdminSubmissionAddStep3/>}/>
+                                    <Route exact path="/admin/submission/:id" element={<AdminSubmissionDetail/>}/>
+                                    <Route exact path="/admin/submission/:id/edit" element={<AdminSubmissionUpdateForSubmission/>}/>
+                                    <Route exact path="/admin/submission/:id/cust/search" element={<AdminSubmissionUpdatePickCustomerWithSearch/>}/>
+                                    <Route exact path="/admin/submission/:id/cust/results" element={<AdminSubmissionUpdatePickCustomerWithResult/>}/>
+                                    <Route exact path="/admin/submission/:id/comments" element={<AdminSubmissionDetailForCommentList/>}/>
+                                    <Route exact path="/admin/submission/:id/cust" element={<AdminSubmissionDetailForCustomer/>}/>
+                                    <Route exact path="/admin/submission/:id/file" element={<AdminSubmissionDetailForPDFFile/>}/>
                                     <Route exact path="/admin/customers" element={<AdminCustomerList/>}/>
                                     <Route exact path="/admin/customers/add" element={<AdminCustomerAdd/>}/>
                                     <Route exact path="/admin/customer/:id" element={<AdminCustomerDetail/>}/>
@@ -86,7 +113,6 @@ function AppRoute() {
                                     <Route exact path="/submissions/add/:id/confirmation" element={<RetailerSubmissionAddStep3/>}/>
                                     <Route exact path="/submission/:id" element={<RetailerSubmissionDetail/>}/>
                                     <Route exact path="/submission/:id/edit" element={<RetailerSubmissionUpdateForSubmission/>}/>
-                                    <Route exact path="/submission/:id/edit-customer" element={<RetailerSubmissionUpdateForCustomer/>}/>
                                     <Route exact path="/submission/:id/cust/search" element={<RetailerSubmissionUpdatePickCustomerWithSearch/>}/>
                                     <Route exact path="/submission/:id/cust/results" element={<RetailerSubmissionUpdatePickCustomerWithResult/>}/>
                                     <Route exact path="/submission/:id/comments" element={<RetailerSubmissionDetailForCommentList/>}/>

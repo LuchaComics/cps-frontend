@@ -56,13 +56,13 @@ function AdminDashboard() {
                 <section class="section">
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
-                            <li class="is-active"><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
+                            <li class="is-active"><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
                         </ul>
                     </nav>
                     <nav class="box">
                         <div class="columns">
                             <div class="column">
-                                <h1 class="title is-2"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</h1>
+                                <h1 class="title is-2"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</h1>
                             </div>
                         </div>
 

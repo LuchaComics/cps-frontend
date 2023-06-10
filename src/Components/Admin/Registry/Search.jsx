@@ -1,0 +1,188 @@
+import React, { useState, useEffect } from "react";
+import { Link, Navigate } from "react-router-dom";
+import Scroll from 'react-scroll';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTasks, faTachometer, faPlus, faDownload, faArrowLeft, faArrowRight, faCheckCircle, faCheck, faGauge, faArrowUpRightFromSquare, faSearch, faFilter, faBarcode  } from '@fortawesome/free-solid-svg-icons'
+import Select from 'react-select'
+import { useRecoilState } from 'recoil';
+import { useParams } from 'react-router-dom';
+
+import useLocalStorage from "../../../Hooks/useLocalStorage";
+import { getSubmissionDetailAPI } from "../../../API/submission";
+import { getCustomerListAPI } from "../../../API/customer";
+import FormErrorBox from "../../Element/FormErrorBox";
+import FormInputField from "../../Element/FormInputField";
+import FormTextareaField from "../../Element/FormTextareaField";
+import FormRadioField from "../../Element/FormRadioField";
+import FormMultiSelectField from "../../Element/FormMultiSelectField";
+import FormSelectField from "../../Element/FormSelectField";
+import FormInputFieldWithButton from "../../Element/FormInputFieldWithButton";
+import { FINDING_OPTIONS } from "../../../Constants/FieldOptions";
+import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
+
+
+function AdminRegistrySearch() {
+    ////
+    //// URL Parameters.
+    ////
+
+    ////
+    //// Global state.
+    ////
+
+    const [topAlertMessage, setTopAlertMessage] = useRecoilState(topAlertMessageState);
+    const [topAlertStatus, setTopAlertStatus] = useRecoilState(topAlertStatusState);
+
+    ////
+    //// Component states.
+    ////
+
+    const [errors, setErrors] = useState({});
+    const [isFetching, setFetching] = useState(false);
+    const [forceURL, setForceURL] = useState("");
+    const [customers, setCustomers] = useState({});
+    const [hasCustomer, setHasCustomer] = useState(1);
+    const [cpsrn, setCpsrn] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+
+    ////
+    //// Event handling.
+    ////
+
+    const onSearchKeywordChange = (e) => {
+        setCpsrn(e.target.value);
+    }
+
+    function onEmailChange(e) {
+        setEmail(e.target.value);
+    }
+
+    function onPhoneChange(e) {
+        setPhone(e.target.value);
+    }
+
+    function onFirstNameChange(e) {
+        setFirstName(e.target.value);
+    }
+
+    function onLastNameChange(e) {
+        setLastName(e.target.value);
+    }
+
+    const onSearchButtonClicked = (e) => {
+        console.log("searchButtonClick: Starting...");
+        let aURL = "/admin/registry";
+        let hasCPSRN = false;
+        if (cpsrn !== "") {
+            aURL += "/"+cpsrn;
+            hasCPSRN = true;
+        }
+
+        // Validate before proceeding further by checkign to see if we've either
+        // searched or filtered and if we did not then error.
+        if (hasCPSRN === false) {
+            setErrors({"cpsrn": "Please input data before submitting lookup."});
+
+            // The following code will cause the screen to scroll to the top of
+            // the page. Please see ``react-scroll`` for more information:
+            // https://github.com/fisshy/react-scroll
+            var scroll = Scroll.animateScroll;
+            scroll.scrollToTop();
+        } else {
+            setForceURL(aURL);
+        }
+    }
+
+    ////
+    //// API.
+    ////
+
+    function onCustomerListSuccess(response){
+        console.log("onCustomerListSuccess: Starting...");
+        if (response.results !== null) {
+            setCustomers(response);
+        }
+    }
+
+    function onCustomerListError(apiErr) {
+        console.log("onCustomerListError: Starting...");
+        setErrors(apiErr);
+
+        // The following code will cause the screen to scroll to the top of
+        // the page. Please see ``react-scroll`` for more information:
+        // https://github.com/fisshy/react-scroll
+        var scroll = Scroll.animateScroll;
+        scroll.scrollToTop();
+    }
+
+    function onCustomerListDone() {
+        console.log("onCustomerListDone: Starting...");
+        setFetching(false);
+    }
+
+    ////
+    //// Misc.
+    ////
+
+    ////
+    //// Component rendering.
+    ////
+
+    if (forceURL !== "") {
+        return <Navigate to={forceURL}  />
+    }
+
+    return (
+        <>
+            <div class="container">
+                <section class="section">
+                    <nav class="breadcrumb" aria-label="breadcrumbs">
+                        <ul>
+                            <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
+                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faBarcode} />&nbsp;Registry</Link></li>
+                        </ul>
+                    </nav>
+
+                    <nav class="box">
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faBarcode} />&nbsp;Registry</p>
+                        <FormErrorBox errors={errors} />
+                        <div class="container pb-5">
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Lookup Submission</p>
+                            <hr />
+
+                            <FormInputField
+                                label="Lookup CPSRN"
+                                name="cpsrn"
+                                placeholder="Text input"
+                                value={cpsrn}
+                                errorText={errors && errors.cpsrn}
+                                helpText="MUST BE EXACTL VALUE AS FOUND ON RECORD"
+                                onChange={onSearchKeywordChange}
+                                isRequired={true}
+                                maxWidth="380px"
+                            />
+                        </div>
+
+
+                        <div class="columns pt-5">
+                            <div class="column is-half">
+                                <Link to={`/admin/dashboard`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                <Link to={`/admin/dashboard`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                            </div>
+                            <div class="column is-half has-text-right">
+                                <button class="button is-medium is-primary is-hidden-touch" onClick={onSearchButtonClicked}><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Lookup</button>
+                                <button class="button is-medium is-primary is-fullwidth is-hidden-desktop" onClick={onSearchButtonClicked}><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Lookup</button>
+                            </div>
+                        </div>
+
+                    </nav>
+                </section>
+            </div>
+        </>
+    );
+}
+
+export default AdminRegistrySearch;

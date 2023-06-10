@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faEye, faArrowLeft, faCheckCircle, faPencil, faGauge, faBook, faMagnifyingGlass, faBalanceScale, faUser, faArrowUpRightFromSquare, faComments, faUsers, faUserCircle } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faEye, faArrowLeft, faCheckCircle, faPencil, faGauge, faBook, faMagnifyingGlass, faBalanceScale, faUser, faArrowUpRightFromSquare, faComments } from '@fortawesome/free-solid-svg-icons'
 import Select from 'react-select'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
 import { DateTime } from "luxon";
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { getCustomerDetailAPI, postCustomerCreateCommentOperationAPI } from "../../../API/customer";
+import { getSubmissionDetailAPI, postSubmissionCreateCommentOperationAPI } from "../../../API/submission";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
 import FormTextareaField from "../../Element/FormTextareaField";
@@ -28,7 +28,7 @@ import {
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
-function AdminCustomerDetailForCommentList() {
+function AdminSubmissionDetailForCommentList() {
     ////
     //// URL Parameters.
     ////
@@ -49,7 +49,7 @@ function AdminCustomerDetailForCommentList() {
     const [errors, setErrors] = useState({});
     const [isFetching, setFetching] = useState(false);
     const [forceURL, setForceURL] = useState("");
-    const [customer, setCustomer] = useState({});
+    const [submission, setSubmission] = useState({});
     const [showCustomerEditOptions, setShowCustomerEditOptions] = useState(false);
     const [content, setContent] = useState("");
 
@@ -59,22 +59,23 @@ function AdminCustomerDetailForCommentList() {
 
     const onSubmitClick = (e) => {
         console.log("onSubmitClick: Beginning...");// Submit to the backend.
-        console.log("onSubmitClick, customer:", customer);
+        console.log("onSubmitClick, submission:", submission);
         setErrors(null);
-        postCustomerCreateCommentOperationAPI(id, content, onCustomerUpdateSuccess, onCustomerUpdateError, onCustomerUpdateDone);
+        setFetching(true);
+        postSubmissionCreateCommentOperationAPI(id, content, onSubmissionUpdateSuccess, onSubmissionUpdateError, onSubmissionUpdateDone);
     }
 
     ////
     //// API.
     ////
 
-    function onCustomerDetailSuccess(response){
-        console.log("onCustomerDetailSuccess: Starting...");
-        setCustomer(response);
+    function onSubmissionDetailSuccess(response){
+        console.log("onSubmissionDetailSuccess: Starting...");
+        setSubmission(response);
     }
 
-    function onCustomerDetailError(apiErr) {
-        console.log("onCustomerDetailError: Starting...");
+    function onSubmissionDetailError(apiErr) {
+        console.log("onSubmissionDetailError: Starting...");
         setErrors(apiErr);
 
         // The following code will cause the screen to scroll to the top of
@@ -84,22 +85,22 @@ function AdminCustomerDetailForCommentList() {
         scroll.scrollToTop();
     }
 
-    function onCustomerDetailDone() {
-        console.log("onCustomerDetailDone: Starting...");
+    function onSubmissionDetailDone() {
+        console.log("onSubmissionDetailDone: Starting...");
         setFetching(false);
     }
 
-    function onCustomerUpdateSuccess(response){
+    function onSubmissionUpdateSuccess(response){
         // For debugging purposes only.
-        console.log("onCustomerUpdateSuccess: Starting...");
+        console.log("onSubmissionUpdateSuccess: Starting...");
         console.log(response);
 
         // Add a temporary banner message in the app and then clear itself after 2 seconds.
-        setTopAlertMessage("Comment created");
+        setTopAlertMessage("Comment submitted");
         setTopAlertStatus("success");
         setTimeout(() => {
-            console.log("onCustomerUpdateSuccess: Delayed for 2 seconds.");
-            console.log("onCustomerUpdateSuccess: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
+            console.log("onSubmissionUpdateSuccess: Delayed for 2 seconds.");
+            console.log("onSubmissionUpdateSuccess: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
         }, 2000);
 
@@ -107,24 +108,24 @@ function AdminCustomerDetailForCommentList() {
         setContent("");
 
         // Fetch latest data.
-        getCustomerDetailAPI(
+        getSubmissionDetailAPI(
             id,
-            onCustomerDetailSuccess,
-            onCustomerDetailError,
-            onCustomerDetailDone
+            onSubmissionDetailSuccess,
+            onSubmissionDetailError,
+            onSubmissionDetailDone
         );
     }
 
-    function onCustomerUpdateError(apiErr) {
-        console.log("onCustomerUpdateError: Starting...");
+    function onSubmissionUpdateError(apiErr) {
+        console.log("onSubmissionUpdateError: Starting...");
         setErrors(apiErr);
 
         // Add a temporary banner message in the app and then clear itself after 2 seconds.
         setTopAlertMessage("Failed submitting");
         setTopAlertStatus("danger");
         setTimeout(() => {
-            console.log("onCustomerUpdateError: Delayed for 2 seconds.");
-            console.log("onCustomerUpdateError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
+            console.log("onSubmissionUpdateError: Delayed for 2 seconds.");
+            console.log("onSubmissionUpdateError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
         }, 2000);
 
@@ -135,8 +136,8 @@ function AdminCustomerDetailForCommentList() {
         scroll.scrollToTop();
     }
 
-    function onCustomerUpdateDone() {
-        console.log("onCustomerUpdateDone: Starting...");
+    function onSubmissionUpdateDone() {
+        console.log("onSubmissionUpdateDone: Starting...");
         setFetching(false);
     }
 
@@ -151,11 +152,11 @@ function AdminCustomerDetailForCommentList() {
             window.scrollTo(0, 0);  // Start the page at the top of the page.
 
             setFetching(true);
-            getCustomerDetailAPI(
+            getSubmissionDetailAPI(
                 id,
-                onCustomerDetailSuccess,
-                onCustomerDetailError,
-                onCustomerDetailDone
+                onSubmissionDetailSuccess,
+                onSubmissionDetailError,
+                onSubmissionDetailDone
             );
         }
 
@@ -184,9 +185,9 @@ function AdminCustomerDetailForCommentList() {
 
                         {/*
                             <br /><br />
-                            <Link to={`/customer/${customer.id}/edit-customer`} class="button is-primary" disabled={true}>Edit Current Customer</Link> */}
+                            <Link to={`/submission/${submission.id}/edit-customer`} class="button is-primary" disabled={true}>Edit Current Customer</Link> */}
                         <br /><br />
-                        <Link to={`/admin/customer/${customer.id}/customer/search`} class="button is-primary">Pick a Different Customer</Link>
+                        <Link to={`/admin/submission/${submission.id}/customer/search`} class="button is-primary">Pick a Different Customer</Link>
                     </section>
                     <footer class="modal-card-foot">
                         <button class="button" onClick={(e)=>setShowCustomerEditOptions(false)}>Close</button>
@@ -199,26 +200,12 @@ function AdminCustomerDetailForCommentList() {
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
                             <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
-                            <li class=""><Link to="/admin/customers" aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers</Link></li>
+                            <li class=""><Link to="/admin/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
                             <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail</Link></li>
                         </ul>
                     </nav>
                     <nav class="box">
-                        <div class="columns">
-                            <div class="column">
-                                <p class="title is-2"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Customer</p>
-                            </div>
-                            <div class="column has-text-right">
-                                {/* Mobile Specific */}
-                                <Link to={`/admin/submissions/add?customer_id=${id}&customer_name=${customer.name}`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
-                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
-                                </Link>
-                                {/* Desktop Specific */}
-                                <Link to={`/admin/submissions/add?customer_id=${id}&customer_name=${customer.name}`} class="button is-small is-success is-hidden-touch" type="button">
-                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
-                                </Link>
-                            </div>
-                        </div>
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission</p>
                         <FormErrorBox errors={errors} />
 
                         {isFetching && <div class="columns is-centered" style={{paddingTop: "20px"}}>
@@ -229,17 +216,20 @@ function AdminCustomerDetailForCommentList() {
                             </div>
                         </div>}
 
-                        {!isFetching && customer && <div class="container">
+                        {!isFetching && submission && <div class="container">
                             <div class="tabs is-medium">
                               <ul>
                                 <li>
-                                    <Link to={`/admin/customer/${id}`}>Detail</Link>
+                                    <Link to={`/admin/submission/${id}`}>Detail</Link>
                                 </li>
                                 <li>
-                                    <Link to={`/admin/customer/${id}/sub`}>Submissions</Link>
+                                    <Link to={`/admin/submission/${id}/cust`}>Customer</Link>
                                 </li>
                                 <li class="is-active">
                                     <Link><b>Comments</b></Link>
+                                </li>
+                                <li>
+                                    <Link to={`/admin/submission/${id}/file`}>File</Link>
                                 </li>
                               </ul>
                             </div>
@@ -247,8 +237,8 @@ function AdminCustomerDetailForCommentList() {
                             <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faComments} />&nbsp;Comments</p>
                             <hr />
 
-                            {customer.comments && customer.comments.length > 0 && <>
-                                {customer.comments.map(function(comment, i){
+                            {submission.comments && submission.comments.length > 0 && <>
+                                {submission.comments.map(function(comment, i){
                                     console.log(comment); // For debugging purposes only.
                                     return <div className="pb-3">
                                         <span class="is-pulled-right has-text-grey-light">{comment.createdByName} at <b>{DateTime.fromISO(comment.createdAt).toLocaleString(DateTime.DATETIME_MED)}</b></span>
@@ -260,7 +250,7 @@ function AdminCustomerDetailForCommentList() {
                                 })}
                             </>}
 
-                            <div class="mt-4 block has-background-success-light p-3">
+                            <div class="mt-4 block has-background-white-ter p-3">
                                     <FormTextareaField
                                         label="Write your comment here:"
                                         name="content"
@@ -279,12 +269,12 @@ function AdminCustomerDetailForCommentList() {
 
                             <div class="columns pt-4">
                                 <div class="column is-half">
-                                    <Link to={`/admin/customers`} class="button is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                    <Link to={`/admin/customers`} class="button is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                    <Link to={`/admin/submissions`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                    <Link to={`/admin/submissions`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                 </div>
                                 <div class="column is-half has-text-right">
-                                    <button onClick={onSubmitClick} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comment</button>
-                                    <button onClick={onSubmitClick} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comment</button>
+                                    <button onClick={onSubmitClick} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comment</button>
+                                    <button onClick={onSubmitClick} class="button is-medium is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comment</button>
                                 </div>
                             </div>
 
@@ -297,4 +287,4 @@ function AdminCustomerDetailForCommentList() {
     );
 }
 
-export default AdminCustomerDetailForCommentList;
+export default AdminSubmissionDetailForCommentList;
