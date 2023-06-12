@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 import { DateTime } from "luxon";
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { getCustomerDetailAPI, postCustomerCreateCommentOperationAPI } from "../../../API/customer";
+import { getUserDetailAPI, postUserCreateCommentOperationAPI } from "../../../API/user";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
 import FormTextareaField from "../../Element/FormTextareaField";
@@ -28,7 +28,7 @@ import {
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
-function AdminCustomerDetailForCommentList() {
+function AdminUserDetailForCommentList() {
     ////
     //// URL Parameters.
     ////
@@ -49,8 +49,8 @@ function AdminCustomerDetailForCommentList() {
     const [errors, setErrors] = useState({});
     const [isFetching, setFetching] = useState(false);
     const [forceURL, setForceURL] = useState("");
-    const [customer, setCustomer] = useState({});
-    const [showCustomerEditOptions, setShowCustomerEditOptions] = useState(false);
+    const [user, setUser] = useState({});
+    const [showUserEditOptions, setShowUserEditOptions] = useState(false);
     const [content, setContent] = useState("");
 
     ////
@@ -59,22 +59,22 @@ function AdminCustomerDetailForCommentList() {
 
     const onSubmitClick = (e) => {
         console.log("onSubmitClick: Beginning...");// Submit to the backend.
-        console.log("onSubmitClick, customer:", customer);
+        console.log("onSubmitClick, user:", user);
         setErrors(null);
-        postCustomerCreateCommentOperationAPI(id, content, onCustomerUpdateSuccess, onCustomerUpdateError, onCustomerUpdateDone);
+        postUserCreateCommentOperationAPI(id, content, onUserUpdateSuccess, onUserUpdateError, onUserUpdateDone);
     }
 
     ////
     //// API.
     ////
 
-    function onCustomerDetailSuccess(response){
-        console.log("onCustomerDetailSuccess: Starting...");
-        setCustomer(response);
+    function onUserDetailSuccess(response){
+        console.log("onUserDetailSuccess: Starting...");
+        setUser(response);
     }
 
-    function onCustomerDetailError(apiErr) {
-        console.log("onCustomerDetailError: Starting...");
+    function onUserDetailError(apiErr) {
+        console.log("onUserDetailError: Starting...");
         setErrors(apiErr);
 
         // The following code will cause the screen to scroll to the top of
@@ -84,22 +84,22 @@ function AdminCustomerDetailForCommentList() {
         scroll.scrollToTop();
     }
 
-    function onCustomerDetailDone() {
-        console.log("onCustomerDetailDone: Starting...");
+    function onUserDetailDone() {
+        console.log("onUserDetailDone: Starting...");
         setFetching(false);
     }
 
-    function onCustomerUpdateSuccess(response){
+    function onUserUpdateSuccess(response){
         // For debugging purposes only.
-        console.log("onCustomerUpdateSuccess: Starting...");
+        console.log("onUserUpdateSuccess: Starting...");
         console.log(response);
 
         // Add a temporary banner message in the app and then clear itself after 2 seconds.
         setTopAlertMessage("Comment created");
         setTopAlertStatus("success");
         setTimeout(() => {
-            console.log("onCustomerUpdateSuccess: Delayed for 2 seconds.");
-            console.log("onCustomerUpdateSuccess: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
+            console.log("onUserUpdateSuccess: Delayed for 2 seconds.");
+            console.log("onUserUpdateSuccess: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
         }, 2000);
 
@@ -107,24 +107,24 @@ function AdminCustomerDetailForCommentList() {
         setContent("");
 
         // Fetch latest data.
-        getCustomerDetailAPI(
+        getUserDetailAPI(
             id,
-            onCustomerDetailSuccess,
-            onCustomerDetailError,
-            onCustomerDetailDone
+            onUserDetailSuccess,
+            onUserDetailError,
+            onUserDetailDone
         );
     }
 
-    function onCustomerUpdateError(apiErr) {
-        console.log("onCustomerUpdateError: Starting...");
+    function onUserUpdateError(apiErr) {
+        console.log("onUserUpdateError: Starting...");
         setErrors(apiErr);
 
         // Add a temporary banner message in the app and then clear itself after 2 seconds.
         setTopAlertMessage("Failed submitting");
         setTopAlertStatus("danger");
         setTimeout(() => {
-            console.log("onCustomerUpdateError: Delayed for 2 seconds.");
-            console.log("onCustomerUpdateError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
+            console.log("onUserUpdateError: Delayed for 2 seconds.");
+            console.log("onUserUpdateError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
         }, 2000);
 
@@ -135,8 +135,8 @@ function AdminCustomerDetailForCommentList() {
         scroll.scrollToTop();
     }
 
-    function onCustomerUpdateDone() {
-        console.log("onCustomerUpdateDone: Starting...");
+    function onUserUpdateDone() {
+        console.log("onUserUpdateDone: Starting...");
         setFetching(false);
     }
 
@@ -151,11 +151,11 @@ function AdminCustomerDetailForCommentList() {
             window.scrollTo(0, 0);  // Start the page at the top of the page.
 
             setFetching(true);
-            getCustomerDetailAPI(
+            getUserDetailAPI(
                 id,
-                onCustomerDetailSuccess,
-                onCustomerDetailError,
-                onCustomerDetailDone
+                onUserDetailSuccess,
+                onUserDetailError,
+                onUserDetailDone
             );
         }
 
@@ -172,24 +172,24 @@ function AdminCustomerDetailForCommentList() {
 
     return (
         <>
-            <div class={`modal ${showCustomerEditOptions ? 'is-active' : ''}`}>
+            <div class={`modal ${showUserEditOptions ? 'is-active' : ''}`}>
                 <div class="modal-background"></div>
                 <div class="modal-card">
                     <header class="modal-card-head">
-                        <p class="modal-card-title">Customer Edit</p>
-                        <button class="delete" aria-label="close" onClick={(e)=>setShowCustomerEditOptions(false)}></button>
+                        <p class="modal-card-title">User Edit</p>
+                        <button class="delete" aria-label="close" onClick={(e)=>setShowUserEditOptions(false)}></button>
                     </header>
                     <section class="modal-card-body">
-                        To edit the customer, please select one of the following option:
+                        To edit the user, please select one of the following option:
 
                         {/*
                             <br /><br />
-                            <Link to={`/customer/${customer.id}/edit-customer`} class="button is-primary" disabled={true}>Edit Current Customer</Link> */}
+                            <Link to={`/user/${user.id}/edit-user`} class="button is-primary" disabled={true}>Edit Current User</Link> */}
                         <br /><br />
-                        <Link to={`/admin/customer/${customer.id}/customer/search`} class="button is-primary">Pick a Different Customer</Link>
+                        <Link to={`/admin/user/${user.id}/user/search`} class="button is-primary">Pick a Different User</Link>
                     </section>
                     <footer class="modal-card-foot">
-                        <button class="button" onClick={(e)=>setShowCustomerEditOptions(false)}>Close</button>
+                        <button class="button" onClick={(e)=>setShowUserEditOptions(false)}>Close</button>
                     </footer>
                 </div>
             </div>
@@ -199,22 +199,22 @@ function AdminCustomerDetailForCommentList() {
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
                             <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
-                            <li class=""><Link to="/admin/customers" aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers</Link></li>
+                            <li class=""><Link to="/admin/users" aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Users</Link></li>
                             <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail</Link></li>
                         </ul>
                     </nav>
                     <nav class="box">
                         <div class="columns">
                             <div class="column">
-                                <p class="title is-2"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Customer</p>
+                                <p class="title is-2"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;User</p>
                             </div>
                             <div class="column has-text-right">
                                 {/* Mobile Specific */}
-                                <Link to={`/admin/submissions/add?customer_id=${id}&customer_name=${customer.name}`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
+                                <Link to={`/admin/submissions/add?user_id=${id}&user_name=${user.name}`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
                                 </Link>
                                 {/* Desktop Specific */}
-                                <Link to={`/admin/submissions/add?customer_id=${id}&customer_name=${customer.name}`} class="button is-small is-success is-hidden-touch" type="button">
+                                <Link to={`/admin/submissions/add?user_id=${id}&user_name=${user.name}`} class="button is-small is-success is-hidden-touch" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
                                 </Link>
                             </div>
@@ -229,14 +229,14 @@ function AdminCustomerDetailForCommentList() {
                             </div>
                         </div>}
 
-                        {!isFetching && customer && <div class="container">
+                        {!isFetching && user && <div class="container">
                             <div class="tabs is-medium">
                               <ul>
                                 <li>
-                                    <Link to={`/admin/customer/${id}`}>Detail</Link>
+                                    <Link to={`/admin/user/${id}`}>Detail</Link>
                                 </li>
                                 <li>
-                                    <Link to={`/admin/customer/${id}/sub`}>Submissions</Link>
+                                    <Link to={`/admin/user/${id}/sub`}>Submissions</Link>
                                 </li>
                                 <li class="is-active">
                                     <Link><b>Comments</b></Link>
@@ -247,8 +247,8 @@ function AdminCustomerDetailForCommentList() {
                             <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faComments} />&nbsp;Comments</p>
                             <hr />
 
-                            {customer.comments && customer.comments.length > 0 && <>
-                                {customer.comments.map(function(comment, i){
+                            {user.comments && user.comments.length > 0 && <>
+                                {user.comments.map(function(comment, i){
                                     console.log(comment); // For debugging purposes only.
                                     return <div className="pb-3">
                                         <span class="is-pulled-right has-text-grey-light">{comment.createdByName} at <b>{DateTime.fromISO(comment.createdAt).toLocaleString(DateTime.DATETIME_MED)}</b></span>
@@ -279,8 +279,8 @@ function AdminCustomerDetailForCommentList() {
 
                             <div class="columns pt-4">
                                 <div class="column is-half">
-                                    <Link to={`/admin/customers`} class="button is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                    <Link to={`/admin/customers`} class="button is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                    <Link to={`/admin/users`} class="button is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                    <Link to={`/admin/users`} class="button is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                 </div>
                                 <div class="column is-half has-text-right">
                                     <button onClick={onSubmitClick} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comment</button>
@@ -297,4 +297,4 @@ function AdminCustomerDetailForCommentList() {
     );
 }
 
-export default AdminCustomerDetailForCommentList;
+export default AdminUserDetailForCommentList;

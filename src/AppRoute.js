@@ -30,12 +30,12 @@ import AdminSubmissionDetailForPDFFile from "./Components/Admin/Submission/Detai
 import AdminSubmissionUpdateForSubmission from "./Components/Admin/Submission/UpdateSubmission";
 import AdminSubmissionUpdatePickCustomerWithResult from "./Components/Admin/Submission/UpdatePickCustomerWithResult";
 import AdminSubmissionUpdatePickCustomerWithSearch from "./Components/Admin/Submission/UpdatePickCustomerWithSearch";
-import AdminCustomerList from "./Components/Admin/Customer/List";
-import AdminCustomerAdd from "./Components/Admin/Customer/Add";
-import AdminCustomerDetail from "./Components/Admin/Customer/Detail";
-import AdminCustomerDetailForSubmission from "./Components/Admin/Customer/DetailForSubmission";
-import AdminCustomerDetailForCommentList from "./Components/Admin/Customer/DetailForCommentList";
-import AdminCustomerUpdate from "./Components/Admin/Customer/Update";
+import AdminUserList from "./Components/Admin/User/List";
+import AdminUserAdd from "./Components/Admin/User/Add";
+import AdminUserDetail from "./Components/Admin/User/Detail";
+import AdminUserDetailForSubmission from "./Components/Admin/User/DetailForSubmission";
+import AdminUserDetailForCommentList from "./Components/Admin/User/DetailForCommentList";
+import AdminUserUpdate from "./Components/Admin/User/Update";
 import RetailerDashboard from "./Components/Retailer/Dashboard";
 import RetailerRegistrySearch from "./Components/Retailer/Registry/Search";
 import RetailerRegistryResult from "./Components/Retailer/Registry/Result";
@@ -110,12 +110,12 @@ function AppRoute() {
                                     <Route exact path="/admin/submission/:id/comments" element={<AdminSubmissionDetailForCommentList/>}/>
                                     <Route exact path="/admin/submission/:id/cust" element={<AdminSubmissionDetailForCustomer/>}/>
                                     <Route exact path="/admin/submission/:id/file" element={<AdminSubmissionDetailForPDFFile/>}/>
-                                    <Route exact path="/admin/customers" element={<AdminCustomerList/>}/>
-                                    <Route exact path="/admin/customers/add" element={<AdminCustomerAdd/>}/>
-                                    <Route exact path="/admin/customer/:id" element={<AdminCustomerDetail/>}/>
-                                    <Route exact path="/admin/customer/:id/sub" element={<AdminCustomerDetailForSubmission/>}/>
-                                    <Route exact path="/admin/customer/:id/edit" element={<AdminCustomerUpdate/>}/>
-                                    <Route exact path="/admin/customer/:id/comments" element={<AdminCustomerDetailForCommentList/>}/>
+                                    <Route exact path="/admin/users" element={<AdminUserList/>}/>
+                                    <Route exact path="/admin/users/add" element={<AdminUserAdd/>}/>
+                                    <Route exact path="/admin/user/:id" element={<AdminUserDetail/>}/>
+                                    <Route exact path="/admin/user/:id/sub" element={<AdminUserDetailForSubmission/>}/>
+                                    <Route exact path="/admin/user/:id/edit" element={<AdminUserUpdate/>}/>
+                                    <Route exact path="/admin/user/:id/comments" element={<AdminUserDetailForCommentList/>}/>
                                     <Route exact path="/admin/dashboard" element={<AdminDashboard/>}/>
                                     <Route exact path="/dashboard" element={<RetailerDashboard/>}/>
                                     <Route exact path="/registry" element={<RetailerRegistrySearch/>}/>

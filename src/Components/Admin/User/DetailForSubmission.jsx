@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 import { SUBMISSION_STATES } from "../../../Constants/FieldOptions";
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { getCustomerDetailAPI } from "../../../API/customer";
+import { getUserDetailAPI } from "../../../API/user";
 import { getSubmissionListAPI, deleteSubmissionAPI } from "../../../API/submission";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
@@ -20,7 +20,7 @@ import FormCheckboxField from "../../Element/FormCheckboxField";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
-function AdminCustomerDetailForSubmission() {
+function AdminUserDetailForSubmission() {
     ////
     //// URL Parameters.
     ////
@@ -41,7 +41,7 @@ function AdminCustomerDetailForSubmission() {
     const [errors, setErrors] = useState({});
     const [isFetching, setFetching] = useState(false);
     const [forceURL, setForceURL] = useState("");
-    const [customer, setCustomer] = useState({});
+    const [user, setUser] = useState({});
     const [tabIndex, setTabIndex] = useState(1);
     const [submissions, setSubmissions] = useState("");
     const [selectedSubmissionForDeletion, setSelectedSubmissionForDeletion] = useState("");
@@ -50,7 +50,7 @@ function AdminCustomerDetailForSubmission() {
     //// Event handling.
     ////
 
-    const fetchListByCustomerID = (customerID) => {
+    const fetchListByUserID = (userID) => {
         setFetching(true);
         getSubmissionListAPI(
             new Map(),
@@ -87,16 +87,16 @@ function AdminCustomerDetailForSubmission() {
     //// API.
     ////
 
-    // Customer details.
+    // User details.
 
-    function onCustomerDetailSuccess(response){
-        console.log("onCustomerDetailSuccess: Starting...");
-        setCustomer(response);
-        fetchListByCustomerID(response.id);
+    function onUserDetailSuccess(response){
+        console.log("onUserDetailSuccess: Starting...");
+        setUser(response);
+        fetchListByUserID(response.id);
     }
 
-    function onCustomerDetailError(apiErr) {
-        console.log("onCustomerDetailError: Starting...");
+    function onUserDetailError(apiErr) {
+        console.log("onUserDetailError: Starting...");
         setErrors(apiErr);
 
         // The following code will cause the screen to scroll to the top of
@@ -106,8 +106,8 @@ function AdminCustomerDetailForSubmission() {
         scroll.scrollToTop();
     }
 
-    function onCustomerDetailDone() {
-        console.log("onCustomerDetailDone: Starting...");
+    function onUserDetailDone() {
+        console.log("onUserDetailDone: Starting...");
         setFetching(false);
     }
 
@@ -150,7 +150,7 @@ function AdminCustomerDetailForSubmission() {
         }, 2000);
 
         // Fetch again an updated list.
-        fetchListByCustomerID(id);
+        fetchListByUserID(id);
     }
 
     function onSubmissionDeleteError(apiErr) {
@@ -188,11 +188,11 @@ function AdminCustomerDetailForSubmission() {
             window.scrollTo(0, 0);  // Start the page at the top of the page.
 
             setFetching(true);
-            getCustomerDetailAPI(
+            getUserDetailAPI(
                 id,
-                onCustomerDetailSuccess,
-                onCustomerDetailError,
-                onCustomerDetailDone
+                onUserDetailSuccess,
+                onUserDetailError,
+                onUserDetailDone
             );
         }
 
@@ -213,7 +213,7 @@ function AdminCustomerDetailForSubmission() {
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
                             <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
-                            <li class=""><Link to="/admin/customers" aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers</Link></li>
+                            <li class=""><Link to="/admin/users" aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Users</Link></li>
                             <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail</Link></li>
                         </ul>
                     </nav>
@@ -236,15 +236,15 @@ function AdminCustomerDetailForSubmission() {
                     <nav class="box">
                         <div class="columns">
                             <div class="column">
-                                <p class="title is-2"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Customer</p>
+                                <p class="title is-2"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;User</p>
                             </div>
                             <div class="column has-text-right">
                                 {/* Mobile Specific */}
-                                <Link to={`/admin/submissions/add?customer_id=${id}&customer_name=${customer.name}`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
+                                <Link to={`/admin/submissions/add?user_id=${id}&user_name=${user.name}`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
                                 </Link>
                                 {/* Desktop Specific */}
-                                <Link to={`/admin/submissions/add?customer_id=${id}&customer_name=${customer.name}`} class="button is-small is-success is-hidden-touch" type="button">
+                                <Link to={`/admin/submissions/add?user_id=${id}&user_name=${user.name}`} class="button is-small is-success is-hidden-touch" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
                                 </Link>
                             </div>
@@ -261,17 +261,17 @@ function AdminCustomerDetailForSubmission() {
                             </div>
                         </div>}
 
-                        {!isFetching && customer && <div class="container">
+                        {!isFetching && user && <div class="container">
                             <div class="tabs is-medium">
                               <ul>
                                 <li>
-                                    <Link to={`/admin/customer/${customer.id}`}>Detail</Link>
+                                    <Link to={`/admin/user/${user.id}`}>Detail</Link>
                                 </li>
                                 <li class="is-active">
                                     <Link><b>Submissions</b></Link>
                                 </li>
                                 <li>
-                                    <Link to={`/admin/customer/${customer.id}/comments`}>Comments</Link>
+                                    <Link to={`/admin/user/${user.id}/comments`}>Comments</Link>
                                 </li>
                               </ul>
                             </div>
@@ -334,12 +334,12 @@ function AdminCustomerDetailForSubmission() {
 
                             <div class="columns pt-5">
                                 <div class="column is-half">
-                                    <Link class="button is-hidden-touch" to={`/admin/customers`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                    <Link class="button is-fullwidth is-hidden-desktop" to={`/admin/customers`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                    <Link class="button is-hidden-touch" to={`/admin/users`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                    <Link class="button is-fullwidth is-hidden-desktop" to={`/admin/users`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                 </div>
                                 <div class="column is-half has-text-right">{/*
-                                    <Link to={`/customer/${id}/edit`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
-                                    <Link to={`/customer/${id}/edit`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
+                                    <Link to={`/user/${id}/edit`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
+                                    <Link to={`/user/${id}/edit`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
                                     */}
                                 </div>
                             </div>
@@ -353,4 +353,4 @@ function AdminCustomerDetailForSubmission() {
     );
 }
 
-export default AdminCustomerDetailForSubmission;
+export default AdminUserDetailForSubmission;

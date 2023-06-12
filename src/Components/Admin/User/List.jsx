@@ -5,12 +5,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUsers, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight, faTable } from '@fortawesome/free-solid-svg-icons';
 import { useRecoilState } from 'recoil';
 
-import { getCustomerListAPI, deleteCustomerAPI } from "../../../API/customer";
+import { getUserListAPI, deleteUserAPI } from "../../../API/user";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 import { SUBMISSION_STATES } from "../../../Constants/FieldOptions";
 
 
-function AdminCustomerList() {
+function AdminUserList() {
 
     ////
     //// Global state.
@@ -24,23 +24,23 @@ function AdminCustomerList() {
     ////
 
     const [setErrors] = useState({});
-    const [customers, setCustomers] = useState("");
-    const [selectedCustomerForDeletion, setSelectedCustomerForDeletion] = useState("");
+    const [users, setUsers] = useState("");
+    const [selectedUserForDeletion, setSelectedUserForDeletion] = useState("");
     const [isFetching, setFetching] = useState(false);
 
     ////
     //// API.
     ////
 
-    function onCustomerListSuccess(response){
-        console.log("onCustomerListSuccess: Starting...");
+    function onUserListSuccess(response){
+        console.log("onUserListSuccess: Starting...");
         if (response.results !== null) {
-            setCustomers(response);
+            setUsers(response);
         }
     }
 
-    function onCustomerListError(apiErr) {
-        console.log("onCustomerListError: Starting...");
+    function onUserListError(apiErr) {
+        console.log("onUserListError: Starting...");
         setErrors(apiErr);
 
         // The following code will cause the screen to scroll to the top of
@@ -50,17 +50,17 @@ function AdminCustomerList() {
         scroll.scrollToTop();
     }
 
-    function onCustomerListDone() {
-        console.log("onCustomerListDone: Starting...");
+    function onUserListDone() {
+        console.log("onUserListDone: Starting...");
         setFetching(false);
     }
 
-    function onCustomerDeleteSuccess(response){
-        console.log("onCustomerDeleteSuccess: Starting..."); // For debugging purposes only.
+    function onUserDeleteSuccess(response){
+        console.log("onUserDeleteSuccess: Starting..."); // For debugging purposes only.
 
         // Update notification.
         setTopAlertStatus("success");
-        setTopAlertMessage("Customer deleted");
+        setTopAlertMessage("User deleted");
         setTimeout(() => {
             console.log("onDeleteConfirmButtonClick: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
@@ -70,15 +70,15 @@ function AdminCustomerList() {
         fetchList();
     }
 
-    function onCustomerDeleteError(apiErr) {
-        console.log("onCustomerDeleteError: Starting..."); // For debugging purposes only.
+    function onUserDeleteError(apiErr) {
+        console.log("onUserDeleteError: Starting..."); // For debugging purposes only.
         setErrors(apiErr);
 
         // Update notification.
         setTopAlertStatus("danger");
         setTopAlertMessage("Failed deleting");
         setTimeout(() => {
-            console.log("onCustomerDeleteError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
+            console.log("onUserDeleteError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
         }, 2000);
 
@@ -89,8 +89,8 @@ function AdminCustomerList() {
         scroll.scrollToTop();
     }
 
-    function onCustomerDeleteDone() {
-        console.log("onCustomerDeleteDone: Starting...");
+    function onUserDeleteDone() {
+        console.log("onUserDeleteDone: Starting...");
         setFetching(false);
     }
 
@@ -101,34 +101,34 @@ function AdminCustomerList() {
     const fetchList = () => {
         setFetching(true);
         let params = new Map();
-        getCustomerListAPI(
+        getUserListAPI(
             params,
-            onCustomerListSuccess,
-            onCustomerListError,
-            onCustomerListDone
+            onUserListSuccess,
+            onUserListError,
+            onUserListDone
         );
     }
 
-    const onSelectCustomerForDeletion = (e, customer) => {
-        console.log("onSelectCustomerForDeletion", customer);
-        setSelectedCustomerForDeletion(customer);
+    const onSelectUserForDeletion = (e, user) => {
+        console.log("onSelectUserForDeletion", user);
+        setSelectedUserForDeletion(user);
     }
 
-    const onDeselectCustomerForDeletion = (e) => {
-        console.log("onDeselectCustomerForDeletion");
-        setSelectedCustomerForDeletion("");
+    const onDeselectUserForDeletion = (e) => {
+        console.log("onDeselectUserForDeletion");
+        setSelectedUserForDeletion("");
     }
 
     const onDeleteConfirmButtonClick = (e) => {
         console.log("onDeleteConfirmButtonClick"); // For debugging purposes only.
 
-        deleteCustomerAPI(
-            selectedCustomerForDeletion.id,
-            onCustomerDeleteSuccess,
-            onCustomerDeleteError,
-            onCustomerDeleteDone
+        deleteUserAPI(
+            selectedUserForDeletion.id,
+            onUserDeleteSuccess,
+            onUserDeleteError,
+            onUserDeleteDone
         );
-        setSelectedCustomerForDeletion("");
+        setSelectedUserForDeletion("");
 
     }
 
@@ -158,39 +158,39 @@ function AdminCustomerList() {
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
                             <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
-                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers</Link></li>
+                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Users</Link></li>
                         </ul>
                     </nav>
                     <nav class="box">
-                        <div class={`modal ${selectedCustomerForDeletion ? 'is-active' : ''}`}>
+                        <div class={`modal ${selectedUserForDeletion ? 'is-active' : ''}`}>
                             <div class="modal-background"></div>
                             <div class="modal-card">
                                 <header class="modal-card-head">
                                     <p class="modal-card-title">Are you sure?</p>
-                                    <button class="delete" aria-label="close" onClick={onDeselectCustomerForDeletion}></button>
+                                    <button class="delete" aria-label="close" onClick={onDeselectUserForDeletion}></button>
                                 </header>
                                 <section class="modal-card-body">
-                                    You are about to <b>archive</b> this customer; it will no longer appear on your dashboard This action can be undone but you'll need to contact the system administrator. Are you sure you would like to continue?
+                                    You are about to <b>archive</b> this user; it will no longer appear on your dashboard This action can be undone but you'll need to contact the system administrator. Are you sure you would like to continue?
                                 </section>
                                 <footer class="modal-card-foot">
                                     <button class="button is-success" onClick={onDeleteConfirmButtonClick}>Confirm</button>
-                                    <button class="button" onClick={onDeselectCustomerForDeletion}>Cancel</button>
+                                    <button class="button" onClick={onDeselectUserForDeletion}>Cancel</button>
                                 </footer>
                             </div>
                         </div>
 
                         <div class="columns">
                             <div class="column">
-                                <h1 class="title is-2"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers List</h1>
+                                <h1 class="title is-2"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Users List</h1>
                             </div>
                             <div class="column has-text-right">
                                 {/* Mobile Specific */}
-                                <Link to={`/admin/customers/add`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
-                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add Customer
+                                <Link to={`/admin/users/add`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
+                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add User
                                 </Link>
                                 {/* Desktop Specific */}
-                                <Link to={`/admin/customers/add`} class="button is-small is-success is-hidden-touch" type="button">
-                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add Customer
+                                <Link to={`/admin/users/add`} class="button is-small is-success is-hidden-touch" type="button">
+                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add User
                                 </Link>
                             </div>
                         </div>
@@ -203,7 +203,7 @@ function AdminCustomerList() {
                             </div>
                         </div>}
 
-                        {!isFetching && customers && customers.results && customers.results.length > 0
+                        {!isFetching && users && users.results && users.results.length > 0
                             ?
                             <div class="container">
                                 <div class="b-table">
@@ -219,23 +219,23 @@ function AdminCustomerList() {
                                             </thead>
                                             <tbody>
 
-                                                {customers && customers.results && customers.results.map(function(customer, i){
+                                                {users && users.results && users.results.map(function(user, i){
                                                     return <tr>
-                                                        <td data-label="Name">{customer.name}</td>
-                                                        <td data-label="Email"><a href={`mailto:${customer.email}`}>{customer.email}</a></td>
-                                                        <td data-label="Created">{customer.createdAt}</td>
+                                                        <td data-label="Name">{user.name}</td>
+                                                        <td data-label="Email"><a href={`mailto:${user.email}`}>{user.email}</a></td>
+                                                        <td data-label="Created">{user.createdAt}</td>
                                                         <td class="is-actions-cell">
                                                             <div class="buttons is-right">
-                                                                <Link to={`/admin/submissions/add?customer_id=${customer.id}&customer_name=${customer.name}`} class="button is-small is-success" type="button">
+                                                                <Link to={`/admin/submissions/add?user_id=${user.id}&user_name=${user.name}`} class="button is-small is-success" type="button">
                                                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
                                                                 </Link>
-                                                                <Link to={`/admin/customer/${customer.id}`} class="button is-small is-primary" type="button">
+                                                                <Link to={`/admin/user/${user.id}`} class="button is-small is-primary" type="button">
                                                                     <FontAwesomeIcon className="mdi" icon={faEye} />&nbsp;View
                                                                 </Link>
-                                                                <Link to={`/admin/customer/${customer.id}/edit`} class="button is-small is-warning" type="button">
+                                                                <Link to={`/admin/user/${user.id}/edit`} class="button is-small is-warning" type="button">
                                                                     <FontAwesomeIcon className="mdi" icon={faPencil} />&nbsp;Edit
                                                                 </Link>
-                                                                <button onClick={(e, ses) => onSelectCustomerForDeletion(e, customer)} class="button is-small is-danger" type="button">
+                                                                <button onClick={(e, ses) => onSelectUserForDeletion(e, user)} class="button is-small is-danger" type="button">
                                                                     <FontAwesomeIcon className="mdi" icon={faTrashCan} />&nbsp;Delete
                                                                 </button>
                                                             </div>
@@ -251,10 +251,10 @@ function AdminCustomerList() {
                                 <section class="hero is-medium has-background-white-ter">
                                   <div class="hero-body">
                                     <p class="title">
-                                        <FontAwesomeIcon className="fas" icon={faTable} />&nbsp;No Customers
+                                        <FontAwesomeIcon className="fas" icon={faTable} />&nbsp;No Users
                                     </p>
                                     <p class="subtitle">
-                                        No customers. <b><Link to="/admin/customers/add">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating your first customer.
+                                        No users. <b><Link to="/admin/users/add">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating your first user.
                                     </p>
                                   </div>
                                 </section>
@@ -266,4 +266,4 @@ function AdminCustomerList() {
     );
 }
 
-export default AdminCustomerList;
+export default AdminUserList;

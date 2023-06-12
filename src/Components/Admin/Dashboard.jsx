@@ -80,6 +80,20 @@ function AdminDashboard() {
                           </div>
                         </section>
 
+                        <section class="hero is-medium is-info">
+                          <div class="hero-body">
+                            <p class="title">
+                                <FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;All Users
+                            </p>
+                            <p class="subtitle">
+                              Manage all the users that belong to your system.
+                              <br />
+                              <br />
+                              <Link to={"/admin/users"}>View&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
+                            </p>
+                          </div>
+                        </section>
+
                         {/*
 
                         <section class="hero is-medium is-link">
@@ -96,19 +110,7 @@ function AdminDashboard() {
                           </div>
                         </section>
 
-                        <section class="hero is-medium is-info">
-                          <div class="hero-body">
-                            <p class="title">
-                                <FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers
-                            </p>
-                            <p class="subtitle">
-                              Manage the customers that belong to your organization.
-                              <br />
-                              <br />
-                              <Link to={"/admin/customers"}>View&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
-                            </p>
-                          </div>
-                        </section>
+
 
                         <section class="hero is-medium is-primary">
                           <div class="hero-body">

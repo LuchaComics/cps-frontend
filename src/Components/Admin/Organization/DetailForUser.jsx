@@ -241,14 +241,14 @@ function AdminOrganizationDetailForUserList() {
                                 <p class="title is-2"><FontAwesomeIcon className="fas" icon={faBuilding} />&nbsp;Organization</p>
                             </div>
                             <div class="column has-text-right">
-                                {/* Mobile Specific */}
+                                {/* Mobile Specific
                                 <Link to={`/admin/users/add?organization_id=${id}&organization_name=${organization.name}`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
                                 </Link>
-                                {/* Desktop Specific */}
+                                 Desktop Specific 
                                 <Link to={`/admin/users/add?organization_id=${id}&organization_name=${organization.name}`} class="button is-small is-success is-hidden-touch" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
-                                </Link>
+                                </Link>*/}
                             </div>
                         </div>
                         <FormErrorBox errors={errors} />
