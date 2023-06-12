@@ -273,7 +273,7 @@ function AdminOrganizationDetailForUserList() {
                                     <Link><b>Users</b></Link>
                                 </li>
                                 <li>
-                                    <Link to={`/admin/organization/${organization.id}/sub`}>Users</Link>
+                                    <Link to={`/admin/organization/${organization.id}/sub`}>Submissions</Link>
                                 </li>
                                 <li>
                                     <Link to={`/admin/organization/${organization.id}/comments`}>Comments</Link>
@@ -303,7 +303,7 @@ function AdminOrganizationDetailForUserList() {
                                                     {users && users.results && users.results.map(function(user, i){
                                                         return <tr>
                                                         <td data-label="Name">{user.name}</td>
-                                                        <td data-label="Email">{user.email}</td>
+                                                        <td data-label="Email"><a href={`mailto:${user.email}`}>{user.email}</a></td>
                                                         <td data-label="Created">{user.createdAt}</td>
                                                             <td class="is-actions-cell">
                                                                 <div class="buttons is-right">

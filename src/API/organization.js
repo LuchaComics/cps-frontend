@@ -138,10 +138,10 @@ export function deleteOrganizationAPI(id, onSuccessCallback, onErrorCallback, on
     }).then(onDoneCallback);
 }
 
-export function postOrganizationCreateCommentOperationAPI(userID, content, onSuccessCallback, onErrorCallback, onDoneCallback) {
+export function postOrganizationCreateCommentOperationAPI(organizationID, content, onSuccessCallback, onErrorCallback, onDoneCallback) {
     const axios = getCustomAxios();
     const data = {
-        user_id: userID,
+        organization_id: organizationID,
         content: content,
     };
     axios.post(CPS_ORGANIZATION_CREATE_COMMENT_OPERATION_API_ENDPOINT, data).then((successResponse) => {

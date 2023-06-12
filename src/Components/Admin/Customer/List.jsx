@@ -222,7 +222,7 @@ function AdminCustomerList() {
                                                 {customers && customers.results && customers.results.map(function(customer, i){
                                                     return <tr>
                                                         <td data-label="Name">{customer.name}</td>
-                                                        <td data-label="Email">{customer.email}</td>
+                                                        <td data-label="Email"><a href={`mailto:${customer.email}`}>{customer.email}</a></td>
                                                         <td data-label="Created">{customer.createdAt}</td>
                                                         <td class="is-actions-cell">
                                                             <div class="buttons is-right">
