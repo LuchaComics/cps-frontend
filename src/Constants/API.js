@@ -20,3 +20,6 @@ export const CPS_REGISTRY_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/cpsrn/{id}";
 export const CPS_ORGANIZATIONS_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/organizations";
 export const CPS_ORGANIZATION_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/organization/{id}";
 export const CPS_ORGANIZATION_CREATE_COMMENT_OPERATION_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/organizations/operation/create-comment";
+export const CPS_USERS_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/users";
+export const CPS_USER_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/user/{id}";
+export const CPS_USER_CREATE_COMMENT_OPERATION_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/users/operation/create-comment";

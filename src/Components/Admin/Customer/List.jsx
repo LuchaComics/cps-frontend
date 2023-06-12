@@ -100,7 +100,7 @@ function AdminCustomerList() {
 
     const fetchList = () => {
         setFetching(true);
-        let params = new Map();        
+        let params = new Map();
         getCustomerListAPI(
             params,
             onCustomerListSuccess,

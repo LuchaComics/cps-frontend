@@ -9,7 +9,7 @@ import { SUBMISSION_STATES } from "../../../Constants/FieldOptions";
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
 import { getOrganizationDetailAPI } from "../../../API/organization";
-import { getSubmissionListAPI, deleteSubmissionAPI } from "../../../API/submission";
+import { getUserListAPI, deleteUserAPI } from "../../../API/user";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
 import FormTextareaField from "../../Element/FormTextareaField";
@@ -43,8 +43,8 @@ function AdminOrganizationDetailForUserList() {
     const [forceURL, setForceURL] = useState("");
     const [organization, setOrganization] = useState({});
     const [tabIndex, setTabIndex] = useState(1);
-    const [submissions, setSubmissions] = useState("");
-    const [selectedSubmissionForDeletion, setSelectedSubmissionForDeletion] = useState("");
+    const [users, setUsers] = useState("");
+    const [selectedUserForDeletion, setSelectedUserForDeletion] = useState("");
 
     ////
     //// Event handling.
@@ -52,34 +52,36 @@ function AdminOrganizationDetailForUserList() {
 
     const fetchListByOrganizationID = (organizationID) => {
         setFetching(true);
-        getSubmissionListAPI(
-            new Map(),
-            onSubmissionListSuccess,
-            onSubmissionListError,
-            onSubmissionListDone
+        let params = new Map();
+        params.set('organization_id', id);
+        getUserListAPI(
+            params,
+            onUserListSuccess,
+            onUserListError,
+            onUserListDone
         );
     }
 
-    const onSelectSubmissionForDeletion = (e, submission) => {
-        console.log("onSelectSubmissionForDeletion", submission);
-        setSelectedSubmissionForDeletion(submission);
+    const onSelectUserForDeletion = (e, user) => {
+        console.log("onSelectUserForDeletion", user);
+        setSelectedUserForDeletion(user);
     }
 
-    const onDeselectSubmissionForDeletion = (e) => {
-        console.log("onDeselectSubmissionForDeletion");
-        setSelectedSubmissionForDeletion("");
+    const onDeselectUserForDeletion = (e) => {
+        console.log("onDeselectUserForDeletion");
+        setSelectedUserForDeletion("");
     }
 
     const onDeleteConfirmButtonClick = (e) => {
         console.log("onDeleteConfirmButtonClick"); // For debugging purposes only.
 
-        deleteSubmissionAPI(
-            selectedSubmissionForDeletion.id,
-            onSubmissionDeleteSuccess,
-            onSubmissionDeleteError,
-            onSubmissionDeleteDone
+        deleteUserAPI(
+            selectedUserForDeletion.id,
+            onUserDeleteSuccess,
+            onUserDeleteError,
+            onUserDeleteDone
         );
-        setSelectedSubmissionForDeletion("");
+        setSelectedUserForDeletion("");
 
     }
 
@@ -111,17 +113,17 @@ function AdminOrganizationDetailForUserList() {
         setFetching(false);
     }
 
-    // Submission list.
+    // User list.
 
-    function onSubmissionListSuccess(response){
-        console.log("onSubmissionListSuccess: Starting...");
+    function onUserListSuccess(response){
+        console.log("onUserListSuccess: Starting...");
         if (response.results !== null) {
-            setSubmissions(response);
+            setUsers(response);
         }
     }
 
-    function onSubmissionListError(apiErr) {
-        console.log("onSubmissionListError: Starting...");
+    function onUserListError(apiErr) {
+        console.log("onUserListError: Starting...");
         setErrors(apiErr);
 
         // The following code will cause the screen to scroll to the top of
@@ -131,19 +133,19 @@ function AdminOrganizationDetailForUserList() {
         scroll.scrollToTop();
     }
 
-    function onSubmissionListDone() {
-        console.log("onSubmissionListDone: Starting...");
+    function onUserListDone() {
+        console.log("onUserListDone: Starting...");
         setFetching(false);
     }
 
-    // Submission delete.
+    // User delete.
 
-    function onSubmissionDeleteSuccess(response){
-        console.log("onSubmissionDeleteSuccess: Starting..."); // For debugging purposes only.
+    function onUserDeleteSuccess(response){
+        console.log("onUserDeleteSuccess: Starting..."); // For debugging purposes only.
 
         // Update notification.
         setTopAlertStatus("success");
-        setTopAlertMessage("Submission deleted");
+        setTopAlertMessage("User deleted");
         setTimeout(() => {
             console.log("onDeleteConfirmButtonClick: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
@@ -153,15 +155,15 @@ function AdminOrganizationDetailForUserList() {
         fetchListByOrganizationID(id);
     }
 
-    function onSubmissionDeleteError(apiErr) {
-        console.log("onSubmissionDeleteError: Starting..."); // For debugging purposes only.
+    function onUserDeleteError(apiErr) {
+        console.log("onUserDeleteError: Starting..."); // For debugging purposes only.
         setErrors(apiErr);
 
         // Update notification.
         setTopAlertStatus("danger");
         setTopAlertMessage("Failed deleting");
         setTimeout(() => {
-            console.log("onSubmissionDeleteError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
+            console.log("onUserDeleteError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
         }, 2000);
 
@@ -172,8 +174,8 @@ function AdminOrganizationDetailForUserList() {
         scroll.scrollToTop();
     }
 
-    function onSubmissionDeleteDone() {
-        console.log("onSubmissionDeleteDone: Starting...");
+    function onUserDeleteDone() {
+        console.log("onUserDeleteDone: Starting...");
         setFetching(false);
     }
 
@@ -217,19 +219,19 @@ function AdminOrganizationDetailForUserList() {
                             <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail</Link></li>
                         </ul>
                     </nav>
-                    <div class={`modal ${selectedSubmissionForDeletion ? 'is-active' : ''}`}>
+                    <div class={`modal ${selectedUserForDeletion ? 'is-active' : ''}`}>
                         <div class="modal-background"></div>
                         <div class="modal-card">
                             <header class="modal-card-head">
                                 <p class="modal-card-title">Are you sure?</p>
-                                <button class="delete" aria-label="close" onClick={onDeselectSubmissionForDeletion}></button>
+                                <button class="delete" aria-label="close" onClick={onDeselectUserForDeletion}></button>
                             </header>
                             <section class="modal-card-body">
-                                You are about to <b>archive</b> this submission; it will no longer appear on your dashboard This action can be undone but you'll need to contact the system administrator. Are you sure you would like to continue?
+                                You are about to <b>archive</b> this user; it will no longer appear on your dashboard This action can be undone but you'll need to contact the system administrator. Are you sure you would like to continue?
                             </section>
                             <footer class="modal-card-foot">
                                 <button class="button is-success" onClick={onDeleteConfirmButtonClick}>Confirm</button>
-                                <button class="button" onClick={onDeselectSubmissionForDeletion}>Cancel</button>
+                                <button class="button" onClick={onDeselectUserForDeletion}>Cancel</button>
                             </footer>
                         </div>
                     </div>
@@ -240,11 +242,11 @@ function AdminOrganizationDetailForUserList() {
                             </div>
                             <div class="column has-text-right">
                                 {/* Mobile Specific */}
-                                <Link to={`/admin/submissions/add?organization_id=${id}&organization_name=${organization.name}`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
+                                <Link to={`/admin/users/add?organization_id=${id}&organization_name=${organization.name}`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
                                 </Link>
                                 {/* Desktop Specific */}
-                                <Link to={`/admin/submissions/add?organization_id=${id}&organization_name=${organization.name}`} class="button is-small is-success is-hidden-touch" type="button">
+                                <Link to={`/admin/users/add?organization_id=${id}&organization_name=${organization.name}`} class="button is-small is-success is-hidden-touch" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
                                 </Link>
                             </div>
@@ -271,7 +273,7 @@ function AdminOrganizationDetailForUserList() {
                                     <Link><b>Users</b></Link>
                                 </li>
                                 <li>
-                                    <Link to={`/admin/organization/${organization.id}/sub`}>Submissions</Link>
+                                    <Link to={`/admin/organization/${organization.id}/sub`}>Users</Link>
                                 </li>
                                 <li>
                                     <Link to={`/admin/organization/${organization.id}/comments`}>Comments</Link>
@@ -282,7 +284,7 @@ function AdminOrganizationDetailForUserList() {
                             <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Users</p>
                             <hr />
 
-                            {!isFetching && submissions && submissions.results && submissions.results.length > 0
+                            {!isFetching && users && users.results && users.results.length > 0
                                 ?
                                 <div class="container">
                                     <div class="b-table">
@@ -290,32 +292,28 @@ function AdminOrganizationDetailForUserList() {
                                             <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
                                                 <thead>
                                                     <tr>
-                                                        <th>Title</th>
-                                                        <th>Vol</th>
-                                                        <th>No</th>
-                                                        <th>State</th>
+                                                        <th>Name</th>
+                                                        <th>Email</th>
                                                         <th>Created</th>
                                                         <th></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
 
-                                                    {submissions && submissions.results && submissions.results.map(function(submission, i){
+                                                    {users && users.results && users.results.map(function(user, i){
                                                         return <tr>
-                                                            <td data-label="Title">{submission.seriesTitle}</td>
-                                                            <td data-label="Vol">{submission.issueVol}</td>
-                                                            <td data-label="No">{submission.issueNo}</td>
-                                                            <td data-label="State">{SUBMISSION_STATES[submission.state]}</td>
-                                                            <td data-label="Created">{submission.createdAt}</td>
+                                                        <td data-label="Name">{user.name}</td>
+                                                        <td data-label="Email">{user.email}</td>
+                                                        <td data-label="Created">{user.createdAt}</td>
                                                             <td class="is-actions-cell">
                                                                 <div class="buttons is-right">
-                                                                    <Link to={`/admin/submission/${submission.id}`} target="_blank" rel="noreferrer" class="button is-small is-primary" type="button">
+                                                                    <Link to={`/admin/user/${user.id}`} target="_blank" rel="noreferrer" class="button is-small is-primary" type="button">
                                                                         View&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
                                                                     </Link>
-                                                                    <Link to={`/admin/submission/${submission.id}/edit`} target="_blank" rel="noreferrer" class="button is-small is-warning" type="button">
+                                                                    <Link to={`/admin/user/${user.id}/edit`} target="_blank" rel="noreferrer" class="button is-small is-warning" type="button">
                                                                         Edit&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
                                                                     </Link>
-                                                                    <button onClick={(e, ses) => onSelectSubmissionForDeletion(e, submission)} class="button is-small is-danger" type="button">
+                                                                    <button onClick={(e, ses) => onSelectUserForDeletion(e, user)} class="button is-small is-danger" type="button">
                                                                         <FontAwesomeIcon className="mdi" icon={faTrashCan} />&nbsp;Delete
                                                                     </button>
                                                                 </div>
@@ -331,7 +329,7 @@ function AdminOrganizationDetailForUserList() {
                                 <div class="container">
                                     <article class="message is-dark">
                                         <div class="message-body">
-                                            No submissions. <b><Link to="/admin/submissions/add/search">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating a new submission.
+                                            No users. <b><Link to="/admin/users/add/search">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating a new user.
                                         </div>
                                     </article>
                                 </div>
