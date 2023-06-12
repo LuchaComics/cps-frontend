@@ -52,8 +52,10 @@ function AdminOrganizationDetailForSubmission() {
 
     const fetchListByOrganizationID = (organizationID) => {
         setFetching(true);
+        let params = new Map();
+        params.set('organization_id', id);
         getSubmissionListAPI(
-            new Map(),
+            params,
             onSubmissionListSuccess,
             onSubmissionListError,
             onSubmissionListDone

@@ -100,8 +100,9 @@ function AdminOrganizationList() {
 
     const fetchList = () => {
         setFetching(true);
+        let params = new Map();
         getOrganizationListAPI(
-            new Map(),
+            params,
             onOrganizationListSuccess,
             onOrganizationListError,
             onOrganizationListDone

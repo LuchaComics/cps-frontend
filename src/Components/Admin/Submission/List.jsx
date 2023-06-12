@@ -100,8 +100,9 @@ function AdminSubmissionList() {
 
     const fetchList = () => {
         setFetching(true);
+        let params = new Map();
         getSubmissionListAPI(
-            new Map(),
+            params,
             onSubmissionListSuccess,
             onSubmissionListError,
             onSubmissionListDone
