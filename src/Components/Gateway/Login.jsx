@@ -62,7 +62,7 @@ function Login() {
             setCurrentUser(response.user);
 
             if (response.user.role === 1) {
-                setForceURL("/admin/dashboard");                
+                setForceURL("/admin/dashboard");
             }
             if (response.user.role === 2) {
                 setForceURL("/dashboard");
