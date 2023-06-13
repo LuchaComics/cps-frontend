@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faUserCircle, faGauge, faPencil, faUsers, faEye, faIdCard, faAddressBook, faContactCard, faChartPie } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faUserCircle, faGauge, faPencil, faUsers, faEye, faIdCard, faAddressBook, faContactCard, faChartPie, faCogs } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
 
-import useLocalStorage from "../../../Hooks/useLocalStorage";
 import { getUserDetailAPI, putUserUpdateAPI } from "../../../API/user";
+import { getOrganizationSelectOptionListAPI } from "../../../API/organization";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
 import FormTextareaField from "../../Element/FormTextareaField";
@@ -56,6 +56,10 @@ function AdminUserUpdate() {
     const [agreePromotionsEmail, setHasPromotionalEmail] = useState(true);
     const [howDidYouHearAboutUs, setHowDidYouHearAboutUs] = useState(0);
     const [howDidYouHearAboutUsOther, setHowDidYouHearAboutUsOther] = useState("");
+    const [organizationSelectOptions, setOrganizationSelectOptions] = useState([]);
+    const [organizationID, setOrganizationID] = useState();
+    const [role, setRole] = useState();
+    const [status, setStatus] = useState();
 
     ////
     //// Event handling.
@@ -150,6 +154,9 @@ function AdminUserUpdate() {
             AgreePromotionsEmail: agreePromotionsEmail,
             HowDidYouHearAboutUs: howDidYouHearAboutUs,
             HowDidYouHearAboutUsOther: howDidYouHearAboutUsOther,
+            OrganizationID: organizationID,
+            Role: role,
+            Status: status,
         };
         console.log("onSubmitClick, user:", user);
         putUserUpdateAPI(user, onAdminUserUpdateSuccess, onAdminUserUpdateError, onAdminUserUpdateDone);
@@ -171,6 +178,9 @@ function AdminUserUpdate() {
         setHasPromotionalEmail(response.agreePromotionsEmail);
         setHowDidYouHearAboutUs(response.howDidYouHearAboutUs);
         setHowDidYouHearAboutUsOther(response.howDidYouHearAboutUsOther);
+        setOrganizationID(response.organizationID);
+        setRole(response.role);
+        setStatus(response.status);
     }
 
     function onProfileDetailError(apiErr) {
@@ -232,6 +242,34 @@ function AdminUserUpdate() {
         setFetching(false);
     }
 
+    function onOrganizationOptionListSuccess(response){
+        console.log("onOrganizationOptionListSuccess: Starting...");
+        if (response !== null) {
+            const selectOptions = [
+                {"value": 0, "label": "Please select"}, // Add empty options.
+                ...response
+            ]
+            setOrganizationSelectOptions(selectOptions);
+        }
+    }
+
+    function onOrganizationOptionListError(apiErr) {
+        console.log("onOrganizationOptionListError: Starting...");
+        console.log("onOrganizationOptionListError: apiErr:", apiErr);
+        setErrors(apiErr);
+
+        // The following code will cause the screen to scroll to the top of
+        // the page. Please see ``react-scroll`` for more information:
+        // https://github.com/fisshy/react-scroll
+        var scroll = Scroll.animateScroll;
+        scroll.scrollToTop();
+    }
+
+    function onOrganizationOptionListDone() {
+        console.log("onOrganizationOptionListDone: Starting...");
+        setFetching(false);
+    }
+
     ////
     //// Misc.
     ////
@@ -248,6 +286,13 @@ function AdminUserUpdate() {
                 onProfileDetailSuccess,
                 onProfileDetailError,
                 onProfileDetailDone
+            );
+            let params = new Map();
+            getOrganizationSelectOptionListAPI(
+                params,
+                onOrganizationOptionListSuccess,
+                onOrganizationOptionListError,
+                onOrganizationOptionListDone
             );
         }
 
@@ -288,6 +333,45 @@ function AdminUserUpdate() {
                         </div>}
 
                         {!isFetching && <div class="container">
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faCogs} />&nbsp;Settings</p>
+                            <hr />
+
+                            <FormSelectField
+                                label="Organization ID"
+                                name="organizationID"
+                                placeholder="Pick"
+                                selectedValue={organizationID}
+                                errorText={errors && errors.organizationID}
+                                helpText="Pick the organization this user belongs to and will be limited by"
+                                isRequired={true}
+                                onChange={(e)=>setOrganizationID(e.target.value)}
+                                options={organizationSelectOptions}
+                                disabled={organizationSelectOptions.length === 0}
+                            />
+                            <FormRadioField
+                                label="Role"
+                                name="role"
+                                value={role}
+                                opt1Value={2}
+                                opt1Label="Staff"
+                                opt2Value={3}
+                                opt2Label="Customer"
+                                errorText={errors && errors.role}
+                                onChange={(e)=>setRole(parseInt(e.target.value))}
+                                maxWidth="180px"
+                            />
+                            <FormRadioField
+                                label="Status"
+                                name="status"
+                                value={status}
+                                opt1Value={1}
+                                opt1Label="Active"
+                                opt2Value={2}
+                                opt2Label="Archived"
+                                errorText={errors && errors.status}
+                                onChange={(e)=>setStatus(parseInt(e.target.value))}
+                                maxWidth="180px"
+                            />
 
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Full Name</p>
                             <hr />

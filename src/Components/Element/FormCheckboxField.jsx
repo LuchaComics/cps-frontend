@@ -94,7 +94,6 @@ function FormCheckboxField({
     helpText,       // The special help task to include.
     onChange        // The function to call when a selection occurs.
 }) {
-    console.log("errorText", errorText);
     return (
         <div class="field pb-4">
             <label class="label">{label}</label>

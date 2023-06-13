@@ -300,3 +300,24 @@ export const USER_STATE_WITH_EMPTY_OPTIONS = [
     { value: "", label: "Please select" }, // EMPTY OPTION
     ...USER_STATE_OPTIONS
 ];
+
+export const USER_ROLE_OPTIONS = [
+    { value: 1, label: 'Root' },
+    { value: 2, label: 'Retailer Staff' },
+    { value: 3, label: 'Retailer Customer' },
+];
+
+export const USER_ROLE_WITH_EMPTY_OPTIONS = [
+    { value: "", label: "Please select" }, // EMPTY OPTION
+    ...USER_ROLE_OPTIONS
+];
+
+export const USER_STATUS_OPTIONS = [
+    { value: 1, label: 'Active' },
+    { value: 2, label: 'Archived' },
+];
+
+export const USER_STATUS_WITH_EMPTY_OPTIONS = [
+    { value: "", label: "Please select" }, // EMPTY OPTION
+    ...USER_STATUS_OPTIONS
+];

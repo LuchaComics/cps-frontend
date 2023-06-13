@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faTimesCircle, faCheckCircle, faUserCircle, faGauge, faPencil, faUsers, faIdCard, faAddressBook, faContactCard, faChartPie } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faTimesCircle, faCheckCircle, faUserCircle, faGauge, faPencil, faUsers, faIdCard, faAddressBook, faContactCard, faChartPie, faCogs } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
 import { getUserDetailAPI, postUserCreateAPI } from "../../../API/user";
+import { getOrganizationSelectOptionListAPI } from "../../../API/organization";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
 import FormTextareaField from "../../Element/FormTextareaField";
@@ -14,7 +15,9 @@ import FormRadioField from "../../Element/FormRadioField";
 import FormMultiSelectField from "../../Element/FormMultiSelectField";
 import FormSelectField from "../../Element/FormSelectField";
 import FormCheckboxField from "../../Element/FormCheckboxField";
-import { HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS } from "../../../Constants/FieldOptions";
+import {
+    HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS,
+} from "../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
@@ -50,73 +53,17 @@ function AdminUserAdd() {
     const [howDidYouHearAboutUs, setHowDidYouHearAboutUs] = useState(0);
     const [howDidYouHearAboutUsOther, setHowDidYouHearAboutUsOther] = useState("");
     const [showCancelWarning, setShowCancelWarning] = useState(false);
+    const [organizationSelectOptions, setOrganizationSelectOptions] = useState([]);
+    const [organizationID, setOrganizationID] = useState();
+    const [role, setRole] = useState();
+    const [status, setStatus] = useState();
 
     ////
     //// Event handling.
     ////
 
-    function onEmailChange(e) {
-        setEmail(e.target.value);
-    }
-
-    function onPhoneChange(e) {
-        setPhone(e.target.value);
-    }
-
-    function onFirstNameChange(e) {
-        setFirstName(e.target.value);
-    }
-
-    function onLastNameChange(e) {
-        setLastName(e.target.value);
-    }
-
-    function onPasswordChange(e) {
-        setPassword(e.target.value);
-    }
-
-    function onPasswordRepeatedChange(e) {
-        setPasswordRepeated(e.target.value);
-    }
-
-    function onCompanyNameChange(e) {
-        setCompanyName(e.target.value);
-    }
-
-    function onAddressLine1Change(e) {
-        setAddressLine1(e.target.value);
-    }
-
-    function onAddressLine2Change(e) {
-        setAddressLine2(e.target.value);
-    }
-
-    function onPostalCodeChange(e) {
-        setPostalCode(e.target.value);
-    }
-
-    function onCityChange(e) {
-        setCity(e.target.value);
-    }
-
-    function onRegionChange(e) {
-        setRegion(e.target.value);
-    }
-
-    function onCountryChange(e) {
-        setCountry(e.target.value);
-    }
-
     function onAgreePromotionsEmailChange(e) {
         setHasPromotionalEmail(!agreePromotionsEmail);
-    }
-
-    function onHowDidYouHearAboutUsChange(e) {
-        setHowDidYouHearAboutUs(parseInt(e.target.value));
-    }
-
-    function onHowDidYouHearAboutUsOtherChange(e) {
-        setHowDidYouHearAboutUsOther(e.target.value);
     }
 
     ////
@@ -128,6 +75,9 @@ function AdminUserAdd() {
         setFetching(true);
 
         const user = {
+            OrganizationID: organizationID,
+            Role: role,
+            Status: status,
             Email: email,
             Phone: phone,
             FirstName: firstName,
@@ -169,14 +119,15 @@ function AdminUserAdd() {
 
     function onAdminUserAddError(apiErr) {
         console.log("onAdminUserAddError: Starting...");
+        console.log("onAdminUserAddError: apiErr:", apiErr);
         setErrors(apiErr);
 
         // Add a temporary banner message in the app and then clear itself after 2 seconds.
         setTopAlertMessage("Failed submitting");
         setTopAlertStatus("danger");
         setTimeout(() => {
-            console.log("onAdminUserAddError: Delayed for 2 seconds.");
-            console.log("onAdminUserAddError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
+            // console.log("onAdminUserAddError: Delayed for 2 seconds.");
+            // console.log("onAdminUserAddError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
         }, 2000);
 
@@ -192,6 +143,34 @@ function AdminUserAdd() {
         setFetching(false);
     }
 
+    function onOrganizationOptionListSuccess(response){
+        console.log("onOrganizationOptionListSuccess: Starting...");
+        if (response !== null) {
+            const selectOptions = [
+                {"value": 0, "label": "Please select"}, // Add empty options.
+                ...response
+            ]
+            setOrganizationSelectOptions(selectOptions);
+        }
+    }
+
+    function onOrganizationOptionListError(apiErr) {
+        console.log("onOrganizationOptionListError: Starting...");
+        console.log("onOrganizationOptionListError: apiErr:", apiErr);
+        setErrors(apiErr);
+
+        // The following code will cause the screen to scroll to the top of
+        // the page. Please see ``react-scroll`` for more information:
+        // https://github.com/fisshy/react-scroll
+        var scroll = Scroll.animateScroll;
+        scroll.scrollToTop();
+    }
+
+    function onOrganizationOptionListDone() {
+        console.log("onOrganizationOptionListDone: Starting...");
+        setFetching(false);
+    }
+
     ////
     //// Misc.
     ////
@@ -201,7 +180,13 @@ function AdminUserAdd() {
 
         if (mounted) {
             window.scrollTo(0, 0);  // Start the page at the top of the page.
-
+            let params = new Map();
+            getOrganizationSelectOptionListAPI(
+                params,
+                onOrganizationOptionListSuccess,
+                onOrganizationOptionListError,
+                onOrganizationOptionListDone
+            );
             setFetching(false);
         }
 
@@ -259,6 +244,46 @@ function AdminUserAdd() {
 
                         <div class="container">
 
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faCogs} />&nbsp;Settings</p>
+                            <hr />
+
+                            <FormSelectField
+                                label="Organization ID"
+                                name="organizationID"
+                                placeholder="Pick"
+                                selectedValue={organizationID}
+                                errorText={errors && errors.organizationID}
+                                helpText="Pick the organization this user belongs to and will be limited by"
+                                isRequired={true}
+                                onChange={(e)=>setOrganizationID(e.target.value)}
+                                options={organizationSelectOptions}
+                                disabled={organizationSelectOptions.length === 0}
+                            />
+                            <FormRadioField
+                                label="Role"
+                                name="role"
+                                value={role}
+                                opt1Value={2}
+                                opt1Label="Staff"
+                                opt2Value={3}
+                                opt2Label="Customer"
+                                errorText={errors && errors.role}
+                                onChange={(e)=>setRole(parseInt(e.target.value))}
+                                maxWidth="180px"
+                            />
+                            <FormRadioField
+                                label="Status"
+                                name="status"
+                                value={status}
+                                opt1Value={1}
+                                opt1Label="Active"
+                                opt2Value={2}
+                                opt2Label="Archived"
+                                errorText={errors && errors.status}
+                                onChange={(e)=>setStatus(parseInt(e.target.value))}
+                                maxWidth="180px"
+                            />
+
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Full Name</p>
                             <hr />
 
@@ -269,7 +294,7 @@ function AdminUserAdd() {
                                 value={firstName}
                                 errorText={errors && errors.firstName}
                                 helpText=""
-                                onChange={onFirstNameChange}
+                                onChange={(e)=>setFirstName(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -281,7 +306,7 @@ function AdminUserAdd() {
                                 value={lastName}
                                 errorText={errors && errors.lastName}
                                 helpText=""
-                                onChange={onLastNameChange}
+                                onChange={(e)=>setLastName(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -296,7 +321,7 @@ function AdminUserAdd() {
                                 value={email}
                                 errorText={errors && errors.email}
                                 helpText=""
-                                onChange={onEmailChange}
+                                onChange={(e)=>setEmail(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -308,7 +333,7 @@ function AdminUserAdd() {
                                 value={phone}
                                 errorText={errors && errors.phone}
                                 helpText=""
-                                onChange={onPhoneChange}
+                                onChange={(e)=>setPhone(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -323,7 +348,7 @@ function AdminUserAdd() {
                                 value={country}
                                 errorText={errors && errors.country}
                                 helpText=""
-                                onChange={onCountryChange}
+                                onChange={(e)=>setCountry(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -335,7 +360,7 @@ function AdminUserAdd() {
                                 value={region}
                                 errorText={errors && errors.region}
                                 helpText=""
-                                onChange={onRegionChange}
+                                onChange={(e)=>setRegion(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -347,7 +372,7 @@ function AdminUserAdd() {
                                 value={city}
                                 errorText={errors && errors.city}
                                 helpText=""
-                                onChange={onCityChange}
+                                onChange={(e)=>setCity(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -359,7 +384,7 @@ function AdminUserAdd() {
                                 value={addressLine1}
                                 errorText={errors && errors.addressLine1}
                                 helpText=""
-                                onChange={onAddressLine1Change}
+                                onChange={(e)=>setAddressLine1(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -371,7 +396,7 @@ function AdminUserAdd() {
                                 value={addressLine2}
                                 errorText={errors && errors.addressLine2}
                                 helpText=""
-                                onChange={onAddressLine2Change}
+                                onChange={(e)=>setAddressLine2(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -383,7 +408,7 @@ function AdminUserAdd() {
                                 value={postalCode}
                                 errorText={errors && errors.postalCode}
                                 helpText=""
-                                onChange={onPostalCodeChange}
+                                onChange={(e)=>setPostalCode(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -398,7 +423,7 @@ function AdminUserAdd() {
                                 selectedValue={howDidYouHearAboutUs}
                                 errorText={errors && errors.howDidYouHearAboutUs}
                                 helpText=""
-                                onChange={onHowDidYouHearAboutUsChange}
+                                onChange={(e)=>setHowDidYouHearAboutUs(parseInt(e.target.value))}
                                 options={HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS}
                             />
 
@@ -407,9 +432,9 @@ function AdminUserAdd() {
                                 name="howDidYouHearAboutUsOther"
                                 placeholder="Text input"
                                 value={howDidYouHearAboutUsOther}
-                                errorText={errors && errors.howDidYouHearAboutUsOther}
+                                errorText={(e)=>setHowDidYouHearAboutUsOther(e.target.value)}
                                 helpText=""
-                                onChange={onHowDidYouHearAboutUsOtherChange}
+                                onChange={(e)=>setHowDidYouHearAboutUsOther(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />}

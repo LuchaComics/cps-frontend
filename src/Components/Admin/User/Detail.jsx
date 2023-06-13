@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faUserCircle, faGauge, faPencil, faUsers, faEye, faIdCard, faAddressBook, faContactCard, faChartPie } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faUserCircle, faGauge, faPencil, faUsers, faEye, faIdCard, faAddressBook, faContactCard, faChartPie, faCogs } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
 import { getUserDetailAPI } from "../../../API/user";
+import { getOrganizationSelectOptionListAPI } from "../../../API/organization";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
 import FormTextareaField from "../../Element/FormTextareaField";
@@ -41,6 +42,7 @@ function AdminUserDetail() {
     const [forceURL, setForceURL] = useState("");
     const [user, setUser] = useState({});
     const [tabIndex, setTabIndex] = useState(1);
+    const [organizationSelectOptions, setOrganizationSelectOptions] = useState([]);
 
     ////
     //// Event handling.
@@ -73,6 +75,34 @@ function AdminUserDetail() {
         setFetching(false);
     }
 
+    function onOrganizationOptionListSuccess(response){
+        console.log("onOrganizationOptionListSuccess: Starting...");
+        if (response !== null) {
+            const selectOptions = [
+                {"value": 0, "label": "Please select"}, // Add empty options.
+                ...response
+            ]
+            setOrganizationSelectOptions(selectOptions);
+        }
+    }
+
+    function onOrganizationOptionListError(apiErr) {
+        console.log("onOrganizationOptionListError: Starting...");
+        console.log("onOrganizationOptionListError: apiErr:", apiErr);
+        setErrors(apiErr);
+
+        // The following code will cause the screen to scroll to the top of
+        // the page. Please see ``react-scroll`` for more information:
+        // https://github.com/fisshy/react-scroll
+        var scroll = Scroll.animateScroll;
+        scroll.scrollToTop();
+    }
+
+    function onOrganizationOptionListDone() {
+        console.log("onOrganizationOptionListDone: Starting...");
+        setFetching(false);
+    }
+
     ////
     //// Misc.
     ////
@@ -89,6 +119,14 @@ function AdminUserDetail() {
                 onUserDetailSuccess,
                 onUserDetailError,
                 onUserDetailDone
+            );
+
+            let params = new Map();
+            getOrganizationSelectOptionListAPI(
+                params,
+                onOrganizationOptionListSuccess,
+                onOrganizationOptionListError,
+                onOrganizationOptionListDone
             );
         }
 
@@ -155,6 +193,43 @@ function AdminUserDetail() {
                                 </li>
                               </ul>
                             </div>
+
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faCogs} />&nbsp;Settings</p>
+                            <hr />
+
+                            <FormSelectField
+                                label="Organization ID"
+                                name="organizationID"
+                                placeholder="Pick"
+                                selectedValue={user.organizationID}
+                                errorText={errors && errors.organizationID}
+                                helpText="Pick the organization this user belongs to and will be limited by"
+                                isRequired={true}
+                                options={organizationSelectOptions}
+                                disabled={true}
+                            />
+                            <FormRadioField
+                                label="Role"
+                                name="role"
+                                value={user.role}
+                                opt1Value={2}
+                                opt1Label="Staff"
+                                opt2Value={3}
+                                opt2Label="Customer"
+                                maxWidth="180px"
+                                disabled={true}
+                            />
+                            <FormRadioField
+                                label="Status"
+                                name="status"
+                                value={user.status}
+                                opt1Value={1}
+                                opt1Label="Active"
+                                opt2Value={2}
+                                opt2Label="Archived"
+                                maxWidth="180px"
+                                disabled={true}
+                            />
 
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Full Name</p>
                             <hr />
