@@ -71,6 +71,7 @@ function AdminSubmissionUpdateForSubmission() {
     const [specialNotes, setSpecialNotes] = useState("");
     const [gradingNotes, setGradingNotes] = useState("");
     const [showsSignsOfTamperingOrRestoration, setShowsSignsOfTamperingOrRestoration] = useState("");
+    const [status, setStatus] = useState(0);
 
     ////
     //// Event handling.
@@ -105,6 +106,7 @@ function AdminSubmissionUpdateForSubmission() {
             overallNumberGrade: parseFloat(overallNumberGrade),
             cpsPercentageGrade: parseFloat(cpsPercentageGrade),
             showsSignsOfTamperingOrRestoration: parseInt(showsSignsOfTamperingOrRestoration),
+            status: status,
         };
 
         // Submit to the backend.
@@ -139,6 +141,7 @@ function AdminSubmissionUpdateForSubmission() {
         setSpecialNotes(response.specialNotes);
         setShowsSignsOfTamperingOrRestoration(response.showsSignsOfTamperingOrRestoration);
         setGradingNotes(response.gradingNotes);
+        setStatus(response.status);
     }
 
     function onSubmissionDetailError(apiErr) {

@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTasks, faTachometer, faPlus, faTimesCircle, faCheckCircle, faGauge, faUsers, faEye, faBook, faMagnifyingGlass, faBalanceScale, faUser, } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 
-import useLocalStorage from "../../../Hooks/useLocalStorage";
 import { postSubmissionCreateAPI } from "../../../API/submission";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
@@ -20,7 +19,8 @@ import {
     PUBLISHER_NAME_WITH_EMPTY_OPTIONS,
     CPS_PERCENTAGE_GRADE_WITH_EMPTY_OPTIONS,
     ISSUE_COVER_YEAR_OPTIONS,
-    ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS
+    ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS,
+    USER_STATE_WITH_EMPTY_OPTIONS
 } from "../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
@@ -31,8 +31,8 @@ function AdminSubmissionAddStep2() {
     ////
 
     const [searchParams] = useSearchParams(); // Special thanks via https://stackoverflow.com/a/65451140
-    const customerID = searchParams.get("customer_id");
-    const customerName = searchParams.get("customer_name");
+    const userID = searchParams.get("user_id");
+    const userName = searchParams.get("user_name");
 
     ////
     //// Global state.
@@ -71,6 +71,7 @@ function AdminSubmissionAddStep2() {
     const [gradingNotes, setGradingNotes] = useState("");
     const [showsSignsOfTamperingOrRestoration, setShowsSignsOfTamperingOrRestoration] = useState("");
     const [showCancelWarning, setShowCancelWarning] = useState(false);
+    const [status, setStatus] = useState("");
 
     ////
     //// Event handling.
@@ -104,17 +105,23 @@ function AdminSubmissionAddStep2() {
             overallLetterGrade: overallLetterGrade,
             overallNumberGrade: parseFloat(overallNumberGrade),
             cpsPercentageGrade: parseFloat(cpsPercentageGrade),
-            showsSignsOfTamperingOrRestoration: parseInt(showsSignsOfTamperingOrRestoration)
+            showsSignsOfTamperingOrRestoration: parseInt(showsSignsOfTamperingOrRestoration),
+            status: status,
         };
 
-        console.log("onSubmitClick: Attaching customer identification.");
-        if (customerID !== undefined && customerID !== null && customerID !== "") {
-            submission.UserID = customerID;
+        console.log("onSubmitClick: Attaching user identification.");
+        if (userID !== undefined && userID !== null && userID !== "") {
+            submission.UserID = userID;
         }
 
         // Submit to the backend.
         console.log("onSubmitClick: payload:", submission);
-        postSubmissionCreateAPI(submission, onSubmissionCreateSuccess, onSubmissionCreateError, onSubmissionCreateDone);
+        postSubmissionCreateAPI(
+            submission,
+            onSubmissionCreateSuccess,
+            onSubmissionCreateError,
+            onSubmissionCreateDone
+        );
     }
 
     ////
@@ -136,8 +143,8 @@ function AdminSubmissionAddStep2() {
         }, 2000);
 
         let urlParams = "";
-        if (customerName !== null) {
-            urlParams += "?customer_id=" + customerID + "&customer_name=" + customerName;
+        if (userName !== null) {
+            urlParams += "?user_id=" + userID + "&user_name=" + userName;
         }
 
         // Redirect the user to a new page.
@@ -196,7 +203,7 @@ function AdminSubmissionAddStep2() {
             <div class="container">
                 <section class="section">
                     <nav class="breadcrumb" aria-label="breadcrumbs">
-                       {customerName === null
+                       {userName === null
                            ?
                             <ul>
                                 <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
@@ -206,9 +213,9 @@ function AdminSubmissionAddStep2() {
                             :
                             <ul>
                                 <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
-                                <li class=""><Link to="/admin/customers" aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers</Link></li>
-                                <li class=""><Link to={`/admin/customer/${customerID}`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail</Link></li>
-                                <li class=""><Link to={`/admin/customer/${customerID}/sub`} aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
+                                <li class=""><Link to="/admin/users" aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Users</Link></li>
+                                <li class=""><Link to={`/admin/user/${userID}`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail</Link></li>
+                                <li class=""><Link to={`/admin/user/${userID}/sub`} aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
                                 <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
                             </ul>
                         }
@@ -225,11 +232,11 @@ function AdminSubmissionAddStep2() {
                                     Your submission will be cancelled and your work will be lost. This cannot be undone. Do you want to continue?
                                 </section>
                                 <footer class="modal-card-foot">
-                                    {customerName === null
+                                    {userName === null
                                         ?
                                         <Link class="button is-medium is-success" to={`/admin/submissions/add/search`}>Yes</Link>
                                         :
-                                        <Link class="button is-medium is-success" to={`/admin/customer/${customerID}/sub`}>Yes</Link>
+                                        <Link class="button is-medium is-success" to={`/admin/user/${userID}/sub`}>Yes</Link>
                                     }
                                     <button class="button is-medium " onClick={(e)=>setShowCancelWarning(false)}>No</button>
                                 </footer>
@@ -616,6 +623,19 @@ function AdminSubmissionAddStep2() {
                                 onChange={(e)=>setCpsPercentageGrade(e.target.value)}
                                 options={CPS_PERCENTAGE_GRADE_WITH_EMPTY_OPTIONS}
                             />}
+
+                            <FormSelectField
+                                label="Status"
+                                name="status"
+                                placeholder="Status"
+                                selectedValue={status}
+                                errorText={errors && errors.status}
+                                helpText=""
+                                onChange={(e)=>setStatus(parseInt(e.target.value))}
+                                options={USER_STATE_WITH_EMPTY_OPTIONS}
+                                isRequired={true}
+                                maxWidth="110px"
+                            />
 
                             <div class="columns pt-5">
                                 <div class="column is-half">

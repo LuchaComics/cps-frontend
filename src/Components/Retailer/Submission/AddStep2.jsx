@@ -104,7 +104,8 @@ function RetailerSubmissionAddStep2() {
             overallLetterGrade: overallLetterGrade,
             overallNumberGrade: parseFloat(overallNumberGrade),
             cpsPercentageGrade: parseFloat(cpsPercentageGrade),
-            showsSignsOfTamperingOrRestoration: parseInt(showsSignsOfTamperingOrRestoration)
+            showsSignsOfTamperingOrRestoration: parseInt(showsSignsOfTamperingOrRestoration),
+            status: 1, // 1 = Pending.
         };
 
         console.log("onSubmitClick: Attaching customer identification.");
@@ -114,7 +115,12 @@ function RetailerSubmissionAddStep2() {
 
         // Submit to the backend.
         console.log("onSubmitClick: payload:", submission);
-        postSubmissionCreateAPI(submission, onSubmissionCreateSuccess, onSubmissionCreateError, onSubmissionCreateDone);
+        postSubmissionCreateAPI(
+            submission,
+            onSubmissionCreateSuccess,
+            onSubmissionCreateError,
+            onSubmissionCreateDone
+        );
     }
 
     ////

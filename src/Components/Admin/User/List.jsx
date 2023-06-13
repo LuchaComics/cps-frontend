@@ -7,7 +7,6 @@ import { useRecoilState } from 'recoil';
 
 import { getUserListAPI, deleteUserAPI } from "../../../API/user";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
-import { SUBMISSION_STATES } from "../../../Constants/FieldOptions";
 
 
 function AdminUserList() {

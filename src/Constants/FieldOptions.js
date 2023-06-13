@@ -288,3 +288,15 @@ export const ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS = [
     { value: 0, label: "Please select" }, // EMPTY OPTION
     ...ISSUE_COVER_MONTH_OPTIONS
 ];
+
+export const USER_STATE_OPTIONS = [
+    { value: 1, label: 'Pending' },
+    { value: 2, label: 'Active' },
+    { value: 3, label: 'Error' },
+    { value: 100, label: 'Archived' },
+];
+
+export const USER_STATE_WITH_EMPTY_OPTIONS = [
+    { value: "", label: "Please select" }, // EMPTY OPTION
+    ...USER_STATE_OPTIONS
+];

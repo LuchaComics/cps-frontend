@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
 import { getSubmissionDetailAPI } from "../../../API/submission";
-import { getCustomerListAPI } from "../../../API/customer";
+import { getUserListAPI } from "../../../API/user";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
 import FormTextareaField from "../../Element/FormTextareaField";
@@ -17,7 +17,6 @@ import FormRadioField from "../../Element/FormRadioField";
 import FormMultiSelectField from "../../Element/FormMultiSelectField";
 import FormSelectField from "../../Element/FormSelectField";
 import FormInputFieldWithButton from "../../Element/FormInputFieldWithButton";
-import { FINDING_OPTIONS } from "../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
@@ -42,7 +41,7 @@ function AdminSubmissionAddStep1WithResult() {
     const [errors, setErrors] = useState({});
     const [isFetching, setFetching] = useState(false);
     const [forceURL, setForceURL] = useState("");
-    const [customers, setCustomers] = useState({});
+    const [users, setUsers] = useState({});
     const [showCancelWarning, setShowCancelWarning] = useState(false);
 
     ////
@@ -53,15 +52,15 @@ function AdminSubmissionAddStep1WithResult() {
     //// API.
     ////
 
-    function onCustomerListSuccess(response){
-        console.log("onCustomerListSuccess: Starting...");
+    function onUserListSuccess(response){
+        console.log("onUserListSuccess: Starting...");
         if (response.results !== null) {
-            setCustomers(response);
+            setUsers(response);
         }
     }
 
-    function onCustomerListError(apiErr) {
-        console.log("onCustomerListError: Starting...");
+    function onUserListError(apiErr) {
+        console.log("onUserListError: Starting...");
         setErrors(apiErr);
 
         // The following code will cause the screen to scroll to the top of
@@ -71,8 +70,8 @@ function AdminSubmissionAddStep1WithResult() {
         scroll.scrollToTop();
     }
 
-    function onCustomerListDone() {
-        console.log("onCustomerListDone: Starting...");
+    function onUserListDone() {
+        console.log("onUserListDone: Starting...");
         setFetching(false);
     }
 
@@ -122,11 +121,11 @@ function AdminSubmissionAddStep1WithResult() {
             }
 
             // Submit the list request to our backend.
-            getCustomerListAPI(
+            getUserListAPI(
                 queryParams,
-                onCustomerListSuccess,
-                onCustomerListError,
-                onCustomerListDone
+                onUserListSuccess,
+                onUserListError,
+                onUserListDone
             );
         }
 
@@ -172,31 +171,31 @@ function AdminSubmissionAddStep1WithResult() {
                         </div>
 
                         <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Submission</p>
-                        <p class="pb-4 has-text-grey">Please select the customer from the following results.</p>
+                        <p class="pb-4 has-text-grey">Please select the user from the following results.</p>
                         <FormErrorBox errors={errors} />
 
                         <div class="container pb-5">
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Results</p>
                             <hr />
 
-                            {customers && customers.results && customers.results.length > 0
+                            {users && users.results && users.results.length > 0
                                 ?
                                 <div class="columns">
-                                    {customers.results.map(function(customer, i){
-                                        return <div class="column is-one-quarter" key={customer.id}>
+                                    {users.results.map(function(user, i){
+                                        return <div class="column is-one-quarter" key={user.id}>
                                             <article class="message is-primary">
                                                 <div class="message-body">
                                                     <p>
-                                                        <Link to={`/admin/customer/${customer.id}`} target="_blank" rel="noreferrer">
-                                                            <b>{customer.name}</b>&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
+                                                        <Link to={`/admin/user/${user.id}`} target="_blank" rel="noreferrer">
+                                                            <b>{user.name}</b>&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
                                                         </Link>
                                                     </p>
-                                                    <p>{customer.country}&nbsp;{customer.region}&nbsp;{customer.city}</p>
-                                                    <p>{customer.addressLine1}, {customer.postalCode}</p>
-                                                    <p><a href={`mailto:${customer.email}`}>{customer.email}</a></p>
-                                                    <p><a href={`tel:${customer.phone}`}>{customer.phone}</a></p>
+                                                    <p>{user.country}&nbsp;{user.region}&nbsp;{user.city}</p>
+                                                    <p>{user.addressLine1}, {user.postalCode}</p>
+                                                    <p><a href={`mailto:${user.email}`}>{user.email}</a></p>
+                                                    <p><a href={`tel:${user.phone}`}>{user.phone}</a></p>
                                                     <br />
-                                                    <Link class="button is-medium is-primary" to={`/submissions/add?customer_id=${customer.id}`}>
+                                                    <Link class="button is-medium is-primary" to={`/admin/submissions/add?user_id=${user.id}`}>
                                                         <FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Pick
                                                     </Link>
                                                 </div>
@@ -208,7 +207,7 @@ function AdminSubmissionAddStep1WithResult() {
                                 <section class="hero is-medium has-background-white-ter">
                                   <div class="hero-body">
                                     <p class="title">
-                                        <FontAwesomeIcon className="fas" icon={faTable} />&nbsp;No Customers
+                                        <FontAwesomeIcon className="fas" icon={faTable} />&nbsp;No Users
                                     </p>
                                     <p class="subtitle">
                                         No results were found in the search.

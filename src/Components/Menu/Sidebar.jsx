@@ -118,16 +118,16 @@ export default props => {
                                     <FontAwesomeIcon className="fas" icon={faBuilding} />&nbsp;Organizations
                                 </a>
                             </li>
-                            {/* <li>
+                            <li>
+                                <a href="/admin/users" class={`has-text-grey-light ${location.pathname.includes("user") && "is-active"}`}>
+                                    <FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;All Users
+                                </a>
+                            </li>
+                            <li>
                                 <a href="/admin/submissions" class={`has-text-grey-light ${location.pathname.includes("submission") && "is-active"}`}>
                                     <FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions
                                 </a>
-                            </li> */}
-                            {/* <li>
-                                <a href="/admin/customers" class={`has-text-grey-light ${location.pathname.includes("customer") && "is-active"}`}>
-                                    <FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers
-                                </a>
-                            </li> */}
+                            </li>
                         </ul>
 
                         {/* <p class="menu-label has-text-grey-light">
