@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faUserCircle, faGauge, faPencil, faIdCard, faAddressBook, faContactCard, faChartPie } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 
-import useLocalStorage from "../../Hooks/useLocalStorage";
 import { getProfileDetailAPI, putProfileUpdateAPI } from "../../API/profile";
 import FormErrorBox from "../Element/FormErrorBox";
 import FormInputField from "../Element/FormInputField";
@@ -16,7 +15,8 @@ import FormSelectField from "../Element/FormSelectField";
 import FormCheckboxField from "../Element/FormCheckboxField";
 import FormCountryField from "../Element/FormCountryField";
 import FormRegionField from "../Element/FormRegionField";
-import { topAlertMessageState, topAlertStatusState } from "../../AppState";
+import PageLoadingContent from "../Element/PageLoadingContent";
+import { topAlertMessageState, topAlertStatusState, currentUserState } from "../../AppState";
 
 
 function ProfileUpdate() {
@@ -26,6 +26,7 @@ function ProfileUpdate() {
 
     const [topAlertMessage, setTopAlertMessage] = useRecoilState(topAlertMessageState);
     const [topAlertStatus, setTopAlertStatus] = useRecoilState(topAlertStatusState);
+    const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
 
     ////
     //// Component states.
@@ -52,58 +53,6 @@ function ProfileUpdate() {
     ////
     //// Event handling.
     ////
-
-    function onEmailChange(e) {
-        setEmail(e.target.value);
-    }
-
-    function onPhoneChange(e) {
-        setPhone(e.target.value);
-    }
-
-    function onFirstNameChange(e) {
-        setFirstName(e.target.value);
-    }
-
-    function onLastNameChange(e) {
-        setLastName(e.target.value);
-    }
-
-    function onPasswordChange(e) {
-        setPassword(e.target.value);
-    }
-
-    function onPasswordRepeatedChange(e) {
-        setPasswordRepeated(e.target.value);
-    }
-
-    function onCompanyNameChange(e) {
-        setCompanyName(e.target.value);
-    }
-
-    function onAddressLine1Change(e) {
-        setAddressLine1(e.target.value);
-    }
-
-    function onAddressLine2Change(e) {
-        setAddressLine2(e.target.value);
-    }
-
-    function onPostalCodeChange(e) {
-        setPostalCode(e.target.value);
-    }
-
-    function onCityChange(e) {
-        setCity(e.target.value);
-    }
-
-    function onRegionChange(e) {
-        setRegion(e.target.value);
-    }
-
-    function onCountryChange(e) {
-        setCountry(e.target.value);
-    }
 
     function onAgreePromotionsEmailChange(e) {
         setHasPromotionalEmail(!agreePromotionsEmail);
@@ -256,13 +205,7 @@ function ProfileUpdate() {
 
                         {/* <p class="pb-4">Please fill out all the required fields before submitting this form.</p> */}
 
-                        {isFetching && <div class="columns is-centered" style={{paddingTop: "20px"}}>
-                            <div class="column has-text-centered is-2">
-                            <div class="loader-wrapper is-centered">
-                              <div class="loader is-loading is-centered" style={{height: "80px", width: "80px"}}></div>
-                            </div>
-                            </div>
-                        </div>}
+                        {isFetching && <PageLoadingContent displayMessage={"Submitting..."} />}
 
                         {!isFetching && <div class="container">
 
@@ -276,7 +219,7 @@ function ProfileUpdate() {
                                 value={firstName}
                                 errorText={errors && errors.firstName}
                                 helpText=""
-                                onChange={onFirstNameChange}
+                                onChange={(e)=>setFirstName(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -288,7 +231,7 @@ function ProfileUpdate() {
                                 value={lastName}
                                 errorText={errors && errors.lastName}
                                 helpText=""
-                                onChange={onLastNameChange}
+                                onChange={(e)=>setLastName(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -303,7 +246,7 @@ function ProfileUpdate() {
                                 value={email}
                                 errorText={errors && errors.email}
                                 helpText=""
-                                onChange={onEmailChange}
+                                onChange={(e)=>setEmail(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -315,7 +258,7 @@ function ProfileUpdate() {
                                 value={phone}
                                 errorText={errors && errors.phone}
                                 helpText=""
-                                onChange={onPhoneChange}
+                                onChange={(e)=>setPhone(e.target.value)}
                                 isRequired={true}
                                 maxWidth="150px"
                             />
@@ -356,7 +299,7 @@ function ProfileUpdate() {
                                 value={city}
                                 errorText={errors && errors.city}
                                 helpText=""
-                                onChange={onCityChange}
+                                onChange={(e)=>setCity(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -368,7 +311,7 @@ function ProfileUpdate() {
                                 value={addressLine1}
                                 errorText={errors && errors.addressLine1}
                                 helpText=""
-                                onChange={onAddressLine1Change}
+                                onChange={(e)=>setAddressLine1(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -380,7 +323,7 @@ function ProfileUpdate() {
                                 value={addressLine2}
                                 errorText={errors && errors.addressLine2}
                                 helpText=""
-                                onChange={onAddressLine2Change}
+                                onChange={(e)=>setAddressLine2(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -392,7 +335,7 @@ function ProfileUpdate() {
                                 value={postalCode}
                                 errorText={errors && errors.postalCode}
                                 helpText=""
-                                onChange={onPostalCodeChange}
+                                onChange={(e)=>setPostalCode(e.target.value)}
                                 isRequired={true}
                                 maxWidth="80px"
                             />

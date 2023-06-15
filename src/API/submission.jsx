@@ -127,6 +127,8 @@ export function putSubmissionUpdateAPI(data, onSuccessCallback, onErrorCallback,
     //     decamelizedData.issue_cover_date = new Date(data.issueCoverDate).toISOString();
     // }
     // Minor bugfixes.
+    decamelizedData.id = decamelizedData.i_d;
+    delete decamelizedData.i_d;
     decamelizedData.user_id = decamelizedData.user_i_d;
     delete decamelizedData.user_i_d;
     decamelizedData.organization_id = decamelizedData.organization_i_d;

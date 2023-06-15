@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faGauge, faPencil, faBuilding } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 
-import useLocalStorage from "../../Hooks/useLocalStorage";
 import { getOrganizationDetailAPI, putOrganizationUpdateAPI } from "../../API/organization";
 import FormErrorBox from "../Element/FormErrorBox";
 import FormInputField from "../Element/FormInputField";
@@ -14,7 +13,8 @@ import FormRadioField from "../Element/FormRadioField";
 import FormMultiSelectField from "../Element/FormMultiSelectField";
 import FormSelectField from "../Element/FormSelectField";
 import FormCheckboxField from "../Element/FormCheckboxField";
-import { topAlertMessageState, topAlertStatusState } from "../../AppState";
+import PageLoadingContent from "../Element/PageLoadingContent";
+import { topAlertMessageState, topAlertStatusState, currentUserState } from "../../AppState";
 
 
 function OrganizationUpdate() {
@@ -24,12 +24,12 @@ function OrganizationUpdate() {
 
     const [topAlertMessage, setTopAlertMessage] = useRecoilState(topAlertMessageState);
     const [topAlertStatus, setTopAlertStatus] = useRecoilState(topAlertStatusState);
+    const [currentUser] = useRecoilState(currentUserState);
 
     ////
     //// Component states.
     ////
 
-    const [profile] = useLocalStorage("CPS_USER_PROFILE");
     const [errors, setErrors] = useState({});
     const [isFetching, setFetching] = useState(false);
     const [forceURL, setForceURL] = useState("");
@@ -53,7 +53,7 @@ function OrganizationUpdate() {
         setFetching(true);
 
         const org = {
-            ID: profile.user.organizationId,
+            ID: currentUser.organizationId,
             Name: name,
         };
         console.log("onSubmitClick, org:", org);
@@ -136,7 +136,7 @@ function OrganizationUpdate() {
 
             setFetching(true);
             getOrganizationDetailAPI(
-                profile.user.organizationId,
+                currentUser.organizationId,
                 onOrganizationDetailSuccess,
                 onOrganizationDetailError,
                 onOrganizationDetailDone
@@ -170,13 +170,7 @@ function OrganizationUpdate() {
 
                         {/* <p class="pb-4">Please fill out all the required fields before submitting this form.</p> */}
 
-                        {isFetching && <div class="columns is-centered" style={{paddingTop: "20px"}}>
-                            <div class="column has-text-centered is-2">
-                            <div class="loader-wrapper is-centered">
-                              <div class="loader is-loading is-centered" style={{height: "80px", width: "80px"}}></div>
-                            </div>
-                            </div>
-                        </div>}
+                        {isFetching && <PageLoadingContent displayMessage={"Submitting..."} />}
 
                         {!isFetching && <div class="container">
 

@@ -17,7 +17,7 @@ import FormRadioField from "../../Element/FormRadioField";
 import FormMultiSelectField from "../../Element/FormMultiSelectField";
 import FormSelectField from "../../Element/FormSelectField";
 import FormInputFieldWithButton from "../../Element/FormInputFieldWithButton";
-import { FINDING_OPTIONS } from "../../../Constants/FieldOptions";
+import PageLoadingContent from "../../Element/PageLoadingContent";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
@@ -179,7 +179,9 @@ function RetailerSubmissionAddStep1WithResult() {
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Results</p>
                             <hr />
 
-                            {customers && customers.results && customers.results.length > 0
+                            {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
+
+                            {!isFetching && customers && customers.results && customers.results.length > 0
                                 ?
                                 <div class="columns">
                                     {customers.results.map(function(customer, i){

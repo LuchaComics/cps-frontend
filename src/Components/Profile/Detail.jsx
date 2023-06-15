@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faUserCircle, faGauge, faPencil, faIdCard, faAddressBook, faContactCard, faChartPie } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 
-import useLocalStorage from "../../Hooks/useLocalStorage";
 import { getProfileDetailAPI } from "../../API/profile";
 import FormErrorBox from "../Element/FormErrorBox";
 import FormInputField from "../Element/FormInputField";
@@ -16,7 +15,8 @@ import FormSelectField from "../Element/FormSelectField";
 import FormCheckboxField from "../Element/FormCheckboxField";
 import FormCountryField from "../Element/FormCountryField";
 import FormRegionField from "../Element/FormRegionField";
-import { topAlertMessageState, topAlertStatusState } from "../../AppState";
+import PageLoadingContent from "../Element/PageLoadingContent";
+import { topAlertMessageState, topAlertStatusState, currentUserState } from "../../AppState";
 
 
 function AccountDetail() {
@@ -30,6 +30,7 @@ function AccountDetail() {
 
     const [topAlertMessage, setTopAlertMessage] = useRecoilState(topAlertMessageState);
     const [topAlertStatus, setTopAlertStatus] = useRecoilState(topAlertStatusState);
+    const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
 
     ////
     //// Component states.
@@ -38,7 +39,6 @@ function AccountDetail() {
     const [errors, setErrors] = useState({});
     const [isFetching, setFetching] = useState(false);
     const [forceURL, setForceURL] = useState("");
-    const [profile, setProfile] = useState({});
 
     ////
     //// Event handling.
@@ -52,7 +52,7 @@ function AccountDetail() {
 
     function onProfileDetailSuccess(response){
         console.log("onProfileDetailSuccess: Starting...");
-        setProfile(response);
+        setCurrentUser(response);
     }
 
     function onProfileDetailError(apiErr) {
@@ -115,15 +115,9 @@ function AccountDetail() {
 
                         {/* <p class="pb-4">Please fill out all the required fields before submitting this form.</p> */}
 
-                        {isFetching && <div class="columns is-centered" style={{paddingTop: "20px"}}>
-                            <div class="column has-text-centered is-2">
-                            <div class="loader-wrapper is-centered">
-                              <div class="loader is-loading is-centered" style={{height: "80px", width: "80px"}}></div>
-                            </div>
-                            </div>
-                        </div>}
+                        {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
 
-                        {!isFetching && profile && <div class="container">
+                        {!isFetching && currentUser && <div class="container">
 
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Full Name</p>
                             <hr />
@@ -132,7 +126,7 @@ function AccountDetail() {
                                 label="First Name"
                                 name="firstName"
                                 placeholder="Text input"
-                                value={profile.firstName}
+                                value={currentUser.firstName}
                                 helpText=""
                                 isRequired={true}
                                 maxWidth="380px"
@@ -142,7 +136,7 @@ function AccountDetail() {
                                 label="Last Name"
                                 name="lastName"
                                 placeholder="Text input"
-                                value={profile.lastName}
+                                value={currentUser.lastName}
                                 helpText=""
                                 isRequired={true}
                                 maxWidth="380px"
@@ -156,7 +150,7 @@ function AccountDetail() {
                                 label="Email"
                                 name="email"
                                 placeholder="Text input"
-                                value={profile.email}
+                                value={currentUser.email}
                                 helpText=""
                                 isRequired={true}
                                 maxWidth="380px"
@@ -167,7 +161,7 @@ function AccountDetail() {
                                 label="Phone"
                                 name="phone"
                                 placeholder="Text input"
-                                value={profile.phone}
+                                value={currentUser.phone}
                                 helpText=""
                                 isRequired={true}
                                 maxWidth="150px"
@@ -182,7 +176,7 @@ function AccountDetail() {
                                 label="Country"
                                 name="country"
                                 placeholder="Text input"
-                                selectedCountry={profile.country}
+                                selectedCountry={currentUser.country}
                                 errorText={errors && errors.country}
                                 helpText=""
                                 isRequired={true}
@@ -194,8 +188,8 @@ function AccountDetail() {
                                 label="Province/Territory"
                                 name="region"
                                 placeholder="Text input"
-                                selectedCountry={profile.country}
-                                selectedRegion={profile.region}
+                                selectedCountry={currentUser.country}
+                                selectedRegion={currentUser.region}
                                 errorText={errors && errors.region}
                                 helpText=""
                                 isRequired={true}
@@ -207,7 +201,7 @@ function AccountDetail() {
                                 label="City"
                                 name="city"
                                 placeholder="Text input"
-                                value={profile.city}
+                                value={currentUser.city}
                                 helpText=""
                                 isRequired={true}
                                 maxWidth="380px"
@@ -218,7 +212,7 @@ function AccountDetail() {
                                 label="Address Line 1"
                                 name="addressLine1"
                                 placeholder="Text input"
-                                value={profile.addressLine1}
+                                value={currentUser.addressLine1}
                                 helpText=""
                                 isRequired={true}
                                 maxWidth="380px"
@@ -229,7 +223,7 @@ function AccountDetail() {
                                 label="Address Line 2"
                                 name="addressLine2"
                                 placeholder="Text input"
-                                value={profile.addressLine2}
+                                value={currentUser.addressLine2}
                                 helpText=""
                                 isRequired={true}
                                 maxWidth="380px"
@@ -240,7 +234,7 @@ function AccountDetail() {
                                 label="Postal Code"
                                 name="postalCode"
                                 placeholder="Text input"
-                                value={profile.postalCode}
+                                value={currentUser.postalCode}
                                 helpText=""
                                 isRequired={true}
                                 maxWidth="80px"
@@ -253,7 +247,7 @@ function AccountDetail() {
                             <FormCheckboxField
                                 label="I agree to receive electronic updates from my local retailer and CPS"
                                 name="agreePromotionsEmail"
-                                checked={profile.agreePromotionsEmail}
+                                checked={currentUser.agreePromotionsEmail}
                                 maxWidth="180px"
                                 disabled={true}
                             />

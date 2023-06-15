@@ -15,6 +15,7 @@ import FormTextareaField from "../../Element/FormTextareaField";
 import FormRadioField from "../../Element/FormRadioField";
 import FormMultiSelectField from "../../Element/FormMultiSelectField";
 import FormSelectField from "../../Element/FormSelectField";
+import PageLoadingContent from "../../Element/PageLoadingContent";
 import {
     FINDING_OPTIONS,
     OVERALL_NUMBER_GRADE_OPTIONS,
@@ -385,13 +386,7 @@ function RetailerSubmissionUpdateForCustomer() {
 
                         <p class="pb-4 has-text-grey">Please fill out all the required fields before submitting this form.</p>
 
-                        {isFetching && <div class="columns is-centered" style={{paddingTop: "20px"}}>
-                            <div class="column has-text-centered is-2">
-                            <div class="loader-wrapper is-centered">
-                              <div class="loader is-loading is-centered" style={{height: "80px", width: "80px"}}></div>
-                            </div>
-                            </div>
-                        </div>}
+                        {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
 
                         {!isFetching && <div class="container">
 

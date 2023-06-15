@@ -146,6 +146,8 @@ export function putOrganizationUpdateAPI(data, onSuccessCallback, onErrorCallbac
     let decamelizedData = decamelizeKeys(data);
 
     // Minor fix.
+    decamelizedData.id = decamelizedData.i_d;
+    delete decamelizedData.i_d;
     decamelizedData.address_line_1 = decamelizedData.address_line1;
     decamelizedData.address_line_2 = decamelizedData.address_line2;
     delete decamelizedData.address_line1;

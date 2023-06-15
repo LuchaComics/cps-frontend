@@ -18,6 +18,7 @@ import FormMultiSelectField from "../../Element/FormMultiSelectField";
 import FormSelectField from "../../Element/FormSelectField";
 import FormInputFieldWithButton from "../../Element/FormInputFieldWithButton";
 import { FINDING_OPTIONS } from "../../../Constants/FieldOptions";
+import PageLoadingContent from "../../Element/PageLoadingContent";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
@@ -234,7 +235,9 @@ function RetailerSubmissionUpdatePickCustomerWithResult() {
                         <p class="pb-4 has-text-grey">Please select the customer from the following results.</p>
                         <FormErrorBox errors={errors} />
 
-                        <div class="container pb-5">
+                        {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
+
+                        {!isFetching && <div class="container pb-5">
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Results</p>
                             <hr />
                             <div class="columns">
@@ -260,7 +263,7 @@ function RetailerSubmissionUpdatePickCustomerWithResult() {
                                     </div>;
                                 })}
                             </div>
-                        </div>
+                        </div>}
 
                         <div class="columns pt-5">
                             <div class="column is-half">

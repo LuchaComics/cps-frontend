@@ -17,6 +17,7 @@ import FormSelectField from "../../Element/FormSelectField";
 import FormCheckboxField from "../../Element/FormCheckboxField";
 import FormCountryField from "../../Element/FormCountryField";
 import FormRegionField from "../../Element/FormRegionField";
+import PageLoadingContent from "../../Element/PageLoadingContent";
 import { HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS } from "../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
@@ -63,68 +64,9 @@ function RetailerCustomerUpdate() {
     //// Event handling.
     ////
 
-    function onEmailChange(e) {
-        setEmail(e.target.value);
-    }
-
-    function onPhoneChange(e) {
-        setPhone(e.target.value);
-    }
-
-    function onFirstNameChange(e) {
-        setFirstName(e.target.value);
-    }
-
-    function onLastNameChange(e) {
-        setLastName(e.target.value);
-    }
-
-    function onPasswordChange(e) {
-        setPassword(e.target.value);
-    }
-
-    function onPasswordRepeatedChange(e) {
-        setPasswordRepeated(e.target.value);
-    }
-
-    function onCompanyNameChange(e) {
-        setCompanyName(e.target.value);
-    }
-
-    function onAddressLine1Change(e) {
-        setAddressLine1(e.target.value);
-    }
-
-    function onAddressLine2Change(e) {
-        setAddressLine2(e.target.value);
-    }
-
-    function onPostalCodeChange(e) {
-        setPostalCode(e.target.value);
-    }
-
-    function onCityChange(e) {
-        setCity(e.target.value);
-    }
-
-    function onRegionChange(e) {
-        setRegion(e.target.value);
-    }
-
-    function onCountryChange(e) {
-        setCountry(e.target.value);
-    }
 
     function onAgreePromotionsEmailChange(e) {
         setHasPromotionalEmail(!agreePromotionsEmail);
-    }
-
-    function onHowDidYouHearAboutUsChange(e) {
-        setHowDidYouHearAboutUs(parseInt(e.target.value));
-    }
-
-    function onHowDidYouHearAboutUsOtherChange(e) {
-        setHowDidYouHearAboutUsOther(e.target.value);
     }
 
     ////
@@ -281,13 +223,7 @@ function RetailerCustomerUpdate() {
 
                         {/* <p class="pb-4">Please fill out all the required fields before submitting this form.</p> */}
 
-                        {isFetching && <div class="columns is-centered" style={{paddingTop: "20px"}}>
-                            <div class="column has-text-centered is-2">
-                            <div class="loader-wrapper is-centered">
-                              <div class="loader is-loading is-centered" style={{height: "80px", width: "80px"}}></div>
-                            </div>
-                            </div>
-                        </div>}
+                        {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
 
                         {!isFetching && <div class="container">
 
@@ -301,7 +237,7 @@ function RetailerCustomerUpdate() {
                                 value={firstName}
                                 errorText={errors && errors.firstName}
                                 helpText=""
-                                onChange={onFirstNameChange}
+                                onChange={(e)=>setFirstName(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -313,7 +249,7 @@ function RetailerCustomerUpdate() {
                                 value={lastName}
                                 errorText={errors && errors.lastName}
                                 helpText=""
-                                onChange={onLastNameChange}
+                                onChange={(e)=>setLastName(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -328,7 +264,7 @@ function RetailerCustomerUpdate() {
                                 value={email}
                                 errorText={errors && errors.email}
                                 helpText=""
-                                onChange={onEmailChange}
+                                onChange={(e)=>setEmail(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -340,7 +276,7 @@ function RetailerCustomerUpdate() {
                                 value={phone}
                                 errorText={errors && errors.phone}
                                 helpText=""
-                                onChange={onPhoneChange}
+                                onChange={(e)=>setPhone(e.target.value)}
                                 isRequired={true}
                                 maxWidth="150px"
                             />
@@ -381,7 +317,7 @@ function RetailerCustomerUpdate() {
                                 value={city}
                                 errorText={errors && errors.city}
                                 helpText=""
-                                onChange={onCityChange}
+                                onChange={(e)=>setCity(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -393,7 +329,7 @@ function RetailerCustomerUpdate() {
                                 value={addressLine1}
                                 errorText={errors && errors.addressLine1}
                                 helpText=""
-                                onChange={onAddressLine1Change}
+                                onChange={(e)=>setAddressLine1(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -405,7 +341,7 @@ function RetailerCustomerUpdate() {
                                 value={addressLine2}
                                 errorText={errors && errors.addressLine2}
                                 helpText=""
-                                onChange={onAddressLine2Change}
+                                onChange={(e)=>setAddressLine2(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -417,7 +353,7 @@ function RetailerCustomerUpdate() {
                                 value={postalCode}
                                 errorText={errors && errors.postalCode}
                                 helpText=""
-                                onChange={onPostalCodeChange}
+                                onChange={(e)=>setPostalCode(e.target.value)}
                                 isRequired={true}
                                 maxWidth="80px"
                             />
@@ -432,7 +368,7 @@ function RetailerCustomerUpdate() {
                                 selectedValue={howDidYouHearAboutUs}
                                 errorText={errors && errors.howDidYouHearAboutUs}
                                 helpText=""
-                                onChange={onHowDidYouHearAboutUsChange}
+                                onChange={(e)=>setHowDidYouHearAboutUs(parseInt(e.target.value))}
                                 options={HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS}
                             />
 
@@ -443,7 +379,7 @@ function RetailerCustomerUpdate() {
                                 value={howDidYouHearAboutUsOther}
                                 errorText={errors && errors.howDidYouHearAboutUsOther}
                                 helpText=""
-                                onChange={onHowDidYouHearAboutUsOtherChange}
+                                onChange={(e)=>setHowDidYouHearAboutUsOther(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />}

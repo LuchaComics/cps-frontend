@@ -17,6 +17,7 @@ import FormSelectField from "../../Element/FormSelectField";
 import FormCheckboxField from "../../Element/FormCheckboxField";
 import FormCountryField from "../../Element/FormCountryField";
 import FormRegionField from "../../Element/FormRegionField";
+import PageLoadingContent from "../../Element/PageLoadingContent";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
@@ -135,13 +136,7 @@ function RetailerCustomerDetail() {
 
                         {/* <p class="pb-4">Please fill out all the required fields before submitting this form.</p> */}
 
-                        {isFetching && <div class="columns is-centered" style={{paddingTop: "20px"}}>
-                            <div class="column has-text-centered is-2">
-                            <div class="loader-wrapper is-centered">
-                              <div class="loader is-loading is-centered" style={{height: "80px", width: "80px"}}></div>
-                            </div>
-                            </div>
-                        </div>}
+                        {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
 
                         {!isFetching && customer && <div class="container">
                             <div class="tabs is-medium">

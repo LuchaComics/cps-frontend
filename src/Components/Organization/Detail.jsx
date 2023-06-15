@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faGauge, faPencil, faBuilding } from '@fortawesome/free-solid-svg-icons';
 import { useRecoilState } from 'recoil';
 
-import useLocalStorage from "../../Hooks/useLocalStorage";
 import { getOrganizationDetailAPI } from "../../API/organization";
 import FormErrorBox from "../Element/FormErrorBox";
 import FormInputField from "../Element/FormInputField";
@@ -14,21 +13,18 @@ import FormRadioField from "../Element/FormRadioField";
 import FormMultiSelectField from "../Element/FormMultiSelectField";
 import FormSelectField from "../Element/FormSelectField";
 import FormCheckboxField from "../Element/FormCheckboxField";
-import { topAlertMessageState, topAlertStatusState } from "../../AppState";
+import PageLoadingContent from "../Element/PageLoadingContent";
+import { topAlertMessageState, topAlertStatusState, currentUserState } from "../../AppState";
 
 
 function OrganizationDetail() {
-    ////
-    ////
-    ////
-
     ////
     //// Global state.
     ////
 
     const [topAlertMessage, setTopAlertMessage] = useRecoilState(topAlertMessageState);
     const [topAlertStatus, setTopAlertStatus] = useRecoilState(topAlertStatusState);
-    const [profile] = useLocalStorage("CPS_USER_PROFILE");
+    const [currentUser] = useRecoilState(currentUserState);
 
     ////
     //// Component states.
@@ -82,7 +78,7 @@ function OrganizationDetail() {
 
             setFetching(true);
             getOrganizationDetailAPI(
-                profile.user.organizationId,
+                currentUser.organizationId,
                 onOrganizationDetailSuccess,
                 onOrganizationDetailError,
                 onOrganizationDetailDone
@@ -115,13 +111,7 @@ function OrganizationDetail() {
 
                         {/* <p class="pb-4">Please fill out all the required fields before submitting this form.</p> */}
 
-                        {isFetching && <div class="columns is-centered" style={{paddingTop: "20px"}}>
-                            <div class="column has-text-centered is-2">
-                            <div class="loader-wrapper is-centered">
-                              <div class="loader is-loading is-centered" style={{height: "80px", width: "80px"}}></div>
-                            </div>
-                            </div>
-                        </div>}
+                        {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
 
                         {!isFetching && organization && <div class="container">
 

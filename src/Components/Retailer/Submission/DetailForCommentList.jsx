@@ -18,6 +18,7 @@ import FormMultiSelectField from "../../Element/FormMultiSelectField";
 import FormCheckboxField from "../../Element/FormCheckboxField";
 import FormSelectField from "../../Element/FormSelectField";
 import FormDateField from "../../Element/FormDateField";
+import PageLoadingContent from "../../Element/PageLoadingContent";
 import {
     FINDING_OPTIONS,
     OVERALL_NUMBER_GRADE_OPTIONS,
@@ -208,13 +209,7 @@ function RetailerSubmissionDetailForCommentList() {
                         <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission</p>
                         <FormErrorBox errors={errors} />
 
-                        {isFetching && <div class="columns is-centered" style={{paddingTop: "20px"}}>
-                            <div class="column has-text-centered is-2">
-                            <div class="loader-wrapper is-centered">
-                              <div class="loader is-loading is-centered" style={{height: "80px", width: "80px"}}></div>
-                            </div>
-                            </div>
-                        </div>}
+                        {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
 
                         {!isFetching && submission && <div class="container">
                             <div class="tabs is-medium">

@@ -17,7 +17,7 @@ import FormRadioField from "../../Element/FormRadioField";
 import FormMultiSelectField from "../../Element/FormMultiSelectField";
 import FormSelectField from "../../Element/FormSelectField";
 import FormInputFieldWithButton from "../../Element/FormInputFieldWithButton";
-import { FINDING_OPTIONS } from "../../../Constants/FieldOptions";
+import PageLoadingContent from "../../Element/PageLoadingContent";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
@@ -52,26 +52,6 @@ function RetailerSubmissionAddStep1WithSearch() {
     ////
     //// Event handling.
     ////
-
-    const onSearchKeywordChange = (e) => {
-        setSearchKeyword(e.target.value);
-    }
-
-    function onEmailChange(e) {
-        setEmail(e.target.value);
-    }
-
-    function onPhoneChange(e) {
-        setPhone(e.target.value);
-    }
-
-    function onFirstNameChange(e) {
-        setFirstName(e.target.value);
-    }
-
-    function onLastNameChange(e) {
-        setLastName(e.target.value);
-    }
 
     const onSearchButtonClicked = (e) => {
         console.log("searchButtonClick: Starting...");
@@ -214,7 +194,7 @@ function RetailerSubmissionAddStep1WithSearch() {
                                 value={searchKeyword}
                                 errorText={errors && errors.searchKeyword}
                                 helpText="SEARCH FIRST NAME, LAST NAME, EMAIL, ETC"
-                                onChange={onSearchKeywordChange}
+                                onChange={(e)=>setSearchKeyword(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -231,7 +211,7 @@ function RetailerSubmissionAddStep1WithSearch() {
                                 value={firstName}
                                 errorText={errors && errors.firstName}
                                 helpText=""
-                                onChange={onFirstNameChange}
+                                onChange={(e)=>setFirstName(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -243,7 +223,7 @@ function RetailerSubmissionAddStep1WithSearch() {
                                 value={lastName}
                                 errorText={errors && errors.lastName}
                                 helpText=""
-                                onChange={onLastNameChange}
+                                onChange={(e)=>setLastName(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -255,7 +235,7 @@ function RetailerSubmissionAddStep1WithSearch() {
                                 value={email}
                                 errorText={errors && errors.email}
                                 helpText=""
-                                onChange={onEmailChange}
+                                onChange={(e)=>setEmail(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -267,7 +247,7 @@ function RetailerSubmissionAddStep1WithSearch() {
                                 value={phone}
                                 errorText={errors && errors.phone}
                                 helpText=""
-                                onChange={onPhoneChange}
+                                onChange={(e)=>setPhone(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />

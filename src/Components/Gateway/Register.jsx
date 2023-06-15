@@ -10,6 +10,7 @@ import useLocalStorage from "../../Hooks/useLocalStorage";
 import { postRegisterAPI } from "../../API/gateway";
 import FormErrorBox from "../Element/FormErrorBox";
 import FormInputField from "../Element/FormInputField";
+import PageLoadingContent from "../Element/PageLoadingContent";
 import FormTextareaField from "../Element/FormTextareaField";
 import FormRadioField from "../Element/FormRadioField";
 import FormMultiSelectField from "../Element/FormMultiSelectField";
@@ -72,6 +73,8 @@ function Register() {
 
     const onSubmitClick = (e) => {
         console.log("onSubmitClick: Beginning...");
+        setFetching(true);
+
         const submission = {
             Email: email,
             Phone: phone,
@@ -172,6 +175,8 @@ function Register() {
                     <nav class="box">
                         <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Register</p>
                         <FormErrorBox errors={errors} />
+
+                        {isFetching && <PageLoadingContent displayMessage={"Submitting..."} />}
 
                         {!isFetching && <div class="container">
                             <p class="subtitle is-3">Details</p>
@@ -350,7 +355,7 @@ function Register() {
                                 selectedValue={howDidYouHearAboutUs}
                                 errorText={errors && errors.howDidYouHearAboutUs}
                                 helpText=""
-                                onChange={(e)=>setHowDidYouHearAboutUs(e.target.value)}
+                                onChange={(e)=>setHowDidYouHearAboutUs(parseInt(e.target.value))}
                                 options={HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS}
                             />
 
