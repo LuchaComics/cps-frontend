@@ -130,16 +130,16 @@ export default props => {
                             </li>
                         </ul>
 
-                        {/* <p class="menu-label has-text-grey-light">
+                        <p class="menu-label has-text-grey-light">
                             System
-                        </p> */}
-                        {/* <ul class="menu-list">
+                        </p>
+                        <ul class="menu-list">
                             <li>
                                 <a href="/admin/registry" class={`has-text-grey-light ${location.pathname.includes("registry") && "is-active"}`}>
                                     <FontAwesomeIcon className="fas" icon={faBarcode} />&nbsp;Registry
                                 </a>
                             </li>
-                        </ul> */}
+                        </ul>
 
                         <p class="menu-label has-text-grey-light">
                             Account

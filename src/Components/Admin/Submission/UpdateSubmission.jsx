@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faPencil, faEye, faGauge, faBook, faMagnifyingGlass, faBalanceScale, } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faPencil, faEye, faGauge, faBook, faMagnifyingGlass, faBalanceScale, faCogs } from '@fortawesome/free-solid-svg-icons'
 import Select from 'react-select'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
@@ -10,6 +10,7 @@ import { DateTime } from "luxon";
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
 import { getSubmissionDetailAPI, putSubmissionUpdateAPI } from "../../../API/submission";
+import { getOrganizationSelectOptionListAPI } from "../../../API/organization";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
 import FormTextareaField from "../../Element/FormTextareaField";
@@ -72,6 +73,9 @@ function AdminSubmissionUpdateForSubmission() {
     const [gradingNotes, setGradingNotes] = useState("");
     const [showsSignsOfTamperingOrRestoration, setShowsSignsOfTamperingOrRestoration] = useState("");
     const [status, setStatus] = useState(0);
+    const [organizationSelectOptions, setOrganizationSelectOptions] = useState([]);
+    const [organizationID, setOrganizationID] = useState("");
+    const [serviceType, setServiceType] = useState(0);
 
     ////
     //// Event handling.
@@ -107,6 +111,8 @@ function AdminSubmissionUpdateForSubmission() {
             cpsPercentageGrade: parseFloat(cpsPercentageGrade),
             showsSignsOfTamperingOrRestoration: parseInt(showsSignsOfTamperingOrRestoration),
             status: status,
+            serviceType: serviceType,
+            organizationID: organizationID,
         };
 
         // Submit to the backend.
@@ -142,6 +148,8 @@ function AdminSubmissionUpdateForSubmission() {
         setShowsSignsOfTamperingOrRestoration(response.showsSignsOfTamperingOrRestoration);
         setGradingNotes(response.gradingNotes);
         setStatus(response.status);
+        setServiceType(response.serviceType);
+        setOrganizationID(response.organizationId);
     }
 
     function onSubmissionDetailError(apiErr) {
@@ -203,6 +211,34 @@ function AdminSubmissionUpdateForSubmission() {
         setFetching(false);
     }
 
+    function onOrganizationOptionListSuccess(response){
+        console.log("onOrganizationOptionListSuccess: Starting...");
+        if (response !== null) {
+            const selectOptions = [
+                {"value": 0, "label": "Please select"}, // Add empty options.
+                ...response
+            ]
+            setOrganizationSelectOptions(selectOptions);
+        }
+    }
+
+    function onOrganizationOptionListError(apiErr) {
+        console.log("onOrganizationOptionListError: Starting...");
+        console.log("onOrganizationOptionListError: apiErr:", apiErr);
+        setErrors(apiErr);
+
+        // The following code will cause the screen to scroll to the top of
+        // the page. Please see ``react-scroll`` for more information:
+        // https://github.com/fisshy/react-scroll
+        var scroll = Scroll.animateScroll;
+        scroll.scrollToTop();
+    }
+
+    function onOrganizationOptionListDone() {
+        console.log("onOrganizationOptionListDone: Starting...");
+        setFetching(false);
+    }
+
     ////
     //// Misc.
     ////
@@ -218,6 +254,14 @@ function AdminSubmissionUpdateForSubmission() {
                 onSubmissionDetailSuccess,
                 onSubmissionDetailError,
                 onSubmissionDetailDone
+            );
+
+            let params = new Map();
+            getOrganizationSelectOptionListAPI(
+                params,
+                onOrganizationOptionListSuccess,
+                onOrganizationOptionListError,
+                onOrganizationOptionListDone
             );
         }
 
@@ -624,6 +668,53 @@ function AdminSubmissionUpdateForSubmission() {
                                 onChange={(e)=>setCpsPercentageGrade(e.target.value)}
                                 options={CPS_PERCENTAGE_GRADE_OPTIONS}
                             />}
+
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faCogs} />&nbsp;Settings</p>
+                            <hr />
+
+                            <FormSelectField
+                                label="Organization ID"
+                                name="organizationID"
+                                placeholder="Pick"
+                                selectedValue={organizationID}
+                                errorText={errors && errors.organizationID}
+                                helpText="Pick the organization this user belongs to and will be limited by"
+                                isRequired={true}
+                                onChange={(e)=>setOrganizationID(e.target.value)}
+                                options={organizationSelectOptions}
+                                disabled={organizationSelectOptions.length === 0}
+                            />
+                            <FormRadioField
+                                label="Service Type"
+                                name="role"
+                                value={serviceType}
+                                opt1Value={1}
+                                opt1Label="Pre-Screening Service"
+                                opt2Value={3}
+                                opt2Label="Pedigree Service"
+                                opt3Value={3}
+                                opt3Label="CPS Capsule You Grade Service"
+                                errorText={errors && errors.serviceType}
+                                onChange={(e)=>setServiceType(parseInt(e.target.value))}
+                                maxWidth="180px"
+                            />
+                            <FormRadioField
+                                label="Status"
+                                name="status"
+                                value={status}
+                                opt1Value={1}
+                                opt1Label="Pending"
+                                opt2Value={2}
+                                opt2Label="Active"
+                                opt3Value={3}
+                                opt3Label="Error"
+                                opt4Value={4}
+                                opt4Label="Archived"
+                                errorText={errors && errors.status}
+                                onChange={(e)=>setStatus(parseInt(e.target.value))}
+                                maxWidth="180px"
+                            />
+
                             <div class="columns pt-5">
                                 <div class="column is-half">
                                     <Link to={`/admin/submission/${id}`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>

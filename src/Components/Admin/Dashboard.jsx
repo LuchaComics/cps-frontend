@@ -107,9 +107,6 @@ function AdminDashboard() {
                             </p>
                           </div>
                         </section>
-
-
-{/* 
                         <section class="hero is-medium is-primary">
                           <div class="hero-body">
                             <p class="title">
@@ -123,8 +120,6 @@ function AdminDashboard() {
                             </p>
                           </div>
                         </section>
-
-                        */}
 
                         {/* <section class="hero is-medium is-primary">
                           <div class="hero-body">

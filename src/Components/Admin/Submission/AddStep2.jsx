@@ -300,52 +300,6 @@ function AdminSubmissionAddStep2() {
 
                         {!isFetching && <div class="container">
 
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faCogs} />&nbsp;Settings</p>
-                            <hr />
-
-                            <FormSelectField
-                                label="Organization ID"
-                                name="organizationID"
-                                placeholder="Pick"
-                                selectedValue={organizationID}
-                                errorText={errors && errors.organizationID}
-                                helpText="Pick the organization this user belongs to and will be limited by"
-                                isRequired={true}
-                                onChange={(e)=>setOrganizationID(e.target.value)}
-                                options={organizationSelectOptions}
-                                disabled={organizationSelectOptions.length === 0}
-                            />
-                            <FormRadioField
-                                label="Service Type"
-                                name="role"
-                                value={serviceType}
-                                opt1Value={1}
-                                opt1Label="Pre-Screening Service"
-                                opt2Value={3}
-                                opt2Label="Pedigree Service"
-                                opt3Value={3}
-                                opt3Label="CPS Capsule You Grade Service"
-                                errorText={errors && errors.serviceType}
-                                onChange={(e)=>setServiceType(parseInt(e.target.value))}
-                                maxWidth="180px"
-                            />
-                            <FormRadioField
-                                label="Status"
-                                name="status"
-                                value={status}
-                                opt1Value={1}
-                                opt1Label="Pending"
-                                opt2Value={2}
-                                opt2Label="Active"
-                                opt3Value={3}
-                                opt3Label="Error"
-                                opt4Value={4}
-                                opt4Label="Archived"
-                                errorText={errors && errors.status}
-                                onChange={(e)=>setStatus(parseInt(e.target.value))}
-                                maxWidth="180px"
-                            />
-
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comic Book Information</p>
                             <hr />
                             <FormInputField
@@ -711,6 +665,52 @@ function AdminSubmissionAddStep2() {
                                 onChange={(e)=>setCpsPercentageGrade(e.target.value)}
                                 options={CPS_PERCENTAGE_GRADE_WITH_EMPTY_OPTIONS}
                             />}
+
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faCogs} />&nbsp;Settings</p>
+                            <hr />
+
+                            <FormSelectField
+                                label="Organization ID"
+                                name="organizationID"
+                                placeholder="Pick"
+                                selectedValue={organizationID}
+                                errorText={errors && errors.organizationID}
+                                helpText="Pick the organization this user belongs to and will be limited by"
+                                isRequired={true}
+                                onChange={(e)=>setOrganizationID(e.target.value)}
+                                options={organizationSelectOptions}
+                                disabled={organizationSelectOptions.length === 0}
+                            />
+                            <FormRadioField
+                                label="Service Type"
+                                name="role"
+                                value={serviceType}
+                                opt1Value={1}
+                                opt1Label="Pre-Screening Service"
+                                opt2Value={3}
+                                opt2Label="Pedigree Service"
+                                opt3Value={3}
+                                opt3Label="CPS Capsule You Grade Service"
+                                errorText={errors && errors.serviceType}
+                                onChange={(e)=>setServiceType(parseInt(e.target.value))}
+                                maxWidth="180px"
+                            />
+                            <FormRadioField
+                                label="Status"
+                                name="status"
+                                value={status}
+                                opt1Value={1}
+                                opt1Label="Pending"
+                                opt2Value={2}
+                                opt2Label="Active"
+                                opt3Value={3}
+                                opt3Label="Error"
+                                opt4Value={4}
+                                opt4Label="Archived"
+                                errorText={errors && errors.status}
+                                onChange={(e)=>setStatus(parseInt(e.target.value))}
+                                maxWidth="180px"
+                            />
 
                             <div class="columns pt-5">
                                 <div class="column is-half">
