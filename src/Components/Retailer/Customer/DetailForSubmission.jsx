@@ -7,7 +7,6 @@ import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
 import { SUBMISSION_STATES } from "../../../Constants/FieldOptions";
 
-import useLocalStorage from "../../../Hooks/useLocalStorage";
 import { getCustomerDetailAPI } from "../../../API/customer";
 import { getSubmissionListAPI, deleteSubmissionAPI } from "../../../API/submission";
 import FormErrorBox from "../../Element/FormErrorBox";
@@ -53,8 +52,10 @@ function RetailerCustomerDetailForSubmission() {
 
     const fetchListByCustomerID = (customerID) => {
         setFetching(true);
+        let params = new Map();
+        params.set("user_id", id);
         getSubmissionListAPI(
-            new Map(),
+            params,
             onSubmissionListSuccess,
             onSubmissionListError,
             onSubmissionListDone
@@ -294,7 +295,7 @@ function RetailerCustomerDetailForSubmission() {
                                                             <td data-label="Title">{submission.seriesTitle}</td>
                                                             <td data-label="Vol">{submission.issueVol}</td>
                                                             <td data-label="No">{submission.issueNo}</td>
-                                                            <td data-label="State">{SUBMISSION_STATES[submission.state]}</td>
+                                                            <td data-label="State">{SUBMISSION_STATES[submission.status]}</td>
                                                             <td data-label="Created">{submission.createdAt}</td>
                                                             <td class="is-actions-cell">
                                                                 <div class="buttons is-right">
@@ -332,10 +333,9 @@ function RetailerCustomerDetailForSubmission() {
                                     <Link class="button is-hidden-touch" to={`/customers`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                     <Link class="button is-fullwidth is-hidden-desktop" to={`/customers`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                 </div>
-                                <div class="column is-half has-text-right">{/*
-                                    <Link to={`/customer/${id}/edit`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
-                                    <Link to={`/customer/${id}/edit`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
-                                    */}
+                                <div class="column is-half has-text-right">
+                                    <Link to={`/submissions/add?customer_id=${id}&customer_name=${customer.name}`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;CPS</Link>
+                                    <Link to={`/submissions/add?customer_id=${id}&customer_name=${customer.name}`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;CPS</Link>
                                 </div>
                             </div>
 

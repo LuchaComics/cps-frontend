@@ -74,6 +74,7 @@ function Register() {
     const onSubmitClick = (e) => {
         console.log("onSubmitClick: Beginning...");
         setFetching(true);
+        setErrors({});
 
         const submission = {
             Email: email,

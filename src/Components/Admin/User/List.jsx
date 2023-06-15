@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUsers, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight, faTable } from '@fortawesome/free-solid-svg-icons';
+import { faUsers, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight, faTable, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { useRecoilState } from 'recoil';
 
 import { getUserListAPI, deleteUserAPI } from "../../../API/user";
@@ -207,7 +207,8 @@ function AdminUserList() {
                                                 <tr>
                                                     <th>Name</th>
                                                     <th>Email</th>
-                                                    <th>Created</th>
+                                                    <th>Organization</th>
+                                                    <th>Joined</th>
                                                     <th></th>
                                                 </tr>
                                             </thead>
@@ -216,8 +217,17 @@ function AdminUserList() {
                                                 {users && users.results && users.results.map(function(user, i){
                                                     return <tr>
                                                         <td data-label="Name">{user.name}</td>
-                                                        <td data-label="Email"><a href={`mailto:${user.email}`}>{user.email}</a></td>
-                                                        <td data-label="Created">{user.createdAt}</td>
+                                                        <td data-label="Email">
+                                                            {user.email !== "root" &&
+                                                                <a href={`mailto:${user.email}`}>{user.email}</a>
+                                                            }
+                                                        </td>
+                                                        <td data-label="Organization">
+                                                            {user.organizationId !== "000000000000000000000000" && <Link to={`/admin/organization/${user.organizationId}`} target="_blank" rel="noreferrer" class="is-small">
+                                                                {user.organizationName}&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
+                                                            </Link>}
+                                                        </td>
+                                                        <td data-label="Joined">{user.createdAt}</td>
                                                         <td class="is-actions-cell">
                                                             <div class="buttons is-right">
                                                                 <Link to={`/admin/submissions/add?user_id=${user.id}&user_name=${user.name}`} class="button is-small is-success" type="button">

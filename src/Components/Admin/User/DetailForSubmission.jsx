@@ -294,7 +294,7 @@ function AdminUserDetailForSubmission() {
                                                             <td data-label="Title">{submission.seriesTitle}</td>
                                                             <td data-label="Vol">{submission.issueVol}</td>
                                                             <td data-label="No">{submission.issueNo}</td>
-                                                            <td data-label="State">{SUBMISSION_STATES[submission.state]}</td>
+                                                            <td data-label="State">{SUBMISSION_STATES[submission.status]}</td>
                                                             <td data-label="Created">{submission.createdAt}</td>
                                                             <td class="is-actions-cell">
                                                                 <div class="buttons is-right">
@@ -326,19 +326,16 @@ function AdminUserDetailForSubmission() {
                                 </div>
                             }
 
-
                             <div class="columns pt-5">
                                 <div class="column is-half">
                                     <Link class="button is-hidden-touch" to={`/admin/users`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                     <Link class="button is-fullwidth is-hidden-desktop" to={`/admin/users`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                 </div>
-                                <div class="column is-half has-text-right">{/*
-                                    <Link to={`/user/${id}/edit`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
-                                    <Link to={`/user/${id}/edit`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
-                                    */}
+                                <div class="column is-half has-text-right">
+                                    <Link to={`/admin/submissions/add?user_id=${id}&user_name=${user.name}`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;CPS</Link>
+                                    <Link to={`/admin/submissions/add?user_id=${id}&user_name=${user.name}`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;CPS</Link>
                                 </div>
                             </div>
-
 
                         </div>}
                     </nav>

@@ -494,6 +494,17 @@ function AdminSubmissionDetail() {
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faCogs} />&nbsp;Settings</p>
                             <hr />
 
+                            {submission && <FormInputField
+                                label="CPSR #"
+                                name="cpsrn"
+                                placeholder="Text input"
+                                value={submission.cpsrn}
+                                helpText="The unique identifier used by CPS for all submissions"
+                                isRequired={true}
+                                maxWidth="200px"
+                                disabled={true}
+                            />}
+
                             <FormSelectField
                                 label="Organization ID"
                                 name="organizationID"

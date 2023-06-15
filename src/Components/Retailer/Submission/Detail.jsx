@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faEye, faArrowLeft, faCheckCircle, faPencil, faGauge, faBook, faMagnifyingGlass, faBalanceScale, faUser, faArrowUpRightFromSquare, faDownload } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faEye, faArrowLeft, faCheckCircle, faPencil, faGauge, faBook, faMagnifyingGlass, faBalanceScale, faUser, faArrowUpRightFromSquare, faDownload, faCogs } from '@fortawesome/free-solid-svg-icons'
 import Select from 'react-select'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
@@ -490,6 +490,35 @@ function RetailerSubmissionDetail() {
                                 options={CPS_PERCENTAGE_GRADE_OPTIONS}
                                 disabled={true}
                             />}
+
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faCogs} />&nbsp;Settings</p>
+                            <hr />
+
+                            {submission && <FormInputField
+                                label="CPSR #"
+                                name="cpsrn"
+                                placeholder="Text input"
+                                value={submission.cpsrn}
+                                helpText="The unique identifier used by CPS for all submissions"
+                                isRequired={true}
+                                maxWidth="200px"
+                                disabled={true}
+                            />}
+                            <FormRadioField
+                                label="Status"
+                                name="status"
+                                value={submission.status}
+                                opt1Value={1}
+                                opt1Label="Pending"
+                                opt2Value={2}
+                                opt2Label="Active"
+                                opt3Value={3}
+                                opt3Label="Error"
+                                opt4Value={4}
+                                opt4Label="Archived"
+                                maxWidth="180px"
+                                disabled={true}
+                            />
 
                             <div class="columns pt-4">
                                 <div class="column is-half">

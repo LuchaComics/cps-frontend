@@ -302,7 +302,7 @@ function AdminOrganizationDetailForSubmission() {
                                                             <td data-label="Title">{submission.seriesTitle}</td>
                                                             <td data-label="Vol">{submission.issueVol}</td>
                                                             <td data-label="No">{submission.issueNo}</td>
-                                                            <td data-label="State">{SUBMISSION_STATES[submission.state]}</td>
+                                                            <td data-label="State">{SUBMISSION_STATES[submission.status]}</td>
                                                             <td data-label="Created">{submission.createdAt}</td>
                                                             <td class="is-actions-cell">
                                                                 <div class="buttons is-right">
