@@ -43,34 +43,10 @@ function AdminRegistrySearch() {
     const [customers, setCustomers] = useState({});
     const [hasCustomer, setHasCustomer] = useState(1);
     const [cpsrn, setCpsrn] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
 
     ////
     //// Event handling.
     ////
-
-    const onSearchKeywordChange = (e) => {
-        setCpsrn(e.target.value);
-    }
-
-    function onEmailChange(e) {
-        setEmail(e.target.value);
-    }
-
-    function onPhoneChange(e) {
-        setPhone(e.target.value);
-    }
-
-    function onFirstNameChange(e) {
-        setFirstName(e.target.value);
-    }
-
-    function onLastNameChange(e) {
-        setLastName(e.target.value);
-    }
 
     const onSearchButtonClicked = (e) => {
         console.log("searchButtonClick: Starting...");
@@ -160,7 +136,7 @@ function AdminRegistrySearch() {
                                 value={cpsrn}
                                 errorText={errors && errors.cpsrn}
                                 helpText="MUST BE EXACTL VALUE AS FOUND ON RECORD"
-                                onChange={onSearchKeywordChange}
+                                onChange={(e)=>setCpsrn(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />

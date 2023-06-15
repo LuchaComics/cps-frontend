@@ -310,7 +310,7 @@ function RetailerCustomerAdd() {
                                 helpText=""
                                 onChange={onPhoneChange}
                                 isRequired={true}
-                                maxWidth="380px"
+                                maxWidth="150px"
                             />
 
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faAddressBook} />&nbsp;Address</p>
@@ -385,7 +385,7 @@ function RetailerCustomerAdd() {
                                 helpText=""
                                 onChange={onPostalCodeChange}
                                 isRequired={true}
-                                maxWidth="380px"
+                                maxWidth="80px"
                             />
 
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faChartPie} />&nbsp;Metrics</p>

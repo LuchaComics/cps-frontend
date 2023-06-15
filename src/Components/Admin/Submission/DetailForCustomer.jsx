@@ -204,7 +204,7 @@ function AdminSubmissionDetailForCustomer() {
                                     placeholder="Text input"
                                     value={submission.user.phone}
                                     isRequired={true}
-                                    maxWidth="280px"
+                                    maxWidth="150px"
                                     helpText={""}
                                     disabled={true}
                                 />
@@ -264,7 +264,7 @@ function AdminSubmissionDetailForCustomer() {
                                     placeholder="Text input"
                                     value={submission.user.postalCode}
                                     isRequired={true}
-                                    maxWidth="280px"
+                                    maxWidth="80px"
                                     helpText={""}
                                     disabled={true}
                                 />

@@ -201,7 +201,7 @@ function RetailerCustomerDetail() {
                                 value={customer.phone}
                                 helpText=""
                                 isRequired={true}
-                                maxWidth="380px"
+                                maxWidth="150px"
                                 disabled={true}
                             />
 
@@ -270,7 +270,7 @@ function RetailerCustomerDetail() {
                                 value={customer.postalCode}
                                 helpText=""
                                 isRequired={true}
-                                maxWidth="380px"
+                                maxWidth="80px"
                                 disabled={true}
                             />
 

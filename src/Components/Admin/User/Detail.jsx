@@ -276,7 +276,7 @@ function AdminUserDetail() {
                                 value={user.phone}
                                 helpText=""
                                 isRequired={true}
-                                maxWidth="380px"
+                                maxWidth="150px"
                                 disabled={true}
                             />
 
@@ -345,7 +345,7 @@ function AdminUserDetail() {
                                 value={user.postalCode}
                                 helpText=""
                                 isRequired={true}
-                                maxWidth="380px"
+                                maxWidth="80px"
                                 disabled={true}
                             />
 

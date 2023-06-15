@@ -54,26 +54,6 @@ function AdminSubmissionUpdatePickCustomerWithSearch() {
     //// Event handling.
     ////
 
-    const onSearchKeywordChange = (e) => {
-        setSearchKeyword(e.target.value);
-    }
-
-    function onEmailChange(e) {
-        setEmail(e.target.value);
-    }
-
-    function onPhoneChange(e) {
-        setPhone(e.target.value);
-    }
-
-    function onFirstNameChange(e) {
-        setFirstName(e.target.value);
-    }
-
-    function onLastNameChange(e) {
-        setLastName(e.target.value);
-    }
-
     const onSearchButtonClicked = (e) => {
         console.log("searchButtonClick: Starting...");
         let aURL = "/admin/submission/" + id + "/cust/results";
@@ -191,7 +171,7 @@ function AdminSubmissionUpdatePickCustomerWithSearch() {
                                 value={searchKeyword}
                                 errorText={errors && errors.searchKeyword}
                                 helpText=""
-                                onChange={onSearchKeywordChange}
+                                onChange={(e)=>setSearchKeyword(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -208,7 +188,7 @@ function AdminSubmissionUpdatePickCustomerWithSearch() {
                                 value={firstName}
                                 errorText={errors && errors.firstName}
                                 helpText=""
-                                onChange={onFirstNameChange}
+                                onChange={(e)=>setFirstName(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -220,7 +200,7 @@ function AdminSubmissionUpdatePickCustomerWithSearch() {
                                 value={lastName}
                                 errorText={errors && errors.lastName}
                                 helpText=""
-                                onChange={onLastNameChange}
+                                onChange={(e)=>setLastName(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -232,7 +212,7 @@ function AdminSubmissionUpdatePickCustomerWithSearch() {
                                 value={email}
                                 errorText={errors && errors.email}
                                 helpText=""
-                                onChange={onEmailChange}
+                                onChange={(e)=>setEmail(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -244,7 +224,7 @@ function AdminSubmissionUpdatePickCustomerWithSearch() {
                                 value={phone}
                                 errorText={errors && errors.phone}
                                 helpText=""
-                                onChange={onPhoneChange}
+                                onChange={(e)=>setPhone(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />

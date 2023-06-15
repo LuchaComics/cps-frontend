@@ -335,7 +335,7 @@ function AdminUserAdd() {
                                 helpText=""
                                 onChange={(e)=>setPhone(e.target.value)}
                                 isRequired={true}
-                                maxWidth="380px"
+                                maxWidth="150px"
                             />
 
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faAddressBook} />&nbsp;Address</p>
@@ -410,7 +410,7 @@ function AdminUserAdd() {
                                 helpText=""
                                 onChange={(e)=>setPostalCode(e.target.value)}
                                 isRequired={true}
-                                maxWidth="380px"
+                                maxWidth="80px"
                             />
 
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faChartPie} />&nbsp;Metrics</p>

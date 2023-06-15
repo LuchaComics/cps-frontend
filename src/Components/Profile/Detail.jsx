@@ -168,7 +168,7 @@ function AccountDetail() {
                                 value={profile.phone}
                                 helpText=""
                                 isRequired={true}
-                                maxWidth="380px"
+                                maxWidth="150px"
                                 disabled={true}
                             />
 
@@ -237,7 +237,7 @@ function AccountDetail() {
                                 value={profile.postalCode}
                                 helpText=""
                                 isRequired={true}
-                                maxWidth="380px"
+                                maxWidth="80px"
                                 disabled={true}
                             />
 
