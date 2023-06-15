@@ -321,7 +321,7 @@ function RetailerCustomerDetailForSubmission() {
                                 <div class="container">
                                     <article class="message is-dark">
                                         <div class="message-body">
-                                            No submissions. <b><Link to="/submissions/add/search">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating a new submission.
+                                            No submissions. <b><Link to={`/submissions/add?customer_id=${id}&customer_name=${customer.name}`}>Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating a new submission.
                                         </div>
                                     </article>
                                 </div>
