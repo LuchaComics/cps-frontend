@@ -23,6 +23,7 @@ import {
     ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS,
     USER_STATE_WITH_EMPTY_OPTIONS
 } from "../../../Constants/FieldOptions";
+import PageLoadingContent from "../../Element/PageLoadingContent";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
@@ -85,6 +86,7 @@ function AdminSubmissionAddStep2() {
         console.log("onSubmitClick: Beginning...");
         console.log("onSubmitClick: Generating payload for submission.");
         setFetching(true);
+        setErrors({});
 
         // Generate the payload.
         const submission = {
@@ -290,13 +292,7 @@ function AdminSubmissionAddStep2() {
 
                         <p class="pb-4 has-text-grey">Please fill out all the required fields before submitting this form.</p>
 
-                        {isFetching && <div class="columns is-centered" style={{paddingTop: "20px"}}>
-                            <div class="column has-text-centered is-2">
-                            <div class="loader-wrapper is-centered">
-                              <div class="loader is-loading is-centered" style={{height: "80px", width: "80px"}}></div>
-                            </div>
-                            </div>
-                        </div>}
+                        {isFetching && <PageLoadingContent displayMessage={"Submitting..."} />}
 
                         {!isFetching && <div class="container">
 

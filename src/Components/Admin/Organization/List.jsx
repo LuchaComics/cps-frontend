@@ -8,6 +8,7 @@ import { useRecoilState } from 'recoil';
 import { getOrganizationListAPI, deleteOrganizationAPI } from "../../../API/organization";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 import { SUBMISSION_STATES } from "../../../Constants/FieldOptions";
+import PageLoadingContent from "../../Element/PageLoadingContent";
 
 
 function AdminOrganizationList() {
@@ -196,13 +197,7 @@ function AdminOrganizationList() {
                             </div>
                         </div>
 
-                        {isFetching && <div class="columns is-centered" style={{paddingTop: "20px"}}>
-                            <div class="column has-text-centered is-2">
-                                <div class="loader-wrapper is-centered">
-                                    <div class="loader is-loading is-centered" style={{height: "80px", width: "80px"}}></div>
-                                </div>
-                            </div>
-                        </div>}
+                        {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
 
                         {!isFetching && organizations && organizations.results && organizations.results.length > 0
                             ?

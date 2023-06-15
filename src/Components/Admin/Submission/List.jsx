@@ -8,6 +8,7 @@ import { useRecoilState } from 'recoil';
 import { getSubmissionListAPI, deleteSubmissionAPI } from "../../../API/submission";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 import { SUBMISSION_STATES } from "../../../Constants/FieldOptions";
+import PageLoadingContent from "../../Element/PageLoadingContent";
 
 
 function AdminSubmissionList() {
@@ -121,7 +122,8 @@ function AdminSubmissionList() {
 
     const onDeleteConfirmButtonClick = (e) => {
         console.log("onDeleteConfirmButtonClick"); // For debugging purposes only.
-
+        setFetching(true);
+        setErrors({});
         deleteSubmissionAPI(
             selectedSubmissionForDeletion.id,
             onSubmissionDeleteSuccess,
@@ -195,13 +197,7 @@ function AdminSubmissionList() {
                             </div>
                         </div>
 
-                        {isFetching && <div class="columns is-centered" style={{paddingTop: "20px"}}>
-                            <div class="column has-text-centered is-2">
-                            <div class="loader-wrapper is-centered">
-                              <div class="loader is-loading is-centered" style={{height: "80px", width: "80px"}}></div>
-                            </div>
-                            </div>
-                        </div>}
+                        {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
 
                         {!isFetching && submissions && submissions.results && submissions.results.length > 0
                             ?

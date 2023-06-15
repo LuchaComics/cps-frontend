@@ -76,6 +76,7 @@ function RetailerCustomerUpdate() {
     const onSubmitClick = (e) => {
         console.log("onSubmitClick: Beginning...");
         setFetching(true);
+        setErrors({});
         const customer = {
             id: id,
             Email: email,

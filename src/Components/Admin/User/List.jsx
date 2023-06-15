@@ -7,6 +7,7 @@ import { useRecoilState } from 'recoil';
 
 import { getUserListAPI, deleteUserAPI } from "../../../API/user";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
+import PageLoadingContent from "../../Element/PageLoadingContent";
 
 
 function AdminUserList() {
@@ -194,13 +195,7 @@ function AdminUserList() {
                             </div>
                         </div>
 
-                        {isFetching && <div class="columns is-centered" style={{paddingTop: "20px"}}>
-                            <div class="column has-text-centered is-2">
-                            <div class="loader-wrapper is-centered">
-                              <div class="loader is-loading is-centered" style={{height: "80px", width: "80px"}}></div>
-                            </div>
-                            </div>
-                        </div>}
+                        {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
 
                         {!isFetching && users && users.results && users.results.length > 0
                             ?

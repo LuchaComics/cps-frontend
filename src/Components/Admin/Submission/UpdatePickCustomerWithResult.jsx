@@ -17,7 +17,7 @@ import FormRadioField from "../../Element/FormRadioField";
 import FormMultiSelectField from "../../Element/FormMultiSelectField";
 import FormSelectField from "../../Element/FormSelectField";
 import FormInputFieldWithButton from "../../Element/FormInputFieldWithButton";
-import { FINDING_OPTIONS } from "../../../Constants/FieldOptions";
+import PageLoadingContent from "../../Element/PageLoadingContent";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
@@ -237,7 +237,10 @@ function AdminSubmissionUpdatePickCustomerWithResult() {
                         <div class="container pb-5">
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Results</p>
                             <hr />
-                            <div class="columns">
+
+                            {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
+
+                            {!isFetching && <div class="columns">
                                 {customers && customers.results && customers.results.map(function(customer, i){
                                     return <div class="column is-one-quarter" key={customer.id}>
                                         <article class="message is-primary">
@@ -259,7 +262,7 @@ function AdminSubmissionUpdatePickCustomerWithResult() {
                                         </article>
                                     </div>;
                                 })}
-                            </div>
+                            </div>}
                         </div>
 
                         <div class="columns pt-5">

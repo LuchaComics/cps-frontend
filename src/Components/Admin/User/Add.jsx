@@ -17,6 +17,7 @@ import FormSelectField from "../../Element/FormSelectField";
 import FormCheckboxField from "../../Element/FormCheckboxField";
 import FormCountryField from "../../Element/FormCountryField";
 import FormRegionField from "../../Element/FormRegionField";
+import PageLoadingContent from "../../Element/PageLoadingContent";
 import {
     HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS,
 } from "../../../Constants/FieldOptions";
@@ -75,7 +76,7 @@ function AdminUserAdd() {
     const onSubmitClick = (e) => {
         console.log("onSubmitClick: Beginning...");
         setFetching(true);
-
+        setErrors({});
         const user = {
             OrganizationID: organizationID,
             Role: role,
@@ -236,15 +237,9 @@ function AdminUserAdd() {
 
                         {/* <p class="pb-4 has-text-grey">Please fill out all the required fields before submitting this form.</p> */}
 
-                        {isFetching && <div class="columns is-centered" style={{paddingTop: "20px"}}>
-                            <div class="column has-text-centered is-2">
-                            <div class="loader-wrapper is-centered">
-                              <div class="loader is-loading is-centered" style={{height: "80px", width: "80px"}}></div>
-                            </div>
-                            </div>
-                        </div>}
+                        {isFetching && <PageLoadingContent displayMessage={"Submitting..."} />}
 
-                        <div class="container">
+                        {!isFetching && <div class="container">
 
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faCogs} />&nbsp;Settings</p>
                             <hr />
@@ -463,7 +458,7 @@ function AdminUserAdd() {
                                 </div>
                             </div>
 
-                        </div>
+                        </div>}
                     </nav>
                 </section>
             </div>

@@ -17,6 +17,7 @@ import FormRadioField from "../../Element/FormRadioField";
 import FormMultiSelectField from "../../Element/FormMultiSelectField";
 import FormSelectField from "../../Element/FormSelectField";
 import FormInputFieldWithButton from "../../Element/FormInputFieldWithButton";
+import PageLoadingContent from "../../Element/PageLoadingContent";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
@@ -178,7 +179,9 @@ function AdminSubmissionAddStep1WithResult() {
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Results</p>
                             <hr />
 
-                            {users && users.results && users.results.length > 0
+                            {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
+
+                            {!isFetching && users && users.results && users.results.length > 0
                                 ?
                                 <div class="columns">
                                     {users.results.map(function(user, i){

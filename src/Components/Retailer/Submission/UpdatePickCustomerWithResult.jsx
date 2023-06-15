@@ -66,6 +66,7 @@ function RetailerSubmissionUpdatePickCustomerWithResult() {
     const onCustomerAgreedToChangeClick = (e) => {
         setShowEditWarning(false);
         setFetching(true);
+        setErrors({});
 
         postSubmissionCustomerSwapOperationAPI(
             id, // submission id

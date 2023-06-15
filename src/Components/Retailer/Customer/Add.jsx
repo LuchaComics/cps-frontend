@@ -69,7 +69,7 @@ function RetailerCustomerAdd() {
     const onSubmitClick = (e) => {
         console.log("onSubmitClick: Beginning...");
         setFetching(true);
-
+        setErrors({});
         const customer = {
             Email: email,
             Phone: phone,

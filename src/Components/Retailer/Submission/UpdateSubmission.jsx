@@ -82,6 +82,7 @@ function RetailerSubmissionUpdateForSubmission() {
     const onSubmitClick = (e) => {
         console.log("onSubmitClick: Beginning...");
         setFetching(true);
+        setErrors({});
 
         // Generate the payload.
         const submission = {
