@@ -66,6 +66,34 @@ function AdminDashboard() {
                             </div>
                         </div>
 
+                        <section class="hero is-medium is-link">
+                          <div class="hero-body">
+                            <p class="title">
+                                <FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions
+                            </p>
+                            <p class="subtitle">
+                              Submit a request to encapsulate your comics by clicking below:
+                              <br />
+                              <br />
+                              <Link to={"/admin/submissions"}>View&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
+                            </p>
+                          </div>
+                        </section>
+
+                        <section class="hero is-medium is-primary">
+                          <div class="hero-body">
+                            <p class="title">
+                                <FontAwesomeIcon className="fas" icon={faBarcode} />&nbsp;Registry
+                            </p>
+                            <p class="subtitle">
+                              Have a CPS registry number? Use the following to lookup existing records:
+                              <br />
+                              <br />
+                              <Link to={"/admin/registry"}>View&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
+                            </p>
+                          </div>
+                        </section>
+
                         <section class="hero is-medium is-success">
                           <div class="hero-body">
                             <p class="title">
@@ -90,33 +118,6 @@ function AdminDashboard() {
                               <br />
                               <br />
                               <Link to={"/admin/users"}>View&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
-                            </p>
-                          </div>
-                        </section>
-
-                        <section class="hero is-medium is-link">
-                          <div class="hero-body">
-                            <p class="title">
-                                <FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions
-                            </p>
-                            <p class="subtitle">
-                              Submit a request to encapsulate your comics by clicking below:
-                              <br />
-                              <br />
-                              <Link to={"/admin/submissions"}>View&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
-                            </p>
-                          </div>
-                        </section>
-                        <section class="hero is-medium is-primary">
-                          <div class="hero-body">
-                            <p class="title">
-                                <FontAwesomeIcon className="fas" icon={faBarcode} />&nbsp;Registry
-                            </p>
-                            <p class="subtitle">
-                              Have a CPS registry number? Use the following to lookup existing records:
-                              <br />
-                              <br />
-                              <Link to={"/admin/registry"}>View&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
                             </p>
                           </div>
                         </section>
