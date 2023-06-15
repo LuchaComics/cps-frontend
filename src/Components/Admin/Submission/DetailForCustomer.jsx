@@ -17,6 +17,8 @@ import FormMultiSelectField from "../../Element/FormMultiSelectField";
 import FormCheckboxField from "../../Element/FormCheckboxField";
 import FormSelectField from "../../Element/FormSelectField";
 import FormDateField from "../../Element/FormDateField";
+import FormCountryField from "../../Element/FormCountryField";
+import FormRegionField from "../../Element/FormRegionField";
 import {
     FINDING_OPTIONS,
     OVERALL_NUMBER_GRADE_OPTIONS,
@@ -208,24 +210,27 @@ function AdminSubmissionDetailForCustomer() {
                                     helpText={""}
                                     disabled={true}
                                 />
-                                <FormInputField
+                                <FormCountryField
+                                    priorityOptions={["CA","US","MX"]}
                                     label="Country"
                                     name="country"
                                     placeholder="Text input"
-                                    value={submission.user.country}
+                                    selectedCountry={submission.user.country}
+                                    helpText=""
                                     isRequired={true}
-                                    maxWidth="280px"
-                                    helpText={""}
+                                    maxWidth="160px"
                                     disabled={true}
                                 />
-                                <FormInputField
-                                    label="Region"
+
+                                <FormRegionField
+                                    label="Province/Territory"
                                     name="region"
                                     placeholder="Text input"
-                                    value={submission.user.region}
+                                    selectedCountry={submission.user.country}
+                                    selectedRegion={submission.user.region}
+                                    helpText=""
                                     isRequired={true}
                                     maxWidth="280px"
-                                    helpText={""}
                                     disabled={true}
                                 />
                                 <FormInputField

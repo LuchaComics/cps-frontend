@@ -14,6 +14,8 @@ import FormRadioField from "../Element/FormRadioField";
 import FormMultiSelectField from "../Element/FormMultiSelectField";
 import FormSelectField from "../Element/FormSelectField";
 import FormCheckboxField from "../Element/FormCheckboxField";
+import FormCountryField from "../Element/FormCountryField";
+import FormRegionField from "../Element/FormRegionField";
 import { topAlertMessageState, topAlertStatusState } from "../../AppState";
 
 
@@ -175,25 +177,29 @@ function AccountDetail() {
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faAddressBook} />&nbsp;Address</p>
                             <hr />
 
-                            <FormInputField
+                            <FormCountryField
+                                priorityOptions={["CA","US","MX"]}
                                 label="Country"
                                 name="country"
                                 placeholder="Text input"
-                                value={profile.country}
+                                selectedCountry={profile.country}
+                                errorText={errors && errors.country}
                                 helpText=""
                                 isRequired={true}
-                                maxWidth="380px"
+                                maxWidth="160px"
                                 disabled={true}
                             />
 
-                            <FormInputField
-                                label="Region"
+                            <FormRegionField
+                                label="Province/Territory"
                                 name="region"
                                 placeholder="Text input"
-                                value={profile.region}
+                                selectedCountry={profile.country}
+                                selectedRegion={profile.region}
+                                errorText={errors && errors.region}
                                 helpText=""
                                 isRequired={true}
-                                maxWidth="380px"
+                                maxWidth="280px"
                                 disabled={true}
                             />
 

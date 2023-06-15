@@ -15,6 +15,8 @@ import FormRadioField from "../../Element/FormRadioField";
 import FormMultiSelectField from "../../Element/FormMultiSelectField";
 import FormSelectField from "../../Element/FormSelectField";
 import FormCheckboxField from "../../Element/FormCheckboxField";
+import FormCountryField from "../../Element/FormCountryField";
+import FormRegionField from "../../Element/FormRegionField";
 import {
     HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS,
 } from "../../../Constants/FieldOptions";
@@ -341,28 +343,30 @@ function AdminUserAdd() {
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faAddressBook} />&nbsp;Address</p>
                             <hr />
 
-                            <FormInputField
+                            <FormCountryField
+                                priorityOptions={["CA","US","MX"]}
                                 label="Country (Optional)"
                                 name="country"
                                 placeholder="Text input"
-                                value={country}
+                                selectedCountry={country}
                                 errorText={errors && errors.country}
                                 helpText=""
-                                onChange={(e)=>setCountry(e.target.value)}
-                                isRequired={true}
-                                maxWidth="380px"
+                                onChange={(value)=>setCountry(value)}
+                                isRequired={false}
+                                maxWidth="160px"
                             />
 
-                            <FormInputField
+                            <FormRegionField
                                 label="Province/Territory (Optional)"
                                 name="region"
                                 placeholder="Text input"
-                                value={region}
+                                selectedCountry={country}
+                                selectedRegion={region}
                                 errorText={errors && errors.region}
                                 helpText=""
-                                onChange={(e)=>setRegion(e.target.value)}
-                                isRequired={true}
-                                maxWidth="380px"
+                                onChange={(value)=>setRegion(value)}
+                                isRequired={false}
+                                maxWidth="280px"
                             />
 
                             <FormInputField
