@@ -64,6 +64,8 @@ export function postSubmissionCreateAPI(data, onSuccessCallback, onErrorCallback
     // Minor bugfixes.
     decamelizedData.user_id = decamelizedData.user_i_d;
     delete decamelizedData.user_i_d;
+    decamelizedData.organization_id = decamelizedData.organization_i_d;
+    delete decamelizedData.organization_i_d;
 
     // if (data.issueCoverDate !==undefined && data.issueCoverDate !==null && data.issueCoverDate !=="") {
     //     decamelizedData.issue_cover_date = new Date(data.issueCoverDate).toISOString();
@@ -124,6 +126,11 @@ export function putSubmissionUpdateAPI(data, onSuccessCallback, onErrorCallback,
     // if (data.issueCoverDate !==undefined && data.issueCoverDate !==null && data.issueCoverDate !=="") {
     //     decamelizedData.issue_cover_date = new Date(data.issueCoverDate).toISOString();
     // }
+    // Minor bugfixes.
+    decamelizedData.user_id = decamelizedData.user_i_d;
+    delete decamelizedData.user_i_d;
+    decamelizedData.organization_id = decamelizedData.organization_i_d;
+    delete decamelizedData.organization_i_d;
 
     console.log("putSubmissionUpdateAPI | post-edited | decamelizedData:", decamelizedData);
 

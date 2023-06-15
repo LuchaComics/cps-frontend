@@ -25,7 +25,7 @@ import {
     ISSUE_COVER_YEAR_OPTIONS,
     ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS
 } from "../../../Constants/FieldOptions";
-import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
+import { topAlertMessageState, topAlertStatusState, currentUserState } from "../../../AppState";
 
 
 function RetailerSubmissionUpdateForSubmission() {
@@ -41,6 +41,7 @@ function RetailerSubmissionUpdateForSubmission() {
 
     const [topAlertMessage, setTopAlertMessage] = useRecoilState(topAlertMessageState);
     const [topAlertStatus, setTopAlertStatus] = useRecoilState(topAlertStatusState);
+    const [currentUser] = useRecoilState(currentUserState);
 
     ////
     //// Component states.
@@ -107,6 +108,8 @@ function RetailerSubmissionUpdateForSubmission() {
             cpsPercentageGrade: parseFloat(cpsPercentageGrade),
             showsSignsOfTamperingOrRestoration: parseInt(showsSignsOfTamperingOrRestoration),
             status: status,
+            serviceType: 1, // 1 = Pre-Screening Service
+            organizationID: currentUser.organizationID,
         };
 
         // Submit to the backend.

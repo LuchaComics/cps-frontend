@@ -56,7 +56,17 @@ function Login() {
         setOnHamburgerClicked(true); // Set to `true` so the side menu loads on startup of app.
         if (response.user !== undefined && response.user !== null && response.user !== "") {
             // For debugging purposes only.
-            console.log("onLoginSuccess | authenticated user:", response.user);
+            console.log("onLoginSuccess | user prefix:", response.user);
+
+            // BUGFIX:
+            try {
+                response.user.organizationID = response.user.organizationId;
+            } catch(err) {
+                console.log("onLoginSuccess | catch err:", err);
+            }
+
+            // For debugging purposes only.
+            console.log("onLoginSuccess | user postfix:", response.user);
 
             // Store in persistance storage in the browser.
             setCurrentUser(response.user);

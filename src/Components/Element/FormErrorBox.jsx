@@ -14,6 +14,25 @@ function FormErrorBox({ errors }) {
         return null;
     }
 
+    // STEP 2: If the error result is not an object then return the following GUI.
+    if (typeof errors !== 'object') {
+        return (
+            <article class="message is-danger">
+                <div class="message-header">
+                    Error(s):
+                </div>
+                <div class="message-body">
+                    <p style={{margin: '10px'}}>
+                        <strong>Error:</strong>&nbsp;{errors}
+                    </p>
+                    <hr />
+                    <p style={{margin: '10px'}}><i>Please make sure the above error(s) have been fixed before submitting again</i></p>
+                </div>
+            </article>
+        );
+    }
+
+    // STEP 3: If the result is an object then run the following GUI.
     return (
         <article class="message is-danger">
             <div class="message-header">

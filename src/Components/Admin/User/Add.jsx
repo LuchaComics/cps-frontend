@@ -187,7 +187,7 @@ function AdminUserAdd() {
                 onOrganizationOptionListError,
                 onOrganizationOptionListDone
             );
-            setFetching(false);
+            setFetching(true);
         }
 
         return () => { mounted = false; }

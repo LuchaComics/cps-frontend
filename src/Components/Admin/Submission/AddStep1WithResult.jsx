@@ -183,6 +183,9 @@ function AdminSubmissionAddStep1WithResult() {
                                 <div class="columns">
                                     {users.results.map(function(user, i){
                                         return <div class="column is-one-quarter" key={user.id}>
+                                            <span className="has-text-grey-light is-size-7">
+                                                User found via <a href={`/admin/organization/${user.organizationId}`} target="_blank" rel="noreferrer">{user.organizationName}&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></a>
+                                            </span>
                                             <article class="message is-primary">
                                                 <div class="message-body">
                                                     <p>

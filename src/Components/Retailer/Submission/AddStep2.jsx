@@ -22,7 +22,7 @@ import {
     ISSUE_COVER_YEAR_OPTIONS,
     ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS
 } from "../../../Constants/FieldOptions";
-import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
+import { topAlertMessageState, topAlertStatusState, currentUserState } from "../../../AppState";
 
 
 function RetailerSubmissionAddStep2() {
@@ -40,6 +40,7 @@ function RetailerSubmissionAddStep2() {
 
     const [topAlertMessage, setTopAlertMessage] = useRecoilState(topAlertMessageState);
     const [topAlertStatus, setTopAlertStatus] = useRecoilState(topAlertStatusState);
+    const [currentUser] = useRecoilState(currentUserState);
 
     ////
     //// Component states.
@@ -106,6 +107,8 @@ function RetailerSubmissionAddStep2() {
             cpsPercentageGrade: parseFloat(cpsPercentageGrade),
             showsSignsOfTamperingOrRestoration: parseInt(showsSignsOfTamperingOrRestoration),
             status: 1, // 1 = Pending.
+            serviceType: 1, // 1 = Pre-Screening Service
+            organizationID: currentUser.organizationID,
         };
 
         console.log("onSubmitClick: Attaching customer identification.");

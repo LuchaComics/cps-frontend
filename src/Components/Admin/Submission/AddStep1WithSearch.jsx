@@ -39,7 +39,7 @@ function AdminSubmissionAddStep1WithSearch() {
     const [errors, setErrors] = useState({});
     const [isFetching, setFetching] = useState(false);
     const [forceURL, setForceURL] = useState("");
-    const [customers, setCustomers] = useState({});
+    const [users, setUsers] = useState({});
     const [hasCustomer, setHasCustomer] = useState(1);
     const [showCancelWarning, setShowCancelWarning] = useState(false);
     const [searchKeyword, setSearchKeyword] = useState("");
@@ -109,7 +109,7 @@ function AdminSubmissionAddStep1WithSearch() {
     function onCustomerListSuccess(response){
         console.log("onCustomerListSuccess: Starting...");
         if (response.results !== null) {
-            setCustomers(response);
+            setUsers(response);
         }
     }
 
@@ -178,7 +178,7 @@ function AdminSubmissionAddStep1WithSearch() {
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customer Options</p>
                             <hr />
 
-                            <Link class="is-medium is-warning" to="/admin/customers/add" target="_blank" rel="noreferrer">Create a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link>&nbsp;&nbsp;<br /><br />
+                            <Link class="is-medium is-warning" to="/admin/users/add" target="_blank" rel="noreferrer">Create a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link>&nbsp;&nbsp;<br /><br />
                             <Link class="is-medium is-danger" to="/admin/submissions/add">Skip selecting a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
                         </div>
 
