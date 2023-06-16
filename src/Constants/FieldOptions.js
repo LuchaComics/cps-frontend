@@ -301,10 +301,16 @@ export const USER_STATE_WITH_EMPTY_OPTIONS = [
     ...USER_STATE_OPTIONS
 ];
 
+export const USER_ROLES = {
+    1: "Root",
+    2: "Staff",
+    3: "Customer"
+}
+
 export const USER_ROLE_OPTIONS = [
     { value: 1, label: 'Root' },
-    { value: 2, label: 'Retailer Staff' },
-    { value: 3, label: 'Retailer Customer' },
+    { value: 2, label: 'Staff' },
+    { value: 3, label: 'Customer' },
 ];
 
 export const USER_ROLE_WITH_EMPTY_OPTIONS = [

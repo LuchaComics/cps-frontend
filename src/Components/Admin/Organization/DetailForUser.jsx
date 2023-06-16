@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faUserCircle, faGauge, faPencil, faUsers, faEye, faArrowRight, faTrashCan, faArrowUpRightFromSquare, faBuilding } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
-import { SUBMISSION_STATES } from "../../../Constants/FieldOptions";
+import { USER_ROLES } from "../../../Constants/FieldOptions";
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
 import { getOrganizationDetailAPI } from "../../../API/organization";
@@ -242,14 +242,14 @@ function AdminOrganizationDetailForUserList() {
                                 <p class="title is-2"><FontAwesomeIcon className="fas" icon={faBuilding} />&nbsp;Organization</p>
                             </div>
                             <div class="column has-text-right">
-                                {/* Mobile Specific
+                                {/* Mobile Specific */}
                                 <Link to={`/admin/users/add?organization_id=${id}&organization_name=${organization.name}`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
-                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
+                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add
                                 </Link>
-                                 Desktop Specific
+                                {/*  Desktop Specific */}
                                 <Link to={`/admin/users/add?organization_id=${id}&organization_name=${organization.name}`} class="button is-small is-success is-hidden-touch" type="button">
-                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
-                                </Link>*/}
+                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add
+                                </Link>
                             </div>
                         </div>
                         <FormErrorBox errors={errors} />
@@ -289,6 +289,7 @@ function AdminOrganizationDetailForUserList() {
                                                     <tr>
                                                         <th>Name</th>
                                                         <th>Email</th>
+                                                        <th>Role</th>
                                                         <th>Created</th>
                                                         <th></th>
                                                     </tr>
@@ -299,9 +300,13 @@ function AdminOrganizationDetailForUserList() {
                                                         return <tr>
                                                         <td data-label="Name">{user.name}</td>
                                                         <td data-label="Email"><a href={`mailto:${user.email}`}>{user.email}</a></td>
+                                                        <td data-label="Role">{USER_ROLES[user.role]}</td>
                                                         <td data-label="Created">{user.createdAt}</td>
                                                             <td class="is-actions-cell">
                                                                 <div class="buttons is-right">
+                                                                    <Link to={`/admin/submissions/add?user_id=${user.id}&user_name=${user.name}`} target="_blank" rel="noreferrer" class="button is-small is-success" type="button">
+                                                                        <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
+                                                                    </Link>
                                                                     <Link to={`/admin/user/${user.id}`} target="_blank" rel="noreferrer" class="button is-small is-primary" type="button">
                                                                         View&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
                                                                     </Link>
@@ -324,25 +329,22 @@ function AdminOrganizationDetailForUserList() {
                                 <div class="container">
                                     <article class="message is-dark">
                                         <div class="message-body">
-                                            No users. <b><Link to="/admin/users/add">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating a new user.
+                                            No users. <b><Link to={`/admin/users/add?organization_id=${id}&organization_name=${organization.name}`}>Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating a new user.
                                         </div>
                                     </article>
                                 </div>
                             }
-
 
                             <div class="columns pt-5">
                                 <div class="column is-half">
                                     <Link class="button is-hidden-touch" to={`/admin/organizations`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                     <Link class="button is-fullwidth is-hidden-desktop" to={`/admin/organizations`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                 </div>
-                                <div class="column is-half has-text-right">{/*
-                                    <Link to={`/organization/${id}/edit`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
-                                    <Link to={`/organization/${id}/edit`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
-                                    */}
+                                <div class="column is-half has-text-right">
+                                    <Link to={`/admin/users/add?organization_id=${id}&organization_name=${organization.name}`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link>
+                                    <Link to={`/admin/users/add?organization_id=${id}&organization_name=${organization.name}`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link>
                                 </div>
                             </div>
-
 
                         </div>}
                     </nav>

@@ -35,6 +35,8 @@ function AdminSubmissionAddStep2() {
     const [searchParams] = useSearchParams(); // Special thanks via https://stackoverflow.com/a/65451140
     const userID = searchParams.get("user_id");
     const userName = searchParams.get("user_name");
+    const orgID = searchParams.get("organization_id");
+    // const orgName = searchParams.get("organization_name");
 
     ////
     //// Global state.
@@ -75,7 +77,7 @@ function AdminSubmissionAddStep2() {
     const [showCancelWarning, setShowCancelWarning] = useState(false);
     const [status, setStatus] = useState(0);
     const [organizationSelectOptions, setOrganizationSelectOptions] = useState([]);
-    const [organizationID, setOrganizationID] = useState("");
+    const [organizationID, setOrganizationID] = useState(orgID);
     const [serviceType, setServiceType] = useState(0);
 
     ////
@@ -258,8 +260,7 @@ function AdminSubmissionAddStep2() {
                             <ul>
                                 <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
                                 <li class=""><Link to="/admin/users" aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Users</Link></li>
-                                <li class=""><Link to={`/admin/user/${userID}`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail</Link></li>
-                                <li class=""><Link to={`/admin/user/${userID}/sub`} aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
+                                <li class=""><Link to={`/admin/user/${userID}/sub`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail (Submissions)</Link></li>
                                 <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
                             </ul>
                         }
@@ -675,7 +676,7 @@ function AdminSubmissionAddStep2() {
                                 isRequired={true}
                                 onChange={(e)=>setOrganizationID(e.target.value)}
                                 options={organizationSelectOptions}
-                                disabled={organizationSelectOptions.length === 0}
+                                disabled={(orgID !== undefined && orgID !== "" && orgID !== null) || organizationSelectOptions.length === 0}
                             />
                             <FormRadioField
                                 label="Service Type"

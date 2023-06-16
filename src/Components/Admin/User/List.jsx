@@ -8,6 +8,7 @@ import { useRecoilState } from 'recoil';
 import { getUserListAPI, deleteUserAPI } from "../../../API/user";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 import PageLoadingContent from "../../Element/PageLoadingContent";
+import { USER_ROLES } from "../../../Constants/FieldOptions";
 
 
 function AdminUserList() {
@@ -206,8 +207,8 @@ function AdminUserList() {
                                             <thead>
                                                 <tr>
                                                     <th>Name</th>
-                                                    <th>Email</th>
                                                     <th>Organization</th>
+                                                    <th>Role</th>
                                                     <th>Joined</th>
                                                     <th></th>
                                                 </tr>
@@ -217,16 +218,13 @@ function AdminUserList() {
                                                 {users && users.results && users.results.map(function(user, i){
                                                     return <tr>
                                                         <td data-label="Name">{user.name}</td>
-                                                        <td data-label="Email">
-                                                            {user.email !== "root" &&
-                                                                <a href={`mailto:${user.email}`}>{user.email}</a>
-                                                            }
-                                                        </td>
+
                                                         <td data-label="Organization">
                                                             {user.organizationId !== "000000000000000000000000" && <Link to={`/admin/organization/${user.organizationId}`} target="_blank" rel="noreferrer" class="is-small">
                                                                 {user.organizationName}&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
                                                             </Link>}
                                                         </td>
+                                                        <td data-label="Role">{USER_ROLES[user.role]}</td>
                                                         <td data-label="Joined">{user.createdAt}</td>
                                                         <td class="is-actions-cell">
                                                             <div class="buttons is-right">

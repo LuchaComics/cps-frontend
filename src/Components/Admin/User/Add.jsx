@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useSearchParams } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faTimesCircle, faCheckCircle, faUserCircle, faGauge, faPencil, faUsers, faIdCard, faAddressBook, faContactCard, faChartPie, faCogs } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faTimesCircle, faCheckCircle, faUserCircle, faGauge, faPencil, faUsers, faIdCard, faAddressBook, faContactCard, faChartPie, faCogs, faBuilding, faEye } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
@@ -25,6 +25,14 @@ import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
 function AdminUserAdd() {
+    ////
+    //// URL Parameters.
+    ////
+
+    const [searchParams] = useSearchParams(); // Special thanks via https://stackoverflow.com/a/65451140
+    const orgID = searchParams.get("organization_id");
+    const orgName = searchParams.get("organization_name");
+
     ////
     //// Global state.
     ////
@@ -57,7 +65,7 @@ function AdminUserAdd() {
     const [howDidYouHearAboutUsOther, setHowDidYouHearAboutUsOther] = useState("");
     const [showCancelWarning, setShowCancelWarning] = useState(false);
     const [organizationSelectOptions, setOrganizationSelectOptions] = useState([]);
-    const [organizationID, setOrganizationID] = useState();
+    const [organizationID, setOrganizationID] = useState(orgID);
     const [role, setRole] = useState();
     const [status, setStatus] = useState();
 
@@ -116,8 +124,13 @@ function AdminUserAdd() {
             setTopAlertMessage("");
         }, 2000);
 
-        // Redirect the user to a new page.
-        setForceURL("/admin/user/"+response.id);
+        if (orgName !== undefined && orgName !== null && orgName !== "") {
+            // Redirect the user to a new page.
+            setForceURL("/admin/organization/"+orgID+"/users");
+        } else {
+            // Redirect the user to a new page.
+            setForceURL("/admin/user/"+response.id);
+        }
     }
 
     function onAdminUserAddError(apiErr) {
@@ -208,11 +221,21 @@ function AdminUserAdd() {
             <div class="container">
                 <section class="section">
                     <nav class="breadcrumb" aria-label="breadcrumbs">
-                        <ul>
-                            <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
-                            <li class=""><Link to="/admin/users" aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Users</Link></li>
-                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
-                        </ul>
+                        {orgName !== undefined && orgName !== null && orgName !== ""
+                            ?
+                            <ul>
+                                <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
+                                <li class=""><Link to="/admin/organizations" aria-current="page"><FontAwesomeIcon className="fas" icon={faBuilding} />&nbsp;Organizations</Link></li>
+                                <li class=""><Link to={`/admin/organization/${orgID}/users`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail (Users)</Link></li>
+                                <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add User</Link></li>
+                            </ul>
+                            :
+                            <ul>
+                                <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
+                                <li class=""><Link to="/admin/users" aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Users</Link></li>
+                                <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
+                            </ul>
+                        }
                     </nav>
                     <nav class="box">
                         <div class={`modal ${showCancelWarning ? 'is-active' : ''}`}>
@@ -226,7 +249,12 @@ function AdminUserAdd() {
                                     Your user record will be cancelled and your work will be lost. This cannot be undone. Do you want to continue?
                                 </section>
                                 <footer class="modal-card-foot">
-                                    <Link class="button is-medium is-success" to={`/admin/users`}>Yes</Link>
+                                    {orgName !== undefined && orgName !== null && orgName !== ""
+                                        ?
+                                        <Link class="button is-medium is-success" to={`/admin/organization/${orgID}/users`}>Yes</Link>
+                                        :
+                                        <Link class="button is-medium is-success" to={`/admin/users`}>Yes</Link>
+                                    }
                                     <button class="button is-medium" onClick={(e)=>setShowCancelWarning(false)}>No</button>
                                 </footer>
                             </div>
