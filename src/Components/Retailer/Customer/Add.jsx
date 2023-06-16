@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faTimesCircle, faCheckCircle, faUserCircle, faGauge, faPencil, faUsers, faIdCard, faAddressBook, faContactCard, faChartPie } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faTimesCircle, faCheckCircle, faUserCircle, faGauge, faPencil, faUsers, faIdCard, faAddressBook, faContactCard, faChartPie, faCogs } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
@@ -358,6 +358,35 @@ function RetailerCustomerAdd() {
                                 errorText={errors && errors.agreePromotionsEmail}
                                 onChange={onAgreePromotionsEmailChange}
                                 maxWidth="180px"
+                            />
+
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faCogs} />&nbsp;Settings</p>
+                            <hr />
+
+                            <FormInputField
+                                label="Password (Optional)"
+                                name="password"
+                                type="password"
+                                placeholder="Text input"
+                                value={password}
+                                errorText={errors && errors.password}
+                                helpText=""
+                                onChange={(e)=>setPassword(e.target.value)}
+                                isRequired={true}
+                                maxWidth="380px"
+                            />
+
+                            <FormInputField
+                                label="Password Repeated (Optional)"
+                                name="passwordRepeated"
+                                type="password"
+                                placeholder="Text input"
+                                value={passwordRepeated}
+                                errorText={errors && errors.passwordRepeated}
+                                helpText=""
+                                onChange={(e)=>setPasswordRepeated(e.target.value)}
+                                isRequired={true}
+                                maxWidth="380px"
                             />
 
                             <div class="columns pt-5">

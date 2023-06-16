@@ -78,6 +78,10 @@ function Login() {
                 setForceURL("/dashboard");
             }
 
+            if (response.user.role === 3) {
+                alert("unsupported customer account... come back another time")
+            }
+
             // For debugging purposes only.
             console.log("currentUser:", currentUser);
         }

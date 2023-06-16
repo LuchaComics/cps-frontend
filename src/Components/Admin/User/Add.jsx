@@ -281,6 +281,32 @@ function AdminUserAdd() {
                                 maxWidth="180px"
                             />
 
+                            <FormInputField
+                                label="Password (Optional)"
+                                name="password"
+                                type="password"
+                                placeholder="Text input"
+                                value={password}
+                                errorText={errors && errors.password}
+                                helpText=""
+                                onChange={(e)=>setPassword(e.target.value)}
+                                isRequired={true}
+                                maxWidth="380px"
+                            />
+
+                            <FormInputField
+                                label="Password Repeated (Optional)"
+                                name="passwordRepeated"
+                                type="password"
+                                placeholder="Text input"
+                                value={passwordRepeated}
+                                errorText={errors && errors.passwordRepeated}
+                                helpText=""
+                                onChange={(e)=>setPasswordRepeated(e.target.value)}
+                                isRequired={true}
+                                maxWidth="380px"
+                            />
+
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Full Name</p>
                             <hr />
 
