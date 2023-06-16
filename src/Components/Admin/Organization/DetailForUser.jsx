@@ -324,7 +324,7 @@ function AdminOrganizationDetailForUserList() {
                                 <div class="container">
                                     <article class="message is-dark">
                                         <div class="message-body">
-                                            No users. <b><Link to="/admin/users/add/search">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating a new user.
+                                            No users. <b><Link to="/admin/users/add">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating a new user.
                                         </div>
                                     </article>
                                 </div>
