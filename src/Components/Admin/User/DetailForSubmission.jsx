@@ -320,7 +320,7 @@ function AdminUserDetailForSubmission() {
                                 <div class="container">
                                     <article class="message is-dark">
                                         <div class="message-body">
-                                            No submissions. <b><Link to="/admin/submissions/add/search">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating a new submission.
+                                            No submissions. <b><Link to={`/admin/submissions/add?user_id=${id}&user_name=${user.name}`}>Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating a new submission.
                                         </div>
                                     </article>
                                 </div>
