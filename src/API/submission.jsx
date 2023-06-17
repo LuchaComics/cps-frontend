@@ -114,27 +114,8 @@ export function getSubmissionDetailAPI(submissionID, onSuccessCallback, onErrorC
     }).then(onDoneCallback);
 }
 
-export function putSubmissionUpdateAPI(data, onSuccessCallback, onErrorCallback, onDoneCallback) {
+export function putSubmissionUpdateAPI(decamelizedData, onSuccessCallback, onErrorCallback, onDoneCallback) {
     const axios = getCustomAxios();
-
-    // To Snake-case for API from camel-case in React.
-    let decamelizedData = decamelizeKeys(data);
-
-    console.log("putSubmissionUpdateAPI | pre-edited | decamelizedData:", decamelizedData); // For debugging purposes only.
-
-    // Minor bugfixes.
-    // if (data.issueCoverDate !==undefined && data.issueCoverDate !==null && data.issueCoverDate !=="") {
-    //     decamelizedData.issue_cover_date = new Date(data.issueCoverDate).toISOString();
-    // }
-    // Minor bugfixes.
-    decamelizedData.id = decamelizedData.i_d;
-    delete decamelizedData.i_d;
-    decamelizedData.user_id = decamelizedData.user_i_d;
-    delete decamelizedData.user_i_d;
-    decamelizedData.organization_id = decamelizedData.organization_i_d;
-    delete decamelizedData.organization_i_d;
-
-    console.log("putSubmissionUpdateAPI | post-edited | decamelizedData:", decamelizedData);
 
     axios.put(CPS_SUBMISSION_API_ENDPOINT.replace("{id}", decamelizedData.id), decamelizedData).then((successResponse) => {
         const responseData = successResponse.data;

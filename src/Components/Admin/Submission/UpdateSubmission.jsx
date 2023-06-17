@@ -90,31 +90,31 @@ function AdminSubmissionUpdateForSubmission() {
         // Generate the payload.
         const submission = {
             id: id,
-            seriesTitle: seriesTitle,
-            issueVol: issueVol,
-            issueNo: issueNo,
-            issueCoverYear: issueCoverYear,
-            issueCoverMonth: issueCoverMonth,
-            publisherName: publisherName,
-            publisherNameOther: publisherNameOther,
-            specialNotes: specialNotes,
-            gradingNotes: gradingNotes,
-            creasesFinding: creasesFinding,
-            tearsFinding: tearsFinding,
-            missingPartsFinding: missingPartsFinding,
-            stainsFinding: stainsFinding,
-            distortionFinding: distortionFinding,
-            paperQualityFinding: paperQualityFinding,
-            spineFinding: spineFinding,
-            coverFinding: coverFinding,
-            gradingScale: parseInt(gradingScale),
-            overallLetterGrade: overallLetterGrade,
-            overallNumberGrade: parseFloat(overallNumberGrade),
-            cpsPercentageGrade: parseFloat(cpsPercentageGrade),
-            showsSignsOfTamperingOrRestoration: parseInt(showsSignsOfTamperingOrRestoration),
+            series_title: seriesTitle,
+            issue_vol: issueVol,
+            issue_no: issueNo,
+            issue_cover_year: issueCoverYear,
+            issue_cover_month: issueCoverMonth,
+            publisher_name: publisherName,
+            publisher_name_other: publisherNameOther,
+            special_notes: specialNotes,
+            grading_notes: gradingNotes,
+            creases_finding: creasesFinding,
+            tears_finding: tearsFinding,
+            missing_parts_finding: missingPartsFinding,
+            stains_finding: stainsFinding,
+            distortion_finding: distortionFinding,
+            paper_quality_finding: paperQualityFinding,
+            spine_finding: spineFinding,
+            cover_finding: coverFinding,
+            grading_scale: parseInt(gradingScale),
+            overall_letter_grade: overallLetterGrade,
+            overall_number_grade: parseFloat(overallNumberGrade),
+            cps_percentage_grade: parseFloat(cpsPercentageGrade),
+            shows_signs_of_tampering_or_restoration: parseInt(showsSignsOfTamperingOrRestoration),
             status: status,
-            serviceType: serviceType,
-            organizationID: organizationID,
+            service_type: serviceType,
+            organization_id: organizationID,
         };
 
         // Submit to the backend.
@@ -686,10 +686,8 @@ function AdminSubmissionUpdateForSubmission() {
                                 value={serviceType}
                                 opt1Value={1}
                                 opt1Label="Pre-Screening Service"
-                                opt2Value={3}
-                                opt2Label="Pedigree Service"
-                                opt3Value={3}
-                                opt3Label="CPS Capsule You Grade Service"
+                                opt2Value={2}
+                                opt2Label="CPS Pedigree Service"
                                 errorText={errors && errors.serviceType}
                                 onChange={(e)=>setServiceType(parseInt(e.target.value))}
                                 maxWidth="180px"
