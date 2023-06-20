@@ -114,6 +114,13 @@ function AdminSubmissionDetail() {
         return <Navigate to={forceURL}  />
     }
 
+    // The following code will check to see if we need to grant the 'is NM+' option is available to the user.
+    let isNMPlusOpen = false;
+    if (submission !== undefined && submission !== null && submission !== "") {
+        isNMPlusOpen = submission.gradingScale === 1 && submission.overallLetterGrade === "nm";
+    }
+
+    // Render the JSX content.
     return (
         <>
             <div class={`modal ${showCustomerEditOptions ? 'is-active' : ''}`}>
@@ -461,15 +468,27 @@ function AdminSubmissionDetail() {
                                 maxWidth="180px"
                             />
 
-                            {submission && submission.gradingScale === 1 && <FormSelectField
-                                label="Overall Letter Grade"
-                                name="overallLetterGrade"
-                                placeholder="Overall Letter Grade"
-                                selectedValue={submission.overallLetterGrade}
-                                helpText=""
-                                options={FINDING_OPTIONS}
-                                disabled={true}
-                            />}
+                            {submission && submission.gradingScale === 1 && <>
+                                <FormSelectField
+                                    label="Overall Letter Grade"
+                                    name="overallLetterGrade"
+                                    placeholder="Overall Letter Grade"
+                                    selectedValue={submission.overallLetterGrade}
+                                    helpText=""
+                                    options={FINDING_OPTIONS}
+                                    disabled={true}
+                                />
+                                {isNMPlusOpen && <>
+                                    <FormCheckboxField
+                                        label="Is Near Mint plus?"
+                                        name="isOverallLetterGradeNearMintPlus"
+                                        checked={submission.isOverallLetterGradeNearMintPlus}
+                                        disabled={true}
+                                        maxWidth="180px"
+                                    />
+                                </>}
+                                </>
+                            }
 
                             {submission && submission.gradingScale === 2 && <FormSelectField
                                 label="Overall Number Grade"

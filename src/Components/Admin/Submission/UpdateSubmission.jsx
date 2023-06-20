@@ -18,6 +18,7 @@ import FormRadioField from "../../Element/FormRadioField";
 import FormMultiSelectField from "../../Element/FormMultiSelectField";
 import FormSelectField from "../../Element/FormSelectField";
 import FormDateField from "../../Element/FormDateField";
+import FormCheckboxField from "../../Element/FormCheckboxField";
 import PageLoadingContent from "../../Element/PageLoadingContent";
 import {
     FINDING_OPTIONS,
@@ -77,6 +78,7 @@ function AdminSubmissionUpdateForSubmission() {
     const [organizationSelectOptions, setOrganizationSelectOptions] = useState([]);
     const [organizationID, setOrganizationID] = useState("");
     const [serviceType, setServiceType] = useState(0);
+    const [isOverallLetterGradeNearMintPlus, setIsOverallLetterGradeNearMintPlus] = useState(false);
 
     ////
     //// Event handling.
@@ -109,6 +111,7 @@ function AdminSubmissionUpdateForSubmission() {
             cover_finding: coverFinding,
             grading_scale: parseInt(gradingScale),
             overall_letter_grade: overallLetterGrade,
+            is_overall_letter_grade_near_mint_plus: isOverallLetterGradeNearMintPlus,
             overall_number_grade: parseFloat(overallNumberGrade),
             cps_percentage_grade: parseFloat(cpsPercentageGrade),
             shows_signs_of_tampering_or_restoration: parseInt(showsSignsOfTamperingOrRestoration),
@@ -145,6 +148,7 @@ function AdminSubmissionUpdateForSubmission() {
         setCoverFinding(response.coverFinding);
         setGradingScale(parseInt(response.gradingScale));
         setOverallLetterGrade(response.overallLetterGrade);
+        setIsOverallLetterGradeNearMintPlus(response.isOverallLetterGradeNearMintPlus);
         setOverallNumberGrade(response.overallNumberGrade);
         setSpecialNotes(response.specialNotes);
         setShowsSignsOfTamperingOrRestoration(response.showsSignsOfTamperingOrRestoration);
@@ -278,6 +282,10 @@ function AdminSubmissionUpdateForSubmission() {
         return <Navigate to={forceURL}  />
     }
 
+    // The following code will check to see if we need to grant the 'is NM+' option is available to the user.
+    let isNMPlusOpen = gradingScale === 1 && overallLetterGrade === "nm";
+
+    // Render the JSX content.
     return (
         <>
             <div class="container">
@@ -634,16 +642,28 @@ function AdminSubmissionUpdateForSubmission() {
                                 maxWidth="180px"
                             />
 
-                            {gradingScale === 1 && <FormSelectField
-                                label="Overall Letter Grade"
-                                name="overallLetterGrade"
-                                placeholder="Overall Letter Grade"
-                                selectedValue={overallLetterGrade}
-                                errorText={errors && errors.overallLetterGrade}
-                                helpText=""
-                                onChange={(e)=>setOverallLetterGrade(e.target.value)}
-                                options={FINDING_OPTIONS}
-                            />}
+                            {gradingScale === 1 && <>
+                                <FormSelectField
+                                    label="Overall Letter Grade"
+                                    name="overallLetterGrade"
+                                    placeholder="Overall Letter Grade"
+                                    selectedValue={overallLetterGrade}
+                                    errorText={errors && errors.overallLetterGrade}
+                                    helpText=""
+                                    onChange={(e)=>setOverallLetterGrade(e.target.value)}
+                                    options={FINDING_OPTIONS}
+                                />
+                                {isNMPlusOpen && <>
+                                    <FormCheckboxField
+                                        label="Is Near Mint plus?"
+                                        name="isOverallLetterGradeNearMintPlus"
+                                        checked={isOverallLetterGradeNearMintPlus}
+                                        errorText={errors && errors.isOverallLetterGradeNearMintPlus}
+                                        onChange={(e)=>setIsOverallLetterGradeNearMintPlus(!isOverallLetterGradeNearMintPlus)}
+                                        maxWidth="180px"
+                                    />
+                                </>}
+                            </>}
                             {gradingScale === 2 && <FormSelectField
                                 label="Overall Number Grade"
                                 name="overallNumberGrade"

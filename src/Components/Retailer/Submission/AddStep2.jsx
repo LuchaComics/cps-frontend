@@ -14,6 +14,7 @@ import FormTextareaField from "../../Element/FormTextareaField";
 import FormRadioField from "../../Element/FormRadioField";
 import FormMultiSelectField from "../../Element/FormMultiSelectField";
 import FormSelectField from "../../Element/FormSelectField";
+import FormCheckboxField from "../../Element/FormCheckboxField";
 import PageLoadingContent from "../../Element/PageLoadingContent";
 import {
     FINDING_WITH_EMPTY_OPTIONS,
@@ -73,6 +74,7 @@ function RetailerSubmissionAddStep2() {
     const [gradingNotes, setGradingNotes] = useState("");
     const [showsSignsOfTamperingOrRestoration, setShowsSignsOfTamperingOrRestoration] = useState("");
     const [showCancelWarning, setShowCancelWarning] = useState(false);
+    const [isOverallLetterGradeNearMintPlus, setIsOverallLetterGradeNearMintPlus] = useState(false);
 
     ////
     //// Event handling.
@@ -105,6 +107,7 @@ function RetailerSubmissionAddStep2() {
             coverFinding: coverFinding,
             gradingScale: parseInt(gradingScale),
             overallLetterGrade: overallLetterGrade,
+            isOverallLetterGradeNearMintPlus: isOverallLetterGradeNearMintPlus,
             overallNumberGrade: parseFloat(overallNumberGrade),
             cpsPercentageGrade: parseFloat(cpsPercentageGrade),
             showsSignsOfTamperingOrRestoration: parseInt(showsSignsOfTamperingOrRestoration),
@@ -202,6 +205,10 @@ function RetailerSubmissionAddStep2() {
         return <Navigate to={forceURL}  />
     }
 
+    // The following code will check to see if we need to grant the 'is NM+' option is available to the user.
+    let isNMPlusOpen = gradingScale === 1 && overallLetterGrade === "nm";
+
+    // Render the JSX content.
     return (
         <>
             <div class="container">
@@ -589,16 +596,28 @@ function RetailerSubmissionAddStep2() {
                                 maxWidth="180px"
                             />
 
-                            {gradingScale === 1 && <FormSelectField
-                                label="Overall Letter Grade"
-                                name="overallLetterGrade"
-                                placeholder="Overall Letter Grade"
-                                selectedValue={overallLetterGrade}
-                                errorText={errors && errors.overallLetterGrade}
-                                helpText=""
-                                onChange={(e)=>setOverallLetterGrade(e.target.value)}
-                                options={FINDING_WITH_EMPTY_OPTIONS}
-                            />}
+                            {gradingScale === 1 && <>
+                                <FormSelectField
+                                    label="Overall Letter Grade"
+                                    name="overallLetterGrade"
+                                    placeholder="Overall Letter Grade"
+                                    selectedValue={overallLetterGrade}
+                                    errorText={errors && errors.overallLetterGrade}
+                                    helpText=""
+                                    onChange={(e)=>setOverallLetterGrade(e.target.value)}
+                                    options={FINDING_WITH_EMPTY_OPTIONS}
+                                />
+                                {isNMPlusOpen && <>
+                                    <FormCheckboxField
+                                        label="Is Near Mint plus?"
+                                        name="isOverallLetterGradeNearMintPlus"
+                                        checked={isOverallLetterGradeNearMintPlus}
+                                        errorText={errors && errors.isOverallLetterGradeNearMintPlus}
+                                        onChange={(e)=>setIsOverallLetterGradeNearMintPlus(!isOverallLetterGradeNearMintPlus)}
+                                        maxWidth="180px"
+                                    />
+                                </>}
+                            </>}
 
                             {gradingScale === 2 && <FormSelectField
                                 label="Overall Number Grade"
