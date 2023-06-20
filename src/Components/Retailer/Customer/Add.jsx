@@ -87,6 +87,7 @@ function RetailerCustomerAdd() {
             AgreePromotionsEmail: agreePromotionsEmail,
             HowDidYouHearAboutUs: howDidYouHearAboutUs,
             HowDidYouHearAboutUsOther: howDidYouHearAboutUsOther,
+            Status: 1, // 1 = UserActiveStatus
         };
         console.log("onSubmitClick, customer:", customer);
         postCustomerCreateAPI(customer, onRetailerCustomerAddSuccess, onRetailerCustomerAddError, onRetailerCustomerAddDone);

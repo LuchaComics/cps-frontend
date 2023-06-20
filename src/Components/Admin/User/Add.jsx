@@ -67,7 +67,6 @@ function AdminUserAdd() {
     const [organizationSelectOptions, setOrganizationSelectOptions] = useState([]);
     const [organizationID, setOrganizationID] = useState(orgID);
     const [role, setRole] = useState();
-    const [status, setStatus] = useState();
 
     ////
     //// Event handling.
@@ -88,7 +87,7 @@ function AdminUserAdd() {
         const user = {
             OrganizationID: organizationID,
             Role: role,
-            Status: status,
+            Status: 1, // 1 = UserActiveStatus
             Email: email,
             Phone: phone,
             FirstName: firstName,
@@ -294,18 +293,6 @@ function AdminUserAdd() {
                                 opt2Label="Customer"
                                 errorText={errors && errors.role}
                                 onChange={(e)=>setRole(parseInt(e.target.value))}
-                                maxWidth="180px"
-                            />
-                            <FormRadioField
-                                label="Status"
-                                name="status"
-                                value={status}
-                                opt1Value={1}
-                                opt1Label="Active"
-                                opt2Value={2}
-                                opt2Label="Archived"
-                                errorText={errors && errors.status}
-                                onChange={(e)=>setStatus(parseInt(e.target.value))}
                                 maxWidth="180px"
                             />
 
