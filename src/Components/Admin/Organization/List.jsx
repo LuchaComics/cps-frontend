@@ -8,6 +8,7 @@ import { useRecoilState } from 'recoil';
 import { getOrganizationListAPI, deleteOrganizationAPI } from "../../../API/organization";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 import { SUBMISSION_STATES } from "../../../Constants/FieldOptions";
+import FormErrorBox from "../../Element/FormErrorBox";
 import PageLoadingContent from "../../Element/PageLoadingContent";
 
 
@@ -24,7 +25,7 @@ function AdminOrganizationList() {
     //// Component states.
     ////
 
-    const [setErrors] = useState({});
+    const [errors, setErrors] = useState({});
     const [organizations, setOrganizations] = useState("");
     const [selectedOrganizationForDeletion, setSelectedOrganizationForDeletion] = useState("");
     const [isFetching, setFetching] = useState(false);
@@ -196,6 +197,7 @@ function AdminOrganizationList() {
                                 </Link>
                             </div>
                         </div>
+                        <FormErrorBox errors={errors} />
 
                         {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
 

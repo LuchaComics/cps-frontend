@@ -7,6 +7,7 @@ import { useRecoilState } from 'recoil';
 
 import { getUserListAPI, deleteUserAPI } from "../../../API/user";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
+import FormErrorBox from "../../Element/FormErrorBox";
 import PageLoadingContent from "../../Element/PageLoadingContent";
 import { USER_ROLES } from "../../../Constants/FieldOptions";
 
@@ -24,7 +25,7 @@ function AdminUserList() {
     //// Component states.
     ////
 
-    const [setErrors] = useState({});
+    const [errors, setErrors] = useState({});
     const [users, setUsers] = useState("");
     const [selectedUserForDeletion, setSelectedUserForDeletion] = useState("");
     const [isFetching, setFetching] = useState(false);
@@ -195,6 +196,7 @@ function AdminUserList() {
                                 </Link>
                             </div>
                         </div>
+                        <FormErrorBox errors={errors} />
 
                         {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
 
