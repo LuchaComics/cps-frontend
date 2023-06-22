@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTasks, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight, faTable, faBookOpen, faNewspaper } from '@fortawesome/free-solid-svg-icons';
+import { faTasks, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight, faTable, faBookOpen, faNewspaper, } from '@fortawesome/free-solid-svg-icons';
 import { useRecoilState } from 'recoil';
 
-import { getComicSubmissionListAPI, deleteComicSubmissionAPI } from "../../../API/ComicSubmission";
-import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
-import PageLoadingContent from "../../Element/PageLoadingContent";
-import FormErrorBox from "../../Element/FormErrorBox";
-import { SUBMISSION_STATES } from "../../../Constants/FieldOptions";
+import { getComicSubmissionListAPI, deleteComicSubmissionAPI } from "../../../../API/ComicSubmission";
+import { topAlertMessageState, topAlertStatusState } from "../../../../AppState";
+import { SUBMISSION_STATES } from "../../../../Constants/FieldOptions";
+import FormErrorBox from "../../../Element/FormErrorBox";
+import PageLoadingContent from "../../../Element/PageLoadingContent";
 
 
-function RetailerComicSubmissionList() {
+function AdminComicSubmissionList() {
 
     ////
     //// Global state.
@@ -102,8 +102,9 @@ function RetailerComicSubmissionList() {
 
     const fetchList = () => {
         setFetching(true);
+        let params = new Map();
         getComicSubmissionListAPI(
-            new Map(),
+            params,
             onComicSubmissionListSuccess,
             onComicSubmissionListError,
             onComicSubmissionListDone
@@ -122,7 +123,8 @@ function RetailerComicSubmissionList() {
 
     const onDeleteConfirmButtonClick = (e) => {
         console.log("onDeleteConfirmButtonClick"); // For debugging purposes only.
-
+        setFetching(true);
+        setErrors({});
         deleteComicSubmissionAPI(
             selectedComicSubmissionForDeletion.id,
             onComicSubmissionDeleteSuccess,
@@ -158,7 +160,7 @@ function RetailerComicSubmissionList() {
                 <section class="section">
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
-                            <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
+                            <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
                             <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
                         </ul>
                     </nav>
@@ -186,11 +188,11 @@ function RetailerComicSubmissionList() {
                             </div>
                             <div class="column has-text-right">
                                 {/* Mobile Specific */}
-                                <Link to={`/submissions/comics/add/search`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
+                                <Link to={`/admin/submissions/comics/add/search`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add Comic Submission
                                 </Link>
                                 {/* Desktop Specific */}
-                                <Link to={`/submissions/comics/add/search`} class="button is-small is-success is-hidden-touch" type="button">
+                                <Link to={`/admin/submissions/comics/add/search`} class="button is-small is-success is-hidden-touch" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add Comic Submission
                                 </Link>
                             </div>
@@ -229,10 +231,10 @@ function RetailerComicSubmissionList() {
                                                                 <td data-label="Created">{submission.createdAt}</td>
                                                                 <td class="is-actions-cell">
                                                                     <div class="buttons is-right">
-                                                                        <Link to={`/submissions/comic/${submission.id}`} class="button is-small is-primary" type="button">
+                                                                        <Link to={`/admin/submissions/comic/${submission.id}`} class="button is-small is-primary" type="button">
                                                                             <FontAwesomeIcon className="mdi" icon={faEye} />&nbsp;View
                                                                         </Link>
-                                                                        <Link to={`/submissions/comic/${submission.id}/edit`} class="button is-small is-warning" type="button">
+                                                                        <Link to={`/admin/submissions/comic/${submission.id}/edit`} class="button is-small is-warning" type="button">
                                                                             <FontAwesomeIcon className="mdi" icon={faPencil} />&nbsp;Edit
                                                                         </Link>
                                                                         <button onClick={(e, ses) => onSelectComicSubmissionForDeletion(e, submission)} class="button is-small is-danger" type="button">
@@ -254,7 +256,7 @@ function RetailerComicSubmissionList() {
                                             <FontAwesomeIcon className="fas" icon={faTable} />&nbsp;No Comic Submissions
                                         </p>
                                         <p class="subtitle">
-                                            No comic submissions. <b><Link to="/submissions/comics/add/search">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating your first new submission.
+                                            No submissions. <b><Link to="/admin/submissions/comics/add/search">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating your first new submission.
                                         </p>
                                       </div>
                                     </section>
@@ -268,4 +270,4 @@ function RetailerComicSubmissionList() {
     );
 }
 
-export default RetailerComicSubmissionList;
+export default AdminComicSubmissionList;

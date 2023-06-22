@@ -202,7 +202,7 @@ function RetailerCustomerDetailForCommentList() {
                         <ul>
                             <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
                             <li class=""><Link to="/customers" aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers</Link></li>
-                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail</Link></li>
+                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail (Comments)</Link></li>
                         </ul>
                     </nav>
                     <nav class="box">
@@ -212,11 +212,11 @@ function RetailerCustomerDetailForCommentList() {
                             </div>
                             <div class="column has-text-right">
                                 {/* Mobile Specific */}
-                                <Link to={`/submissions/add?customer_id=${id}&customer_name=${customer.name}`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
+                                <Link to={`/submissions/pick-type-for-add?customer_id=${id}&customer_name=${customer.name}`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
                                 </Link>
                                 {/* Desktop Specific */}
-                                <Link to={`/submissions/add?customer_id=${id}&customer_name=${customer.name}`} class="button is-small is-success is-hidden-touch" type="button">
+                                <Link to={`/submissions/pick-type-for-add?customer_id=${id}&customer_name=${customer.name}`} class="button is-small is-success is-hidden-touch" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
                                 </Link>
                             </div>
@@ -235,7 +235,7 @@ function RetailerCustomerDetailForCommentList() {
                                             <Link to={`/customer/${id}`}>Detail</Link>
                                         </li>
                                         <li>
-                                            <Link to={`/customer/${id}/sub`}>Submissions</Link>
+                                            <Link to={`/customer/${id}/comics`}>Comics</Link>
                                         </li>
                                         <li class="is-active">
                                             <Link><b>Comments</b></Link>

@@ -241,11 +241,11 @@ function AdminUserDetailForComicSubmission() {
                             </div>
                             <div class="column has-text-right">
                                 {/* Mobile Specific */}
-                                <Link to={`/admin/submissions/comics/pick-type-for-add?user_id=${id}&user_name=${user.name}`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
+                                <Link to={`/admin/submissions/pick-type-for-add?user_id=${id}&user_name=${user.name}`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
                                 </Link>
                                 {/* Desktop Specific */}
-                                <Link to={`/admin/submissions/comics/pick-type-for-add?user_id=${id}&user_name=${user.name}`} class="button is-small is-success is-hidden-touch" type="button">
+                                <Link to={`/admin/submissions/pick-type-for-add?user_id=${id}&user_name=${user.name}`} class="button is-small is-success is-hidden-touch" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
                                 </Link>
                             </div>
@@ -323,7 +323,7 @@ function AdminUserDetailForComicSubmission() {
                                         <div class="container">
                                             <article class="message is-dark">
                                                 <div class="message-body">
-                                                    No submissions. <b><Link to={`/admin/submissions/comics/pick-type-for-add?user_id=${id}&user_name=${user.name}`}>Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating a new submission.
+                                                    No submissions. <b><Link to={`/admin/submissions/pick-type-for-add?user_id=${id}&user_name=${user.name}`}>Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating a new submission.
                                                 </div>
                                             </article>
                                         </div>
@@ -335,8 +335,8 @@ function AdminUserDetailForComicSubmission() {
                                             <Link class="button is-fullwidth is-hidden-desktop" to={`/admin/users`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                         </div>
                                         <div class="column is-half has-text-right">
-                                            <Link to={`/admin/submissions/comics/pick-type-for-add?user_id=${id}&user_name=${user.name}`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;CPS</Link>
-                                            <Link to={`/admin/submissions/comics/pick-type-for-add?user_id=${id}&user_name=${user.name}`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;CPS</Link>
+                                            <Link to={`/admin/submissions/pick-type-for-add?user_id=${id}&user_name=${user.name}`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;CPS</Link>
+                                            <Link to={`/admin/submissions/pick-type-for-add?user_id=${id}&user_name=${user.name}`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;CPS</Link>
                                         </div>
                                     </div>
 

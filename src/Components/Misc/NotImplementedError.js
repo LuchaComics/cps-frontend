@@ -5,7 +5,7 @@ function NotImplementedError() {
         <>
             <div class="container">
                 <section class="section">
-                    <h1>501 - Page does not implemented</h1>
+                    <h1>501 - Page not implemented by programmer</h1>
                 </section>
             </div>
         </>

@@ -233,7 +233,7 @@ function AdminUserList() {
                                                                 <td data-label="Joined">{user.createdAt}</td>
                                                                 <td class="is-actions-cell">
                                                                     <div class="buttons is-right">
-                                                                        <Link to={`/admin/submissions/comics/pick-type-for-add?user_id=${user.id}&user_name=${user.name}`} class="button is-small is-success" type="button">
+                                                                        <Link to={`/admin/submissions/pick-type-for-add?user_id=${user.id}&user_name=${user.name}`} class="button is-small is-success" type="button">
                                                                             <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
                                                                         </Link>
                                                                         <Link to={`/admin/user/${user.id}`} class="button is-small is-primary" type="button">

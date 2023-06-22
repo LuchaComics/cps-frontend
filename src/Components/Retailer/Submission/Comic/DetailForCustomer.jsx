@@ -7,30 +7,30 @@ import Select from 'react-select'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
 
-import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { getComicSubmissionDetailAPI } from "../../../API/ComicSubmission";
-import FormErrorBox from "../../Element/FormErrorBox";
-import FormInputField from "../../Element/FormInputField";
-import FormTextareaField from "../../Element/FormTextareaField";
-import FormRadioField from "../../Element/FormRadioField";
-import FormMultiSelectField from "../../Element/FormMultiSelectField";
-import FormCheckboxField from "../../Element/FormCheckboxField";
-import FormSelectField from "../../Element/FormSelectField";
-import FormDateField from "../../Element/FormDateField";
-import FormCountryField from "../../Element/FormCountryField";
-import FormRegionField from "../../Element/FormRegionField";
-import PageLoadingContent from "../../Element/PageLoadingContent";
+import useLocalStorage from "../../../../Hooks/useLocalStorage";
+import { getComicSubmissionDetailAPI } from "../../../../API/ComicSubmission";
+import FormErrorBox from "../../../Element/FormErrorBox";
+import FormInputField from "../../../Element/FormInputField";
+import FormTextareaField from "../../../Element/FormTextareaField";
+import FormRadioField from "../../../Element/FormRadioField";
+import FormMultiSelectField from "../../../Element/FormMultiSelectField";
+import FormCheckboxField from "../../../Element/FormCheckboxField";
+import FormSelectField from "../../../Element/FormSelectField";
+import FormDateField from "../../../Element/FormDateField";
+import FormCountryField from "../../../Element/FormCountryField";
+import FormRegionField from "../../../Element/FormRegionField";
+import PageLoadingContent from "../../../Element/PageLoadingContent";
 import {
     FINDING_OPTIONS,
     OVERALL_NUMBER_GRADE_OPTIONS,
     PUBLISHER_NAME_OPTIONS,
     CPS_PERCENTAGE_GRADE_OPTIONS,
     HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS
-} from "../../../Constants/FieldOptions";
-import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
+} from "../../../../Constants/FieldOptions";
+import { topAlertMessageState, topAlertStatusState } from "../../../../AppState";
 
 
-function AdminComicSubmissionDetailForCustomer() {
+function RetailerComicSubmissionDetailForCustomer() {
     ////
     //// URL Parameters.
     ////
@@ -130,7 +130,7 @@ function AdminComicSubmissionDetailForCustomer() {
                             <br /><br />
                             <Link to={`/submissions/comic/${submission.id}/edit-customer`} class="button is-primary" disabled={true}>Edit Current Customer</Link> */}
                         <br /><br />
-                        <Link to={`/admin/submissions/comic/${submission.id}/cust/search`} class="button is-primary">Pick a Different Customer</Link>
+                        <Link to={`/submissions/comic/${submission.id}/cust/search`} class="button is-primary">Pick a Different Customer</Link>
                     </section>
                     <footer class="modal-card-foot">
                         <button class="button" onClick={(e)=>setShowCustomerEditOptions(false)}>Close</button>
@@ -142,8 +142,8 @@ function AdminComicSubmissionDetailForCustomer() {
                 <section class="section">
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
-                            <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
-                            <li class=""><Link to="/admin/submissions/comics" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
+                            <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
+                            <li class=""><Link to="/submissions/comics" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
                             <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail (Customer)</Link></li>
                         </ul>
                     </nav>
@@ -160,23 +160,23 @@ function AdminComicSubmissionDetailForCustomer() {
                                     <div class="tabs is-medium">
                                       <ul>
                                         <li>
-                                            <Link to={`/admin/submissions/comic/${id}`}>Detail</Link>
+                                            <Link to={`/submissions/comic/${id}`}>Detail</Link>
                                         </li>
                                         <li class="is-active">
                                             <Link><b>Customer</b></Link>
                                         </li>
                                         <li>
-                                            <Link to={`/admin/submissions/comic/${id}/comments`}>Comments</Link>
+                                            <Link to={`/submissions/comic/${id}/comments`}>Comments</Link>
                                         </li>
                                         <li>
-                                            <Link to={`/admin/submissions/comic/${id}/file`}>File</Link>
+                                            <Link to={`/submissions/comic/${id}/file`}>File</Link>
                                         </li>
                                       </ul>
                                     </div>
                                     {submission && submission.user !== undefined && submission.user !== null && submission.user !== "" && <>
                                         <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faUser} />&nbsp;Customer</p>
                                         <hr />
-                                        <p class="pb-5"><Link to={`/admin/user/${submission.user.id}`} target="_blank" rel="noreferrer">Click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link> to view the customer.</p>
+                                        <p class="pb-5"><Link to={`/customer/${submission.user.id}`} target="_blank" rel="noreferrer">Click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link> to view the customer.</p>
 
                                         <FormInputField
                                             label="Name"
@@ -300,8 +300,8 @@ function AdminComicSubmissionDetailForCustomer() {
 
                                         <div class="columns pt-5">
                                             <div class="column is-half">
-                                                <Link to={`/admin/submissions/comics`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                                <Link to={`/admin/submissions/comics`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                                <Link to={`/submissions/comics`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                                <Link to={`/submissions/comics`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                             </div>
                                             <div class="column is-half has-text-right">
                                                 <Link onClick={(e)=>setShowCustomerEditOptions(true)} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Customer</Link>
@@ -320,4 +320,4 @@ function AdminComicSubmissionDetailForCustomer() {
     );
 }
 
-export default AdminComicSubmissionDetailForCustomer;
+export default RetailerComicSubmissionDetailForCustomer;

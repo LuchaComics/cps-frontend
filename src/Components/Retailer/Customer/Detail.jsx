@@ -123,11 +123,11 @@ function RetailerCustomerDetail() {
                             </div>
                             <div class="column has-text-right">
                                 {/* Mobile Specific */}
-                                <Link to={`/submissions/add?customer_id=${id}&customer_name=${customer.name}`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
+                                <Link to={`/submissions/pick-type-for-add?customer_id=${id}&customer_name=${customer.name}`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
                                 </Link>
                                 {/* Desktop Specific */}
-                                <Link to={`/submissions/add?customer_id=${id}&customer_name=${customer.name}`} class="button is-small is-success is-hidden-touch" type="button">
+                                <Link to={`/submissions/pick-type-for-add?customer_id=${id}&customer_name=${customer.name}`} class="button is-small is-success is-hidden-touch" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
                                 </Link>
                             </div>
@@ -148,7 +148,7 @@ function RetailerCustomerDetail() {
                                             <Link><b>Detail</b></Link>
                                         </li>
                                         <li>
-                                            <Link to={`/customer/${customer.id}/sub`}>Submissions</Link>
+                                            <Link to={`/customer/${customer.id}/comics`}>Comics</Link>
                                         </li>
                                         <li>
                                             <Link to={`/customer/${customer.id}/comments`}>Comments</Link>

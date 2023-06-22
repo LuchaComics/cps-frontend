@@ -7,17 +7,17 @@ import Select from 'react-select'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
 
-import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { getComicSubmissionDetailAPI } from "../../../API/ComicSubmission";
-import FormErrorBox from "../../Element/FormErrorBox";
-import FormInputField from "../../Element/FormInputField";
-import FormTextareaField from "../../Element/FormTextareaField";
-import FormRadioField from "../../Element/FormRadioField";
-import FormMultiSelectField from "../../Element/FormMultiSelectField";
-import FormCheckboxField from "../../Element/FormCheckboxField";
-import FormSelectField from "../../Element/FormSelectField";
-import FormDateField from "../../Element/FormDateField";
-import PageLoadingContent from "../../Element/PageLoadingContent";
+import useLocalStorage from "../../../../Hooks/useLocalStorage";
+import { getComicSubmissionDetailAPI } from "../../../../API/ComicSubmission";
+import FormErrorBox from "../../../Element/FormErrorBox";
+import FormInputField from "../../../Element/FormInputField";
+import FormTextareaField from "../../../Element/FormTextareaField";
+import FormRadioField from "../../../Element/FormRadioField";
+import FormMultiSelectField from "../../../Element/FormMultiSelectField";
+import FormCheckboxField from "../../../Element/FormCheckboxField";
+import FormSelectField from "../../../Element/FormSelectField";
+import FormDateField from "../../../Element/FormDateField";
+import PageLoadingContent from "../../../Element/PageLoadingContent";
 import {
     FINDING_OPTIONS,
     OVERALL_NUMBER_GRADE_OPTIONS,
@@ -26,94 +26,11 @@ import {
     HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS,
     ISSUE_COVER_YEAR_OPTIONS,
     ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS
-} from "../../../Constants/FieldOptions";
-import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
+} from "../../../../Constants/FieldOptions";
+import { topAlertMessageState, topAlertStatusState } from "../../../../AppState";
 
 
-function AdminComicSubmissionDetail() {
-    ////
-    //// URL Parameters.
-    ////
-
-    const { id } = useParams()
-
-    ////
-    //// Global state.
-    ////
-
-    const [topAlertMessage, setTopAlertMessage] = useRecoilState(topAlertMessageState);
-    const [topAlertStatus, setTopAlertStatus] = useRecoilState(topAlertStatusState);
-
-    ////
-    //// Component states.
-    ////
-
-    const [errors, setErrors] = useState({});
-    const [isFetching, setFetching] = useState(false);
-    const [forceURL, setForceURL] = useState("");
-    const [submission, setComicSubmission] = useState({});
-    const [showCustomerEditOptions, setShowCustomerEditOptions] = useState(false);
-
-    ////
-    //// Event handling.
-    ////
-
-
-    ////
-    //// API.
-    ////
-
-    function onComicSubmissionDetailSuccess(response){
-        console.log("onComicSubmissionDetailSuccess: Starting...");
-        setComicSubmission(response);
-    }
-
-    function onComicSubmissionDetailError(apiErr) {
-        console.log("onComicSubmissionDetailError: Starting...");
-        setErrors(apiErr);
-
-        // The following code will cause the screen to scroll to the top of
-        // the page. Please see ``react-scroll`` for more information:
-        // https://github.com/fisshy/react-scroll
-        var scroll = Scroll.animateScroll;
-        scroll.scrollToTop();
-    }
-
-    function onComicSubmissionDetailDone() {
-        console.log("onComicSubmissionDetailDone: Starting...");
-        setFetching(false);
-    }
-
-    ////
-    //// Misc.
-    ////
-
-    useEffect(() => {
-        let mounted = true;
-
-        if (mounted) {
-            window.scrollTo(0, 0);  // Start the page at the top of the page.
-
-            setFetching(true);
-            getComicSubmissionDetailAPI(
-                id,
-                onComicSubmissionDetailSuccess,
-                onComicSubmissionDetailError,
-                onComicSubmissionDetailDone
-            );
-        }
-
-        return () => { mounted = false; }
-    }, [id]);
-
-    ////
-    //// Component rendering.
-    ////
-
-    if (forceURL !== "") {
-        return <Navigate to={forceURL}  />
-    }
-
+function AdminComicSubmissionDetailContentComic({ id, errors, isFetching, submission, showCustomerEditOptions, setShowCustomerEditOptions }) {
     // The following code will check to see if we need to grant the 'is NM+' option is available to the user.
     let isNMPlusOpen = false;
     if (submission !== undefined && submission !== null && submission !== "") {
@@ -587,4 +504,4 @@ function AdminComicSubmissionDetail() {
     );
 }
 
-export default AdminComicSubmissionDetail;
+export default AdminComicSubmissionDetailContentComic;

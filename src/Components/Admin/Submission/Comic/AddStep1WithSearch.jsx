@@ -2,30 +2,28 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faDownload, faArrowLeft, faArrowRight, faCheckCircle, faCheck, faGauge, faArrowUpRightFromSquare, faSearch, faFilter, faEye, faPencil } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faDownload, faArrowLeft, faArrowRight, faCheckCircle, faCheck, faGauge, faArrowUpRightFromSquare, faSearch, faFilter, faUsers  } from '@fortawesome/free-solid-svg-icons'
 import Select from 'react-select'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
 
-import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { getComicSubmissionDetailAPI } from "../../../API/ComicSubmission";
-import { getCustomerListAPI } from "../../../API/customer";
-import FormErrorBox from "../../Element/FormErrorBox";
-import FormInputField from "../../Element/FormInputField";
-import FormTextareaField from "../../Element/FormTextareaField";
-import FormRadioField from "../../Element/FormRadioField";
-import FormMultiSelectField from "../../Element/FormMultiSelectField";
-import FormSelectField from "../../Element/FormSelectField";
-import FormInputFieldWithButton from "../../Element/FormInputFieldWithButton";
-import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
+import useLocalStorage from "../../../../Hooks/useLocalStorage";
+import { getComicSubmissionDetailAPI } from "../../../../API/ComicSubmission";
+import FormErrorBox from "../../../Element/FormErrorBox";
+import FormInputField from "../../../Element/FormInputField";
+import FormTextareaField from "../../../Element/FormTextareaField";
+import FormRadioField from "../../../Element/FormRadioField";
+import FormMultiSelectField from "../../../Element/FormMultiSelectField";
+import FormSelectField from "../../../Element/FormSelectField";
+import FormInputFieldWithButton from "../../../Element/FormInputFieldWithButton";
+import { FINDING_OPTIONS } from "../../../../Constants/FieldOptions";
+import { topAlertMessageState, topAlertStatusState } from "../../../../AppState";
 
 
-function AdminComicSubmissionUpdatePickCustomerWithSearch() {
+function AdminComicSubmissionAddStep1WithSearch() {
     ////
     //// URL Parameters.
     ////
-
-    const { id } = useParams()
 
     ////
     //// Global state.
@@ -41,8 +39,9 @@ function AdminComicSubmissionUpdatePickCustomerWithSearch() {
     const [errors, setErrors] = useState({});
     const [isFetching, setFetching] = useState(false);
     const [forceURL, setForceURL] = useState("");
-    const [customers, setCustomers] = useState({});
+    const [users, setUsers] = useState({});
     const [hasCustomer, setHasCustomer] = useState(1);
+    const [showCancelWarning, setShowCancelWarning] = useState(false);
     const [searchKeyword, setSearchKeyword] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -55,7 +54,7 @@ function AdminComicSubmissionUpdatePickCustomerWithSearch() {
 
     const onSearchButtonClicked = (e) => {
         console.log("searchButtonClick: Starting...");
-        let aURL = "/admin/submissions/comic/" + id + "/cust/results";
+        let aURL = "/admin/submissions/comics/add/results";
         if (searchKeyword !=="") {
             aURL += "?search="+searchKeyword;
         }
@@ -110,7 +109,7 @@ function AdminComicSubmissionUpdatePickCustomerWithSearch() {
     function onCustomerListSuccess(response){
         console.log("onCustomerListSuccess: Starting...");
         if (response.results !== null) {
-            setCustomers(response);
+            setUsers(response);
         }
     }
 
@@ -150,17 +149,41 @@ function AdminComicSubmissionUpdatePickCustomerWithSearch() {
                         <ul>
                             <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
                             <li class=""><Link to="/admin/submissions/comics" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
-                            <li class=""><Link to={`/admin/submissions/comic/${id}/cust`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Details</Link></li>
-                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update (Customer)</Link></li>
+                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
                         </ul>
                     </nav>
 
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update Comic Submission</p>
+                        <div class={`modal ${showCancelWarning ? 'is-active' : ''}`}>
+                            <div class="modal-background"></div>
+                            <div class="modal-card">
+                                <header class="modal-card-head">
+                                    <p class="modal-card-title">Are you sure?</p>
+                                    <button class="delete" aria-label="close" onClick={(e)=>setShowCancelWarning(false)}></button>
+                                </header>
+                                <section class="modal-card-body">
+                                    Your submission will be cancelled and your work will be lost. This cannot be undone. Do you want to continue?
+                                </section>
+                                <footer class="modal-card-foot">
+                                    <Link class="button is-success" to={`/admin/dashboard`}>Yes</Link>
+                                    <button class="button" onClick={(e)=>setShowCancelWarning(false)}>No</button>
+                                </footer>
+                            </div>
+                        </div>
+
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comic Submission</p>
                         <FormErrorBox errors={errors} />
 
+                        <div class="container pb-6">
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customer Options</p>
+                            <hr />
+
+                            <Link class="is-medium is-warning" to="/admin/users/add" target="_blank" rel="noreferrer">Create a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link>&nbsp;&nbsp;<br /><br />
+                            <Link class="is-medium is-danger" to="/admin/submissions/pick-type-for-add">Skip selecting a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
+                        </div>
+
                         <div class="container pb-5">
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search</p>
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search Customers</p>
                             <hr />
 
                             <FormInputField
@@ -169,15 +192,15 @@ function AdminComicSubmissionUpdatePickCustomerWithSearch() {
                                 placeholder="Text input"
                                 value={searchKeyword}
                                 errorText={errors && errors.searchKeyword}
-                                helpText=""
+                                helpText="SEARCH FIRST NAME, LAST NAME, EMAIL, ETC"
                                 onChange={(e)=>setSearchKeyword(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
                         </div>
 
-                        <div class="container pb-5">
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faFilter} />&nbsp;Filter</p>
+                        <div class="container pb-6">
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faFilter} />&nbsp;Filter Customers</p>
                             <hr />
 
                             <FormInputField
@@ -228,11 +251,10 @@ function AdminComicSubmissionUpdatePickCustomerWithSearch() {
                                 maxWidth="380px"
                             />
                         </div>
-
                         <div class="columns pt-5">
                             <div class="column is-half">
-                                <Link to={`/admin/submissions/comic/${id}/cust`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                <Link to={`/admin/submissions/comic/${id}/cust`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                <button class="button is-medium is-hidden-touch" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
+                                <button class="button is-medium is-fullwidth is-hidden-desktop" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
                             </div>
                             <div class="column is-half has-text-right">
                                 <button class="button is-medium is-primary is-hidden-touch" onClick={onSearchButtonClicked}><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search</button>
@@ -247,4 +269,4 @@ function AdminComicSubmissionUpdatePickCustomerWithSearch() {
     );
 }
 
-export default AdminComicSubmissionUpdatePickCustomerWithSearch;
+export default AdminComicSubmissionAddStep1WithSearch;

@@ -10,7 +10,7 @@ import PageLoadingContent from "../../Element/PageLoadingContent";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
-function RetailerComicSubmissionAddStep2() {
+function RetailerSubmissionPickTypeForAdd() {
     ////
     //// URL Parameters.
     ////
@@ -74,14 +74,14 @@ function RetailerComicSubmissionAddStep2() {
                             :
                             <ul>
                                 <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
-                                <li class=""><Link to="/customers" aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Users</Link></li>
-                                <li class=""><Link to={`/customer/${customerID}/sub`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail (Comic Submissions)</Link></li>
+                                <li class=""><Link to="/customers" aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers</Link></li>
+                                <li class=""><Link to={`/customer/${customerID}/comics`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail (Comics)</Link></li>
                                 <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
                             </ul>
                         }
                     </nav>
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comic Submission</p>
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Submission</p>
                         <div class="container">
 
                             <p class="pb-4 has-text-grey">Please select the type of collectible product you would like to submit to CPS.</p>
@@ -108,7 +108,7 @@ function RetailerComicSubmissionAddStep2() {
                                             </div>
                                         </div>
                                         <footer class="card-footer">
-                                            <Link to={`/submissions/comics/add-comic?customer_id=${customerID}`} class="card-footer-item">Select&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
+                                            <Link to={`/submissions/comics/add?customer_id=${customerID}&customer_name=${customerName}`} class="card-footer-item">Select&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
                                         </footer>
                                     </div>
                                 </div>
@@ -172,4 +172,4 @@ function RetailerComicSubmissionAddStep2() {
     );
 }
 
-export default RetailerComicSubmissionAddStep2;
+export default RetailerSubmissionPickTypeForAdd;

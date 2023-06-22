@@ -18,19 +18,19 @@ import AdminOrganizationUpdate from "./Components/Admin/Organization/Update";
 import AdminDashboard from "./Components/Admin/Dashboard";
 import AdminRegistrySearch from "./Components/Admin/Registry/Search";
 import AdminRegistryResult from "./Components/Admin/Registry/Result";
-import AdminComicSubmissionList from "./Components/Admin/ComicSubmission/List";
-import AdminComicSubmissionAddStep1WithSearch from "./Components/Admin/ComicSubmission/AddStep1WithSearch";
-import AdminComicSubmissionAddStep1WithResult from "./Components/Admin/ComicSubmission/AddStep1WithResult";
-import AdminComicSubmissionAddStep2 from "./Components/Admin/ComicSubmission/AddStep2";
-import AdminComicSubmissionAddStep3Comic from "./Components/Admin/ComicSubmission/AddStep3Comic";
-import AdminComicSubmissionAddStep4 from "./Components/Admin/ComicSubmission/AddStep4";
-import AdminComicSubmissionDetail from "./Components/Admin/ComicSubmission/Detail";
-import AdminComicSubmissionDetailForCommentList from "./Components/Admin/ComicSubmission/DetailForCommentList";
-import AdminComicSubmissionDetailForCustomer from "./Components/Admin/ComicSubmission/DetailForCustomer";
-import AdminComicSubmissionDetailForPDFFile from "./Components/Admin/ComicSubmission/DetailForPDFFile";
-import AdminComicSubmissionUpdateForComicSubmission from "./Components/Admin/ComicSubmission/UpdateSubmission";
-import AdminComicSubmissionUpdatePickCustomerWithResult from "./Components/Admin/ComicSubmission/UpdatePickCustomerWithResult";
-import AdminComicSubmissionUpdatePickCustomerWithSearch from "./Components/Admin/ComicSubmission/UpdatePickCustomerWithSearch";
+import AdminComicSubmissionList from "./Components/Admin/Submission/Comic/List";
+import AdminComicSubmissionAddStep1WithSearch from "./Components/Admin/Submission/Comic/AddStep1WithSearch";
+import AdminComicSubmissionAddStep1WithResult from "./Components/Admin/Submission/Comic/AddStep1WithResult";
+import AdminComicSubmissionAddStep2 from "./Components/Admin/Submission/Comic/AddStep2";
+import AdminComicSubmissionAddStep3Comic from "./Components/Admin/Submission/Comic/AddStep3Comic";
+import AdminComicSubmissionAddStep4 from "./Components/Admin/Submission/Comic/AddStep4";
+import AdminComicSubmissionDetail from "./Components/Admin/Submission/Comic/Detail";
+import AdminComicSubmissionDetailForCommentList from "./Components/Admin/Submission/Comic/DetailForCommentList";
+import AdminComicSubmissionDetailForCustomer from "./Components/Admin/Submission/Comic/DetailForCustomer";
+import AdminComicSubmissionDetailForPDFFile from "./Components/Admin/Submission/Comic/DetailForPDFFile";
+import AdminComicSubmissionUpdateForComicSubmission from "./Components/Admin/Submission/Comic/UpdateSubmission";
+import AdminComicSubmissionUpdatePickCustomerWithResult from "./Components/Admin/Submission/Comic/UpdatePickCustomerWithResult";
+import AdminComicSubmissionUpdatePickCustomerWithSearch from "./Components/Admin/Submission/Comic/UpdatePickCustomerWithSearch";
 import AdminUserList from "./Components/Admin/User/List";
 import AdminUserAdd from "./Components/Admin/User/Add";
 import AdminUserDetail from "./Components/Admin/User/Detail";
@@ -40,19 +40,19 @@ import AdminUserUpdate from "./Components/Admin/User/Update";
 import RetailerDashboard from "./Components/Retailer/Dashboard";
 import RetailerRegistrySearch from "./Components/Retailer/Registry/Search";
 import RetailerRegistryResult from "./Components/Retailer/Registry/Result";
-import RetailerComicSubmissionList from "./Components/Retailer/ComicSubmission/List";
-import RetailerComicSubmissionAddStep1WithSearch from "./Components/Retailer/ComicSubmission/AddStep1WithSearch";
-import RetailerComicSubmissionAddStep1WithResult from "./Components/Retailer/ComicSubmission/AddStep1WithResult";
-import RetailerComicSubmissionAddStep2 from "./Components/Retailer/ComicSubmission/AddStep2";
-import RetailerComicSubmissionAddStep3Comic from "./Components/Retailer/ComicSubmission/AddStep3Comic";
-import RetailerComicSubmissionAddStep4 from "./Components/Retailer/ComicSubmission/AddStep4";
-import RetailerComicSubmissionDetail from "./Components/Retailer/ComicSubmission/Detail";
-import RetailerComicSubmissionDetailForCommentList from "./Components/Retailer/ComicSubmission/DetailForCommentList";
-import RetailerComicSubmissionDetailForCustomer from "./Components/Retailer/ComicSubmission/DetailForCustomer";
-import RetailerComicSubmissionDetailForPDFFile from "./Components/Retailer/ComicSubmission/DetailForPDFFile";
-import RetailerComicSubmissionUpdateForComicSubmission from "./Components/Retailer/ComicSubmission/UpdateSubmission";
-import RetailerComicSubmissionUpdatePickCustomerWithResult from "./Components/Retailer/ComicSubmission/UpdatePickCustomerWithResult";
-import RetailerComicSubmissionUpdatePickCustomerWithSearch from "./Components/Retailer/ComicSubmission/UpdatePickCustomerWithSearch";
+import RetailerSubmissionPickTypeForAdd from "./Components/Retailer/Submission/PickForAdd";
+import RetailerComicSubmissionList from "./Components/Retailer/Submission/Comic/List";
+import RetailerComicSubmissionAddStep1WithSearch from "./Components/Retailer/Submission/Comic/AddStep1WithSearch";
+import RetailerComicSubmissionAddStep1WithResult from "./Components/Retailer/Submission/Comic/AddStep1WithResult";
+import RetailerComicSubmissionAddStep2 from "./Components/Retailer/Submission/Comic/AddStep2";
+import RetailerComicSubmissionAddStep3 from "./Components/Retailer/Submission/Comic/AddStep3";
+import RetailerComicSubmissionDetail from "./Components/Retailer/Submission/Comic/Detail";
+import RetailerComicSubmissionDetailForCommentList from "./Components/Retailer/Submission/Comic/DetailForCommentList";
+import RetailerComicSubmissionDetailForCustomer from "./Components/Retailer/Submission/Comic/DetailForCustomer";
+import RetailerComicSubmissionDetailForPDFFile from "./Components/Retailer/Submission/Comic/DetailForPDFFile";
+import RetailerComicSubmissionUpdateForComicSubmission from "./Components/Retailer/Submission/Comic/UpdateSubmission";
+import RetailerComicSubmissionUpdatePickCustomerWithResult from "./Components/Retailer/Submission/Comic/UpdatePickCustomerWithResult";
+import RetailerComicSubmissionUpdatePickCustomerWithSearch from "./Components/Retailer/Submission/Comic/UpdatePickCustomerWithSearch";
 import RetailerCustomerList from "./Components/Retailer/Customer/List";
 import RetailerCustomerAdd from "./Components/Retailer/Customer/Add";
 import RetailerCustomerDetail from "./Components/Retailer/Customer/Detail";
@@ -126,12 +126,12 @@ function AppRoute() {
                                     <Route exact path="/dashboard" element={<RetailerDashboard/>}/>
                                     <Route exact path="/registry" element={<RetailerRegistrySearch/>}/>
                                     <Route exact path="/registry/:cpsn" element={<RetailerRegistryResult/>}/>
+                                    <Route exact path="/submissions/pick-type-for-add" element={<RetailerSubmissionPickTypeForAdd/>}/>
                                     <Route exact path="/submissions/comics" element={<RetailerComicSubmissionList/>}/>
                                     <Route exact path="/submissions/comics/add/search" element={<RetailerComicSubmissionAddStep1WithSearch/>}/>
                                     <Route exact path="/submissions/comics/add/results" element={<RetailerComicSubmissionAddStep1WithResult/>}/>
-                                    <Route exact path="/submissions/comics/pick-type-for-add" element={<RetailerComicSubmissionAddStep2/>}/>
-                                    <Route exact path="/submissions/comics/add-comic" element={<RetailerComicSubmissionAddStep3Comic/>}/>
-                                    <Route exact path="/submissions/comics/add/:id/confirmation" element={<RetailerComicSubmissionAddStep4/>}/>
+                                    <Route exact path="/submissions/comics/add" element={<RetailerComicSubmissionAddStep2/>}/>
+                                    <Route exact path="/submissions/comics/add/:id/confirmation" element={<RetailerComicSubmissionAddStep3/>}/>
                                     <Route exact path="/submissions/comic/:id" element={<RetailerComicSubmissionDetail/>}/>
                                     <Route exact path="/submissions/comic/:id/edit" element={<RetailerComicSubmissionUpdateForComicSubmission/>}/>
                                     <Route exact path="/submissions/comic/:id/cust/search" element={<RetailerComicSubmissionUpdatePickCustomerWithSearch/>}/>
@@ -143,7 +143,7 @@ function AppRoute() {
                                     <Route exact path="/customers" element={<RetailerCustomerList/>}/>
                                     <Route exact path="/customers/add" element={<RetailerCustomerAdd/>}/>
                                     <Route exact path="/customer/:id" element={<RetailerCustomerDetail/>}/>
-                                    <Route exact path="/customer/:id/sub" element={<RetailerCustomerDetailForComicSubmission/>}/>
+                                    <Route exact path="/customer/:id/comics" element={<RetailerCustomerDetailForComicSubmission/>}/>
                                     <Route exact path="/customer/:id/edit" element={<RetailerCustomerUpdate/>}/>
                                     <Route exact path="/customer/:id/comments" element={<RetailerCustomerDetailForCommentList/>}/>
                                     <Route exact path="/account" element={<ProfileDetail/>}/>

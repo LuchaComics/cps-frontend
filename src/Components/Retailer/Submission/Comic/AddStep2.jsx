@@ -2,42 +2,39 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate, useSearchParams } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faTimesCircle, faCheckCircle, faGauge, faUsers, faEye, faBook, faMagnifyingGlass, faBalanceScale, faUser, faCogs } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faTimesCircle, faCheckCircle, faGauge, faUsers, faEye, faBook, faMagnifyingGlass, faBalanceScale, faUser, } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 
-import { postComicSubmissionCreateAPI } from "../../../API/ComicSubmission";
-import { getOrganizationSelectOptionListAPI } from "../../../API/organization";
-import FormErrorBox from "../../Element/FormErrorBox";
-import FormInputField from "../../Element/FormInputField";
-import FormDateField from "../../Element/FormDateField";
-import FormTextareaField from "../../Element/FormTextareaField";
-import FormRadioField from "../../Element/FormRadioField";
-import FormMultiSelectField from "../../Element/FormMultiSelectField";
-import FormSelectField from "../../Element/FormSelectField";
-import FormCheckboxField from "../../Element/FormCheckboxField";
+import useLocalStorage from "../../../../Hooks/useLocalStorage";
+import { postComicSubmissionCreateAPI } from "../../../../API/ComicSubmission";
+import FormErrorBox from "../../../Element/FormErrorBox";
+import FormInputField from "../../../Element/FormInputField";
+import FormDateField from "../../../Element/FormDateField";
+import FormTextareaField from "../../../Element/FormTextareaField";
+import FormRadioField from "../../../Element/FormRadioField";
+import FormMultiSelectField from "../../../Element/FormMultiSelectField";
+import FormSelectField from "../../../Element/FormSelectField";
+import FormCheckboxField from "../../../Element/FormCheckboxField";
+import PageLoadingContent from "../../../Element/PageLoadingContent";
 import {
     FINDING_WITH_EMPTY_OPTIONS,
     OVERALL_NUMBER_GRADE_WITH_EMPTY_OPTIONS,
     PUBLISHER_NAME_WITH_EMPTY_OPTIONS,
     CPS_PERCENTAGE_GRADE_WITH_EMPTY_OPTIONS,
     ISSUE_COVER_YEAR_OPTIONS,
-    ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS,
-    USER_STATE_WITH_EMPTY_OPTIONS
-} from "../../../Constants/FieldOptions";
-import PageLoadingContent from "../../Element/PageLoadingContent";
-import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
+    ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS
+} from "../../../../Constants/FieldOptions";
+import { topAlertMessageState, topAlertStatusState, currentUserState } from "../../../../AppState";
 
 
-function AdminComicSubmissionAddStep3Comic() {
+function RetailerComicSubmissionAddStep3() {
     ////
     //// URL Parameters.
     ////
 
     const [searchParams] = useSearchParams(); // Special thanks via https://stackoverflow.com/a/65451140
-    const userID = searchParams.get("user_id");
-    const userName = searchParams.get("user_name");
-    const orgID = searchParams.get("organization_id");
-    // const orgName = searchParams.get("organization_name");
+    const customerID = searchParams.get("customer_id");
+    const customerName = searchParams.get("customer_name");
 
     ////
     //// Global state.
@@ -45,6 +42,7 @@ function AdminComicSubmissionAddStep3Comic() {
 
     const [topAlertMessage, setTopAlertMessage] = useRecoilState(topAlertMessageState);
     const [topAlertStatus, setTopAlertStatus] = useRecoilState(topAlertStatusState);
+    const [currentUser] = useRecoilState(currentUserState);
 
     ////
     //// Component states.
@@ -76,10 +74,6 @@ function AdminComicSubmissionAddStep3Comic() {
     const [gradingNotes, setGradingNotes] = useState("");
     const [showsSignsOfTamperingOrRestoration, setShowsSignsOfTamperingOrRestoration] = useState("");
     const [showCancelWarning, setShowCancelWarning] = useState(false);
-    const [status, setStatus] = useState(0);
-    const [organizationSelectOptions, setOrganizationSelectOptions] = useState([]);
-    const [organizationID, setOrganizationID] = useState(orgID);
-    const [serviceType, setServiceType] = useState(0);
     const [isOverallLetterGradeNearMintPlus, setIsOverallLetterGradeNearMintPlus] = useState(false);
 
     ////
@@ -117,15 +111,15 @@ function AdminComicSubmissionAddStep3Comic() {
             overallNumberGrade: parseFloat(overallNumberGrade),
             cpsPercentageGrade: parseFloat(cpsPercentageGrade),
             showsSignsOfTamperingOrRestoration: parseInt(showsSignsOfTamperingOrRestoration),
-            status: status,
-            serviceType: serviceType,
-            organizationID: organizationID,
-            CollectibleType: 1, // 1=Comic, 2=Card
+            status: 1, // 1 = Pending.
+            serviceType: 1, // 1 = Pre-Screening Service
+            organizationID: currentUser.organizationID,
+            CollectibleType: 1, // 1=, 2=Card
         };
 
-        console.log("onSubmitClick: Attaching user identification.");
-        if (userID !== undefined && userID !== null && userID !== "") {
-            submission.UserID = userID;
+        console.log("onSubmitClick: Attaching customer identification.");
+        if (customerID !== undefined && customerID !== null && customerID !== "") {
+            submission.UserID = customerID;
         }
 
         // Submit to the backend.
@@ -157,12 +151,12 @@ function AdminComicSubmissionAddStep3Comic() {
         }, 2000);
 
         let urlParams = "";
-        if (userName !== null) {
-            urlParams += "?user_id=" + userID + "&user_name=" + userName;
+        if (customerName !== null) {
+            urlParams += "?customer_id=" + customerID + "&customer_name=" + customerName;
         }
 
         // Redirect the user to a new page.
-        setForceURL("/admin/submissions/comics/add/"+response.id+"/confirmation"+urlParams);
+        setForceURL("/submissions/comics/add/"+response.id+"/confirmation"+urlParams);
     }
 
     function onComicSubmissionCreateError(apiErr) {
@@ -190,34 +184,6 @@ function AdminComicSubmissionAddStep3Comic() {
         setFetching(false);
     }
 
-    function onOrganizationOptionListSuccess(response){
-        console.log("onOrganizationOptionListSuccess: Starting...");
-        if (response !== null) {
-            const selectOptions = [
-                {"value": 0, "label": "Please select"}, // Add empty options.
-                ...response
-            ]
-            setOrganizationSelectOptions(selectOptions);
-        }
-    }
-
-    function onOrganizationOptionListError(apiErr) {
-        console.log("onOrganizationOptionListError: Starting...");
-        console.log("onOrganizationOptionListError: apiErr:", apiErr);
-        setErrors(apiErr);
-
-        // The following code will cause the screen to scroll to the top of
-        // the page. Please see ``react-scroll`` for more information:
-        // https://github.com/fisshy/react-scroll
-        var scroll = Scroll.animateScroll;
-        scroll.scrollToTop();
-    }
-
-    function onOrganizationOptionListDone() {
-        console.log("onOrganizationOptionListDone: Starting...");
-        setFetching(false);
-    }
-
     ////
     //// Misc.
     ////
@@ -227,14 +193,6 @@ function AdminComicSubmissionAddStep3Comic() {
 
         if (mounted) {
             window.scrollTo(0, 0);  // Start the page at the top of the page.
-            let params = new Map();
-            getOrganizationSelectOptionListAPI(
-                params,
-                onOrganizationOptionListSuccess,
-                onOrganizationOptionListError,
-                onOrganizationOptionListDone
-            );
-            setFetching(true);
         }
 
         return () => { mounted = false; }
@@ -257,18 +215,18 @@ function AdminComicSubmissionAddStep3Comic() {
             <div class="container">
                 <section class="section">
                     <nav class="breadcrumb" aria-label="breadcrumbs">
-                       {userName === null
+                       {customerName === null
                            ?
                             <ul>
-                                <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
-                                <li class=""><Link to="/admin/submissions/comics" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
+                                <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
+                                <li class=""><Link to="/submissions/comics" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
                                 <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
                             </ul>
                             :
                             <ul>
-                                <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
-                                <li class=""><Link to="/admin/users" aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Users</Link></li>
-                                <li class=""><Link to={`/admin/user/${userID}/sub`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail (Comic Submissions)</Link></li>
+                                <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
+                                <li class=""><Link to="/customers" aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers</Link></li>
+                                <li class=""><Link to={`/customer/${customerID}/comics`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail (Comics)</Link></li>
                                 <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
                             </ul>
                         }
@@ -285,11 +243,11 @@ function AdminComicSubmissionAddStep3Comic() {
                                     Your submission will be cancelled and your work will be lost. This cannot be undone. Do you want to continue?
                                 </section>
                                 <footer class="modal-card-foot">
-                                    {userName === null
+                                    {customerName === null
                                         ?
-                                        <Link class="button is-medium is-success" to={`/admin/submissions/comics/add/search`}>Yes</Link>
+                                        <Link class="button is-medium is-success" to={`/submissions/comics/add/search`}>Yes</Link>
                                         :
-                                        <Link class="button is-medium is-success" to={`/admin/user/${userID}/sub`}>Yes</Link>
+                                        <Link class="button is-medium is-success" to={`/customer/${customerID}/sub`}>Yes</Link>
                                     }
                                     <button class="button is-medium " onClick={(e)=>setShowCancelWarning(false)}>No</button>
                                 </footer>
@@ -304,11 +262,11 @@ function AdminComicSubmissionAddStep3Comic() {
                             <PageLoadingContent displayMessage={"Submitting..."} />
                             :
                             <>
-                                <p class="pb-4 has-text-grey">Please fill out all the required fields before submitting this form.</p>
                                 <FormErrorBox errors={errors} />
+                                <p class="pb-4 has-text-grey">Please fill out all the required fields before submitting this form.</p>
                                 <div class="container">
 
-                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comic Book Information</p>
+                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp; Book Information</p>
                                     <hr />
                                     <FormInputField
                                         label="Series Title"
@@ -610,7 +568,7 @@ function AdminComicSubmissionAddStep3Comic() {
                                     />
 
                                     <FormTextareaField
-                                        label="Grading Notes"
+                                        label="Grading Notes (Optional)"
                                         name="gradingNotes"
                                         placeholder="Text input"
                                         value={gradingNotes}
@@ -686,50 +644,6 @@ function AdminComicSubmissionAddStep3Comic() {
                                         options={CPS_PERCENTAGE_GRADE_WITH_EMPTY_OPTIONS}
                                     />}
 
-                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faCogs} />&nbsp;Settings</p>
-                                    <hr />
-
-                                    <FormSelectField
-                                        label="Organization ID"
-                                        name="organizationID"
-                                        placeholder="Pick"
-                                        selectedValue={organizationID}
-                                        errorText={errors && errors.organizationID}
-                                        helpText="Pick the organization this user belongs to and will be limited by"
-                                        isRequired={true}
-                                        onChange={(e)=>setOrganizationID(e.target.value)}
-                                        options={organizationSelectOptions}
-                                        disabled={(orgID !== undefined && orgID !== "" && orgID !== null) || organizationSelectOptions.length === 0}
-                                    />
-                                    <FormRadioField
-                                        label="Service Type"
-                                        name="role"
-                                        value={serviceType}
-                                        opt1Value={1}
-                                        opt1Label="Pre-Screening Service"
-                                        opt2Value={2}
-                                        opt2Label="Pedigree Service"
-                                        errorText={errors && errors.serviceType}
-                                        onChange={(e)=>setServiceType(parseInt(e.target.value))}
-                                        maxWidth="180px"
-                                    />
-                                    <FormRadioField
-                                        label="Status"
-                                        name="status"
-                                        value={status}
-                                        opt1Value={1}
-                                        opt1Label="Pending"
-                                        opt2Value={2}
-                                        opt2Label="Active"
-                                        opt3Value={3}
-                                        opt3Label="Error"
-                                        opt4Value={4}
-                                        opt4Label="Archived"
-                                        errorText={errors && errors.status}
-                                        onChange={(e)=>setStatus(parseInt(e.target.value))}
-                                        maxWidth="180px"
-                                    />
-
                                     <div class="columns pt-5">
                                         <div class="column is-half">
                                             <button class="button is-medium is-hidden-touch" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faTimesCircle} />&nbsp;Cancel</button>
@@ -751,4 +665,4 @@ function AdminComicSubmissionAddStep3Comic() {
     );
 }
 
-export default AdminComicSubmissionAddStep3Comic;
+export default RetailerComicSubmissionAddStep3;

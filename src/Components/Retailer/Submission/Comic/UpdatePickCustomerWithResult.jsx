@@ -7,19 +7,19 @@ import Select from 'react-select'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
 
-import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { postComicSubmissionCustomerSwapOperationAPI } from "../../../API/ComicSubmission";
-import { getCustomerListAPI } from "../../../API/customer";
-import FormErrorBox from "../../Element/FormErrorBox";
-import FormInputField from "../../Element/FormInputField";
-import FormTextareaField from "../../Element/FormTextareaField";
-import FormRadioField from "../../Element/FormRadioField";
-import FormMultiSelectField from "../../Element/FormMultiSelectField";
-import FormSelectField from "../../Element/FormSelectField";
-import FormInputFieldWithButton from "../../Element/FormInputFieldWithButton";
-import { FINDING_OPTIONS } from "../../../Constants/FieldOptions";
-import PageLoadingContent from "../../Element/PageLoadingContent";
-import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
+import useLocalStorage from "../../../../Hooks/useLocalStorage";
+import { postComicSubmissionCustomerSwapOperationAPI } from "../../../../API/ComicSubmission";
+import { getCustomerListAPI } from "../../../../API/customer";
+import FormErrorBox from "../../../Element/FormErrorBox";
+import FormInputField from "../../../Element/FormInputField";
+import FormTextareaField from "../../../Element/FormTextareaField";
+import FormRadioField from "../../../Element/FormRadioField";
+import FormMultiSelectField from "../../../Element/FormMultiSelectField";
+import FormSelectField from "../../../Element/FormSelectField";
+import FormInputFieldWithButton from "../../../Element/FormInputFieldWithButton";
+import { FINDING_OPTIONS } from "../../../../Constants/FieldOptions";
+import PageLoadingContent from "../../../Element/PageLoadingContent";
+import { topAlertMessageState, topAlertStatusState } from "../../../../AppState";
 
 
 function RetailerComicSubmissionUpdatePickCustomerWithResult() {

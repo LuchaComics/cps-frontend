@@ -2,36 +2,31 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faPencil, faEye, faGauge, faBook, faMagnifyingGlass, faBalanceScale, faCogs } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faPencil, faEye, faGauge } from '@fortawesome/free-solid-svg-icons'
 import Select from 'react-select'
 import { useRecoilState } from 'recoil';
-import { useParams } from 'react-router-dom';
-import { DateTime } from "luxon";
+import { useParams } from 'react-router-dom'
 
-import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { getComicSubmissionDetailAPI, putComicSubmissionUpdateAPI } from "../../../API/ComicSubmission";
-import { getOrganizationSelectOptionListAPI } from "../../../API/organization";
-import FormErrorBox from "../../Element/FormErrorBox";
-import FormInputField from "../../Element/FormInputField";
-import FormTextareaField from "../../Element/FormTextareaField";
-import FormRadioField from "../../Element/FormRadioField";
-import FormMultiSelectField from "../../Element/FormMultiSelectField";
-import FormSelectField from "../../Element/FormSelectField";
-import FormDateField from "../../Element/FormDateField";
-import FormCheckboxField from "../../Element/FormCheckboxField";
-import PageLoadingContent from "../../Element/PageLoadingContent";
+import useLocalStorage from "../../../../Hooks/useLocalStorage";
+import { getComicSubmissionDetailAPI, putComicSubmissionUpdateAPI } from "../../../../API/ComicSubmission";
+import FormErrorBox from "../../../Element/FormErrorBox";
+import FormInputField from "../../../Element/FormInputField";
+import FormTextareaField from "../../../Element/FormTextareaField";
+import FormRadioField from "../../../Element/FormRadioField";
+import FormMultiSelectField from "../../../Element/FormMultiSelectField";
+import FormSelectField from "../../../Element/FormSelectField";
+import FormCheckboxField from "../../../Element/FormCheckboxField";
+import PageLoadingContent from "../../../Element/PageLoadingContent";
 import {
     FINDING_OPTIONS,
     OVERALL_NUMBER_GRADE_OPTIONS,
     PUBLISHER_NAME_OPTIONS,
-    CPS_PERCENTAGE_GRADE_OPTIONS,
-    ISSUE_COVER_YEAR_OPTIONS,
-    ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS
-} from "../../../Constants/FieldOptions";
-import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
+    CPS_PERCENTAGE_GRADE_OPTIONS
+} from "../../../../Constants/FieldOptions";
+import { topAlertMessageState, topAlertStatusState } from "../../../../AppState";
 
 
-function AdminComicSubmissionUpdateForComicSubmission() {
+function RetailerComicSubmissionUpdateForCustomer() {
     ////
     //// URL Parameters.
     ////
@@ -55,8 +50,7 @@ function AdminComicSubmissionUpdateForComicSubmission() {
     const [seriesTitle, setSeriesTitle] = useState("");
     const [issueVol, setIssueVol] = useState("");
     const [issueNo, setIssueNo] = useState("");
-    const [issueCoverYear, setIssueCoverYear] = useState(0);
-    const [issueCoverMonth, setIssueCoverMonth] = useState(0);
+    const [issueCoverDate, setIssueCoverDate] = useState("");
     const [publisherName, setPublisherName] = useState(0);
     const [publisherNameOther, setPublisherNameOther] = useState("");
     const [creasesFinding, setCreasesFinding] = useState("");
@@ -71,53 +65,182 @@ function AdminComicSubmissionUpdateForComicSubmission() {
     const [overallLetterGrade, setOverallLetterGrade] = useState("");
     const [overallNumberGrade, setOverallNumberGrade] = useState("");
     const [cpsPercentageGrade, setCpsPercentageGrade] = useState("");
-    const [specialNotes, setSpecialNotes] = useState("");
-    const [gradingNotes, setGradingNotes] = useState("");
+    const [specialNotesLine1, setSpecialNotesLine1] = useState("");
+    const [specialNotesLine2, setSpecialNotesLine2] = useState("");
+    const [specialNotesLine3, setSpecialNotesLine3] = useState("");
+    const [specialNotesLine4, setSpecialNotesLine4] = useState("");
+    const [specialNotesLine5, setSpecialNotesLine5] = useState("");
+    const [gradingNotesLine1, setGradingNotesLine1] = useState("");
+    const [gradingNotesLine2, setGradingNotesLine2] = useState("");
+    const [gradingNotesLine3, setGradingNotesLine3] = useState("");
+    const [gradingNotesLine4, setGradingNotesLine4] = useState("");
+    const [gradingNotesLine5, setGradingNotesLine5] = useState("");
     const [showsSignsOfTamperingOrRestoration, setShowsSignsOfTamperingOrRestoration] = useState("");
-    const [status, setStatus] = useState(0);
-    const [organizationSelectOptions, setOrganizationSelectOptions] = useState([]);
-    const [organizationID, setOrganizationID] = useState("");
-    const [serviceType, setServiceType] = useState(0);
     const [isOverallLetterGradeNearMintPlus, setIsOverallLetterGradeNearMintPlus] = useState(false);
 
     ////
     //// Event handling.
     ////
 
+    const onSeriesTitleChange = (e) => {
+        setSeriesTitle(e.target.value);
+    }
+
+    const onIssueVolChange = (e) => {
+        setIssueVol(e.target.value);
+    }
+
+    const onIssueNoChange = (e) => {
+        setIssueNo(e.target.value);
+    }
+
+    const onIssueCoverDateChange = (e) => {
+        setIssueCoverDate(e.target.value);
+    }
+
+    const onPublisherNameChange = (e) => {
+        setPublisherName(parseInt(e.target.value));
+    }
+
+    const onPublisherNameOtherChange = (e) => {
+        setPublisherNameOther(e.target.value);
+    }
+
+    const onCreasesFindingChange = (e) => {
+        setCreasesFinding(e.target.value);
+    }
+
+    const onTearsFindingChange = (e) => {
+        setTearsFinding(e.target.value);
+    }
+
+    const onMissingPartsFindingChange = (e) => {
+        setMissingPartsFinding(e.target.value);
+    }
+
+    const onStainsFindingdChange = (e) => {
+        setStainsFinding(e.target.value);
+    }
+
+    const onStainsFindingChange = (e) => {
+        setStainsFinding(e.target.value);
+    }
+
+    const onDistortionFindingChange = (e) => {
+        setDistortionFinding(e.target.value);
+    }
+
+    const onPaperQualityFindingChange = (e) => {
+        setPaperQualityFinding(e.target.value);
+    }
+
+    const onSpineFindingChange = (e) => {
+        setSpineFinding(e.target.value);
+    }
+
+    const onCoverFindingChange = (e) => {
+        setCoverFinding(e.target.value);
+    }
+
+    const onGradingScaleChange = (e) => {
+        setGradingScale(parseInt(e.target.value));
+    }
+
+    const onOverallLetterGradeChange = (e) => {
+        setOverallLetterGrade(e.target.value);
+    }
+
+    const onOverallNumberGradeChange = (e) => {
+        setOverallNumberGrade(e.target.value);
+    }
+
+    const onCpsPercentageGradeChange = (e) => {
+        setCpsPercentageGrade(e.target.value);
+    }
+
+    const onSpecialNotesLine1Change = (e) => {
+        setSpecialNotesLine1(e.target.value);
+    }
+
+    const onSpecialNotesLine2Change = (e) => {
+        setSpecialNotesLine2(e.target.value);
+    }
+
+    const onSpecialNotesLine3Change = (e) => {
+        setSpecialNotesLine3(e.target.value);
+    }
+
+    const onSpecialNotesLine4Change = (e) => {
+        setSpecialNotesLine4(e.target.value);
+    }
+
+    const onSpecialNotesLine5Change = (e) => {
+        setSpecialNotesLine5(e.target.value);
+    }
+
+    const onGradingNotesLine1Change = (e) => {
+        setGradingNotesLine1(e.target.value);
+    }
+
+    const onGradingNotesLine2Change = (e) => {
+        setGradingNotesLine2(e.target.value);
+    }
+
+    const onGradingNotesLine3Change = (e) => {
+        setGradingNotesLine3(e.target.value);
+    }
+
+    const onGradingNotesLine4Change = (e) => {
+        setGradingNotesLine4(e.target.value);
+    }
+
+    const onGradingNotesLine5Change = (e) => {
+        setGradingNotesLine5(e.target.value);
+    }
+
+    const onShowsSignsOfTamperingOrRestorationChange = (e) => {
+        setShowsSignsOfTamperingOrRestoration(e.target.value);
+    }
+
+
     const onSubmitClick = (e) => {
         console.log("onSubmitClick: Beginning...");
-        setFetching(true);
         setErrors({});
+        setFetching(true);
 
         // Generate the payload.
         const submission = {
-            id: id,
-            series_title: seriesTitle,
-            issue_vol: issueVol,
-            issue_no: issueNo,
-            issue_cover_year: issueCoverYear,
-            issue_cover_month: issueCoverMonth,
-            publisher_name: publisherName,
-            publisher_name_other: publisherNameOther,
-            special_notes: specialNotes,
-            grading_notes: gradingNotes,
-            creases_finding: creasesFinding,
-            tears_finding: tearsFinding,
-            missing_parts_finding: missingPartsFinding,
-            stains_finding: stainsFinding,
-            distortion_finding: distortionFinding,
-            paper_quality_finding: paperQualityFinding,
-            spine_finding: spineFinding,
-            cover_finding: coverFinding,
-            grading_scale: parseInt(gradingScale),
-            overall_letter_grade: overallLetterGrade,
-            is_overall_letter_grade_near_mint_plus: isOverallLetterGradeNearMintPlus,
-            overall_number_grade: parseFloat(overallNumberGrade),
-            cps_percentage_grade: parseFloat(cpsPercentageGrade),
-            shows_signs_of_tampering_or_restoration: parseInt(showsSignsOfTamperingOrRestoration),
-            status: status,
-            service_type: serviceType,
-            organization_id: organizationID,
+            ID: id,
+            SeriesTitle: seriesTitle,
+            IssueVol: issueVol,
+            IssueNo: issueNo,
+            IssueCoverDate: issueCoverDate,
+            PublisherName: publisherName,
+            PublisherNameOther: publisherNameOther,
+            SpecialNotesLine1: specialNotesLine1,
+            SpecialNotesLine2: specialNotesLine2,
+            SpecialNotesLine3: specialNotesLine3,
+            SpecialNotesLine4: specialNotesLine4,
+            SpecialNotesLine5: specialNotesLine5,
+            GradingNotesLine1: gradingNotesLine1,
+            GradingNotesLine2: gradingNotesLine2,
+            GradingNotesLine3: gradingNotesLine3,
+            GradingNotesLine4: gradingNotesLine4,
+            GradingNotesLine5: gradingNotesLine5,
+            CreasesFinding: creasesFinding,
+            TearsFinding: tearsFinding,
+            MissingPartsFinding: missingPartsFinding,
+            StainsFinding: stainsFinding,
+            DistortionFinding: distortionFinding,
+            PaperQualityFinding: paperQualityFinding,
+            SpineFinding: spineFinding,
+            CoverFinding: coverFinding,
+            GradingScale: parseInt(gradingScale),
+            OverallLetterGrade: overallLetterGrade,
+            IsOverallLetterGradeNearMintPlus: isOverallLetterGradeNearMintPlus,
+            OverallNumberGrade: parseFloat(overallNumberGrade),
+            CpsPercentageGrade: parseFloat(cpsPercentageGrade),
+            ShowsSignsOfTamperingOrRestoration: parseInt(showsSignsOfTamperingOrRestoration),
         };
 
         // Submit to the backend.
@@ -134,8 +257,7 @@ function AdminComicSubmissionUpdateForComicSubmission() {
         setSeriesTitle(response.seriesTitle);
         setIssueVol(response.issueVol);
         setIssueNo(response.issueNo);
-        setIssueCoverYear(response.issueCoverYear);
-        setIssueCoverMonth(response.issueCoverMonth);
+        setIssueCoverDate(response.issueCoverDate);
         setPublisherName(response.publisherName);
         setPublisherNameOther(response.publisherNameOther);
         setCreasesFinding(response.creasesFinding);
@@ -150,12 +272,18 @@ function AdminComicSubmissionUpdateForComicSubmission() {
         setOverallLetterGrade(response.overallLetterGrade);
         setIsOverallLetterGradeNearMintPlus(response.isOverallLetterGradeNearMintPlus);
         setOverallNumberGrade(response.overallNumberGrade);
-        setSpecialNotes(response.specialNotes);
+        setSpecialNotesLine1(response.specialNotesLine1);
+        setSpecialNotesLine2(response.specialNotesLine2);
+        setSpecialNotesLine3(response.specialNotesLine3);
+        setSpecialNotesLine4(response.specialNotesLine4);
+        setSpecialNotesLine5(response.specialNotesLine5);
         setShowsSignsOfTamperingOrRestoration(response.showsSignsOfTamperingOrRestoration);
-        setGradingNotes(response.gradingNotes);
-        setStatus(response.status);
-        setServiceType(response.serviceType);
-        setOrganizationID(response.organizationId);
+        setGradingNotesLine1(response.gradingNotesLine1);
+        setGradingNotesLine2(response.gradingNotesLine2);
+        setGradingNotesLine3(response.gradingNotesLine3);
+        setGradingNotesLine4(response.gradingNotesLine4);
+        setGradingNotesLine5(response.gradingNotesLine5);
+
     }
 
     function onComicSubmissionDetailError(apiErr) {
@@ -189,7 +317,7 @@ function AdminComicSubmissionUpdateForComicSubmission() {
         }, 2000);
 
         // Redirect the user to a new page.
-        setForceURL("/admin/submissions/comic/"+response.id);
+        setForceURL("/submissions/comic/"+response.id);
     }
 
     function onComicSubmissionUpdateError(apiErr) {
@@ -217,34 +345,6 @@ function AdminComicSubmissionUpdateForComicSubmission() {
         setFetching(false);
     }
 
-    function onOrganizationOptionListSuccess(response){
-        console.log("onOrganizationOptionListSuccess: Starting...");
-        if (response !== null) {
-            const selectOptions = [
-                {"value": 0, "label": "Please select"}, // Add empty options.
-                ...response
-            ]
-            setOrganizationSelectOptions(selectOptions);
-        }
-    }
-
-    function onOrganizationOptionListError(apiErr) {
-        console.log("onOrganizationOptionListError: Starting...");
-        console.log("onOrganizationOptionListError: apiErr:", apiErr);
-        setErrors(apiErr);
-
-        // The following code will cause the screen to scroll to the top of
-        // the page. Please see ``react-scroll`` for more information:
-        // https://github.com/fisshy/react-scroll
-        var scroll = Scroll.animateScroll;
-        scroll.scrollToTop();
-    }
-
-    function onOrganizationOptionListDone() {
-        console.log("onOrganizationOptionListDone: Starting...");
-        setFetching(false);
-    }
-
     ////
     //// Misc.
     ////
@@ -260,14 +360,6 @@ function AdminComicSubmissionUpdateForComicSubmission() {
                 onComicSubmissionDetailSuccess,
                 onComicSubmissionDetailError,
                 onComicSubmissionDetailDone
-            );
-
-            let params = new Map();
-            getOrganizationSelectOptionListAPI(
-                params,
-                onOrganizationOptionListSuccess,
-                onOrganizationOptionListError,
-                onOrganizationOptionListDone
             );
         }
 
@@ -292,24 +384,26 @@ function AdminComicSubmissionUpdateForComicSubmission() {
                 <section class="section">
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
-                            <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
-                            <li class=""><Link to="/admin/submissions/comics" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
-                            <li class=""><Link to={`/admin/submissions/comic/${id}`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail</Link></li>
-                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update (Comic Submission)</Link></li>
+                            <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
+                            <li class=""><Link to="/submissions/comics" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
+                            <li class=""><Link to={`/submissions/comic/${id}`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Details</Link></li>
+                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update (Customer)</Link></li>
                         </ul>
                     </nav>
                     <nav class="box">
                         <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submission</p>
+                        <FormErrorBox errors={errors} />
+
+                        <p class="pb-4 has-text-grey">Please fill out all the required fields before submitting this form.</p>
+
                         {isFetching
                             ?
-                            <PageLoadingContent displayMessage={"Submitting..."} />
+                            <PageLoadingContent displayMessage={"Loading..."} />
                             :
                             <>
-                                <FormErrorBox errors={errors} />
-                                <p class="pb-4 has-text-grey">Please fill out all the required fields before submitting this form.</p>
                                 <div class="container">
 
-                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comic Book Information</p>
+                                    <p class="subtitle is-3">Comic Book Information</p>
                                     <hr />
 
                                     <FormInputField
@@ -319,7 +413,7 @@ function AdminComicSubmissionUpdateForComicSubmission() {
                                         value={seriesTitle}
                                         errorText={errors && errors.seriesTitle}
                                         helpText=""
-                                        onChange={(e)=>setSeriesTitle(e.target.value)}
+                                        onChange={onSeriesTitleChange}
                                         isRequired={true}
                                         maxWidth="380px"
                                     />
@@ -331,7 +425,7 @@ function AdminComicSubmissionUpdateForComicSubmission() {
                                         value={issueVol}
                                         errorText={errors && errors.issueVol}
                                         helpText=""
-                                        onChange={(e)=>setIssueVol(e.target.value)}
+                                        onChange={onIssueVolChange}
                                         isRequired={true}
                                         maxWidth="180px"
                                     />
@@ -343,36 +437,22 @@ function AdminComicSubmissionUpdateForComicSubmission() {
                                         value={issueNo}
                                         errorText={errors && errors.issueNo}
                                         helpText=""
-                                        onChange={(e)=>setIssueNo(e.target.value)}
+                                        onChange={onIssueNoChange}
                                         isRequired={true}
                                         maxWidth="180px"
                                     />
 
-                                    <FormSelectField
-                                        label="Issue Cover Year"
-                                        name="issueCoverYear"
-                                        placeholder="Issue Cover Year"
-                                        selectedValue={issueCoverYear}
-                                        errorText={errors && errors.issueCoverYear}
+                                    <FormInputField
+                                        label="Issue Cover Date"
+                                        name="issueCoverDate"
+                                        placeholder="Text input"
+                                        value={issueCoverDate}
+                                        errorText={errors && errors.issueCoverDate}
                                         helpText=""
-                                        onChange={(e)=>setIssueCoverYear(parseInt(e.target.value))}
-                                        options={ISSUE_COVER_YEAR_OPTIONS}
+                                        onChange={onIssueCoverDateChange}
                                         isRequired={true}
-                                        maxWidth="110px"
+                                        maxWidth="180px"
                                     />
-
-                                    {issueCoverYear !== 0 && issueCoverYear !== 1 && <FormSelectField
-                                        label="Issue Cover Month"
-                                        name="issueCoverMonth"
-                                        placeholder="Issue Cover Month"
-                                        selectedValue={issueCoverMonth}
-                                        errorText={errors && errors.issueCoverMonth}
-                                        helpText=""
-                                        onChange={(e)=>setIssueCoverMonth(parseInt(e.target.value))}
-                                        options={ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS}
-                                        isRequired={true}
-                                        maxWidth="110px"
-                                    />}
 
                                     <FormSelectField
                                         label="Publisher Name"
@@ -381,7 +461,7 @@ function AdminComicSubmissionUpdateForComicSubmission() {
                                         selectedValue={publisherName}
                                         errorText={errors && errors.publisherName}
                                         helpText=""
-                                        onChange={(e)=>setPublisherName(parseInt(e.target.value))}
+                                        onChange={onPublisherNameChange}
                                         options={PUBLISHER_NAME_OPTIONS}
                                     />
 
@@ -392,26 +472,77 @@ function AdminComicSubmissionUpdateForComicSubmission() {
                                         value={publisherNameOther}
                                         errorText={errors && errors.publisherNameOther}
                                         helpText=""
-                                        onChange={(e)=>setPublisherNameOther(e.target.value)}
+                                        onChange={onPublisherNameOtherChange}
                                         isRequired={true}
                                         maxWidth="280px"
                                     />}
 
-                                    <FormTextareaField
-                                        label="Special Notes (Optional)"
-                                        name="specialNotes"
+                                    <FormInputField
+                                        label="Special Note - Line 1 (Optional)"
+                                        name="specialNotesLine1"
                                         placeholder="Text input"
-                                        value={specialNotes}
-                                        errorText={errors && errors.specialNotes}
+                                        value={specialNotesLine1}
+                                        errorText={errors && errors.specialNotesLine1}
                                         helpText=""
-                                        onChange={(e)=>setSpecialNotes(e.target.value)}
+                                        onChange={onSpecialNotesLine1Change}
                                         isRequired={true}
                                         maxWidth="280px"
-                                        helpText={"Max 638 characters"}
-                                        rows={4}
+                                        helpText={"Max 17 characters"}
                                     />
 
-                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faMagnifyingGlass} />&nbsp;Summary of Findings</p>
+                                    <FormInputField
+                                        label="Special Note - Line 2 (Optional)"
+                                        name="specialNotesLine2"
+                                        placeholder="Text input"
+                                        value={specialNotesLine2}
+                                        errorText={errors && errors.specialNotesLine2}
+                                        helpText=""
+                                        onChange={onSpecialNotesLine2Change}
+                                        isRequired={true}
+                                        maxWidth="280px"
+                                        helpText={"Max 17 characters"}
+                                    />
+
+                                    <FormInputField
+                                        label="Special Note - Line 3 (Optional)"
+                                        name="specialNotesLine3"
+                                        placeholder="Text input"
+                                        value={specialNotesLine3}
+                                        errorText={errors && errors.specialNotesLine3}
+                                        helpText=""
+                                        onChange={onSpecialNotesLine3Change}
+                                        isRequired={true}
+                                        maxWidth="280px"
+                                        helpText={"Max 17 characters"}
+                                    />
+
+                                    <FormInputField
+                                        label="Special Note - Line 4 (Optional)"
+                                        name="specialNotesLine4"
+                                        placeholder="Text input"
+                                        value={specialNotesLine4}
+                                        errorText={errors && errors.specialNotesLine4}
+                                        helpText=""
+                                        onChange={onSpecialNotesLine4Change}
+                                        isRequired={true}
+                                        maxWidth="280px"
+                                        helpText={"Max 17 characters"}
+                                    />
+
+                                    <FormInputField
+                                        label="Special Note - Line 5 (Optional)"
+                                        name="specialNotesLine5"
+                                        placeholder="Text input"
+                                        value={specialNotesLine5}
+                                        errorText={errors && errors.specialNotesLine5}
+                                        helpText=""
+                                        onChange={onSpecialNotesLine5Change}
+                                        isRequired={true}
+                                        maxWidth="280px"
+                                        helpText={"Max 17 characters"}
+                                    />
+
+                                    <p class="subtitle is-3">Summary of Findings</p>
                                     <hr />
 
                                     <FormRadioField
@@ -433,7 +564,7 @@ function AdminComicSubmissionUpdateForComicSubmission() {
                                         opt7Value="nm"
                                         opt7Label="Near Mint"
                                         errorText={errors && errors.creasesFinding}
-                                        onChange={(e)=>setCreasesFinding(e.target.value)}
+                                        onChange={onCreasesFindingChange}
                                         maxWidth="180px"
                                     />
 
@@ -456,7 +587,7 @@ function AdminComicSubmissionUpdateForComicSubmission() {
                                         opt7Value="nm"
                                         opt7Label="Near Mint"
                                         errorText={errors && errors.tearsFinding}
-                                        onChange={(e)=>setTearsFinding(e.target.value)}
+                                        onChange={onTearsFindingChange}
                                         maxWidth="180px"
                                     />
 
@@ -479,7 +610,7 @@ function AdminComicSubmissionUpdateForComicSubmission() {
                                         opt7Value="nm"
                                         opt7Label="Near Mint"
                                         errorText={errors && errors.missingPartsFinding}
-                                        onChange={(e)=>setMissingPartsFinding(e.target.value)}
+                                        onChange={onMissingPartsFindingChange}
                                         maxWidth="180px"
                                     />
 
@@ -502,7 +633,7 @@ function AdminComicSubmissionUpdateForComicSubmission() {
                                         opt7Value="nm"
                                         opt7Label="Near Mint"
                                         errorText={errors && errors.stainsFinding}
-                                        onChange={(e)=>setStainsFinding(e.target.value)}
+                                        onChange={onStainsFindingChange}
                                         maxWidth="180px"
                                     />
 
@@ -525,7 +656,7 @@ function AdminComicSubmissionUpdateForComicSubmission() {
                                         opt7Value="nm"
                                         opt7Label="Near Mint"
                                         errorText={errors && errors.distortionFinding}
-                                        onChange={(e)=>setDistortionFinding(e.target.value)}
+                                        onChange={onDistortionFindingChange}
                                         maxWidth="180px"
                                     />
 
@@ -548,7 +679,7 @@ function AdminComicSubmissionUpdateForComicSubmission() {
                                         opt7Value="nm"
                                         opt7Label="Near Mint"
                                         errorText={errors && errors.paperQualityFinding}
-                                        onChange={(e)=>setPaperQualityFinding(e.target.value)}
+                                        onChange={onPaperQualityFindingChange}
                                         maxWidth="180px"
                                     />
 
@@ -571,7 +702,7 @@ function AdminComicSubmissionUpdateForComicSubmission() {
                                         opt7Value="nm"
                                         opt7Label="Near Mint"
                                         errorText={errors && errors.spineFinding}
-                                        onChange={(e)=>setSpineFinding(e.target.value)}
+                                        onChange={onSpineFindingChange}
                                         maxWidth="180px"
                                     />
 
@@ -594,38 +725,89 @@ function AdminComicSubmissionUpdateForComicSubmission() {
                                         opt7Value="nm"
                                         opt7Label="Near Mint"
                                         errorText={errors && errors.coverFinding}
-                                        onChange={(e)=>setCoverFinding(e.target.value)}
+                                        onChange={onCoverFindingChange}
                                         maxWidth="180px"
                                     />
 
                                     <FormRadioField
                                         label="Shows signs of tampering/restoration"
                                         name="showsSignsOfTamperingOrRestoration"
-                                        value={parseInt(showsSignsOfTamperingOrRestoration)}
-                                        opt1Value={2}
+                                        value={showsSignsOfTamperingOrRestoration}
+                                        opt1Value={"2"}
                                         opt1Label="No"
-                                        opt2Value={1}
+                                        opt2Value={"1"}
                                         opt2Label="Yes"
                                         errorText={errors && errors.showsSignsOfTamperingOrRestoration}
-                                        onChange={(e)=>setShowsSignsOfTamperingOrRestoration(e.target.value)}
+                                        onChange={onShowsSignsOfTamperingOrRestorationChange}
                                         maxWidth="180px"
                                     />
 
-                                    <FormTextareaField
-                                        label="Grading Notes (Optional)"
-                                        name="gradingNotes"
+                                    <FormInputField
+                                        label="Grading Note - Line 1 (Optional)"
+                                        name="gradingNotesLine1"
                                         placeholder="Text input"
-                                        value={gradingNotes}
-                                        errorText={errors && errors.gradingNotes}
+                                        value={gradingNotesLine1}
+                                        errorText={errors && errors.gradingNotesLine1}
                                         helpText=""
-                                        onChange={(e)=>setGradingNotes(e.target.value)}
+                                        onChange={onGradingNotesLine1Change}
                                         isRequired={true}
                                         maxWidth="280px"
-                                        helpText={"Max 638 characters"}
-                                        rows={4}
+                                        helpText={"Max 17 characters"}
                                     />
 
-                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faBalanceScale} />&nbsp;Grading</p>
+                                    <FormInputField
+                                        label="Grading Note - Line 2 (Optional)"
+                                        name="gradingNotesLine2"
+                                        placeholder="Text input"
+                                        value={gradingNotesLine2}
+                                        errorText={errors && errors.gradingNotesLine2}
+                                        helpText=""
+                                        onChange={onGradingNotesLine2Change}
+                                        isRequired={true}
+                                        maxWidth="280px"
+                                        helpText={"Max 17 characters"}
+                                    />
+
+                                    <FormInputField
+                                        label="Grading Note - Line 3 (Optional)"
+                                        name="gradingNotesLine3"
+                                        placeholder="Text input"
+                                        value={gradingNotesLine3}
+                                        errorText={errors && errors.gradingNotesLine3}
+                                        helpText=""
+                                        onChange={onGradingNotesLine3Change}
+                                        isRequired={true}
+                                        maxWidth="280px"
+                                        helpText={"Max 17 characters"}
+                                    />
+
+                                    <FormInputField
+                                        label="Grading Note - Line 4 (Optional)"
+                                        name="gradingNotesLine4"
+                                        placeholder="Text input"
+                                        value={gradingNotesLine4}
+                                        errorText={errors && errors.gradingNotesLine4}
+                                        helpText=""
+                                        onChange={onGradingNotesLine4Change}
+                                        isRequired={true}
+                                        maxWidth="280px"
+                                        helpText={"Max 17 characters"}
+                                    />
+
+                                    <FormInputField
+                                        label="Grading Note - Line 5 (Optional)"
+                                        name="gradingNotesLine5"
+                                        placeholder="Text input"
+                                        value={gradingNotesLine5}
+                                        errorText={errors && errors.gradingNotesLine5}
+                                        helpText=""
+                                        onChange={onGradingNotesLine5Change}
+                                        isRequired={true}
+                                        maxWidth="280px"
+                                        helpText={"Max 17 characters"}
+                                    />
+
+                                    <p class="subtitle is-3">Grading</p>
                                     <hr />
 
                                     <FormRadioField
@@ -639,7 +821,7 @@ function AdminComicSubmissionUpdateForComicSubmission() {
                                         opt3Value={3}
                                         opt3Label="CPS Percentage (5%-100%)"
                                         errorText={errors && errors.gradingScale}
-                                        onChange={(e)=>setGradingScale(parseInt(e.target.value))}
+                                        onChange={onGradingScaleChange}
                                         maxWidth="180px"
                                     />
 
@@ -672,7 +854,7 @@ function AdminComicSubmissionUpdateForComicSubmission() {
                                         selectedValue={overallNumberGrade}
                                         errorText={errors && errors.overallNumberGrade}
                                         helpText=""
-                                        onChange={(e)=>setOverallNumberGrade(e.target.value)}
+                                        onChange={onOverallNumberGradeChange}
                                         options={OVERALL_NUMBER_GRADE_OPTIONS}
                                     />}
                                     {gradingScale === 3 && <FormSelectField
@@ -682,62 +864,17 @@ function AdminComicSubmissionUpdateForComicSubmission() {
                                         selectedValue={cpsPercentageGrade}
                                         errorText={errors && errors.cpsPercentageGrade}
                                         helpText=""
-                                        onChange={(e)=>setCpsPercentageGrade(e.target.value)}
+                                        onChange={onCpsPercentageGradeChange}
                                         options={CPS_PERCENTAGE_GRADE_OPTIONS}
                                     />}
-
-                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faCogs} />&nbsp;Settings</p>
-                                    <hr />
-
-                                    <FormSelectField
-                                        label="Organization ID"
-                                        name="organizationID"
-                                        placeholder="Pick"
-                                        selectedValue={organizationID}
-                                        errorText={errors && errors.organizationID}
-                                        helpText="Pick the organization this user belongs to and will be limited by"
-                                        isRequired={true}
-                                        onChange={(e)=>setOrganizationID(e.target.value)}
-                                        options={organizationSelectOptions}
-                                        disabled={organizationSelectOptions.length === 0}
-                                    />
-                                    <FormRadioField
-                                        label="Service Type"
-                                        name="role"
-                                        value={serviceType}
-                                        opt1Value={1}
-                                        opt1Label="Pre-Screening Service"
-                                        opt2Value={2}
-                                        opt2Label="CPS Pedigree Service"
-                                        errorText={errors && errors.serviceType}
-                                        onChange={(e)=>setServiceType(parseInt(e.target.value))}
-                                        maxWidth="180px"
-                                    />
-                                    <FormRadioField
-                                        label="Status"
-                                        name="status"
-                                        value={status}
-                                        opt1Value={1}
-                                        opt1Label="Pending"
-                                        opt2Value={2}
-                                        opt2Label="Active"
-                                        opt3Value={3}
-                                        opt3Label="Error"
-                                        opt4Value={4}
-                                        opt4Label="Archived"
-                                        errorText={errors && errors.status}
-                                        onChange={(e)=>setStatus(parseInt(e.target.value))}
-                                        maxWidth="180px"
-                                    />
-
                                     <div class="columns pt-5">
                                         <div class="column is-half">
-                                            <Link to={`/admin/submissions/comic/${id}`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                            <Link to={`/admin/submissions/comic/${id}`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link to={`/submissions/comic/${id}`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link to={`/submissions/comic/${id}`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                         </div>
                                         <div class="column is-half has-text-right">
-                                            <button class="button is-medium is-primary is-hidden-touch" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
-                                            <button class="button is-medium is-primary is-fullwidth is-hidden-desktop" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
+                                            <button class="button is-primary is-medium is-hidden-touch" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
+                                            <button class="button is-primary is-medium is-fullwidth is-hidden-desktop" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
                                         </div>
                                     </div>
 
@@ -751,4 +888,4 @@ function AdminComicSubmissionUpdateForComicSubmission() {
     );
 }
 
-export default AdminComicSubmissionUpdateForComicSubmission;
+export default RetailerComicSubmissionUpdateForCustomer;

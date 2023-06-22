@@ -5,9 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTasks, faTachometer, faPlus, faTimesCircle, faCheckCircle, faGauge, faUsers, faEye, faCube, faMagnifyingGlass, faBalanceScale, faUser, faCogs, faBookOpen, faNewspaper, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 
-import FormErrorBox from "../../Element/FormErrorBox";
-import PageLoadingContent from "../../Element/PageLoadingContent";
-import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
+import FormErrorBox from "../../../Element/FormErrorBox";
+import PageLoadingContent from "../../../Element/PageLoadingContent";
+import { topAlertMessageState, topAlertStatusState } from "../../../../AppState";
 
 
 function AdminComicSubmissionAddStep2() {

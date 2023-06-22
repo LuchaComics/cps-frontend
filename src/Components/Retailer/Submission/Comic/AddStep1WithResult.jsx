@@ -7,21 +7,21 @@ import Select from 'react-select'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
 
-import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { getComicSubmissionDetailAPI } from "../../../API/ComicSubmission";
-import { getUserListAPI } from "../../../API/user";
-import FormErrorBox from "../../Element/FormErrorBox";
-import FormInputField from "../../Element/FormInputField";
-import FormTextareaField from "../../Element/FormTextareaField";
-import FormRadioField from "../../Element/FormRadioField";
-import FormMultiSelectField from "../../Element/FormMultiSelectField";
-import FormSelectField from "../../Element/FormSelectField";
-import FormInputFieldWithButton from "../../Element/FormInputFieldWithButton";
-import PageLoadingContent from "../../Element/PageLoadingContent";
-import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
+import useLocalStorage from "../../../../Hooks/useLocalStorage";
+import { getComicSubmissionDetailAPI } from "../../../../API/ComicSubmission";
+import { getCustomerListAPI } from "../../../../API/customer";
+import FormErrorBox from "../../../Element/FormErrorBox";
+import FormInputField from "../../../Element/FormInputField";
+import FormTextareaField from "../../../Element/FormTextareaField";
+import FormRadioField from "../../../Element/FormRadioField";
+import FormMultiSelectField from "../../../Element/FormMultiSelectField";
+import FormSelectField from "../../../Element/FormSelectField";
+import FormInputFieldWithButton from "../../../Element/FormInputFieldWithButton";
+import PageLoadingContent from "../../../Element/PageLoadingContent";
+import { topAlertMessageState, topAlertStatusState } from "../../../../AppState";
 
 
-function AdminComicSubmissionAddStep1WithResult() {
+function RetailerComicSubmissionAddStep1WithResult() {
     ////
     //// URL Parameters.
     ////
@@ -42,7 +42,7 @@ function AdminComicSubmissionAddStep1WithResult() {
     const [errors, setErrors] = useState({});
     const [isFetching, setFetching] = useState(false);
     const [forceURL, setForceURL] = useState("");
-    const [users, setUsers] = useState({});
+    const [customers, setCustomers] = useState({});
     const [showCancelWarning, setShowCancelWarning] = useState(false);
 
     ////
@@ -53,15 +53,15 @@ function AdminComicSubmissionAddStep1WithResult() {
     //// API.
     ////
 
-    function onUserListSuccess(response){
-        console.log("onUserListSuccess: Starting...");
+    function onCustomerListSuccess(response){
+        console.log("onCustomerListSuccess: Starting...");
         if (response.results !== null) {
-            setUsers(response);
+            setCustomers(response);
         }
     }
 
-    function onUserListError(apiErr) {
-        console.log("onUserListError: Starting...");
+    function onCustomerListError(apiErr) {
+        console.log("onCustomerListError: Starting...");
         setErrors(apiErr);
 
         // The following code will cause the screen to scroll to the top of
@@ -71,8 +71,8 @@ function AdminComicSubmissionAddStep1WithResult() {
         scroll.scrollToTop();
     }
 
-    function onUserListDone() {
-        console.log("onUserListDone: Starting...");
+    function onCustomerListDone() {
+        console.log("onCustomerListDone: Starting...");
         setFetching(false);
     }
 
@@ -122,11 +122,11 @@ function AdminComicSubmissionAddStep1WithResult() {
             }
 
             // Submit the list request to our backend.
-            getUserListAPI(
+            getCustomerListAPI(
                 queryParams,
-                onUserListSuccess,
-                onUserListError,
-                onUserListDone
+                onCustomerListSuccess,
+                onCustomerListError,
+                onCustomerListDone
             );
         }
 
@@ -147,8 +147,8 @@ function AdminComicSubmissionAddStep1WithResult() {
                 <section class="section">
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
-                            <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
-                            <li class=""><Link to="/admin/submissions/comics" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
+                            <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
+                            <li class=""><Link to="/submissions/comics" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
                             <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
                         </ul>
                     </nav>
@@ -172,7 +172,7 @@ function AdminComicSubmissionAddStep1WithResult() {
                         </div>
 
                         <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comic Submission</p>
-                        <p class="pb-4 has-text-grey">Please select the user from the following results.</p>
+                        <p class="pb-4 has-text-grey">Please select the customer from the following results.</p>
                         <FormErrorBox errors={errors} />
 
                         <div class="container pb-5">
@@ -184,27 +184,24 @@ function AdminComicSubmissionAddStep1WithResult() {
                                 <PageLoadingContent displayMessage={"Loading..."} />
                                 :
                                 <>
-                                    {users && users.results && users.results.length > 0
+                                    {customers && customers.results && customers.results.length > 0
                                         ?
                                         <div class="columns">
-                                            {users.results.map(function(user, i){
-                                                return <div class="column is-one-quarter" key={user.id}>
-                                                    <span className="has-text-grey-light is-size-7">
-                                                        User found via <a href={`/admin/organization/${user.organizationId}`} target="_blank" rel="noreferrer">{user.organizationName}&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></a>
-                                                    </span>
+                                            {customers.results.map(function(customer, i){
+                                                return <div class="column is-one-quarter" key={customer.id}>
                                                     <article class="message is-primary">
                                                         <div class="message-body">
                                                             <p>
-                                                                <Link to={`/admin/user/${user.id}`} target="_blank" rel="noreferrer">
-                                                                    <b>{user.name}</b>&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
+                                                                <Link to={`/customer/${customer.id}`} target="_blank" rel="noreferrer">
+                                                                    <b>{customer.name}</b>&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
                                                                 </Link>
                                                             </p>
-                                                            <p>{user.country}&nbsp;{user.region}&nbsp;{user.city}</p>
-                                                            <p>{user.addressLine1}, {user.postalCode}</p>
-                                                            <p><a href={`mailto:${user.email}`}>{user.email}</a></p>
-                                                            <p><a href={`tel:${user.phone}`}>{user.phone}</a></p>
+                                                            <p>{customer.country}&nbsp;{customer.region}&nbsp;{customer.city}</p>
+                                                            <p>{customer.addressLine1}, {customer.postalCode}</p>
+                                                            <p><a href={`mailto:${customer.email}`}>{customer.email}</a></p>
+                                                            <p><a href={`tel:${customer.phone}`}>{customer.phone}</a></p>
                                                             <br />
-                                                            <Link class="button is-medium is-primary" to={`/admin/submissions/comics/pick-type-for-add?user_id=${user.id}`}>
+                                                            <Link class="button is-medium is-primary" to={`/submissions/comics/add?customer_id=${customer.id}`}>
                                                                 <FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Pick
                                                             </Link>
                                                         </div>
@@ -216,10 +213,10 @@ function AdminComicSubmissionAddStep1WithResult() {
                                         <section class="hero is-medium has-background-white-ter">
                                           <div class="hero-body">
                                             <p class="title">
-                                                <FontAwesomeIcon className="fas" icon={faTable} />&nbsp;No Users
+                                                <FontAwesomeIcon className="fas" icon={faTable} />&nbsp;No Customers
                                             </p>
                                             <p class="subtitle">
-                                                No results were found in the search. <Link class="is-medium is-warning" to="/admin/customers/add" target="_blank" rel="noreferrer">Click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link> to create a new customer or <Link class="is-medium is-danger" to="/admin/submissions/comics/pick-type-for-add">click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link> to continue without a customer.
+                                                No results were found in the search. <Link class="is-medium is-warning" to="/customers/add" target="_blank" rel="noreferrer">Click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link> to create a new customer or <Link class="is-medium is-danger" to="/submissions/pick-type-for-add">click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link> to continue without a customer.
                                             </p>
                                           </div>
                                         </section>
@@ -230,8 +227,8 @@ function AdminComicSubmissionAddStep1WithResult() {
 
                         <div class="columns pt-5">
                             <div class="column is-half">
-                                <Link class="button is-medium is-hidden-touch" to="/admin/submissions/comics/add/search"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                <Link class="button is-medium is-fullwidth is-hidden-desktop" to="/admin/submissions/comics/add/search"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                <Link class="button is-medium is-hidden-touch" to="/submissions/comics/add/search"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                <Link class="button is-medium is-fullwidth is-hidden-desktop" to="/submissions/comics/add/search"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                             </div>
                             <div class="column is-half has-text-right">
                                 {/*
@@ -248,4 +245,4 @@ function AdminComicSubmissionAddStep1WithResult() {
     );
 }
 
-export default AdminComicSubmissionAddStep1WithResult;
+export default RetailerComicSubmissionAddStep1WithResult;

@@ -7,20 +7,20 @@ import Select from 'react-select'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
 
-import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { getComicSubmissionDetailAPI } from "../../../API/ComicSubmission";
-import { getCustomerListAPI } from "../../../API/customer";
-import FormErrorBox from "../../Element/FormErrorBox";
-import FormInputField from "../../Element/FormInputField";
-import FormTextareaField from "../../Element/FormTextareaField";
-import FormRadioField from "../../Element/FormRadioField";
-import FormMultiSelectField from "../../Element/FormMultiSelectField";
-import FormSelectField from "../../Element/FormSelectField";
-import FormInputFieldWithButton from "../../Element/FormInputFieldWithButton";
-import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
+import useLocalStorage from "../../../../Hooks/useLocalStorage";
+import { getComicSubmissionDetailAPI } from "../../../../API/ComicSubmission";
+import { getCustomerListAPI } from "../../../../API/customer";
+import FormErrorBox from "../../../Element/FormErrorBox";
+import FormInputField from "../../../Element/FormInputField";
+import FormTextareaField from "../../../Element/FormTextareaField";
+import FormRadioField from "../../../Element/FormRadioField";
+import FormMultiSelectField from "../../../Element/FormMultiSelectField";
+import FormSelectField from "../../../Element/FormSelectField";
+import FormInputFieldWithButton from "../../../Element/FormInputFieldWithButton";
+import { topAlertMessageState, topAlertStatusState } from "../../../../AppState";
 
 
-function RetailerComicSubmissionUpdatePickCustomerWithSearch() {
+function AdminComicSubmissionUpdatePickCustomerWithSearch() {
     ////
     //// URL Parameters.
     ////
@@ -53,29 +53,9 @@ function RetailerComicSubmissionUpdatePickCustomerWithSearch() {
     //// Event handling.
     ////
 
-    const onSearchKeywordChange = (e) => {
-        setSearchKeyword(e.target.value);
-    }
-
-    function onEmailChange(e) {
-        setEmail(e.target.value);
-    }
-
-    function onPhoneChange(e) {
-        setPhone(e.target.value);
-    }
-
-    function onFirstNameChange(e) {
-        setFirstName(e.target.value);
-    }
-
-    function onLastNameChange(e) {
-        setLastName(e.target.value);
-    }
-
     const onSearchButtonClicked = (e) => {
         console.log("searchButtonClick: Starting...");
-        let aURL = "/submissions/comic/" + id + "/cust/results";
+        let aURL = "/admin/submissions/comic/" + id + "/cust/results";
         if (searchKeyword !=="") {
             aURL += "?search="+searchKeyword;
         }
@@ -168,9 +148,9 @@ function RetailerComicSubmissionUpdatePickCustomerWithSearch() {
                 <section class="section">
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
-                            <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
-                            <li class=""><Link to="/submissions/comics" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
-                            <li class=""><Link to={`/submissions/comic/${id}/cust`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Details</Link></li>
+                            <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
+                            <li class=""><Link to="/admin/submissions/comics" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
+                            <li class=""><Link to={`/admin/submissions/comic/${id}/cust`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Details</Link></li>
                             <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update (Customer)</Link></li>
                         </ul>
                     </nav>
@@ -190,7 +170,7 @@ function RetailerComicSubmissionUpdatePickCustomerWithSearch() {
                                 value={searchKeyword}
                                 errorText={errors && errors.searchKeyword}
                                 helpText=""
-                                onChange={onSearchKeywordChange}
+                                onChange={(e)=>setSearchKeyword(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -207,7 +187,7 @@ function RetailerComicSubmissionUpdatePickCustomerWithSearch() {
                                 value={firstName}
                                 errorText={errors && errors.firstName}
                                 helpText=""
-                                onChange={onFirstNameChange}
+                                onChange={(e)=>setFirstName(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -219,7 +199,7 @@ function RetailerComicSubmissionUpdatePickCustomerWithSearch() {
                                 value={lastName}
                                 errorText={errors && errors.lastName}
                                 helpText=""
-                                onChange={onLastNameChange}
+                                onChange={(e)=>setLastName(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -231,7 +211,7 @@ function RetailerComicSubmissionUpdatePickCustomerWithSearch() {
                                 value={email}
                                 errorText={errors && errors.email}
                                 helpText=""
-                                onChange={onEmailChange}
+                                onChange={(e)=>setEmail(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -243,7 +223,7 @@ function RetailerComicSubmissionUpdatePickCustomerWithSearch() {
                                 value={phone}
                                 errorText={errors && errors.phone}
                                 helpText=""
-                                onChange={onPhoneChange}
+                                onChange={(e)=>setPhone(e.target.value)}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -251,8 +231,8 @@ function RetailerComicSubmissionUpdatePickCustomerWithSearch() {
 
                         <div class="columns pt-5">
                             <div class="column is-half">
-                                <Link to={`/submissions/comic/${id}/cust`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                <Link to={`/submissions/comic/${id}/cust`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                <Link to={`/admin/submissions/comic/${id}/cust`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                <Link to={`/admin/submissions/comic/${id}/cust`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                             </div>
                             <div class="column is-half has-text-right">
                                 <button class="button is-medium is-primary is-hidden-touch" onClick={onSearchButtonClicked}><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search</button>
@@ -267,4 +247,4 @@ function RetailerComicSubmissionUpdatePickCustomerWithSearch() {
     );
 }
 
-export default RetailerComicSubmissionUpdatePickCustomerWithSearch;
+export default AdminComicSubmissionUpdatePickCustomerWithSearch;

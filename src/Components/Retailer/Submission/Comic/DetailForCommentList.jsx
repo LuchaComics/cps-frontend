@@ -8,21 +8,28 @@ import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
 import { DateTime } from "luxon";
 
-import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { getComicSubmissionDetailAPI, postComicSubmissionCreateCommentOperationAPI } from "../../../API/ComicSubmission";
-import FormErrorBox from "../../Element/FormErrorBox";
-import FormInputField from "../../Element/FormInputField";
-import FormTextareaField from "../../Element/FormTextareaField";
-import FormRadioField from "../../Element/FormRadioField";
-import FormMultiSelectField from "../../Element/FormMultiSelectField";
-import FormCheckboxField from "../../Element/FormCheckboxField";
-import FormSelectField from "../../Element/FormSelectField";
-import FormDateField from "../../Element/FormDateField";
-import PageLoadingContent from "../../Element/PageLoadingContent";
-import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
+import useLocalStorage from "../../../../Hooks/useLocalStorage";
+import { getComicSubmissionDetailAPI, postComicSubmissionCreateCommentOperationAPI } from "../../../../API/ComicSubmission";
+import FormErrorBox from "../../../Element/FormErrorBox";
+import FormInputField from "../../../Element/FormInputField";
+import FormTextareaField from "../../../Element/FormTextareaField";
+import FormRadioField from "../../../Element/FormRadioField";
+import FormMultiSelectField from "../../../Element/FormMultiSelectField";
+import FormCheckboxField from "../../../Element/FormCheckboxField";
+import FormSelectField from "../../../Element/FormSelectField";
+import FormDateField from "../../../Element/FormDateField";
+import PageLoadingContent from "../../../Element/PageLoadingContent";
+import {
+    FINDING_OPTIONS,
+    OVERALL_NUMBER_GRADE_OPTIONS,
+    PUBLISHER_NAME_OPTIONS,
+    CPS_PERCENTAGE_GRADE_OPTIONS,
+    HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS
+} from "../../../../Constants/FieldOptions";
+import { topAlertMessageState, topAlertStatusState } from "../../../../AppState";
 
 
-function AdminComicSubmissionDetailForCommentList() {
+function RetailerComicSubmissionDetailForCommentList() {
     ////
     //// URL Parameters.
     ////
@@ -181,7 +188,7 @@ function AdminComicSubmissionDetailForCommentList() {
                             <br /><br />
                             <Link to={`/submissions/comic/${submission.id}/edit-customer`} class="button is-primary" disabled={true}>Edit Current Customer</Link> */}
                         <br /><br />
-                        <Link to={`/admin/submissions/comic/${submission.id}/customer/search`} class="button is-primary">Pick a Different Customer</Link>
+                        <Link to={`/submissions/comic/${submission.id}/customer/search`} class="button is-primary">Pick a Different Customer</Link>
                     </section>
                     <footer class="modal-card-foot">
                         <button class="button" onClick={(e)=>setShowCustomerEditOptions(false)}>Close</button>
@@ -193,8 +200,8 @@ function AdminComicSubmissionDetailForCommentList() {
                 <section class="section">
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
-                            <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
-                            <li class=""><Link to="/admin/submissions/comics" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
+                            <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
+                            <li class=""><Link to="/submissions/comics" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
                             <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail (Comments)</Link></li>
                         </ul>
                     </nav>
@@ -211,16 +218,16 @@ function AdminComicSubmissionDetailForCommentList() {
                                     <div class="tabs is-medium">
                                       <ul>
                                         <li>
-                                            <Link to={`/admin/submissions/comic/${id}`}>Detail</Link>
+                                            <Link to={`/submissions/comic/${id}`}>Detail</Link>
                                         </li>
                                         <li>
-                                            <Link to={`/admin/submissions/comic/${id}/cust`}>Customer</Link>
+                                            <Link to={`/submissions/comic/${id}/cust`}>Customer</Link>
                                         </li>
                                         <li class="is-active">
                                             <Link><b>Comments</b></Link>
                                         </li>
                                         <li>
-                                            <Link to={`/admin/submissions/comic/${id}/file`}>File</Link>
+                                            <Link to={`/submissions/comic/${id}/file`}>File</Link>
                                         </li>
                                       </ul>
                                     </div>
@@ -242,29 +249,30 @@ function AdminComicSubmissionDetailForCommentList() {
                                     </>}
 
                                     <div class="mt-4 block has-background-white-ter p-3">
-                                            <FormTextareaField
-                                                label="Write your comment here:"
-                                                name="content"
-                                                placeholder="Text input"
-                                                value={content}
-                                                errorText={errors && errors.content}
-                                                helpText=""
-                                                onChange={(e)=>setContent(e.target.value)}
-                                                isRequired={true}
-                                                maxWidth="180px"
-                                            />
-                                        </div>
+                                        <FormTextareaField
+                                            label="Write your comment here:"
+                                            name="content"
+                                            placeholder="Text input"
+                                            value={content}
+                                            errorText={errors && errors.content}
+                                            helpText=""
+                                            onChange={(e)=>setContent(e.target.value)}
+                                            isRequired={true}
+                                            maxWidth="180px"
+                                        />
+                                    </div>
 
                                     <div class="columns pt-4">
                                         <div class="column is-half">
-                                            <Link to={`/admin/submissions/comics`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                            <Link to={`/admin/submissions/comics`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link to={`/submissions/comics`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link to={`/submissions/comics`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                         </div>
                                         <div class="column is-half has-text-right">
                                             <button onClick={onSubmitClick} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comment</button>
                                             <button onClick={onSubmitClick} class="button is-medium is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comment</button>
                                         </div>
                                     </div>
+
 
                                 </div>}
                             </>
@@ -276,4 +284,4 @@ function AdminComicSubmissionDetailForCommentList() {
     );
 }
 
-export default AdminComicSubmissionDetailForCommentList;
+export default RetailerComicSubmissionDetailForCommentList;
