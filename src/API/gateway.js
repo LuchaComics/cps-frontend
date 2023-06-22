@@ -1,4 +1,4 @@
-import getCustomAxios from "../Helpers/customAxios";
+import axios from 'axios';
 import { camelizeKeys, decamelizeKeys } from 'humps';
 import {
     CPS_LOGIN_API_ENDPOINT,
@@ -9,19 +9,25 @@ import {
     CPS_FORGOT_PASSWORD_API_ENDPOINT,
     CPS_PASSWORD_RESET_API_ENDPOINT
 } from "../Constants/API";
-
+import { getAPIBaseURL } from '../Helpers/urlUtility';
 import {
     setAccessTokenInLocalStorage,
     setRefreshTokenInLocalStorage
 } from '../Helpers/jwtUtility';
 
 export function postLoginAPI(data, onSuccessCallback, onErrorCallback, onDoneCallback) {
-    const axios = getCustomAxios();
+    const customAxios = axios.create({
+        baseURL: getAPIBaseURL(),
+        headers: {
+            'Content-Type': 'application/json;',
+            'Accept': 'application/json',
+        },
+    });
 
     // To Snake-case for API from camel-case in React.
     let decamelizedData = decamelizeKeys(data);
 
-    axios.post(CPS_LOGIN_API_ENDPOINT, decamelizedData).then((successResponse) => {
+    customAxios.post(CPS_LOGIN_API_ENDPOINT, decamelizedData).then((successResponse) => {
         const responseData = successResponse.data;
 
         // Snake-case from API to camel-case for React.
@@ -59,9 +65,14 @@ export function postLoginAPI(data, onSuccessCallback, onErrorCallback, onDoneCal
     }).then(onDoneCallback);
 }
 
-
 export function postRegisterAPI(data, onSuccessCallback, onErrorCallback, onDoneCallback) {
-    const axios = getCustomAxios();
+    const customAxios = axios.create({
+        baseURL: getAPIBaseURL(),
+        headers: {
+            'Content-Type': 'application/json;',
+            'Accept': 'application/json',
+        },
+    });
 
     // To Snake-case for API from camel-case in React.
     let decamelizedData = decamelizeKeys(data);
@@ -71,7 +82,7 @@ export function postRegisterAPI(data, onSuccessCallback, onErrorCallback, onDone
     decamelizedData.address_line_1 = data.AddressLine1;
     decamelizedData.address_line_2= data.AddressLine2;
 
-    axios.post(CPS_REGISTER_API_ENDPOINT, decamelizedData).then((successResponse) => {
+    customAxios.post(CPS_REGISTER_API_ENDPOINT, decamelizedData).then((successResponse) => {
         const responseData = successResponse.data;
 
         // Snake-case from API to camel-case for React.
@@ -114,8 +125,15 @@ export function postRegisterAPI(data, onSuccessCallback, onErrorCallback, onDone
 }
 
 export function getVersionAPI(onSuccessCallback, onErrorCallback, onDoneCallback) {
-    const axios = getCustomAxios();
-    axios.get(CPS_VERSION_ENDPOINT).then((successResponse) => {
+    const customAxios = axios.create({
+        baseURL: getAPIBaseURL(),
+        headers: {
+            'Content-Type': 'application/json;',
+            'Accept': 'application/json',
+        },
+    });
+
+    customAxios.get(CPS_VERSION_ENDPOINT).then((successResponse) => {
         const responseData = successResponse.data;
 
         // Snake-case from API to camel-case for React.
@@ -130,11 +148,18 @@ export function getVersionAPI(onSuccessCallback, onErrorCallback, onDoneCallback
 }
 
 export function postEmailVerificationAPI(verificationCode, onSuccessCallback, onErrorCallback, onDoneCallback) {
-    const axios = getCustomAxios();
+    const customAxios = axios.create({
+        baseURL: getAPIBaseURL(),
+        headers: {
+            'Content-Type': 'application/json;',
+            'Accept': 'application/json',
+        },
+    });
+
     let data = {
         code: verificationCode,
     };
-    axios.post(CPS_EMAIL_VERIFICATION_API_ENDPOINT, data).then((successResponse) => {
+    customAxios.post(CPS_EMAIL_VERIFICATION_API_ENDPOINT, data).then((successResponse) => {
         onSuccessCallback(null);
     }).catch( (exception) => {
         let responseData = null;
@@ -162,9 +187,16 @@ export function postEmailVerificationAPI(verificationCode, onSuccessCallback, on
 }
 
 export function postLogoutAPI(onSuccessCallback, onErrorCallback, onDoneCallback) {
-    const axios = getCustomAxios();
+    const customAxios = axios.create({
+        baseURL: getAPIBaseURL(),
+        headers: {
+            'Content-Type': 'application/json;',
+            'Accept': 'application/json',
+        },
+    });
+
     let data = {};
-    axios.post(CPS_LOGOUT_API_ENDPOINT, data).then((successResponse) => {
+    customAxios.post(CPS_LOGOUT_API_ENDPOINT, data).then((successResponse) => {
         onSuccessCallback(null);
     }).catch( (exception) => {
         let errors = camelizeKeys(exception);
@@ -173,9 +205,15 @@ export function postLogoutAPI(onSuccessCallback, onErrorCallback, onDoneCallback
 }
 
 export function postForgotPasswordAPI(email, onSuccessCallback, onErrorCallback, onDoneCallback) {
-    const axios = getCustomAxios();
+    const customAxios = axios.create({
+        baseURL: getAPIBaseURL(),
+        headers: {
+            'Content-Type': 'application/json;',
+            'Accept': 'application/json',
+        },
+    });
 
-    axios.post(CPS_FORGOT_PASSWORD_API_ENDPOINT, {email: email}).then((successResponse) => {
+    customAxios.post(CPS_FORGOT_PASSWORD_API_ENDPOINT, {email: email}).then((successResponse) => {
         console.log("postForgotPasswordAPI: Success")
         onSuccessCallback(); // Return the callback data.
     }).catch( (exception) => {
@@ -204,9 +242,15 @@ export function postForgotPasswordAPI(email, onSuccessCallback, onErrorCallback,
 }
 
 export function postPasswordResetAPI(verificationCode, password, passwordRepeat, onSuccessCallback, onErrorCallback, onDoneCallback) {
-    const axios = getCustomAxios();
+    const customAxios = axios.create({
+        baseURL: getAPIBaseURL(),
+        headers: {
+            'Content-Type': 'application/json;',
+            'Accept': 'application/json',
+        },
+    });
 
-    axios.post(CPS_PASSWORD_RESET_API_ENDPOINT, {verification_code: verificationCode, password: password, password_repeated: passwordRepeat}).then((successResponse) => {
+    customAxios.post(CPS_PASSWORD_RESET_API_ENDPOINT, {verification_code: verificationCode, password: password, password_repeated: passwordRepeat}).then((successResponse) => {
         console.log("postForgotPasswordAPI: Success")
         onSuccessCallback(); // Return the callback data.
     }).catch( (exception) => {
