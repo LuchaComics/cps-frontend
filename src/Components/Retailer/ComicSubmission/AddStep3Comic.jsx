@@ -156,7 +156,7 @@ function RetailerComicSubmissionAddStep3() {
         }
 
         // Redirect the user to a new page.
-        setForceURL("/comic-submissions/add/"+response.id+"/confirmation"+urlParams);
+        setForceURL("/submissions/comics/add/"+response.id+"/confirmation"+urlParams);
     }
 
     function onComicSubmissionCreateError(apiErr) {
@@ -219,7 +219,7 @@ function RetailerComicSubmissionAddStep3() {
                            ?
                             <ul>
                                 <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
-                                <li class=""><Link to="/comic-submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
+                                <li class=""><Link to="/submissions/comics" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
                                 <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
                             </ul>
                             :
@@ -246,7 +246,7 @@ function RetailerComicSubmissionAddStep3() {
                                 <footer class="modal-card-foot">
                                     {customerName === null
                                         ?
-                                        <Link class="button is-medium is-success" to={`/comic-submissions/add/search`}>Yes</Link>
+                                        <Link class="button is-medium is-success" to={`/submissions/comics/add/search`}>Yes</Link>
                                         :
                                         <Link class="button is-medium is-success" to={`/customer/${customerID}/sub`}>Yes</Link>
                                     }

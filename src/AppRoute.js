@@ -101,20 +101,21 @@ function AppRoute() {
                                     <Route exact path="/admin/organization/:id/comments" element={<AdminOrganizationDetailForCommentList/>}/>
                                     <Route exact path="/admin/registry" element={<AdminRegistrySearch/>}/>
                                     <Route exact path="/admin/registry/:cpsn" element={<AdminRegistryResult/>}/>
-                                    <Route exact path="/admin/comic-submissions" element={<AdminComicSubmissionList/>}/>
-                                    <Route exact path="/admin/comic-submissions/add/search" element={<AdminComicSubmissionAddStep1WithSearch/>}/>
-                                    <Route exact path="/admin/comic-submissions/add/results" element={<AdminComicSubmissionAddStep1WithResult/>}/>
-                                    <Route exact path="/admin/comic-submissions/pick-type-for-add" element={<AdminComicSubmissionAddStep2/>}/>
-                                    <Route exact path="/admin/comic-submissions/add-comic" element={<AdminComicSubmissionAddStep3Comic/>}/>
-                                    <Route exact path="/admin/comic-submissions/add-card" element={<NotImplementedError/>}/>
-                                    <Route exact path="/admin/comic-submissions/add/:id/confirmation" element={<AdminComicSubmissionAddStep4/>}/>
-                                    <Route exact path="/admin/comic-submission/:id" element={<AdminComicSubmissionDetail/>}/>
-                                    <Route exact path="/admin/comic-submission/:id/edit" element={<AdminComicSubmissionUpdateForComicSubmission/>}/>
-                                    <Route exact path="/admin/comic-submission/:id/cust/search" element={<AdminComicSubmissionUpdatePickCustomerWithSearch/>}/>
-                                    <Route exact path="/admin/comic-submission/:id/cust/results" element={<AdminComicSubmissionUpdatePickCustomerWithResult/>}/>
-                                    <Route exact path="/admin/comic-submission/:id/comments" element={<AdminComicSubmissionDetailForCommentList/>}/>
-                                    <Route exact path="/admin/comic-submission/:id/cust" element={<AdminComicSubmissionDetailForCustomer/>}/>
-                                    <Route exact path="/admin/comic-submission/:id/file" element={<AdminComicSubmissionDetailForPDFFile/>}/>
+                                    <Route exact path="/admin/submissions/comics" element={<AdminComicSubmissionList/>}/>
+                                    <Route exact path="/admin/submissions/comics/add/search" element={<AdminComicSubmissionAddStep1WithSearch/>}/>
+                                    <Route exact path="/admin/submissions/comics/add/results" element={<AdminComicSubmissionAddStep1WithResult/>}/>
+                                    <Route exact path="/admin/submissions/comics/pick-type-for-add" element={<AdminComicSubmissionAddStep2/>}/>
+                                    <Route exact path="/admin/submissions/comics/add-comic" element={<AdminComicSubmissionAddStep3Comic/>}/>
+                                    <Route exact path="/admin/submissions/comics/add-card" element={<NotImplementedError/>}/>
+                                    <Route exact path="/admin/submissions/comics/add/:id/confirmation" element={<AdminComicSubmissionAddStep4/>}/>
+                                    <Route exact path="/admin/submissions/comic/:id" element={<AdminComicSubmissionDetail/>}/>
+                                    <Route exact path="/admin/submissions/comic/:id/edit" element={<AdminComicSubmissionUpdateForComicSubmission/>}/>
+                                    <Route exact path="/admin/submissions/comic/:id/cust/search" element={<AdminComicSubmissionUpdatePickCustomerWithSearch/>}/>
+                                    <Route exact path="/admin/submissions/comic/:id/cust/results" element={<AdminComicSubmissionUpdatePickCustomerWithResult/>}/>
+                                    <Route exact path="/admin/submissions/comic/:id/comments" element={<AdminComicSubmissionDetailForCommentList/>}/>
+                                    <Route exact path="/admin/submissions/comic/:id/cust" element={<AdminComicSubmissionDetailForCustomer/>}/>
+                                    <Route exact path="/admin/submissions/comic/:id/file" element={<AdminComicSubmissionDetailForPDFFile/>}/>
+                                    <Route exact path="/admin/submission/cards" element={<NotImplementedError/>}/>
                                     <Route exact path="/admin/users" element={<AdminUserList/>}/>
                                     <Route exact path="/admin/users/add" element={<AdminUserAdd/>}/>
                                     <Route exact path="/admin/user/:id" element={<AdminUserDetail/>}/>
@@ -125,19 +126,20 @@ function AppRoute() {
                                     <Route exact path="/dashboard" element={<RetailerDashboard/>}/>
                                     <Route exact path="/registry" element={<RetailerRegistrySearch/>}/>
                                     <Route exact path="/registry/:cpsn" element={<RetailerRegistryResult/>}/>
-                                    <Route exact path="/comic-submissions" element={<RetailerComicSubmissionList/>}/>
-                                    <Route exact path="/comic-submissions/add/search" element={<RetailerComicSubmissionAddStep1WithSearch/>}/>
-                                    <Route exact path="/comic-submissions/add/results" element={<RetailerComicSubmissionAddStep1WithResult/>}/>
-                                    <Route exact path="/comic-submissions/pick-type-for-add" element={<RetailerComicSubmissionAddStep2/>}/>
-                                    <Route exact path="/comic-submissions/add-comic" element={<RetailerComicSubmissionAddStep3Comic/>}/>
-                                    <Route exact path="/comic-submissions/add/:id/confirmation" element={<RetailerComicSubmissionAddStep4/>}/>
-                                    <Route exact path="/comic-submission/:id" element={<RetailerComicSubmissionDetail/>}/>
-                                    <Route exact path="/comic-submission/:id/edit" element={<RetailerComicSubmissionUpdateForComicSubmission/>}/>
-                                    <Route exact path="/comic-submission/:id/cust/search" element={<RetailerComicSubmissionUpdatePickCustomerWithSearch/>}/>
-                                    <Route exact path="/comic-submission/:id/cust/results" element={<RetailerComicSubmissionUpdatePickCustomerWithResult/>}/>
-                                    <Route exact path="/comic-submission/:id/comments" element={<RetailerComicSubmissionDetailForCommentList/>}/>
-                                    <Route exact path="/comic-submission/:id/cust" element={<RetailerComicSubmissionDetailForCustomer/>}/>
-                                    <Route exact path="/comic-submission/:id/file" element={<RetailerComicSubmissionDetailForPDFFile/>}/>
+                                    <Route exact path="/submissions/comics" element={<RetailerComicSubmissionList/>}/>
+                                    <Route exact path="/submissions/comics/add/search" element={<RetailerComicSubmissionAddStep1WithSearch/>}/>
+                                    <Route exact path="/submissions/comics/add/results" element={<RetailerComicSubmissionAddStep1WithResult/>}/>
+                                    <Route exact path="/submissions/comics/pick-type-for-add" element={<RetailerComicSubmissionAddStep2/>}/>
+                                    <Route exact path="/submissions/comics/add-comic" element={<RetailerComicSubmissionAddStep3Comic/>}/>
+                                    <Route exact path="/submissions/comics/add/:id/confirmation" element={<RetailerComicSubmissionAddStep4/>}/>
+                                    <Route exact path="/submissions/comic/:id" element={<RetailerComicSubmissionDetail/>}/>
+                                    <Route exact path="/submissions/comic/:id/edit" element={<RetailerComicSubmissionUpdateForComicSubmission/>}/>
+                                    <Route exact path="/submissions/comic/:id/cust/search" element={<RetailerComicSubmissionUpdatePickCustomerWithSearch/>}/>
+                                    <Route exact path="/submissions/comic/:id/cust/results" element={<RetailerComicSubmissionUpdatePickCustomerWithResult/>}/>
+                                    <Route exact path="/submissions/comic/:id/comments" element={<RetailerComicSubmissionDetailForCommentList/>}/>
+                                    <Route exact path="/submissions/comic/:id/cust" element={<RetailerComicSubmissionDetailForCustomer/>}/>
+                                    <Route exact path="/submissions/comic/:id/file" element={<RetailerComicSubmissionDetailForPDFFile/>}/>
+                                    <Route exact path="/submissions/cards" element={<NotImplementedError/>}/>
                                     <Route exact path="/customers" element={<RetailerCustomerList/>}/>
                                     <Route exact path="/customers/add" element={<RetailerCustomerAdd/>}/>
                                     <Route exact path="/customer/:id" element={<RetailerCustomerDetail/>}/>

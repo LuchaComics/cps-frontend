@@ -119,7 +119,7 @@ function RetailerComicSubmissionAddStep4() {
                             ?
                              <ul>
                                  <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
-                                 <li class=""><Link to="/comic-submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
+                                 <li class=""><Link to="/submissions/comics" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
                                  <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
                              </ul>
                              :
@@ -193,8 +193,8 @@ function RetailerComicSubmissionAddStep4() {
                                         {customerName === null
                                             ?
                                             <div class="column is-half has-text-right">
-                                                <Link to={`/comic-submissions`} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to List</Link>
-                                                <Link to={`/comic-submissions`} class="button is-medium is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to List</Link>
+                                                <Link to={`/submissions/comics`} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to List</Link>
+                                                <Link to={`/submissions/comics`} class="button is-medium is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to List</Link>
                                             </div>
                                             :
                                             <div class="column is-half has-text-right">

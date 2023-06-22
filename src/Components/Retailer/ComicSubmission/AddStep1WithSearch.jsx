@@ -55,7 +55,7 @@ function RetailerComicSubmissionAddStep1WithSearch() {
 
     const onSearchButtonClicked = (e) => {
         console.log("searchButtonClick: Starting...");
-        let aURL = "/comic-submissions/add/results";
+        let aURL = "/submissions/comics/add/results";
         if (searchKeyword !=="") {
             aURL += "?search="+searchKeyword;
         }
@@ -149,7 +149,7 @@ function RetailerComicSubmissionAddStep1WithSearch() {
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
                             <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
-                            <li class=""><Link to="/comic-submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
+                            <li class=""><Link to="/submissions/comics" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
                             <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
                         </ul>
                     </nav>
@@ -180,7 +180,7 @@ function RetailerComicSubmissionAddStep1WithSearch() {
                             <hr />
 
                             <Link class="is-medium is-warning" to="/customers/add" target="_blank" rel="noreferrer">Create a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link>&nbsp;&nbsp;<br /><br />
-                            <Link class="is-medium is-danger" to="/comic-submissions/add">Skip selecting a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
+                            <Link class="is-medium is-danger" to="/submissions/comics/add">Skip selecting a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
                         </div>
 
                         <div class="container pb-5">

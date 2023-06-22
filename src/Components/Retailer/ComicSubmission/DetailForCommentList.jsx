@@ -186,9 +186,9 @@ function RetailerComicSubmissionDetailForCommentList() {
 
                         {/*
                             <br /><br />
-                            <Link to={`/comic-submission/${submission.id}/edit-customer`} class="button is-primary" disabled={true}>Edit Current Customer</Link> */}
+                            <Link to={`/submissions/comic/${submission.id}/edit-customer`} class="button is-primary" disabled={true}>Edit Current Customer</Link> */}
                         <br /><br />
-                        <Link to={`/comic-submission/${submission.id}/customer/search`} class="button is-primary">Pick a Different Customer</Link>
+                        <Link to={`/submissions/comic/${submission.id}/customer/search`} class="button is-primary">Pick a Different Customer</Link>
                     </section>
                     <footer class="modal-card-foot">
                         <button class="button" onClick={(e)=>setShowCustomerEditOptions(false)}>Close</button>
@@ -201,7 +201,7 @@ function RetailerComicSubmissionDetailForCommentList() {
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
                             <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
-                            <li class=""><Link to="/comic-submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
+                            <li class=""><Link to="/submissions/comics" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
                             <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail (Comments)</Link></li>
                         </ul>
                     </nav>
@@ -218,16 +218,16 @@ function RetailerComicSubmissionDetailForCommentList() {
                                     <div class="tabs is-medium">
                                       <ul>
                                         <li>
-                                            <Link to={`/comic-submission/${id}`}>Detail</Link>
+                                            <Link to={`/submissions/comic/${id}`}>Detail</Link>
                                         </li>
                                         <li>
-                                            <Link to={`/comic-submission/${id}/cust`}>Customer</Link>
+                                            <Link to={`/submissions/comic/${id}/cust`}>Customer</Link>
                                         </li>
                                         <li class="is-active">
                                             <Link><b>Comments</b></Link>
                                         </li>
                                         <li>
-                                            <Link to={`/comic-submission/${id}/file`}>File</Link>
+                                            <Link to={`/submissions/comic/${id}/file`}>File</Link>
                                         </li>
                                       </ul>
                                     </div>
@@ -264,8 +264,8 @@ function RetailerComicSubmissionDetailForCommentList() {
 
                                     <div class="columns pt-4">
                                         <div class="column is-half">
-                                            <Link to={`/comic-submissions`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                            <Link to={`/comic-submissions`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link to={`/submissions/comics`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link to={`/submissions/comics`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                         </div>
                                         <div class="column is-half has-text-right">
                                             <button onClick={onSubmitClick} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comment</button>

@@ -55,7 +55,7 @@ function AdminComicSubmissionUpdatePickCustomerWithSearch() {
 
     const onSearchButtonClicked = (e) => {
         console.log("searchButtonClick: Starting...");
-        let aURL = "/admin/comic-submission/" + id + "/cust/results";
+        let aURL = "/admin/submissions/comic/" + id + "/cust/results";
         if (searchKeyword !=="") {
             aURL += "?search="+searchKeyword;
         }
@@ -149,8 +149,8 @@ function AdminComicSubmissionUpdatePickCustomerWithSearch() {
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
                             <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
-                            <li class=""><Link to="/admin/comic-submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
-                            <li class=""><Link to={`/admin/comic-submission/${id}/cust`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Details</Link></li>
+                            <li class=""><Link to="/admin/submissions/comics" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
+                            <li class=""><Link to={`/admin/submissions/comic/${id}/cust`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Details</Link></li>
                             <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update (Customer)</Link></li>
                         </ul>
                     </nav>
@@ -231,8 +231,8 @@ function AdminComicSubmissionUpdatePickCustomerWithSearch() {
 
                         <div class="columns pt-5">
                             <div class="column is-half">
-                                <Link to={`/admin/comic-submission/${id}/cust`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                <Link to={`/admin/comic-submission/${id}/cust`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                <Link to={`/admin/submissions/comic/${id}/cust`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                <Link to={`/admin/submissions/comic/${id}/cust`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                             </div>
                             <div class="column is-half has-text-right">
                                 <button class="button is-medium is-primary is-hidden-touch" onClick={onSearchButtonClicked}><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search</button>

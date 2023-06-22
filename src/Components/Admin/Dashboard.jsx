@@ -75,7 +75,7 @@ function AdminDashboard() {
                               Submit a request to encapsulate your collectible by clicking below:
                               <br />
                               <br />
-                              <Link to={"/admin/comic-submissions"}>View Comics&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
+                              <Link to={"/admin/submissions/comics"}>View Comics&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
                             </p>
                           </div>
                         </section>

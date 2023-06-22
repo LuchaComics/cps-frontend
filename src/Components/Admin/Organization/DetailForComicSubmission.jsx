@@ -243,11 +243,11 @@ function AdminOrganizationDetailForComicSubmission() {
                             </div>
                             <div class="column has-text-right">
                                 {/* Mobile Specific */}
-                                <Link to={`/admin/comic-submissions/add/search`} target="_blank" rel="noreferrer" class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
+                                <Link to={`/admin/submissions/comics/add/search`} target="_blank" rel="noreferrer" class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
                                 </Link>
                                 {/* Desktop Specific */}
-                                <Link to={`/admin/comic-submissions/add/search`} target="_blank" rel="noreferrer" class="button is-small is-success is-hidden-touch" type="button">
+                                <Link to={`/admin/submissions/comics/add/search`} target="_blank" rel="noreferrer" class="button is-small is-success is-hidden-touch" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
                                 </Link>
                             </div>
@@ -309,10 +309,10 @@ function AdminOrganizationDetailForComicSubmission() {
                                                                     <td data-label="Created">{submission.createdAt}</td>
                                                                     <td class="is-actions-cell">
                                                                         <div class="buttons is-right">
-                                                                            <Link to={`/admin/comic-submission/${submission.id}`} target="_blank" rel="noreferrer" class="button is-small is-primary" type="button">
+                                                                            <Link to={`/admin/submissions/comic/${submission.id}`} target="_blank" rel="noreferrer" class="button is-small is-primary" type="button">
                                                                                 View&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
                                                                             </Link>
-                                                                            <Link to={`/admin/comic-submission/${submission.id}/edit`} target="_blank" rel="noreferrer" class="button is-small is-warning" type="button">
+                                                                            <Link to={`/admin/submissions/comic/${submission.id}/edit`} target="_blank" rel="noreferrer" class="button is-small is-warning" type="button">
                                                                                 Edit&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
                                                                             </Link>
                                                                             <button onClick={(e, ses) => onSelectComicSubmissionForDeletion(e, submission)} class="button is-small is-danger" type="button">
@@ -331,7 +331,7 @@ function AdminOrganizationDetailForComicSubmission() {
                                         <div class="container">
                                             <article class="message is-dark">
                                                 <div class="message-body">
-                                                    No submissions. <b><Link to="/admin/comic-submissions/add/search">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating a new submission.
+                                                    No submissions. <b><Link to="/admin/submissions/comics/add/search">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating a new submission.
                                                 </div>
                                             </article>
                                         </div>
@@ -344,8 +344,8 @@ function AdminOrganizationDetailForComicSubmission() {
                                             <Link class="button is-fullwidth is-hidden-desktop" to={`/admin/organizations`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                         </div>
                                         <div class="column is-half has-text-right">
-                                            <Link to={`/admin/comic-submissions/add/search`} target="_blank" rel="noreferrer" class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;CPS&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link>
-                                            <Link to={`/admin/comic-submissions/add/search`} target="_blank" rel="noreferrer" class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;CPS&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link>
+                                            <Link to={`/admin/submissions/comics/add/search`} target="_blank" rel="noreferrer" class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;CPS&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link>
+                                            <Link to={`/admin/submissions/comics/add/search`} target="_blank" rel="noreferrer" class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;CPS&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link>
                                         </div>
                                     </div>
 

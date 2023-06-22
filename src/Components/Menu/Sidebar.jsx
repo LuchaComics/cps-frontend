@@ -124,9 +124,21 @@ export default props => {
                                 </a>
                             </li>
                             <li>
-                                <a href="/admin/comic-submissions" class={`has-text-grey-light ${location.pathname.includes("submission") && "is-active"}`}>
-                                    <FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions
+                                <a class={`has-text-grey-light`}>
+                                    <FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions
                                 </a>
+                                <ul>
+                                    <li>
+                                        <a href="/admin/submissions/comics" class={`has-text-grey-light ${location.pathname.includes("submissions/comic") && "is-active"}`}>
+                                            <FontAwesomeIcon className="fas" icon={faTachometer} />&nbsp;Comics
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/admin/submissions/cards" class={`has-text-grey-light ${location.pathname.includes("card") && "is-active"}`}>
+                                            <FontAwesomeIcon className="fas" icon={faTachometer} />&nbsp;Cards
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
 
@@ -183,15 +195,28 @@ export default props => {
                                     <FontAwesomeIcon className="fas" icon={faTachometer} />&nbsp;Dashboard
                                 </a>
                             </li>
-                            <li>
-                                <a href="/comic-submissions" class={`has-text-grey-light ${location.pathname.includes("submission") && "is-active"}`}>
-                                    <FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions
-                                </a>
-                            </li>
+
                             <li>
                                 <a href="/customers" class={`has-text-grey-light ${location.pathname.includes("customer") && "is-active"}`}>
                                     <FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers
                                 </a>
+                            </li>
+                            <li>
+                                <a class={`has-text-grey-light`}>
+                                    <FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a href="/submissions/comics" class={`has-text-grey-light ${location.pathname.includes("submissions/comic") && "is-active"}`}>
+                                            <FontAwesomeIcon className="fas" icon={faTachometer} />&nbsp;Comics
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/submissions/cards" class={`has-text-grey-light ${location.pathname.includes("card") && "is-active"}`}>
+                                            <FontAwesomeIcon className="fas" icon={faTachometer} />&nbsp;Cards
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
 

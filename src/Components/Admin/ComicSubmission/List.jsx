@@ -188,11 +188,11 @@ function AdminComicSubmissionList() {
                             </div>
                             <div class="column has-text-right">
                                 {/* Mobile Specific */}
-                                <Link to={`/admin/comic-submissions/add/search`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
+                                <Link to={`/admin/submissions/comics/add/search`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add Comic Submission
                                 </Link>
                                 {/* Desktop Specific */}
-                                <Link to={`/admin/comic-submissions/add/search`} class="button is-small is-success is-hidden-touch" type="button">
+                                <Link to={`/admin/submissions/comics/add/search`} class="button is-small is-success is-hidden-touch" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add Comic Submission
                                 </Link>
                             </div>
@@ -231,10 +231,10 @@ function AdminComicSubmissionList() {
                                                                 <td data-label="Created">{submission.createdAt}</td>
                                                                 <td class="is-actions-cell">
                                                                     <div class="buttons is-right">
-                                                                        <Link to={`/admin/comic-submission/${submission.id}`} class="button is-small is-primary" type="button">
+                                                                        <Link to={`/admin/submissions/comic/${submission.id}`} class="button is-small is-primary" type="button">
                                                                             <FontAwesomeIcon className="mdi" icon={faEye} />&nbsp;View
                                                                         </Link>
-                                                                        <Link to={`/admin/comic-submission/${submission.id}/edit`} class="button is-small is-warning" type="button">
+                                                                        <Link to={`/admin/submissions/comic/${submission.id}/edit`} class="button is-small is-warning" type="button">
                                                                             <FontAwesomeIcon className="mdi" icon={faPencil} />&nbsp;Edit
                                                                         </Link>
                                                                         <button onClick={(e, ses) => onSelectComicSubmissionForDeletion(e, submission)} class="button is-small is-danger" type="button">
@@ -256,7 +256,7 @@ function AdminComicSubmissionList() {
                                             <FontAwesomeIcon className="fas" icon={faTable} />&nbsp;No Comic Submissions
                                         </p>
                                         <p class="subtitle">
-                                            No submissions. <b><Link to="/admin/comic-submissions/add/search">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating your first new submission.
+                                            No submissions. <b><Link to="/admin/submissions/comics/add/search">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating your first new submission.
                                         </p>
                                       </div>
                                     </section>

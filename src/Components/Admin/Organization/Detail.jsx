@@ -122,11 +122,11 @@ function AdminOrganizationDetail() {
                             {/* HIDDEN */}
                             <div class="is-hidden column has-text-right">
                                 {/* Mobile Specific */}
-                                <Link to={`/admin/comic-submissions/add?organization_id=${id}&organization_name=${organization.name}`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
+                                <Link to={`/admin/submissions/comics/add?organization_id=${id}&organization_name=${organization.name}`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
                                 </Link>
                                 {/* Desktop Specific */}
-                                <Link to={`/admin/comic-submissions/add?organization_id=${id}&organization_name=${organization.name}`} class="button is-small is-success is-hidden-touch" type="button">
+                                <Link to={`/admin/submissions/comics/add?organization_id=${id}&organization_name=${organization.name}`} class="button is-small is-success is-hidden-touch" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
                                 </Link>
                             </div>

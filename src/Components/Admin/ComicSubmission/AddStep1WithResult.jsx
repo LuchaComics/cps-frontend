@@ -148,7 +148,7 @@ function AdminComicSubmissionAddStep1WithResult() {
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
                             <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
-                            <li class=""><Link to="/admin/comic-submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
+                            <li class=""><Link to="/admin/submissions/comics" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
                             <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
                         </ul>
                     </nav>
@@ -204,7 +204,7 @@ function AdminComicSubmissionAddStep1WithResult() {
                                                             <p><a href={`mailto:${user.email}`}>{user.email}</a></p>
                                                             <p><a href={`tel:${user.phone}`}>{user.phone}</a></p>
                                                             <br />
-                                                            <Link class="button is-medium is-primary" to={`/admin/comic-submissions/pick-type-for-add?user_id=${user.id}`}>
+                                                            <Link class="button is-medium is-primary" to={`/admin/submissions/comics/pick-type-for-add?user_id=${user.id}`}>
                                                                 <FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Pick
                                                             </Link>
                                                         </div>
@@ -219,7 +219,7 @@ function AdminComicSubmissionAddStep1WithResult() {
                                                 <FontAwesomeIcon className="fas" icon={faTable} />&nbsp;No Users
                                             </p>
                                             <p class="subtitle">
-                                                No results were found in the search. <Link class="is-medium is-warning" to="/admin/customers/add" target="_blank" rel="noreferrer">Click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link> to create a new customer or <Link class="is-medium is-danger" to="/admin/comic-submissions/pick-type-for-add">click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link> to continue without a customer.
+                                                No results were found in the search. <Link class="is-medium is-warning" to="/admin/customers/add" target="_blank" rel="noreferrer">Click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link> to create a new customer or <Link class="is-medium is-danger" to="/admin/submissions/comics/pick-type-for-add">click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link> to continue without a customer.
                                             </p>
                                           </div>
                                         </section>
@@ -230,8 +230,8 @@ function AdminComicSubmissionAddStep1WithResult() {
 
                         <div class="columns pt-5">
                             <div class="column is-half">
-                                <Link class="button is-medium is-hidden-touch" to="/admin/comic-submissions/add/search"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                <Link class="button is-medium is-fullwidth is-hidden-desktop" to="/admin/comic-submissions/add/search"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                <Link class="button is-medium is-hidden-touch" to="/admin/submissions/comics/add/search"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                <Link class="button is-medium is-fullwidth is-hidden-desktop" to="/admin/submissions/comics/add/search"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                             </div>
                             <div class="column is-half has-text-right">
                                 {/*

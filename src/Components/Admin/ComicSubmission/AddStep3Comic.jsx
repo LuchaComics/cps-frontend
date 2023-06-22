@@ -162,7 +162,7 @@ function AdminComicSubmissionAddStep3Comic() {
         }
 
         // Redirect the user to a new page.
-        setForceURL("/admin/comic-submissions/add/"+response.id+"/confirmation"+urlParams);
+        setForceURL("/admin/submissions/comics/add/"+response.id+"/confirmation"+urlParams);
     }
 
     function onComicSubmissionCreateError(apiErr) {
@@ -261,7 +261,7 @@ function AdminComicSubmissionAddStep3Comic() {
                            ?
                             <ul>
                                 <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
-                                <li class=""><Link to="/admin/comic-submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
+                                <li class=""><Link to="/admin/submissions/comics" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
                                 <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
                             </ul>
                             :
@@ -287,7 +287,7 @@ function AdminComicSubmissionAddStep3Comic() {
                                 <footer class="modal-card-foot">
                                     {userName === null
                                         ?
-                                        <Link class="button is-medium is-success" to={`/admin/comic-submissions/add/search`}>Yes</Link>
+                                        <Link class="button is-medium is-success" to={`/admin/submissions/comics/add/search`}>Yes</Link>
                                         :
                                         <Link class="button is-medium is-success" to={`/admin/user/${userID}/sub`}>Yes</Link>
                                     }
