@@ -76,6 +76,12 @@ function AdminDashboard() {
                               <br />
                               <br />
                               <Link to={"/admin/submissions/comics"}>View Comics&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
+                              <br />
+                              <br />
+                              <Link to={"/admin/submissions/cards"}>View Cards&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
+                              <br />
+                              <br />
+                              <Link to={"/admin/submissions/pick-type-for-add"}>Add&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
                             </p>
                           </div>
                         </section>

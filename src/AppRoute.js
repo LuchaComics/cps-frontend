@@ -18,12 +18,12 @@ import AdminOrganizationUpdate from "./Components/Admin/Organization/Update";
 import AdminDashboard from "./Components/Admin/Dashboard";
 import AdminRegistrySearch from "./Components/Admin/Registry/Search";
 import AdminRegistryResult from "./Components/Admin/Registry/Result";
+import AdminSubmissionPickTypeForAdd from "./Components/Admin/Submission/PickTypeForAdd";
 import AdminComicSubmissionList from "./Components/Admin/Submission/Comic/List";
 import AdminComicSubmissionAddStep1WithSearch from "./Components/Admin/Submission/Comic/AddStep1WithSearch";
 import AdminComicSubmissionAddStep1WithResult from "./Components/Admin/Submission/Comic/AddStep1WithResult";
 import AdminComicSubmissionAddStep2 from "./Components/Admin/Submission/Comic/AddStep2";
-import AdminComicSubmissionAddStep3Comic from "./Components/Admin/Submission/Comic/AddStep3Comic";
-import AdminComicSubmissionAddStep4 from "./Components/Admin/Submission/Comic/AddStep4";
+import AdminComicSubmissionAddStep3 from "./Components/Admin/Submission/Comic/AddStep3";
 import AdminComicSubmissionDetail from "./Components/Admin/Submission/Comic/Detail";
 import AdminComicSubmissionDetailForCommentList from "./Components/Admin/Submission/Comic/DetailForCommentList";
 import AdminComicSubmissionDetailForCustomer from "./Components/Admin/Submission/Comic/DetailForCustomer";
@@ -101,13 +101,12 @@ function AppRoute() {
                                     <Route exact path="/admin/organization/:id/comments" element={<AdminOrganizationDetailForCommentList/>}/>
                                     <Route exact path="/admin/registry" element={<AdminRegistrySearch/>}/>
                                     <Route exact path="/admin/registry/:cpsn" element={<AdminRegistryResult/>}/>
+                                    <Route exact path="/admin/submissions/pick-type-for-add" element={<AdminSubmissionPickTypeForAdd/>}/>
                                     <Route exact path="/admin/submissions/comics" element={<AdminComicSubmissionList/>}/>
                                     <Route exact path="/admin/submissions/comics/add/search" element={<AdminComicSubmissionAddStep1WithSearch/>}/>
                                     <Route exact path="/admin/submissions/comics/add/results" element={<AdminComicSubmissionAddStep1WithResult/>}/>
-                                    <Route exact path="/admin/submissions/comics/pick-type-for-add" element={<AdminComicSubmissionAddStep2/>}/>
-                                    <Route exact path="/admin/submissions/comics/add-comic" element={<AdminComicSubmissionAddStep3Comic/>}/>
-                                    <Route exact path="/admin/submissions/comics/add-card" element={<NotImplementedError/>}/>
-                                    <Route exact path="/admin/submissions/comics/add/:id/confirmation" element={<AdminComicSubmissionAddStep4/>}/>
+                                    <Route exact path="/admin/submissions/comics/add" element={<AdminComicSubmissionAddStep2/>}/>
+                                    <Route exact path="/admin/submissions/comics/add/:id/confirmation" element={<AdminComicSubmissionAddStep3/>}/>
                                     <Route exact path="/admin/submissions/comic/:id" element={<AdminComicSubmissionDetail/>}/>
                                     <Route exact path="/admin/submissions/comic/:id/edit" element={<AdminComicSubmissionUpdateForComicSubmission/>}/>
                                     <Route exact path="/admin/submissions/comic/:id/cust/search" element={<AdminComicSubmissionUpdatePickCustomerWithSearch/>}/>
@@ -115,7 +114,7 @@ function AppRoute() {
                                     <Route exact path="/admin/submissions/comic/:id/comments" element={<AdminComicSubmissionDetailForCommentList/>}/>
                                     <Route exact path="/admin/submissions/comic/:id/cust" element={<AdminComicSubmissionDetailForCustomer/>}/>
                                     <Route exact path="/admin/submissions/comic/:id/file" element={<AdminComicSubmissionDetailForPDFFile/>}/>
-                                    <Route exact path="/admin/submission/cards" element={<NotImplementedError/>}/>
+                                    <Route exact path="/admin/submissions/cards" element={<NotImplementedError/>}/>
                                     <Route exact path="/admin/users" element={<AdminUserList/>}/>
                                     <Route exact path="/admin/users/add" element={<AdminUserAdd/>}/>
                                     <Route exact path="/admin/user/:id" element={<AdminUserDetail/>}/>

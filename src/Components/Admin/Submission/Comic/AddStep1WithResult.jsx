@@ -204,7 +204,7 @@ function AdminComicSubmissionAddStep1WithResult() {
                                                             <p><a href={`mailto:${user.email}`}>{user.email}</a></p>
                                                             <p><a href={`tel:${user.phone}`}>{user.phone}</a></p>
                                                             <br />
-                                                            <Link class="button is-medium is-primary" to={`/admin/submissions/pick-type-for-add?user_id=${user.id}`}>
+                                                            <Link class="button is-medium is-primary" to={`/admin/submissions/comics/add?user_id=${user.id}`}>
                                                                 <FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Pick
                                                             </Link>
                                                         </div>

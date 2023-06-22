@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTasks, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight, faTable, faBookOpen, faNewspaper } from '@fortawesome/free-solid-svg-icons';
+import { faTasks, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight, faTable, faBookOpen, faNewspaper, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { useRecoilState } from 'recoil';
 
 import { getComicSubmissionListAPI, deleteComicSubmissionAPI } from "../../../../API/ComicSubmission";
@@ -214,6 +214,7 @@ function RetailerComicSubmissionList() {
                                                             <th>Vol</th>
                                                             <th>No</th>
                                                             <th>State</th>
+                                                            <th>Customer</th>
                                                             <th>Created</th>
                                                             <th></th>
                                                         </tr>
@@ -226,6 +227,18 @@ function RetailerComicSubmissionList() {
                                                                 <td data-label="Vol">{submission.issueVol}</td>
                                                                 <td data-label="No">{submission.issueNo}</td>
                                                                 <td data-label="State">{SUBMISSION_STATES[submission.status]}</td>
+                                                                <td data-label="Customer">
+                                                                    {submission.user !== undefined && submission.user !== null && submission.user !== ""
+                                                                        ?
+                                                                        <>
+                                                                            {submission.user.id !== "000000000000000000000000" && <Link to={`/customer/${submission.user.id}`} target="_blank" rel="noreferrer" class="is-small">
+                                                                                {submission.user.name}&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
+                                                                            </Link>}
+                                                                        </>
+                                                                        :
+                                                                        <>-</>
+                                                                     }
+                                                                </td>
                                                                 <td data-label="Created">{submission.createdAt}</td>
                                                                 <td class="is-actions-cell">
                                                                     <div class="buttons is-right">

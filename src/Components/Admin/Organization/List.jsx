@@ -224,6 +224,9 @@ function AdminOrganizationList() {
                                                                 <td data-label="Created">{organization.createdAt}</td>
                                                                 <td class="is-actions-cell">
                                                                     <div class="buttons is-right">
+                                                                        <Link to={`/admin/submissions/pick-type-for-add?org_id=${organization.id}`} class="button is-small is-success" type="button">
+                                                                            <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
+                                                                        </Link>
                                                                         <Link to={`/admin/organization/${organization.id}`} class="button is-small is-primary" type="button">
                                                                             <FontAwesomeIcon className="mdi" icon={faEye} />&nbsp;View
                                                                         </Link>

@@ -244,11 +244,11 @@ function AdminOrganizationDetailForUserList() {
                             <div class="column has-text-right">
                                 {/* Mobile Specific */}
                                 <Link to={`/admin/users/add?organization_id=${id}&organization_name=${organization.name}`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
-                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add
+                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add User
                                 </Link>
                                 {/*  Desktop Specific */}
                                 <Link to={`/admin/users/add?organization_id=${id}&organization_name=${organization.name}`} class="button is-small is-success is-hidden-touch" type="button">
-                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add
+                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add User
                                 </Link>
                             </div>
                         </div>
@@ -344,8 +344,8 @@ function AdminOrganizationDetailForUserList() {
                                             <Link class="button is-fullwidth is-hidden-desktop" to={`/admin/organizations`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                         </div>
                                         <div class="column is-half has-text-right">
-                                            <Link to={`/admin/users/add?organization_id=${id}&organization_name=${organization.name}`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link>
-                                            <Link to={`/admin/users/add?organization_id=${id}&organization_name=${organization.name}`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link>
+                                            <Link to={`/admin/users/add?organization_id=${id}&organization_name=${organization.name}`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add User</Link>
+                                            <Link to={`/admin/users/add?organization_id=${id}&organization_name=${organization.name}`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add User</Link>
                                         </div>
                                     </div>
 

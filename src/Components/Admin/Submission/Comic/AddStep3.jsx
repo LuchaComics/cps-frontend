@@ -19,7 +19,7 @@ import PageLoadingContent from "../../../Element/PageLoadingContent";
 import { topAlertMessageState, topAlertStatusState } from "../../../../AppState";
 
 
-function AdminComicSubmissionAddStep4() {
+function AdminComicSubmissionAddStep3() {
     ////
     //// URL Arguments.
     ////
@@ -213,4 +213,4 @@ function AdminComicSubmissionAddStep4() {
     );
 }
 
-export default AdminComicSubmissionAddStep4;
+export default AdminComicSubmissionAddStep3;
