@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 import { DateTime } from "luxon";
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { getSubmissionDetailAPI, putSubmissionUpdateAPI } from "../../../API/ComicSubmission";
+import { getComicSubmissionDetailAPI, putComicSubmissionUpdateAPI } from "../../../API/ComicSubmission";
 import { getOrganizationSelectOptionListAPI } from "../../../API/organization";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
@@ -122,7 +122,7 @@ function AdminComicSubmissionUpdateForComicSubmission() {
 
         // Submit to the backend.
         console.log("onSubmitClick, submission:", submission);
-        putSubmissionUpdateAPI(submission, onComicSubmissionUpdateSuccess, onComicSubmissionUpdateError, onComicSubmissionUpdateDone);
+        putComicSubmissionUpdateAPI(submission, onComicSubmissionUpdateSuccess, onComicSubmissionUpdateError, onComicSubmissionUpdateDone);
     }
 
     ////
@@ -255,7 +255,7 @@ function AdminComicSubmissionUpdateForComicSubmission() {
         if (mounted) {
             window.scrollTo(0, 0);  // Start the page at the top of the page.
             setFetching(true);
-            getSubmissionDetailAPI(
+            getComicSubmissionDetailAPI(
                 id,
                 onComicSubmissionDetailSuccess,
                 onComicSubmissionDetailError,

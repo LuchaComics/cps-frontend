@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTasks, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight, faTable, faBookOpen, faNewspaper, } from '@fortawesome/free-solid-svg-icons';
 import { useRecoilState } from 'recoil';
 
-import { getSubmissionListAPI, deleteSubmissionAPI } from "../../../API/ComicSubmission";
+import { getComicSubmissionListAPI, deleteComicSubmissionAPI } from "../../../API/ComicSubmission";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 import { SUBMISSION_STATES } from "../../../Constants/FieldOptions";
 import FormErrorBox from "../../Element/FormErrorBox";
@@ -103,7 +103,7 @@ function AdminComicSubmissionList() {
     const fetchList = () => {
         setFetching(true);
         let params = new Map();
-        getSubmissionListAPI(
+        getComicSubmissionListAPI(
             params,
             onComicSubmissionListSuccess,
             onComicSubmissionListError,
@@ -125,7 +125,7 @@ function AdminComicSubmissionList() {
         console.log("onDeleteConfirmButtonClick"); // For debugging purposes only.
         setFetching(true);
         setErrors({});
-        deleteSubmissionAPI(
+        deleteComicSubmissionAPI(
             selectedComicSubmissionForDeletion.id,
             onComicSubmissionDeleteSuccess,
             onComicSubmissionDeleteError,

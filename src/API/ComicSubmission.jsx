@@ -10,7 +10,7 @@ import {
 } from "../Constants/API";
 
 
-export function getSubmissionListAPI(filtersMap=new Map(), onSuccessCallback, onErrorCallback, onDoneCallback) {
+export function getComicSubmissionListAPI(filtersMap=new Map(), onSuccessCallback, onErrorCallback, onDoneCallback) {
     const axios = getCustomAxios();
 
     // The following code will generate the query parameters for the url based on the map.
@@ -33,7 +33,7 @@ export function getSubmissionListAPI(filtersMap=new Map(), onSuccessCallback, on
         const data = camelizeKeys(responseData);
 
         // Bugfixes.
-        console.log("getSubmissionListAPI | pre-fix | results:", data);
+        console.log("getComicSubmissionListAPI | pre-fix | results:", data);
         if (data.results !== undefined && data.results !== null && data.results.length > 0) {
             data.results.forEach(
                 (item, index) => {
@@ -43,7 +43,7 @@ export function getSubmissionListAPI(filtersMap=new Map(), onSuccessCallback, on
                 }
             )
         }
-        console.log("getSubmissionListAPI | post-fix | results:", data);
+        console.log("getComicSubmissionListAPI | post-fix | results:", data);
 
         // Return the callback data.
         onSuccessCallback(data);
@@ -53,10 +53,10 @@ export function getSubmissionListAPI(filtersMap=new Map(), onSuccessCallback, on
     }).then(onDoneCallback);
 }
 
-export function postSubmissionCreateAPI(data, onSuccessCallback, onErrorCallback, onDoneCallback) {
+export function postComicSubmissionCreateAPI(data, onSuccessCallback, onErrorCallback, onDoneCallback) {
     const axios = getCustomAxios();
 
-    console.log("postSubmissionCreateAPI | pre-modified | data:", data);
+    console.log("postComicSubmissionCreateAPI | pre-modified | data:", data);
 
     // To Snake-case for API from camel-case in React.
     let decamelizedData = decamelizeKeys(data);
@@ -71,7 +71,7 @@ export function postSubmissionCreateAPI(data, onSuccessCallback, onErrorCallback
     //     decamelizedData.issue_cover_date = new Date(data.issueCoverDate).toISOString();
     // }
 
-    console.log("postSubmissionCreateAPI | post-modified | data:", decamelizedData);
+    console.log("postComicSubmissionCreateAPI | post-modified | data:", decamelizedData);
 
     axios.post(CPS_COMIC_SUBMISSIONS_API_ENDPOINT, decamelizedData).then((successResponse) => {
         const responseData = successResponse.data;
@@ -91,7 +91,7 @@ export function postSubmissionCreateAPI(data, onSuccessCallback, onErrorCallback
     }).then(onDoneCallback);
 }
 
-export function getSubmissionDetailAPI(submissionID, onSuccessCallback, onErrorCallback, onDoneCallback) {
+export function getComicSubmissionDetailAPI(submissionID, onSuccessCallback, onErrorCallback, onDoneCallback) {
     const axios = getCustomAxios();
     axios.get(CPS_COMIC_SUBMISSION_API_ENDPOINT.replace("{id}", submissionID)).then((successResponse) => {
         const responseData = successResponse.data;
@@ -114,7 +114,7 @@ export function getSubmissionDetailAPI(submissionID, onSuccessCallback, onErrorC
     }).then(onDoneCallback);
 }
 
-export function putSubmissionUpdateAPI(decamelizedData, onSuccessCallback, onErrorCallback, onDoneCallback) {
+export function putComicSubmissionUpdateAPI(decamelizedData, onSuccessCallback, onErrorCallback, onDoneCallback) {
     const axios = getCustomAxios();
 
     axios.put(CPS_COMIC_SUBMISSION_API_ENDPOINT.replace("{id}", decamelizedData.id), decamelizedData).then((successResponse) => {
@@ -135,7 +135,7 @@ export function putSubmissionUpdateAPI(decamelizedData, onSuccessCallback, onErr
     }).then(onDoneCallback);
 }
 
-export function deleteSubmissionAPI(id, onSuccessCallback, onErrorCallback, onDoneCallback) {
+export function deleteComicSubmissionAPI(id, onSuccessCallback, onErrorCallback, onDoneCallback) {
     const axios = getCustomAxios();
     axios.delete(CPS_COMIC_SUBMISSION_API_ENDPOINT.replace("{id}", id)).then((successResponse) => {
         const responseData = successResponse.data;
@@ -151,7 +151,7 @@ export function deleteSubmissionAPI(id, onSuccessCallback, onErrorCallback, onDo
     }).then(onDoneCallback);
 }
 
-export function postSubmissionCustomerSwapOperationAPI(submissionID, customerID, onSuccessCallback, onErrorCallback, onDoneCallback) {
+export function postComicSubmissionCustomerSwapOperationAPI(submissionID, customerID, onSuccessCallback, onErrorCallback, onDoneCallback) {
     const axios = getCustomAxios();
     const data = {
         submission_id: submissionID,
@@ -171,7 +171,7 @@ export function postSubmissionCustomerSwapOperationAPI(submissionID, customerID,
     }).then(onDoneCallback);
 }
 
-export function postSubmissionCreateCommentOperationAPI(submissionID, content, onSuccessCallback, onErrorCallback, onDoneCallback) {
+export function postComicSubmissionCreateCommentOperationAPI(submissionID, content, onSuccessCallback, onErrorCallback, onDoneCallback) {
     const axios = getCustomAxios();
     const data = {
         submission_id: submissionID,

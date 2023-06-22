@@ -8,7 +8,7 @@ import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { postSubmissionCustomerSwapOperationAPI } from "../../../API/ComicSubmission";
+import { postComicSubmissionCustomerSwapOperationAPI } from "../../../API/ComicSubmission";
 import { getCustomerListAPI } from "../../../API/customer";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
@@ -66,7 +66,7 @@ function AdminComicSubmissionUpdatePickCustomerWithResult() {
         setShowEditWarning(false);
         setFetching(true);
 
-        postSubmissionCustomerSwapOperationAPI(
+        postComicSubmissionCustomerSwapOperationAPI(
             id, // submission id
             customerID,
             onOperationSuccess,

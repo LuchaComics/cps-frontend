@@ -9,7 +9,7 @@ import { SUBMISSION_STATES } from "../../../Constants/FieldOptions";
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
 import { getOrganizationDetailAPI } from "../../../API/organization";
-import { getSubmissionListAPI, deleteSubmissionAPI } from "../../../API/ComicSubmission";
+import { getComicSubmissionListAPI, deleteComicSubmissionAPI } from "../../../API/ComicSubmission";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
 import FormTextareaField from "../../Element/FormTextareaField";
@@ -55,7 +55,7 @@ function AdminOrganizationDetailForComicSubmission() {
         setFetching(true);
         let params = new Map();
         params.set('organization_id', id);
-        getSubmissionListAPI(
+        getComicSubmissionListAPI(
             params,
             onComicSubmissionListSuccess,
             onComicSubmissionListError,
@@ -76,7 +76,7 @@ function AdminOrganizationDetailForComicSubmission() {
     const onDeleteConfirmButtonClick = (e) => {
         console.log("onDeleteConfirmButtonClick"); // For debugging purposes only.
 
-        deleteSubmissionAPI(
+        deleteComicSubmissionAPI(
             selectedComicSubmissionForDeletion.id,
             onComicSubmissionDeleteSuccess,
             onComicSubmissionDeleteError,

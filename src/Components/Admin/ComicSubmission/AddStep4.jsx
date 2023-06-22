@@ -8,7 +8,7 @@ import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { getSubmissionDetailAPI } from "../../../API/ComicSubmission";
+import { getComicSubmissionDetailAPI } from "../../../API/ComicSubmission";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
 import FormTextareaField from "../../Element/FormTextareaField";
@@ -91,7 +91,7 @@ function AdminComicSubmissionAddStep4() {
             window.scrollTo(0, 0);  // Start the page at the top of the page.
 
             setFetching(true);
-            getSubmissionDetailAPI(
+            getComicSubmissionDetailAPI(
                 id,
                 onComicSubmissionDetailSuccess,
                 onComicSubmissionDetailError,

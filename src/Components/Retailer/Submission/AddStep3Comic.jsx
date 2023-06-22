@@ -27,7 +27,7 @@ import {
 import { topAlertMessageState, topAlertStatusState, currentUserState } from "../../../AppState";
 
 
-function RetailerSubmissionAddStep3Comic() {
+function RetailerSubmissionAddStep3() {
     ////
     //// URL Parameters.
     ////
@@ -114,7 +114,7 @@ function RetailerSubmissionAddStep3Comic() {
             status: 1, // 1 = Pending.
             serviceType: 1, // 1 = Pre-Screening Service
             organizationID: currentUser.organizationID,
-            CollectibleType: 1, // 1=Comic, 2=Card
+            CollectibleType: 1, // 1=, 2=Card
         };
 
         console.log("onSubmitClick: Attaching customer identification.");
@@ -267,7 +267,7 @@ function RetailerSubmissionAddStep3Comic() {
                             <>
                                 <div class="container">
 
-                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comic Book Information</p>
+                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp; Book Information</p>
                                     <hr />
                                     <FormInputField
                                         label="Series Title"
@@ -666,4 +666,4 @@ function RetailerSubmissionAddStep3Comic() {
     );
 }
 
-export default RetailerSubmissionAddStep3Comic;
+export default RetailerSubmissionAddStep3;

@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 import { DateTime } from "luxon";
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { getSubmissionDetailAPI, postSubmissionCreateCommentOperationAPI } from "../../../API/ComicSubmission";
+import { getComicSubmissionDetailAPI, postComicSubmissionCreateCommentOperationAPI } from "../../../API/ComicSubmission";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
 import FormTextareaField from "../../Element/FormTextareaField";
@@ -56,7 +56,7 @@ function AdminComicSubmissionDetailForCommentList() {
         console.log("onSubmitClick, submission:", submission);
         setErrors(null);
         setFetching(true);
-        postSubmissionCreateCommentOperationAPI(id, content, onComicSubmissionUpdateSuccess, onComicSubmissionUpdateError, onComicSubmissionUpdateDone);
+        postComicSubmissionCreateCommentOperationAPI(id, content, onComicSubmissionUpdateSuccess, onComicSubmissionUpdateError, onComicSubmissionUpdateDone);
     }
 
     ////
@@ -102,7 +102,7 @@ function AdminComicSubmissionDetailForCommentList() {
         setContent("");
 
         // Fetch latest data.
-        getSubmissionDetailAPI(
+        getComicSubmissionDetailAPI(
             id,
             onComicSubmissionDetailSuccess,
             onComicSubmissionDetailError,
@@ -146,7 +146,7 @@ function AdminComicSubmissionDetailForCommentList() {
             window.scrollTo(0, 0);  // Start the page at the top of the page.
 
             setFetching(true);
-            getSubmissionDetailAPI(
+            getComicSubmissionDetailAPI(
                 id,
                 onComicSubmissionDetailSuccess,
                 onComicSubmissionDetailError,

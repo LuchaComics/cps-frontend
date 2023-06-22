@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTasks, faTachometer, faPlus, faTimesCircle, faCheckCircle, faGauge, faUsers, faEye, faBook, faMagnifyingGlass, faBalanceScale, faUser, faCogs } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 
-import { postSubmissionCreateAPI } from "../../../API/ComicSubmission";
+import { postComicSubmissionCreateAPI } from "../../../API/ComicSubmission";
 import { getOrganizationSelectOptionListAPI } from "../../../API/organization";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
@@ -130,7 +130,7 @@ function AdminComicSubmissionAddStep3Comic() {
 
         // Submit to the backend.
         console.log("onSubmitClick: payload:", submission);
-        postSubmissionCreateAPI(
+        postComicSubmissionCreateAPI(
             submission,
             onComicSubmissionCreateSuccess,
             onComicSubmissionCreateError,
@@ -305,7 +305,7 @@ function AdminComicSubmissionAddStep3Comic() {
                             :
                             <>
                                 <p class="pb-4 has-text-grey">Please fill out all the required fields before submitting this form.</p>
-                                <FormErrorBox errors={errors} />   
+                                <FormErrorBox errors={errors} />
                                 <div class="container">
 
                                     <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comic Book Information</p>
