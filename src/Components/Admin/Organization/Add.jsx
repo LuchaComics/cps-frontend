@@ -157,37 +157,42 @@ function AdminOrganizationAdd() {
 
                         {/* <p class="pb-4 has-text-grey">Please fill out all the required fields before submitting this form.</p> */}
 
-                        {isFetching && <PageLoadingContent displayMessage={"Submitting..."} />}
+                        {isFetching
+                            ?
+                            <PageLoadingContent displayMessage={"Submitting..."} />
+                            :
+                            <>
+                                <div class="container">
 
-                        <div class="container">
+                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Full Name</p>
+                                    <hr />
 
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Full Name</p>
-                            <hr />
+                                    <FormInputField
+                                        label="Name"
+                                        name="name"
+                                        placeholder="Text input"
+                                        value={name}
+                                        errorText={errors && errors.name}
+                                        helpText=""
+                                        onChange={(e)=>setName(e.target.value)}
+                                        isRequired={true}
+                                        maxWidth="380px"
+                                    />
 
-                            <FormInputField
-                                label="Name"
-                                name="name"
-                                placeholder="Text input"
-                                value={name}
-                                errorText={errors && errors.name}
-                                helpText=""
-                                onChange={(e)=>setName(e.target.value)}
-                                isRequired={true}
-                                maxWidth="380px"
-                            />
+                                    <div class="columns pt-5">
+                                        <div class="column is-half">
+                                            <button class="button is-medium is-hidden-touch" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faTimesCircle} />&nbsp;Cancel</button>
+                                            <button class="button is-medium is-fullwidth is-hidden-desktop" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faTimesCircle} />&nbsp;Cancel</button>
+                                        </div>
+                                        <div class="column is-half has-text-right">
+                                            <button class="button is-medium is-primary is-hidden-touch" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
+                                            <button class="button is-medium is-primary is-fullwidth is-hidden-desktop" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
+                                        </div>
+                                    </div>
 
-                            <div class="columns pt-5">
-                                <div class="column is-half">
-                                    <button class="button is-medium is-hidden-touch" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faTimesCircle} />&nbsp;Cancel</button>
-                                    <button class="button is-medium is-fullwidth is-hidden-desktop" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faTimesCircle} />&nbsp;Cancel</button>
                                 </div>
-                                <div class="column is-half has-text-right">
-                                    <button class="button is-medium is-primary is-hidden-touch" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
-                                    <button class="button is-medium is-primary is-fullwidth is-hidden-desktop" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
-                                </div>
-                            </div>
-
-                        </div>
+                            </>
+                        }
                     </nav>
                 </section>
             </div>

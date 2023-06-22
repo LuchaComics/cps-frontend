@@ -111,34 +111,39 @@ function OrganizationDetail() {
 
                         {/* <p class="pb-4">Please fill out all the required fields before submitting this form.</p> */}
 
-                        {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
+                        {isFetching
+                            ?
+                            <PageLoadingContent displayMessage={"Loading..."} />
+                            :
+                            <>
+                                {organization && <div class="container">
 
-                        {!isFetching && organization && <div class="container">
+                                    <p class="subtitle is-3">Identification</p>
+                                    <FormInputField
+                                        label="Name"
+                                        name="Name"
+                                        placeholder="Text input"
+                                        value={organization.name}
+                                        helpText=""
+                                        isRequired={true}
+                                        maxWidth="380px"
+                                        disabled={true}
+                                    />
 
-                            <p class="subtitle is-3">Identification</p>
-                            <FormInputField
-                                label="Name"
-                                name="Name"
-                                placeholder="Text input"
-                                value={organization.name}
-                                helpText=""
-                                isRequired={true}
-                                maxWidth="380px"
-                                disabled={true}
-                            />
+                                    <div class="columns pt-5">
+                                        <div class="column is-half">
+                                            <Link class="button is-hidden-touch" to={"/dashboard"}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link class="button is-fullwidth is-hidden-desktop" to={"/dashboard"}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                        </div>
+                                        <div class="column is-half has-text-right">
+                                            <Link to={"/organization/update"} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
+                                            <Link to={"/organization/update"} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
+                                        </div>
+                                    </div>
 
-                            <div class="columns pt-5">
-                                <div class="column is-half">
-                                    <Link class="button is-hidden-touch" to={"/dashboard"}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                    <Link class="button is-fullwidth is-hidden-desktop" to={"/dashboard"}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                </div>
-                                <div class="column is-half has-text-right">
-                                    <Link to={"/organization/update"} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
-                                    <Link to={"/organization/update"} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
-                                </div>
-                            </div>
-
-                        </div>}
+                                </div>}
+                            </>
+                        }
                     </nav>
                 </section>
             </div>

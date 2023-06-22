@@ -205,165 +205,170 @@ function ProfileUpdate() {
 
                         {/* <p class="pb-4">Please fill out all the required fields before submitting this form.</p> */}
 
-                        {isFetching && <PageLoadingContent displayMessage={"Submitting..."} />}
+                        {isFetching
+                            ?
+                            <PageLoadingContent displayMessage={"Submitting..."} />
+                            :
+                            <>
+                                <div class="container">
 
-                        {!isFetching && <div class="container">
+                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Full Name</p>
+                                    <hr />
 
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Full Name</p>
-                            <hr />
+                                    <FormInputField
+                                        label="First Name"
+                                        name="firstName"
+                                        placeholder="Text input"
+                                        value={firstName}
+                                        errorText={errors && errors.firstName}
+                                        helpText=""
+                                        onChange={(e)=>setFirstName(e.target.value)}
+                                        isRequired={true}
+                                        maxWidth="380px"
+                                    />
 
-                            <FormInputField
-                                label="First Name"
-                                name="firstName"
-                                placeholder="Text input"
-                                value={firstName}
-                                errorText={errors && errors.firstName}
-                                helpText=""
-                                onChange={(e)=>setFirstName(e.target.value)}
-                                isRequired={true}
-                                maxWidth="380px"
-                            />
+                                    <FormInputField
+                                        label="Last Name"
+                                        name="lastName"
+                                        placeholder="Text input"
+                                        value={lastName}
+                                        errorText={errors && errors.lastName}
+                                        helpText=""
+                                        onChange={(e)=>setLastName(e.target.value)}
+                                        isRequired={true}
+                                        maxWidth="380px"
+                                    />
 
-                            <FormInputField
-                                label="Last Name"
-                                name="lastName"
-                                placeholder="Text input"
-                                value={lastName}
-                                errorText={errors && errors.lastName}
-                                helpText=""
-                                onChange={(e)=>setLastName(e.target.value)}
-                                isRequired={true}
-                                maxWidth="380px"
-                            />
+                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faContactCard} />&nbsp;Contact Information</p>
+                                    <hr />
 
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faContactCard} />&nbsp;Contact Information</p>
-                            <hr />
+                                    <FormInputField
+                                        label="Email"
+                                        name="email"
+                                        placeholder="Text input"
+                                        value={email}
+                                        errorText={errors && errors.email}
+                                        helpText=""
+                                        onChange={(e)=>setEmail(e.target.value)}
+                                        isRequired={true}
+                                        maxWidth="380px"
+                                    />
 
-                            <FormInputField
-                                label="Email"
-                                name="email"
-                                placeholder="Text input"
-                                value={email}
-                                errorText={errors && errors.email}
-                                helpText=""
-                                onChange={(e)=>setEmail(e.target.value)}
-                                isRequired={true}
-                                maxWidth="380px"
-                            />
+                                    <FormInputField
+                                        label="Phone"
+                                        name="phone"
+                                        placeholder="Text input"
+                                        value={phone}
+                                        errorText={errors && errors.phone}
+                                        helpText=""
+                                        onChange={(e)=>setPhone(e.target.value)}
+                                        isRequired={true}
+                                        maxWidth="150px"
+                                    />
 
-                            <FormInputField
-                                label="Phone"
-                                name="phone"
-                                placeholder="Text input"
-                                value={phone}
-                                errorText={errors && errors.phone}
-                                helpText=""
-                                onChange={(e)=>setPhone(e.target.value)}
-                                isRequired={true}
-                                maxWidth="150px"
-                            />
+                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faAddressBook} />&nbsp;Address</p>
+                                    <hr />
 
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faAddressBook} />&nbsp;Address</p>
-                            <hr />
+                                    <FormCountryField
+                                        priorityOptions={["CA","US","MX"]}
+                                        label="Country"
+                                        name="country"
+                                        placeholder="Text input"
+                                        selectedCountry={country}
+                                        errorText={errors && errors.country}
+                                        helpText=""
+                                        onChange={(value)=>setCountry(value)}
+                                        isRequired={true}
+                                        maxWidth="160px"
+                                    />
 
-                            <FormCountryField
-                                priorityOptions={["CA","US","MX"]}
-                                label="Country"
-                                name="country"
-                                placeholder="Text input"
-                                selectedCountry={country}
-                                errorText={errors && errors.country}
-                                helpText=""
-                                onChange={(value)=>setCountry(value)}
-                                isRequired={true}
-                                maxWidth="160px"
-                            />
+                                    <FormRegionField
+                                        label="Province/Territory"
+                                        name="region"
+                                        placeholder="Text input"
+                                        selectedCountry={country}
+                                        selectedRegion={region}
+                                        errorText={errors && errors.region}
+                                        helpText=""
+                                        onChange={(value)=>setRegion(value)}
+                                        isRequired={true}
+                                        maxWidth="280px"
+                                    />
 
-                            <FormRegionField
-                                label="Province/Territory"
-                                name="region"
-                                placeholder="Text input"
-                                selectedCountry={country}
-                                selectedRegion={region}
-                                errorText={errors && errors.region}
-                                helpText=""
-                                onChange={(value)=>setRegion(value)}
-                                isRequired={true}
-                                maxWidth="280px"
-                            />
+                                    <FormInputField
+                                        label="City"
+                                        name="city"
+                                        placeholder="Text input"
+                                        value={city}
+                                        errorText={errors && errors.city}
+                                        helpText=""
+                                        onChange={(e)=>setCity(e.target.value)}
+                                        isRequired={true}
+                                        maxWidth="380px"
+                                    />
 
-                            <FormInputField
-                                label="City"
-                                name="city"
-                                placeholder="Text input"
-                                value={city}
-                                errorText={errors && errors.city}
-                                helpText=""
-                                onChange={(e)=>setCity(e.target.value)}
-                                isRequired={true}
-                                maxWidth="380px"
-                            />
+                                    <FormInputField
+                                        label="Address Line 1"
+                                        name="addressLine1"
+                                        placeholder="Text input"
+                                        value={addressLine1}
+                                        errorText={errors && errors.addressLine1}
+                                        helpText=""
+                                        onChange={(e)=>setAddressLine1(e.target.value)}
+                                        isRequired={true}
+                                        maxWidth="380px"
+                                    />
 
-                            <FormInputField
-                                label="Address Line 1"
-                                name="addressLine1"
-                                placeholder="Text input"
-                                value={addressLine1}
-                                errorText={errors && errors.addressLine1}
-                                helpText=""
-                                onChange={(e)=>setAddressLine1(e.target.value)}
-                                isRequired={true}
-                                maxWidth="380px"
-                            />
+                                    <FormInputField
+                                        label="Address Line 2"
+                                        name="addressLine2"
+                                        placeholder="Text input"
+                                        value={addressLine2}
+                                        errorText={errors && errors.addressLine2}
+                                        helpText=""
+                                        onChange={(e)=>setAddressLine2(e.target.value)}
+                                        isRequired={true}
+                                        maxWidth="380px"
+                                    />
 
-                            <FormInputField
-                                label="Address Line 2"
-                                name="addressLine2"
-                                placeholder="Text input"
-                                value={addressLine2}
-                                errorText={errors && errors.addressLine2}
-                                helpText=""
-                                onChange={(e)=>setAddressLine2(e.target.value)}
-                                isRequired={true}
-                                maxWidth="380px"
-                            />
+                                    <FormInputField
+                                        label="Postal Code"
+                                        name="postalCode"
+                                        placeholder="Text input"
+                                        value={postalCode}
+                                        errorText={errors && errors.postalCode}
+                                        helpText=""
+                                        onChange={(e)=>setPostalCode(e.target.value)}
+                                        isRequired={true}
+                                        maxWidth="80px"
+                                    />
 
-                            <FormInputField
-                                label="Postal Code"
-                                name="postalCode"
-                                placeholder="Text input"
-                                value={postalCode}
-                                errorText={errors && errors.postalCode}
-                                helpText=""
-                                onChange={(e)=>setPostalCode(e.target.value)}
-                                isRequired={true}
-                                maxWidth="80px"
-                            />
+                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faChartPie} />&nbsp;Metrics</p>
+                                    <hr />
 
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faChartPie} />&nbsp;Metrics</p>
-                            <hr />
+                                    <FormCheckboxField
+                                        label="I agree to receive electronic updates from my local retailer and CPS"
+                                        name="agreePromotionsEmail"
+                                        checked={agreePromotionsEmail}
+                                        errorText={errors && errors.agreePromotionsEmail}
+                                        onChange={onAgreePromotionsEmailChange}
+                                        maxWidth="180px"
+                                    />
 
-                            <FormCheckboxField
-                                label="I agree to receive electronic updates from my local retailer and CPS"
-                                name="agreePromotionsEmail"
-                                checked={agreePromotionsEmail}
-                                errorText={errors && errors.agreePromotionsEmail}
-                                onChange={onAgreePromotionsEmailChange}
-                                maxWidth="180px"
-                            />
+                                    <div class="columns pt-5">
+                                        <div class="column is-half">
+                                            <Link class="button is-hidden-touch" to={"/account"}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link class="button is-fullwidth is-hidden-desktop" to={"/account"}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                        </div>
+                                        <div class="column is-half has-text-right">
+                                            <button class="button is-primary is-hidden-touch" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
+                                            <button class="button is-primary is-fullwidth is-hidden-desktop" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
+                                        </div>
+                                    </div>
 
-                            <div class="columns pt-5">
-                                <div class="column is-half">
-                                    <Link class="button is-hidden-touch" to={"/account"}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                    <Link class="button is-fullwidth is-hidden-desktop" to={"/account"}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                 </div>
-                                <div class="column is-half has-text-right">
-                                    <button class="button is-primary is-hidden-touch" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
-                                    <button class="button is-primary is-fullwidth is-hidden-desktop" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
-                                </div>
-                            </div>
-
-                        </div>}
+                            </>
+                        }
                     </nav>
                 </section>
             </div>

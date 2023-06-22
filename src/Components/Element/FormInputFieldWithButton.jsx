@@ -8,30 +8,31 @@ function FormInputFieldWithButton({ label, name, placeholder, value, type="text"
     }
     return (
         <>
-        <label class="label">{label}:</label>
-        <div class="field has-addons pb-4">
+            <label class="label">{label}:</label>
+            <div class="field has-addons pb-4">
 
-            <div class="control">
-                <input class={classNameText}
-                        name={name}
-                        type={type}
-                 placeholder={placeholder}
-                       value={value}
-                    onChange={onChange}
-                       style={{maxWidth:maxWidth}}
-                    disabled={disabled}
-                autoComplete="off" />
+                <div class="control is-expanded" style={{maxWidth:maxWidth}}>
+                    <input class={classNameText}
+                            name={name}
+                            type={type}
+                     placeholder={placeholder}
+                           value={value}
+                        onChange={onChange}
+                        disabled={disabled}
+                    autoComplete="off" />
+                </div>
+                <div class="control">
+                    <button class="button is-info"
+                          onClick={onButtonClick}
+                         disabled={disabled}>{buttonLabel}</button>
+                </div>
+                {errorText &&
+                    <p class="help is-danger">{errorText}</p>
+                }
+                {helpText &&
+                    <p class="help">{helpText}</p>
+                }
             </div>
-            <div class="control">
-                <button class="button is-info" onClick={onButtonClick}>{buttonLabel}</button>
-            </div>
-            {errorText &&
-                <p class="help is-danger">{errorText}</p>
-            }
-            {helpText &&
-                <p class="help">{helpText}</p>
-            }
-        </div>
         </>
     );
 }

@@ -115,156 +115,161 @@ function AccountDetail() {
 
                         {/* <p class="pb-4">Please fill out all the required fields before submitting this form.</p> */}
 
-                        {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
+                        {isFetching
+                            ?
+                            <PageLoadingContent displayMessage={"Loading..."} />
+                            :
+                            <>
+                                {currentUser && <div class="container">
 
-                        {!isFetching && currentUser && <div class="container">
+                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Full Name</p>
+                                    <hr />
 
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Full Name</p>
-                            <hr />
+                                    <FormInputField
+                                        label="First Name"
+                                        name="firstName"
+                                        placeholder="Text input"
+                                        value={currentUser.firstName}
+                                        helpText=""
+                                        isRequired={true}
+                                        maxWidth="380px"
+                                        disabled={true}
+                                    />
+                                    <FormInputField
+                                        label="Last Name"
+                                        name="lastName"
+                                        placeholder="Text input"
+                                        value={currentUser.lastName}
+                                        helpText=""
+                                        isRequired={true}
+                                        maxWidth="380px"
+                                        disabled={true}
+                                    />
 
-                            <FormInputField
-                                label="First Name"
-                                name="firstName"
-                                placeholder="Text input"
-                                value={currentUser.firstName}
-                                helpText=""
-                                isRequired={true}
-                                maxWidth="380px"
-                                disabled={true}
-                            />
-                            <FormInputField
-                                label="Last Name"
-                                name="lastName"
-                                placeholder="Text input"
-                                value={currentUser.lastName}
-                                helpText=""
-                                isRequired={true}
-                                maxWidth="380px"
-                                disabled={true}
-                            />
+                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faContactCard} />&nbsp;Contact Information</p>
+                                    <hr />
 
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faContactCard} />&nbsp;Contact Information</p>
-                            <hr />
+                                    <FormInputField
+                                        label="Email"
+                                        name="email"
+                                        placeholder="Text input"
+                                        value={currentUser.email}
+                                        helpText=""
+                                        isRequired={true}
+                                        maxWidth="380px"
+                                        disabled={true}
+                                    />
 
-                            <FormInputField
-                                label="Email"
-                                name="email"
-                                placeholder="Text input"
-                                value={currentUser.email}
-                                helpText=""
-                                isRequired={true}
-                                maxWidth="380px"
-                                disabled={true}
-                            />
+                                    <FormInputField
+                                        label="Phone"
+                                        name="phone"
+                                        placeholder="Text input"
+                                        value={currentUser.phone}
+                                        helpText=""
+                                        isRequired={true}
+                                        maxWidth="150px"
+                                        disabled={true}
+                                    />
 
-                            <FormInputField
-                                label="Phone"
-                                name="phone"
-                                placeholder="Text input"
-                                value={currentUser.phone}
-                                helpText=""
-                                isRequired={true}
-                                maxWidth="150px"
-                                disabled={true}
-                            />
+                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faAddressBook} />&nbsp;Address</p>
+                                    <hr />
 
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faAddressBook} />&nbsp;Address</p>
-                            <hr />
+                                    <FormCountryField
+                                        priorityOptions={["CA","US","MX"]}
+                                        label="Country"
+                                        name="country"
+                                        placeholder="Text input"
+                                        selectedCountry={currentUser.country}
+                                        errorText={errors && errors.country}
+                                        helpText=""
+                                        isRequired={true}
+                                        maxWidth="160px"
+                                        disabled={true}
+                                    />
 
-                            <FormCountryField
-                                priorityOptions={["CA","US","MX"]}
-                                label="Country"
-                                name="country"
-                                placeholder="Text input"
-                                selectedCountry={currentUser.country}
-                                errorText={errors && errors.country}
-                                helpText=""
-                                isRequired={true}
-                                maxWidth="160px"
-                                disabled={true}
-                            />
+                                    <FormRegionField
+                                        label="Province/Territory"
+                                        name="region"
+                                        placeholder="Text input"
+                                        selectedCountry={currentUser.country}
+                                        selectedRegion={currentUser.region}
+                                        errorText={errors && errors.region}
+                                        helpText=""
+                                        isRequired={true}
+                                        maxWidth="280px"
+                                        disabled={true}
+                                    />
 
-                            <FormRegionField
-                                label="Province/Territory"
-                                name="region"
-                                placeholder="Text input"
-                                selectedCountry={currentUser.country}
-                                selectedRegion={currentUser.region}
-                                errorText={errors && errors.region}
-                                helpText=""
-                                isRequired={true}
-                                maxWidth="280px"
-                                disabled={true}
-                            />
+                                    <FormInputField
+                                        label="City"
+                                        name="city"
+                                        placeholder="Text input"
+                                        value={currentUser.city}
+                                        helpText=""
+                                        isRequired={true}
+                                        maxWidth="380px"
+                                        disabled={true}
+                                    />
 
-                            <FormInputField
-                                label="City"
-                                name="city"
-                                placeholder="Text input"
-                                value={currentUser.city}
-                                helpText=""
-                                isRequired={true}
-                                maxWidth="380px"
-                                disabled={true}
-                            />
+                                    <FormInputField
+                                        label="Address Line 1"
+                                        name="addressLine1"
+                                        placeholder="Text input"
+                                        value={currentUser.addressLine1}
+                                        helpText=""
+                                        isRequired={true}
+                                        maxWidth="380px"
+                                        disabled={true}
+                                    />
 
-                            <FormInputField
-                                label="Address Line 1"
-                                name="addressLine1"
-                                placeholder="Text input"
-                                value={currentUser.addressLine1}
-                                helpText=""
-                                isRequired={true}
-                                maxWidth="380px"
-                                disabled={true}
-                            />
+                                    <FormInputField
+                                        label="Address Line 2"
+                                        name="addressLine2"
+                                        placeholder="Text input"
+                                        value={currentUser.addressLine2}
+                                        helpText=""
+                                        isRequired={true}
+                                        maxWidth="380px"
+                                        disabled={true}
+                                    />
 
-                            <FormInputField
-                                label="Address Line 2"
-                                name="addressLine2"
-                                placeholder="Text input"
-                                value={currentUser.addressLine2}
-                                helpText=""
-                                isRequired={true}
-                                maxWidth="380px"
-                                disabled={true}
-                            />
+                                    <FormInputField
+                                        label="Postal Code"
+                                        name="postalCode"
+                                        placeholder="Text input"
+                                        value={currentUser.postalCode}
+                                        helpText=""
+                                        isRequired={true}
+                                        maxWidth="80px"
+                                        disabled={true}
+                                    />
 
-                            <FormInputField
-                                label="Postal Code"
-                                name="postalCode"
-                                placeholder="Text input"
-                                value={currentUser.postalCode}
-                                helpText=""
-                                isRequired={true}
-                                maxWidth="80px"
-                                disabled={true}
-                            />
+                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faChartPie} />&nbsp;Metrics</p>
+                                    <hr />
 
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faChartPie} />&nbsp;Metrics</p>
-                            <hr />
-
-                            <FormCheckboxField
-                                label="I agree to receive electronic updates from my local retailer and CPS"
-                                name="agreePromotionsEmail"
-                                checked={currentUser.agreePromotionsEmail}
-                                maxWidth="180px"
-                                disabled={true}
-                            />
+                                    <FormCheckboxField
+                                        label="I agree to receive electronic updates from my local retailer and CPS"
+                                        name="agreePromotionsEmail"
+                                        checked={currentUser.agreePromotionsEmail}
+                                        maxWidth="180px"
+                                        disabled={true}
+                                    />
 
 
-                            <div class="columns pt-5">
-                                <div class="column is-half">
-                                    <Link class="button is-medium is-hidden-touch" to={"/dashboard"}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                    <Link class="button is-medium is-fullwidth is-hidden-desktop" to={"/dashboard"}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                </div>
-                                <div class="column is-half has-text-right">
-                                    <Link to={"/account/update"} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
-                                    <Link to={"/account/update"} class="button is-medium is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
-                                </div>
-                            </div>
+                                    <div class="columns pt-5">
+                                        <div class="column is-half">
+                                            <Link class="button is-medium is-hidden-touch" to={"/dashboard"}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link class="button is-medium is-fullwidth is-hidden-desktop" to={"/dashboard"}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                        </div>
+                                        <div class="column is-half has-text-right">
+                                            <Link to={"/account/update"} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
+                                            <Link to={"/account/update"} class="button is-medium is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
+                                        </div>
+                                    </div>
 
-                        </div>}
+                                </div>}
+                            </>
+                        }
                     </nav>
                 </section>
             </div>

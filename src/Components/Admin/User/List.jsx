@@ -198,71 +198,76 @@ function AdminUserList() {
                         </div>
                         <FormErrorBox errors={errors} />
 
-                        {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
-
-                        {!isFetching && users && users.results && users.results.length > 0
+                        {isFetching
                             ?
-                            <div class="container">
-                                <div class="b-table">
-                                    <div class="table-wrapper has-mobile-cards">
-                                        <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
-                                            <thead>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Organization</th>
-                                                    <th>Role</th>
-                                                    <th>Joined</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                            <PageLoadingContent displayMessage={"Loading..."} />
+                            :
+                            <>
+                                {users && users.results && users.results.length > 0
+                                    ?
+                                    <div class="container">
+                                        <div class="b-table">
+                                            <div class="table-wrapper has-mobile-cards">
+                                                <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>Organization</th>
+                                                            <th>Role</th>
+                                                            <th>Joined</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
 
-                                                {users && users.results && users.results.map(function(user, i){
-                                                    return <tr>
-                                                        <td data-label="Name">{user.name}</td>
+                                                        {users && users.results && users.results.map(function(user, i){
+                                                            return <tr>
+                                                                <td data-label="Name">{user.name}</td>
 
-                                                        <td data-label="Organization">
-                                                            {user.organizationId !== "000000000000000000000000" && <Link to={`/admin/organization/${user.organizationId}`} target="_blank" rel="noreferrer" class="is-small">
-                                                                {user.organizationName}&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
-                                                            </Link>}
-                                                        </td>
-                                                        <td data-label="Role">{USER_ROLES[user.role]}</td>
-                                                        <td data-label="Joined">{user.createdAt}</td>
-                                                        <td class="is-actions-cell">
-                                                            <div class="buttons is-right">
-                                                                <Link to={`/admin/submissions/add?user_id=${user.id}&user_name=${user.name}`} class="button is-small is-success" type="button">
-                                                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
-                                                                </Link>
-                                                                <Link to={`/admin/user/${user.id}`} class="button is-small is-primary" type="button">
-                                                                    <FontAwesomeIcon className="mdi" icon={faEye} />&nbsp;View
-                                                                </Link>
-                                                                <Link to={`/admin/user/${user.id}/edit`} class="button is-small is-warning" type="button">
-                                                                    <FontAwesomeIcon className="mdi" icon={faPencil} />&nbsp;Edit
-                                                                </Link>
-                                                                <button onClick={(e, ses) => onSelectUserForDeletion(e, user)} class="button is-small is-danger" type="button">
-                                                                    <FontAwesomeIcon className="mdi" icon={faTrashCan} />&nbsp;Delete
-                                                                </button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>;
-                                                })}
-                                            </tbody>
-                                        </table>
+                                                                <td data-label="Organization">
+                                                                    {user.organizationId !== "000000000000000000000000" && <Link to={`/admin/organization/${user.organizationId}`} target="_blank" rel="noreferrer" class="is-small">
+                                                                        {user.organizationName}&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
+                                                                    </Link>}
+                                                                </td>
+                                                                <td data-label="Role">{USER_ROLES[user.role]}</td>
+                                                                <td data-label="Joined">{user.createdAt}</td>
+                                                                <td class="is-actions-cell">
+                                                                    <div class="buttons is-right">
+                                                                        <Link to={`/admin/submissions/add?user_id=${user.id}&user_name=${user.name}`} class="button is-small is-success" type="button">
+                                                                            <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
+                                                                        </Link>
+                                                                        <Link to={`/admin/user/${user.id}`} class="button is-small is-primary" type="button">
+                                                                            <FontAwesomeIcon className="mdi" icon={faEye} />&nbsp;View
+                                                                        </Link>
+                                                                        <Link to={`/admin/user/${user.id}/edit`} class="button is-small is-warning" type="button">
+                                                                            <FontAwesomeIcon className="mdi" icon={faPencil} />&nbsp;Edit
+                                                                        </Link>
+                                                                        <button onClick={(e, ses) => onSelectUserForDeletion(e, user)} class="button is-small is-danger" type="button">
+                                                                            <FontAwesomeIcon className="mdi" icon={faTrashCan} />&nbsp;Delete
+                                                                        </button>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>;
+                                                        })}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
-                                    </div>
-                                </div>
-                                :
-                                <section class="hero is-medium has-background-white-ter">
-                                  <div class="hero-body">
-                                    <p class="title">
-                                        <FontAwesomeIcon className="fas" icon={faTable} />&nbsp;No Users
-                                    </p>
-                                    <p class="subtitle">
-                                        No users. <b><Link to="/admin/users/add">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating your first user.
-                                    </p>
-                                  </div>
-                                </section>
-                            }
+                                    :
+                                    <section class="hero is-medium has-background-white-ter">
+                                          <div class="hero-body">
+                                            <p class="title">
+                                                <FontAwesomeIcon className="fas" icon={faTable} />&nbsp;No Users
+                                            </p>
+                                            <p class="subtitle">
+                                                No users. <b><Link to="/admin/users/add">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating your first user.
+                                            </p>
+                                          </div>
+                                    </section>
+                                }
+                            </>
+                        }
                     </nav>
                 </section>
             </div>

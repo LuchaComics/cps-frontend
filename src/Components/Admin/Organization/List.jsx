@@ -7,7 +7,6 @@ import { useRecoilState } from 'recoil';
 
 import { getOrganizationListAPI, deleteOrganizationAPI } from "../../../API/organization";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
-import { SUBMISSION_STATES } from "../../../Constants/FieldOptions";
 import FormErrorBox from "../../Element/FormErrorBox";
 import PageLoadingContent from "../../Element/PageLoadingContent";
 
@@ -199,59 +198,64 @@ function AdminOrganizationList() {
                         </div>
                         <FormErrorBox errors={errors} />
 
-                        {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
-
-                        {!isFetching && organizations && organizations.results && organizations.results.length > 0
+                        {isFetching
                             ?
-                            <div class="container">
-                                <div class="b-table">
-                                    <div class="table-wrapper has-mobile-cards">
-                                        <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
-                                            <thead>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Created</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                            <PageLoadingContent displayMessage={"Loading..."} />
+                            :
+                            <>
+                                {organizations && organizations.results && organizations.results.length > 0
+                                    ?
+                                    <div class="container">
+                                        <div class="b-table">
+                                            <div class="table-wrapper has-mobile-cards">
+                                                <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>Created</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
 
-                                                {organizations && organizations.results && organizations.results.map(function(organization, i){
-                                                    return <tr>
-                                                        <td data-label="Name">{organization.name}</td>
-                                                        <td data-label="Created">{organization.createdAt}</td>
-                                                        <td class="is-actions-cell">
-                                                            <div class="buttons is-right">
-                                                                <Link to={`/admin/organization/${organization.id}`} class="button is-small is-primary" type="button">
-                                                                    <FontAwesomeIcon className="mdi" icon={faEye} />&nbsp;View
-                                                                </Link>
-                                                                <Link to={`/admin/organization/${organization.id}/edit`} class="button is-small is-warning" type="button">
-                                                                    <FontAwesomeIcon className="mdi" icon={faPencil} />&nbsp;Edit
-                                                                </Link>
-                                                                <button onClick={(e, ses) => onSelectOrganizationForDeletion(e, organization)} class="button is-small is-danger" type="button">
-                                                                    <FontAwesomeIcon className="mdi" icon={faTrashCan} />&nbsp;Delete
-                                                                </button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>;
-                                                })}
-                                            </tbody>
-                                        </table>
+                                                        {organizations && organizations.results && organizations.results.map(function(organization, i){
+                                                            return <tr>
+                                                                <td data-label="Name">{organization.name}</td>
+                                                                <td data-label="Created">{organization.createdAt}</td>
+                                                                <td class="is-actions-cell">
+                                                                    <div class="buttons is-right">
+                                                                        <Link to={`/admin/organization/${organization.id}`} class="button is-small is-primary" type="button">
+                                                                            <FontAwesomeIcon className="mdi" icon={faEye} />&nbsp;View
+                                                                        </Link>
+                                                                        <Link to={`/admin/organization/${organization.id}/edit`} class="button is-small is-warning" type="button">
+                                                                            <FontAwesomeIcon className="mdi" icon={faPencil} />&nbsp;Edit
+                                                                        </Link>
+                                                                        <button onClick={(e, ses) => onSelectOrganizationForDeletion(e, organization)} class="button is-small is-danger" type="button">
+                                                                            <FontAwesomeIcon className="mdi" icon={faTrashCan} />&nbsp;Delete
+                                                                        </button>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>;
+                                                        })}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
-                                    </div>
-                                </div>
-                                :
-                                <section class="hero is-medium has-background-white-ter">
-                                  <div class="hero-body">
-                                    <p class="title">
-                                        <FontAwesomeIcon className="fas" icon={faTable} />&nbsp;No Organizations
-                                    </p>
-                                    <p class="subtitle">
-                                        No organizations. <b><Link to="/admin/organizations/add">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating your first organization.
-                                    </p>
-                                  </div>
-                                </section>
-                            }
+                                    :
+                                    <section class="hero is-medium has-background-white-ter">
+                                          <div class="hero-body">
+                                            <p class="title">
+                                                <FontAwesomeIcon className="fas" icon={faTable} />&nbsp;No Organizations
+                                            </p>
+                                            <p class="subtitle">
+                                                No organizations. <b><Link to="/admin/organizations/add">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating your first organization.
+                                            </p>
+                                          </div>
+                                    </section>
+                                }
+                            </>
+                        }
                     </nav>
                 </section>
             </div>

@@ -254,90 +254,95 @@ function AdminUserDetailForSubmission() {
 
                         {/* <p class="pb-4">Please fill out all the required fields before submitting this form.</p> */}
 
-                        {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
+                        {isFetching
+                            ?
+                            <PageLoadingContent displayMessage={"Loading..."} />
+                            :
+                            <>
+                                {user && <div class="container">
+                                    <div class="tabs is-medium">
+                                      <ul>
+                                        <li>
+                                            <Link to={`/admin/user/${user.id}`}>Detail</Link>
+                                        </li>
+                                        <li class="is-active">
+                                            <Link><b>Submissions</b></Link>
+                                        </li>
+                                        <li>
+                                            <Link to={`/admin/user/${user.id}/comments`}>Comments</Link>
+                                        </li>
+                                      </ul>
+                                    </div>
 
-                        {!isFetching && user && <div class="container">
-                            <div class="tabs is-medium">
-                              <ul>
-                                <li>
-                                    <Link to={`/admin/user/${user.id}`}>Detail</Link>
-                                </li>
-                                <li class="is-active">
-                                    <Link><b>Submissions</b></Link>
-                                </li>
-                                <li>
-                                    <Link to={`/admin/user/${user.id}/comments`}>Comments</Link>
-                                </li>
-                              </ul>
-                            </div>
+                                    {!isFetching && submissions && submissions.results && submissions.results.length > 0
+                                        ?
+                                        <div class="container">
+                                            <div class="b-table">
+                                                <div class="table-wrapper has-mobile-cards">
+                                                    <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Title</th>
+                                                                <th>Vol</th>
+                                                                <th>No</th>
+                                                                <th>State</th>
+                                                                <th>Created</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
 
-                            {!isFetching && submissions && submissions.results && submissions.results.length > 0
-                                ?
-                                <div class="container">
-                                    <div class="b-table">
-                                        <div class="table-wrapper has-mobile-cards">
-                                            <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Title</th>
-                                                        <th>Vol</th>
-                                                        <th>No</th>
-                                                        <th>State</th>
-                                                        <th>Created</th>
-                                                        <th></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
+                                                            {submissions && submissions.results && submissions.results.map(function(submission, i){
+                                                                return <tr>
+                                                                    <td data-label="Title">{submission.seriesTitle}</td>
+                                                                    <td data-label="Vol">{submission.issueVol}</td>
+                                                                    <td data-label="No">{submission.issueNo}</td>
+                                                                    <td data-label="State">{SUBMISSION_STATES[submission.status]}</td>
+                                                                    <td data-label="Created">{submission.createdAt}</td>
+                                                                    <td class="is-actions-cell">
+                                                                        <div class="buttons is-right">
+                                                                            <Link to={`/admin/submission/${submission.id}`} target="_blank" rel="noreferrer" class="button is-small is-primary" type="button">
+                                                                                View&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
+                                                                            </Link>
+                                                                            <Link to={`/admin/submission/${submission.id}/edit`} target="_blank" rel="noreferrer" class="button is-small is-warning" type="button">
+                                                                                Edit&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
+                                                                            </Link>
+                                                                            <button onClick={(e, ses) => onSelectSubmissionForDeletion(e, submission)} class="button is-small is-danger" type="button">
+                                                                                <FontAwesomeIcon className="mdi" icon={faTrashCan} />&nbsp;Delete
+                                                                            </button>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>;
+                                                            })}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        :
+                                        <div class="container">
+                                            <article class="message is-dark">
+                                                <div class="message-body">
+                                                    No submissions. <b><Link to={`/admin/submissions/add?user_id=${id}&user_name=${user.name}`}>Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating a new submission.
+                                                </div>
+                                            </article>
+                                        </div>
+                                    }
 
-                                                    {submissions && submissions.results && submissions.results.map(function(submission, i){
-                                                        return <tr>
-                                                            <td data-label="Title">{submission.seriesTitle}</td>
-                                                            <td data-label="Vol">{submission.issueVol}</td>
-                                                            <td data-label="No">{submission.issueNo}</td>
-                                                            <td data-label="State">{SUBMISSION_STATES[submission.status]}</td>
-                                                            <td data-label="Created">{submission.createdAt}</td>
-                                                            <td class="is-actions-cell">
-                                                                <div class="buttons is-right">
-                                                                    <Link to={`/admin/submission/${submission.id}`} target="_blank" rel="noreferrer" class="button is-small is-primary" type="button">
-                                                                        View&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
-                                                                    </Link>
-                                                                    <Link to={`/admin/submission/${submission.id}/edit`} target="_blank" rel="noreferrer" class="button is-small is-warning" type="button">
-                                                                        Edit&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
-                                                                    </Link>
-                                                                    <button onClick={(e, ses) => onSelectSubmissionForDeletion(e, submission)} class="button is-small is-danger" type="button">
-                                                                        <FontAwesomeIcon className="mdi" icon={faTrashCan} />&nbsp;Delete
-                                                                    </button>
-                                                                </div>
-                                                            </td>
-                                                        </tr>;
-                                                    })}
-                                                </tbody>
-                                            </table>
+                                    <div class="columns pt-5">
+                                        <div class="column is-half">
+                                            <Link class="button is-hidden-touch" to={`/admin/users`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link class="button is-fullwidth is-hidden-desktop" to={`/admin/users`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                        </div>
+                                        <div class="column is-half has-text-right">
+                                            <Link to={`/admin/submissions/add?user_id=${id}&user_name=${user.name}`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;CPS</Link>
+                                            <Link to={`/admin/submissions/add?user_id=${id}&user_name=${user.name}`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;CPS</Link>
                                         </div>
                                     </div>
-                                </div>
-                                :
-                                <div class="container">
-                                    <article class="message is-dark">
-                                        <div class="message-body">
-                                            No submissions. <b><Link to={`/admin/submissions/add?user_id=${id}&user_name=${user.name}`}>Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating a new submission.
-                                        </div>
-                                    </article>
-                                </div>
-                            }
 
-                            <div class="columns pt-5">
-                                <div class="column is-half">
-                                    <Link class="button is-hidden-touch" to={`/admin/users`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                    <Link class="button is-fullwidth is-hidden-desktop" to={`/admin/users`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                </div>
-                                <div class="column is-half has-text-right">
-                                    <Link to={`/admin/submissions/add?user_id=${id}&user_name=${user.name}`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;CPS</Link>
-                                    <Link to={`/admin/submissions/add?user_id=${id}&user_name=${user.name}`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;CPS</Link>
-                                </div>
-                            </div>
-
-                        </div>}
+                                </div>}
+                            </>
+                        }
                     </nav>
                 </section>
             </div>

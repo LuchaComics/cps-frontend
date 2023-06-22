@@ -149,54 +149,59 @@ function RetailerSubmissionDetailForPDFFile() {
                         <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission</p>
                         <FormErrorBox errors={errors} />
 
-                        {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
+                        {isFetching
+                            ?
+                            <PageLoadingContent displayMessage={"Loading..."} />
+                            :
+                            <>
+                                {submission && <div class="container">
+                                    <div class="tabs is-medium">
+                                      <ul>
+                                        <li>
+                                            <Link to={`/submission/${id}`}>Detail</Link>
+                                        </li>
+                                        <li>
+                                            <Link to={`/submission/${id}/cust`}>Customer</Link>
+                                        </li>
+                                        <li>
+                                            <Link to={`/submission/${id}/comments`}>Comments</Link>
+                                        </li>
+                                        <li class={`is-active`}>
+                                            <Link to={`/submission/${id}/file`}><b>File</b></Link>
+                                        </li>
+                                      </ul>
+                                    </div>
 
-                        {!isFetching && submission && <div class="container">
-                            <div class="tabs is-medium">
-                              <ul>
-                                <li>
-                                    <Link to={`/submission/${id}`}>Detail</Link>
-                                </li>
-                                <li>
-                                    <Link to={`/submission/${id}/cust`}>Customer</Link>
-                                </li>
-                                <li>
-                                    <Link to={`/submission/${id}/comments`}>Comments</Link>
-                                </li>
-                                <li class={`is-active`}>
-                                    <Link to={`/submission/${id}/file`}><b>File</b></Link>
-                                </li>
-                              </ul>
-                            </div>
+                                    <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faFile} />&nbsp;File</p>
+                                    <hr />
+                                    <p class="pb-4 has-text-grey">Click the following "Download PDF" button to start downloading a copy of this submission in PDF file format to your computer.</p>
 
-                            <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faFile} />&nbsp;File</p>
-                            <hr />
-                            <p class="pb-4 has-text-grey">Click the following "Download PDF" button to start downloading a copy of this submission in PDF file format to your computer.</p>
-
-                            <section class="hero has-background-white-ter">
-                                <div class="hero-body">
-                                    <p class="subtitle">
-                                        <div class="has-text-centered">
-                                            <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-large is-success is-hidden-touch"><FontAwesomeIcon className="fas" icon={faDownload} />&nbsp;Download PDF</a>
-                                            <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-large is-success is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faDownload} />&nbsp;Download PDF</a>
+                                    <section class="hero has-background-white-ter">
+                                        <div class="hero-body">
+                                            <p class="subtitle">
+                                                <div class="has-text-centered">
+                                                    <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-large is-success is-hidden-touch"><FontAwesomeIcon className="fas" icon={faDownload} />&nbsp;Download PDF</a>
+                                                    <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-large is-success is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faDownload} />&nbsp;Download PDF</a>
+                                                </div>
+                                            </p>
                                         </div>
-                                    </p>
-                                </div>
-                            </section>
+                                    </section>
 
-                            <div class="columns pt-4">
-                                <div class="column is-half">
-                                    <Link to={`/submissions`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                    <Link to={`/submissions`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                </div>
-                                <div class="column is-half has-text-right">
-                                {/*
-                                    <Link to={`/submission/${id}/edit`} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Submission</Link>
-                                    <Link to={`/submission/${id}/edit`} class="button is-medium is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Submission</Link>
-                                */}
-                                </div>
-                            </div>
-                        </div>}
+                                    <div class="columns pt-4">
+                                        <div class="column is-half">
+                                            <Link to={`/submissions`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link to={`/submissions`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                        </div>
+                                        <div class="column is-half has-text-right">
+                                        {/*
+                                            <Link to={`/submission/${id}/edit`} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Submission</Link>
+                                            <Link to={`/submission/${id}/edit`} class="button is-medium is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Submission</Link>
+                                        */}
+                                        </div>
+                                    </div>
+                                </div>}
+                            </>
+                        }
                     </nav>
                 </section>
             </div>

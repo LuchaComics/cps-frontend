@@ -135,53 +135,57 @@ function AdminOrganizationDetail() {
 
                         {/* <p class="pb-4">Please fill out all the required fields before submitting this form.</p> */}
 
-                        {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
+                        {isFetching
+                            ?
+                            <PageLoadingContent displayMessage={"Loading..."} />
+                            :
+                            <>
+                                {organization && <div class="container">
+                                    <div class="tabs is-medium">
+                                      <ul>
+                                        <li class="is-active">
+                                            <Link><b>Detail</b></Link>
+                                        </li>
+                                        <li>
+                                            <Link to={`/admin/organization/${organization.id}/users`}>Users</Link>
+                                        </li>
+                                        <li>
+                                            <Link to={`/admin/organization/${organization.id}/sub`}>Submissions</Link>
+                                        </li>
+                                        <li>
+                                            <Link to={`/admin/organization/${organization.id}/comments`}>Comments</Link>
+                                        </li>
+                                      </ul>
+                                    </div>
 
-                        {!isFetching && organization && <div class="container">
-                            <div class="tabs is-medium">
-                              <ul>
-                                <li class="is-active">
-                                    <Link><b>Detail</b></Link>
-                                </li>
-                                <li>
-                                    <Link to={`/admin/organization/${organization.id}/users`}>Users</Link>
-                                </li>
-                                <li>
-                                    <Link to={`/admin/organization/${organization.id}/sub`}>Submissions</Link>
-                                </li>
-                                <li>
-                                    <Link to={`/admin/organization/${organization.id}/comments`}>Comments</Link>
-                                </li>
-                              </ul>
-                            </div>
+                                    <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Identification</p>
+                                    <hr />
 
-                            <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Identification</p>
-                            <hr />
+                                    <FormInputField
+                                        label="Name"
+                                        name="name"
+                                        placeholder="Text input"
+                                        value={organization.name}
+                                        helpText=""
+                                        isRequired={true}
+                                        maxWidth="380px"
+                                        disabled={true}
+                                    />
 
-                            <FormInputField
-                                label="Name"
-                                name="name"
-                                placeholder="Text input"
-                                value={organization.name}
-                                helpText=""
-                                isRequired={true}
-                                maxWidth="380px"
-                                disabled={true}
-                            />
+                                    <div class="columns pt-5">
+                                        <div class="column is-half">
+                                            <Link class="button is-hidden-touch" to={`/admin/organizations`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link class="button is-fullwidth is-hidden-desktop" to={`/admin/organizations`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                        </div>
+                                        <div class="column is-half has-text-right">
+                                            <Link to={`/admin/organization/${id}/edit`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
+                                            <Link to={`/admin/organization/${id}/edit`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
+                                        </div>
+                                    </div>
 
-                            <div class="columns pt-5">
-                                <div class="column is-half">
-                                    <Link class="button is-hidden-touch" to={`/admin/organizations`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                    <Link class="button is-fullwidth is-hidden-desktop" to={`/admin/organizations`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                </div>
-                                <div class="column is-half has-text-right">
-                                    <Link to={`/admin/organization/${id}/edit`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
-                                    <Link to={`/admin/organization/${id}/edit`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
-                                </div>
-                            </div>
-
-
-                        </div>}
+                                </div>}
+                            </>
+                        }
                     </nav>
                 </section>
             </div>

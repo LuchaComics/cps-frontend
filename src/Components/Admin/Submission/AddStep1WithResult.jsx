@@ -179,47 +179,52 @@ function AdminSubmissionAddStep1WithResult() {
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Results</p>
                             <hr />
 
-                            {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
-
-                            {!isFetching && users && users.results && users.results.length > 0
+                            {isFetching
                                 ?
-                                <div class="columns">
-                                    {users.results.map(function(user, i){
-                                        return <div class="column is-one-quarter" key={user.id}>
-                                            <span className="has-text-grey-light is-size-7">
-                                                User found via <a href={`/admin/organization/${user.organizationId}`} target="_blank" rel="noreferrer">{user.organizationName}&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></a>
-                                            </span>
-                                            <article class="message is-primary">
-                                                <div class="message-body">
-                                                    <p>
-                                                        <Link to={`/admin/user/${user.id}`} target="_blank" rel="noreferrer">
-                                                            <b>{user.name}</b>&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
-                                                        </Link>
-                                                    </p>
-                                                    <p>{user.country}&nbsp;{user.region}&nbsp;{user.city}</p>
-                                                    <p>{user.addressLine1}, {user.postalCode}</p>
-                                                    <p><a href={`mailto:${user.email}`}>{user.email}</a></p>
-                                                    <p><a href={`tel:${user.phone}`}>{user.phone}</a></p>
-                                                    <br />
-                                                    <Link class="button is-medium is-primary" to={`/admin/submissions/add?user_id=${user.id}`}>
-                                                        <FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Pick
-                                                    </Link>
-                                                </div>
-                                            </article>
-                                        </div>;
-                                    })}
-                                </div>
+                                <PageLoadingContent displayMessage={"Loading..."} />
                                 :
-                                <section class="hero is-medium has-background-white-ter">
-                                  <div class="hero-body">
-                                    <p class="title">
-                                        <FontAwesomeIcon className="fas" icon={faTable} />&nbsp;No Users
-                                    </p>
-                                    <p class="subtitle">
-                                        No results were found in the search.
-                                    </p>
-                                  </div>
-                                </section>
+                                <>
+                                    {users && users.results && users.results.length > 0
+                                        ?
+                                        <div class="columns">
+                                            {users.results.map(function(user, i){
+                                                return <div class="column is-one-quarter" key={user.id}>
+                                                    <span className="has-text-grey-light is-size-7">
+                                                        User found via <a href={`/admin/organization/${user.organizationId}`} target="_blank" rel="noreferrer">{user.organizationName}&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></a>
+                                                    </span>
+                                                    <article class="message is-primary">
+                                                        <div class="message-body">
+                                                            <p>
+                                                                <Link to={`/admin/user/${user.id}`} target="_blank" rel="noreferrer">
+                                                                    <b>{user.name}</b>&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
+                                                                </Link>
+                                                            </p>
+                                                            <p>{user.country}&nbsp;{user.region}&nbsp;{user.city}</p>
+                                                            <p>{user.addressLine1}, {user.postalCode}</p>
+                                                            <p><a href={`mailto:${user.email}`}>{user.email}</a></p>
+                                                            <p><a href={`tel:${user.phone}`}>{user.phone}</a></p>
+                                                            <br />
+                                                            <Link class="button is-medium is-primary" to={`/admin/submissions/add?user_id=${user.id}`}>
+                                                                <FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Pick
+                                                            </Link>
+                                                        </div>
+                                                    </article>
+                                                </div>;
+                                            })}
+                                        </div>
+                                        :
+                                        <section class="hero is-medium has-background-white-ter">
+                                          <div class="hero-body">
+                                            <p class="title">
+                                                <FontAwesomeIcon className="fas" icon={faTable} />&nbsp;No Users
+                                            </p>
+                                            <p class="subtitle">
+                                                No results were found in the search.
+                                            </p>
+                                          </div>
+                                        </section>
+                                    }
+                                </>
                             }
                         </div>
 

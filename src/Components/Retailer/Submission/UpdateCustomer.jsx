@@ -396,486 +396,491 @@ function RetailerSubmissionUpdateForCustomer() {
 
                         <p class="pb-4 has-text-grey">Please fill out all the required fields before submitting this form.</p>
 
-                        {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
+                        {isFetching
+                            ?
+                            <PageLoadingContent displayMessage={"Loading..."} />
+                            :
+                            <>
+                                <div class="container">
 
-                        {!isFetching && <div class="container">
+                                    <p class="subtitle is-3">Comic Book Information</p>
+                                    <hr />
 
-                            <p class="subtitle is-3">Comic Book Information</p>
-                            <hr />
+                                    <FormInputField
+                                        label="Series Title"
+                                        name="seriesTitle"
+                                        placeholder="Text input"
+                                        value={seriesTitle}
+                                        errorText={errors && errors.seriesTitle}
+                                        helpText=""
+                                        onChange={onSeriesTitleChange}
+                                        isRequired={true}
+                                        maxWidth="380px"
+                                    />
 
-                            <FormInputField
-                                label="Series Title"
-                                name="seriesTitle"
-                                placeholder="Text input"
-                                value={seriesTitle}
-                                errorText={errors && errors.seriesTitle}
-                                helpText=""
-                                onChange={onSeriesTitleChange}
-                                isRequired={true}
-                                maxWidth="380px"
-                            />
-
-                            <FormInputField
-                                label="Issue Vol"
-                                name="issueVol"
-                                placeholder="Text input"
-                                value={issueVol}
-                                errorText={errors && errors.issueVol}
-                                helpText=""
-                                onChange={onIssueVolChange}
-                                isRequired={true}
-                                maxWidth="180px"
-                            />
-
-                            <FormInputField
-                                label="Issue No"
-                                name="issueNo"
-                                placeholder="Text input"
-                                value={issueNo}
-                                errorText={errors && errors.issueNo}
-                                helpText=""
-                                onChange={onIssueNoChange}
-                                isRequired={true}
-                                maxWidth="180px"
-                            />
-
-                            <FormInputField
-                                label="Issue Cover Date"
-                                name="issueCoverDate"
-                                placeholder="Text input"
-                                value={issueCoverDate}
-                                errorText={errors && errors.issueCoverDate}
-                                helpText=""
-                                onChange={onIssueCoverDateChange}
-                                isRequired={true}
-                                maxWidth="180px"
-                            />
-
-                            <FormSelectField
-                                label="Publisher Name"
-                                name="publisherName"
-                                placeholder="Publisher Name"
-                                selectedValue={publisherName}
-                                errorText={errors && errors.publisherName}
-                                helpText=""
-                                onChange={onPublisherNameChange}
-                                options={PUBLISHER_NAME_OPTIONS}
-                            />
-
-                            {publisherName === 1 && <FormInputField
-                                label="Publisher Name (Other)"
-                                name="publisherNameOther"
-                                placeholder="Text input"
-                                value={publisherNameOther}
-                                errorText={errors && errors.publisherNameOther}
-                                helpText=""
-                                onChange={onPublisherNameOtherChange}
-                                isRequired={true}
-                                maxWidth="280px"
-                            />}
-
-                            <FormInputField
-                                label="Special Note - Line 1 (Optional)"
-                                name="specialNotesLine1"
-                                placeholder="Text input"
-                                value={specialNotesLine1}
-                                errorText={errors && errors.specialNotesLine1}
-                                helpText=""
-                                onChange={onSpecialNotesLine1Change}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 17 characters"}
-                            />
-
-                            <FormInputField
-                                label="Special Note - Line 2 (Optional)"
-                                name="specialNotesLine2"
-                                placeholder="Text input"
-                                value={specialNotesLine2}
-                                errorText={errors && errors.specialNotesLine2}
-                                helpText=""
-                                onChange={onSpecialNotesLine2Change}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 17 characters"}
-                            />
-
-                            <FormInputField
-                                label="Special Note - Line 3 (Optional)"
-                                name="specialNotesLine3"
-                                placeholder="Text input"
-                                value={specialNotesLine3}
-                                errorText={errors && errors.specialNotesLine3}
-                                helpText=""
-                                onChange={onSpecialNotesLine3Change}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 17 characters"}
-                            />
-
-                            <FormInputField
-                                label="Special Note - Line 4 (Optional)"
-                                name="specialNotesLine4"
-                                placeholder="Text input"
-                                value={specialNotesLine4}
-                                errorText={errors && errors.specialNotesLine4}
-                                helpText=""
-                                onChange={onSpecialNotesLine4Change}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 17 characters"}
-                            />
-
-                            <FormInputField
-                                label="Special Note - Line 5 (Optional)"
-                                name="specialNotesLine5"
-                                placeholder="Text input"
-                                value={specialNotesLine5}
-                                errorText={errors && errors.specialNotesLine5}
-                                helpText=""
-                                onChange={onSpecialNotesLine5Change}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 17 characters"}
-                            />
-
-                            <p class="subtitle is-3">Summary of Findings</p>
-                            <hr />
-
-                            <FormRadioField
-                                label="Creases Finding"
-                                name="creasesFinding"
-                                value={creasesFinding}
-                                opt1Value="pr"
-                                opt1Label="Poor"
-                                opt2Value="fr"
-                                opt2Label="Fair"
-                                opt3Value="gd"
-                                opt3Label="Good"
-                                opt4Value="vg"
-                                opt4Label="Very good"
-                                opt5Value="fn"
-                                opt5Label="Fine"
-                                opt6Value="vf"
-                                opt6Label="Very Fine"
-                                opt7Value="nm"
-                                opt7Label="Near Mint"
-                                errorText={errors && errors.creasesFinding}
-                                onChange={onCreasesFindingChange}
-                                maxWidth="180px"
-                            />
-
-                            <FormRadioField
-                                label="Tears Finding"
-                                name="tearsFinding"
-                                value={tearsFinding}
-                                opt1Value="pr"
-                                opt1Label="Poor"
-                                opt2Value="fr"
-                                opt2Label="Fair"
-                                opt3Value="gd"
-                                opt3Label="Good"
-                                opt4Value="vg"
-                                opt4Label="Very good"
-                                opt5Value="fn"
-                                opt5Label="Fine"
-                                opt6Value="vf"
-                                opt6Label="Very Fine"
-                                opt7Value="nm"
-                                opt7Label="Near Mint"
-                                errorText={errors && errors.tearsFinding}
-                                onChange={onTearsFindingChange}
-                                maxWidth="180px"
-                            />
-
-                            <FormRadioField
-                                label="Missing Parts Finding"
-                                name="missingPartsFinding"
-                                value={missingPartsFinding}
-                                opt1Value="pr"
-                                opt1Label="Poor"
-                                opt2Value="fr"
-                                opt2Label="Fair"
-                                opt3Value="gd"
-                                opt3Label="Good"
-                                opt4Value="vg"
-                                opt4Label="Very good"
-                                opt5Value="fn"
-                                opt5Label="Fine"
-                                opt6Value="vf"
-                                opt6Label="Very Fine"
-                                opt7Value="nm"
-                                opt7Label="Near Mint"
-                                errorText={errors && errors.missingPartsFinding}
-                                onChange={onMissingPartsFindingChange}
-                                maxWidth="180px"
-                            />
-
-                            <FormRadioField
-                                label="Stains/Marks/Substances"
-                                name="stainsFinding"
-                                value={stainsFinding}
-                                opt1Value="pr"
-                                opt1Label="Poor"
-                                opt2Value="fr"
-                                opt2Label="Fair"
-                                opt3Value="gd"
-                                opt3Label="Good"
-                                opt4Value="vg"
-                                opt4Label="Very good"
-                                opt5Value="fn"
-                                opt5Label="Fine"
-                                opt6Value="vf"
-                                opt6Label="Very Fine"
-                                opt7Value="nm"
-                                opt7Label="Near Mint"
-                                errorText={errors && errors.stainsFinding}
-                                onChange={onStainsFindingChange}
-                                maxWidth="180px"
-                            />
-
-                            <FormRadioField
-                                label="Distortion Finding"
-                                name="distortionFinding"
-                                value={distortionFinding}
-                                opt1Value="pr"
-                                opt1Label="Poor"
-                                opt2Value="fr"
-                                opt2Label="Fair"
-                                opt3Value="gd"
-                                opt3Label="Good"
-                                opt4Value="vg"
-                                opt4Label="Very good"
-                                opt5Value="fn"
-                                opt5Label="Fine"
-                                opt6Value="vf"
-                                opt6Label="Very Fine"
-                                opt7Value="nm"
-                                opt7Label="Near Mint"
-                                errorText={errors && errors.distortionFinding}
-                                onChange={onDistortionFindingChange}
-                                maxWidth="180px"
-                            />
-
-                            <FormRadioField
-                                label="Paper Quality Finding"
-                                name="paperQualityFinding"
-                                value={paperQualityFinding}
-                                opt1Value="pr"
-                                opt1Label="Poor"
-                                opt2Value="fr"
-                                opt2Label="Fair"
-                                opt3Value="gd"
-                                opt3Label="Good"
-                                opt4Value="vg"
-                                opt4Label="Very good"
-                                opt5Value="fn"
-                                opt5Label="Fine"
-                                opt6Value="vf"
-                                opt6Label="Very Fine"
-                                opt7Value="nm"
-                                opt7Label="Near Mint"
-                                errorText={errors && errors.paperQualityFinding}
-                                onChange={onPaperQualityFindingChange}
-                                maxWidth="180px"
-                            />
-
-                            <FormRadioField
-                                label="Spine Finding"
-                                name="spineFinding"
-                                value={spineFinding}
-                                opt1Value="pr"
-                                opt1Label="Poor"
-                                opt2Value="fr"
-                                opt2Label="Fair"
-                                opt3Value="gd"
-                                opt3Label="Good"
-                                opt4Value="vg"
-                                opt4Label="Very good"
-                                opt5Value="fn"
-                                opt5Label="Fine"
-                                opt6Value="vf"
-                                opt6Label="Very Fine"
-                                opt7Value="nm"
-                                opt7Label="Near Mint"
-                                errorText={errors && errors.spineFinding}
-                                onChange={onSpineFindingChange}
-                                maxWidth="180px"
-                            />
-
-                            <FormRadioField
-                                label="Cover Finding"
-                                name="coverFinding"
-                                value={coverFinding}
-                                opt1Value="pr"
-                                opt1Label="Poor"
-                                opt2Value="fr"
-                                opt2Label="Fair"
-                                opt3Value="gd"
-                                opt3Label="Good"
-                                opt4Value="vg"
-                                opt4Label="Very good"
-                                opt5Value="fn"
-                                opt5Label="Fine"
-                                opt6Value="vf"
-                                opt6Label="Very Fine"
-                                opt7Value="nm"
-                                opt7Label="Near Mint"
-                                errorText={errors && errors.coverFinding}
-                                onChange={onCoverFindingChange}
-                                maxWidth="180px"
-                            />
-
-                            <FormRadioField
-                                label="Shows signs of tampering/restoration"
-                                name="showsSignsOfTamperingOrRestoration"
-                                value={showsSignsOfTamperingOrRestoration}
-                                opt1Value={"2"}
-                                opt1Label="No"
-                                opt2Value={"1"}
-                                opt2Label="Yes"
-                                errorText={errors && errors.showsSignsOfTamperingOrRestoration}
-                                onChange={onShowsSignsOfTamperingOrRestorationChange}
-                                maxWidth="180px"
-                            />
-
-                            <FormInputField
-                                label="Grading Note - Line 1 (Optional)"
-                                name="gradingNotesLine1"
-                                placeholder="Text input"
-                                value={gradingNotesLine1}
-                                errorText={errors && errors.gradingNotesLine1}
-                                helpText=""
-                                onChange={onGradingNotesLine1Change}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 17 characters"}
-                            />
-
-                            <FormInputField
-                                label="Grading Note - Line 2 (Optional)"
-                                name="gradingNotesLine2"
-                                placeholder="Text input"
-                                value={gradingNotesLine2}
-                                errorText={errors && errors.gradingNotesLine2}
-                                helpText=""
-                                onChange={onGradingNotesLine2Change}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 17 characters"}
-                            />
-
-                            <FormInputField
-                                label="Grading Note - Line 3 (Optional)"
-                                name="gradingNotesLine3"
-                                placeholder="Text input"
-                                value={gradingNotesLine3}
-                                errorText={errors && errors.gradingNotesLine3}
-                                helpText=""
-                                onChange={onGradingNotesLine3Change}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 17 characters"}
-                            />
-
-                            <FormInputField
-                                label="Grading Note - Line 4 (Optional)"
-                                name="gradingNotesLine4"
-                                placeholder="Text input"
-                                value={gradingNotesLine4}
-                                errorText={errors && errors.gradingNotesLine4}
-                                helpText=""
-                                onChange={onGradingNotesLine4Change}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 17 characters"}
-                            />
-
-                            <FormInputField
-                                label="Grading Note - Line 5 (Optional)"
-                                name="gradingNotesLine5"
-                                placeholder="Text input"
-                                value={gradingNotesLine5}
-                                errorText={errors && errors.gradingNotesLine5}
-                                helpText=""
-                                onChange={onGradingNotesLine5Change}
-                                isRequired={true}
-                                maxWidth="280px"
-                                helpText={"Max 17 characters"}
-                            />
-
-                            <p class="subtitle is-3">Grading</p>
-                            <hr />
-
-                            <FormRadioField
-                                label="Which type of grading scale would you prefer?"
-                                name="gradingScale"
-                                value={gradingScale}
-                                opt1Value={1}
-                                opt1Label="Letter Grade (Poor-Near Mint)"
-                                opt2Value={2}
-                                opt2Label="Numbers (0.5-10.0)"
-                                opt3Value={3}
-                                opt3Label="CPS Percentage (5%-100%)"
-                                errorText={errors && errors.gradingScale}
-                                onChange={onGradingScaleChange}
-                                maxWidth="180px"
-                            />
-
-                            {gradingScale === 1 && <>
-                                <FormSelectField
-                                    label="Overall Letter Grade"
-                                    name="overallLetterGrade"
-                                    placeholder="Overall Letter Grade"
-                                    selectedValue={overallLetterGrade}
-                                    errorText={errors && errors.overallLetterGrade}
-                                    helpText=""
-                                    onChange={(e)=>setOverallLetterGrade(e.target.value)}
-                                    options={FINDING_OPTIONS}
-                                />
-                                {isNMPlusOpen && <>
-                                    <FormCheckboxField
-                                        label="Is Near Mint plus?"
-                                        name="isOverallLetterGradeNearMintPlus"
-                                        checked={isOverallLetterGradeNearMintPlus}
-                                        errorText={errors && errors.isOverallLetterGradeNearMintPlus}
-                                        onChange={(e)=>setIsOverallLetterGradeNearMintPlus(!isOverallLetterGradeNearMintPlus)}
+                                    <FormInputField
+                                        label="Issue Vol"
+                                        name="issueVol"
+                                        placeholder="Text input"
+                                        value={issueVol}
+                                        errorText={errors && errors.issueVol}
+                                        helpText=""
+                                        onChange={onIssueVolChange}
+                                        isRequired={true}
                                         maxWidth="180px"
                                     />
-                                </>}
-                            </>}
-                            {gradingScale === 2 && <FormSelectField
-                                label="Overall Number Grade"
-                                name="overallNumberGrade"
-                                placeholder="Overall Grade"
-                                selectedValue={overallNumberGrade}
-                                errorText={errors && errors.overallNumberGrade}
-                                helpText=""
-                                onChange={onOverallNumberGradeChange}
-                                options={OVERALL_NUMBER_GRADE_OPTIONS}
-                            />}
-                            {gradingScale === 3 && <FormSelectField
-                                label="CPS Percentage Grade"
-                                name="cpsPercentageGrade"
-                                placeholder="CPS Percentage Grade"
-                                selectedValue={cpsPercentageGrade}
-                                errorText={errors && errors.cpsPercentageGrade}
-                                helpText=""
-                                onChange={onCpsPercentageGradeChange}
-                                options={CPS_PERCENTAGE_GRADE_OPTIONS}
-                            />}
-                            <div class="columns pt-5">
-                                <div class="column is-half">
-                                    <Link to={`/submission/${id}`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                    <Link to={`/submission/${id}`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                </div>
-                                <div class="column is-half has-text-right">
-                                    <button class="button is-primary is-medium is-hidden-touch" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
-                                    <button class="button is-primary is-medium is-fullwidth is-hidden-desktop" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
-                                </div>
-                            </div>
 
-                        </div>}
+                                    <FormInputField
+                                        label="Issue No"
+                                        name="issueNo"
+                                        placeholder="Text input"
+                                        value={issueNo}
+                                        errorText={errors && errors.issueNo}
+                                        helpText=""
+                                        onChange={onIssueNoChange}
+                                        isRequired={true}
+                                        maxWidth="180px"
+                                    />
+
+                                    <FormInputField
+                                        label="Issue Cover Date"
+                                        name="issueCoverDate"
+                                        placeholder="Text input"
+                                        value={issueCoverDate}
+                                        errorText={errors && errors.issueCoverDate}
+                                        helpText=""
+                                        onChange={onIssueCoverDateChange}
+                                        isRequired={true}
+                                        maxWidth="180px"
+                                    />
+
+                                    <FormSelectField
+                                        label="Publisher Name"
+                                        name="publisherName"
+                                        placeholder="Publisher Name"
+                                        selectedValue={publisherName}
+                                        errorText={errors && errors.publisherName}
+                                        helpText=""
+                                        onChange={onPublisherNameChange}
+                                        options={PUBLISHER_NAME_OPTIONS}
+                                    />
+
+                                    {publisherName === 1 && <FormInputField
+                                        label="Publisher Name (Other)"
+                                        name="publisherNameOther"
+                                        placeholder="Text input"
+                                        value={publisherNameOther}
+                                        errorText={errors && errors.publisherNameOther}
+                                        helpText=""
+                                        onChange={onPublisherNameOtherChange}
+                                        isRequired={true}
+                                        maxWidth="280px"
+                                    />}
+
+                                    <FormInputField
+                                        label="Special Note - Line 1 (Optional)"
+                                        name="specialNotesLine1"
+                                        placeholder="Text input"
+                                        value={specialNotesLine1}
+                                        errorText={errors && errors.specialNotesLine1}
+                                        helpText=""
+                                        onChange={onSpecialNotesLine1Change}
+                                        isRequired={true}
+                                        maxWidth="280px"
+                                        helpText={"Max 17 characters"}
+                                    />
+
+                                    <FormInputField
+                                        label="Special Note - Line 2 (Optional)"
+                                        name="specialNotesLine2"
+                                        placeholder="Text input"
+                                        value={specialNotesLine2}
+                                        errorText={errors && errors.specialNotesLine2}
+                                        helpText=""
+                                        onChange={onSpecialNotesLine2Change}
+                                        isRequired={true}
+                                        maxWidth="280px"
+                                        helpText={"Max 17 characters"}
+                                    />
+
+                                    <FormInputField
+                                        label="Special Note - Line 3 (Optional)"
+                                        name="specialNotesLine3"
+                                        placeholder="Text input"
+                                        value={specialNotesLine3}
+                                        errorText={errors && errors.specialNotesLine3}
+                                        helpText=""
+                                        onChange={onSpecialNotesLine3Change}
+                                        isRequired={true}
+                                        maxWidth="280px"
+                                        helpText={"Max 17 characters"}
+                                    />
+
+                                    <FormInputField
+                                        label="Special Note - Line 4 (Optional)"
+                                        name="specialNotesLine4"
+                                        placeholder="Text input"
+                                        value={specialNotesLine4}
+                                        errorText={errors && errors.specialNotesLine4}
+                                        helpText=""
+                                        onChange={onSpecialNotesLine4Change}
+                                        isRequired={true}
+                                        maxWidth="280px"
+                                        helpText={"Max 17 characters"}
+                                    />
+
+                                    <FormInputField
+                                        label="Special Note - Line 5 (Optional)"
+                                        name="specialNotesLine5"
+                                        placeholder="Text input"
+                                        value={specialNotesLine5}
+                                        errorText={errors && errors.specialNotesLine5}
+                                        helpText=""
+                                        onChange={onSpecialNotesLine5Change}
+                                        isRequired={true}
+                                        maxWidth="280px"
+                                        helpText={"Max 17 characters"}
+                                    />
+
+                                    <p class="subtitle is-3">Summary of Findings</p>
+                                    <hr />
+
+                                    <FormRadioField
+                                        label="Creases Finding"
+                                        name="creasesFinding"
+                                        value={creasesFinding}
+                                        opt1Value="pr"
+                                        opt1Label="Poor"
+                                        opt2Value="fr"
+                                        opt2Label="Fair"
+                                        opt3Value="gd"
+                                        opt3Label="Good"
+                                        opt4Value="vg"
+                                        opt4Label="Very good"
+                                        opt5Value="fn"
+                                        opt5Label="Fine"
+                                        opt6Value="vf"
+                                        opt6Label="Very Fine"
+                                        opt7Value="nm"
+                                        opt7Label="Near Mint"
+                                        errorText={errors && errors.creasesFinding}
+                                        onChange={onCreasesFindingChange}
+                                        maxWidth="180px"
+                                    />
+
+                                    <FormRadioField
+                                        label="Tears Finding"
+                                        name="tearsFinding"
+                                        value={tearsFinding}
+                                        opt1Value="pr"
+                                        opt1Label="Poor"
+                                        opt2Value="fr"
+                                        opt2Label="Fair"
+                                        opt3Value="gd"
+                                        opt3Label="Good"
+                                        opt4Value="vg"
+                                        opt4Label="Very good"
+                                        opt5Value="fn"
+                                        opt5Label="Fine"
+                                        opt6Value="vf"
+                                        opt6Label="Very Fine"
+                                        opt7Value="nm"
+                                        opt7Label="Near Mint"
+                                        errorText={errors && errors.tearsFinding}
+                                        onChange={onTearsFindingChange}
+                                        maxWidth="180px"
+                                    />
+
+                                    <FormRadioField
+                                        label="Missing Parts Finding"
+                                        name="missingPartsFinding"
+                                        value={missingPartsFinding}
+                                        opt1Value="pr"
+                                        opt1Label="Poor"
+                                        opt2Value="fr"
+                                        opt2Label="Fair"
+                                        opt3Value="gd"
+                                        opt3Label="Good"
+                                        opt4Value="vg"
+                                        opt4Label="Very good"
+                                        opt5Value="fn"
+                                        opt5Label="Fine"
+                                        opt6Value="vf"
+                                        opt6Label="Very Fine"
+                                        opt7Value="nm"
+                                        opt7Label="Near Mint"
+                                        errorText={errors && errors.missingPartsFinding}
+                                        onChange={onMissingPartsFindingChange}
+                                        maxWidth="180px"
+                                    />
+
+                                    <FormRadioField
+                                        label="Stains/Marks/Substances"
+                                        name="stainsFinding"
+                                        value={stainsFinding}
+                                        opt1Value="pr"
+                                        opt1Label="Poor"
+                                        opt2Value="fr"
+                                        opt2Label="Fair"
+                                        opt3Value="gd"
+                                        opt3Label="Good"
+                                        opt4Value="vg"
+                                        opt4Label="Very good"
+                                        opt5Value="fn"
+                                        opt5Label="Fine"
+                                        opt6Value="vf"
+                                        opt6Label="Very Fine"
+                                        opt7Value="nm"
+                                        opt7Label="Near Mint"
+                                        errorText={errors && errors.stainsFinding}
+                                        onChange={onStainsFindingChange}
+                                        maxWidth="180px"
+                                    />
+
+                                    <FormRadioField
+                                        label="Distortion Finding"
+                                        name="distortionFinding"
+                                        value={distortionFinding}
+                                        opt1Value="pr"
+                                        opt1Label="Poor"
+                                        opt2Value="fr"
+                                        opt2Label="Fair"
+                                        opt3Value="gd"
+                                        opt3Label="Good"
+                                        opt4Value="vg"
+                                        opt4Label="Very good"
+                                        opt5Value="fn"
+                                        opt5Label="Fine"
+                                        opt6Value="vf"
+                                        opt6Label="Very Fine"
+                                        opt7Value="nm"
+                                        opt7Label="Near Mint"
+                                        errorText={errors && errors.distortionFinding}
+                                        onChange={onDistortionFindingChange}
+                                        maxWidth="180px"
+                                    />
+
+                                    <FormRadioField
+                                        label="Paper Quality Finding"
+                                        name="paperQualityFinding"
+                                        value={paperQualityFinding}
+                                        opt1Value="pr"
+                                        opt1Label="Poor"
+                                        opt2Value="fr"
+                                        opt2Label="Fair"
+                                        opt3Value="gd"
+                                        opt3Label="Good"
+                                        opt4Value="vg"
+                                        opt4Label="Very good"
+                                        opt5Value="fn"
+                                        opt5Label="Fine"
+                                        opt6Value="vf"
+                                        opt6Label="Very Fine"
+                                        opt7Value="nm"
+                                        opt7Label="Near Mint"
+                                        errorText={errors && errors.paperQualityFinding}
+                                        onChange={onPaperQualityFindingChange}
+                                        maxWidth="180px"
+                                    />
+
+                                    <FormRadioField
+                                        label="Spine Finding"
+                                        name="spineFinding"
+                                        value={spineFinding}
+                                        opt1Value="pr"
+                                        opt1Label="Poor"
+                                        opt2Value="fr"
+                                        opt2Label="Fair"
+                                        opt3Value="gd"
+                                        opt3Label="Good"
+                                        opt4Value="vg"
+                                        opt4Label="Very good"
+                                        opt5Value="fn"
+                                        opt5Label="Fine"
+                                        opt6Value="vf"
+                                        opt6Label="Very Fine"
+                                        opt7Value="nm"
+                                        opt7Label="Near Mint"
+                                        errorText={errors && errors.spineFinding}
+                                        onChange={onSpineFindingChange}
+                                        maxWidth="180px"
+                                    />
+
+                                    <FormRadioField
+                                        label="Cover Finding"
+                                        name="coverFinding"
+                                        value={coverFinding}
+                                        opt1Value="pr"
+                                        opt1Label="Poor"
+                                        opt2Value="fr"
+                                        opt2Label="Fair"
+                                        opt3Value="gd"
+                                        opt3Label="Good"
+                                        opt4Value="vg"
+                                        opt4Label="Very good"
+                                        opt5Value="fn"
+                                        opt5Label="Fine"
+                                        opt6Value="vf"
+                                        opt6Label="Very Fine"
+                                        opt7Value="nm"
+                                        opt7Label="Near Mint"
+                                        errorText={errors && errors.coverFinding}
+                                        onChange={onCoverFindingChange}
+                                        maxWidth="180px"
+                                    />
+
+                                    <FormRadioField
+                                        label="Shows signs of tampering/restoration"
+                                        name="showsSignsOfTamperingOrRestoration"
+                                        value={showsSignsOfTamperingOrRestoration}
+                                        opt1Value={"2"}
+                                        opt1Label="No"
+                                        opt2Value={"1"}
+                                        opt2Label="Yes"
+                                        errorText={errors && errors.showsSignsOfTamperingOrRestoration}
+                                        onChange={onShowsSignsOfTamperingOrRestorationChange}
+                                        maxWidth="180px"
+                                    />
+
+                                    <FormInputField
+                                        label="Grading Note - Line 1 (Optional)"
+                                        name="gradingNotesLine1"
+                                        placeholder="Text input"
+                                        value={gradingNotesLine1}
+                                        errorText={errors && errors.gradingNotesLine1}
+                                        helpText=""
+                                        onChange={onGradingNotesLine1Change}
+                                        isRequired={true}
+                                        maxWidth="280px"
+                                        helpText={"Max 17 characters"}
+                                    />
+
+                                    <FormInputField
+                                        label="Grading Note - Line 2 (Optional)"
+                                        name="gradingNotesLine2"
+                                        placeholder="Text input"
+                                        value={gradingNotesLine2}
+                                        errorText={errors && errors.gradingNotesLine2}
+                                        helpText=""
+                                        onChange={onGradingNotesLine2Change}
+                                        isRequired={true}
+                                        maxWidth="280px"
+                                        helpText={"Max 17 characters"}
+                                    />
+
+                                    <FormInputField
+                                        label="Grading Note - Line 3 (Optional)"
+                                        name="gradingNotesLine3"
+                                        placeholder="Text input"
+                                        value={gradingNotesLine3}
+                                        errorText={errors && errors.gradingNotesLine3}
+                                        helpText=""
+                                        onChange={onGradingNotesLine3Change}
+                                        isRequired={true}
+                                        maxWidth="280px"
+                                        helpText={"Max 17 characters"}
+                                    />
+
+                                    <FormInputField
+                                        label="Grading Note - Line 4 (Optional)"
+                                        name="gradingNotesLine4"
+                                        placeholder="Text input"
+                                        value={gradingNotesLine4}
+                                        errorText={errors && errors.gradingNotesLine4}
+                                        helpText=""
+                                        onChange={onGradingNotesLine4Change}
+                                        isRequired={true}
+                                        maxWidth="280px"
+                                        helpText={"Max 17 characters"}
+                                    />
+
+                                    <FormInputField
+                                        label="Grading Note - Line 5 (Optional)"
+                                        name="gradingNotesLine5"
+                                        placeholder="Text input"
+                                        value={gradingNotesLine5}
+                                        errorText={errors && errors.gradingNotesLine5}
+                                        helpText=""
+                                        onChange={onGradingNotesLine5Change}
+                                        isRequired={true}
+                                        maxWidth="280px"
+                                        helpText={"Max 17 characters"}
+                                    />
+
+                                    <p class="subtitle is-3">Grading</p>
+                                    <hr />
+
+                                    <FormRadioField
+                                        label="Which type of grading scale would you prefer?"
+                                        name="gradingScale"
+                                        value={gradingScale}
+                                        opt1Value={1}
+                                        opt1Label="Letter Grade (Poor-Near Mint)"
+                                        opt2Value={2}
+                                        opt2Label="Numbers (0.5-10.0)"
+                                        opt3Value={3}
+                                        opt3Label="CPS Percentage (5%-100%)"
+                                        errorText={errors && errors.gradingScale}
+                                        onChange={onGradingScaleChange}
+                                        maxWidth="180px"
+                                    />
+
+                                    {gradingScale === 1 && <>
+                                        <FormSelectField
+                                            label="Overall Letter Grade"
+                                            name="overallLetterGrade"
+                                            placeholder="Overall Letter Grade"
+                                            selectedValue={overallLetterGrade}
+                                            errorText={errors && errors.overallLetterGrade}
+                                            helpText=""
+                                            onChange={(e)=>setOverallLetterGrade(e.target.value)}
+                                            options={FINDING_OPTIONS}
+                                        />
+                                        {isNMPlusOpen && <>
+                                            <FormCheckboxField
+                                                label="Is Near Mint plus?"
+                                                name="isOverallLetterGradeNearMintPlus"
+                                                checked={isOverallLetterGradeNearMintPlus}
+                                                errorText={errors && errors.isOverallLetterGradeNearMintPlus}
+                                                onChange={(e)=>setIsOverallLetterGradeNearMintPlus(!isOverallLetterGradeNearMintPlus)}
+                                                maxWidth="180px"
+                                            />
+                                        </>}
+                                    </>}
+                                    {gradingScale === 2 && <FormSelectField
+                                        label="Overall Number Grade"
+                                        name="overallNumberGrade"
+                                        placeholder="Overall Grade"
+                                        selectedValue={overallNumberGrade}
+                                        errorText={errors && errors.overallNumberGrade}
+                                        helpText=""
+                                        onChange={onOverallNumberGradeChange}
+                                        options={OVERALL_NUMBER_GRADE_OPTIONS}
+                                    />}
+                                    {gradingScale === 3 && <FormSelectField
+                                        label="CPS Percentage Grade"
+                                        name="cpsPercentageGrade"
+                                        placeholder="CPS Percentage Grade"
+                                        selectedValue={cpsPercentageGrade}
+                                        errorText={errors && errors.cpsPercentageGrade}
+                                        helpText=""
+                                        onChange={onCpsPercentageGradeChange}
+                                        options={CPS_PERCENTAGE_GRADE_OPTIONS}
+                                    />}
+                                    <div class="columns pt-5">
+                                        <div class="column is-half">
+                                            <Link to={`/submission/${id}`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link to={`/submission/${id}`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                        </div>
+                                        <div class="column is-half has-text-right">
+                                            <button class="button is-primary is-medium is-hidden-touch" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
+                                            <button class="button is-primary is-medium is-fullwidth is-hidden-desktop" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </>
+                        }
                     </nav>
                 </section>
             </div>

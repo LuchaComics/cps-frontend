@@ -8,6 +8,7 @@ import { useRecoilState } from 'recoil';
 import { getCustomerListAPI, deleteCustomerAPI } from "../../../API/customer";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 import { SUBMISSION_STATES } from "../../../Constants/FieldOptions";
+import FormErrorBox from "../../Element/FormErrorBox";
 import PageLoadingContent from "../../Element/PageLoadingContent";
 
 
@@ -24,7 +25,7 @@ function RetailerCustomerList() {
     //// Component states.
     ////
 
-    const [setErrors] = useState({});
+    const [errors, setErrors] = useState({});
     const [customers, setCustomers] = useState("");
     const [selectedCustomerForDeletion, setSelectedCustomerForDeletion] = useState("");
     const [isFetching, setFetching] = useState(false);
@@ -194,63 +195,70 @@ function RetailerCustomerList() {
                                 </Link>
                             </div>
                         </div>
-                        {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
-                        {!isFetching && customers && customers.results && customers.results.length > 0
+                        <FormErrorBox errors={errors} />
+                        {isFetching
                             ?
-                            <div class="container">
-                                <div class="b-table">
-                                    <div class="table-wrapper has-mobile-cards">
-                                        <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
-                                            <thead>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Email</th>
-                                                    <th>Created</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                            <PageLoadingContent displayMessage={"Loading..."} />
+                            :
+                            <>
+                                {customers && customers.results && customers.results.length > 0
+                                    ?
+                                    <div class="container">
+                                        <div class="b-table">
+                                            <div class="table-wrapper has-mobile-cards">
+                                                <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>Email</th>
+                                                            <th>Created</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
 
-                                                {customers && customers.results && customers.results.map(function(customer, i){
-                                                    return <tr>
-                                                        <td data-label="Name">{customer.name}</td>
-                                                        <td data-label="Email">{customer.email}</td>
-                                                        <td data-label="Created">{customer.createdAt}</td>
-                                                        <td class="is-actions-cell">
-                                                            <div class="buttons is-right">
-                                                                <Link to={`/submissions/add?customer_id=${customer.id}&customer_name=${customer.name}`} class="button is-small is-success" type="button">
-                                                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
-                                                                </Link>
-                                                                <Link to={`/customer/${customer.id}`} class="button is-small is-primary" type="button">
-                                                                    <FontAwesomeIcon className="mdi" icon={faEye} />&nbsp;View
-                                                                </Link>
-                                                                <Link to={`/customer/${customer.id}/edit`} class="button is-small is-warning" type="button">
-                                                                    <FontAwesomeIcon className="mdi" icon={faPencil} />&nbsp;Edit
-                                                                </Link>
-                                                                <button onClick={(e, ses) => onSelectCustomerForDeletion(e, customer)} class="button is-small is-danger" type="button">
-                                                                    <FontAwesomeIcon className="mdi" icon={faTrashCan} />&nbsp;Delete
-                                                                </button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>;
-                                                })}
-                                            </tbody>
-                                        </table>
+                                                        {customers && customers.results && customers.results.map(function(customer, i){
+                                                            return <tr>
+                                                                <td data-label="Name">{customer.name}</td>
+                                                                <td data-label="Email">{customer.email}</td>
+                                                                <td data-label="Created">{customer.createdAt}</td>
+                                                                <td class="is-actions-cell">
+                                                                    <div class="buttons is-right">
+                                                                        <Link to={`/submissions/add?customer_id=${customer.id}&customer_name=${customer.name}`} class="button is-small is-success" type="button">
+                                                                            <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
+                                                                        </Link>
+                                                                        <Link to={`/customer/${customer.id}`} class="button is-small is-primary" type="button">
+                                                                            <FontAwesomeIcon className="mdi" icon={faEye} />&nbsp;View
+                                                                        </Link>
+                                                                        <Link to={`/customer/${customer.id}/edit`} class="button is-small is-warning" type="button">
+                                                                            <FontAwesomeIcon className="mdi" icon={faPencil} />&nbsp;Edit
+                                                                        </Link>
+                                                                        <button onClick={(e, ses) => onSelectCustomerForDeletion(e, customer)} class="button is-small is-danger" type="button">
+                                                                            <FontAwesomeIcon className="mdi" icon={faTrashCan} />&nbsp;Delete
+                                                                        </button>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>;
+                                                        })}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
-                                    </div>
-                                </div>
-                                :
-                                <section class="hero is-medium has-background-white-ter">
-                                  <div class="hero-body">
-                                    <p class="title">
-                                        <FontAwesomeIcon className="fas" icon={faTable} />&nbsp;No Customers
-                                    </p>
-                                    <p class="subtitle">
-                                        No customers. <b><Link to="/customers/add">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating your first customer.
-                                    </p>
-                                  </div>
-                                </section>
-                            }
+                                    :
+                                    <section class="hero is-medium has-background-white-ter">
+                                          <div class="hero-body">
+                                            <p class="title">
+                                                <FontAwesomeIcon className="fas" icon={faTable} />&nbsp;No Customers
+                                            </p>
+                                            <p class="subtitle">
+                                                No customers. <b><Link to="/customers/add">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating your first customer.
+                                            </p>
+                                          </div>
+                                    </section>
+                                }
+                            </>
+                        }
                     </nav>
                 </section>
             </div>

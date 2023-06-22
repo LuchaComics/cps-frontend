@@ -223,72 +223,73 @@ function AdminOrganizationDetailForCommentList() {
                         </div>
                         <FormErrorBox errors={errors} />
 
-                        {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
-
-                        {!isFetching && organization && <div class="container">
-                            <div class="tabs is-medium">
-                              <ul>
-                                <li>
-                                    <Link to={`/admin/organization/${id}`}>Detail</Link>
-                                </li>
-                                <li>
-                                    <Link to={`/admin/organization/${organization.id}/users`}>Users</Link>
-                                </li>
-                                <li>
-                                    <Link to={`/admin/organization/${organization.id}/sub`}>Submissions</Link>
-                                </li>
-                                <li class="is-active">
-                                    <Link><b>Comments</b></Link>
-                                </li>
-                              </ul>
-                            </div>
-
-                            <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faComments} />&nbsp;Comments</p>
-                            <hr />
-
-                            {organization.comments && organization.comments.length > 0 && <>
-                                {organization.comments.map(function(comment, i){
-                                    console.log(comment); // For debugging purposes only.
-                                    return <div className="pb-3">
-                                        <span class="is-pulled-right has-text-grey-light">{comment.createdByName} at <b>{DateTime.fromISO(comment.createdAt).toLocaleString(DateTime.DATETIME_MED)}</b></span>
-                                        <br />
-                                        <article class="message">
-                                            <div class="message-body">{comment.content}</div>
-                                        </article>
+                        {isFetching
+                            ?
+                            <PageLoadingContent displayMessage={"Loading..."} />
+                            :
+                            <>
+                                {organization && <div class="container">
+                                    <div class="tabs is-medium">
+                                      <ul>
+                                        <li>
+                                            <Link to={`/admin/organization/${id}`}>Detail</Link>
+                                        </li>
+                                        <li>
+                                            <Link to={`/admin/organization/${organization.id}/users`}>Users</Link>
+                                        </li>
+                                        <li>
+                                            <Link to={`/admin/organization/${organization.id}/sub`}>Submissions</Link>
+                                        </li>
+                                        <li class="is-active">
+                                            <Link><b>Comments</b></Link>
+                                        </li>
+                                      </ul>
                                     </div>
-                                })}
-                            </>}
 
-                            <div class="mt-4 block has-background-success-light p-3">
-                                    <FormTextareaField
-                                        label="Write your comment here:"
-                                        name="content"
-                                        placeholder="Text input"
-                                        value={content}
-                                        errorText={errors && errors.content}
-                                        helpText=""
-                                        onChange={(e)=>setContent(e.target.value)}
-                                        isRequired={true}
-                                        maxWidth="180px"
-                                    />
-                                </div>
+                                    <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faComments} />&nbsp;Comments</p>
+                                    <hr />
 
+                                    {organization.comments && organization.comments.length > 0 && <>
+                                        {organization.comments.map(function(comment, i){
+                                            console.log(comment); // For debugging purposes only.
+                                            return <div className="pb-3">
+                                                <span class="is-pulled-right has-text-grey-light">{comment.createdByName} at <b>{DateTime.fromISO(comment.createdAt).toLocaleString(DateTime.DATETIME_MED)}</b></span>
+                                                <br />
+                                                <article class="message">
+                                                    <div class="message-body">{comment.content}</div>
+                                                </article>
+                                            </div>
+                                        })}
+                                    </>}
 
+                                    <div class="mt-4 block has-background-success-light p-3">
+                                            <FormTextareaField
+                                                label="Write your comment here:"
+                                                name="content"
+                                                placeholder="Text input"
+                                                value={content}
+                                                errorText={errors && errors.content}
+                                                helpText=""
+                                                onChange={(e)=>setContent(e.target.value)}
+                                                isRequired={true}
+                                                maxWidth="180px"
+                                            />
+                                        </div>
 
+                                    <div class="columns pt-4">
+                                        <div class="column is-half">
+                                            <Link to={`/admin/organizations`} class="button is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link to={`/admin/organizations`} class="button is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                        </div>
+                                        <div class="column is-half has-text-right">
+                                            <button onClick={onSubmitClick} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comment</button>
+                                            <button onClick={onSubmitClick} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comment</button>
+                                        </div>
+                                    </div>
 
-                            <div class="columns pt-4">
-                                <div class="column is-half">
-                                    <Link to={`/admin/organizations`} class="button is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                    <Link to={`/admin/organizations`} class="button is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                </div>
-                                <div class="column is-half has-text-right">
-                                    <button onClick={onSubmitClick} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comment</button>
-                                    <button onClick={onSubmitClick} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comment</button>
-                                </div>
-                            </div>
-
-
-                        </div>}
+                                </div>}
+                            </>
+                        }
                     </nav>
                 </section>
             </div>

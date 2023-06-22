@@ -238,31 +238,36 @@ function AdminSubmissionUpdatePickCustomerWithResult() {
                             <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Results</p>
                             <hr />
 
-                            {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
-
-                            {!isFetching && <div class="columns">
-                                {customers && customers.results && customers.results.map(function(customer, i){
-                                    return <div class="column is-one-quarter" key={customer.id}>
-                                        <article class="message is-primary">
-                                            <div class="message-body">
-                                                <p>
-                                                    <Link to={`/admin/customer/${customer.id}`} target="_blank" rel="noreferrer">
-                                                        <b>{customer.name}</b>&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
-                                                    </Link>
-                                                </p>
-                                                <p>{customer.country}&nbsp;{customer.region}&nbsp;{customer.city}</p>
-                                                <p>{customer.addressLine1}, {customer.postalCode}</p>
-                                                <p><a href={`mailto:${customer.email}`}>{customer.email}</a></p>
-                                                <p><a href={`tel:${customer.phone}`}>{customer.phone}</a></p>
-                                                <br />
-                                                <button class="button is-primary" onClick={(e,c)=>onCustomerPickClick(e,customer.id)}>
-                                                    <FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Pick
-                                                </button>
-                                            </div>
-                                        </article>
-                                    </div>;
-                                })}
-                            </div>}
+                            {isFetching
+                                ?
+                                <PageLoadingContent displayMessage={"Loading..."} />
+                                :
+                                <>
+                                    <div class="columns">
+                                        {customers && customers.results && customers.results.map(function(customer, i){
+                                            return <div class="column is-one-quarter" key={customer.id}>
+                                                <article class="message is-primary">
+                                                    <div class="message-body">
+                                                        <p>
+                                                            <Link to={`/admin/customer/${customer.id}`} target="_blank" rel="noreferrer">
+                                                                <b>{customer.name}</b>&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
+                                                            </Link>
+                                                        </p>
+                                                        <p>{customer.country}&nbsp;{customer.region}&nbsp;{customer.city}</p>
+                                                        <p>{customer.addressLine1}, {customer.postalCode}</p>
+                                                        <p><a href={`mailto:${customer.email}`}>{customer.email}</a></p>
+                                                        <p><a href={`tel:${customer.phone}`}>{customer.phone}</a></p>
+                                                        <br />
+                                                        <button class="button is-primary" onClick={(e,c)=>onCustomerPickClick(e,customer.id)}>
+                                                            <FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Pick
+                                                        </button>
+                                                    </div>
+                                                </article>
+                                            </div>;
+                                        })}
+                                    </div>
+                                </>
+                            }
                         </div>
 
                         <div class="columns pt-5">

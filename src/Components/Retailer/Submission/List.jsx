@@ -8,6 +8,7 @@ import { useRecoilState } from 'recoil';
 import { getSubmissionListAPI, deleteSubmissionAPI } from "../../../API/submission";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 import PageLoadingContent from "../../Element/PageLoadingContent";
+import FormErrorBox from "../../Element/FormErrorBox";
 import { SUBMISSION_STATES } from "../../../Constants/FieldOptions";
 
 
@@ -24,7 +25,7 @@ function RetailerSubmissionList() {
     //// Component states.
     ////
 
-    const [setErrors] = useState({});
+    const [errors, setErrors] = useState({});
     const [submissions, setSubmissions] = useState("");
     const [selectedSubmissionForDeletion, setSelectedSubmissionForDeletion] = useState("");
     const [isFetching, setFetching] = useState(false);
@@ -194,65 +195,71 @@ function RetailerSubmissionList() {
                                 </Link>
                             </div>
                         </div>
+                        <FormErrorBox errors={errors} />
 
-                        {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
-                        
-                        {!isFetching && submissions && submissions.results && submissions.results.length > 0
+                        {isFetching
                             ?
-                            <div class="container">
-                                <div class="b-table">
-                                    <div class="table-wrapper has-mobile-cards">
-                                        <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
-                                            <thead>
-                                                <tr>
-                                                    <th>Title</th>
-                                                    <th>Vol</th>
-                                                    <th>No</th>
-                                                    <th>State</th>
-                                                    <th>Created</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                {submissions && submissions.results && submissions.results.map(function(submission, i){
-                                                    return <tr>
-                                                        <td data-label="Title">{submission.seriesTitle}</td>
-                                                        <td data-label="Vol">{submission.issueVol}</td>
-                                                        <td data-label="No">{submission.issueNo}</td>
-                                                        <td data-label="State">{SUBMISSION_STATES[submission.status]}</td>
-                                                        <td data-label="Created">{submission.createdAt}</td>
-                                                        <td class="is-actions-cell">
-                                                            <div class="buttons is-right">
-                                                                <Link to={`/submission/${submission.id}`} class="button is-small is-primary" type="button">
-                                                                    <FontAwesomeIcon className="mdi" icon={faEye} />&nbsp;View
-                                                                </Link>
-                                                                <Link to={`/submission/${submission.id}/edit`} class="button is-small is-warning" type="button">
-                                                                    <FontAwesomeIcon className="mdi" icon={faPencil} />&nbsp;Edit
-                                                                </Link>
-                                                                <button onClick={(e, ses) => onSelectSubmissionForDeletion(e, submission)} class="button is-small is-danger" type="button">
-                                                                    <FontAwesomeIcon className="mdi" icon={faTrashCan} />&nbsp;Delete
-                                                                </button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>;
-                                                })}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+                            <PageLoadingContent displayMessage={"Loading..."} />
                             :
-                            <section class="hero is-medium has-background-white-ter">
-                              <div class="hero-body">
-                                <p class="title">
-                                    <FontAwesomeIcon className="fas" icon={faTable} />&nbsp;No Submissions
-                                </p>
-                                <p class="subtitle">
-                                    No submissions. <b><Link to="/submissions/add/search">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating your first new submission.
-                                </p>
-                              </div>
-                            </section>
+                            <>
+                                {submissions && submissions.results && submissions.results.length > 0
+                                    ?
+                                    <div class="container">
+                                        <div class="b-table">
+                                            <div class="table-wrapper has-mobile-cards">
+                                                <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Title</th>
+                                                            <th>Vol</th>
+                                                            <th>No</th>
+                                                            <th>State</th>
+                                                            <th>Created</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        {submissions && submissions.results && submissions.results.map(function(submission, i){
+                                                            return <tr>
+                                                                <td data-label="Title">{submission.seriesTitle}</td>
+                                                                <td data-label="Vol">{submission.issueVol}</td>
+                                                                <td data-label="No">{submission.issueNo}</td>
+                                                                <td data-label="State">{SUBMISSION_STATES[submission.status]}</td>
+                                                                <td data-label="Created">{submission.createdAt}</td>
+                                                                <td class="is-actions-cell">
+                                                                    <div class="buttons is-right">
+                                                                        <Link to={`/submission/${submission.id}`} class="button is-small is-primary" type="button">
+                                                                            <FontAwesomeIcon className="mdi" icon={faEye} />&nbsp;View
+                                                                        </Link>
+                                                                        <Link to={`/submission/${submission.id}/edit`} class="button is-small is-warning" type="button">
+                                                                            <FontAwesomeIcon className="mdi" icon={faPencil} />&nbsp;Edit
+                                                                        </Link>
+                                                                        <button onClick={(e, ses) => onSelectSubmissionForDeletion(e, submission)} class="button is-small is-danger" type="button">
+                                                                            <FontAwesomeIcon className="mdi" icon={faTrashCan} />&nbsp;Delete
+                                                                        </button>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>;
+                                                        })}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    :
+                                    <section class="hero is-medium has-background-white-ter">
+                                      <div class="hero-body">
+                                        <p class="title">
+                                            <FontAwesomeIcon className="fas" icon={faTable} />&nbsp;No Submissions
+                                        </p>
+                                        <p class="subtitle">
+                                            No submissions. <b><Link to="/submissions/add/search">Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating your first new submission.
+                                        </p>
+                                      </div>
+                                    </section>
+                                }
+                            </>
                         }
                     </nav>
                 </section>

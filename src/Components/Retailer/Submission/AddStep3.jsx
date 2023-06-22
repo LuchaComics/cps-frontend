@@ -137,70 +137,75 @@ function RetailerSubmissionAddStep3() {
                         <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission - Confirmation</p>
                         <FormErrorBox errors={errors} />
 
-                        {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
+                        {isFetching
+                            ?
+                            <PageLoadingContent displayMessage={"Loading..."} />
+                            :
+                            <>
+                                <div class="container">
 
-                        {!isFetching && <div class="container">
-
-                            <article class="message is-success">
-                                <div class="message-body">
-                                <p><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;PDF is ready for download.</p>
-                                </div>
-                            </article>
-                            <article>
-                                <p>
-                                We're excited to inform you that your PDF is now ready for download. Simply click the provided link, and you'll have access to your PDF file.
-                                </p>
-
-
-                                <p class="pb-3">Once you've downloaded the PDF, please sign it and keep it with the comic. This adds a personal touch and ensures the authenticity of the document.</p>
-
-                                <p class="pb-3">After signing, we ask you to attach the signed PDF to the comic book you wish to have encapsulated. Safely packaging your comic book helps protect it during transit and ensures its safe arrival at our facility.</p>
-
-                                <p class="pb-3">If you will be submitting this comic book for grading as part of a pedigree or encapsulation order, please include the signed PDF, along with <Link>this submission order form</Link>, and send your order to the address provided below:</p>
-
-                                <article class="message pb-3" style={{width:"300px"}}>
-                                  <div class="message-body">
-                                  <p class="pb-1"><b>CPS</b></p>
-                                  <p class="pb-1"><a href="tel:5199142685">(519) 914-2685</a></p>
-                                  <p class="pb-1"><a href="mailto:info@cpscapsule.com">info@cpscapsule.com</a></p>
-                                  <p class="pb-1">8-611 Wonderland Road North, P.M.B. 125</p>
-                                  <p class="pb-1">London, Ontario</p>
-                                  <p class="pb-1">N6H1T6</p>
-                                  <p class="pb-1">Canada</p>
-                                  </div>
-                                </article>
-
-                                <p class="pb-3">Once completed, please wait a few weeks for us to receive and process your request.</p>
-
-                                <section class="hero has-background-white-ter">
-                                    <div class="hero-body">
-                                        <p class="subtitle">
-                                            <div class="has-text-centered">
-                                                <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-large is-success is-hidden-touch"><FontAwesomeIcon className="fas" icon={faDownload} />&nbsp;Download PDF</a>
-                                                <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-large is-success is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faDownload} />&nbsp;Download PDF</a>
-                                            </div>
+                                    <article class="message is-success">
+                                        <div class="message-body">
+                                        <p><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;PDF is ready for download.</p>
+                                        </div>
+                                    </article>
+                                    <article>
+                                        <p>
+                                        We're excited to inform you that your PDF is now ready for download. Simply click the provided link, and you'll have access to your PDF file.
                                         </p>
-                                    </div>
-                                </section>
-                            </article>
 
-                            <div class="columns pt-5">
-                                <div class="column is-half">
+
+                                        <p class="pb-3">Once you've downloaded the PDF, please sign it and keep it with the comic. This adds a personal touch and ensures the authenticity of the document.</p>
+
+                                        <p class="pb-3">After signing, we ask you to attach the signed PDF to the comic book you wish to have encapsulated. Safely packaging your comic book helps protect it during transit and ensures its safe arrival at our facility.</p>
+
+                                        <p class="pb-3">If you will be submitting this comic book for grading as part of a pedigree or encapsulation order, please include the signed PDF, along with <Link>this submission order form</Link>, and send your order to the address provided below:</p>
+
+                                        <article class="message pb-3" style={{width:"300px"}}>
+                                          <div class="message-body">
+                                          <p class="pb-1"><b>CPS</b></p>
+                                          <p class="pb-1"><a href="tel:5199142685">(519) 914-2685</a></p>
+                                          <p class="pb-1"><a href="mailto:info@cpscapsule.com">info@cpscapsule.com</a></p>
+                                          <p class="pb-1">8-611 Wonderland Road North, P.M.B. 125</p>
+                                          <p class="pb-1">London, Ontario</p>
+                                          <p class="pb-1">N6H1T6</p>
+                                          <p class="pb-1">Canada</p>
+                                          </div>
+                                        </article>
+
+                                        <p class="pb-3">Once completed, please wait a few weeks for us to receive and process your request.</p>
+
+                                        <section class="hero has-background-white-ter">
+                                            <div class="hero-body">
+                                                <p class="subtitle">
+                                                    <div class="has-text-centered">
+                                                        <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-large is-success is-hidden-touch"><FontAwesomeIcon className="fas" icon={faDownload} />&nbsp;Download PDF</a>
+                                                        <a href={submission.fileUploadDownloadableFileURL} target="_blank" rel="noreferrer" class="button is-large is-success is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faDownload} />&nbsp;Download PDF</a>
+                                                    </div>
+                                                </p>
+                                            </div>
+                                        </section>
+                                    </article>
+
+                                    <div class="columns pt-5">
+                                        <div class="column is-half">
+                                        </div>
+                                        {customerName === null
+                                            ?
+                                            <div class="column is-half has-text-right">
+                                                <Link to={`/submissions`} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to List</Link>
+                                                <Link to={`/submissions`} class="button is-medium is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to List</Link>
+                                            </div>
+                                            :
+                                            <div class="column is-half has-text-right">
+                                                <Link to={`/customer/${customerID}/sub`} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to Customer</Link>
+                                                <Link to={`/customer/${customerID}/sub`} class="button is-medium is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to Customer</Link>
+                                            </div>
+                                        }
+                                    </div>
                                 </div>
-                                {customerName === null
-                                    ?
-                                    <div class="column is-half has-text-right">
-                                        <Link to={`/submissions`} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to List</Link>
-                                        <Link to={`/submissions`} class="button is-medium is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to List</Link>
-                                    </div>
-                                    :
-                                    <div class="column is-half has-text-right">
-                                        <Link to={`/customer/${customerID}/sub`} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to Customer</Link>
-                                        <Link to={`/customer/${customerID}/sub`} class="button is-medium is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to Customer</Link>
-                                    </div>
-                                }
-                            </div>
-                        </div>}
+                            </>
+                        }
                     </nav>
                 </section>
             </div>

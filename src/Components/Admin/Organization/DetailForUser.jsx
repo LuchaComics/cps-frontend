@@ -256,97 +256,102 @@ function AdminOrganizationDetailForUserList() {
 
                         {/* <p class="pb-4">Please fill out all the required fields before submitting this form.</p> */}
 
-                        {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
+                        {isFetching
+                            ?
+                            <PageLoadingContent displayMessage={"Loading..."} />
+                            :
+                            <>
+                                {organization && <div class="container">
+                                    <div class="tabs is-medium">
+                                      <ul>
+                                        <li>
+                                            <Link to={`/admin/organization/${organization.id}`}>Detail</Link>
+                                        </li>
+                                        <li class="is-active">
+                                            <Link><b>Users</b></Link>
+                                        </li>
+                                        <li>
+                                            <Link to={`/admin/organization/${organization.id}/sub`}>Submissions</Link>
+                                        </li>
+                                        <li>
+                                            <Link to={`/admin/organization/${organization.id}/comments`}>Comments</Link>
+                                        </li>
+                                      </ul>
+                                    </div>
 
-                        {!isFetching && organization && <div class="container">
-                            <div class="tabs is-medium">
-                              <ul>
-                                <li>
-                                    <Link to={`/admin/organization/${organization.id}`}>Detail</Link>
-                                </li>
-                                <li class="is-active">
-                                    <Link><b>Users</b></Link>
-                                </li>
-                                <li>
-                                    <Link to={`/admin/organization/${organization.id}/sub`}>Submissions</Link>
-                                </li>
-                                <li>
-                                    <Link to={`/admin/organization/${organization.id}/comments`}>Comments</Link>
-                                </li>
-                              </ul>
-                            </div>
+                                    <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Users</p>
+                                    <hr />
 
-                            <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Users</p>
-                            <hr />
+                                    {!isFetching && users && users.results && users.results.length > 0
+                                        ?
+                                        <div class="container">
+                                            <div class="b-table">
+                                                <div class="table-wrapper has-mobile-cards">
+                                                    <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Name</th>
+                                                                <th>Email</th>
+                                                                <th>Role</th>
+                                                                <th>Created</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
 
-                            {!isFetching && users && users.results && users.results.length > 0
-                                ?
-                                <div class="container">
-                                    <div class="b-table">
-                                        <div class="table-wrapper has-mobile-cards">
-                                            <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Name</th>
-                                                        <th>Email</th>
-                                                        <th>Role</th>
-                                                        <th>Created</th>
-                                                        <th></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
+                                                            {users && users.results && users.results.map(function(user, i){
+                                                                return <tr>
+                                                                <td data-label="Name">{user.name}</td>
+                                                                <td data-label="Email"><a href={`mailto:${user.email}`}>{user.email}</a></td>
+                                                                <td data-label="Role">{USER_ROLES[user.role]}</td>
+                                                                <td data-label="Created">{user.createdAt}</td>
+                                                                    <td class="is-actions-cell">
+                                                                        <div class="buttons is-right">
+                                                                            <Link to={`/admin/submissions/add?user_id=${user.id}&user_name=${user.name}`} target="_blank" rel="noreferrer" class="button is-small is-success" type="button">
+                                                                                <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
+                                                                            </Link>
+                                                                            <Link to={`/admin/user/${user.id}`} target="_blank" rel="noreferrer" class="button is-small is-primary" type="button">
+                                                                                View&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
+                                                                            </Link>
+                                                                            <Link to={`/admin/user/${user.id}/edit`} target="_blank" rel="noreferrer" class="button is-small is-warning" type="button">
+                                                                                Edit&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
+                                                                            </Link>
+                                                                            <button onClick={(e, ses) => onSelectUserForDeletion(e, user)} class="button is-small is-danger" type="button">
+                                                                                <FontAwesomeIcon className="mdi" icon={faTrashCan} />&nbsp;Delete
+                                                                            </button>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>;
+                                                            })}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        :
+                                        <div class="container">
+                                            <article class="message is-dark">
+                                                <div class="message-body">
+                                                    No users. <b><Link to={`/admin/users/add?organization_id=${id}&organization_name=${organization.name}`}>Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating a new user.
+                                                </div>
+                                            </article>
+                                        </div>
+                                    }
 
-                                                    {users && users.results && users.results.map(function(user, i){
-                                                        return <tr>
-                                                        <td data-label="Name">{user.name}</td>
-                                                        <td data-label="Email"><a href={`mailto:${user.email}`}>{user.email}</a></td>
-                                                        <td data-label="Role">{USER_ROLES[user.role]}</td>
-                                                        <td data-label="Created">{user.createdAt}</td>
-                                                            <td class="is-actions-cell">
-                                                                <div class="buttons is-right">
-                                                                    <Link to={`/admin/submissions/add?user_id=${user.id}&user_name=${user.name}`} target="_blank" rel="noreferrer" class="button is-small is-success" type="button">
-                                                                        <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
-                                                                    </Link>
-                                                                    <Link to={`/admin/user/${user.id}`} target="_blank" rel="noreferrer" class="button is-small is-primary" type="button">
-                                                                        View&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
-                                                                    </Link>
-                                                                    <Link to={`/admin/user/${user.id}/edit`} target="_blank" rel="noreferrer" class="button is-small is-warning" type="button">
-                                                                        Edit&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
-                                                                    </Link>
-                                                                    <button onClick={(e, ses) => onSelectUserForDeletion(e, user)} class="button is-small is-danger" type="button">
-                                                                        <FontAwesomeIcon className="mdi" icon={faTrashCan} />&nbsp;Delete
-                                                                    </button>
-                                                                </div>
-                                                            </td>
-                                                        </tr>;
-                                                    })}
-                                                </tbody>
-                                            </table>
+                                    <div class="columns pt-5">
+                                        <div class="column is-half">
+                                            <Link class="button is-hidden-touch" to={`/admin/organizations`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link class="button is-fullwidth is-hidden-desktop" to={`/admin/organizations`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                        </div>
+                                        <div class="column is-half has-text-right">
+                                            <Link to={`/admin/users/add?organization_id=${id}&organization_name=${organization.name}`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link>
+                                            <Link to={`/admin/users/add?organization_id=${id}&organization_name=${organization.name}`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link>
                                         </div>
                                     </div>
-                                </div>
-                                :
-                                <div class="container">
-                                    <article class="message is-dark">
-                                        <div class="message-body">
-                                            No users. <b><Link to={`/admin/users/add?organization_id=${id}&organization_name=${organization.name}`}>Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating a new user.
-                                        </div>
-                                    </article>
-                                </div>
-                            }
 
-                            <div class="columns pt-5">
-                                <div class="column is-half">
-                                    <Link class="button is-hidden-touch" to={`/admin/organizations`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                    <Link class="button is-fullwidth is-hidden-desktop" to={`/admin/organizations`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                </div>
-                                <div class="column is-half has-text-right">
-                                    <Link to={`/admin/users/add?organization_id=${id}&organization_name=${organization.name}`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link>
-                                    <Link to={`/admin/users/add?organization_id=${id}&organization_name=${organization.name}`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link>
-                                </div>
-                            </div>
-
-                        </div>}
+                                </div>}
+                            </>
+                        }
                     </nav>
                 </section>
             </div>

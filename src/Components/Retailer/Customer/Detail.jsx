@@ -136,167 +136,171 @@ function RetailerCustomerDetail() {
 
                         {/* <p class="pb-4">Please fill out all the required fields before submitting this form.</p> */}
 
-                        {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
+                        {isFetching
+                            ?
+                            <PageLoadingContent displayMessage={"Loading..."} />
+                            :
+                            <>
+                                {customer && <div class="container">
+                                    <div class="tabs is-medium">
+                                      <ul>
+                                        <li class="is-active">
+                                            <Link><b>Detail</b></Link>
+                                        </li>
+                                        <li>
+                                            <Link to={`/customer/${customer.id}/sub`}>Submissions</Link>
+                                        </li>
+                                        <li>
+                                            <Link to={`/customer/${customer.id}/comments`}>Comments</Link>
+                                        </li>
+                                      </ul>
+                                    </div>
 
-                        {!isFetching && customer && <div class="container">
-                            <div class="tabs is-medium">
-                              <ul>
-                                <li class="is-active">
-                                    <Link><b>Detail</b></Link>
-                                </li>
-                                <li>
-                                    <Link to={`/customer/${customer.id}/sub`}>Submissions</Link>
-                                </li>
-                                <li>
-                                    <Link to={`/customer/${customer.id}/comments`}>Comments</Link>
-                                </li>
-                              </ul>
-                            </div>
+                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Full Name</p>
+                                    <hr />
 
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Full Name</p>
-                            <hr />
+                                    <FormInputField
+                                        label="First Name"
+                                        name="firstName"
+                                        placeholder="Text input"
+                                        value={customer.firstName}
+                                        helpText=""
+                                        isRequired={true}
+                                        maxWidth="380px"
+                                        disabled={true}
+                                    />
+                                    <FormInputField
+                                        label="Last Name"
+                                        name="lastName"
+                                        placeholder="Text input"
+                                        value={customer.lastName}
+                                        helpText=""
+                                        isRequired={true}
+                                        maxWidth="380px"
+                                        disabled={true}
+                                    />
 
-                            <FormInputField
-                                label="First Name"
-                                name="firstName"
-                                placeholder="Text input"
-                                value={customer.firstName}
-                                helpText=""
-                                isRequired={true}
-                                maxWidth="380px"
-                                disabled={true}
-                            />
-                            <FormInputField
-                                label="Last Name"
-                                name="lastName"
-                                placeholder="Text input"
-                                value={customer.lastName}
-                                helpText=""
-                                isRequired={true}
-                                maxWidth="380px"
-                                disabled={true}
-                            />
+                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faContactCard} />&nbsp;Contact Information</p>
+                                    <hr />
 
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faContactCard} />&nbsp;Contact Information</p>
-                            <hr />
+                                    <FormInputField
+                                        label="Email"
+                                        name="email"
+                                        placeholder="Text input"
+                                        value={customer.email}
+                                        helpText=""
+                                        isRequired={true}
+                                        maxWidth="380px"
+                                        disabled={true}
+                                    />
 
-                            <FormInputField
-                                label="Email"
-                                name="email"
-                                placeholder="Text input"
-                                value={customer.email}
-                                helpText=""
-                                isRequired={true}
-                                maxWidth="380px"
-                                disabled={true}
-                            />
+                                    <FormInputField
+                                        label="Phone"
+                                        name="phone"
+                                        placeholder="Text input"
+                                        value={customer.phone}
+                                        helpText=""
+                                        isRequired={true}
+                                        maxWidth="150px"
+                                        disabled={true}
+                                    />
 
-                            <FormInputField
-                                label="Phone"
-                                name="phone"
-                                placeholder="Text input"
-                                value={customer.phone}
-                                helpText=""
-                                isRequired={true}
-                                maxWidth="150px"
-                                disabled={true}
-                            />
+                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faAddressBook} />&nbsp;Address</p>
+                                    <hr />
 
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faAddressBook} />&nbsp;Address</p>
-                            <hr />
+                                    <FormCountryField
+                                        priorityOptions={["CA","US","MX"]}
+                                        label="Country"
+                                        name="country"
+                                        placeholder="Text input"
+                                        selectedCountry={customer.country}
+                                        helpText=""
+                                        isRequired={true}
+                                        maxWidth="160px"
+                                        disabled={true}
+                                    />
 
-                            <FormCountryField
-                                priorityOptions={["CA","US","MX"]}
-                                label="Country"
-                                name="country"
-                                placeholder="Text input"
-                                selectedCountry={customer.country}
-                                helpText=""
-                                isRequired={true}
-                                maxWidth="160px"
-                                disabled={true}
-                            />
+                                    <FormRegionField
+                                        label="Province/Territory"
+                                        name="region"
+                                        placeholder="Text input"
+                                        selectedCountry={customer.country}
+                                        selectedRegion={customer.region}
+                                        helpText=""
+                                        isRequired={true}
+                                        maxWidth="280px"
+                                        disabled={true}
+                                    />
 
-                            <FormRegionField
-                                label="Province/Territory"
-                                name="region"
-                                placeholder="Text input"
-                                selectedCountry={customer.country}
-                                selectedRegion={customer.region}
-                                helpText=""
-                                isRequired={true}
-                                maxWidth="280px"
-                                disabled={true}
-                            />
+                                    <FormInputField
+                                        label="City"
+                                        name="city"
+                                        placeholder="Text input"
+                                        value={customer.city}
+                                        helpText=""
+                                        isRequired={true}
+                                        maxWidth="380px"
+                                        disabled={true}
+                                    />
 
-                            <FormInputField
-                                label="City"
-                                name="city"
-                                placeholder="Text input"
-                                value={customer.city}
-                                helpText=""
-                                isRequired={true}
-                                maxWidth="380px"
-                                disabled={true}
-                            />
+                                    <FormInputField
+                                        label="Address Line 1"
+                                        name="addressLine1"
+                                        placeholder="Text input"
+                                        value={customer.addressLine1}
+                                        helpText=""
+                                        isRequired={true}
+                                        maxWidth="380px"
+                                        disabled={true}
+                                    />
 
-                            <FormInputField
-                                label="Address Line 1"
-                                name="addressLine1"
-                                placeholder="Text input"
-                                value={customer.addressLine1}
-                                helpText=""
-                                isRequired={true}
-                                maxWidth="380px"
-                                disabled={true}
-                            />
+                                    <FormInputField
+                                        label="Address Line 2"
+                                        name="addressLine2"
+                                        placeholder="Text input"
+                                        value={customer.addressLine2}
+                                        helpText=""
+                                        isRequired={true}
+                                        maxWidth="380px"
+                                        disabled={true}
+                                    />
 
-                            <FormInputField
-                                label="Address Line 2"
-                                name="addressLine2"
-                                placeholder="Text input"
-                                value={customer.addressLine2}
-                                helpText=""
-                                isRequired={true}
-                                maxWidth="380px"
-                                disabled={true}
-                            />
+                                    <FormInputField
+                                        label="Postal Code"
+                                        name="postalCode"
+                                        placeholder="Text input"
+                                        value={customer.postalCode}
+                                        helpText=""
+                                        isRequired={true}
+                                        maxWidth="80px"
+                                        disabled={true}
+                                    />
 
-                            <FormInputField
-                                label="Postal Code"
-                                name="postalCode"
-                                placeholder="Text input"
-                                value={customer.postalCode}
-                                helpText=""
-                                isRequired={true}
-                                maxWidth="80px"
-                                disabled={true}
-                            />
+                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faChartPie} />&nbsp;Metrics</p>
+                                    <hr />
 
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faChartPie} />&nbsp;Metrics</p>
-                            <hr />
+                                    <FormCheckboxField
+                                        label="I agree to receive electronic updates from my local retailer and CPS"
+                                        name="agreePromotionsEmail"
+                                        checked={customer.agreePromotionsEmail}
+                                        maxWidth="180px"
+                                        disabled={true}
+                                    />
 
-                            <FormCheckboxField
-                                label="I agree to receive electronic updates from my local retailer and CPS"
-                                name="agreePromotionsEmail"
-                                checked={customer.agreePromotionsEmail}
-                                maxWidth="180px"
-                                disabled={true}
-                            />
+                                    <div class="columns pt-5">
+                                        <div class="column is-half">
+                                            <Link class="button is-hidden-touch" to={`/customers`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link class="button is-fullwidth is-hidden-desktop" to={`/customers`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                        </div>
+                                        <div class="column is-half has-text-right">
+                                            <Link to={`/customer/${id}/edit`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
+                                            <Link to={`/customer/${id}/edit`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
+                                        </div>
+                                    </div>
 
-                            <div class="columns pt-5">
-                                <div class="column is-half">
-                                    <Link class="button is-hidden-touch" to={`/customers`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                    <Link class="button is-fullwidth is-hidden-desktop" to={`/customers`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                </div>
-                                <div class="column is-half has-text-right">
-                                    <Link to={`/customer/${id}/edit`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
-                                    <Link to={`/customer/${id}/edit`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link>
-                                </div>
-                            </div>
-
-
-                        </div>}
+                                </div>}
+                            </>
+                        }
                     </nav>
                 </section>
             </div>

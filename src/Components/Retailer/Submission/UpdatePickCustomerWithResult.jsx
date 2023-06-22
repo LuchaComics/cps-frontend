@@ -236,36 +236,40 @@ function RetailerSubmissionUpdatePickCustomerWithResult() {
                         <p class="pb-4 has-text-grey">Please select the customer from the following results.</p>
                         <FormErrorBox errors={errors} />
 
-                        {isFetching && <PageLoadingContent displayMessage={"Loading..."} />}
-
-                        {!isFetching && <div class="container pb-5">
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Results</p>
-                            <hr />
-                            <div class="columns">
-                                {customers && customers.results && customers.results.map(function(customer, i){
-                                    return <div class="column is-one-quarter" key={customer.id}>
-                                        <article class="message is-primary">
-                                            <div class="message-body">
-                                                <p>
-                                                    <Link to={`/customer/${customer.id}`} target="_blank" rel="noreferrer">
-                                                        <b>{customer.name}</b>&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
-                                                    </Link>
-                                                </p>
-                                                <p>{customer.country}&nbsp;{customer.region}&nbsp;{customer.city}</p>
-                                                <p>{customer.addressLine1}, {customer.postalCode}</p>
-                                                <p><a href={`mailto:${customer.email}`}>{customer.email}</a></p>
-                                                <p><a href={`tel:${customer.phone}`}>{customer.phone}</a></p>
-                                                <br />
-                                                <button class="button is-primary" onClick={(e,c)=>onCustomerPickClick(e,customer.id)}>
-                                                    <FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Pick
-                                                </button>
-                                            </div>
-                                        </article>
-                                    </div>;
-                                })}
-                            </div>
-                        </div>}
-
+                        {isFetching
+                            ?
+                            <PageLoadingContent displayMessage={"Loading..."} />
+                            :
+                            <>
+                                <div class="container pb-5">
+                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Results</p>
+                                    <hr />
+                                    <div class="columns">
+                                        {customers && customers.results && customers.results.map(function(customer, i){
+                                            return <div class="column is-one-quarter" key={customer.id}>
+                                                <article class="message is-primary">
+                                                    <div class="message-body">
+                                                        <p>
+                                                            <Link to={`/customer/${customer.id}`} target="_blank" rel="noreferrer">
+                                                                <b>{customer.name}</b>&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
+                                                            </Link>
+                                                        </p>
+                                                        <p>{customer.country}&nbsp;{customer.region}&nbsp;{customer.city}</p>
+                                                        <p>{customer.addressLine1}, {customer.postalCode}</p>
+                                                        <p><a href={`mailto:${customer.email}`}>{customer.email}</a></p>
+                                                        <p><a href={`tel:${customer.phone}`}>{customer.phone}</a></p>
+                                                        <br />
+                                                        <button class="button is-primary" onClick={(e,c)=>onCustomerPickClick(e,customer.id)}>
+                                                            <FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Pick
+                                                        </button>
+                                                    </div>
+                                                </article>
+                                            </div>;
+                                        })}
+                                    </div>
+                                </div>
+                            </>
+                        }
                         <div class="columns pt-5">
                             <div class="column is-half">
                                 <Link class="button is-medium is-hidden-touch" to={`/submission/${id}/cust/search`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
