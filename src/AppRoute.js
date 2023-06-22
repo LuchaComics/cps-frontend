@@ -11,30 +11,30 @@ import { RecoilRoot } from 'recoil';
 import AdminOrganizationList from "./Components/Admin/Organization/List";
 import AdminOrganizationAdd from "./Components/Admin/Organization/Add";
 import AdminOrganizationDetail from "./Components/Admin/Organization/Detail";
-import AdminOrganizationDetailForSubmission from "./Components/Admin/Organization/DetailForSubmission";
+import AdminOrganizationDetailForComicSubmission from "./Components/Admin/Organization/DetailForComicSubmission";
 import AdminOrganizationDetailForUserList from "./Components/Admin/Organization/DetailForUser";
 import AdminOrganizationDetailForCommentList from "./Components/Admin/Organization/DetailForCommentList";
 import AdminOrganizationUpdate from "./Components/Admin/Organization/Update";
 import AdminDashboard from "./Components/Admin/Dashboard";
 import AdminRegistrySearch from "./Components/Admin/Registry/Search";
 import AdminRegistryResult from "./Components/Admin/Registry/Result";
-import AdminSubmissionList from "./Components/Admin/Submission/List";
-import AdminSubmissionAddStep1WithSearch from "./Components/Admin/Submission/AddStep1WithSearch";
-import AdminSubmissionAddStep1WithResult from "./Components/Admin/Submission/AddStep1WithResult";
-import AdminSubmissionAddStep2 from "./Components/Admin/Submission/AddStep2";
-import AdminSubmissionAddStep3Comic from "./Components/Admin/Submission/AddStep3Comic";
-import AdminSubmissionAddStep4 from "./Components/Admin/Submission/AddStep4";
-import AdminSubmissionDetail from "./Components/Admin/Submission/Detail";
-import AdminSubmissionDetailForCommentList from "./Components/Admin/Submission/DetailForCommentList";
-import AdminSubmissionDetailForCustomer from "./Components/Admin/Submission/DetailForCustomer";
-import AdminSubmissionDetailForPDFFile from "./Components/Admin/Submission/DetailForPDFFile";
-import AdminSubmissionUpdateForSubmission from "./Components/Admin/Submission/UpdateSubmission";
-import AdminSubmissionUpdatePickCustomerWithResult from "./Components/Admin/Submission/UpdatePickCustomerWithResult";
-import AdminSubmissionUpdatePickCustomerWithSearch from "./Components/Admin/Submission/UpdatePickCustomerWithSearch";
+import AdminComicSubmissionList from "./Components/Admin/ComicSubmission/List";
+import AdminComicSubmissionAddStep1WithSearch from "./Components/Admin/ComicSubmission/AddStep1WithSearch";
+import AdminComicSubmissionAddStep1WithResult from "./Components/Admin/ComicSubmission/AddStep1WithResult";
+import AdminComicSubmissionAddStep2 from "./Components/Admin/ComicSubmission/AddStep2";
+import AdminComicSubmissionAddStep3Comic from "./Components/Admin/ComicSubmission/AddStep3Comic";
+import AdminComicSubmissionAddStep4 from "./Components/Admin/ComicSubmission/AddStep4";
+import AdminComicSubmissionDetail from "./Components/Admin/ComicSubmission/Detail";
+import AdminComicSubmissionDetailForCommentList from "./Components/Admin/ComicSubmission/DetailForCommentList";
+import AdminComicSubmissionDetailForCustomer from "./Components/Admin/ComicSubmission/DetailForCustomer";
+import AdminComicSubmissionDetailForPDFFile from "./Components/Admin/ComicSubmission/DetailForPDFFile";
+import AdminComicSubmissionUpdateForComicSubmission from "./Components/Admin/ComicSubmission/UpdateSubmission";
+import AdminComicSubmissionUpdatePickCustomerWithResult from "./Components/Admin/ComicSubmission/UpdatePickCustomerWithResult";
+import AdminComicSubmissionUpdatePickCustomerWithSearch from "./Components/Admin/ComicSubmission/UpdatePickCustomerWithSearch";
 import AdminUserList from "./Components/Admin/User/List";
 import AdminUserAdd from "./Components/Admin/User/Add";
 import AdminUserDetail from "./Components/Admin/User/Detail";
-import AdminUserDetailForSubmission from "./Components/Admin/User/DetailForSubmission";
+import AdminUserDetailForComicSubmission from "./Components/Admin/User/DetailForComicSubmission";
 import AdminUserDetailForCommentList from "./Components/Admin/User/DetailForCommentList";
 import AdminUserUpdate from "./Components/Admin/User/Update";
 import RetailerDashboard from "./Components/Retailer/Dashboard";
@@ -95,30 +95,30 @@ function AppRoute() {
                                     <Route exact path="/admin/organizations" element={<AdminOrganizationList/>}/>
                                     <Route exact path="/admin/organizations/add" element={<AdminOrganizationAdd/>}/>
                                     <Route exact path="/admin/organization/:id" element={<AdminOrganizationDetail/>}/>
-                                    <Route exact path="/admin/organization/:id/sub" element={<AdminOrganizationDetailForSubmission/>}/>
+                                    <Route exact path="/admin/organization/:id/comics" element={<AdminOrganizationDetailForComicSubmission/>}/>
                                     <Route exact path="/admin/organization/:id/users" element={<AdminOrganizationDetailForUserList/>}/>
                                     <Route exact path="/admin/organization/:id/edit" element={<AdminOrganizationUpdate/>}/>
                                     <Route exact path="/admin/organization/:id/comments" element={<AdminOrganizationDetailForCommentList/>}/>
                                     <Route exact path="/admin/registry" element={<AdminRegistrySearch/>}/>
                                     <Route exact path="/admin/registry/:cpsn" element={<AdminRegistryResult/>}/>
-                                    <Route exact path="/admin/submissions" element={<AdminSubmissionList/>}/>
-                                    <Route exact path="/admin/submissions/add/search" element={<AdminSubmissionAddStep1WithSearch/>}/>
-                                    <Route exact path="/admin/submissions/add/results" element={<AdminSubmissionAddStep1WithResult/>}/>
-                                    <Route exact path="/admin/submissions/pick-type-for-add" element={<AdminSubmissionAddStep2/>}/>
-                                    <Route exact path="/admin/submissions/add-comic" element={<AdminSubmissionAddStep3Comic/>}/>
-                                    <Route exact path="/admin/submissions/add-card" element={<NotImplementedError/>}/>
-                                    <Route exact path="/admin/submissions/add/:id/confirmation" element={<AdminSubmissionAddStep4/>}/>
-                                    <Route exact path="/admin/submission/:id" element={<AdminSubmissionDetail/>}/>
-                                    <Route exact path="/admin/submission/:id/edit" element={<AdminSubmissionUpdateForSubmission/>}/>
-                                    <Route exact path="/admin/submission/:id/cust/search" element={<AdminSubmissionUpdatePickCustomerWithSearch/>}/>
-                                    <Route exact path="/admin/submission/:id/cust/results" element={<AdminSubmissionUpdatePickCustomerWithResult/>}/>
-                                    <Route exact path="/admin/submission/:id/comments" element={<AdminSubmissionDetailForCommentList/>}/>
-                                    <Route exact path="/admin/submission/:id/cust" element={<AdminSubmissionDetailForCustomer/>}/>
-                                    <Route exact path="/admin/submission/:id/file" element={<AdminSubmissionDetailForPDFFile/>}/>
+                                    <Route exact path="/admin/comic-submissions" element={<AdminComicSubmissionList/>}/>
+                                    <Route exact path="/admin/comic-submissions/add/search" element={<AdminComicSubmissionAddStep1WithSearch/>}/>
+                                    <Route exact path="/admin/comic-submissions/add/results" element={<AdminComicSubmissionAddStep1WithResult/>}/>
+                                    <Route exact path="/admin/comic-submissions/pick-type-for-add" element={<AdminComicSubmissionAddStep2/>}/>
+                                    <Route exact path="/admin/comic-submissions/add-comic" element={<AdminComicSubmissionAddStep3Comic/>}/>
+                                    <Route exact path="/admin/comic-submissions/add-card" element={<NotImplementedError/>}/>
+                                    <Route exact path="/admin/comic-submissions/add/:id/confirmation" element={<AdminComicSubmissionAddStep4/>}/>
+                                    <Route exact path="/admin/comic-submission/:id" element={<AdminComicSubmissionDetail/>}/>
+                                    <Route exact path="/admin/comic-submission/:id/edit" element={<AdminComicSubmissionUpdateForComicSubmission/>}/>
+                                    <Route exact path="/admin/comic-submission/:id/cust/search" element={<AdminComicSubmissionUpdatePickCustomerWithSearch/>}/>
+                                    <Route exact path="/admin/comic-submission/:id/cust/results" element={<AdminComicSubmissionUpdatePickCustomerWithResult/>}/>
+                                    <Route exact path="/admin/comic-submission/:id/comments" element={<AdminComicSubmissionDetailForCommentList/>}/>
+                                    <Route exact path="/admin/comic-submission/:id/cust" element={<AdminComicSubmissionDetailForCustomer/>}/>
+                                    <Route exact path="/admin/comic-submission/:id/file" element={<AdminComicSubmissionDetailForPDFFile/>}/>
                                     <Route exact path="/admin/users" element={<AdminUserList/>}/>
                                     <Route exact path="/admin/users/add" element={<AdminUserAdd/>}/>
                                     <Route exact path="/admin/user/:id" element={<AdminUserDetail/>}/>
-                                    <Route exact path="/admin/user/:id/sub" element={<AdminUserDetailForSubmission/>}/>
+                                    <Route exact path="/admin/user/:id/comics" element={<AdminUserDetailForComicSubmission/>}/>
                                     <Route exact path="/admin/user/:id/edit" element={<AdminUserUpdate/>}/>
                                     <Route exact path="/admin/user/:id/comments" element={<AdminUserDetailForCommentList/>}/>
                                     <Route exact path="/admin/dashboard" element={<AdminDashboard/>}/>

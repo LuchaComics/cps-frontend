@@ -1,43 +1,42 @@
 import React, { useState, useEffect } from "react";
-import { Link, Navigate, useSearchParams } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faTimesCircle, faCheckCircle, faGauge, faUsers, faEye, faBook, faMagnifyingGlass, faBalanceScale, faUser, faCogs } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faPencil, faEye, faGauge, faBook, faMagnifyingGlass, faBalanceScale, faCogs } from '@fortawesome/free-solid-svg-icons'
+import Select from 'react-select'
 import { useRecoilState } from 'recoil';
+import { useParams } from 'react-router-dom';
+import { DateTime } from "luxon";
 
-import { postSubmissionCreateAPI } from "../../../API/submission";
+import useLocalStorage from "../../../Hooks/useLocalStorage";
+import { getSubmissionDetailAPI, putSubmissionUpdateAPI } from "../../../API/ComicSubmission";
 import { getOrganizationSelectOptionListAPI } from "../../../API/organization";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
-import FormDateField from "../../Element/FormDateField";
 import FormTextareaField from "../../Element/FormTextareaField";
 import FormRadioField from "../../Element/FormRadioField";
 import FormMultiSelectField from "../../Element/FormMultiSelectField";
 import FormSelectField from "../../Element/FormSelectField";
+import FormDateField from "../../Element/FormDateField";
 import FormCheckboxField from "../../Element/FormCheckboxField";
-import {
-    FINDING_WITH_EMPTY_OPTIONS,
-    OVERALL_NUMBER_GRADE_WITH_EMPTY_OPTIONS,
-    PUBLISHER_NAME_WITH_EMPTY_OPTIONS,
-    CPS_PERCENTAGE_GRADE_WITH_EMPTY_OPTIONS,
-    ISSUE_COVER_YEAR_OPTIONS,
-    ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS,
-    USER_STATE_WITH_EMPTY_OPTIONS
-} from "../../../Constants/FieldOptions";
 import PageLoadingContent from "../../Element/PageLoadingContent";
+import {
+    FINDING_OPTIONS,
+    OVERALL_NUMBER_GRADE_OPTIONS,
+    PUBLISHER_NAME_OPTIONS,
+    CPS_PERCENTAGE_GRADE_OPTIONS,
+    ISSUE_COVER_YEAR_OPTIONS,
+    ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS
+} from "../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
-function AdminSubmissionAddStep3Comic() {
+function AdminComicSubmissionUpdateForComicSubmission() {
     ////
     //// URL Parameters.
     ////
 
-    const [searchParams] = useSearchParams(); // Special thanks via https://stackoverflow.com/a/65451140
-    const userID = searchParams.get("user_id");
-    const userName = searchParams.get("user_name");
-    const orgID = searchParams.get("organization_id");
-    // const orgName = searchParams.get("organization_name");
+    const { id } = useParams()
 
     ////
     //// Global state.
@@ -75,10 +74,9 @@ function AdminSubmissionAddStep3Comic() {
     const [specialNotes, setSpecialNotes] = useState("");
     const [gradingNotes, setGradingNotes] = useState("");
     const [showsSignsOfTamperingOrRestoration, setShowsSignsOfTamperingOrRestoration] = useState("");
-    const [showCancelWarning, setShowCancelWarning] = useState(false);
     const [status, setStatus] = useState(0);
     const [organizationSelectOptions, setOrganizationSelectOptions] = useState([]);
-    const [organizationID, setOrganizationID] = useState(orgID);
+    const [organizationID, setOrganizationID] = useState("");
     const [serviceType, setServiceType] = useState(0);
     const [isOverallLetterGradeNearMintPlus, setIsOverallLetterGradeNearMintPlus] = useState(false);
 
@@ -88,93 +86,122 @@ function AdminSubmissionAddStep3Comic() {
 
     const onSubmitClick = (e) => {
         console.log("onSubmitClick: Beginning...");
-        console.log("onSubmitClick: Generating payload for submission.");
         setFetching(true);
         setErrors({});
 
         // Generate the payload.
         const submission = {
-            seriesTitle: seriesTitle,
-            issueVol: issueVol,
-            issueNo: issueNo,
-            issueCoverYear: issueCoverYear,
-            issueCoverMonth: issueCoverMonth,
-            publisherName: publisherName,
-            publisherNameOther: publisherNameOther,
-            specialNotes: specialNotes,
-            gradingNotes: gradingNotes,
-            creasesFinding: creasesFinding,
-            tearsFinding: tearsFinding,
-            missingPartsFinding: missingPartsFinding,
-            stainsFinding: stainsFinding,
-            distortionFinding: distortionFinding,
-            paperQualityFinding: paperQualityFinding,
-            spineFinding: spineFinding,
-            coverFinding: coverFinding,
-            gradingScale: parseInt(gradingScale),
-            overallLetterGrade: overallLetterGrade,
-            isOverallLetterGradeNearMintPlus: isOverallLetterGradeNearMintPlus,
-            overallNumberGrade: parseFloat(overallNumberGrade),
-            cpsPercentageGrade: parseFloat(cpsPercentageGrade),
-            showsSignsOfTamperingOrRestoration: parseInt(showsSignsOfTamperingOrRestoration),
+            id: id,
+            series_title: seriesTitle,
+            issue_vol: issueVol,
+            issue_no: issueNo,
+            issue_cover_year: issueCoverYear,
+            issue_cover_month: issueCoverMonth,
+            publisher_name: publisherName,
+            publisher_name_other: publisherNameOther,
+            special_notes: specialNotes,
+            grading_notes: gradingNotes,
+            creases_finding: creasesFinding,
+            tears_finding: tearsFinding,
+            missing_parts_finding: missingPartsFinding,
+            stains_finding: stainsFinding,
+            distortion_finding: distortionFinding,
+            paper_quality_finding: paperQualityFinding,
+            spine_finding: spineFinding,
+            cover_finding: coverFinding,
+            grading_scale: parseInt(gradingScale),
+            overall_letter_grade: overallLetterGrade,
+            is_overall_letter_grade_near_mint_plus: isOverallLetterGradeNearMintPlus,
+            overall_number_grade: parseFloat(overallNumberGrade),
+            cps_percentage_grade: parseFloat(cpsPercentageGrade),
+            shows_signs_of_tampering_or_restoration: parseInt(showsSignsOfTamperingOrRestoration),
             status: status,
-            serviceType: serviceType,
-            organizationID: organizationID,
-            CollectibleType: 1, // 1=Comic, 2=Card
+            service_type: serviceType,
+            organization_id: organizationID,
         };
 
-        console.log("onSubmitClick: Attaching user identification.");
-        if (userID !== undefined && userID !== null && userID !== "") {
-            submission.UserID = userID;
-        }
-
         // Submit to the backend.
-        console.log("onSubmitClick: payload:", submission);
-        postSubmissionCreateAPI(
-            submission,
-            onSubmissionCreateSuccess,
-            onSubmissionCreateError,
-            onSubmissionCreateDone
-        );
+        console.log("onSubmitClick, submission:", submission);
+        putSubmissionUpdateAPI(submission, onComicSubmissionUpdateSuccess, onComicSubmissionUpdateError, onComicSubmissionUpdateDone);
     }
 
     ////
     //// API.
     ////
 
-    function onSubmissionCreateSuccess(response){
+    function onComicSubmissionDetailSuccess(response){
+        console.log("onComicSubmissionDetailSuccess: Starting...");
+        setSeriesTitle(response.seriesTitle);
+        setIssueVol(response.issueVol);
+        setIssueNo(response.issueNo);
+        setIssueCoverYear(response.issueCoverYear);
+        setIssueCoverMonth(response.issueCoverMonth);
+        setPublisherName(response.publisherName);
+        setPublisherNameOther(response.publisherNameOther);
+        setCreasesFinding(response.creasesFinding);
+        setTearsFinding(response.tearsFinding);
+        setMissingPartsFinding(response.missingPartsFinding);
+        setStainsFinding(response.stainsFinding);
+        setDistortionFinding(response.distortionFinding);
+        setPaperQualityFinding(response.paperQualityFinding);
+        setSpineFinding(response.spineFinding);
+        setCoverFinding(response.coverFinding);
+        setGradingScale(parseInt(response.gradingScale));
+        setOverallLetterGrade(response.overallLetterGrade);
+        setIsOverallLetterGradeNearMintPlus(response.isOverallLetterGradeNearMintPlus);
+        setOverallNumberGrade(response.overallNumberGrade);
+        setSpecialNotes(response.specialNotes);
+        setShowsSignsOfTamperingOrRestoration(response.showsSignsOfTamperingOrRestoration);
+        setGradingNotes(response.gradingNotes);
+        setStatus(response.status);
+        setServiceType(response.serviceType);
+        setOrganizationID(response.organizationId);
+    }
+
+    function onComicSubmissionDetailError(apiErr) {
+        console.log("onComicSubmissionDetailError: Starting...");
+        setErrors(apiErr);
+
+        // The following code will cause the screen to scroll to the top of
+        // the page. Please see ``react-scroll`` for more information:
+        // https://github.com/fisshy/react-scroll
+        var scroll = Scroll.animateScroll;
+        scroll.scrollToTop();
+    }
+
+    function onComicSubmissionDetailDone() {
+        console.log("onComicSubmissionDetailDone: Starting...");
+        setFetching(false);
+    }
+
+    function onComicSubmissionUpdateSuccess(response){
         // For debugging purposes only.
-        console.log("onSubmissionCreateSuccess: Starting...");
+        console.log("onComicSubmissionUpdateSuccess: Starting...");
         console.log(response);
 
         // Add a temporary banner message in the app and then clear itself after 2 seconds.
-        setTopAlertMessage("Submission created");
+        setTopAlertMessage("ComicSubmission created");
         setTopAlertStatus("success");
         setTimeout(() => {
-            console.log("onSubmissionCreateSuccess: Delayed for 2 seconds.");
-            console.log("onSubmissionCreateSuccess: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
+            console.log("onComicSubmissionUpdateSuccess: Delayed for 2 seconds.");
+            console.log("onComicSubmissionUpdateSuccess: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
         }, 2000);
 
-        let urlParams = "";
-        if (userName !== null) {
-            urlParams += "?user_id=" + userID + "&user_name=" + userName;
-        }
-
         // Redirect the user to a new page.
-        setForceURL("/admin/submissions/add/"+response.id+"/confirmation"+urlParams);
+        setForceURL("/admin/comic-submission/"+response.id);
     }
 
-    function onSubmissionCreateError(apiErr) {
-        console.log("onSubmissionCreateError: Starting...");
+    function onComicSubmissionUpdateError(apiErr) {
+        console.log("onComicSubmissionUpdateError: Starting...");
         setErrors(apiErr);
 
         // Add a temporary banner message in the app and then clear itself after 2 seconds.
         setTopAlertMessage("Failed submitting");
         setTopAlertStatus("danger");
         setTimeout(() => {
-            console.log("onSubmissionCreateError: Delayed for 2 seconds.");
-            console.log("onSubmissionCreateError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
+            console.log("onComicSubmissionUpdateError: Delayed for 2 seconds.");
+            console.log("onComicSubmissionUpdateError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
         }, 2000);
 
@@ -185,8 +212,8 @@ function AdminSubmissionAddStep3Comic() {
         scroll.scrollToTop();
     }
 
-    function onSubmissionCreateDone() {
-        console.log("onSubmissionCreateDone: Starting...");
+    function onComicSubmissionUpdateDone() {
+        console.log("onComicSubmissionUpdateDone: Starting...");
         setFetching(false);
     }
 
@@ -227,6 +254,14 @@ function AdminSubmissionAddStep3Comic() {
 
         if (mounted) {
             window.scrollTo(0, 0);  // Start the page at the top of the page.
+            setFetching(true);
+            getSubmissionDetailAPI(
+                id,
+                onComicSubmissionDetailSuccess,
+                onComicSubmissionDetailError,
+                onComicSubmissionDetailDone
+            );
+
             let params = new Map();
             getOrganizationSelectOptionListAPI(
                 params,
@@ -234,11 +269,10 @@ function AdminSubmissionAddStep3Comic() {
                 onOrganizationOptionListError,
                 onOrganizationOptionListDone
             );
-            setFetching(true);
         }
 
         return () => { mounted = false; }
-    }, []);
+    }, [id]);
 
     ////
     //// Component rendering.
@@ -257,59 +291,27 @@ function AdminSubmissionAddStep3Comic() {
             <div class="container">
                 <section class="section">
                     <nav class="breadcrumb" aria-label="breadcrumbs">
-                       {userName === null
-                           ?
-                            <ul>
-                                <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
-                                <li class=""><Link to="/admin/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
-                                <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
-                            </ul>
-                            :
-                            <ul>
-                                <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
-                                <li class=""><Link to="/admin/users" aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Users</Link></li>
-                                <li class=""><Link to={`/admin/user/${userID}/sub`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail (Submissions)</Link></li>
-                                <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
-                            </ul>
-                        }
+                        <ul>
+                            <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
+                            <li class=""><Link to="/admin/comic-submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
+                            <li class=""><Link to={`/admin/comic-submission/${id}`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail</Link></li>
+                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update (Comic Submission)</Link></li>
+                        </ul>
                     </nav>
                     <nav class="box">
-                        <div class={`modal ${showCancelWarning ? 'is-active' : ''}`}>
-                            <div class="modal-background"></div>
-                            <div class="modal-card">
-                                <header class="modal-card-head">
-                                    <p class="modal-card-title">Are you sure?</p>
-                                    <button class="delete" aria-label="close" onClick={(e)=>setShowCancelWarning(false)}></button>
-                                </header>
-                                <section class="modal-card-body">
-                                    Your submission will be cancelled and your work will be lost. This cannot be undone. Do you want to continue?
-                                </section>
-                                <footer class="modal-card-foot">
-                                    {userName === null
-                                        ?
-                                        <Link class="button is-medium is-success" to={`/admin/submissions/add/search`}>Yes</Link>
-                                        :
-                                        <Link class="button is-medium is-success" to={`/admin/user/${userID}/sub`}>Yes</Link>
-                                    }
-                                    <button class="button is-medium " onClick={(e)=>setShowCancelWarning(false)}>No</button>
-                                </footer>
-                            </div>
-                        </div>
-
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Submission</p>
-                        <FormErrorBox errors={errors} />
-
-                        <p class="pb-4 has-text-grey">Please fill out all the required fields before submitting this form.</p>
-
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submission</p>
                         {isFetching
                             ?
                             <PageLoadingContent displayMessage={"Submitting..."} />
                             :
                             <>
+                                <FormErrorBox errors={errors} />
+                                <p class="pb-4 has-text-grey">Please fill out all the required fields before submitting this form.</p>
                                 <div class="container">
 
                                     <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comic Book Information</p>
                                     <hr />
+
                                     <FormInputField
                                         label="Series Title"
                                         name="seriesTitle"
@@ -380,7 +382,7 @@ function AdminSubmissionAddStep3Comic() {
                                         errorText={errors && errors.publisherName}
                                         helpText=""
                                         onChange={(e)=>setPublisherName(parseInt(e.target.value))}
-                                        options={PUBLISHER_NAME_WITH_EMPTY_OPTIONS}
+                                        options={PUBLISHER_NAME_OPTIONS}
                                     />
 
                                     {publisherName === 1 && <FormInputField
@@ -396,11 +398,11 @@ function AdminSubmissionAddStep3Comic() {
                                     />}
 
                                     <FormTextareaField
-                                        label="Special Note (Optional)"
+                                        label="Special Notes (Optional)"
                                         name="specialNotes"
                                         placeholder="Text input"
                                         value={specialNotes}
-                                        errorText={errors && errors.specialNotesLine1}
+                                        errorText={errors && errors.specialNotes}
                                         helpText=""
                                         onChange={(e)=>setSpecialNotes(e.target.value)}
                                         isRequired={true}
@@ -599,10 +601,10 @@ function AdminSubmissionAddStep3Comic() {
                                     <FormRadioField
                                         label="Shows signs of tampering/restoration"
                                         name="showsSignsOfTamperingOrRestoration"
-                                        value={showsSignsOfTamperingOrRestoration}
-                                        opt1Value={"2"}
+                                        value={parseInt(showsSignsOfTamperingOrRestoration)}
+                                        opt1Value={2}
                                         opt1Label="No"
-                                        opt2Value={"1"}
+                                        opt2Value={1}
                                         opt2Label="Yes"
                                         errorText={errors && errors.showsSignsOfTamperingOrRestoration}
                                         onChange={(e)=>setShowsSignsOfTamperingOrRestoration(e.target.value)}
@@ -610,7 +612,7 @@ function AdminSubmissionAddStep3Comic() {
                                     />
 
                                     <FormTextareaField
-                                        label="Grading Notes"
+                                        label="Grading Notes (Optional)"
                                         name="gradingNotes"
                                         placeholder="Text input"
                                         value={gradingNotes}
@@ -650,7 +652,7 @@ function AdminSubmissionAddStep3Comic() {
                                             errorText={errors && errors.overallLetterGrade}
                                             helpText=""
                                             onChange={(e)=>setOverallLetterGrade(e.target.value)}
-                                            options={FINDING_WITH_EMPTY_OPTIONS}
+                                            options={FINDING_OPTIONS}
                                         />
                                         {isNMPlusOpen && <>
                                             <FormCheckboxField
@@ -663,18 +665,16 @@ function AdminSubmissionAddStep3Comic() {
                                             />
                                         </>}
                                     </>}
-
                                     {gradingScale === 2 && <FormSelectField
                                         label="Overall Number Grade"
                                         name="overallNumberGrade"
-                                        placeholder="Overall Number Grade"
+                                        placeholder="Overall Grade"
                                         selectedValue={overallNumberGrade}
                                         errorText={errors && errors.overallNumberGrade}
                                         helpText=""
                                         onChange={(e)=>setOverallNumberGrade(e.target.value)}
-                                        options={OVERALL_NUMBER_GRADE_WITH_EMPTY_OPTIONS}
+                                        options={OVERALL_NUMBER_GRADE_OPTIONS}
                                     />}
-
                                     {gradingScale === 3 && <FormSelectField
                                         label="CPS Percentage Grade"
                                         name="cpsPercentageGrade"
@@ -683,7 +683,7 @@ function AdminSubmissionAddStep3Comic() {
                                         errorText={errors && errors.cpsPercentageGrade}
                                         helpText=""
                                         onChange={(e)=>setCpsPercentageGrade(e.target.value)}
-                                        options={CPS_PERCENTAGE_GRADE_WITH_EMPTY_OPTIONS}
+                                        options={CPS_PERCENTAGE_GRADE_OPTIONS}
                                     />}
 
                                     <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faCogs} />&nbsp;Settings</p>
@@ -699,7 +699,7 @@ function AdminSubmissionAddStep3Comic() {
                                         isRequired={true}
                                         onChange={(e)=>setOrganizationID(e.target.value)}
                                         options={organizationSelectOptions}
-                                        disabled={(orgID !== undefined && orgID !== "" && orgID !== null) || organizationSelectOptions.length === 0}
+                                        disabled={organizationSelectOptions.length === 0}
                                     />
                                     <FormRadioField
                                         label="Service Type"
@@ -708,7 +708,7 @@ function AdminSubmissionAddStep3Comic() {
                                         opt1Value={1}
                                         opt1Label="Pre-Screening Service"
                                         opt2Value={2}
-                                        opt2Label="Pedigree Service"
+                                        opt2Label="CPS Pedigree Service"
                                         errorText={errors && errors.serviceType}
                                         onChange={(e)=>setServiceType(parseInt(e.target.value))}
                                         maxWidth="180px"
@@ -732,8 +732,8 @@ function AdminSubmissionAddStep3Comic() {
 
                                     <div class="columns pt-5">
                                         <div class="column is-half">
-                                            <button class="button is-medium is-hidden-touch" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faTimesCircle} />&nbsp;Cancel</button>
-                                            <button class="button is-medium is-fullwidth is-hidden-desktop" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faTimesCircle} />&nbsp;Cancel</button>
+                                            <Link to={`/admin/comic-submission/${id}`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link to={`/admin/comic-submission/${id}`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                         </div>
                                         <div class="column is-half has-text-right">
                                             <button class="button is-medium is-primary is-hidden-touch" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
@@ -751,4 +751,4 @@ function AdminSubmissionAddStep3Comic() {
     );
 }
 
-export default AdminSubmissionAddStep3Comic;
+export default AdminComicSubmissionUpdateForComicSubmission;

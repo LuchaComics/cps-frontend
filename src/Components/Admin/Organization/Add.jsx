@@ -153,7 +153,6 @@ function AdminOrganizationAdd() {
                         </div>
 
                         <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Organization</p>
-                        <FormErrorBox errors={errors} />
 
                         {/* <p class="pb-4 has-text-grey">Please fill out all the required fields before submitting this form.</p> */}
 
@@ -162,6 +161,7 @@ function AdminOrganizationAdd() {
                             <PageLoadingContent displayMessage={"Submitting..."} />
                             :
                             <>
+                                <FormErrorBox errors={errors} />
                                 <div class="container">
 
                                     <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Full Name</p>

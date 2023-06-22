@@ -8,7 +8,7 @@ import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { getSubmissionDetailAPI } from "../../../API/submission";
+import { getSubmissionDetailAPI } from "../../../API/ComicSubmission";
 import { getCustomerListAPI } from "../../../API/customer";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
@@ -20,7 +20,7 @@ import FormInputFieldWithButton from "../../Element/FormInputFieldWithButton";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
-function AdminSubmissionUpdatePickCustomerWithSearch() {
+function AdminComicSubmissionUpdatePickCustomerWithSearch() {
     ////
     //// URL Parameters.
     ////
@@ -55,7 +55,7 @@ function AdminSubmissionUpdatePickCustomerWithSearch() {
 
     const onSearchButtonClicked = (e) => {
         console.log("searchButtonClick: Starting...");
-        let aURL = "/admin/submission/" + id + "/cust/results";
+        let aURL = "/admin/comic-submission/" + id + "/cust/results";
         if (searchKeyword !=="") {
             aURL += "?search="+searchKeyword;
         }
@@ -149,14 +149,14 @@ function AdminSubmissionUpdatePickCustomerWithSearch() {
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
                             <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
-                            <li class=""><Link to="/admin/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
-                            <li class=""><Link to={`/admin/submission/${id}/cust`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Details</Link></li>
+                            <li class=""><Link to="/admin/comic-submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
+                            <li class=""><Link to={`/admin/comic-submission/${id}/cust`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Details</Link></li>
                             <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update (Customer)</Link></li>
                         </ul>
                     </nav>
 
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update Submission</p>
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update Comic Submission</p>
                         <FormErrorBox errors={errors} />
 
                         <div class="container pb-5">
@@ -231,8 +231,8 @@ function AdminSubmissionUpdatePickCustomerWithSearch() {
 
                         <div class="columns pt-5">
                             <div class="column is-half">
-                                <Link to={`/admin/submission/${id}/cust`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                <Link to={`/admin/submission/${id}/cust`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                <Link to={`/admin/comic-submission/${id}/cust`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                <Link to={`/admin/comic-submission/${id}/cust`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                             </div>
                             <div class="column is-half has-text-right">
                                 <button class="button is-medium is-primary is-hidden-touch" onClick={onSearchButtonClicked}><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search</button>
@@ -247,4 +247,4 @@ function AdminSubmissionUpdatePickCustomerWithSearch() {
     );
 }
 
-export default AdminSubmissionUpdatePickCustomerWithSearch;
+export default AdminComicSubmissionUpdatePickCustomerWithSearch;

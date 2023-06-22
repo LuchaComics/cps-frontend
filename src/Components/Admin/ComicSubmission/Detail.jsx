@@ -8,7 +8,7 @@ import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { getSubmissionDetailAPI } from "../../../API/submission";
+import { getSubmissionDetailAPI } from "../../../API/ComicSubmission";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
 import FormTextareaField from "../../Element/FormTextareaField";
@@ -30,7 +30,90 @@ import {
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
-function AdminSubmissionDetailContentComic({ id, errors, isFetching, submission, showCustomerEditOptions, setShowCustomerEditOptions }) {
+function AdminComicSubmissionDetail() {
+    ////
+    //// URL Parameters.
+    ////
+
+    const { id } = useParams()
+
+    ////
+    //// Global state.
+    ////
+
+    const [topAlertMessage, setTopAlertMessage] = useRecoilState(topAlertMessageState);
+    const [topAlertStatus, setTopAlertStatus] = useRecoilState(topAlertStatusState);
+
+    ////
+    //// Component states.
+    ////
+
+    const [errors, setErrors] = useState({});
+    const [isFetching, setFetching] = useState(false);
+    const [forceURL, setForceURL] = useState("");
+    const [submission, setComicSubmission] = useState({});
+    const [showCustomerEditOptions, setShowCustomerEditOptions] = useState(false);
+
+    ////
+    //// Event handling.
+    ////
+
+
+    ////
+    //// API.
+    ////
+
+    function onComicSubmissionDetailSuccess(response){
+        console.log("onComicSubmissionDetailSuccess: Starting...");
+        setComicSubmission(response);
+    }
+
+    function onComicSubmissionDetailError(apiErr) {
+        console.log("onComicSubmissionDetailError: Starting...");
+        setErrors(apiErr);
+
+        // The following code will cause the screen to scroll to the top of
+        // the page. Please see ``react-scroll`` for more information:
+        // https://github.com/fisshy/react-scroll
+        var scroll = Scroll.animateScroll;
+        scroll.scrollToTop();
+    }
+
+    function onComicSubmissionDetailDone() {
+        console.log("onComicSubmissionDetailDone: Starting...");
+        setFetching(false);
+    }
+
+    ////
+    //// Misc.
+    ////
+
+    useEffect(() => {
+        let mounted = true;
+
+        if (mounted) {
+            window.scrollTo(0, 0);  // Start the page at the top of the page.
+
+            setFetching(true);
+            getSubmissionDetailAPI(
+                id,
+                onComicSubmissionDetailSuccess,
+                onComicSubmissionDetailError,
+                onComicSubmissionDetailDone
+            );
+        }
+
+        return () => { mounted = false; }
+    }, [id]);
+
+    ////
+    //// Component rendering.
+    ////
+
+    if (forceURL !== "") {
+        return <Navigate to={forceURL}  />
+    }
+
     // The following code will check to see if we need to grant the 'is NM+' option is available to the user.
     let isNMPlusOpen = false;
     if (submission !== undefined && submission !== null && submission !== "") {
@@ -52,9 +135,9 @@ function AdminSubmissionDetailContentComic({ id, errors, isFetching, submission,
 
                         {/*
                             <br /><br />
-                            <Link to={`/submission/${submission.id}/edit-customer`} class="button is-primary" disabled={true}>Edit Current Customer</Link> */}
+                            <Link to={`/comic-submission/${submission.id}/edit-customer`} class="button is-primary" disabled={true}>Edit Current Customer</Link> */}
                         <br /><br />
-                        <Link to={`/admin/submission/${submission.id}/customer/search`} class="button is-medum is-menu is-primary">Pick a Different Customer</Link>
+                        <Link to={`/admin/comic-submission/${submission.id}/customer/search`} class="button is-medum is-menu is-primary">Pick a Different Customer</Link>
                     </section>
                     <footer class="modal-card-foot">
                         <button class="button" onClick={(e)=>setShowCustomerEditOptions(false)}>Close</button>
@@ -67,12 +150,12 @@ function AdminSubmissionDetailContentComic({ id, errors, isFetching, submission,
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
                             <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
-                            <li class=""><Link to="/admin/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
+                            <li class=""><Link to="/admin/comic-submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
                             <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail</Link></li>
                         </ul>
                     </nav>
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission</p>
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submission</p>
                         <FormErrorBox errors={errors} />
 
                         {isFetching
@@ -87,13 +170,13 @@ function AdminSubmissionDetailContentComic({ id, errors, isFetching, submission,
                                             <Link><b>Detail</b></Link>
                                         </li>
                                         <li>
-                                            <Link to={`/admin/submission/${id}/cust`}>Customer</Link>
+                                            <Link to={`/admin/comic-submission/${id}/cust`}>Customer</Link>
                                         </li>
                                         <li>
-                                            <Link to={`/admin/submission/${id}/comments`}>Comments</Link>
+                                            <Link to={`/admin/comic-submission/${id}/comments`}>Comments</Link>
                                         </li>
                                         <li>
-                                            <Link to={`/admin/submission/${id}/file`}>File</Link>
+                                            <Link to={`/admin/comic-submission/${id}/file`}>File</Link>
                                         </li>
                                       </ul>
                                     </div>
@@ -486,12 +569,12 @@ function AdminSubmissionDetailContentComic({ id, errors, isFetching, submission,
 
                                     <div class="columns pt-4">
                                         <div class="column is-half">
-                                            <Link to={`/admin/submissions`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                            <Link to={`/admin/submissions`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link to={`/admin/comic-submissions`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link to={`/admin/comic-submissions`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                         </div>
                                         <div class="column is-half has-text-right">
-                                            <Link to={`/admin/submission/${id}/edit`} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Submission</Link>
-                                            <Link to={`/admin/submission/${id}/edit`} class="button is-medium is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Submission</Link>
+                                            <Link to={`/admin/comic-submission/${id}/edit`} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Comic Submission</Link>
+                                            <Link to={`/admin/comic-submission/${id}/edit`} class="button is-medium is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Comic Submission</Link>
                                         </div>
                                     </div>
                                 </div>}
@@ -504,4 +587,4 @@ function AdminSubmissionDetailContentComic({ id, errors, isFetching, submission,
     );
 }
 
-export default AdminSubmissionDetailContentComic;
+export default AdminComicSubmissionDetail;

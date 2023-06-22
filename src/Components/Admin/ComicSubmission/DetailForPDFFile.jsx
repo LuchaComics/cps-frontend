@@ -8,7 +8,7 @@ import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { getSubmissionDetailAPI } from "../../../API/submission";
+import { getSubmissionDetailAPI } from "../../../API/ComicSubmission";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
 import FormTextareaField from "../../Element/FormTextareaField";
@@ -21,7 +21,7 @@ import PageLoadingContent from "../../Element/PageLoadingContent";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
-function AdminSubmissionDetailForPDFFile() {
+function AdminComicSubmissionDetailForPDFFile() {
     ////
     //// URL Parameters.
     ////
@@ -42,7 +42,7 @@ function AdminSubmissionDetailForPDFFile() {
     const [errors, setErrors] = useState({});
     const [isFetching, setFetching] = useState(false);
     const [forceURL, setForceURL] = useState("");
-    const [submission, setSubmission] = useState({});
+    const [submission, setComicSubmission] = useState({});
     const [showCustomerEditOptions, setShowCustomerEditOptions] = useState(false);
 
     ////
@@ -54,13 +54,13 @@ function AdminSubmissionDetailForPDFFile() {
     //// API.
     ////
 
-    function onSubmissionDetailSuccess(response){
-        console.log("onSubmissionDetailSuccess: Starting...");
-        setSubmission(response);
+    function onComicSubmissionDetailSuccess(response){
+        console.log("onComicSubmissionDetailSuccess: Starting...");
+        setComicSubmission(response);
     }
 
-    function onSubmissionDetailError(apiErr) {
-        console.log("onSubmissionDetailError: Starting...");
+    function onComicSubmissionDetailError(apiErr) {
+        console.log("onComicSubmissionDetailError: Starting...");
         setErrors(apiErr);
 
         // The following code will cause the screen to scroll to the top of
@@ -70,8 +70,8 @@ function AdminSubmissionDetailForPDFFile() {
         scroll.scrollToTop();
     }
 
-    function onSubmissionDetailDone() {
-        console.log("onSubmissionDetailDone: Starting...");
+    function onComicSubmissionDetailDone() {
+        console.log("onComicSubmissionDetailDone: Starting...");
         setFetching(false);
     }
 
@@ -88,9 +88,9 @@ function AdminSubmissionDetailForPDFFile() {
             setFetching(true);
             getSubmissionDetailAPI(
                 id,
-                onSubmissionDetailSuccess,
-                onSubmissionDetailError,
-                onSubmissionDetailDone
+                onComicSubmissionDetailSuccess,
+                onComicSubmissionDetailError,
+                onComicSubmissionDetailDone
             );
         }
 
@@ -119,9 +119,9 @@ function AdminSubmissionDetailForPDFFile() {
 
                         {/*
                             <br /><br />
-                            <Link to={`/submission/${submission.id}/edit-customer`} class="button is-primary" disabled={true}>Edit Current Customer</Link> */}
+                            <Link to={`/comic-submission/${submission.id}/edit-customer`} class="button is-primary" disabled={true}>Edit Current Customer</Link> */}
                         <br /><br />
-                        <Link to={`/admin/submission/${submission.id}/customer/search`} class="button is-medum is-menu is-primary">Pick a Different Customer</Link>
+                        <Link to={`/admin/comic-submission/${submission.id}/customer/search`} class="button is-medum is-menu is-primary">Pick a Different Customer</Link>
                     </section>
                     <footer class="modal-card-foot">
                         <button class="button" onClick={(e)=>setShowCustomerEditOptions(false)}>Close</button>
@@ -134,12 +134,12 @@ function AdminSubmissionDetailForPDFFile() {
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
                             <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
-                            <li class=""><Link to="/admin/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
+                            <li class=""><Link to="/admin/comic-submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
                             <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail (File)</Link></li>
                         </ul>
                     </nav>
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission</p>
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submission</p>
                         <FormErrorBox errors={errors} />
 
                         {isFetching
@@ -151,16 +151,16 @@ function AdminSubmissionDetailForPDFFile() {
                                     <div class="tabs is-medium">
                                       <ul>
                                         <li>
-                                            <Link to={`/admin/submission/${id}`}>Detail</Link>
+                                            <Link to={`/admin/comic-submission/${id}`}>Detail</Link>
                                         </li>
                                         <li>
-                                            <Link to={`/admin/submission/${id}/cust`}>Customer</Link>
+                                            <Link to={`/admin/comic-submission/${id}/cust`}>Customer</Link>
                                         </li>
                                         <li>
-                                            <Link to={`/admin/submission/${id}/comments`}>Comments</Link>
+                                            <Link to={`/admin/comic-submission/${id}/comments`}>Comments</Link>
                                         </li>
                                         <li class={`is-active`}>
-                                            <Link to={`/admin/submission/${id}/file`}><b>File</b></Link>
+                                            <Link to={`/admin/comic-submission/${id}/file`}><b>File</b></Link>
                                         </li>
                                       </ul>
                                     </div>
@@ -182,13 +182,13 @@ function AdminSubmissionDetailForPDFFile() {
 
                                     <div class="columns pt-4">
                                         <div class="column is-half">
-                                            <Link to={`/admin/submissions`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                            <Link to={`/admin/submissions`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link to={`/admin/comic-submissions`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link to={`/admin/comic-submissions`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                         </div>
                                         <div class="column is-half has-text-right">
                                         {/*
-                                            <Link to={`/submission/${id}/edit`} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Submission</Link>
-                                            <Link to={`/submission/${id}/edit`} class="button is-medium is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Submission</Link>
+                                            <Link to={`/comic-submission/${id}/edit`} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit ComicSubmission</Link>
+                                            <Link to={`/comic-submission/${id}/edit`} class="button is-medium is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit ComicSubmission</Link>
                                         */}
                                         </div>
                                     </div>
@@ -202,4 +202,4 @@ function AdminSubmissionDetailForPDFFile() {
     );
 }
 
-export default AdminSubmissionDetailForPDFFile;
+export default AdminComicSubmissionDetailForPDFFile;

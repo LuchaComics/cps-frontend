@@ -211,11 +211,11 @@ function AdminUserDetailForCommentList() {
                             </div>
                             <div class="column has-text-right">
                                 {/* Mobile Specific */}
-                                <Link to={`/admin/submissions/pick-type-for-add?user_id=${id}&user_name=${user.name}`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
+                                <Link to={`/admin/comic-submissions/pick-type-for-add?user_id=${id}&user_name=${user.name}`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
                                 </Link>
                                 {/* Desktop Specific */}
-                                <Link to={`/admin/submissions/pick-type-for-add?user_id=${id}&user_name=${user.name}`} class="button is-small is-success is-hidden-touch" type="button">
+                                <Link to={`/admin/comic-submissions/pick-type-for-add?user_id=${id}&user_name=${user.name}`} class="button is-small is-success is-hidden-touch" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
                                 </Link>
                             </div>
@@ -234,7 +234,7 @@ function AdminUserDetailForCommentList() {
                                             <Link to={`/admin/user/${id}`}>Detail</Link>
                                         </li>
                                         <li>
-                                            <Link to={`/admin/user/${id}/sub`}>Submissions</Link>
+                                            <Link to={`/admin/user/${id}/comics`}>Comics</Link>
                                         </li>
                                         <li class="is-active">
                                             <Link><b>Comments</b></Link>

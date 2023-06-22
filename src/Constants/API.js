@@ -25,3 +25,8 @@ export const CPS_USERS_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/users";
 export const CPS_USERS_SELECT_OPTIONS_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/users/select-options";
 export const CPS_USER_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/user/{id}";
 export const CPS_USER_CREATE_COMMENT_OPERATION_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/users/operation/create-comment";
+
+export const CPS_COMIC_SUBMISSIONS_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/comic-submissions";
+export const CPS_COMIC_SUBMISSION_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/comic-submission/{id}";
+export const CPS_COMIC_SUBMISSION_CUSTOMER_SWAP_OPERATION_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/comic-submissions/operation/set-user";
+export const CPS_COMIC_SUBMISSION_CREATE_COMMENT_OPERATION_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/comic-submissions/operation/create-comment";

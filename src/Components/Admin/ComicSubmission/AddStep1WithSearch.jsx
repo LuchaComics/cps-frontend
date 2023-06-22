@@ -8,7 +8,7 @@ import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { getSubmissionDetailAPI } from "../../../API/submission";
+import { getSubmissionDetailAPI } from "../../../API/ComicSubmission";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
 import FormTextareaField from "../../Element/FormTextareaField";
@@ -20,7 +20,7 @@ import { FINDING_OPTIONS } from "../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
-function AdminSubmissionAddStep1WithSearch() {
+function AdminComicSubmissionAddStep1WithSearch() {
     ////
     //// URL Parameters.
     ////
@@ -54,7 +54,7 @@ function AdminSubmissionAddStep1WithSearch() {
 
     const onSearchButtonClicked = (e) => {
         console.log("searchButtonClick: Starting...");
-        let aURL = "/admin/submissions/add/results";
+        let aURL = "/admin/comic-submissions/add/results";
         if (searchKeyword !=="") {
             aURL += "?search="+searchKeyword;
         }
@@ -148,7 +148,7 @@ function AdminSubmissionAddStep1WithSearch() {
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
                             <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
-                            <li class=""><Link to="/admin/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
+                            <li class=""><Link to="/admin/comic-submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
                             <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
                         </ul>
                     </nav>
@@ -171,7 +171,7 @@ function AdminSubmissionAddStep1WithSearch() {
                             </div>
                         </div>
 
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Submission</p>
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comic Submission</p>
                         <FormErrorBox errors={errors} />
 
                         <div class="container pb-6">
@@ -179,7 +179,7 @@ function AdminSubmissionAddStep1WithSearch() {
                             <hr />
 
                             <Link class="is-medium is-warning" to="/admin/users/add" target="_blank" rel="noreferrer">Create a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link>&nbsp;&nbsp;<br /><br />
-                            <Link class="is-medium is-danger" to="/admin/submissions/pick-type-for-add">Skip selecting a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
+                            <Link class="is-medium is-danger" to="/admin/comic-submissions/pick-type-for-add">Skip selecting a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
                         </div>
 
                         <div class="container pb-5">
@@ -269,4 +269,4 @@ function AdminSubmissionAddStep1WithSearch() {
     );
 }
 
-export default AdminSubmissionAddStep1WithSearch;
+export default AdminComicSubmissionAddStep1WithSearch;

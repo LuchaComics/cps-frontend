@@ -72,10 +72,10 @@ function AdminDashboard() {
                                 <FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions
                             </p>
                             <p class="subtitle">
-                              Submit a request to encapsulate your comics by clicking below:
+                              Submit a request to encapsulate your collectible by clicking below:
                               <br />
                               <br />
-                              <Link to={"/admin/submissions"}>View&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
+                              <Link to={"/admin/comic-submissions"}>View Comics&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
                             </p>
                           </div>
                         </section>

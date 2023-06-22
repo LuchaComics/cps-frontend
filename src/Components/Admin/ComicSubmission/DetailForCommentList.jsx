@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 import { DateTime } from "luxon";
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { getSubmissionDetailAPI, postSubmissionCreateCommentOperationAPI } from "../../../API/submission";
+import { getSubmissionDetailAPI, postSubmissionCreateCommentOperationAPI } from "../../../API/ComicSubmission";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
 import FormTextareaField from "../../Element/FormTextareaField";
@@ -22,7 +22,7 @@ import PageLoadingContent from "../../Element/PageLoadingContent";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
-function AdminSubmissionDetailForCommentList() {
+function AdminComicSubmissionDetailForCommentList() {
     ////
     //// URL Parameters.
     ////
@@ -43,7 +43,7 @@ function AdminSubmissionDetailForCommentList() {
     const [errors, setErrors] = useState({});
     const [isFetching, setFetching] = useState(false);
     const [forceURL, setForceURL] = useState("");
-    const [submission, setSubmission] = useState({});
+    const [submission, setComicSubmission] = useState({});
     const [showCustomerEditOptions, setShowCustomerEditOptions] = useState(false);
     const [content, setContent] = useState("");
 
@@ -56,20 +56,20 @@ function AdminSubmissionDetailForCommentList() {
         console.log("onSubmitClick, submission:", submission);
         setErrors(null);
         setFetching(true);
-        postSubmissionCreateCommentOperationAPI(id, content, onSubmissionUpdateSuccess, onSubmissionUpdateError, onSubmissionUpdateDone);
+        postSubmissionCreateCommentOperationAPI(id, content, onComicSubmissionUpdateSuccess, onComicSubmissionUpdateError, onComicSubmissionUpdateDone);
     }
 
     ////
     //// API.
     ////
 
-    function onSubmissionDetailSuccess(response){
-        console.log("onSubmissionDetailSuccess: Starting...");
-        setSubmission(response);
+    function onComicSubmissionDetailSuccess(response){
+        console.log("onComicSubmissionDetailSuccess: Starting...");
+        setComicSubmission(response);
     }
 
-    function onSubmissionDetailError(apiErr) {
-        console.log("onSubmissionDetailError: Starting...");
+    function onComicSubmissionDetailError(apiErr) {
+        console.log("onComicSubmissionDetailError: Starting...");
         setErrors(apiErr);
 
         // The following code will cause the screen to scroll to the top of
@@ -79,22 +79,22 @@ function AdminSubmissionDetailForCommentList() {
         scroll.scrollToTop();
     }
 
-    function onSubmissionDetailDone() {
-        console.log("onSubmissionDetailDone: Starting...");
+    function onComicSubmissionDetailDone() {
+        console.log("onComicSubmissionDetailDone: Starting...");
         setFetching(false);
     }
 
-    function onSubmissionUpdateSuccess(response){
+    function onComicSubmissionUpdateSuccess(response){
         // For debugging purposes only.
-        console.log("onSubmissionUpdateSuccess: Starting...");
+        console.log("onComicSubmissionUpdateSuccess: Starting...");
         console.log(response);
 
         // Add a temporary banner message in the app and then clear itself after 2 seconds.
         setTopAlertMessage("Comment submitted");
         setTopAlertStatus("success");
         setTimeout(() => {
-            console.log("onSubmissionUpdateSuccess: Delayed for 2 seconds.");
-            console.log("onSubmissionUpdateSuccess: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
+            console.log("onComicSubmissionUpdateSuccess: Delayed for 2 seconds.");
+            console.log("onComicSubmissionUpdateSuccess: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
         }, 2000);
 
@@ -104,22 +104,22 @@ function AdminSubmissionDetailForCommentList() {
         // Fetch latest data.
         getSubmissionDetailAPI(
             id,
-            onSubmissionDetailSuccess,
-            onSubmissionDetailError,
-            onSubmissionDetailDone
+            onComicSubmissionDetailSuccess,
+            onComicSubmissionDetailError,
+            onComicSubmissionDetailDone
         );
     }
 
-    function onSubmissionUpdateError(apiErr) {
-        console.log("onSubmissionUpdateError: Starting...");
+    function onComicSubmissionUpdateError(apiErr) {
+        console.log("onComicSubmissionUpdateError: Starting...");
         setErrors(apiErr);
 
         // Add a temporary banner message in the app and then clear itself after 2 seconds.
         setTopAlertMessage("Failed submitting");
         setTopAlertStatus("danger");
         setTimeout(() => {
-            console.log("onSubmissionUpdateError: Delayed for 2 seconds.");
-            console.log("onSubmissionUpdateError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
+            console.log("onComicSubmissionUpdateError: Delayed for 2 seconds.");
+            console.log("onComicSubmissionUpdateError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
         }, 2000);
 
@@ -130,8 +130,8 @@ function AdminSubmissionDetailForCommentList() {
         scroll.scrollToTop();
     }
 
-    function onSubmissionUpdateDone() {
-        console.log("onSubmissionUpdateDone: Starting...");
+    function onComicSubmissionUpdateDone() {
+        console.log("onComicSubmissionUpdateDone: Starting...");
         setFetching(false);
     }
 
@@ -148,9 +148,9 @@ function AdminSubmissionDetailForCommentList() {
             setFetching(true);
             getSubmissionDetailAPI(
                 id,
-                onSubmissionDetailSuccess,
-                onSubmissionDetailError,
-                onSubmissionDetailDone
+                onComicSubmissionDetailSuccess,
+                onComicSubmissionDetailError,
+                onComicSubmissionDetailDone
             );
         }
 
@@ -179,9 +179,9 @@ function AdminSubmissionDetailForCommentList() {
 
                         {/*
                             <br /><br />
-                            <Link to={`/submission/${submission.id}/edit-customer`} class="button is-primary" disabled={true}>Edit Current Customer</Link> */}
+                            <Link to={`/comic-submission/${submission.id}/edit-customer`} class="button is-primary" disabled={true}>Edit Current Customer</Link> */}
                         <br /><br />
-                        <Link to={`/admin/submission/${submission.id}/customer/search`} class="button is-primary">Pick a Different Customer</Link>
+                        <Link to={`/admin/comic-submission/${submission.id}/customer/search`} class="button is-primary">Pick a Different Customer</Link>
                     </section>
                     <footer class="modal-card-foot">
                         <button class="button" onClick={(e)=>setShowCustomerEditOptions(false)}>Close</button>
@@ -194,12 +194,12 @@ function AdminSubmissionDetailForCommentList() {
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
                             <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
-                            <li class=""><Link to="/admin/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
+                            <li class=""><Link to="/admin/comic-submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
                             <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail (Comments)</Link></li>
                         </ul>
                     </nav>
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission</p>
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submission</p>
                         <FormErrorBox errors={errors} />
 
                         {isFetching
@@ -211,16 +211,16 @@ function AdminSubmissionDetailForCommentList() {
                                     <div class="tabs is-medium">
                                       <ul>
                                         <li>
-                                            <Link to={`/admin/submission/${id}`}>Detail</Link>
+                                            <Link to={`/admin/comic-submission/${id}`}>Detail</Link>
                                         </li>
                                         <li>
-                                            <Link to={`/admin/submission/${id}/cust`}>Customer</Link>
+                                            <Link to={`/admin/comic-submission/${id}/cust`}>Customer</Link>
                                         </li>
                                         <li class="is-active">
                                             <Link><b>Comments</b></Link>
                                         </li>
                                         <li>
-                                            <Link to={`/admin/submission/${id}/file`}>File</Link>
+                                            <Link to={`/admin/comic-submission/${id}/file`}>File</Link>
                                         </li>
                                       </ul>
                                     </div>
@@ -257,8 +257,8 @@ function AdminSubmissionDetailForCommentList() {
 
                                     <div class="columns pt-4">
                                         <div class="column is-half">
-                                            <Link to={`/admin/submissions`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                            <Link to={`/admin/submissions`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link to={`/admin/comic-submissions`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link to={`/admin/comic-submissions`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                         </div>
                                         <div class="column is-half has-text-right">
                                             <button onClick={onSubmitClick} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comment</button>
@@ -276,4 +276,4 @@ function AdminSubmissionDetailForCommentList() {
     );
 }
 
-export default AdminSubmissionDetailForCommentList;
+export default AdminComicSubmissionDetailForCommentList;

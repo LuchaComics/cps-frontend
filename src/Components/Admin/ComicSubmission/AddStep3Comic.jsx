@@ -1,42 +1,43 @@
 import React, { useState, useEffect } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useSearchParams } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faPencil, faEye, faGauge, faBook, faMagnifyingGlass, faBalanceScale, faCogs } from '@fortawesome/free-solid-svg-icons'
-import Select from 'react-select'
+import { faTasks, faTachometer, faPlus, faTimesCircle, faCheckCircle, faGauge, faUsers, faEye, faBook, faMagnifyingGlass, faBalanceScale, faUser, faCogs } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
-import { useParams } from 'react-router-dom';
-import { DateTime } from "luxon";
 
-import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { getSubmissionDetailAPI, putSubmissionUpdateAPI } from "../../../API/submission";
+import { postSubmissionCreateAPI } from "../../../API/ComicSubmission";
 import { getOrganizationSelectOptionListAPI } from "../../../API/organization";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
+import FormDateField from "../../Element/FormDateField";
 import FormTextareaField from "../../Element/FormTextareaField";
 import FormRadioField from "../../Element/FormRadioField";
 import FormMultiSelectField from "../../Element/FormMultiSelectField";
 import FormSelectField from "../../Element/FormSelectField";
-import FormDateField from "../../Element/FormDateField";
 import FormCheckboxField from "../../Element/FormCheckboxField";
-import PageLoadingContent from "../../Element/PageLoadingContent";
 import {
-    FINDING_OPTIONS,
-    OVERALL_NUMBER_GRADE_OPTIONS,
-    PUBLISHER_NAME_OPTIONS,
-    CPS_PERCENTAGE_GRADE_OPTIONS,
+    FINDING_WITH_EMPTY_OPTIONS,
+    OVERALL_NUMBER_GRADE_WITH_EMPTY_OPTIONS,
+    PUBLISHER_NAME_WITH_EMPTY_OPTIONS,
+    CPS_PERCENTAGE_GRADE_WITH_EMPTY_OPTIONS,
     ISSUE_COVER_YEAR_OPTIONS,
-    ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS
+    ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS,
+    USER_STATE_WITH_EMPTY_OPTIONS
 } from "../../../Constants/FieldOptions";
+import PageLoadingContent from "../../Element/PageLoadingContent";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
-function AdminSubmissionUpdateForSubmission() {
+function AdminComicSubmissionAddStep3Comic() {
     ////
     //// URL Parameters.
     ////
 
-    const { id } = useParams()
+    const [searchParams] = useSearchParams(); // Special thanks via https://stackoverflow.com/a/65451140
+    const userID = searchParams.get("user_id");
+    const userName = searchParams.get("user_name");
+    const orgID = searchParams.get("organization_id");
+    // const orgName = searchParams.get("organization_name");
 
     ////
     //// Global state.
@@ -74,9 +75,10 @@ function AdminSubmissionUpdateForSubmission() {
     const [specialNotes, setSpecialNotes] = useState("");
     const [gradingNotes, setGradingNotes] = useState("");
     const [showsSignsOfTamperingOrRestoration, setShowsSignsOfTamperingOrRestoration] = useState("");
+    const [showCancelWarning, setShowCancelWarning] = useState(false);
     const [status, setStatus] = useState(0);
     const [organizationSelectOptions, setOrganizationSelectOptions] = useState([]);
-    const [organizationID, setOrganizationID] = useState("");
+    const [organizationID, setOrganizationID] = useState(orgID);
     const [serviceType, setServiceType] = useState(0);
     const [isOverallLetterGradeNearMintPlus, setIsOverallLetterGradeNearMintPlus] = useState(false);
 
@@ -86,122 +88,93 @@ function AdminSubmissionUpdateForSubmission() {
 
     const onSubmitClick = (e) => {
         console.log("onSubmitClick: Beginning...");
+        console.log("onSubmitClick: Generating payload for submission.");
         setFetching(true);
         setErrors({});
 
         // Generate the payload.
         const submission = {
-            id: id,
-            series_title: seriesTitle,
-            issue_vol: issueVol,
-            issue_no: issueNo,
-            issue_cover_year: issueCoverYear,
-            issue_cover_month: issueCoverMonth,
-            publisher_name: publisherName,
-            publisher_name_other: publisherNameOther,
-            special_notes: specialNotes,
-            grading_notes: gradingNotes,
-            creases_finding: creasesFinding,
-            tears_finding: tearsFinding,
-            missing_parts_finding: missingPartsFinding,
-            stains_finding: stainsFinding,
-            distortion_finding: distortionFinding,
-            paper_quality_finding: paperQualityFinding,
-            spine_finding: spineFinding,
-            cover_finding: coverFinding,
-            grading_scale: parseInt(gradingScale),
-            overall_letter_grade: overallLetterGrade,
-            is_overall_letter_grade_near_mint_plus: isOverallLetterGradeNearMintPlus,
-            overall_number_grade: parseFloat(overallNumberGrade),
-            cps_percentage_grade: parseFloat(cpsPercentageGrade),
-            shows_signs_of_tampering_or_restoration: parseInt(showsSignsOfTamperingOrRestoration),
+            seriesTitle: seriesTitle,
+            issueVol: issueVol,
+            issueNo: issueNo,
+            issueCoverYear: issueCoverYear,
+            issueCoverMonth: issueCoverMonth,
+            publisherName: publisherName,
+            publisherNameOther: publisherNameOther,
+            specialNotes: specialNotes,
+            gradingNotes: gradingNotes,
+            creasesFinding: creasesFinding,
+            tearsFinding: tearsFinding,
+            missingPartsFinding: missingPartsFinding,
+            stainsFinding: stainsFinding,
+            distortionFinding: distortionFinding,
+            paperQualityFinding: paperQualityFinding,
+            spineFinding: spineFinding,
+            coverFinding: coverFinding,
+            gradingScale: parseInt(gradingScale),
+            overallLetterGrade: overallLetterGrade,
+            isOverallLetterGradeNearMintPlus: isOverallLetterGradeNearMintPlus,
+            overallNumberGrade: parseFloat(overallNumberGrade),
+            cpsPercentageGrade: parseFloat(cpsPercentageGrade),
+            showsSignsOfTamperingOrRestoration: parseInt(showsSignsOfTamperingOrRestoration),
             status: status,
-            service_type: serviceType,
-            organization_id: organizationID,
+            serviceType: serviceType,
+            organizationID: organizationID,
+            CollectibleType: 1, // 1=Comic, 2=Card
         };
 
+        console.log("onSubmitClick: Attaching user identification.");
+        if (userID !== undefined && userID !== null && userID !== "") {
+            submission.UserID = userID;
+        }
+
         // Submit to the backend.
-        console.log("onSubmitClick, submission:", submission);
-        putSubmissionUpdateAPI(submission, onSubmissionUpdateSuccess, onSubmissionUpdateError, onSubmissionUpdateDone);
+        console.log("onSubmitClick: payload:", submission);
+        postSubmissionCreateAPI(
+            submission,
+            onComicSubmissionCreateSuccess,
+            onComicSubmissionCreateError,
+            onComicSubmissionCreateDone
+        );
     }
 
     ////
     //// API.
     ////
 
-    function onSubmissionDetailSuccess(response){
-        console.log("onSubmissionDetailSuccess: Starting...");
-        setSeriesTitle(response.seriesTitle);
-        setIssueVol(response.issueVol);
-        setIssueNo(response.issueNo);
-        setIssueCoverYear(response.issueCoverYear);
-        setIssueCoverMonth(response.issueCoverMonth);
-        setPublisherName(response.publisherName);
-        setPublisherNameOther(response.publisherNameOther);
-        setCreasesFinding(response.creasesFinding);
-        setTearsFinding(response.tearsFinding);
-        setMissingPartsFinding(response.missingPartsFinding);
-        setStainsFinding(response.stainsFinding);
-        setDistortionFinding(response.distortionFinding);
-        setPaperQualityFinding(response.paperQualityFinding);
-        setSpineFinding(response.spineFinding);
-        setCoverFinding(response.coverFinding);
-        setGradingScale(parseInt(response.gradingScale));
-        setOverallLetterGrade(response.overallLetterGrade);
-        setIsOverallLetterGradeNearMintPlus(response.isOverallLetterGradeNearMintPlus);
-        setOverallNumberGrade(response.overallNumberGrade);
-        setSpecialNotes(response.specialNotes);
-        setShowsSignsOfTamperingOrRestoration(response.showsSignsOfTamperingOrRestoration);
-        setGradingNotes(response.gradingNotes);
-        setStatus(response.status);
-        setServiceType(response.serviceType);
-        setOrganizationID(response.organizationId);
-    }
-
-    function onSubmissionDetailError(apiErr) {
-        console.log("onSubmissionDetailError: Starting...");
-        setErrors(apiErr);
-
-        // The following code will cause the screen to scroll to the top of
-        // the page. Please see ``react-scroll`` for more information:
-        // https://github.com/fisshy/react-scroll
-        var scroll = Scroll.animateScroll;
-        scroll.scrollToTop();
-    }
-
-    function onSubmissionDetailDone() {
-        console.log("onSubmissionDetailDone: Starting...");
-        setFetching(false);
-    }
-
-    function onSubmissionUpdateSuccess(response){
+    function onComicSubmissionCreateSuccess(response){
         // For debugging purposes only.
-        console.log("onSubmissionUpdateSuccess: Starting...");
+        console.log("onComicSubmissionCreateSuccess: Starting...");
         console.log(response);
 
         // Add a temporary banner message in the app and then clear itself after 2 seconds.
-        setTopAlertMessage("Submission created");
+        setTopAlertMessage("ComicSubmission created");
         setTopAlertStatus("success");
         setTimeout(() => {
-            console.log("onSubmissionUpdateSuccess: Delayed for 2 seconds.");
-            console.log("onSubmissionUpdateSuccess: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
+            console.log("onComicSubmissionCreateSuccess: Delayed for 2 seconds.");
+            console.log("onComicSubmissionCreateSuccess: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
         }, 2000);
 
+        let urlParams = "";
+        if (userName !== null) {
+            urlParams += "?user_id=" + userID + "&user_name=" + userName;
+        }
+
         // Redirect the user to a new page.
-        setForceURL("/admin/submission/"+response.id);
+        setForceURL("/admin/comic-submissions/add/"+response.id+"/confirmation"+urlParams);
     }
 
-    function onSubmissionUpdateError(apiErr) {
-        console.log("onSubmissionUpdateError: Starting...");
+    function onComicSubmissionCreateError(apiErr) {
+        console.log("onComicSubmissionCreateError: Starting...");
         setErrors(apiErr);
 
         // Add a temporary banner message in the app and then clear itself after 2 seconds.
         setTopAlertMessage("Failed submitting");
         setTopAlertStatus("danger");
         setTimeout(() => {
-            console.log("onSubmissionUpdateError: Delayed for 2 seconds.");
-            console.log("onSubmissionUpdateError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
+            console.log("onComicSubmissionCreateError: Delayed for 2 seconds.");
+            console.log("onComicSubmissionCreateError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
         }, 2000);
 
@@ -212,8 +185,8 @@ function AdminSubmissionUpdateForSubmission() {
         scroll.scrollToTop();
     }
 
-    function onSubmissionUpdateDone() {
-        console.log("onSubmissionUpdateDone: Starting...");
+    function onComicSubmissionCreateDone() {
+        console.log("onComicSubmissionCreateDone: Starting...");
         setFetching(false);
     }
 
@@ -254,14 +227,6 @@ function AdminSubmissionUpdateForSubmission() {
 
         if (mounted) {
             window.scrollTo(0, 0);  // Start the page at the top of the page.
-            setFetching(true);
-            getSubmissionDetailAPI(
-                id,
-                onSubmissionDetailSuccess,
-                onSubmissionDetailError,
-                onSubmissionDetailDone
-            );
-
             let params = new Map();
             getOrganizationSelectOptionListAPI(
                 params,
@@ -269,10 +234,11 @@ function AdminSubmissionUpdateForSubmission() {
                 onOrganizationOptionListError,
                 onOrganizationOptionListDone
             );
+            setFetching(true);
         }
 
         return () => { mounted = false; }
-    }, [id]);
+    }, []);
 
     ////
     //// Component rendering.
@@ -291,29 +257,59 @@ function AdminSubmissionUpdateForSubmission() {
             <div class="container">
                 <section class="section">
                     <nav class="breadcrumb" aria-label="breadcrumbs">
-                        <ul>
-                            <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
-                            <li class=""><Link to="/admin/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
-                            <li class=""><Link to={`/admin/submission/${id}`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail</Link></li>
-                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update (Submission)</Link></li>
-                        </ul>
+                       {userName === null
+                           ?
+                            <ul>
+                                <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
+                                <li class=""><Link to="/admin/comic-submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
+                                <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
+                            </ul>
+                            :
+                            <ul>
+                                <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
+                                <li class=""><Link to="/admin/users" aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Users</Link></li>
+                                <li class=""><Link to={`/admin/user/${userID}/sub`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail (Comic Submissions)</Link></li>
+                                <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
+                            </ul>
+                        }
                     </nav>
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission</p>
-                        <FormErrorBox errors={errors} />
+                        <div class={`modal ${showCancelWarning ? 'is-active' : ''}`}>
+                            <div class="modal-background"></div>
+                            <div class="modal-card">
+                                <header class="modal-card-head">
+                                    <p class="modal-card-title">Are you sure?</p>
+                                    <button class="delete" aria-label="close" onClick={(e)=>setShowCancelWarning(false)}></button>
+                                </header>
+                                <section class="modal-card-body">
+                                    Your submission will be cancelled and your work will be lost. This cannot be undone. Do you want to continue?
+                                </section>
+                                <footer class="modal-card-foot">
+                                    {userName === null
+                                        ?
+                                        <Link class="button is-medium is-success" to={`/admin/comic-submissions/add/search`}>Yes</Link>
+                                        :
+                                        <Link class="button is-medium is-success" to={`/admin/user/${userID}/sub`}>Yes</Link>
+                                    }
+                                    <button class="button is-medium " onClick={(e)=>setShowCancelWarning(false)}>No</button>
+                                </footer>
+                            </div>
+                        </div>
 
-                        <p class="pb-4 has-text-grey">Please fill out all the required fields before submitting this form.</p>
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comic Submission</p>
+
 
                         {isFetching
                             ?
                             <PageLoadingContent displayMessage={"Submitting..."} />
                             :
                             <>
+                                <p class="pb-4 has-text-grey">Please fill out all the required fields before submitting this form.</p>
+                                <FormErrorBox errors={errors} />   
                                 <div class="container">
 
                                     <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comic Book Information</p>
                                     <hr />
-
                                     <FormInputField
                                         label="Series Title"
                                         name="seriesTitle"
@@ -384,7 +380,7 @@ function AdminSubmissionUpdateForSubmission() {
                                         errorText={errors && errors.publisherName}
                                         helpText=""
                                         onChange={(e)=>setPublisherName(parseInt(e.target.value))}
-                                        options={PUBLISHER_NAME_OPTIONS}
+                                        options={PUBLISHER_NAME_WITH_EMPTY_OPTIONS}
                                     />
 
                                     {publisherName === 1 && <FormInputField
@@ -400,11 +396,11 @@ function AdminSubmissionUpdateForSubmission() {
                                     />}
 
                                     <FormTextareaField
-                                        label="Special Notes (Optional)"
+                                        label="Special Note (Optional)"
                                         name="specialNotes"
                                         placeholder="Text input"
                                         value={specialNotes}
-                                        errorText={errors && errors.specialNotes}
+                                        errorText={errors && errors.specialNotesLine1}
                                         helpText=""
                                         onChange={(e)=>setSpecialNotes(e.target.value)}
                                         isRequired={true}
@@ -603,10 +599,10 @@ function AdminSubmissionUpdateForSubmission() {
                                     <FormRadioField
                                         label="Shows signs of tampering/restoration"
                                         name="showsSignsOfTamperingOrRestoration"
-                                        value={parseInt(showsSignsOfTamperingOrRestoration)}
-                                        opt1Value={2}
+                                        value={showsSignsOfTamperingOrRestoration}
+                                        opt1Value={"2"}
                                         opt1Label="No"
-                                        opt2Value={1}
+                                        opt2Value={"1"}
                                         opt2Label="Yes"
                                         errorText={errors && errors.showsSignsOfTamperingOrRestoration}
                                         onChange={(e)=>setShowsSignsOfTamperingOrRestoration(e.target.value)}
@@ -614,7 +610,7 @@ function AdminSubmissionUpdateForSubmission() {
                                     />
 
                                     <FormTextareaField
-                                        label="Grading Notes (Optional)"
+                                        label="Grading Notes"
                                         name="gradingNotes"
                                         placeholder="Text input"
                                         value={gradingNotes}
@@ -654,7 +650,7 @@ function AdminSubmissionUpdateForSubmission() {
                                             errorText={errors && errors.overallLetterGrade}
                                             helpText=""
                                             onChange={(e)=>setOverallLetterGrade(e.target.value)}
-                                            options={FINDING_OPTIONS}
+                                            options={FINDING_WITH_EMPTY_OPTIONS}
                                         />
                                         {isNMPlusOpen && <>
                                             <FormCheckboxField
@@ -667,16 +663,18 @@ function AdminSubmissionUpdateForSubmission() {
                                             />
                                         </>}
                                     </>}
+
                                     {gradingScale === 2 && <FormSelectField
                                         label="Overall Number Grade"
                                         name="overallNumberGrade"
-                                        placeholder="Overall Grade"
+                                        placeholder="Overall Number Grade"
                                         selectedValue={overallNumberGrade}
                                         errorText={errors && errors.overallNumberGrade}
                                         helpText=""
                                         onChange={(e)=>setOverallNumberGrade(e.target.value)}
-                                        options={OVERALL_NUMBER_GRADE_OPTIONS}
+                                        options={OVERALL_NUMBER_GRADE_WITH_EMPTY_OPTIONS}
                                     />}
+
                                     {gradingScale === 3 && <FormSelectField
                                         label="CPS Percentage Grade"
                                         name="cpsPercentageGrade"
@@ -685,7 +683,7 @@ function AdminSubmissionUpdateForSubmission() {
                                         errorText={errors && errors.cpsPercentageGrade}
                                         helpText=""
                                         onChange={(e)=>setCpsPercentageGrade(e.target.value)}
-                                        options={CPS_PERCENTAGE_GRADE_OPTIONS}
+                                        options={CPS_PERCENTAGE_GRADE_WITH_EMPTY_OPTIONS}
                                     />}
 
                                     <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faCogs} />&nbsp;Settings</p>
@@ -701,7 +699,7 @@ function AdminSubmissionUpdateForSubmission() {
                                         isRequired={true}
                                         onChange={(e)=>setOrganizationID(e.target.value)}
                                         options={organizationSelectOptions}
-                                        disabled={organizationSelectOptions.length === 0}
+                                        disabled={(orgID !== undefined && orgID !== "" && orgID !== null) || organizationSelectOptions.length === 0}
                                     />
                                     <FormRadioField
                                         label="Service Type"
@@ -710,7 +708,7 @@ function AdminSubmissionUpdateForSubmission() {
                                         opt1Value={1}
                                         opt1Label="Pre-Screening Service"
                                         opt2Value={2}
-                                        opt2Label="CPS Pedigree Service"
+                                        opt2Label="Pedigree Service"
                                         errorText={errors && errors.serviceType}
                                         onChange={(e)=>setServiceType(parseInt(e.target.value))}
                                         maxWidth="180px"
@@ -734,8 +732,8 @@ function AdminSubmissionUpdateForSubmission() {
 
                                     <div class="columns pt-5">
                                         <div class="column is-half">
-                                            <Link to={`/admin/submission/${id}`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                            <Link to={`/admin/submission/${id}`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <button class="button is-medium is-hidden-touch" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faTimesCircle} />&nbsp;Cancel</button>
+                                            <button class="button is-medium is-fullwidth is-hidden-desktop" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faTimesCircle} />&nbsp;Cancel</button>
                                         </div>
                                         <div class="column is-half has-text-right">
                                             <button class="button is-medium is-primary is-hidden-touch" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
@@ -753,4 +751,4 @@ function AdminSubmissionUpdateForSubmission() {
     );
 }
 
-export default AdminSubmissionUpdateForSubmission;
+export default AdminComicSubmissionAddStep3Comic;

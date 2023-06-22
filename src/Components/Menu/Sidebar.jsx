@@ -124,8 +124,8 @@ export default props => {
                                 </a>
                             </li>
                             <li>
-                                <a href="/admin/submissions" class={`has-text-grey-light ${location.pathname.includes("submission") && "is-active"}`}>
-                                    <FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions
+                                <a href="/admin/comic-submissions" class={`has-text-grey-light ${location.pathname.includes("submission") && "is-active"}`}>
+                                    <FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions
                                 </a>
                             </li>
                         </ul>
