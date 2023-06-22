@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 import { SUBMISSION_STATES } from "../../../Constants/FieldOptions";
 
 import { getCustomerDetailAPI } from "../../../API/customer";
-import { getSubmissionListAPI, deleteSubmissionAPI } from "../../../API/submission";
+import { getComicSubmissionListAPI, deleteComicSubmissionAPI } from "../../../API/ComicSubmission";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
 import FormTextareaField from "../../Element/FormTextareaField";
@@ -20,7 +20,7 @@ import PageLoadingContent from "../../Element/PageLoadingContent";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
-function RetailerCustomerDetailForSubmission() {
+function RetailerCustomerDetailForComicSubmission() {
     ////
     //// URL Parameters.
     ////
@@ -43,8 +43,8 @@ function RetailerCustomerDetailForSubmission() {
     const [forceURL, setForceURL] = useState("");
     const [customer, setCustomer] = useState({});
     const [tabIndex, setTabIndex] = useState(1);
-    const [submissions, setSubmissions] = useState("");
-    const [selectedSubmissionForDeletion, setSelectedSubmissionForDeletion] = useState("");
+    const [submissions, setComicSubmissions] = useState("");
+    const [selectedComicSubmissionForDeletion, setSelectedComicSubmissionForDeletion] = useState("");
 
     ////
     //// Event handling.
@@ -54,34 +54,34 @@ function RetailerCustomerDetailForSubmission() {
         setFetching(true);
         let params = new Map();
         params.set("user_id", id);
-        getSubmissionListAPI(
+        getComicSubmissionListAPI(
             params,
-            onSubmissionListSuccess,
-            onSubmissionListError,
-            onSubmissionListDone
+            onComicSubmissionListSuccess,
+            onComicSubmissionListError,
+            onComicSubmissionListDone
         );
     }
 
-    const onSelectSubmissionForDeletion = (e, submission) => {
-        console.log("onSelectSubmissionForDeletion", submission);
-        setSelectedSubmissionForDeletion(submission);
+    const onSelectComicSubmissionForDeletion = (e, submission) => {
+        console.log("onSelectComicSubmissionForDeletion", submission);
+        setSelectedComicSubmissionForDeletion(submission);
     }
 
-    const onDeselectSubmissionForDeletion = (e) => {
-        console.log("onDeselectSubmissionForDeletion");
-        setSelectedSubmissionForDeletion("");
+    const onDeselectComicSubmissionForDeletion = (e) => {
+        console.log("onDeselectComicSubmissionForDeletion");
+        setSelectedComicSubmissionForDeletion("");
     }
 
     const onDeleteConfirmButtonClick = (e) => {
         console.log("onDeleteConfirmButtonClick"); // For debugging purposes only.
 
-        deleteSubmissionAPI(
-            selectedSubmissionForDeletion.id,
-            onSubmissionDeleteSuccess,
-            onSubmissionDeleteError,
-            onSubmissionDeleteDone
+        deleteComicSubmissionAPI(
+            selectedComicSubmissionForDeletion.id,
+            onComicSubmissionDeleteSuccess,
+            onComicSubmissionDeleteError,
+            onComicSubmissionDeleteDone
         );
-        setSelectedSubmissionForDeletion("");
+        setSelectedComicSubmissionForDeletion("");
 
     }
 
@@ -113,17 +113,17 @@ function RetailerCustomerDetailForSubmission() {
         setFetching(false);
     }
 
-    // Submission list.
+    // ComicSubmission list.
 
-    function onSubmissionListSuccess(response){
-        console.log("onSubmissionListSuccess: Starting...");
+    function onComicSubmissionListSuccess(response){
+        console.log("onComicSubmissionListSuccess: Starting...");
         if (response.results !== null) {
-            setSubmissions(response);
+            setComicSubmissions(response);
         }
     }
 
-    function onSubmissionListError(apiErr) {
-        console.log("onSubmissionListError: Starting...");
+    function onComicSubmissionListError(apiErr) {
+        console.log("onComicSubmissionListError: Starting...");
         setErrors(apiErr);
 
         // The following code will cause the screen to scroll to the top of
@@ -133,19 +133,19 @@ function RetailerCustomerDetailForSubmission() {
         scroll.scrollToTop();
     }
 
-    function onSubmissionListDone() {
-        console.log("onSubmissionListDone: Starting...");
+    function onComicSubmissionListDone() {
+        console.log("onComicSubmissionListDone: Starting...");
         setFetching(false);
     }
 
-    // Submission delete.
+    // ComicSubmission delete.
 
-    function onSubmissionDeleteSuccess(response){
-        console.log("onSubmissionDeleteSuccess: Starting..."); // For debugging purposes only.
+    function onComicSubmissionDeleteSuccess(response){
+        console.log("onComicSubmissionDeleteSuccess: Starting..."); // For debugging purposes only.
 
         // Update notification.
         setTopAlertStatus("success");
-        setTopAlertMessage("Submission deleted");
+        setTopAlertMessage("ComicSubmission deleted");
         setTimeout(() => {
             console.log("onDeleteConfirmButtonClick: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
@@ -155,15 +155,15 @@ function RetailerCustomerDetailForSubmission() {
         fetchListByCustomerID(id);
     }
 
-    function onSubmissionDeleteError(apiErr) {
-        console.log("onSubmissionDeleteError: Starting..."); // For debugging purposes only.
+    function onComicSubmissionDeleteError(apiErr) {
+        console.log("onComicSubmissionDeleteError: Starting..."); // For debugging purposes only.
         setErrors(apiErr);
 
         // Update notification.
         setTopAlertStatus("danger");
         setTopAlertMessage("Failed deleting");
         setTimeout(() => {
-            console.log("onSubmissionDeleteError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
+            console.log("onComicSubmissionDeleteError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
         }, 2000);
 
@@ -174,8 +174,8 @@ function RetailerCustomerDetailForSubmission() {
         scroll.scrollToTop();
     }
 
-    function onSubmissionDeleteDone() {
-        console.log("onSubmissionDeleteDone: Starting...");
+    function onComicSubmissionDeleteDone() {
+        console.log("onComicSubmissionDeleteDone: Starting...");
         setFetching(false);
     }
 
@@ -219,19 +219,19 @@ function RetailerCustomerDetailForSubmission() {
                             <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail</Link></li>
                         </ul>
                     </nav>
-                    <div class={`modal ${selectedSubmissionForDeletion ? 'is-active' : ''}`}>
+                    <div class={`modal ${selectedComicSubmissionForDeletion ? 'is-active' : ''}`}>
                         <div class="modal-background"></div>
                         <div class="modal-card">
                             <header class="modal-card-head">
                                 <p class="modal-card-title">Are you sure?</p>
-                                <button class="delete" aria-label="close" onClick={onDeselectSubmissionForDeletion}></button>
+                                <button class="delete" aria-label="close" onClick={onDeselectComicSubmissionForDeletion}></button>
                             </header>
                             <section class="modal-card-body">
                                 You are about to <b>archive</b> this submission; it will no longer appear on your dashboard This action can be undone but you'll need to contact the system administrator. Are you sure you would like to continue?
                             </section>
                             <footer class="modal-card-foot">
                                 <button class="button is-success" onClick={onDeleteConfirmButtonClick}>Confirm</button>
-                                <button class="button" onClick={onDeselectSubmissionForDeletion}>Cancel</button>
+                                <button class="button" onClick={onDeselectComicSubmissionForDeletion}>Cancel</button>
                             </footer>
                         </div>
                     </div>
@@ -242,11 +242,11 @@ function RetailerCustomerDetailForSubmission() {
                             </div>
                             <div class="column has-text-right">
                                 {/* Mobile Specific */}
-                                <Link to={`/submissions/pick-type-for-add?customer_id=${id}&customer_name=${customer.name}`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
+                                <Link to={`/comic-submissions/pick-type-for-add?customer_id=${id}&customer_name=${customer.name}`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
                                 </Link>
                                 {/* Desktop Specific */}
-                                <Link to={`/submissions/pick-type-for-add?customer_id=${id}&customer_name=${customer.name}`} class="button is-small is-success is-hidden-touch" type="button">
+                                <Link to={`/comic-submissions/pick-type-for-add?customer_id=${id}&customer_name=${customer.name}`} class="button is-small is-success is-hidden-touch" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS
                                 </Link>
                             </div>
@@ -267,7 +267,7 @@ function RetailerCustomerDetailForSubmission() {
                                             <Link to={`/customer/${customer.id}`}>Detail</Link>
                                         </li>
                                         <li class="is-active">
-                                            <Link><b>Submissions</b></Link>
+                                            <Link><b>Comic Submissions</b></Link>
                                         </li>
                                         <li>
                                             <Link to={`/customer/${customer.id}/comments`}>Comments</Link>
@@ -302,13 +302,13 @@ function RetailerCustomerDetailForSubmission() {
                                                                     <td data-label="Created">{submission.createdAt}</td>
                                                                     <td class="is-actions-cell">
                                                                         <div class="buttons is-right">
-                                                                            <Link to={`/submission/${submission.id}`} target="_blank" rel="noreferrer" class="button is-small is-primary" type="button">
+                                                                            <Link to={`/comic-submission/${submission.id}`} target="_blank" rel="noreferrer" class="button is-small is-primary" type="button">
                                                                                 View&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
                                                                             </Link>
-                                                                            <Link to={`/submission/${submission.id}/edit`} target="_blank" rel="noreferrer" class="button is-small is-warning" type="button">
+                                                                            <Link to={`/comic-submission/${submission.id}/edit`} target="_blank" rel="noreferrer" class="button is-small is-warning" type="button">
                                                                                 Edit&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
                                                                             </Link>
-                                                                            <button onClick={(e, ses) => onSelectSubmissionForDeletion(e, submission)} class="button is-small is-danger" type="button">
+                                                                            <button onClick={(e, ses) => onSelectComicSubmissionForDeletion(e, submission)} class="button is-small is-danger" type="button">
                                                                                 <FontAwesomeIcon className="mdi" icon={faTrashCan} />&nbsp;Delete
                                                                             </button>
                                                                         </div>
@@ -324,7 +324,7 @@ function RetailerCustomerDetailForSubmission() {
                                         <div class="container">
                                             <article class="message is-dark">
                                                 <div class="message-body">
-                                                    No submissions. <b><Link to={`/submissions/pick-type-for-add?customer_id=${id}&customer_name=${customer.name}`}>Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating a new submission.
+                                                    No submissions. <b><Link to={`/comic-submissions/pick-type-for-add?customer_id=${id}&customer_name=${customer.name}`}>Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating a new submission.
                                                 </div>
                                             </article>
                                         </div>
@@ -336,8 +336,8 @@ function RetailerCustomerDetailForSubmission() {
                                             <Link class="button is-fullwidth is-hidden-desktop" to={`/customers`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                         </div>
                                         <div class="column is-half has-text-right">
-                                            <Link to={`/submissions/pick-type-for-add?customer_id=${id}&customer_name=${customer.name}`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;CPS</Link>
-                                            <Link to={`/submissions/pick-type-for-add?customer_id=${id}&customer_name=${customer.name}`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;CPS</Link>
+                                            <Link to={`/comic-submissions/pick-type-for-add?customer_id=${id}&customer_name=${customer.name}`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;CPS</Link>
+                                            <Link to={`/comic-submissions/pick-type-for-add?customer_id=${id}&customer_name=${customer.name}`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;CPS</Link>
                                         </div>
                                     </div>
 
@@ -351,4 +351,4 @@ function RetailerCustomerDetailForSubmission() {
     );
 }
 
-export default RetailerCustomerDetailForSubmission;
+export default RetailerCustomerDetailForComicSubmission;

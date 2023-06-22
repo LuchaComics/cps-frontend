@@ -76,7 +76,7 @@ function RetailerDashboard() {
                               Submit a request to encapsulate your comics by clicking below:
                               <br />
                               <br />
-                              <Link to={"/submissions"}>View&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
+                              <Link to={"/comic-submissions"}>View Comics&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
                             </p>
                           </div>
                         </section>

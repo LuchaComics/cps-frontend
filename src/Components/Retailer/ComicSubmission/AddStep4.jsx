@@ -8,7 +8,7 @@ import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { getSubmissionDetailAPI } from "../../../API/submission";
+import { getComicSubmissionDetailAPI } from "../../../API/ComicSubmission";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
 import FormTextareaField from "../../Element/FormTextareaField";
@@ -19,7 +19,7 @@ import PageLoadingContent from "../../Element/PageLoadingContent";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
-function RetailerSubmissionAddStep4() {
+function RetailerComicSubmissionAddStep4() {
     ////
     //// URL Arguments.
     ////
@@ -48,7 +48,7 @@ function RetailerSubmissionAddStep4() {
     const [errors, setErrors] = useState({});
     const [isFetching, setFetching] = useState(false);
     const [forceURL, setForceURL] = useState("");
-    const [submission, setSubmission] = useState({});
+    const [submission, setComicSubmission] = useState({});
 
     ////
     //// Event handling.
@@ -59,13 +59,13 @@ function RetailerSubmissionAddStep4() {
     //// API.
     ////
 
-    function onSubmissionDetailSuccess(response){
-        console.log("onSubmissionDetailSuccess: Starting...");
-        setSubmission(response);
+    function onComicSubmissionDetailSuccess(response){
+        console.log("onComicSubmissionDetailSuccess: Starting...");
+        setComicSubmission(response);
     }
 
-    function onSubmissionDetailError(apiErr) {
-        console.log("onSubmissionDetailError: Starting...");
+    function onComicSubmissionDetailError(apiErr) {
+        console.log("onComicSubmissionDetailError: Starting...");
         setErrors(apiErr);
 
         // The following code will cause the screen to scroll to the top of
@@ -75,8 +75,8 @@ function RetailerSubmissionAddStep4() {
         scroll.scrollToTop();
     }
 
-    function onSubmissionDetailDone() {
-        console.log("onSubmissionDetailDone: Starting...");
+    function onComicSubmissionDetailDone() {
+        console.log("onComicSubmissionDetailDone: Starting...");
         setFetching(false);
     }
 
@@ -91,11 +91,11 @@ function RetailerSubmissionAddStep4() {
             window.scrollTo(0, 0);  // Start the page at the top of the page.
 
             setFetching(true);
-            getSubmissionDetailAPI(
+            getComicSubmissionDetailAPI(
                 id,
-                onSubmissionDetailSuccess,
-                onSubmissionDetailError,
-                onSubmissionDetailDone
+                onComicSubmissionDetailSuccess,
+                onComicSubmissionDetailError,
+                onComicSubmissionDetailDone
             );
         }
 
@@ -119,7 +119,7 @@ function RetailerSubmissionAddStep4() {
                             ?
                              <ul>
                                  <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
-                                 <li class=""><Link to="/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
+                                 <li class=""><Link to="/comic-submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
                                  <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
                              </ul>
                              :
@@ -127,14 +127,14 @@ function RetailerSubmissionAddStep4() {
                                  <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
                                  <li class=""><Link to="/customers" aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers</Link></li>
                                  <li class=""><Link to={`/customer/${customerID}`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail</Link></li>
-                                 <li class=""><Link to={`/customer/${customerID}/sub`} aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
+                                 <li class=""><Link to={`/customer/${customerID}/sub`} aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
                                  <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
                              </ul>
                          }
                     </nav>
 
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Submission (Confirmation)</p>
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comic Submission (Confirmation)</p>
                         <FormErrorBox errors={errors} />
 
                         {isFetching
@@ -193,8 +193,8 @@ function RetailerSubmissionAddStep4() {
                                         {customerName === null
                                             ?
                                             <div class="column is-half has-text-right">
-                                                <Link to={`/submissions`} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to List</Link>
-                                                <Link to={`/submissions`} class="button is-medium is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to List</Link>
+                                                <Link to={`/comic-submissions`} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to List</Link>
+                                                <Link to={`/comic-submissions`} class="button is-medium is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back to List</Link>
                                             </div>
                                             :
                                             <div class="column is-half has-text-right">
@@ -213,4 +213,4 @@ function RetailerSubmissionAddStep4() {
     );
 }
 
-export default RetailerSubmissionAddStep4;
+export default RetailerComicSubmissionAddStep4;

@@ -8,7 +8,7 @@ import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { getSubmissionDetailAPI } from "../../../API/submission";
+import { getComicSubmissionDetailAPI } from "../../../API/ComicSubmission";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
 import FormTextareaField from "../../Element/FormTextareaField";
@@ -30,7 +30,7 @@ import {
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
-function RetailerSubmissionDetail() {
+function RetailerComicSubmissionDetail() {
     ////
     //// URL Parameters.
     ////
@@ -51,7 +51,7 @@ function RetailerSubmissionDetail() {
     const [errors, setErrors] = useState({});
     const [isFetching, setFetching] = useState(false);
     const [forceURL, setForceURL] = useState("");
-    const [submission, setSubmission] = useState({});
+    const [submission, setComicSubmission] = useState({});
     const [showCustomerEditOptions, setShowCustomerEditOptions] = useState(false);
 
     ////
@@ -63,13 +63,13 @@ function RetailerSubmissionDetail() {
     //// API.
     ////
 
-    function onSubmissionDetailSuccess(response){
-        console.log("onSubmissionDetailSuccess: Starting...");
-        setSubmission(response);
+    function onComicSubmissionDetailSuccess(response){
+        console.log("onComicSubmissionDetailSuccess: Starting...");
+        setComicSubmission(response);
     }
 
-    function onSubmissionDetailError(apiErr) {
-        console.log("onSubmissionDetailError: Starting...");
+    function onComicSubmissionDetailError(apiErr) {
+        console.log("onComicSubmissionDetailError: Starting...");
         setErrors(apiErr);
 
         // The following code will cause the screen to scroll to the top of
@@ -79,8 +79,8 @@ function RetailerSubmissionDetail() {
         scroll.scrollToTop();
     }
 
-    function onSubmissionDetailDone() {
-        console.log("onSubmissionDetailDone: Starting...");
+    function onComicSubmissionDetailDone() {
+        console.log("onComicSubmissionDetailDone: Starting...");
         setFetching(false);
     }
 
@@ -95,11 +95,11 @@ function RetailerSubmissionDetail() {
             window.scrollTo(0, 0);  // Start the page at the top of the page.
 
             setFetching(true);
-            getSubmissionDetailAPI(
+            getComicSubmissionDetailAPI(
                 id,
-                onSubmissionDetailSuccess,
-                onSubmissionDetailError,
-                onSubmissionDetailDone
+                onComicSubmissionDetailSuccess,
+                onComicSubmissionDetailError,
+                onComicSubmissionDetailDone
             );
         }
 
@@ -135,9 +135,9 @@ function RetailerSubmissionDetail() {
 
                         {/*
                             <br /><br />
-                            <Link to={`/submission/${submission.id}/edit-customer`} class="button is-primary" disabled={true}>Edit Current Customer</Link> */}
+                            <Link to={`/comic-submission/${submission.id}/edit-customer`} class="button is-primary" disabled={true}>Edit Current Customer</Link> */}
                         <br /><br />
-                        <Link to={`/submission/${submission.id}/customer/search`} class="button is-medum is-menu is-primary">Pick a Different Customer</Link>
+                        <Link to={`/comic-submission/${submission.id}/customer/search`} class="button is-medum is-menu is-primary">Pick a Different Customer</Link>
                     </section>
                     <footer class="modal-card-foot">
                         <button class="button" onClick={(e)=>setShowCustomerEditOptions(false)}>Close</button>
@@ -150,12 +150,12 @@ function RetailerSubmissionDetail() {
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
                             <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
-                            <li class=""><Link to="/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
+                            <li class=""><Link to="/comic-submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
                             <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail</Link></li>
                         </ul>
                     </nav>
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission</p>
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submission</p>
                         <FormErrorBox errors={errors} />
 
                         {isFetching
@@ -170,13 +170,13 @@ function RetailerSubmissionDetail() {
                                             <Link><b>Detail</b></Link>
                                         </li>
                                         <li>
-                                            <Link to={`/submission/${id}/cust`}>Customer</Link>
+                                            <Link to={`/comic-submission/${id}/cust`}>Customer</Link>
                                         </li>
                                         <li>
-                                            <Link to={`/submission/${id}/comments`}>Comments</Link>
+                                            <Link to={`/comic-submission/${id}/comments`}>Comments</Link>
                                         </li>
                                         <li>
-                                            <Link to={`/submission/${id}/file`}>File</Link>
+                                            <Link to={`/comic-submission/${id}/file`}>File</Link>
                                         </li>
                                       </ul>
                                     </div>
@@ -544,12 +544,12 @@ function RetailerSubmissionDetail() {
 
                                     <div class="columns pt-4">
                                         <div class="column is-half">
-                                            <Link to={`/submissions`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                            <Link to={`/submissions`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link to={`/comic-submissions`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link to={`/comic-submissions`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                         </div>
                                         <div class="column is-half has-text-right">
-                                            <Link to={`/submission/${id}/edit`} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Submission</Link>
-                                            <Link to={`/submission/${id}/edit`} class="button is-medium is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Submission</Link>
+                                            <Link to={`/comic-submission/${id}/edit`} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Comic Submission</Link>
+                                            <Link to={`/comic-submission/${id}/edit`} class="button is-medium is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Comic Submission</Link>
                                         </div>
                                     </div>
                                 </div>}
@@ -562,4 +562,4 @@ function RetailerSubmissionDetail() {
     );
 }
 
-export default RetailerSubmissionDetail;
+export default RetailerComicSubmissionDetail;

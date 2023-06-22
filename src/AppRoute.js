@@ -40,23 +40,23 @@ import AdminUserUpdate from "./Components/Admin/User/Update";
 import RetailerDashboard from "./Components/Retailer/Dashboard";
 import RetailerRegistrySearch from "./Components/Retailer/Registry/Search";
 import RetailerRegistryResult from "./Components/Retailer/Registry/Result";
-import RetailerSubmissionList from "./Components/Retailer/Submission/List";
-import RetailerSubmissionAddStep1WithSearch from "./Components/Retailer/Submission/AddStep1WithSearch";
-import RetailerSubmissionAddStep1WithResult from "./Components/Retailer/Submission/AddStep1WithResult";
-import RetailerSubmissionAddStep2 from "./Components/Retailer/Submission/AddStep2";
-import RetailerSubmissionAddStep3Comic from "./Components/Retailer/Submission/AddStep3Comic";
-import RetailerSubmissionAddStep4 from "./Components/Retailer/Submission/AddStep4";
-import RetailerSubmissionDetail from "./Components/Retailer/Submission/Detail";
-import RetailerSubmissionDetailForCommentList from "./Components/Retailer/Submission/DetailForCommentList";
-import RetailerSubmissionDetailForCustomer from "./Components/Retailer/Submission/DetailForCustomer";
-import RetailerSubmissionDetailForPDFFile from "./Components/Retailer/Submission/DetailForPDFFile";
-import RetailerSubmissionUpdateForSubmission from "./Components/Retailer/Submission/UpdateSubmission";
-import RetailerSubmissionUpdatePickCustomerWithResult from "./Components/Retailer/Submission/UpdatePickCustomerWithResult";
-import RetailerSubmissionUpdatePickCustomerWithSearch from "./Components/Retailer/Submission/UpdatePickCustomerWithSearch";
+import RetailerComicSubmissionList from "./Components/Retailer/ComicSubmission/List";
+import RetailerComicSubmissionAddStep1WithSearch from "./Components/Retailer/ComicSubmission/AddStep1WithSearch";
+import RetailerComicSubmissionAddStep1WithResult from "./Components/Retailer/ComicSubmission/AddStep1WithResult";
+import RetailerComicSubmissionAddStep2 from "./Components/Retailer/ComicSubmission/AddStep2";
+import RetailerComicSubmissionAddStep3Comic from "./Components/Retailer/ComicSubmission/AddStep3Comic";
+import RetailerComicSubmissionAddStep4 from "./Components/Retailer/ComicSubmission/AddStep4";
+import RetailerComicSubmissionDetail from "./Components/Retailer/ComicSubmission/Detail";
+import RetailerComicSubmissionDetailForCommentList from "./Components/Retailer/ComicSubmission/DetailForCommentList";
+import RetailerComicSubmissionDetailForCustomer from "./Components/Retailer/ComicSubmission/DetailForCustomer";
+import RetailerComicSubmissionDetailForPDFFile from "./Components/Retailer/ComicSubmission/DetailForPDFFile";
+import RetailerComicSubmissionUpdateForComicSubmission from "./Components/Retailer/ComicSubmission/UpdateSubmission";
+import RetailerComicSubmissionUpdatePickCustomerWithResult from "./Components/Retailer/ComicSubmission/UpdatePickCustomerWithResult";
+import RetailerComicSubmissionUpdatePickCustomerWithSearch from "./Components/Retailer/ComicSubmission/UpdatePickCustomerWithSearch";
 import RetailerCustomerList from "./Components/Retailer/Customer/List";
 import RetailerCustomerAdd from "./Components/Retailer/Customer/Add";
 import RetailerCustomerDetail from "./Components/Retailer/Customer/Detail";
-import RetailerCustomerDetailForSubmission from "./Components/Retailer/Customer/DetailForSubmission";
+import RetailerCustomerDetailForComicSubmission from "./Components/Retailer/Customer/DetailForComicSubmission";
 import RetailerCustomerDetailForCommentList from "./Components/Retailer/Customer/DetailForCommentList";
 import RetailerCustomerUpdate from "./Components/Retailer/Customer/Update";
 import LogoutRedirector from "./Components/Gateway/LogoutRedirector";
@@ -125,23 +125,23 @@ function AppRoute() {
                                     <Route exact path="/dashboard" element={<RetailerDashboard/>}/>
                                     <Route exact path="/registry" element={<RetailerRegistrySearch/>}/>
                                     <Route exact path="/registry/:cpsn" element={<RetailerRegistryResult/>}/>
-                                    <Route exact path="/submissions" element={<RetailerSubmissionList/>}/>
-                                    <Route exact path="/submissions/add/search" element={<RetailerSubmissionAddStep1WithSearch/>}/>
-                                    <Route exact path="/submissions/add/results" element={<RetailerSubmissionAddStep1WithResult/>}/>
-                                    <Route exact path="/submissions/pick-type-for-add" element={<RetailerSubmissionAddStep2/>}/>
-                                    <Route exact path="/submissions/add-comic" element={<RetailerSubmissionAddStep3Comic/>}/>
-                                    <Route exact path="/submissions/add/:id/confirmation" element={<RetailerSubmissionAddStep4/>}/>
-                                    <Route exact path="/submission/:id" element={<RetailerSubmissionDetail/>}/>
-                                    <Route exact path="/submission/:id/edit" element={<RetailerSubmissionUpdateForSubmission/>}/>
-                                    <Route exact path="/submission/:id/cust/search" element={<RetailerSubmissionUpdatePickCustomerWithSearch/>}/>
-                                    <Route exact path="/submission/:id/cust/results" element={<RetailerSubmissionUpdatePickCustomerWithResult/>}/>
-                                    <Route exact path="/submission/:id/comments" element={<RetailerSubmissionDetailForCommentList/>}/>
-                                    <Route exact path="/submission/:id/cust" element={<RetailerSubmissionDetailForCustomer/>}/>
-                                    <Route exact path="/submission/:id/file" element={<RetailerSubmissionDetailForPDFFile/>}/>
+                                    <Route exact path="/comic-submissions" element={<RetailerComicSubmissionList/>}/>
+                                    <Route exact path="/comic-submissions/add/search" element={<RetailerComicSubmissionAddStep1WithSearch/>}/>
+                                    <Route exact path="/comic-submissions/add/results" element={<RetailerComicSubmissionAddStep1WithResult/>}/>
+                                    <Route exact path="/comic-submissions/pick-type-for-add" element={<RetailerComicSubmissionAddStep2/>}/>
+                                    <Route exact path="/comic-submissions/add-comic" element={<RetailerComicSubmissionAddStep3Comic/>}/>
+                                    <Route exact path="/comic-submissions/add/:id/confirmation" element={<RetailerComicSubmissionAddStep4/>}/>
+                                    <Route exact path="/comic-submission/:id" element={<RetailerComicSubmissionDetail/>}/>
+                                    <Route exact path="/comic-submission/:id/edit" element={<RetailerComicSubmissionUpdateForComicSubmission/>}/>
+                                    <Route exact path="/comic-submission/:id/cust/search" element={<RetailerComicSubmissionUpdatePickCustomerWithSearch/>}/>
+                                    <Route exact path="/comic-submission/:id/cust/results" element={<RetailerComicSubmissionUpdatePickCustomerWithResult/>}/>
+                                    <Route exact path="/comic-submission/:id/comments" element={<RetailerComicSubmissionDetailForCommentList/>}/>
+                                    <Route exact path="/comic-submission/:id/cust" element={<RetailerComicSubmissionDetailForCustomer/>}/>
+                                    <Route exact path="/comic-submission/:id/file" element={<RetailerComicSubmissionDetailForPDFFile/>}/>
                                     <Route exact path="/customers" element={<RetailerCustomerList/>}/>
                                     <Route exact path="/customers/add" element={<RetailerCustomerAdd/>}/>
                                     <Route exact path="/customer/:id" element={<RetailerCustomerDetail/>}/>
-                                    <Route exact path="/customer/:id/sub" element={<RetailerCustomerDetailForSubmission/>}/>
+                                    <Route exact path="/customer/:id/sub" element={<RetailerCustomerDetailForComicSubmission/>}/>
                                     <Route exact path="/customer/:id/edit" element={<RetailerCustomerUpdate/>}/>
                                     <Route exact path="/customer/:id/comments" element={<RetailerCustomerDetailForCommentList/>}/>
                                     <Route exact path="/account" element={<ProfileDetail/>}/>

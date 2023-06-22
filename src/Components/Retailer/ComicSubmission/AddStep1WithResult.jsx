@@ -8,7 +8,7 @@ import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { getSubmissionDetailAPI } from "../../../API/submission";
+import { getComicSubmissionDetailAPI } from "../../../API/ComicSubmission";
 import { getCustomerListAPI } from "../../../API/customer";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
@@ -21,7 +21,7 @@ import PageLoadingContent from "../../Element/PageLoadingContent";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
-function RetailerSubmissionAddStep1WithResult() {
+function RetailerComicSubmissionAddStep1WithResult() {
     ////
     //// URL Parameters.
     ////
@@ -148,7 +148,7 @@ function RetailerSubmissionAddStep1WithResult() {
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
                             <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
-                            <li class=""><Link to="/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
+                            <li class=""><Link to="/comic-submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
                             <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
                         </ul>
                     </nav>
@@ -171,7 +171,7 @@ function RetailerSubmissionAddStep1WithResult() {
                             </div>
                         </div>
 
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Submission</p>
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comic Submission</p>
                         <p class="pb-4 has-text-grey">Please select the customer from the following results.</p>
                         <FormErrorBox errors={errors} />
 
@@ -201,7 +201,7 @@ function RetailerSubmissionAddStep1WithResult() {
                                                             <p><a href={`mailto:${customer.email}`}>{customer.email}</a></p>
                                                             <p><a href={`tel:${customer.phone}`}>{customer.phone}</a></p>
                                                             <br />
-                                                            <Link class="button is-medium is-primary" to={`/submissions/pick-type-for-add?customer_id=${customer.id}`}>
+                                                            <Link class="button is-medium is-primary" to={`/comic-submissions/pick-type-for-add?customer_id=${customer.id}`}>
                                                                 <FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Pick
                                                             </Link>
                                                         </div>
@@ -216,7 +216,7 @@ function RetailerSubmissionAddStep1WithResult() {
                                                 <FontAwesomeIcon className="fas" icon={faTable} />&nbsp;No Customers
                                             </p>
                                             <p class="subtitle">
-                                                No results were found in the search. <Link class="is-medium is-warning" to="/customers/add" target="_blank" rel="noreferrer">Click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link> to create a new customer or <Link class="is-medium is-danger" to="/submissions/pick-type-for-add">click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link> to continue without a customer.
+                                                No results were found in the search. <Link class="is-medium is-warning" to="/customers/add" target="_blank" rel="noreferrer">Click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link> to create a new customer or <Link class="is-medium is-danger" to="/comic-submissions/pick-type-for-add">click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link> to continue without a customer.
                                             </p>
                                           </div>
                                         </section>
@@ -227,8 +227,8 @@ function RetailerSubmissionAddStep1WithResult() {
 
                         <div class="columns pt-5">
                             <div class="column is-half">
-                                <Link class="button is-medium is-hidden-touch" to="/submissions/add/search"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                <Link class="button is-medium is-fullwidth is-hidden-desktop" to="/submissions/add/search"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                <Link class="button is-medium is-hidden-touch" to="/comic-submissions/add/search"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                <Link class="button is-medium is-fullwidth is-hidden-desktop" to="/comic-submissions/add/search"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                             </div>
                             <div class="column is-half has-text-right">
                                 {/*
@@ -245,4 +245,4 @@ function RetailerSubmissionAddStep1WithResult() {
     );
 }
 
-export default RetailerSubmissionAddStep1WithResult;
+export default RetailerComicSubmissionAddStep1WithResult;

@@ -8,7 +8,7 @@ import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { postSubmissionCustomerSwapOperationAPI } from "../../../API/submission";
+import { postComicSubmissionCustomerSwapOperationAPI } from "../../../API/ComicSubmission";
 import { getCustomerListAPI } from "../../../API/customer";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
@@ -22,7 +22,7 @@ import PageLoadingContent from "../../Element/PageLoadingContent";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
-function RetailerSubmissionUpdatePickCustomerWithResult() {
+function RetailerComicSubmissionUpdatePickCustomerWithResult() {
     ////
     //// URL Parameters.
     ////
@@ -68,7 +68,7 @@ function RetailerSubmissionUpdatePickCustomerWithResult() {
         setFetching(true);
         setErrors({});
 
-        postSubmissionCustomerSwapOperationAPI(
+        postComicSubmissionCustomerSwapOperationAPI(
             id, // submission id
             customerID,
             onOperationSuccess,
@@ -108,7 +108,7 @@ function RetailerSubmissionUpdatePickCustomerWithResult() {
         console.log("onOperationSuccess: Starting...");
 
         // Add a temporary banner message in the app and then clear itself after 2 seconds.
-        setTopAlertMessage("Submission updated");
+        setTopAlertMessage("ComicSubmission updated");
         setTopAlertStatus("success");
         setTimeout(() => {
             console.log("onOperationSuccess: Delayed for 2 seconds.");
@@ -117,7 +117,7 @@ function RetailerSubmissionUpdatePickCustomerWithResult() {
         }, 2000);
 
         // Redirect the user to a details page.
-        setForceURL("/submission/"+id+"/cust");
+        setForceURL("/comic-submission/"+id+"/cust");
     }
 
     function onOperationError(apiErr) {
@@ -208,8 +208,8 @@ function RetailerSubmissionUpdatePickCustomerWithResult() {
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
                             <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
-                            <li class=""><Link to="/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
-                            <li class=""><Link to={`/submission/${id}/cust`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Details</Link></li>
+                            <li class=""><Link to="/comic-submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
+                            <li class=""><Link to={`/comic-submission/${id}/cust`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Details</Link></li>
                             <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update (Customer)</Link></li>
                         </ul>
                     </nav>
@@ -232,7 +232,7 @@ function RetailerSubmissionUpdatePickCustomerWithResult() {
                             </div>
                         </div>
 
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update Submission</p>
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update Comic Submission</p>
                         <p class="pb-4 has-text-grey">Please select the customer from the following results.</p>
                         <FormErrorBox errors={errors} />
 
@@ -272,8 +272,8 @@ function RetailerSubmissionUpdatePickCustomerWithResult() {
                         }
                         <div class="columns pt-5">
                             <div class="column is-half">
-                                <Link class="button is-medium is-hidden-touch" to={`/submission/${id}/cust/search`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                <Link class="button is-medium is-fullwidth is-hidden-desktop" to={`/submission/${id}/cust/search`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                <Link class="button is-medium is-hidden-touch" to={`/comic-submission/${id}/cust/search`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                <Link class="button is-medium is-fullwidth is-hidden-desktop" to={`/comic-submission/${id}/cust/search`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                             </div>
                             <div class="column is-half has-text-right">
                                 {/*
@@ -290,4 +290,4 @@ function RetailerSubmissionUpdatePickCustomerWithResult() {
     );
 }
 
-export default RetailerSubmissionUpdatePickCustomerWithResult;
+export default RetailerComicSubmissionUpdatePickCustomerWithResult;

@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 import { DateTime } from "luxon";
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { getSubmissionDetailAPI, putSubmissionUpdateAPI } from "../../../API/submission";
+import { getComicSubmissionDetailAPI, putComicSubmissionUpdateAPI } from "../../../API/ComicSubmission";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
 import FormTextareaField from "../../Element/FormTextareaField";
@@ -29,7 +29,7 @@ import {
 import { topAlertMessageState, topAlertStatusState, currentUserState } from "../../../AppState";
 
 
-function RetailerSubmissionUpdateForSubmission() {
+function RetailerComicSubmissionUpdateForComicSubmission() {
     ////
     //// URL Parameters.
     ////
@@ -116,15 +116,15 @@ function RetailerSubmissionUpdateForSubmission() {
 
         // Submit to the backend.
         console.log("onSubmitClick, submission:", submission);
-        putSubmissionUpdateAPI(submission, onSubmissionUpdateSuccess, onSubmissionUpdateError, onSubmissionUpdateDone);
+        putComicSubmissionUpdateAPI(submission, onComicSubmissionUpdateSuccess, onComicSubmissionUpdateError, onComicSubmissionUpdateDone);
     }
 
     ////
     //// API.
     ////
 
-    function onSubmissionDetailSuccess(response){
-        console.log("onSubmissionDetailSuccess: Starting...");
+    function onComicSubmissionDetailSuccess(response){
+        console.log("onComicSubmissionDetailSuccess: Starting...");
         setSeriesTitle(response.seriesTitle);
         setIssueVol(response.issueVol);
         setIssueNo(response.issueNo);
@@ -149,8 +149,8 @@ function RetailerSubmissionUpdateForSubmission() {
         setStatus(response.status);
     }
 
-    function onSubmissionDetailError(apiErr) {
-        console.log("onSubmissionDetailError: Starting...");
+    function onComicSubmissionDetailError(apiErr) {
+        console.log("onComicSubmissionDetailError: Starting...");
         setErrors(apiErr);
 
         // The following code will cause the screen to scroll to the top of
@@ -160,39 +160,39 @@ function RetailerSubmissionUpdateForSubmission() {
         scroll.scrollToTop();
     }
 
-    function onSubmissionDetailDone() {
-        console.log("onSubmissionDetailDone: Starting...");
+    function onComicSubmissionDetailDone() {
+        console.log("onComicSubmissionDetailDone: Starting...");
         setFetching(false);
     }
 
-    function onSubmissionUpdateSuccess(response){
+    function onComicSubmissionUpdateSuccess(response){
         // For debugging purposes only.
-        console.log("onSubmissionUpdateSuccess: Starting...");
+        console.log("onComicSubmissionUpdateSuccess: Starting...");
         console.log(response);
 
         // Add a temporary banner message in the app and then clear itself after 2 seconds.
-        setTopAlertMessage("Submission created");
+        setTopAlertMessage("ComicSubmission created");
         setTopAlertStatus("success");
         setTimeout(() => {
-            console.log("onSubmissionUpdateSuccess: Delayed for 2 seconds.");
-            console.log("onSubmissionUpdateSuccess: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
+            console.log("onComicSubmissionUpdateSuccess: Delayed for 2 seconds.");
+            console.log("onComicSubmissionUpdateSuccess: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
         }, 2000);
 
         // Redirect the user to a new page.
-        setForceURL("/submission/"+response.id);
+        setForceURL("/comic-submission/"+response.id);
     }
 
-    function onSubmissionUpdateError(apiErr) {
-        console.log("onSubmissionUpdateError: Starting...");
+    function onComicSubmissionUpdateError(apiErr) {
+        console.log("onComicSubmissionUpdateError: Starting...");
         setErrors(apiErr);
 
         // Add a temporary banner message in the app and then clear itself after 2 seconds.
         setTopAlertMessage("Failed submitting");
         setTopAlertStatus("danger");
         setTimeout(() => {
-            console.log("onSubmissionUpdateError: Delayed for 2 seconds.");
-            console.log("onSubmissionUpdateError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
+            console.log("onComicSubmissionUpdateError: Delayed for 2 seconds.");
+            console.log("onComicSubmissionUpdateError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
         }, 2000);
 
@@ -203,8 +203,8 @@ function RetailerSubmissionUpdateForSubmission() {
         scroll.scrollToTop();
     }
 
-    function onSubmissionUpdateDone() {
-        console.log("onSubmissionUpdateDone: Starting...");
+    function onComicSubmissionUpdateDone() {
+        console.log("onComicSubmissionUpdateDone: Starting...");
         setFetching(false);
     }
 
@@ -218,11 +218,11 @@ function RetailerSubmissionUpdateForSubmission() {
         if (mounted) {
             window.scrollTo(0, 0);  // Start the page at the top of the page.
             setFetching(true);
-            getSubmissionDetailAPI(
+            getComicSubmissionDetailAPI(
                 id,
-                onSubmissionDetailSuccess,
-                onSubmissionDetailError,
-                onSubmissionDetailDone
+                onComicSubmissionDetailSuccess,
+                onComicSubmissionDetailError,
+                onComicSubmissionDetailDone
             );
         }
 
@@ -244,13 +244,13 @@ function RetailerSubmissionUpdateForSubmission() {
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
                             <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
-                            <li class=""><Link to="/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
-                            <li class=""><Link to={`/submission/${id}`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail</Link></li>
-                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update (Submission)</Link></li>
+                            <li class=""><Link to="/comic-submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
+                            <li class=""><Link to={`/comic-submission/${id}`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail</Link></li>
+                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update (Comic Submission)</Link></li>
                         </ul>
                     </nav>
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission</p>
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submission</p>
                         <FormErrorBox errors={errors} />
 
                         <p class="pb-4 has-text-grey">Please fill out all the required fields before submitting this form.</p>
@@ -628,8 +628,8 @@ function RetailerSubmissionUpdateForSubmission() {
                                     />}
                                     <div class="columns pt-5">
                                         <div class="column is-half">
-                                            <Link to={`/submission/${id}`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                            <Link to={`/submission/${id}`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link to={`/comic-submission/${id}`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link to={`/comic-submission/${id}`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                         </div>
                                         <div class="column is-half has-text-right">
                                             <button class="button is-medium is-primary is-hidden-touch" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
@@ -647,4 +647,4 @@ function RetailerSubmissionUpdateForSubmission() {
     );
 }
 
-export default RetailerSubmissionUpdateForSubmission;
+export default RetailerComicSubmissionUpdateForComicSubmission;

@@ -10,7 +10,7 @@ import PageLoadingContent from "../../Element/PageLoadingContent";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
-function RetailerSubmissionAddStep2() {
+function RetailerComicSubmissionAddStep2() {
     ////
     //// URL Parameters.
     ////
@@ -68,20 +68,20 @@ function RetailerSubmissionAddStep2() {
                            ?
                             <ul>
                                 <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
-                                <li class=""><Link to="/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
+                                <li class=""><Link to="/comic-submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
                                 <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
                             </ul>
                             :
                             <ul>
                                 <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
                                 <li class=""><Link to="/customers" aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Users</Link></li>
-                                <li class=""><Link to={`/customer/${customerID}/sub`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail (Submissions)</Link></li>
+                                <li class=""><Link to={`/customer/${customerID}/sub`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail (Comic Submissions)</Link></li>
                                 <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
                             </ul>
                         }
                     </nav>
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Submission</p>
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comic Submission</p>
                         <div class="container">
 
                             <p class="pb-4 has-text-grey">Please select the type of collectible product you would like to submit to CPS.</p>
@@ -108,7 +108,7 @@ function RetailerSubmissionAddStep2() {
                                             </div>
                                         </div>
                                         <footer class="card-footer">
-                                            <Link to={`/submissions/add-comic?customer_id=${customerID}`} class="card-footer-item">Select&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
+                                            <Link to={`/comic-submissions/add-comic?customer_id=${customerID}`} class="card-footer-item">Select&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
                                         </footer>
                                     </div>
                                 </div>
@@ -131,7 +131,7 @@ function RetailerSubmissionAddStep2() {
                                         </div>
                                         <footer class="card-footer">
                                             {/*
-                                            <Link to={`/submissions/add-card?customer_id=${customerID}`} class="card-footer-item">Select&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
+                                            <Link to={`/comic-submissions/add-card?customer_id=${customerID}`} class="card-footer-item">Select&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
                                             */}
                                             <Link class="card-footer-item"><i>Coming soon</i></Link>
 
@@ -146,8 +146,8 @@ function RetailerSubmissionAddStep2() {
                                 {customerName === null
                                     ?
                                     <>
-                                        <Link to={`/submissions`} class="button is-medium is-hidden-touch" ><FontAwesomeIcon className="fas" icon={faTimesCircle} />&nbsp;Cancel</Link>
-                                        <Link to={`/submissions`} class="button is-medium is-fullwidth is-hidden-desktop" ><FontAwesomeIcon className="fas" icon={faTimesCircle} />&nbsp;Cancel</Link>
+                                        <Link to={`/comic-submissions`} class="button is-medium is-hidden-touch" ><FontAwesomeIcon className="fas" icon={faTimesCircle} />&nbsp;Cancel</Link>
+                                        <Link to={`/comic-submissions`} class="button is-medium is-fullwidth is-hidden-desktop" ><FontAwesomeIcon className="fas" icon={faTimesCircle} />&nbsp;Cancel</Link>
                                     </>
                                     :
                                     <>
@@ -172,4 +172,4 @@ function RetailerSubmissionAddStep2() {
     );
 }
 
-export default RetailerSubmissionAddStep2;
+export default RetailerComicSubmissionAddStep2;

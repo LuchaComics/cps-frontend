@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faDownload, faArrowLeft, faArrowRight, faCheckCircle, faCheck, faGauge, faArrowUpRightFromSquare, faSearch, faFilter, faUsers  } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faDownload, faArrowLeft, faArrowRight, faCheckCircle, faCheck, faGauge, faArrowUpRightFromSquare, faSearch, faFilter, faEye, faPencil } from '@fortawesome/free-solid-svg-icons'
 import Select from 'react-select'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
-import { getSubmissionDetailAPI } from "../../../API/submission";
+import { getComicSubmissionDetailAPI } from "../../../API/ComicSubmission";
 import { getCustomerListAPI } from "../../../API/customer";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
@@ -17,14 +17,15 @@ import FormRadioField from "../../Element/FormRadioField";
 import FormMultiSelectField from "../../Element/FormMultiSelectField";
 import FormSelectField from "../../Element/FormSelectField";
 import FormInputFieldWithButton from "../../Element/FormInputFieldWithButton";
-import PageLoadingContent from "../../Element/PageLoadingContent";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
-function RetailerSubmissionAddStep1WithSearch() {
+function RetailerComicSubmissionUpdatePickCustomerWithSearch() {
     ////
     //// URL Parameters.
     ////
+
+    const { id } = useParams()
 
     ////
     //// Global state.
@@ -42,7 +43,6 @@ function RetailerSubmissionAddStep1WithSearch() {
     const [forceURL, setForceURL] = useState("");
     const [customers, setCustomers] = useState({});
     const [hasCustomer, setHasCustomer] = useState(1);
-    const [showCancelWarning, setShowCancelWarning] = useState(false);
     const [searchKeyword, setSearchKeyword] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -53,9 +53,29 @@ function RetailerSubmissionAddStep1WithSearch() {
     //// Event handling.
     ////
 
+    const onSearchKeywordChange = (e) => {
+        setSearchKeyword(e.target.value);
+    }
+
+    function onEmailChange(e) {
+        setEmail(e.target.value);
+    }
+
+    function onPhoneChange(e) {
+        setPhone(e.target.value);
+    }
+
+    function onFirstNameChange(e) {
+        setFirstName(e.target.value);
+    }
+
+    function onLastNameChange(e) {
+        setLastName(e.target.value);
+    }
+
     const onSearchButtonClicked = (e) => {
         console.log("searchButtonClick: Starting...");
-        let aURL = "/submissions/add/results";
+        let aURL = "/comic-submission/" + id + "/cust/results";
         if (searchKeyword !=="") {
             aURL += "?search="+searchKeyword;
         }
@@ -149,42 +169,18 @@ function RetailerSubmissionAddStep1WithSearch() {
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
                             <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
-                            <li class=""><Link to="/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
-                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
+                            <li class=""><Link to="/comic-submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
+                            <li class=""><Link to={`/comic-submission/${id}/cust`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Details</Link></li>
+                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update (Customer)</Link></li>
                         </ul>
                     </nav>
 
                     <nav class="box">
-                        <div class={`modal ${showCancelWarning ? 'is-active' : ''}`}>
-                            <div class="modal-background"></div>
-                            <div class="modal-card">
-                                <header class="modal-card-head">
-                                    <p class="modal-card-title">Are you sure?</p>
-                                    <button class="delete" aria-label="close" onClick={(e)=>setShowCancelWarning(false)}></button>
-                                </header>
-                                <section class="modal-card-body">
-                                    Your submission will be cancelled and your work will be lost. This cannot be undone. Do you want to continue?
-                                </section>
-                                <footer class="modal-card-foot">
-                                    <Link class="button is-success" to={`/dashboard`}>Yes</Link>
-                                    <button class="button" onClick={(e)=>setShowCancelWarning(false)}>No</button>
-                                </footer>
-                            </div>
-                        </div>
-
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Submission</p>
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update Comic Submission</p>
                         <FormErrorBox errors={errors} />
 
-                        <div class="container pb-6">
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customer Options</p>
-                            <hr />
-
-                            <Link class="is-medium is-warning" to="/customers/add" target="_blank" rel="noreferrer">Create a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link>&nbsp;&nbsp;<br /><br />
-                            <Link class="is-medium is-danger" to="/submissions/add">Skip selecting a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
-                        </div>
-
                         <div class="container pb-5">
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search Customers</p>
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search</p>
                             <hr />
 
                             <FormInputField
@@ -193,15 +189,15 @@ function RetailerSubmissionAddStep1WithSearch() {
                                 placeholder="Text input"
                                 value={searchKeyword}
                                 errorText={errors && errors.searchKeyword}
-                                helpText="SEARCH FIRST NAME, LAST NAME, EMAIL, ETC"
-                                onChange={(e)=>setSearchKeyword(e.target.value)}
+                                helpText=""
+                                onChange={onSearchKeywordChange}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
                         </div>
 
-                        <div class="container pb-6">
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faFilter} />&nbsp;Filter Customers</p>
+                        <div class="container pb-5">
+                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faFilter} />&nbsp;Filter</p>
                             <hr />
 
                             <FormInputField
@@ -211,7 +207,7 @@ function RetailerSubmissionAddStep1WithSearch() {
                                 value={firstName}
                                 errorText={errors && errors.firstName}
                                 helpText=""
-                                onChange={(e)=>setFirstName(e.target.value)}
+                                onChange={onFirstNameChange}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -223,7 +219,7 @@ function RetailerSubmissionAddStep1WithSearch() {
                                 value={lastName}
                                 errorText={errors && errors.lastName}
                                 helpText=""
-                                onChange={(e)=>setLastName(e.target.value)}
+                                onChange={onLastNameChange}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -235,7 +231,7 @@ function RetailerSubmissionAddStep1WithSearch() {
                                 value={email}
                                 errorText={errors && errors.email}
                                 helpText=""
-                                onChange={(e)=>setEmail(e.target.value)}
+                                onChange={onEmailChange}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
@@ -247,15 +243,16 @@ function RetailerSubmissionAddStep1WithSearch() {
                                 value={phone}
                                 errorText={errors && errors.phone}
                                 helpText=""
-                                onChange={(e)=>setPhone(e.target.value)}
+                                onChange={onPhoneChange}
                                 isRequired={true}
                                 maxWidth="380px"
                             />
                         </div>
+
                         <div class="columns pt-5">
                             <div class="column is-half">
-                                <button class="button is-medium is-hidden-touch" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
-                                <button class="button is-medium is-fullwidth is-hidden-desktop" onClick={(e)=>setShowCancelWarning(true)}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</button>
+                                <Link to={`/comic-submission/${id}/cust`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                <Link to={`/comic-submission/${id}/cust`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                             </div>
                             <div class="column is-half has-text-right">
                                 <button class="button is-medium is-primary is-hidden-touch" onClick={onSearchButtonClicked}><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search</button>
@@ -270,4 +267,4 @@ function RetailerSubmissionAddStep1WithSearch() {
     );
 }
 
-export default RetailerSubmissionAddStep1WithSearch;
+export default RetailerComicSubmissionUpdatePickCustomerWithSearch;
