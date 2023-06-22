@@ -1,15 +1,15 @@
 import React from "react";
 
-function NotFoundError() {
+function NotImplementedError() {
     return (
         <>
             <div class="container">
                 <section class="section">
-                    <h1>404 - Page does not exist</h1>
+                    <h1>501 - Page does not implemented</h1>
                 </section>
             </div>
         </>
     );
 }
 
-export default NotFoundError;
+export default NotImplementedError;

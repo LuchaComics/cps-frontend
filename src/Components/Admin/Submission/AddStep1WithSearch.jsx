@@ -179,7 +179,7 @@ function AdminSubmissionAddStep1WithSearch() {
                             <hr />
 
                             <Link class="is-medium is-warning" to="/admin/users/add" target="_blank" rel="noreferrer">Create a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link>&nbsp;&nbsp;<br /><br />
-                            <Link class="is-medium is-danger" to="/admin/submissions/add">Skip selecting a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
+                            <Link class="is-medium is-danger" to="/admin/submissions/pick-type-for-add">Skip selecting a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
                         </div>
 
                         <div class="container pb-5">

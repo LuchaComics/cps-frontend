@@ -243,11 +243,11 @@ function AdminOrganizationDetailForSubmission() {
                             </div>
                             <div class="column has-text-right">
                                 {/* Mobile Specific */}
-                                <Link to={`/admin/submissions/add?organization_id=${id}&organization_name=${organization.name}`} target="_blank" rel="noreferrer" class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
+                                <Link to={`/admin/submissions/add/search`} target="_blank" rel="noreferrer" class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
                                 </Link>
                                 {/* Desktop Specific */}
-                                <Link to={`/admin/submissions/add?organization_id=${id}&organization_name=${organization.name}`} target="_blank" rel="noreferrer" class="button is-small is-success is-hidden-touch" type="button">
+                                <Link to={`/admin/submissions/add/search`} target="_blank" rel="noreferrer" class="button is-small is-success is-hidden-touch" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
                                 </Link>
                             </div>
@@ -344,8 +344,8 @@ function AdminOrganizationDetailForSubmission() {
                                             <Link class="button is-fullwidth is-hidden-desktop" to={`/admin/organizations`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                         </div>
                                         <div class="column is-half has-text-right">
-                                            <Link to={`/admin/submissions/add?organization_id=${id}&organization_name=${organization.name}`} target="_blank" rel="noreferrer" class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;CPS&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link>
-                                            <Link to={`/admin/submissions/add?organization_id=${id}&organization_name=${organization.name}`} target="_blank" rel="noreferrer" class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;CPS&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link>
+                                            <Link to={`/admin/submissions/add/search`} target="_blank" rel="noreferrer" class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;CPS&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link>
+                                            <Link to={`/admin/submissions/add/search`} target="_blank" rel="noreferrer" class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;CPS&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link>
                                         </div>
                                     </div>
 

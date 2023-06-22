@@ -22,7 +22,8 @@ import AdminSubmissionList from "./Components/Admin/Submission/List";
 import AdminSubmissionAddStep1WithSearch from "./Components/Admin/Submission/AddStep1WithSearch";
 import AdminSubmissionAddStep1WithResult from "./Components/Admin/Submission/AddStep1WithResult";
 import AdminSubmissionAddStep2 from "./Components/Admin/Submission/AddStep2";
-import AdminSubmissionAddStep3 from "./Components/Admin/Submission/AddStep3";
+import AdminSubmissionAddStep3Comic from "./Components/Admin/Submission/AddStep3Comic";
+import AdminSubmissionAddStep4 from "./Components/Admin/Submission/AddStep4";
 import AdminSubmissionDetail from "./Components/Admin/Submission/Detail";
 import AdminSubmissionDetailForCommentList from "./Components/Admin/Submission/DetailForCommentList";
 import AdminSubmissionDetailForCustomer from "./Components/Admin/Submission/DetailForCustomer";
@@ -43,7 +44,8 @@ import RetailerSubmissionList from "./Components/Retailer/Submission/List";
 import RetailerSubmissionAddStep1WithSearch from "./Components/Retailer/Submission/AddStep1WithSearch";
 import RetailerSubmissionAddStep1WithResult from "./Components/Retailer/Submission/AddStep1WithResult";
 import RetailerSubmissionAddStep2 from "./Components/Retailer/Submission/AddStep2";
-import RetailerSubmissionAddStep3 from "./Components/Retailer/Submission/AddStep3";
+import RetailerSubmissionAddStep3Comic from "./Components/Retailer/Submission/AddStep3Comic";
+import RetailerSubmissionAddStep4 from "./Components/Retailer/Submission/AddStep4";
 import RetailerSubmissionDetail from "./Components/Retailer/Submission/Detail";
 import RetailerSubmissionDetailForCommentList from "./Components/Retailer/Submission/DetailForCommentList";
 import RetailerSubmissionDetailForCustomer from "./Components/Retailer/Submission/DetailForCustomer";
@@ -66,6 +68,7 @@ import TopAlertBanner from "./Components/Misc/TopAlertBanner";
 import Sidebar from "./Components/Menu/Sidebar";
 import Topbar from "./Components/Menu/Top";
 import NotFoundError from "./Components/Misc/NotFoundError";
+import NotImplementedError from "./Components/Misc/NotImplementedError";
 import EmailVerification from "./Components/Gateway/EmailVerification";
 import ProfileDetail from "./Components/Profile/Detail";
 import ProfileUpdate from "./Components/Profile/Update";
@@ -101,8 +104,10 @@ function AppRoute() {
                                     <Route exact path="/admin/submissions" element={<AdminSubmissionList/>}/>
                                     <Route exact path="/admin/submissions/add/search" element={<AdminSubmissionAddStep1WithSearch/>}/>
                                     <Route exact path="/admin/submissions/add/results" element={<AdminSubmissionAddStep1WithResult/>}/>
-                                    <Route exact path="/admin/submissions/add" element={<AdminSubmissionAddStep2/>}/>
-                                    <Route exact path="/admin/submissions/add/:id/confirmation" element={<AdminSubmissionAddStep3/>}/>
+                                    <Route exact path="/admin/submissions/pick-type-for-add" element={<AdminSubmissionAddStep2/>}/>
+                                    <Route exact path="/admin/submissions/add-comic" element={<AdminSubmissionAddStep3Comic/>}/>
+                                    <Route exact path="/admin/submissions/add-card" element={<NotImplementedError/>}/>
+                                    <Route exact path="/admin/submissions/add/:id/confirmation" element={<AdminSubmissionAddStep4/>}/>
                                     <Route exact path="/admin/submission/:id" element={<AdminSubmissionDetail/>}/>
                                     <Route exact path="/admin/submission/:id/edit" element={<AdminSubmissionUpdateForSubmission/>}/>
                                     <Route exact path="/admin/submission/:id/cust/search" element={<AdminSubmissionUpdatePickCustomerWithSearch/>}/>
@@ -123,8 +128,9 @@ function AppRoute() {
                                     <Route exact path="/submissions" element={<RetailerSubmissionList/>}/>
                                     <Route exact path="/submissions/add/search" element={<RetailerSubmissionAddStep1WithSearch/>}/>
                                     <Route exact path="/submissions/add/results" element={<RetailerSubmissionAddStep1WithResult/>}/>
-                                    <Route exact path="/submissions/add" element={<RetailerSubmissionAddStep2/>}/>
-                                    <Route exact path="/submissions/add/:id/confirmation" element={<RetailerSubmissionAddStep3/>}/>
+                                    <Route exact path="/submissions/pick-type-for-add" element={<RetailerSubmissionAddStep2/>}/>
+                                    <Route exact path="/submissions/add-comic" element={<RetailerSubmissionAddStep3Comic/>}/>
+                                    <Route exact path="/submissions/add/:id/confirmation" element={<RetailerSubmissionAddStep4/>}/>
                                     <Route exact path="/submission/:id" element={<RetailerSubmissionDetail/>}/>
                                     <Route exact path="/submission/:id/edit" element={<RetailerSubmissionUpdateForSubmission/>}/>
                                     <Route exact path="/submission/:id/cust/search" element={<RetailerSubmissionUpdatePickCustomerWithSearch/>}/>

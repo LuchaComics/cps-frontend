@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate, useSearchParams } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faDownload, faArrowLeft, faTable, faCheckCircle, faCheck, faGauge, faUsers, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faDownload, faArrowLeft, faTable, faCheckCircle, faCheck, faGauge, faUsers, faArrowUpRightFromSquare, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import Select from 'react-select'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
@@ -204,7 +204,7 @@ function AdminSubmissionAddStep1WithResult() {
                                                             <p><a href={`mailto:${user.email}`}>{user.email}</a></p>
                                                             <p><a href={`tel:${user.phone}`}>{user.phone}</a></p>
                                                             <br />
-                                                            <Link class="button is-medium is-primary" to={`/admin/submissions/add?user_id=${user.id}`}>
+                                                            <Link class="button is-medium is-primary" to={`/admin/submissions/pick-type-for-add?user_id=${user.id}`}>
                                                                 <FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Pick
                                                             </Link>
                                                         </div>
@@ -219,7 +219,7 @@ function AdminSubmissionAddStep1WithResult() {
                                                 <FontAwesomeIcon className="fas" icon={faTable} />&nbsp;No Users
                                             </p>
                                             <p class="subtitle">
-                                                No results were found in the search.
+                                                No results were found in the search. <Link class="is-medium is-warning" to="/admin/customers/add" target="_blank" rel="noreferrer">Click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link> to create a new customer or <Link class="is-medium is-danger" to="/admin/submissions/pick-type-for-add">click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link> to continue without a customer.
                                             </p>
                                           </div>
                                         </section>

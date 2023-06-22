@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTasks, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight, faTable } from '@fortawesome/free-solid-svg-icons';
+import { faTasks, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight, faTable, faBookOpen, faNewspaper } from '@fortawesome/free-solid-svg-icons';
 import { useRecoilState } from 'recoil';
 
 import { getSubmissionListAPI, deleteSubmissionAPI } from "../../../API/submission";
@@ -210,6 +210,7 @@ function RetailerSubmissionList() {
                                                 <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
                                                     <thead>
                                                         <tr>
+                                                            <th>Type</th>
                                                             <th>Title</th>
                                                             <th>Vol</th>
                                                             <th>No</th>
@@ -222,6 +223,10 @@ function RetailerSubmissionList() {
 
                                                         {submissions && submissions.results && submissions.results.map(function(submission, i){
                                                             return <tr>
+                                                                <td data-label="Type">
+                                                                    {submission.collectibleType === 1 && <><FontAwesomeIcon className="mdi" icon={faBookOpen} />&nbsp;Comic</>}
+                                                                    {submission.collectibleType === 2 && <><FontAwesomeIcon className="mdi" icon={faNewspaper} />&nbsp;Card</>}
+                                                                </td>
                                                                 <td data-label="Title">{submission.seriesTitle}</td>
                                                                 <td data-label="Vol">{submission.issueVol}</td>
                                                                 <td data-label="No">{submission.issueNo}</td>

@@ -19,7 +19,7 @@ import PageLoadingContent from "../../Element/PageLoadingContent";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
-function AdminSubmissionAddStep3() {
+function AdminSubmissionAddStep4() {
     ////
     //// URL Arguments.
     ////
@@ -134,7 +134,7 @@ function AdminSubmissionAddStep3() {
                     </nav>
 
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission - Confirmation</p>
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Submission (Confirmation)</p>
                         <FormErrorBox errors={errors} />
 
                         {isFetching
@@ -213,4 +213,4 @@ function AdminSubmissionAddStep3() {
     );
 }
 
-export default AdminSubmissionAddStep3;
+export default AdminSubmissionAddStep4;
