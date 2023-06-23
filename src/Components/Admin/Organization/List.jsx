@@ -9,6 +9,7 @@ import { getOrganizationListAPI, deleteOrganizationAPI } from "../../../API/orga
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 import FormErrorBox from "../../Element/FormErrorBox";
 import PageLoadingContent from "../../Element/PageLoadingContent";
+import { PAGE_SIZE_OPTIONS } from "../../../Constants/FieldOptions";
 
 
 function AdminOrganizationList() {
@@ -28,6 +29,7 @@ function AdminOrganizationList() {
     const [organizations, setOrganizations] = useState("");
     const [selectedOrganizationForDeletion, setSelectedOrganizationForDeletion] = useState("");
     const [isFetching, setFetching] = useState(false);
+    const [pageSize, setPageSize] = useState(10);
 
     ////
     //// API.
@@ -68,7 +70,7 @@ function AdminOrganizationList() {
         }, 2000);
 
         // Fetch again an updated list.
-        fetchList();
+        fetchList(pageSize);
     }
 
     function onOrganizationDeleteError(apiErr) {
@@ -99,9 +101,13 @@ function AdminOrganizationList() {
     //// Event handling.
     ////
 
-    const fetchList = () => {
+    const fetchList = (limit) => {
         setFetching(true);
+        setErrors({});
+
         let params = new Map();
+        params.set("page_size", limit);
+
         getOrganizationListAPI(
             params,
             onOrganizationListSuccess,
@@ -142,11 +148,11 @@ function AdminOrganizationList() {
 
         if (mounted) {
             window.scrollTo(0, 0);  // Start the page at the top of the page.
-            fetchList();
+            fetchList(pageSize);
         }
 
         return () => { mounted = false; }
-    }, []);
+    }, [pageSize]);
 
     ////
     //// Component rendering.
@@ -242,6 +248,24 @@ function AdminOrganizationList() {
                                                         })}
                                                     </tbody>
                                                 </table>
+
+                                                <div class="columns">
+                                                    <div class="column is-half">
+                                                        <span class="select">
+                                                            <select class={`input has-text-grey-light`}
+                                                                     name="pageSize"
+                                                                 onChange={(e)=>setPageSize(parseInt(e.target.value))}>
+                                                                {PAGE_SIZE_OPTIONS.map(function(option, i){
+                                                                    return <option selected={pageSize === option.value} value={option.value}>{option.label}</option>;
+                                                                })}
+                                                            </select>
+                                                        </span>
+
+                                                    </div>
+                                                    <div class="column is-half has-text-right">
+                                                    </div>
+                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </div>

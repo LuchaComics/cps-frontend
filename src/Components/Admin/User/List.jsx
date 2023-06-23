@@ -9,7 +9,7 @@ import { getUserListAPI, deleteUserAPI } from "../../../API/user";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 import FormErrorBox from "../../Element/FormErrorBox";
 import PageLoadingContent from "../../Element/PageLoadingContent";
-import { USER_ROLES } from "../../../Constants/FieldOptions";
+import { USER_ROLES, PAGE_SIZE_OPTIONS } from "../../../Constants/FieldOptions";
 
 
 function AdminUserList() {
@@ -29,6 +29,7 @@ function AdminUserList() {
     const [users, setUsers] = useState("");
     const [selectedUserForDeletion, setSelectedUserForDeletion] = useState("");
     const [isFetching, setFetching] = useState(false);
+    const [pageSize, setPageSize] = useState(10);
 
     ////
     //// API.
@@ -69,7 +70,7 @@ function AdminUserList() {
         }, 2000);
 
         // Fetch again an updated list.
-        fetchList();
+        fetchList(pageSize);
     }
 
     function onUserDeleteError(apiErr) {
@@ -100,9 +101,13 @@ function AdminUserList() {
     //// Event handling.
     ////
 
-    const fetchList = () => {
+    const fetchList = (limit) => {
         setFetching(true);
+        setErrors({});
+
         let params = new Map();
+        params.set("page_size", limit);
+
         getUserListAPI(
             params,
             onUserListSuccess,
@@ -143,11 +148,11 @@ function AdminUserList() {
 
         if (mounted) {
             window.scrollTo(0, 0);  // Start the page at the top of the page.
-            fetchList();
+            fetchList(pageSize);
         }
 
         return () => { mounted = false; }
-    }, []);
+    }, [pageSize]);
 
     ////
     //// Component rendering.
@@ -251,6 +256,24 @@ function AdminUserList() {
                                                         })}
                                                     </tbody>
                                                 </table>
+
+                                                <div class="columns">
+                                                    <div class="column is-half">
+                                                        <span class="select">
+                                                            <select class={`input has-text-grey-light`}
+                                                                     name="pageSize"
+                                                                 onChange={(e)=>setPageSize(parseInt(e.target.value))}>
+                                                                {PAGE_SIZE_OPTIONS.map(function(option, i){
+                                                                    return <option selected={pageSize === option.value} value={option.value}>{option.label}</option>;
+                                                                })}
+                                                            </select>
+                                                        </span>
+
+                                                    </div>
+                                                    <div class="column is-half has-text-right">
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>

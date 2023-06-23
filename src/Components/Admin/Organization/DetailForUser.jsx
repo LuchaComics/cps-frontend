@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faUserCircle, faGauge, faPencil, faUsers, faEye, faArrowRight, faTrashCan, faArrowUpRightFromSquare, faBuilding } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
-import { USER_ROLES } from "../../../Constants/FieldOptions";
+import { USER_ROLES, PAGE_SIZE_OPTIONS } from "../../../Constants/FieldOptions";
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
 import { getOrganizationDetailAPI } from "../../../API/organization";
@@ -46,15 +46,20 @@ function AdminOrganizationDetailForUserList() {
     const [tabIndex, setTabIndex] = useState(1);
     const [users, setUsers] = useState("");
     const [selectedUserForDeletion, setSelectedUserForDeletion] = useState("");
+    const [pageSize, setPageSize] = useState(10);
 
     ////
     //// Event handling.
     ////
 
-    const fetchListByOrganizationID = (organizationID) => {
+    const fetchUserList = (organizationID, limit) => {
         setFetching(true);
+        setErrors({});
+
         let params = new Map();
         params.set('organization_id', id);
+        params.set("page_size", limit);
+
         getUserListAPI(
             params,
             onUserListSuccess,
@@ -95,7 +100,7 @@ function AdminOrganizationDetailForUserList() {
     function onOrganizationDetailSuccess(response){
         console.log("onOrganizationDetailSuccess: Starting...");
         setOrganization(response);
-        fetchListByOrganizationID(response.id);
+        fetchUserList(response.id, pageSize);
     }
 
     function onOrganizationDetailError(apiErr) {
@@ -153,7 +158,7 @@ function AdminOrganizationDetailForUserList() {
         }, 2000);
 
         // Fetch again an updated list.
-        fetchListByOrganizationID(id);
+        fetchUserList(id, pageSize);
     }
 
     function onUserDeleteError(apiErr) {
@@ -197,10 +202,13 @@ function AdminOrganizationDetailForUserList() {
                 onOrganizationDetailError,
                 onOrganizationDetailDone
             );
+
+            fetchUserList(id, pageSize);
         }
 
         return () => { mounted = false; }
-    }, []);
+    }, [id, pageSize]);
+
     ////
     //// Component rendering.
     ////
@@ -325,6 +333,24 @@ function AdminOrganizationDetailForUserList() {
                                                             })}
                                                         </tbody>
                                                     </table>
+
+                                                    <div class="columns">
+                                                        <div class="column is-half">
+                                                            <span class="select">
+                                                                <select class={`input has-text-grey-light`}
+                                                                         name="pageSize"
+                                                                     onChange={(e)=>setPageSize(parseInt(e.target.value))}>
+                                                                    {PAGE_SIZE_OPTIONS.map(function(option, i){
+                                                                        return <option selected={pageSize === option.value} value={option.value}>{option.label}</option>;
+                                                                    })}
+                                                                </select>
+                                                            </span>
+
+                                                        </div>
+                                                        <div class="column is-half has-text-right">
+                                                        </div>
+                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                         </div>

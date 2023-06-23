@@ -7,7 +7,7 @@ import { useRecoilState } from 'recoil';
 
 import { getComicSubmissionListAPI, deleteComicSubmissionAPI } from "../../../../API/ComicSubmission";
 import { topAlertMessageState, topAlertStatusState } from "../../../../AppState";
-import { SUBMISSION_STATES } from "../../../../Constants/FieldOptions";
+import { SUBMISSION_STATES, PAGE_SIZE_OPTIONS } from "../../../../Constants/FieldOptions";
 import FormErrorBox from "../../../Element/FormErrorBox";
 import PageLoadingContent from "../../../Element/PageLoadingContent";
 
@@ -29,6 +29,7 @@ function AdminComicSubmissionList() {
     const [submissions, setComicSubmissions] = useState("");
     const [selectedComicSubmissionForDeletion, setSelectedComicSubmissionForDeletion] = useState("");
     const [isFetching, setFetching] = useState(false);
+    const [pageSize, setPageSize] = useState(10);
 
     ////
     //// API.
@@ -69,7 +70,7 @@ function AdminComicSubmissionList() {
         }, 2000);
 
         // Fetch again an updated list.
-        fetchList();
+        fetchList(pageSize);
     }
 
     function onComicSubmissionDeleteError(apiErr) {
@@ -100,9 +101,13 @@ function AdminComicSubmissionList() {
     //// Event handling.
     ////
 
-    const fetchList = () => {
+    const fetchList = (limit) => {
         setFetching(true);
+        setErrors({});
+
         let params = new Map();
+        params.set("page_size", limit);
+        
         getComicSubmissionListAPI(
             params,
             onComicSubmissionListSuccess,
@@ -132,7 +137,6 @@ function AdminComicSubmissionList() {
             onComicSubmissionDeleteDone
         );
         setSelectedComicSubmissionForDeletion("");
-
     }
 
     ////
@@ -144,11 +148,11 @@ function AdminComicSubmissionList() {
 
         if (mounted) {
             window.scrollTo(0, 0);  // Start the page at the top of the page.
-            fetchList();
+            fetchList(pageSize);
         }
 
         return () => { mounted = false; }
-    }, []);
+    }, [pageSize]);
 
     ////
     //// Component rendering.
@@ -265,6 +269,24 @@ function AdminComicSubmissionList() {
                                                         })}
                                                     </tbody>
                                                 </table>
+
+                                                <div class="columns">
+                                                    <div class="column is-half">
+                                                        <span class="select">
+                                                            <select class={`input has-text-grey-light`}
+                                                                     name="pageSize"
+                                                                 onChange={(e)=>setPageSize(parseInt(e.target.value))}>
+                                                                {PAGE_SIZE_OPTIONS.map(function(option, i){
+                                                                    return <option selected={pageSize === option.value} value={option.value}>{option.label}</option>;
+                                                                })}
+                                                            </select>
+                                                        </span>
+
+                                                    </div>
+                                                    <div class="column is-half has-text-right">
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>

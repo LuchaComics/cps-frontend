@@ -327,3 +327,12 @@ export const USER_STATUS_WITH_EMPTY_OPTIONS = [
     { value: "", label: "Please select" }, // EMPTY OPTION
     ...USER_STATUS_OPTIONS
 ];
+
+export const PAGE_SIZE_OPTIONS = [
+    { value: 5, label: '5 Rows' },
+    { value: 10, label: '10 Rows' },
+    { value: 25, label: '25 Rows' },
+    { value: 50, label: '50 Rows' },
+    { value: 100, label: '100 Rows' },
+    { value: 250, label: '250 Rows' },
+];

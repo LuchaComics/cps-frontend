@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faUserCircle, faGauge, faPencil, faUsers, faEye, faArrowRight, faTrashCan, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
-import { SUBMISSION_STATES } from "../../../Constants/FieldOptions";
+import { SUBMISSION_STATES, PAGE_SIZE_OPTIONS } from "../../../Constants/FieldOptions";
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
 import { getUserDetailAPI } from "../../../API/user";
@@ -46,15 +46,22 @@ function AdminUserDetailForComicSubmission() {
     const [tabIndex, setTabIndex] = useState(1);
     const [submissions, setComicSubmissions] = useState("");
     const [selectedComicSubmissionForDeletion, setSelectedComicSubmissionForDeletion] = useState("");
+    const [pageSize, setPageSize] = useState(10);
 
     ////
     //// Event handling.
     ////
 
-    const fetchListByUserID = (userID) => {
+    const fetchSubmissionList = (userID, limit) => {
         setFetching(true);
+        setErrors({});
+
+        let params = new Map();
+        params.set('user_id', id);
+        params.set("page_size", limit);
+
         getComicSubmissionListAPI(
-            new Map(),
+            params,
             onComicSubmissionListSuccess,
             onComicSubmissionListError,
             onComicSubmissionListDone
@@ -93,7 +100,7 @@ function AdminUserDetailForComicSubmission() {
     function onUserDetailSuccess(response){
         console.log("onUserDetailSuccess: Starting...");
         setUser(response);
-        fetchListByUserID(response.id);
+        fetchSubmissionList(response.id, pageSize);
     }
 
     function onUserDetailError(apiErr) {
@@ -151,7 +158,7 @@ function AdminUserDetailForComicSubmission() {
         }, 2000);
 
         // Fetch again an updated list.
-        fetchListByUserID(id);
+        fetchSubmissionList(id, pageSize);
     }
 
     function onComicSubmissionDeleteError(apiErr) {
@@ -187,7 +194,6 @@ function AdminUserDetailForComicSubmission() {
 
         if (mounted) {
             window.scrollTo(0, 0);  // Start the page at the top of the page.
-
             setFetching(true);
             getUserDetailAPI(
                 id,
@@ -195,10 +201,12 @@ function AdminUserDetailForComicSubmission() {
                 onUserDetailError,
                 onUserDetailDone
             );
+            fetchSubmissionList(id, pageSize);
         }
 
         return () => { mounted = false; }
-    }, []);
+    }, [id, pageSize]);
+
     ////
     //// Component rendering.
     ////
@@ -316,6 +324,24 @@ function AdminUserDetailForComicSubmission() {
                                                             })}
                                                         </tbody>
                                                     </table>
+
+                                                    <div class="columns">
+                                                        <div class="column is-half">
+                                                            <span class="select">
+                                                                <select class={`input has-text-grey-light`}
+                                                                         name="pageSize"
+                                                                     onChange={(e)=>setPageSize(parseInt(e.target.value))}>
+                                                                    {PAGE_SIZE_OPTIONS.map(function(option, i){
+                                                                        return <option selected={pageSize === option.value} value={option.value}>{option.label}</option>;
+                                                                    })}
+                                                                </select>
+                                                            </span>
+
+                                                        </div>
+                                                        <div class="column is-half has-text-right">
+                                                        </div>
+                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
