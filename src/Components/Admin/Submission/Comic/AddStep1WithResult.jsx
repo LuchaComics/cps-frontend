@@ -219,7 +219,7 @@ function AdminComicSubmissionAddStep1WithResult() {
                                                 <FontAwesomeIcon className="fas" icon={faTable} />&nbsp;No Users
                                             </p>
                                             <p class="subtitle">
-                                                No results were found in the search. <Link class="is-medium is-warning" to="/admin/customers/add" target="_blank" rel="noreferrer">Click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link> to create a new customer or <Link class="is-medium is-danger" to="/admin/submissions/pick-type-for-add">click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link> to continue without a customer.
+                                                No results were found in the search. <Link class="is-medium is-warning" to="/admin/customers/add" target="_blank" rel="noreferrer">Click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link> to create a new customer or <Link class="is-medium is-danger" to="/admin/submissions/comics/add">click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link> to continue without a customer.
                                             </p>
                                           </div>
                                         </section>
