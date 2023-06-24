@@ -104,7 +104,7 @@ function RetailerSubmissionPickTypeForAdd() {
                                         </header>
                                         <div class="card-content">
                                             <div class="content">
-                                              Lorem ipsum leo risus, porta ac consectetur ac, vestibulum at eros. Donec id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras mattis consectetur purus sit amet fermentum.
+                                                Currently we accept submissions of comics up to 64 pages. Comics must be standard US Golden Age, Silver Age, Bronze Age or Modern Age sizes (no oversize submissions can be processed at this time).
                                             </div>
                                         </div>
                                         <footer class="card-footer">
@@ -126,7 +126,7 @@ function RetailerSubmissionPickTypeForAdd() {
                                         </header>
                                         <div class="card-content">
                                             <div class="content">
-                                              Lorem ipsum leo risus, porta ac consectetur ac, vestibulum at eros. Donec id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras mattis consectetur purus sit amet fermentum.
+                                                Currently we accept of standard size, non-sports cards.
                                             </div>
                                         </div>
                                         <footer class="card-footer">
