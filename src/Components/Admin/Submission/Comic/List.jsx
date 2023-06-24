@@ -29,21 +29,28 @@ function AdminComicSubmissionList() {
     const [submissions, setComicSubmissions] = useState("");
     const [selectedComicSubmissionForDeletion, setSelectedComicSubmissionForDeletion] = useState("");
     const [isFetching, setFetching] = useState(false);
-    const [pageSize, setPageSize] = useState(10);
+    const [pageSize, setPageSize] = useState(10);     // Pagination
+    const [previousCursors, setPreviousCursors] = useState([]);       // Pagination
+    const [nextCursor, setNextCursor] = useState(""); // Pagination
+    const [currentCursor, setCurrentCursor] = useState("");         // Pagination
 
     ////
     //// API.
     ////
 
     function onComicSubmissionListSuccess(response){
-        console.log("onComicSubmissionListSuccess: Starting...");
+        // console.log("onComicSubmissionListSuccess: Starting...");
+        // console.log("onComicSubmissionListSuccess: response:", response);
         if (response.results !== null) {
             setComicSubmissions(response);
+            if (response.hasNextPage) {
+                setNextCursor(response.nextCursor); // For pagination purposes.
+            }
         }
     }
 
     function onComicSubmissionListError(apiErr) {
-        console.log("onComicSubmissionListError: Starting...");
+        // console.log("onComicSubmissionListError: Starting...");
         setErrors(apiErr);
 
         // The following code will cause the screen to scroll to the top of
@@ -54,34 +61,34 @@ function AdminComicSubmissionList() {
     }
 
     function onComicSubmissionListDone() {
-        console.log("onComicSubmissionListDone: Starting...");
+        // console.log("onComicSubmissionListDone: Starting...");
         setFetching(false);
     }
 
     function onComicSubmissionDeleteSuccess(response){
-        console.log("onComicSubmissionDeleteSuccess: Starting..."); // For debugging purposes only.
+        // console.log("onComicSubmissionDeleteSuccess: Starting..."); // For debugging purposes only.
 
         // Update notification.
         setTopAlertStatus("success");
         setTopAlertMessage("ComicSubmission deleted");
         setTimeout(() => {
-            console.log("onDeleteConfirmButtonClick: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
+            // console.log("onDeleteConfirmButtonClick: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
         }, 2000);
 
         // Fetch again an updated list.
-        fetchList(pageSize);
+        fetchList(currentCursor, pageSize);
     }
 
     function onComicSubmissionDeleteError(apiErr) {
-        console.log("onComicSubmissionDeleteError: Starting..."); // For debugging purposes only.
+        // console.log("onComicSubmissionDeleteError: Starting..."); // For debugging purposes only.
         setErrors(apiErr);
 
         // Update notification.
         setTopAlertStatus("danger");
         setTopAlertMessage("Failed deleting");
         setTimeout(() => {
-            console.log("onComicSubmissionDeleteError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
+            // console.log("onComicSubmissionDeleteError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
         }, 2000);
 
@@ -93,7 +100,7 @@ function AdminComicSubmissionList() {
     }
 
     function onComicSubmissionDeleteDone() {
-        console.log("onComicSubmissionDeleteDone: Starting...");
+        // console.log("onComicSubmissionDeleteDone: Starting...");
         setFetching(false);
     }
 
@@ -101,19 +108,37 @@ function AdminComicSubmissionList() {
     //// Event handling.
     ////
 
-    const fetchList = (limit) => {
+    const fetchList = (cur, limit) => {
         setFetching(true);
         setErrors({});
 
         let params = new Map();
         params.set("page_size", limit);
-        
+
+        if (cur !== "") {
+            params.set("cursor", cur);
+        }
+
         getComicSubmissionListAPI(
             params,
             onComicSubmissionListSuccess,
             onComicSubmissionListError,
             onComicSubmissionListDone
         );
+    }
+
+    const onNextClicked = (e) => {
+        let arr = [...previousCursors];
+        arr.push(currentCursor);
+        setPreviousCursors(arr);
+        setCurrentCursor(nextCursor);
+    }
+
+    const onPreviousClicked = (e) => {
+        let arr = [...previousCursors];
+        const previousCursor = arr.pop();
+        setPreviousCursors(arr);
+        setCurrentCursor(previousCursor);
     }
 
     const onSelectComicSubmissionForDeletion = (e, submission) => {
@@ -148,15 +173,20 @@ function AdminComicSubmissionList() {
 
         if (mounted) {
             window.scrollTo(0, 0);  // Start the page at the top of the page.
-            fetchList(pageSize);
+            fetchList(currentCursor, pageSize);
         }
 
         return () => { mounted = false; }
-    }, [pageSize]);
+    }, [currentCursor, pageSize]);
 
     ////
     //// Component rendering.
     ////
+
+    console.log("state | previousCursors:", previousCursors);
+    console.log("state | currentCursor:", currentCursor);
+    console.log("state | nextCursor:", nextCursor);
+    console.log();
 
     return (
         <>
@@ -208,7 +238,7 @@ function AdminComicSubmissionList() {
                             <PageLoadingContent displayMessage={"Loading..."} />
                             :
                             <>
-                                {submissions && submissions.results && submissions.results.length > 0
+                                {submissions && submissions.results && (submissions.results.length > 0 || previousCursors.length > 0)
                                     ?
                                     <div class="container">
                                         <div class="b-table">
@@ -284,6 +314,12 @@ function AdminComicSubmissionList() {
 
                                                     </div>
                                                     <div class="column is-half has-text-right">
+                                                        {previousCursors.length > 0 &&
+                                                            <button class="button" onClick={onPreviousClicked}>Previous</button>
+                                                        }
+                                                        {submissions.hasNextPage && <>
+                                                            <button class="button" onClick={onNextClicked}>Next</button>
+                                                        </>}
                                                     </div>
                                                 </div>
 

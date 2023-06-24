@@ -29,7 +29,10 @@ function RetailerComicSubmissionList() {
     const [submissions, setComicSubmissions] = useState("");
     const [selectedComicSubmissionForDeletion, setSelectedComicSubmissionForDeletion] = useState("");
     const [isFetching, setFetching] = useState(false);
-    const [pageSize, setPageSize] = useState(10);
+    const [pageSize, setPageSize] = useState(10);     // Pagination
+    const [previousCursors, setPreviousCursors] = useState([]);       // Pagination
+    const [nextCursor, setNextCursor] = useState(""); // Pagination
+    const [currentCursor, setCurrentCursor] = useState("");         // Pagination
 
     ////
     //// API.
@@ -39,6 +42,9 @@ function RetailerComicSubmissionList() {
         console.log("onComicSubmissionListSuccess: Starting...");
         if (response.results !== null) {
             setComicSubmissions(response);
+            if (response.hasNextPage) {
+                setNextCursor(response.nextCursor); // For pagination purposes.
+            }
         }
     }
 
@@ -70,7 +76,7 @@ function RetailerComicSubmissionList() {
         }, 2000);
 
         // Fetch again an updated list.
-        fetchList(pageSize);
+        fetchList(currentCursor, pageSize);
     }
 
     function onComicSubmissionDeleteError(apiErr) {
@@ -101,12 +107,16 @@ function RetailerComicSubmissionList() {
     //// Event handling.
     ////
 
-    const fetchList = (limit) => {
+    const fetchList = (cur, limit) => {
         setFetching(true);
         setErrors({});
 
         let params = new Map();
         params.set("page_size", limit);
+
+        if (cur !== "") {
+            params.set("cursor", cur);
+        }
 
         getComicSubmissionListAPI(
             params,
@@ -114,6 +124,20 @@ function RetailerComicSubmissionList() {
             onComicSubmissionListError,
             onComicSubmissionListDone
         );
+    }
+
+    const onNextClicked = (e) => {
+        let arr = [...previousCursors];
+        arr.push(currentCursor);
+        setPreviousCursors(arr);
+        setCurrentCursor(nextCursor);
+    }
+
+    const onPreviousClicked = (e) => {
+        let arr = [...previousCursors];
+        const previousCursor = arr.pop();
+        setPreviousCursors(arr);
+        setCurrentCursor(previousCursor);
     }
 
     const onSelectComicSubmissionForDeletion = (e, submission) => {
@@ -148,11 +172,11 @@ function RetailerComicSubmissionList() {
 
         if (mounted) {
             window.scrollTo(0, 0);  // Start the page at the top of the page.
-            fetchList(pageSize);
+            fetchList(currentCursor, pageSize);
         }
 
         return () => { mounted = false; }
-    }, [pageSize]);
+    }, [currentCursor, pageSize]);
 
     ////
     //// Component rendering.
@@ -208,7 +232,7 @@ function RetailerComicSubmissionList() {
                             <PageLoadingContent displayMessage={"Loading..."} />
                             :
                             <>
-                                {submissions && submissions.results && submissions.results.length > 0
+                                {submissions && submissions.results && (submissions.results.length > 0 || previousCursors.length > 0)
                                     ?
                                     <div class="container">
                                         <div class="b-table">
@@ -278,6 +302,12 @@ function RetailerComicSubmissionList() {
 
                                                     </div>
                                                     <div class="column is-half has-text-right">
+                                                        {previousCursors.length > 0 &&
+                                                            <button class="button" onClick={onPreviousClicked}>Previous</button>
+                                                        }
+                                                        {submissions.hasNextPage && <>
+                                                            <button class="button" onClick={onNextClicked}>Next</button>
+                                                        </>}
                                                     </div>
                                                 </div>
 

@@ -29,7 +29,10 @@ function AdminOrganizationList() {
     const [organizations, setOrganizations] = useState("");
     const [selectedOrganizationForDeletion, setSelectedOrganizationForDeletion] = useState("");
     const [isFetching, setFetching] = useState(false);
-    const [pageSize, setPageSize] = useState(10);
+    const [pageSize, setPageSize] = useState(10);               // Pagination
+    const [previousCursors, setPreviousCursors] = useState([]); // Pagination
+    const [nextCursor, setNextCursor] = useState("");           // Pagination
+    const [currentCursor, setCurrentCursor] = useState("");     // Pagination
 
     ////
     //// API.
@@ -37,8 +40,12 @@ function AdminOrganizationList() {
 
     function onOrganizationListSuccess(response){
         console.log("onOrganizationListSuccess: Starting...");
+        console.log("onComicSubmissionListSuccess: response:", response);
         if (response.results !== null) {
             setOrganizations(response);
+            if (response.hasNextPage) {
+                setNextCursor(response.nextCursor); // For pagination purposes.
+            }
         }
     }
 
@@ -70,7 +77,7 @@ function AdminOrganizationList() {
         }, 2000);
 
         // Fetch again an updated list.
-        fetchList(pageSize);
+        fetchList(currentCursor, pageSize);
     }
 
     function onOrganizationDeleteError(apiErr) {
@@ -101,12 +108,16 @@ function AdminOrganizationList() {
     //// Event handling.
     ////
 
-    const fetchList = (limit) => {
+    const fetchList = (cur, limit) => {
         setFetching(true);
         setErrors({});
 
         let params = new Map();
         params.set("page_size", limit);
+
+        if (cur !== "") {
+            params.set("cursor", cur);
+        }
 
         getOrganizationListAPI(
             params,
@@ -114,6 +125,20 @@ function AdminOrganizationList() {
             onOrganizationListError,
             onOrganizationListDone
         );
+    }
+
+    const onNextClicked = (e) => {
+        let arr = [...previousCursors];
+        arr.push(currentCursor);
+        setPreviousCursors(arr);
+        setCurrentCursor(nextCursor);
+    }
+
+    const onPreviousClicked = (e) => {
+        let arr = [...previousCursors];
+        const previousCursor = arr.pop();
+        setPreviousCursors(arr);
+        setCurrentCursor(previousCursor);
     }
 
     const onSelectOrganizationForDeletion = (e, organization) => {
@@ -148,11 +173,11 @@ function AdminOrganizationList() {
 
         if (mounted) {
             window.scrollTo(0, 0);  // Start the page at the top of the page.
-            fetchList(pageSize);
+            fetchList(currentCursor, pageSize);
         }
 
         return () => { mounted = false; }
-    }, [pageSize]);
+    }, [currentCursor, pageSize]);
 
     ////
     //// Component rendering.
@@ -209,7 +234,7 @@ function AdminOrganizationList() {
                             <PageLoadingContent displayMessage={"Loading..."} />
                             :
                             <>
-                                {organizations && organizations.results && organizations.results.length > 0
+                                {organizations && organizations.results && (organizations.results.length > 0 || previousCursors.length > 0)
                                     ?
                                     <div class="container">
                                         <div class="b-table">
@@ -263,9 +288,15 @@ function AdminOrganizationList() {
 
                                                     </div>
                                                     <div class="column is-half has-text-right">
+                                                        {previousCursors.length > 0 &&
+                                                            <button class="button" onClick={onPreviousClicked}>Previous</button>
+                                                        }
+                                                        {organizations.hasNextPage && <>
+                                                            <button class="button" onClick={onNextClicked}>Next</button>
+                                                        </>}
                                                     </div>
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
                                     </div>

@@ -46,19 +46,25 @@ function AdminOrganizationDetailForComicSubmission() {
     const [tabIndex, setTabIndex] = useState(1);
     const [submissions, setComicSubmissions] = useState("");
     const [selectedComicSubmissionForDeletion, setSelectedComicSubmissionForDeletion] = useState("");
-    const [pageSize, setPageSize] = useState(10);
+    const [pageSize, setPageSize] = useState(10);               // Pagination
+    const [previousCursors, setPreviousCursors] = useState([]); // Pagination
+    const [nextCursor, setNextCursor] = useState("");           // Pagination
+    const [currentCursor, setCurrentCursor] = useState("");     // Pagination
 
     ////
     //// Event handling.
     ////
 
-    const fetchSubmissionList = (organizationID, limit) => {
+    const fetchSubmissionList = (cur, organizationID, limit) => {
         setFetching(true);
         setErrors({});
 
         let params = new Map();
         params.set('organization_id', id);
         params.set("page_size", limit);
+        if (cur !== "") {
+            params.set("cursor", cur);
+        }
 
         getComicSubmissionListAPI(
             params,
@@ -66,6 +72,22 @@ function AdminOrganizationDetailForComicSubmission() {
             onComicSubmissionListError,
             onComicSubmissionListDone
         );
+    }
+
+    const onNextClicked = (e) => {
+        console.log("onNextClicked");
+        let arr = [...previousCursors];
+        arr.push(currentCursor);
+        setPreviousCursors(arr);
+        setCurrentCursor(nextCursor);
+    }
+
+    const onPreviousClicked = (e) => {
+        console.log("onPreviousClicked");
+        let arr = [...previousCursors];
+        const previousCursor = arr.pop();
+        setPreviousCursors(arr);
+        setCurrentCursor(previousCursor);
     }
 
     const onSelectComicSubmissionForDeletion = (e, submission) => {
@@ -124,6 +146,9 @@ function AdminOrganizationDetailForComicSubmission() {
         console.log("onComicSubmissionListSuccess: Starting...");
         if (response.results !== null) {
             setComicSubmissions(response);
+            if (response.hasNextPage) {
+                setNextCursor(response.nextCursor); // For pagination purposes.
+            }
         }
     }
 
@@ -157,7 +182,7 @@ function AdminOrganizationDetailForComicSubmission() {
         }, 2000);
 
         // Fetch again an updated list.
-        fetchSubmissionList(id, pageSize);
+        fetchSubmissionList(currentCursor, id, pageSize);
     }
 
     function onComicSubmissionDeleteError(apiErr) {
@@ -203,11 +228,11 @@ function AdminOrganizationDetailForComicSubmission() {
             );
 
 
-            fetchSubmissionList(id, pageSize);
+            fetchSubmissionList(currentCursor, id, pageSize);
         }
 
         return () => { mounted = false; }
-    }, [id, pageSize]);
+    }, [currentCursor, id, pageSize]);
 
     ////
     //// Component rendering.
@@ -290,7 +315,7 @@ function AdminOrganizationDetailForComicSubmission() {
                                     <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</p>
                                     <hr />
 
-                                    {!isFetching && submissions && submissions.results && submissions.results.length > 0
+                                    {!isFetching && submissions && submissions.results && (submissions.results.length > 0 || previousCursors.length > 0)
                                         ?
                                         <div class="container">
                                             <div class="b-table">
@@ -347,9 +372,15 @@ function AdminOrganizationDetailForComicSubmission() {
 
                                                         </div>
                                                         <div class="column is-half has-text-right">
+                                                            {previousCursors.length > 0 &&
+                                                                <button class="button" onClick={onPreviousClicked}>Previous</button>
+                                                            }
+                                                            {submissions.hasNextPage && <>
+                                                                <button class="button" onClick={onNextClicked}>Next</button>
+                                                            </>}
                                                         </div>
                                                     </div>
-                                                    
+
                                                 </div>
                                             </div>
                                         </div>

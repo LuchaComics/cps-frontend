@@ -29,7 +29,10 @@ function RetailerCustomerList() {
     const [customers, setCustomers] = useState("");
     const [selectedCustomerForDeletion, setSelectedCustomerForDeletion] = useState("");
     const [isFetching, setFetching] = useState(false);
-    const [pageSize, setPageSize] = useState(10);
+    const [pageSize, setPageSize] = useState(10);     // Pagination
+    const [previousCursors, setPreviousCursors] = useState([]);       // Pagination
+    const [nextCursor, setNextCursor] = useState(""); // Pagination
+    const [currentCursor, setCurrentCursor] = useState("");         // Pagination
 
     ////
     //// API.
@@ -39,6 +42,9 @@ function RetailerCustomerList() {
         console.log("onCustomerListSuccess: Starting...");
         if (response.results !== null) {
             setCustomers(response);
+            if (response.hasNextPage) {
+                setNextCursor(response.nextCursor); // For pagination purposes.
+            }
         }
     }
 
@@ -70,7 +76,7 @@ function RetailerCustomerList() {
         }, 2000);
 
         // Fetch again an updated list.
-        fetchList(pageSize);
+        fetchList(currentCursor, pageSize);
     }
 
     function onCustomerDeleteError(apiErr) {
@@ -101,12 +107,16 @@ function RetailerCustomerList() {
     //// Event handling.
     ////
 
-    const fetchList = (limit) => {
+    const fetchList = (cur, limit) => {
         setFetching(true);
         setErrors({});
 
         let params = new Map();
         params.set("page_size", limit);
+
+        if (cur !== "") {
+            params.set("cursor", cur);
+        }
 
         getCustomerListAPI(
             params,
@@ -114,6 +124,20 @@ function RetailerCustomerList() {
             onCustomerListError,
             onCustomerListDone
         );
+    }
+
+    const onNextClicked = (e) => {
+        let arr = [...previousCursors];
+        arr.push(currentCursor);
+        setPreviousCursors(arr);
+        setCurrentCursor(nextCursor);
+    }
+
+    const onPreviousClicked = (e) => {
+        let arr = [...previousCursors];
+        const previousCursor = arr.pop();
+        setPreviousCursors(arr);
+        setCurrentCursor(previousCursor);
     }
 
     const onSelectCustomerForDeletion = (e, customer) => {
@@ -148,15 +172,20 @@ function RetailerCustomerList() {
 
         if (mounted) {
             window.scrollTo(0, 0);  // Start the page at the top of the page.
-            fetchList(pageSize);
+            fetchList(currentCursor, pageSize);
         }
 
         return () => { mounted = false; }
-    }, [pageSize]);
+    }, [currentCursor, pageSize]);
 
     ////
     //// Component rendering.
     ////
+
+    console.log("state | previousCursors:", previousCursors);
+    console.log("state | currentCursor:", currentCursor);
+    console.log("state | nextCursor:", nextCursor);
+    console.log();
 
     return (
         <>
@@ -207,7 +236,7 @@ function RetailerCustomerList() {
                             <PageLoadingContent displayMessage={"Loading..."} />
                             :
                             <>
-                                {customers && customers.results && customers.results.length > 0
+                                {customers && customers.results && (customers.results.length > 0 || previousCursors.length > 0)
                                     ?
                                     <div class="container">
                                         <div class="b-table">
@@ -263,9 +292,15 @@ function RetailerCustomerList() {
 
                                                     </div>
                                                     <div class="column is-half has-text-right">
+                                                        {previousCursors.length > 0 &&
+                                                            <button class="button" onClick={onPreviousClicked}>Previous</button>
+                                                        }
+                                                        {customers.hasNextPage && <>
+                                                            <button class="button" onClick={onNextClicked}>Next</button>
+                                                        </>}
                                                     </div>
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
                                     </div>

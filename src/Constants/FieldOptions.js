@@ -329,6 +329,7 @@ export const USER_STATUS_WITH_EMPTY_OPTIONS = [
 ];
 
 export const PAGE_SIZE_OPTIONS = [
+    { value: 2, label: '2 Rows' },
     { value: 5, label: '5 Rows' },
     { value: 10, label: '10 Rows' },
     { value: 25, label: '25 Rows' },

@@ -46,19 +46,25 @@ function AdminUserDetailForComicSubmission() {
     const [tabIndex, setTabIndex] = useState(1);
     const [submissions, setComicSubmissions] = useState("");
     const [selectedComicSubmissionForDeletion, setSelectedComicSubmissionForDeletion] = useState("");
-    const [pageSize, setPageSize] = useState(10);
+    const [pageSize, setPageSize] = useState(10);               // Pagination
+    const [previousCursors, setPreviousCursors] = useState([]); // Pagination
+    const [nextCursor, setNextCursor] = useState("");           // Pagination
+    const [currentCursor, setCurrentCursor] = useState("");     // Pagination
 
     ////
     //// Event handling.
     ////
 
-    const fetchSubmissionList = (userID, limit) => {
+    const fetchSubmissionList = (cur, userID, limit) => {
         setFetching(true);
         setErrors({});
 
         let params = new Map();
         params.set('user_id', id);
         params.set("page_size", limit);
+        if (cur !== "") {
+            params.set("cursor", cur);
+        }
 
         getComicSubmissionListAPI(
             params,
@@ -66,6 +72,22 @@ function AdminUserDetailForComicSubmission() {
             onComicSubmissionListError,
             onComicSubmissionListDone
         );
+    }
+
+    const onNextClicked = (e) => {
+        console.log("onNextClicked");
+        let arr = [...previousCursors];
+        arr.push(currentCursor);
+        setPreviousCursors(arr);
+        setCurrentCursor(nextCursor);
+    }
+
+    const onPreviousClicked = (e) => {
+        console.log("onPreviousClicked");
+        let arr = [...previousCursors];
+        const previousCursor = arr.pop();
+        setPreviousCursors(arr);
+        setCurrentCursor(previousCursor);
     }
 
     const onSelectComicSubmissionForDeletion = (e, submission) => {
@@ -125,6 +147,9 @@ function AdminUserDetailForComicSubmission() {
         console.log("onComicSubmissionListSuccess: Starting...");
         if (response.results !== null) {
             setComicSubmissions(response);
+            if (response.hasNextPage) {
+                setNextCursor(response.nextCursor); // For pagination purposes.
+            }
         }
     }
 
@@ -158,7 +183,7 @@ function AdminUserDetailForComicSubmission() {
         }, 2000);
 
         // Fetch again an updated list.
-        fetchSubmissionList(id, pageSize);
+        fetchSubmissionList(currentCursor, id, pageSize);
     }
 
     function onComicSubmissionDeleteError(apiErr) {
@@ -201,11 +226,11 @@ function AdminUserDetailForComicSubmission() {
                 onUserDetailError,
                 onUserDetailDone
             );
-            fetchSubmissionList(id, pageSize);
+            fetchSubmissionList(currentCursor, id, pageSize);
         }
 
         return () => { mounted = false; }
-    }, [id, pageSize]);
+    }, [currentCursor, id, pageSize]);
 
     ////
     //// Component rendering.
@@ -282,7 +307,7 @@ function AdminUserDetailForComicSubmission() {
                                       </ul>
                                     </div>
 
-                                    {!isFetching && submissions && submissions.results && submissions.results.length > 0
+                                    {!isFetching && submissions && submissions.results && (submissions.results.length > 0 || previousCursors.length > 0)
                                         ?
                                         <div class="container">
                                             <div class="b-table">
@@ -339,9 +364,15 @@ function AdminUserDetailForComicSubmission() {
 
                                                         </div>
                                                         <div class="column is-half has-text-right">
+                                                            {previousCursors.length > 0 &&
+                                                                <button class="button" onClick={onPreviousClicked}>Previous</button>
+                                                            }
+                                                            {submissions.hasNextPage && <>
+                                                                <button class="button" onClick={onNextClicked}>Next</button>
+                                                            </>}
                                                         </div>
                                                     </div>
-                                                    
+
                                                 </div>
                                             </div>
                                         </div>

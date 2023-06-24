@@ -33,17 +33,17 @@ export function getComicSubmissionListAPI(filtersMap=new Map(), onSuccessCallbac
         const data = camelizeKeys(responseData);
 
         // Bugfixes.
-        console.log("getComicSubmissionListAPI | pre-fix | results:", data);
+        // console.log("getComicSubmissionListAPI | pre-fix | results:", data);
         if (data.results !== undefined && data.results !== null && data.results.length > 0) {
             data.results.forEach(
                 (item, index) => {
                     item.issueCoverDate = DateTime.fromISO(item.issueCoverDate).toLocaleString(DateTime.DATETIME_MED);
                     item.createdAt = DateTime.fromISO(item.createdAt).toLocaleString(DateTime.DATETIME_MED);
-                    console.log(item, index);
+                    // console.log(item, index);
                 }
             )
         }
-        console.log("getComicSubmissionListAPI | post-fix | results:", data);
+        // console.log("getComicSubmissionListAPI | post-fix | results:", data);
 
         // Return the callback data.
         onSuccessCallback(data);
@@ -56,7 +56,7 @@ export function getComicSubmissionListAPI(filtersMap=new Map(), onSuccessCallbac
 export function postComicSubmissionCreateAPI(data, onSuccessCallback, onErrorCallback, onDoneCallback) {
     const axios = getCustomAxios();
 
-    console.log("postComicSubmissionCreateAPI | pre-modified | data:", data);
+    // console.log("postComicSubmissionCreateAPI | pre-modified | data:", data);
 
     // To Snake-case for API from camel-case in React.
     let decamelizedData = decamelizeKeys(data);
@@ -71,7 +71,7 @@ export function postComicSubmissionCreateAPI(data, onSuccessCallback, onErrorCal
     //     decamelizedData.issue_cover_date = new Date(data.issueCoverDate).toISOString();
     // }
 
-    console.log("postComicSubmissionCreateAPI | post-modified | data:", decamelizedData);
+    // console.log("postComicSubmissionCreateAPI | post-modified | data:", decamelizedData);
 
     axios.post(CPS_COMIC_SUBMISSIONS_API_ENDPOINT, decamelizedData).then((successResponse) => {
         const responseData = successResponse.data;
@@ -103,8 +103,8 @@ export function getComicSubmissionDetailAPI(submissionID, onSuccessCallback, onE
         data.showsSignsOfTamperingOrRestoration = parseInt(data.showsSignsOfTamperingOrRestoration);
         // data.issueCoverDate = DateTime.fromISO(data.issueCoverDate).toJSDate();
 
-        // For debugging purposeso pnly.
-        console.log(data);
+        // // For debugging purposeso pnly.
+        // console.log(data);
 
         // Return the callback data.
         onSuccessCallback(data);
