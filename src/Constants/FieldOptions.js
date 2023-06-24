@@ -135,7 +135,7 @@ export const HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS = [
 
 export const ISSUE_COVER_YEAR_OPTIONS = [
     { value: 0, label: "Please select" }, // EMPTY OPTION
-    { value: 1, label: 'I do not know' },
+    { value: 1, label: 'No Cover Date Year' },
     { value: 2023, label: '2023' },
     { value: 2022, label: '2022' },
     { value: 2021, label: '2021' },
