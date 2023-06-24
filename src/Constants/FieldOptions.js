@@ -281,7 +281,7 @@ export const ISSUE_COVER_MONTH_OPTIONS = [
     { value: 10, label: "October"},
     { value: 11, label: "November"},
     { value: 12, label: "December"},
-    { value: 13, label: "I don't know"},
+    { value: 13, label: "No Cover Date Month"},
 ];
 
 export const ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS = [
