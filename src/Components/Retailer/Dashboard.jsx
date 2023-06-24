@@ -76,10 +76,7 @@ function RetailerDashboard() {
                               Submit a request to encapsulate your collectibles by clicking below:
                               <br />
                               <br />
-                              <Link to={"/submissions/comics"}>View Comics&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
-                              <br />
-                              <br />
-                              <Link to={"/submissions/cards"}>View Cards&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
+                              <Link to={"/submissions/pick-type-for-add"}>Add&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
                             </p>
                           </div>
                         </section>
