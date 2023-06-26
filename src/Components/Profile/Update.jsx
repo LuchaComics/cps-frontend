@@ -19,7 +19,7 @@ import PageLoadingContent from "../Element/PageLoadingContent";
 import { topAlertMessageState, topAlertStatusState, currentUserState } from "../../AppState";
 
 
-function ProfileUpdate() {
+function AccountUpdate() {
     ////
     //// Global state.
     ////
@@ -65,6 +65,7 @@ function ProfileUpdate() {
     const onSubmitClick = (e) => {
         console.log("onSubmitClick: Beginning...");
         setFetching(true);
+        setErrors({});
 
         const submission = {
             Email: email,
@@ -196,7 +197,8 @@ function ProfileUpdate() {
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
                             <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
-                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Account</Link></li>
+                            <li class=""><Link to="/account" aria-current="page"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Account</Link></li>
+                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link></li>
                         </ul>
                     </nav>
                     <nav class="box">
@@ -376,4 +378,4 @@ function ProfileUpdate() {
     );
 }
 
-export default ProfileUpdate;
+export default AccountUpdate;

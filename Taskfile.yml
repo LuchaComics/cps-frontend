@@ -9,7 +9,7 @@ tasks:
   build:
     desc: "build the project and move the production artifact into the deployment folder (for production only)"
     cmds:
-      - npm run build
+      - npm run build --production
       - cp -Rf ./build/* ../cps-frontend-static
       - rm -Rf ./build
 

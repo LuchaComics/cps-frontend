@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faEye, faArrowLeft, faCheckCircle, faPencil, faGauge, faBook, faMagnifyingGlass, faBalanceScale, faUser, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faPlus, faEye, faArrowLeft, faCheckCircle, faPencil, faGauge, faBook, faMagnifyingGlass, faBalanceScale, faUser, faArrowUpRightFromSquare, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import Select from 'react-select'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
@@ -173,143 +173,161 @@ function RetailerComicSubmissionDetailForCustomer() {
                                         </li>
                                       </ul>
                                     </div>
-                                    {submission && submission.user !== undefined && submission.user !== null && submission.user !== "" && <>
-                                        <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faUser} />&nbsp;Customer</p>
-                                        <hr />
-                                        <p class="pb-5"><Link to={`/customer/${submission.user.id}`} target="_blank" rel="noreferrer">Click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link> to view the customer.</p>
+                                    {submission && submission.user !== undefined && submission.user !== null && submission.user !== ""
+                                        ?
+                                        <>
+                                            <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faUser} />&nbsp;Customer</p>
+                                            <hr />
+                                            <p class="pb-5"><Link to={`/customer/${submission.user.id}`} target="_blank" rel="noreferrer">Click here&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link> to view the customer.</p>
 
-                                        <FormInputField
-                                            label="Name"
-                                            name="name"
-                                            placeholder="Text input"
-                                            value={submission.user.name}
-                                            isRequired={true}
-                                            maxWidth="280px"
-                                            helpText={""}
-                                            disabled={true}
-                                        />
-                                        <FormInputField
-                                            label="Email"
-                                            name="email"
-                                            placeholder="Text input"
-                                            value={submission.user.email}
-                                            isRequired={true}
-                                            maxWidth="280px"
-                                            helpText={""}
-                                            disabled={true}
-                                        />
-                                        <FormInputField
-                                            label="Phone"
-                                            name="phone"
-                                            placeholder="Text input"
-                                            value={submission.user.phone}
-                                            isRequired={true}
-                                            maxWidth="150px"
-                                            helpText={""}
-                                            disabled={true}
-                                        />
-                                        <FormCountryField
-                                            priorityOptions={["CA","US","MX"]}
-                                            label="Country"
-                                            name="country"
-                                            placeholder="Text input"
-                                            selectedCountry={submission.user.country}
-                                            helpText=""
-                                            isRequired={true}
-                                            maxWidth="160px"
-                                            disabled={true}
-                                        />
+                                            <FormInputField
+                                                label="Name"
+                                                name="name"
+                                                placeholder="Text input"
+                                                value={submission.user.name}
+                                                isRequired={true}
+                                                maxWidth="280px"
+                                                helpText={""}
+                                                disabled={true}
+                                            />
+                                            <FormInputField
+                                                label="Email"
+                                                name="email"
+                                                placeholder="Text input"
+                                                value={submission.user.email}
+                                                isRequired={true}
+                                                maxWidth="280px"
+                                                helpText={""}
+                                                disabled={true}
+                                            />
+                                            <FormInputField
+                                                label="Phone"
+                                                name="phone"
+                                                placeholder="Text input"
+                                                value={submission.user.phone}
+                                                isRequired={true}
+                                                maxWidth="150px"
+                                                helpText={""}
+                                                disabled={true}
+                                            />
+                                            <FormCountryField
+                                                priorityOptions={["CA","US","MX"]}
+                                                label="Country"
+                                                name="country"
+                                                placeholder="Text input"
+                                                selectedCountry={submission.user.country}
+                                                helpText=""
+                                                isRequired={true}
+                                                maxWidth="160px"
+                                                disabled={true}
+                                            />
 
-                                        <FormRegionField
-                                            label="Province/Territory"
-                                            name="region"
-                                            placeholder="Text input"
-                                            selectedCountry={submission.user.country}
-                                            selectedRegion={submission.user.region}
-                                            helpText=""
-                                            isRequired={true}
-                                            maxWidth="280px"
-                                            disabled={true}
-                                        />
-                                        <FormInputField
-                                            label="City"
-                                            name="city"
-                                            placeholder="Text input"
-                                            value={submission.user.city}
-                                            isRequired={true}
-                                            maxWidth="280px"
-                                            helpText={""}
-                                            disabled={true}
-                                        />
-                                        <FormInputField
-                                            label="Address Line 1"
-                                            name="addressLine1"
-                                            placeholder="Text input"
-                                            value={submission.user.addressLine1}
-                                            isRequired={true}
-                                            maxWidth="280px"
-                                            helpText={""}
-                                            disabled={true}
-                                        />
-                                        <FormInputField
-                                            label="Address Line 2"
-                                            name="addressLine2"
-                                            placeholder="Text input"
-                                            value={submission.user.addressLine2}
-                                            isRequired={true}
-                                            maxWidth="280px"
-                                            helpText={""}
-                                            disabled={true}
-                                        />
-                                        <FormInputField
-                                            label="Postal Code"
-                                            name="postalCode"
-                                            placeholder="Text input"
-                                            value={submission.user.postalCode}
-                                            isRequired={true}
-                                            maxWidth="80px"
-                                            helpText={""}
-                                            disabled={true}
-                                        />
-                                        <FormSelectField
-                                            label="How did you hear about us?"
-                                            name="howDidYouHearAboutUs"
-                                            placeholder="Pick"
-                                            selectedValue={submission.user.howDidYouHearAboutUs}
-                                            helpText=""
-                                            options={HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS}
-                                            disabled={true}
-                                        />
-                                        {submission.user.howDidYouHearAboutUs === 1 && <FormInputField
-                                            label="Other (Please specify):"
-                                            name="howDidYouHearAboutUsOther"
-                                            placeholder="Text input"
-                                            value={submission.user.howDidYouHearAboutUsOther}
-                                            helpText=""
-                                            isRequired={true}
-                                            maxWidth="380px"
-                                            disabled={true}
-                                        />}
+                                            <FormRegionField
+                                                label="Province/Territory"
+                                                name="region"
+                                                placeholder="Text input"
+                                                selectedCountry={submission.user.country}
+                                                selectedRegion={submission.user.region}
+                                                helpText=""
+                                                isRequired={true}
+                                                maxWidth="280px"
+                                                disabled={true}
+                                            />
+                                            <FormInputField
+                                                label="City"
+                                                name="city"
+                                                placeholder="Text input"
+                                                value={submission.user.city}
+                                                isRequired={true}
+                                                maxWidth="280px"
+                                                helpText={""}
+                                                disabled={true}
+                                            />
+                                            <FormInputField
+                                                label="Address Line 1"
+                                                name="addressLine1"
+                                                placeholder="Text input"
+                                                value={submission.user.addressLine1}
+                                                isRequired={true}
+                                                maxWidth="280px"
+                                                helpText={""}
+                                                disabled={true}
+                                            />
+                                            <FormInputField
+                                                label="Address Line 2"
+                                                name="addressLine2"
+                                                placeholder="Text input"
+                                                value={submission.user.addressLine2}
+                                                isRequired={true}
+                                                maxWidth="280px"
+                                                helpText={""}
+                                                disabled={true}
+                                            />
+                                            <FormInputField
+                                                label="Postal Code"
+                                                name="postalCode"
+                                                placeholder="Text input"
+                                                value={submission.user.postalCode}
+                                                isRequired={true}
+                                                maxWidth="80px"
+                                                helpText={""}
+                                                disabled={true}
+                                            />
+                                            <FormSelectField
+                                                label="How did you hear about us?"
+                                                name="howDidYouHearAboutUs"
+                                                placeholder="Pick"
+                                                selectedValue={submission.user.howDidYouHearAboutUs}
+                                                helpText=""
+                                                options={HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS}
+                                                disabled={true}
+                                            />
+                                            {submission.user.howDidYouHearAboutUs === 1 && <FormInputField
+                                                label="Other (Please specify):"
+                                                name="howDidYouHearAboutUsOther"
+                                                placeholder="Text input"
+                                                value={submission.user.howDidYouHearAboutUsOther}
+                                                helpText=""
+                                                isRequired={true}
+                                                maxWidth="380px"
+                                                disabled={true}
+                                            />}
 
-                                        <FormCheckboxField
-                                            label="I agree to receive electronic updates from my local retailer and CPS"
-                                            name="agreePromotionsEmail"
-                                            checked={submission.user.agreePromotionsEmail}
-                                            maxWidth="180px"
-                                        />
+                                            <FormCheckboxField
+                                                label="I agree to receive electronic updates from my local retailer and CPS"
+                                                name="agreePromotionsEmail"
+                                                checked={submission.user.agreePromotionsEmail}
+                                                maxWidth="180px"
+                                            />
 
-                                        <div class="columns pt-5">
-                                            <div class="column is-half">
-                                                <Link to={`/submissions/comics`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                                <Link to={`/submissions/comics`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <div class="columns pt-5">
+                                                <div class="column is-half">
+                                                    <Link to={`/submissions/comics`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                                    <Link to={`/submissions/comics`} class="button is-medium is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                                </div>
+                                                <div class="column is-half has-text-right">
+                                                    <Link onClick={(e)=>setShowCustomerEditOptions(true)} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Customer</Link>
+                                                    <Link onClick={(e)=>setShowCustomerEditOptions(true)} class="button is-medium is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Customer</Link>
+                                                </div>
                                             </div>
-                                            <div class="column is-half has-text-right">
-                                                <Link onClick={(e)=>setShowCustomerEditOptions(true)} class="button is-medium is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Customer</Link>
-                                                <Link onClick={(e)=>setShowCustomerEditOptions(true)} class="button is-medium is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Customer</Link>
-                                            </div>
-                                        </div>
-                                    </>}
-
+                                        </>
+                                        :
+                                        <>
+                                            <section class="hero is-medium is-warning">
+                                              <div class="hero-body">
+                                                <p class="title">
+                                                    <FontAwesomeIcon className="fas" icon={faUser} />&nbsp;No Customer
+                                                </p>
+                                                <p class="subtitle">
+                                                  Assign a customer to this comic by clicking below:
+                                                  <br />
+                                                  <br />
+                                                  <Link to={`/submissions/comic/${submission.id}/cust/search`}>Assign&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
+                                                </p>
+                                              </div>
+                                            </section>
+                                        </>
+                                    }
                                 </div>}
                             </>
                         }

@@ -11,6 +11,7 @@ export const CPS_SUBMISSION_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/submission
 export const CPS_SUBMISSION_CUSTOMER_SWAP_OPERATION_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/submissions/operation/set-user";
 export const CPS_SUBMISSION_CREATE_COMMENT_OPERATION_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/submissions/operation/create-comment";
 export const CPS_PROFILE_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/profile";
+export const CPS_PROFILE_CHANGE_PASSWORD_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/profile/change-password";
 export const CPS_CUSTOMERS_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/customers";
 export const CPS_CUSTOMER_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/customer/{id}";
 export const CPS_CUSTOMER_CREATE_COMMENT_OPERATION_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/customers/operation/create-comment";
@@ -25,7 +26,6 @@ export const CPS_USERS_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/users";
 export const CPS_USERS_SELECT_OPTIONS_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/users/select-options";
 export const CPS_USER_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/user/{id}";
 export const CPS_USER_CREATE_COMMENT_OPERATION_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/users/operation/create-comment";
-
 export const CPS_COMIC_SUBMISSIONS_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/comic-submissions";
 export const CPS_COMIC_SUBMISSION_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/comic-submission/{id}";
 export const CPS_COMIC_SUBMISSION_CUSTOMER_SWAP_OPERATION_API_ENDPOINT = HTTP_API_SERVER + "/api/v1/comic-submissions/operation/set-user";

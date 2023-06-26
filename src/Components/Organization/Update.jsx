@@ -51,6 +51,7 @@ function OrganizationUpdate() {
     const onSubmitClick = (e) => {
         console.log("onSubmitClick: Beginning...");
         setFetching(true);
+        setErrors({});
 
         const org = {
             ID: currentUser.organizationId,

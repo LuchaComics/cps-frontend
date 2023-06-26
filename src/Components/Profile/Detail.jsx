@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faUserCircle, faGauge, faPencil, faIdCard, faAddressBook, faContactCard, faChartPie } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faKey, faArrowLeft, faCheckCircle, faUserCircle, faGauge, faPencil, faIdCard, faAddressBook, faContactCard, faChartPie, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 
 import { getProfileDetailAPI } from "../../API/profile";
@@ -110,7 +110,21 @@ function AccountDetail() {
                         </ul>
                     </nav>
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Account</p>
+                        {currentUser && <div class="columns">
+                            <div class="column">
+                                <p class="title is-2"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Account</p>
+                            </div>
+                            <div class="column has-text-right">
+                                {/* Mobile Specific */}
+                                <Link to={`/account/change-password`} class="button is-medium is-success is-fullwidth is-hidden-desktop" type="button">
+                                    <FontAwesomeIcon className="mdi" icon={faKey} />&nbsp;Change Password
+                                </Link>
+                                {/* Desktop Specific */}
+                                <Link to={`/account/change-password`} class="button is-medium is-success is-hidden-touch" type="button">
+                                    <FontAwesomeIcon className="mdi" icon={faKey} />&nbsp;Change Password
+                                </Link>
+                            </div>
+                        </div>}
                         <FormErrorBox errors={errors} />
 
                         {/* <p class="pb-4">Please fill out all the required fields before submitting this form.</p> */}
@@ -271,6 +285,7 @@ function AccountDetail() {
                             </>
                         }
                     </nav>
+                    {/* end box */}
                 </section>
             </div>
         </>

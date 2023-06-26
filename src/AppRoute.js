@@ -70,8 +70,9 @@ import Topbar from "./Components/Menu/Top";
 import NotFoundError from "./Components/Misc/NotFoundError";
 import NotImplementedError from "./Components/Misc/NotImplementedError";
 import EmailVerification from "./Components/Gateway/EmailVerification";
-import ProfileDetail from "./Components/Profile/Detail";
-import ProfileUpdate from "./Components/Profile/Update";
+import AccountDetail from "./Components/Profile/Detail";
+import AccountUpdate from "./Components/Profile/Update";
+import AccountChangePassword from "./Components/Profile/ChangePassword";
 import OrganizationDetail from "./Components/Organization/Detail";
 import OrganizationUpdate from "./Components/Organization/Update";
 import ForgotPassword from "./Components/Gateway/ForgotPassword";
@@ -145,8 +146,9 @@ function AppRoute() {
                                     <Route exact path="/customer/:id/comics" element={<RetailerCustomerDetailForComicSubmission/>}/>
                                     <Route exact path="/customer/:id/edit" element={<RetailerCustomerUpdate/>}/>
                                     <Route exact path="/customer/:id/comments" element={<RetailerCustomerDetailForCommentList/>}/>
-                                    <Route exact path="/account" element={<ProfileDetail/>}/>
-                                    <Route exact path="/account/update" element={<ProfileUpdate/>}/>
+                                    <Route exact path="/account" element={<AccountDetail/>}/>
+                                    <Route exact path="/account/update" element={<AccountUpdate/>}/>
+                                    <Route exact path="/account/change-password" element={<AccountChangePassword/>}/>
                                     <Route exact path="/organization/" element={<OrganizationDetail/>}/>
                                     <Route exact path="/organization/update" element={<OrganizationUpdate/>}/>
                                     <Route exact path="/register" element={<Register/>}/>

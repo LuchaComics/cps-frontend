@@ -108,7 +108,12 @@ function RetailerSubmissionPickTypeForAdd() {
                                             </div>
                                         </div>
                                         <footer class="card-footer">
-                                            <Link to={`/submissions/comics/add?customer_id=${customerID}&customer_name=${customerName}`} class="card-footer-item">Select&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
+                                            {customerName === null
+                                                ?
+                                                <Link to={`/submissions/comics/add/search`} class="card-footer-item">Select&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
+                                                :
+                                                <Link to={`/submissions/comics/add?customer_id=${customerID}&customer_name=${customerName}`} class="card-footer-item">Select&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
+                                            }
                                         </footer>
                                     </div>
                                 </div>

@@ -314,7 +314,7 @@ function RetailerComicSubmissionUpdateForComicSubmission() {
                                         maxWidth="110px"
                                     />
 
-                                    {issueCoverYear !== 0 && issueCoverYear !== 1 && <FormSelectField
+                                    {issueCoverYear !== 0 && <FormSelectField
                                         label="Issue Cover Month"
                                         name="issueCoverMonth"
                                         placeholder="Issue Cover Month"
