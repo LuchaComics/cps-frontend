@@ -134,7 +134,9 @@ function PublicRegistrySearch() {
                                             <nav class="level">
                                                 <div class="level-item has-text-centered">
                                                     <figure class='image'>
-                                                        <img src='/static/CPS logo 2023 GR.webp' style={{width:"256px"}} />
+                                                        <Link to="/">
+                                                            <img src='/static/CPS logo 2023 GR.webp' style={{width:"256px"}} />
+                                                        </Link>
                                                     </figure>
                                                 </div>
                                             </nav>
