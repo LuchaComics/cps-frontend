@@ -47,6 +47,10 @@ import RetailerComicSubmissionAddStep1WithResult from "./Components/Retailer/Sub
 import RetailerComicSubmissionAddStep2 from "./Components/Retailer/Submission/Comic/AddStep2";
 import RetailerComicSubmissionAddStep3 from "./Components/Retailer/Submission/Comic/AddStep3";
 import RetailerComicSubmissionDetail from "./Components/Retailer/Submission/Comic/Detail";
+import RetailerSubmissionAttachmentAdd from "./Components/Retailer/Submission/Comic/Attachment/Add";
+import RetailerSubmissionAttachmentDetail from "./Components/Retailer/Submission/Comic/Attachment/Detail";
+import RetailerSubmissionAttachmentUpdate from "./Components/Retailer/Submission/Comic/Attachment/Update";
+import RetailerComicSubmissionDetailForAttachment from "./Components/Retailer/Submission/Comic/DetailForAttachment";
 import RetailerComicSubmissionDetailForCommentList from "./Components/Retailer/Submission/Comic/DetailForCommentList";
 import RetailerComicSubmissionDetailForCustomer from "./Components/Retailer/Submission/Comic/DetailForCustomer";
 import RetailerComicSubmissionDetailForPDFFile from "./Components/Retailer/Submission/Comic/DetailForPDFFile";
@@ -58,8 +62,8 @@ import RetailerCustomerAdd from "./Components/Retailer/Customer/Add";
 import RetailerCustomerDetail from "./Components/Retailer/Customer/Detail";
 import RetailerCustomerDetailForComicSubmission from "./Components/Retailer/Customer/DetailForComicSubmission";
 import RetailerCustomerDetailForCommentList from "./Components/Retailer/Customer/DetailForCommentList";
-import RetailerCustomerDetailForAttachment from "./Components/Retailer/Customer/DetailForAttachment";
 import RetailerCustomerUpdate from "./Components/Retailer/Customer/Update";
+import RetailerCustomerDetailForAttachment from "./Components/Retailer/Customer/DetailForAttachment";
 import RetailerCustomerAttachmentAdd from "./Components/Retailer/Customer/Attachment/Add";
 import RetailerCustomerAttachmentDetail from "./Components/Retailer/Customer/Attachment/Detail";
 import RetailerCustomerAttachmentUpdate from "./Components/Retailer/Customer/Attachment/Update";
@@ -140,6 +144,10 @@ function AppRoute() {
                                     <Route exact path="/submissions/comic/:id/edit" element={<RetailerComicSubmissionUpdateForComicSubmission/>}/>
                                     <Route exact path="/submissions/comic/:id/cust/search" element={<RetailerComicSubmissionUpdatePickCustomerWithSearch/>}/>
                                     <Route exact path="/submissions/comic/:id/cust/results" element={<RetailerComicSubmissionUpdatePickCustomerWithResult/>}/>
+                                    <Route exact path="/submissions/comic/:id/attachment/:aid/edit" element={<RetailerSubmissionAttachmentUpdate/>}/>
+                                    <Route exact path="/submissions/comic/:id/attachment/:aid" element={<RetailerSubmissionAttachmentDetail/>}/>
+                                    <Route exact path="/submissions/comic/:id/attachments/add" element={<RetailerSubmissionAttachmentAdd/>}/>
+                                    <Route exact path="/submissions/comic/:id/attachments" element={<RetailerComicSubmissionDetailForAttachment/>}/>
                                     <Route exact path="/submissions/comic/:id/comments" element={<RetailerComicSubmissionDetailForCommentList/>}/>
                                     <Route exact path="/submissions/comic/:id/cust" element={<RetailerComicSubmissionDetailForCustomer/>}/>
                                     <Route exact path="/submissions/comic/:id/file" element={<RetailerComicSubmissionDetailForPDFFile/>}/>

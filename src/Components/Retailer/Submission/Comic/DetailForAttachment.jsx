@@ -5,22 +5,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faUserCircle, faGauge, faPencil, faUsers, faEye, faArrowRight, faTrashCan, faArrowUpRightFromSquare, faFile, faDownload } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
-import { ATTACHMENT_STATES, PAGE_SIZE_OPTIONS } from "../../../Constants/FieldOptions";
+import { ATTACHMENT_STATES, PAGE_SIZE_OPTIONS } from "../../../../Constants/FieldOptions";
 
-import { getCustomerDetailAPI } from "../../../API/customer";
-import { getAttachmentListAPI, deleteAttachmentAPI } from "../../../API/Attachment";
-import FormErrorBox from "../../Element/FormErrorBox";
-import FormInputField from "../../Element/FormInputField";
-import FormTextareaField from "../../Element/FormTextareaField";
-import FormRadioField from "../../Element/FormRadioField";
-import FormMultiSelectField from "../../Element/FormMultiSelectField";
-import FormSelectField from "../../Element/FormSelectField";
-import FormCheckboxField from "../../Element/FormCheckboxField";
-import PageLoadingContent from "../../Element/PageLoadingContent";
-import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
+import { getComicSubmissionDetailAPI } from "../../../../API/ComicSubmission";
+import { getAttachmentListAPI, deleteAttachmentAPI } from "../../../../API/Attachment";
+import FormErrorBox from "../../../Element/FormErrorBox";
+import FormInputField from "../../../Element/FormInputField";
+import FormTextareaField from "../../../Element/FormTextareaField";
+import FormRadioField from "../../../Element/FormRadioField";
+import FormMultiSelectField from "../../../Element/FormMultiSelectField";
+import FormSelectField from "../../../Element/FormSelectField";
+import FormCheckboxField from "../../../Element/FormCheckboxField";
+import PageLoadingContent from "../../../Element/PageLoadingContent";
+import { topAlertMessageState, topAlertStatusState } from "../../../../AppState";
 
 
-function RetailerCustomerDetailForAttachment() {
+function RetailerComicSubmissionDetailForAttachment() {
     ////
     //// URL Parameters.
     ////
@@ -41,7 +41,7 @@ function RetailerCustomerDetailForAttachment() {
     const [errors, setErrors] = useState({});
     const [isFetching, setFetching] = useState(false);
     const [forceURL, setForceURL] = useState("");
-    const [customer, setCustomer] = useState({});
+    const [submission, setSubmission] = useState({});
     const [tabIndex, setTabIndex] = useState(1);
     const [attachments, setAttachments] = useState("");
     const [selectedAttachmentForDeletion, setSelectedAttachmentForDeletion] = useState("");
@@ -54,13 +54,12 @@ function RetailerCustomerDetailForAttachment() {
     //// Event handling.
     ////
 
-    const fetchAttachmentList = (cur, customerID, limit) => {
+    const fetchSubmissionList = (cur, submissionID, limit) => {
         setFetching(true);
         setErrors({});
 
         let params = new Map();
         params.set('ownership_id', id);
-        params.set('ownership_role', 1); // 1=Customer or User.
         params.set("page_size", limit);
         if (cur !== "") {
             params.set("cursor", cur);
@@ -116,15 +115,15 @@ function RetailerCustomerDetailForAttachment() {
     //// API.
     ////
 
-    // Customer details.
+    // Submission details.
 
-    function onCustomerDetailSuccess(response){
-        console.log("onCustomerDetailSuccess: Starting...");
-        setCustomer(response);
+    function onSubmissionDetailSuccess(response){
+        console.log("onSubmissionDetailSuccess: Starting...");
+        setSubmission(response);
     }
 
-    function onCustomerDetailError(apiErr) {
-        console.log("onCustomerDetailError: Starting...");
+    function onSubmissionDetailError(apiErr) {
+        console.log("onSubmissionDetailError: Starting...");
         setErrors(apiErr);
 
         // The following code will cause the screen to scroll to the top of
@@ -134,8 +133,8 @@ function RetailerCustomerDetailForAttachment() {
         scroll.scrollToTop();
     }
 
-    function onCustomerDetailDone() {
-        console.log("onCustomerDetailDone: Starting...");
+    function onSubmissionDetailDone() {
+        console.log("onSubmissionDetailDone: Starting...");
         setFetching(false);
     }
 
@@ -181,7 +180,7 @@ function RetailerCustomerDetailForAttachment() {
         }, 2000);
 
         // Fetch again an updated list.
-        fetchAttachmentList(currentCursor, id, pageSize);
+        fetchSubmissionList(currentCursor, id, pageSize);
     }
 
     function onAttachmentDeleteError(apiErr) {
@@ -219,13 +218,13 @@ function RetailerCustomerDetailForAttachment() {
             window.scrollTo(0, 0);  // Start the page at the top of the page.
 
             setFetching(true);
-            getCustomerDetailAPI(
+            getComicSubmissionDetailAPI(
                 id,
-                onCustomerDetailSuccess,
-                onCustomerDetailError,
-                onCustomerDetailDone
+                onSubmissionDetailSuccess,
+                onSubmissionDetailError,
+                onSubmissionDetailDone
             );
-            fetchAttachmentList(currentCursor, id, pageSize);
+            fetchSubmissionList(currentCursor, id, pageSize);
         }
 
         return () => { mounted = false; }
@@ -245,7 +244,7 @@ function RetailerCustomerDetailForAttachment() {
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
                             <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
-                            <li class=""><Link to="/customers" aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers</Link></li>
+                            <li class=""><Link to="/submissions/comics" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
                             <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail (Attachments)</Link></li>
                         </ul>
                     </nav>
@@ -268,15 +267,15 @@ function RetailerCustomerDetailForAttachment() {
                     <nav class="box">
                         <div class="columns">
                             <div class="column">
-                                <p class="title is-2"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Customer</p>
+                                <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submission</p>
                             </div>
-                            {customer && <div class="column has-text-right">
+                            {submission && <div class="column has-text-right">
                                 {/* Mobile Specific */}
-                                <Link to={`/customer/${id}/attachments/add`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
+                                <Link to={`/submissions/comic/${id}/attachments/add`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add Attachment
                                 </Link>
                                 {/* Desktop Specific */}
-                                <Link to={`/customer/${id}/attachments/add`} class="button is-small is-success is-hidden-touch" type="button">
+                                <Link to={`/submissions/comic/${id}/attachments/add`} class="button is-small is-success is-hidden-touch" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add Attachment
                                 </Link>
                             </div>}
@@ -290,20 +289,23 @@ function RetailerCustomerDetailForAttachment() {
                             <PageLoadingContent displayMessage={"Loading..."} />
                             :
                             <>
-                                {customer && <div class="container">
+                                {submission && <div class="container">
                                     <div class="tabs is-medium">
                                       <ul>
                                         <li>
-                                            <Link to={`/customer/${customer.id}`}>Detail</Link>
+                                            <Link to={`/submissions/comic/${id}`}>Detail</Link>
                                         </li>
                                         <li>
-                                            <Link to={`/customer/${customer.id}/comics`}>Comics</Link>
+                                            <Link to={`/submissions/comic/${id}/cust`}>Customer</Link>
                                         </li>
                                         <li>
-                                            <Link to={`/customer/${customer.id}/comments`}>Comments</Link>
+                                            <Link to={`/submissions/comic/${id}/comments`}>Comments</Link>
+                                        </li>
+                                        <li>
+                                            <Link to={`/submissions/comic/${id}/file`}>File</Link>
                                         </li>
                                         <li class="is-active">
-                                            <Link to={`/customer/${customer.id}/attachments`}><b>Attachments</b></Link>
+                                            <Link to={`/submissions/comic/${id}/attachments`}>Attachments</Link>
                                         </li>
                                       </ul>
                                     </div>
@@ -341,10 +343,10 @@ function RetailerCustomerDetailForAttachment() {
                                                                     </td>
                                                                     <td class="is-actions-cell">
                                                                         <div class="buttons is-right">
-                                                                            <Link to={`/customer/${customer.id}/attachment/${attachment.id}`} class="button is-small is-primary" type="button">
+                                                                            <Link to={`/submissions/comic/${submission.id}/attachment/${attachment.id}`} class="button is-small is-primary" type="button">
                                                                                 View
                                                                             </Link>
-                                                                            <Link to={`/customer/${customer.id}/attachment/${attachment.id}/edit`} class="button is-small is-warning" type="button">
+                                                                            <Link to={`/submissions/comic/${submission.id}/attachment/${attachment.id}/edit`} class="button is-small is-warning" type="button">
                                                                                 Edit
                                                                             </Link>
                                                                             <button onClick={(e, ses) => onSelectAttachmentForDeletion(e, attachment)} class="button is-small is-danger" type="button">
@@ -387,7 +389,7 @@ function RetailerCustomerDetailForAttachment() {
                                         <div class="container">
                                             <article class="message is-dark">
                                                 <div class="message-body">
-                                                    No attachments. <b><Link to={`/customer/${id}/attachments/add`}>Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating a new attachment.
+                                                    No attachments. <b><Link to={`/submissions/comic/${id}/attachments/add`}>Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating a new attachment.
                                                 </div>
                                             </article>
                                         </div>
@@ -395,12 +397,12 @@ function RetailerCustomerDetailForAttachment() {
 
                                     <div class="columns pt-5">
                                         <div class="column is-half">
-                                            <Link class="button is-hidden-touch" to={`/customers`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                            <Link class="button is-fullwidth is-hidden-desktop" to={`/customers`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link class="button is-hidden-touch" to={`/submissions`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link class="button is-fullwidth is-hidden-desktop" to={`/submissions`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                         </div>
                                         <div class="column is-half has-text-right">
-                                            <Link to={`/customer/${id}/attachments/add`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Attachment</Link>
-                                            <Link to={`/customer/${id}/attachments/add`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Attachment</Link>
+                                            <Link to={`/submissions/comic/${id}/attachments/add`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Attachment</Link>
+                                            <Link to={`/submissions/comic/${id}/attachments/add`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Attachment</Link>
                                         </div>
                                     </div>
 
@@ -414,4 +416,4 @@ function RetailerCustomerDetailForAttachment() {
     );
 }
 
-export default RetailerCustomerDetailForAttachment;
+export default RetailerComicSubmissionDetailForAttachment;

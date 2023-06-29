@@ -5,22 +5,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTasks, faTachometer, faPlus, faTimesCircle, faCheckCircle, faUserCircle, faGauge, faPencil, faUsers, faIdCard, faAddressBook, faContactCard, faChartPie, faCogs, faEye, faArrowLeft, faFile } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 
-import useLocalStorage from "../../../../Hooks/useLocalStorage";
-import { putAttachmentUpdateAPI, getAttachmentDetailAPI } from "../../../../API/Attachment";
-import FormErrorBox from "../../../Element/FormErrorBox";
-import FormInputField from "../../../Element/FormInputField";
-import FormTextareaField from "../../../Element/FormTextareaField";
-import FormRadioField from "../../../Element/FormRadioField";
-import FormMultiSelectField from "../../../Element/FormMultiSelectField";
-import FormSelectField from "../../../Element/FormSelectField";
-import FormCheckboxField from "../../../Element/FormCheckboxField";
-import FormCountryField from "../../../Element/FormCountryField";
-import FormRegionField from "../../../Element/FormRegionField";
-import PageLoadingContent from "../../../Element/PageLoadingContent";
-import { topAlertMessageState, topAlertStatusState } from "../../../../AppState";
+import useLocalStorage from "../../../../../Hooks/useLocalStorage";
+import { putAttachmentUpdateAPI, getAttachmentDetailAPI } from "../../../../../API/Attachment";
+import FormErrorBox from "../../../../Element/FormErrorBox";
+import FormInputField from "../../../../Element/FormInputField";
+import FormTextareaField from "../../../../Element/FormTextareaField";
+import FormRadioField from "../../../../Element/FormRadioField";
+import FormMultiSelectField from "../../../../Element/FormMultiSelectField";
+import FormSelectField from "../../../../Element/FormSelectField";
+import FormCheckboxField from "../../../../Element/FormCheckboxField";
+import FormCountryField from "../../../../Element/FormCountryField";
+import FormRegionField from "../../../../Element/FormRegionField";
+import PageLoadingContent from "../../../../Element/PageLoadingContent";
+import { topAlertMessageState, topAlertStatusState } from "../../../../../AppState";
 
 
-function RetailerCustomerAttachmentUpdate() {
+function RetailerSubmissionAttachmentUpdate() {
     ////
     //// URL Parameters.
     ////
@@ -65,14 +65,14 @@ function RetailerCustomerAttachmentUpdate() {
         formData.append('name', name);
         formData.append('description', description);
         formData.append('ownership_id', id);
-        formData.append('ownership_type', 1); // 1=Customer or User.
+        formData.append('ownership_type', 2); // 2=Submission.
 
         putAttachmentUpdateAPI(
             id,
             formData,
-            onRetailerCustomerAttachmentUpdateSuccess,
-            onRetailerCustomerAttachmentUpdateError,
-            onRetailerCustomerAttachmentUpdateDone
+            onRetailerSubmissionAttachmentUpdateSuccess,
+            onRetailerSubmissionAttachmentUpdateError,
+            onRetailerSubmissionAttachmentUpdateDone
         );
         console.log("onSubmitClick: Finished.")
     }
@@ -81,34 +81,34 @@ function RetailerCustomerAttachmentUpdate() {
     //// API.
     ////
 
-    function onRetailerCustomerAttachmentUpdateSuccess(response){
+    function onRetailerSubmissionAttachmentUpdateSuccess(response){
         // For debugging purposes only.
-        console.log("onRetailerCustomerAttachmentUpdateSuccess: Starting...");
+        console.log("onRetailerSubmissionAttachmentUpdateSuccess: Starting...");
         console.log(response);
 
         // Add a temporary banner message in the app and then clear itself after 2 seconds.
-        setTopAlertMessage("Customer created");
+        setTopAlertMessage("Submission created");
         setTopAlertStatus("success");
         setTimeout(() => {
-            console.log("onRetailerCustomerAttachmentUpdateSuccess: Delayed for 2 seconds.");
-            console.log("onRetailerCustomerAttachmentUpdateSuccess: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
+            console.log("onRetailerSubmissionAttachmentUpdateSuccess: Delayed for 2 seconds.");
+            console.log("onRetailerSubmissionAttachmentUpdateSuccess: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
         }, 2000);
 
-        // Redirect the user to the customer attachments page.
-        setForceURL("/customer/"+id+"/attachments");
+        // Redirect the user to the submission attachments page.
+        setForceURL("/submissions/comic/"+id+"/attachments");
     }
 
-    function onRetailerCustomerAttachmentUpdateError(apiErr) {
-        console.log("onRetailerCustomerAttachmentUpdateError: Starting...");
+    function onRetailerSubmissionAttachmentUpdateError(apiErr) {
+        console.log("onRetailerSubmissionAttachmentUpdateError: Starting...");
         setErrors(apiErr);
 
         // Add a temporary banner message in the app and then clear itself after 2 seconds.
         setTopAlertMessage("Failed submitting");
         setTopAlertStatus("danger");
         setTimeout(() => {
-            console.log("onRetailerCustomerAttachmentUpdateError: Delayed for 2 seconds.");
-            console.log("onRetailerCustomerAttachmentUpdateError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
+            console.log("onRetailerSubmissionAttachmentUpdateError: Delayed for 2 seconds.");
+            console.log("onRetailerSubmissionAttachmentUpdateError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
         }, 2000);
 
@@ -119,30 +119,30 @@ function RetailerCustomerAttachmentUpdate() {
         scroll.scrollToTop();
     }
 
-    function onRetailerCustomerAttachmentUpdateDone() {
-        console.log("onRetailerCustomerAttachmentUpdateDone: Starting...");
+    function onRetailerSubmissionAttachmentUpdateDone() {
+        console.log("onRetailerSubmissionAttachmentUpdateDone: Starting...");
         setFetching(false);
     }
 
-    function onRetailerCustomerAttachmentDetailSuccess(response){
+    function onRetailerSubmissionAttachmentDetailSuccess(response){
         // For debugging purposes only.
-        console.log("onRetailerCustomerAttachmentDetailSuccess: Starting...");
+        console.log("onRetailerSubmissionAttachmentDetailSuccess: Starting...");
         console.log(response);
         setName(response.name);
         setDescription(response.description);
         setObjectUrl(response.objectUrl);
     }
 
-    function onRetailerCustomerAttachmentDetailError(apiErr) {
-        console.log("onRetailerCustomerAttachmentDetailError: Starting...");
+    function onRetailerSubmissionAttachmentDetailError(apiErr) {
+        console.log("onRetailerSubmissionAttachmentDetailError: Starting...");
         setErrors(apiErr);
 
         // Add a temporary banner message in the app and then clear itself after 2 seconds.
         setTopAlertMessage("Failed submitting");
         setTopAlertStatus("danger");
         setTimeout(() => {
-            console.log("onRetailerCustomerAttachmentDetailError: Delayed for 2 seconds.");
-            console.log("onRetailerCustomerAttachmentDetailError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
+            console.log("onRetailerSubmissionAttachmentDetailError: Delayed for 2 seconds.");
+            console.log("onRetailerSubmissionAttachmentDetailError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
         }, 2000);
 
@@ -153,8 +153,8 @@ function RetailerCustomerAttachmentUpdate() {
         scroll.scrollToTop();
     }
 
-    function onRetailerCustomerAttachmentDetailDone() {
-        console.log("onRetailerCustomerAttachmentDetailDone: Starting...");
+    function onRetailerSubmissionAttachmentDetailDone() {
+        console.log("onRetailerSubmissionAttachmentDetailDone: Starting...");
         setFetching(false);
     }
 
@@ -170,9 +170,9 @@ function RetailerCustomerAttachmentUpdate() {
 
             getAttachmentDetailAPI(
                 aid,
-                onRetailerCustomerAttachmentDetailSuccess,
-                onRetailerCustomerAttachmentDetailError,
-                onRetailerCustomerAttachmentDetailDone
+                onRetailerSubmissionAttachmentDetailSuccess,
+                onRetailerSubmissionAttachmentDetailError,
+                onRetailerSubmissionAttachmentDetailDone
             );
         }
 
@@ -193,9 +193,9 @@ function RetailerCustomerAttachmentUpdate() {
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
                             <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
-                            <li class=""><Link to="/customers" aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers</Link></li>
-                            <li class=""><Link to={`/customer/${id}/attachments`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail (Attachments)</Link></li>
-                            <li class=""><Link to={`/customer/${id}/attachment/${aid}`} aria-current="page"><FontAwesomeIcon className="fas" icon={faFile} />&nbsp;Attachment</Link></li>
+                            <li class=""><Link to="/submissions/comics" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
+                            <li class=""><Link to={`/submissions/comic/${id}/attachments`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail (Attachments)</Link></li>
+                            <li class=""><Link to={`/submissions/comic/${id}/attachment/${aid}`} aria-current="page"><FontAwesomeIcon className="fas" icon={faFile} />&nbsp;Attachment</Link></li>
                             <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit</Link></li>
                         </ul>
                     </nav>
@@ -249,8 +249,8 @@ function RetailerCustomerAttachmentUpdate() {
 
                                     <div class="columns pt-5">
                                         <div class="column is-half">
-                                            <Link to={`/customer/${id}/attachment/${aid}`} class="button is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
-                                            <Link to={`/customer/${id}/attachment/${aid}`} class="button is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link to={`/submissions/comic/${id}/attachment/${aid}`} class="button is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
+                                            <Link to={`/submissions/comic/${id}/attachment/${aid}`} class="button is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                         </div>
                                         <div class="column is-half has-text-right">
                                             <button class="button is-medium is-primary is-hidden-touch" onClick={onSubmitClick}><FontAwesomeIcon className="fas" icon={faCheckCircle} />&nbsp;Save</button>
@@ -268,4 +268,4 @@ function RetailerCustomerAttachmentUpdate() {
     );
 }
 
-export default RetailerCustomerAttachmentUpdate;
+export default RetailerSubmissionAttachmentUpdate;

@@ -169,6 +169,9 @@ function RetailerComicSubmissionDetailForPDFFile() {
                                         <li class={`is-active`}>
                                             <Link to={`/submissions/comic/${id}/file`}><b>File</b></Link>
                                         </li>
+                                        <li>
+                                            <Link to={`/submissions/comic/${id}/attachments`}>Attachments</Link>
+                                        </li>
                                       </ul>
                                     </div>
 

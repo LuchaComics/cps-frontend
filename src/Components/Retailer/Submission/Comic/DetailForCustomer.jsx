@@ -171,6 +171,9 @@ function RetailerComicSubmissionDetailForCustomer() {
                                         <li>
                                             <Link to={`/submissions/comic/${id}/file`}>File</Link>
                                         </li>
+                                        <li>
+                                            <Link to={`/submissions/comic/${id}/attachments`}>Attachments</Link>
+                                        </li>
                                       </ul>
                                     </div>
                                     {submission && submission.user !== undefined && submission.user !== null && submission.user !== ""

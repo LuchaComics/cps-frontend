@@ -229,6 +229,9 @@ function RetailerComicSubmissionDetailForCommentList() {
                                         <li>
                                             <Link to={`/submissions/comic/${id}/file`}>File</Link>
                                         </li>
+                                        <li>
+                                            <Link to={`/submissions/comic/${id}/attachments`}>Attachments</Link>
+                                        </li>
                                       </ul>
                                     </div>
 
