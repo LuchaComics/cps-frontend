@@ -89,10 +89,15 @@ export function getAttachmentDetailAPI(submissionID, onSuccessCallback, onErrorC
     }).then(onDoneCallback);
 }
 
-export function putAttachmentUpdateAPI(data, onSuccessCallback, onErrorCallback, onDoneCallback) {
+export function putAttachmentUpdateAPI(id, data, onSuccessCallback, onErrorCallback, onDoneCallback) {
     const axios = getCustomAxios();
 
-    axios.put(CPS_ATTACHMENT_API_ENDPOINT.replace("{id}", data.id), data).then((successResponse) => {
+    axios.put(CPS_ATTACHMENT_API_ENDPOINT.replace("{id}", id), data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Accept': 'application/json'
+        }
+    }).then((successResponse) => {
         const responseData = successResponse.data;
 
         // Snake-case from API to camel-case for React.

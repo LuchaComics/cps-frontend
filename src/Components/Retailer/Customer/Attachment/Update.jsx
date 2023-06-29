@@ -60,7 +60,7 @@ function RetailerCustomerAttachmentUpdate() {
         setErrors({});
 
         const formData = new FormData();
-        formData.append('id', id);
+        formData.append('id', aid);
         formData.append('file', selectedFile);
         formData.append('name', name);
         formData.append('description', description);
@@ -241,6 +241,11 @@ function RetailerCustomerAttachmentUpdate() {
                                         isRequired={true}
                                         maxWidth="485px"
                                     />
+
+                                    <input name="file"type="file" onChange={onHandleFileChange} />
+                                    <br />
+                                    <br />
+
 
                                     <div class="columns pt-5">
                                         <div class="column is-half">
