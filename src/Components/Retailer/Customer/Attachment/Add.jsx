@@ -84,7 +84,7 @@ function RetailerCustomerAttachmentAdd() {
         console.log(response);
 
         // Add a temporary banner message in the app and then clear itself after 2 seconds.
-        setTopAlertMessage("Customer created");
+        setTopAlertMessage("Attachment created");
         setTopAlertStatus("success");
         setTimeout(() => {
             console.log("onRetailerCustomerAttachmentAddSuccess: Delayed for 2 seconds.");
@@ -155,7 +155,7 @@ function RetailerCustomerAttachmentAdd() {
                         </ul>
                     </nav>
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Customer</p>
+                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Attachment</p>
                         <FormErrorBox errors={errors} />
 
                         {/* <p class="pb-4 has-text-grey">Please fill out all the required fields before submitting this form.</p> */}

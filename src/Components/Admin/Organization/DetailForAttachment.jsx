@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faArrowLeft, faCheckCircle, faUserCircle, faGauge, faPencil, faUsers, faEye, faArrowRight, faTrashCan, faArrowUpRightFromSquare, faBuilding } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faTachometer, faBuilding, faPlus, faArrowLeft, faCheckCircle, faUserCircle, faGauge, faPencil, faUsers, faEye, faArrowRight, faTrashCan, faArrowUpRightFromSquare, faFile, faDownload } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
-import { USER_ROLES, PAGE_SIZE_OPTIONS } from "../../../Constants/FieldOptions";
+import { ATTACHMENT_STATES, PAGE_SIZE_OPTIONS } from "../../../Constants/FieldOptions";
 
-import useLocalStorage from "../../../Hooks/useLocalStorage";
 import { getOrganizationDetailAPI } from "../../../API/organization";
-import { getUserListAPI, deleteUserAPI } from "../../../API/user";
+import { getAttachmentListAPI, deleteAttachmentAPI } from "../../../API/Attachment";
 import FormErrorBox from "../../Element/FormErrorBox";
 import FormInputField from "../../Element/FormInputField";
 import FormTextareaField from "../../Element/FormTextareaField";
@@ -21,7 +20,7 @@ import PageLoadingContent from "../../Element/PageLoadingContent";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 
-function AdminOrganizationDetailForUserList() {
+function AdminOrganizationDetailForAttachment() {
     ////
     //// URL Parameters.
     ////
@@ -44,8 +43,8 @@ function AdminOrganizationDetailForUserList() {
     const [forceURL, setForceURL] = useState("");
     const [organization, setOrganization] = useState({});
     const [tabIndex, setTabIndex] = useState(1);
-    const [users, setUsers] = useState("");
-    const [selectedUserForDeletion, setSelectedUserForDeletion] = useState("");
+    const [attachments, setAttachments] = useState("");
+    const [selectedAttachmentForDeletion, setSelectedAttachmentForDeletion] = useState("");
     const [pageSize, setPageSize] = useState(10);               // Pagination
     const [previousCursors, setPreviousCursors] = useState([]); // Pagination
     const [nextCursor, setNextCursor] = useState("");           // Pagination
@@ -55,22 +54,23 @@ function AdminOrganizationDetailForUserList() {
     //// Event handling.
     ////
 
-    const fetchUserList = (cur, organizationID, limit) => {
+    const fetchAttachmentList = (cur, organizationID, limit) => {
         setFetching(true);
         setErrors({});
 
         let params = new Map();
-        params.set('organization_id', id);
+        params.set('ownership_id', id);
+        params.set('ownership_role', 3); // 3=Organization.
         params.set("page_size", limit);
         if (cur !== "") {
             params.set("cursor", cur);
         }
 
-        getUserListAPI(
+        getAttachmentListAPI(
             params,
-            onUserListSuccess,
-            onUserListError,
-            onUserListDone
+            onAttachmentListSuccess,
+            onAttachmentListError,
+            onAttachmentListDone
         );
     }
 
@@ -90,27 +90,26 @@ function AdminOrganizationDetailForUserList() {
         setCurrentCursor(previousCursor);
     }
 
-    const onSelectUserForDeletion = (e, user) => {
-        console.log("onSelectUserForDeletion", user);
-        setSelectedUserForDeletion(user);
+    const onSelectAttachmentForDeletion = (e, attachment) => {
+        console.log("onSelectAttachmentForDeletion", attachment);
+        setSelectedAttachmentForDeletion(attachment);
     }
 
-    const onDeselectUserForDeletion = (e) => {
-        console.log("onDeselectUserForDeletion");
-        setSelectedUserForDeletion("");
+    const onDeselectAttachmentForDeletion = (e) => {
+        console.log("onDeselectAttachmentForDeletion");
+        setSelectedAttachmentForDeletion("");
     }
 
     const onDeleteConfirmButtonClick = (e) => {
         console.log("onDeleteConfirmButtonClick"); // For debugging purposes only.
 
-        deleteUserAPI(
-            selectedUserForDeletion.id,
-            onUserDeleteSuccess,
-            onUserDeleteError,
-            onUserDeleteDone
+        deleteAttachmentAPI(
+            selectedAttachmentForDeletion.id,
+            onAttachmentDeleteSuccess,
+            onAttachmentDeleteError,
+            onAttachmentDeleteDone
         );
-        setSelectedUserForDeletion("");
-
+        setSelectedAttachmentForDeletion("");
     }
 
     ////
@@ -122,7 +121,6 @@ function AdminOrganizationDetailForUserList() {
     function onOrganizationDetailSuccess(response){
         console.log("onOrganizationDetailSuccess: Starting...");
         setOrganization(response);
-        fetchUserList(currentCursor, response.id, pageSize);
     }
 
     function onOrganizationDetailError(apiErr) {
@@ -141,20 +139,20 @@ function AdminOrganizationDetailForUserList() {
         setFetching(false);
     }
 
-    // User list.
+    // Attachment list.
 
-    function onUserListSuccess(response){
-        console.log("onUserListSuccess: Starting...");
+    function onAttachmentListSuccess(response){
+        console.log("onAttachmentListSuccess: Starting...");
         if (response.results !== null) {
-            setUsers(response);
+            setAttachments(response);
             if (response.hasNextPage) {
                 setNextCursor(response.nextCursor); // For pagination purposes.
             }
         }
     }
 
-    function onUserListError(apiErr) {
-        console.log("onUserListError: Starting...");
+    function onAttachmentListError(apiErr) {
+        console.log("onAttachmentListError: Starting...");
         setErrors(apiErr);
 
         // The following code will cause the screen to scroll to the top of
@@ -164,37 +162,37 @@ function AdminOrganizationDetailForUserList() {
         scroll.scrollToTop();
     }
 
-    function onUserListDone() {
-        console.log("onUserListDone: Starting...");
+    function onAttachmentListDone() {
+        console.log("onAttachmentListDone: Starting...");
         setFetching(false);
     }
 
-    // User delete.
+    // Attachment delete.
 
-    function onUserDeleteSuccess(response){
-        console.log("onUserDeleteSuccess: Starting..."); // For debugging purposes only.
+    function onAttachmentDeleteSuccess(response){
+        console.log("onAttachmentDeleteSuccess: Starting..."); // For debugging purposes only.
 
         // Update notification.
         setTopAlertStatus("success");
-        setTopAlertMessage("User deleted");
+        setTopAlertMessage("Attachment deleted");
         setTimeout(() => {
             console.log("onDeleteConfirmButtonClick: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
         }, 2000);
 
         // Fetch again an updated list.
-        fetchUserList(currentCursor, id, pageSize);
+        fetchAttachmentList(currentCursor, id, pageSize);
     }
 
-    function onUserDeleteError(apiErr) {
-        console.log("onUserDeleteError: Starting..."); // For debugging purposes only.
+    function onAttachmentDeleteError(apiErr) {
+        console.log("onAttachmentDeleteError: Starting..."); // For debugging purposes only.
         setErrors(apiErr);
 
         // Update notification.
         setTopAlertStatus("danger");
         setTopAlertMessage("Failed deleting");
         setTimeout(() => {
-            console.log("onUserDeleteError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
+            console.log("onAttachmentDeleteError: topAlertMessage, topAlertStatus:", topAlertMessage, topAlertStatus);
             setTopAlertMessage("");
         }, 2000);
 
@@ -205,8 +203,8 @@ function AdminOrganizationDetailForUserList() {
         scroll.scrollToTop();
     }
 
-    function onUserDeleteDone() {
-        console.log("onUserDeleteDone: Starting...");
+    function onAttachmentDeleteDone() {
+        console.log("onAttachmentDeleteDone: Starting...");
         setFetching(false);
     }
 
@@ -227,11 +225,11 @@ function AdminOrganizationDetailForUserList() {
                 onOrganizationDetailError,
                 onOrganizationDetailDone
             );
+            fetchAttachmentList(currentCursor, id, pageSize);
         }
 
         return () => { mounted = false; }
     }, [currentCursor, id, pageSize]);
-
     ////
     //// Component rendering.
     ////
@@ -248,22 +246,22 @@ function AdminOrganizationDetailForUserList() {
                         <ul>
                             <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
                             <li class=""><Link to="/admin/organizations" aria-current="page"><FontAwesomeIcon className="fas" icon={faBuilding} />&nbsp;Organizations</Link></li>
-                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail (Users)</Link></li>
+                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail (Attachments)</Link></li>
                         </ul>
                     </nav>
-                    <div class={`modal ${selectedUserForDeletion ? 'is-active' : ''}`}>
+                    <div class={`modal ${selectedAttachmentForDeletion ? 'is-active' : ''}`}>
                         <div class="modal-background"></div>
                         <div class="modal-card">
                             <header class="modal-card-head">
                                 <p class="modal-card-title">Are you sure?</p>
-                                <button class="delete" aria-label="close" onClick={onDeselectUserForDeletion}></button>
+                                <button class="delete" aria-label="close" onClick={onDeselectAttachmentForDeletion}></button>
                             </header>
                             <section class="modal-card-body">
-                                You are about to <b>archive</b> this user; it will no longer appear on your dashboard This action can be undone but you'll need to contact the system administrator. Are you sure you would like to continue?
+                                You are about to <b>archive</b> this attachment; it will no longer appear on your dashboard This action can be undone but you'll need to contact the system administrator. Are you sure you would like to continue?
                             </section>
                             <footer class="modal-card-foot">
                                 <button class="button is-success" onClick={onDeleteConfirmButtonClick}>Confirm</button>
-                                <button class="button" onClick={onDeselectUserForDeletion}>Cancel</button>
+                                <button class="button" onClick={onDeselectAttachmentForDeletion}>Cancel</button>
                             </footer>
                         </div>
                     </div>
@@ -272,16 +270,16 @@ function AdminOrganizationDetailForUserList() {
                             <div class="column">
                                 <p class="title is-2"><FontAwesomeIcon className="fas" icon={faBuilding} />&nbsp;Organization</p>
                             </div>
-                            <div class="column has-text-right">
+                            {organization && <div class="column has-text-right">
                                 {/* Mobile Specific */}
-                                <Link to={`/admin/users/add?organization_id=${id}&organization_name=${organization.name}`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
-                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add User
+                                <Link to={`/admin/organization/${id}/attachments/add`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
+                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add Attachment
                                 </Link>
-                                {/*  Desktop Specific */}
-                                <Link to={`/admin/users/add?organization_id=${id}&organization_name=${organization.name}`} class="button is-small is-success is-hidden-touch" type="button">
-                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add User
+                                {/* Desktop Specific */}
+                                <Link to={`/admin/organization/${id}/attachments/add`} class="button is-small is-success is-hidden-touch" type="button">
+                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add Attachment
                                 </Link>
-                            </div>
+                            </div>}
                         </div>
                         <FormErrorBox errors={errors} />
 
@@ -298,8 +296,8 @@ function AdminOrganizationDetailForUserList() {
                                         <li>
                                             <Link to={`/admin/organization/${organization.id}`}>Detail</Link>
                                         </li>
-                                        <li class="is-active">
-                                            <Link><b>Users</b></Link>
+                                        <li>
+                                            <Link to={`/admin/organization/${organization.id}/users`}>Users</Link>
                                         </li>
                                         <li>
                                             <Link to={`/admin/organization/${organization.id}/comics`}>Comics</Link>
@@ -307,50 +305,53 @@ function AdminOrganizationDetailForUserList() {
                                         <li>
                                             <Link to={`/admin/organization/${organization.id}/comments`}>Comments</Link>
                                         </li>
-                                        <li>
-                                            <Link to={`/admin/organization/${organization.id}/attachments`}>Attachments</Link>
+                                        <li class="is-active">
+                                            <Link to={`/admin/organization/${organization.id}/attachments`}><b>Attachments</b></Link>
                                         </li>
+
                                       </ul>
                                     </div>
 
-                                    <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Users</p>
-                                    <hr />
-
-                                    {!isFetching && users && users.results && (users.results.length > 0 || previousCursors.length > 0)
+                                    {!isFetching && attachments && attachments.results && (attachments.results.length > 0 || previousCursors.length > 0)
                                         ?
                                         <div class="container">
+
+                                            <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faFile} />&nbsp;Attachments</p>
+                                            <hr />
+
                                             <div class="b-table">
                                                 <div class="table-wrapper has-mobile-cards">
                                                     <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
                                                         <thead>
                                                             <tr>
                                                                 <th>Name</th>
-                                                                <th>Email</th>
-                                                                <th>Role</th>
+                                                                <th>State</th>
                                                                 <th>Created</th>
+                                                                <th>File</th>
                                                                 <th></th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
 
-                                                            {users && users.results && users.results.map(function(user, i){
+                                                            {attachments && attachments.results && attachments.results.map(function(attachment, i){
                                                                 return <tr>
-                                                                <td data-label="Name">{user.name}</td>
-                                                                <td data-label="Email"><a href={`mailto:${user.email}`}>{user.email}</a></td>
-                                                                <td data-label="Role">{USER_ROLES[user.role]}</td>
-                                                                <td data-label="Created">{user.createdAt}</td>
+                                                                    <td data-label="Title">{attachment.name}</td>
+                                                                    <td data-label="State">{ATTACHMENT_STATES[attachment.status]}</td>
+                                                                    <td data-label="Created">{attachment.createdAt}</td>
+                                                                    <td data-label="File">
+                                                                        <a href={attachment.objectUrl} target="_blank" rel="noreferrer" class="">
+                                                                            <FontAwesomeIcon className="mdi" icon={faDownload} />&nbsp;Download File
+                                                                        </a>
+                                                                    </td>
                                                                     <td class="is-actions-cell">
                                                                         <div class="buttons is-right">
-                                                                            <Link to={`/admin/submissions/pick-type-for-add?user_id=${user.id}&user_name=${user.name}`} target="_blank" rel="noreferrer" class="button is-small is-success" type="button">
-                                                                                <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;CPS&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
+                                                                            <Link to={`/admin/organization/${organization.id}/attachment/${attachment.id}`} class="button is-small is-primary" type="button">
+                                                                                View
                                                                             </Link>
-                                                                            <Link to={`/admin/user/${user.id}`} target="_blank" rel="noreferrer" class="button is-small is-primary" type="button">
-                                                                                View&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
+                                                                            <Link to={`/admin/organization/${organization.id}/attachment/${attachment.id}/edit`} class="button is-small is-warning" type="button">
+                                                                                Edit
                                                                             </Link>
-                                                                            <Link to={`/admin/user/${user.id}/edit`} target="_blank" rel="noreferrer" class="button is-small is-warning" type="button">
-                                                                                Edit&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />
-                                                                            </Link>
-                                                                            <button onClick={(e, ses) => onSelectUserForDeletion(e, user)} class="button is-small is-danger" type="button">
+                                                                            <button onClick={(e, ses) => onSelectAttachmentForDeletion(e, attachment)} class="button is-small is-danger" type="button">
                                                                                 <FontAwesomeIcon className="mdi" icon={faTrashCan} />&nbsp;Delete
                                                                             </button>
                                                                         </div>
@@ -377,7 +378,7 @@ function AdminOrganizationDetailForUserList() {
                                                             {previousCursors.length > 0 &&
                                                                 <button class="button" onClick={onPreviousClicked}>Previous</button>
                                                             }
-                                                            {users.hasNextPage && <>
+                                                            {attachments.hasNextPage && <>
                                                                 <button class="button" onClick={onNextClicked}>Next</button>
                                                             </>}
                                                         </div>
@@ -390,7 +391,7 @@ function AdminOrganizationDetailForUserList() {
                                         <div class="container">
                                             <article class="message is-dark">
                                                 <div class="message-body">
-                                                    No users. <b><Link to={`/admin/users/add?organization_id=${id}&organization_name=${organization.name}`}>Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating a new user.
+                                                    No attachments. <b><Link to={`/admin/organization/${id}/attachments/add`}>Click here&nbsp;<FontAwesomeIcon className="mdi" icon={faArrowRight} /></Link></b> to get started creating a new attachment.
                                                 </div>
                                             </article>
                                         </div>
@@ -402,8 +403,8 @@ function AdminOrganizationDetailForUserList() {
                                             <Link class="button is-fullwidth is-hidden-desktop" to={`/admin/organizations`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                         </div>
                                         <div class="column is-half has-text-right">
-                                            <Link to={`/admin/users/add?organization_id=${id}&organization_name=${organization.name}`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add User</Link>
-                                            <Link to={`/admin/users/add?organization_id=${id}&organization_name=${organization.name}`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add User</Link>
+                                            <Link to={`/admin/organization/${id}/attachments/add`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Attachment</Link>
+                                            <Link to={`/admin/organization/${id}/attachments/add`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Attachment</Link>
                                         </div>
                                     </div>
 
@@ -417,4 +418,4 @@ function AdminOrganizationDetailForUserList() {
     );
 }
 
-export default AdminOrganizationDetailForUserList;
+export default AdminOrganizationDetailForAttachment;

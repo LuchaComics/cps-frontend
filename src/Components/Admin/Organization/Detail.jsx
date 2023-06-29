@@ -155,6 +155,9 @@ function AdminOrganizationDetail() {
                                         <li>
                                             <Link to={`/admin/organization/${organization.id}/comments`}>Comments</Link>
                                         </li>
+                                        <li>
+                                            <Link to={`/admin/organization/${organization.id}/attachments`}>Attachments</Link>
+                                        </li>
                                       </ul>
                                     </div>
 

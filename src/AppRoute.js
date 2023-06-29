@@ -14,6 +14,10 @@ import AdminOrganizationDetail from "./Components/Admin/Organization/Detail";
 import AdminOrganizationDetailForComicSubmission from "./Components/Admin/Organization/DetailForComicSubmission";
 import AdminOrganizationDetailForUserList from "./Components/Admin/Organization/DetailForUser";
 import AdminOrganizationDetailForCommentList from "./Components/Admin/Organization/DetailForCommentList";
+import AdminOrganizationDetailForAttachment from "./Components/Admin/Organization/DetailForAttachment";
+import AdminOrganizationAttachmentAdd from "./Components/Admin/Organization/Attachment/Add";
+import AdminOrganizationAttachmentDetail from "./Components/Admin/Organization/Attachment/Detail";
+import AdminOrganizationAttachmentUpdate from "./Components/Admin/Organization/Attachment/Update";
 import AdminOrganizationUpdate from "./Components/Admin/Organization/Update";
 import AdminDashboard from "./Components/Admin/Dashboard";
 import AdminRegistrySearch from "./Components/Admin/Registry/Search";
@@ -118,6 +122,10 @@ function AppRoute() {
                                     <Route exact path="/admin/organization/:id/users" element={<AdminOrganizationDetailForUserList/>}/>
                                     <Route exact path="/admin/organization/:id/edit" element={<AdminOrganizationUpdate/>}/>
                                     <Route exact path="/admin/organization/:id/comments" element={<AdminOrganizationDetailForCommentList/>}/>
+                                    <Route exact path="/admin/organization/:id/attachments" element={<AdminOrganizationDetailForAttachment/>}/>
+                                    <Route exact path="/admin/organization/:id/attachment/:aid" element={<AdminOrganizationAttachmentDetail/>}/>
+                                    <Route exact path="/admin/organization/:id/attachments/add" element={<AdminOrganizationAttachmentAdd/>}/>
+                                    <Route exact path="/admin/organization/:id/attachment/:aid/edit" element={<AdminOrganizationAttachmentUpdate/>}/>
                                     <Route exact path="/admin/registry" element={<AdminRegistrySearch/>}/>
                                     <Route exact path="/admin/registry/:cpsn" element={<AdminRegistryResult/>}/>
                                     <Route exact path="/admin/submissions/pick-type-for-add" element={<AdminSubmissionPickTypeForAdd/>}/>
