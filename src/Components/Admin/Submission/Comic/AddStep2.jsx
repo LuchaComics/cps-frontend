@@ -15,6 +15,7 @@ import FormRadioField from "../../../Reusable/FormRadioField";
 import FormMultiSelectField from "../../../Reusable/FormMultiSelectField";
 import FormSelectField from "../../../Reusable/FormSelectField";
 import FormCheckboxField from "../../../Reusable/FormCheckboxField";
+import FormComicSignaturesTable from "../../../Reusable/FormComicSignaturesTable";
 import {
     FINDING_WITH_EMPTY_OPTIONS,
     OVERALL_NUMBER_GRADE_WITH_EMPTY_OPTIONS,
@@ -82,6 +83,7 @@ function AdminComicSubmissionAddStep2() {
     const [organizationID, setOrganizationID] = useState(orgID);
     const [serviceType, setServiceType] = useState(0);
     const [isCpsIndieMintGem, setIsCpsIndieMintGem] = useState(false);
+    const [signatures, setSignatures] = useState([]);
 
     ////
     //// Event handling.
@@ -310,9 +312,16 @@ function AdminComicSubmissionAddStep2() {
                                 <p class="pb-4 has-text-grey">Please fill out all the required fields before submitting this form.</p>
                                 <FormErrorBox errors={errors} />
                                 <div class="container">
-
                                     <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comic Book Information</p>
                                     <hr />
+
+                                    {/*
+                                    <FormComicSignaturesTable
+                                        data={signatures}
+                                        onDataChange={setSignatures}
+                                    />
+                                    */}
+
                                     <FormInputField
                                         label="Series Title"
                                         name="seriesTitle"
