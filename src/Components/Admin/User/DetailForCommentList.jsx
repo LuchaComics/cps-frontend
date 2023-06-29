@@ -239,6 +239,9 @@ function AdminUserDetailForCommentList() {
                                         <li class="is-active">
                                             <Link><b>Comments</b></Link>
                                         </li>
+                                        <li>
+                                            <Link to={`/admin/user/${user.id}/attachments`}>Attachments</Link>
+                                        </li>
                                       </ul>
                                     </div>
 

@@ -41,6 +41,10 @@ import AdminUserAdd from "./Components/Admin/User/Add";
 import AdminUserDetail from "./Components/Admin/User/Detail";
 import AdminUserDetailForComicSubmission from "./Components/Admin/User/DetailForComicSubmission";
 import AdminUserDetailForCommentList from "./Components/Admin/User/DetailForCommentList";
+import AdminUserDetailForAttachment from "./Components/Admin/User/DetailForAttachment";
+import AdminUserAttachmentAdd from "./Components/Admin/User/Attachment/Add";
+import AdminUserAttachmentDetail from "./Components/Admin/User/Attachment/Detail";
+import AdminUserAttachmentUpdate from "./Components/Admin/User/Attachment/Update";
 import AdminUserUpdate from "./Components/Admin/User/Update";
 import RetailerDashboard from "./Components/Retailer/Dashboard";
 import RetailerRegistrySearch from "./Components/Retailer/Registry/Search";
@@ -141,6 +145,10 @@ function AppRoute() {
                                     <Route exact path="/admin/user/:id/comics" element={<AdminUserDetailForComicSubmission/>}/>
                                     <Route exact path="/admin/user/:id/edit" element={<AdminUserUpdate/>}/>
                                     <Route exact path="/admin/user/:id/comments" element={<AdminUserDetailForCommentList/>}/>
+                                    <Route exact path="/admin/user/:id/attachments" element={<AdminUserDetailForAttachment/>}/>
+                                    <Route exact path="/admin/user/:id/attachment/:aid" element={<AdminUserAttachmentDetail/>}/>
+                                    <Route exact path="/admin/user/:id/attachments/add" element={<AdminUserAttachmentAdd/>}/>
+                                    <Route exact path="/admin/user/:id/attachment/:aid/edit" element={<AdminUserAttachmentUpdate/>}/>
                                     <Route exact path="/admin/dashboard" element={<AdminDashboard/>}/>
                                     <Route exact path="/dashboard" element={<RetailerDashboard/>}/>
                                     <Route exact path="/registry" element={<RetailerRegistrySearch/>}/>

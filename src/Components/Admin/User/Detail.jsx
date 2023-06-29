@@ -191,6 +191,9 @@ function AdminUserDetail() {
                                         <li>
                                             <Link to={`/admin/user/${user.id}/comments`}>Comments</Link>
                                         </li>
+                                        <li>
+                                            <Link to={`/admin/user/${user.id}/attachments`}>Attachments</Link>
+                                        </li>
                                       </ul>
                                     </div>
 
