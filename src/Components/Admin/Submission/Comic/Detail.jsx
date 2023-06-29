@@ -278,244 +278,256 @@ function AdminComicSubmissionDetail() {
                                         rows={4}
                                     />
 
-                                    <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faMagnifyingGlass} />&nbsp;Summary of Findings</p>
-                                    <hr />
-
-                                    {submission && <FormRadioField
-                                        label="Creases Finding"
-                                        name="creasesFinding"
-                                        value={submission.creasesFinding}
-                                        opt1Value="pr"
-                                        opt1Label="Poor"
-                                        opt2Value="fr"
-                                        opt2Label="Fair"
-                                        opt3Value="gd"
-                                        opt3Label="Good"
-                                        opt4Value="vg"
-                                        opt4Label="Very good"
-                                        opt5Value="fn"
-                                        opt5Label="Fine"
-                                        opt6Value="vf"
-                                        opt6Label="Very Fine"
-                                        opt7Value="nm"
-                                        opt7Label="Near Mint"
-                                        maxWidth="180px"
-                                        disabled={true}
-                                    />}
-
-                                    {submission && <FormRadioField
-                                        label="Tears Finding"
-                                        name="tearsFinding"
-                                        value={submission.tearsFinding}
-                                        opt1Value="pr"
-                                        opt1Label="Poor"
-                                        opt2Value="fr"
-                                        opt2Label="Fair"
-                                        opt3Value="gd"
-                                        opt3Label="Good"
-                                        opt4Value="vg"
-                                        opt4Label="Very good"
-                                        opt5Value="fn"
-                                        opt5Label="Fine"
-                                        opt6Value="vf"
-                                        opt6Label="Very Fine"
-                                        opt7Value="nm"
-                                        opt7Label="Near Mint"
-                                        maxWidth="180px"
-                                        disabled={true}
-                                    />}
-
-                                    {submission && <FormRadioField
-                                        label="Missing Parts Finding"
-                                        name="missingPartsFinding"
-                                        value={submission.missingPartsFinding}
-                                        opt1Value="pr"
-                                        opt1Label="Poor"
-                                        opt2Value="fr"
-                                        opt2Label="Fair"
-                                        opt3Value="gd"
-                                        opt3Label="Good"
-                                        opt4Value="vg"
-                                        opt4Label="Very good"
-                                        opt5Value="fn"
-                                        opt5Label="Fine"
-                                        opt6Value="vf"
-                                        opt6Label="Very Fine"
-                                        opt7Value="nm"
-                                        opt7Label="Near Mint"
-                                        maxWidth="180px"
-                                        disabled={true}
-                                    />}
-
-                                    {submission && <FormRadioField
-                                        label="Stains/Marks/Substances"
-                                        name="stainsFinding"
-                                        value={submission.stainsFinding}
-                                        opt1Value="pr"
-                                        opt1Label="Poor"
-                                        opt2Value="fr"
-                                        opt2Label="Fair"
-                                        opt3Value="gd"
-                                        opt3Label="Good"
-                                        opt4Value="vg"
-                                        opt4Label="Very good"
-                                        opt5Value="fn"
-                                        opt5Label="Fine"
-                                        opt6Value="vf"
-                                        opt6Label="Very Fine"
-                                        opt7Value="nm"
-                                        opt7Label="Near Mint"
-                                        maxWidth="180px"
-                                        disabled={true}
-                                    />}
-
-                                    {submission && <FormRadioField
-                                        label="Distortion Finding"
-                                        name="distortionFinding"
-                                        value={submission.distortionFinding}
-                                        opt1Value="pr"
-                                        opt1Label="Poor"
-                                        opt2Value="fr"
-                                        opt2Label="Fair"
-                                        opt3Value="gd"
-                                        opt3Label="Good"
-                                        opt4Value="vg"
-                                        opt4Label="Very good"
-                                        opt5Value="fn"
-                                        opt5Label="Fine"
-                                        opt6Value="vf"
-                                        opt6Label="Very Fine"
-                                        opt7Value="nm"
-                                        opt7Label="Near Mint"
-                                        maxWidth="180px"
-                                        disabled={true}
-                                    />}
-
-                                    {submission && <FormRadioField
-                                        label="Paper Quality Finding"
-                                        name="paperQualityFinding"
-                                        value={submission.paperQualityFinding}
-                                        opt1Value="pr"
-                                        opt1Label="Poor"
-                                        opt2Value="fr"
-                                        opt2Label="Fair"
-                                        opt3Value="gd"
-                                        opt3Label="Good"
-                                        opt4Value="vg"
-                                        opt4Label="Very good"
-                                        opt5Value="fn"
-                                        opt5Label="Fine"
-                                        opt6Value="vf"
-                                        opt6Label="Very Fine"
-                                        opt7Value="nm"
-                                        opt7Label="Near Mint"
-                                        maxWidth="180px"
-                                        disabled={true}
-                                    />}
-
-                                    {submission && <FormRadioField
-                                        label="Spine Finding"
-                                        name="spineFinding"
-                                        value={submission.spineFinding}
-                                        opt1Value="pr"
-                                        opt1Label="Poor"
-                                        opt2Value="fr"
-                                        opt2Label="Fair"
-                                        opt3Value="gd"
-                                        opt3Label="Good"
-                                        opt4Value="vg"
-                                        opt4Label="Very good"
-                                        opt5Value="fn"
-                                        opt5Label="Fine"
-                                        opt6Value="vf"
-                                        opt6Label="Very Fine"
-                                        opt7Value="nm"
-                                        opt7Label="Near Mint"
-                                        maxWidth="180px"
-                                        disabled={true}
-                                    />}
-
-                                    <FormRadioField
-                                        label="Shows signs of tampering/restoration"
-                                        name="showsSignsOfTamperingOrRestoration"
-                                        value={parseInt(submission.showsSignsOfTamperingOrRestoration)}
-                                        opt1Value={2}
-                                        opt1Label="No"
-                                        opt2Value={1}
-                                        opt2Label="Yes"
+                                    <FormCheckboxField
+                                        label="Is CPS Indie Mint Gem?"
+                                        name="isCpsIndieMintGem"
+                                        checked={submission.isCpsIndieMintGem}
                                         maxWidth="180px"
                                         disabled={true}
                                     />
 
-                                    <FormTextareaField
-                                        label="Grading Notes (Optional)"
-                                        name="gradingNotes"
-                                        placeholder="Text input"
-                                        value={submission.gradingNotes}
-                                        isRequired={true}
-                                        maxWidth="280px"
-                                        helpText={"Max 638 characters"}
-                                        disabled={true}
-                                        rows={4}
-                                    />
+                                    {submission.isCpsIndieMintGem === false &&
+                                        <>
+                                            <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faMagnifyingGlass} />&nbsp;Summary of Findings</p>
+                                            <hr />
 
-                                    <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faBalanceScale} />&nbsp;Grading</p>
-                                    <hr />
-
-                                    <FormRadioField
-                                        label="Which type of grading scale would you prefer?"
-                                        name="gradingScale"
-                                        value={parseInt(submission.gradingScale)}
-                                        opt1Value={1}
-                                        opt1Label="Letter Grade (Poor-Near Mint)"
-                                        opt2Value={2}
-                                        opt2Label="Numbers (0.5-10.0)"
-                                        opt3Value={3}
-                                        opt3Label="CPS Percentage (5%-100%)"
-                                        maxWidth="180px"
-                                    />
-
-                                    {submission && submission.gradingScale === 1 && <>
-                                        <FormSelectField
-                                            label="Overall Letter Grade"
-                                            name="overallLetterGrade"
-                                            placeholder="Overall Letter Grade"
-                                            selectedValue={submission.overallLetterGrade}
-                                            helpText=""
-                                            options={FINDING_OPTIONS}
-                                            disabled={true}
-                                        />
-                                        {isNMPlusOpen && <>
-                                            <FormCheckboxField
-                                                label="Is Near Mint plus?"
-                                                name="isOverallLetterGradeNearMintPlus"
-                                                checked={submission.isOverallLetterGradeNearMintPlus}
+                                            {submission && <FormRadioField
+                                                label="Creases Finding"
+                                                name="creasesFinding"
+                                                value={submission.creasesFinding}
+                                                opt1Value="pr"
+                                                opt1Label="Poor"
+                                                opt2Value="fr"
+                                                opt2Label="Fair"
+                                                opt3Value="gd"
+                                                opt3Label="Good"
+                                                opt4Value="vg"
+                                                opt4Label="Very good"
+                                                opt5Value="fn"
+                                                opt5Label="Fine"
+                                                opt6Value="vf"
+                                                opt6Label="Very Fine"
+                                                opt7Value="nm"
+                                                opt7Label="Near Mint"
+                                                maxWidth="180px"
                                                 disabled={true}
+                                            />}
+
+                                            {submission && <FormRadioField
+                                                label="Tears Finding"
+                                                name="tearsFinding"
+                                                value={submission.tearsFinding}
+                                                opt1Value="pr"
+                                                opt1Label="Poor"
+                                                opt2Value="fr"
+                                                opt2Label="Fair"
+                                                opt3Value="gd"
+                                                opt3Label="Good"
+                                                opt4Value="vg"
+                                                opt4Label="Very good"
+                                                opt5Value="fn"
+                                                opt5Label="Fine"
+                                                opt6Value="vf"
+                                                opt6Label="Very Fine"
+                                                opt7Value="nm"
+                                                opt7Label="Near Mint"
+                                                maxWidth="180px"
+                                                disabled={true}
+                                            />}
+
+                                            {submission && <FormRadioField
+                                                label="Missing Parts Finding"
+                                                name="missingPartsFinding"
+                                                value={submission.missingPartsFinding}
+                                                opt1Value="pr"
+                                                opt1Label="Poor"
+                                                opt2Value="fr"
+                                                opt2Label="Fair"
+                                                opt3Value="gd"
+                                                opt3Label="Good"
+                                                opt4Value="vg"
+                                                opt4Label="Very good"
+                                                opt5Value="fn"
+                                                opt5Label="Fine"
+                                                opt6Value="vf"
+                                                opt6Label="Very Fine"
+                                                opt7Value="nm"
+                                                opt7Label="Near Mint"
+                                                maxWidth="180px"
+                                                disabled={true}
+                                            />}
+
+                                            {submission && <FormRadioField
+                                                label="Stains/Marks/Substances"
+                                                name="stainsFinding"
+                                                value={submission.stainsFinding}
+                                                opt1Value="pr"
+                                                opt1Label="Poor"
+                                                opt2Value="fr"
+                                                opt2Label="Fair"
+                                                opt3Value="gd"
+                                                opt3Label="Good"
+                                                opt4Value="vg"
+                                                opt4Label="Very good"
+                                                opt5Value="fn"
+                                                opt5Label="Fine"
+                                                opt6Value="vf"
+                                                opt6Label="Very Fine"
+                                                opt7Value="nm"
+                                                opt7Label="Near Mint"
+                                                maxWidth="180px"
+                                                disabled={true}
+                                            />}
+
+                                            {submission && <FormRadioField
+                                                label="Distortion Finding"
+                                                name="distortionFinding"
+                                                value={submission.distortionFinding}
+                                                opt1Value="pr"
+                                                opt1Label="Poor"
+                                                opt2Value="fr"
+                                                opt2Label="Fair"
+                                                opt3Value="gd"
+                                                opt3Label="Good"
+                                                opt4Value="vg"
+                                                opt4Label="Very good"
+                                                opt5Value="fn"
+                                                opt5Label="Fine"
+                                                opt6Value="vf"
+                                                opt6Label="Very Fine"
+                                                opt7Value="nm"
+                                                opt7Label="Near Mint"
+                                                maxWidth="180px"
+                                                disabled={true}
+                                            />}
+
+                                            {submission && <FormRadioField
+                                                label="Paper Quality Finding"
+                                                name="paperQualityFinding"
+                                                value={submission.paperQualityFinding}
+                                                opt1Value="pr"
+                                                opt1Label="Poor"
+                                                opt2Value="fr"
+                                                opt2Label="Fair"
+                                                opt3Value="gd"
+                                                opt3Label="Good"
+                                                opt4Value="vg"
+                                                opt4Label="Very good"
+                                                opt5Value="fn"
+                                                opt5Label="Fine"
+                                                opt6Value="vf"
+                                                opt6Label="Very Fine"
+                                                opt7Value="nm"
+                                                opt7Label="Near Mint"
+                                                maxWidth="180px"
+                                                disabled={true}
+                                            />}
+
+                                            {submission && <FormRadioField
+                                                label="Spine Finding"
+                                                name="spineFinding"
+                                                value={submission.spineFinding}
+                                                opt1Value="pr"
+                                                opt1Label="Poor"
+                                                opt2Value="fr"
+                                                opt2Label="Fair"
+                                                opt3Value="gd"
+                                                opt3Label="Good"
+                                                opt4Value="vg"
+                                                opt4Label="Very good"
+                                                opt5Value="fn"
+                                                opt5Label="Fine"
+                                                opt6Value="vf"
+                                                opt6Label="Very Fine"
+                                                opt7Value="nm"
+                                                opt7Label="Near Mint"
+                                                maxWidth="180px"
+                                                disabled={true}
+                                            />}
+
+                                            <FormRadioField
+                                                label="Shows signs of tampering/restoration"
+                                                name="showsSignsOfTamperingOrRestoration"
+                                                value={parseInt(submission.showsSignsOfTamperingOrRestoration)}
+                                                opt1Value={2}
+                                                opt1Label="No"
+                                                opt2Value={1}
+                                                opt2Label="Yes"
+                                                maxWidth="180px"
+                                                disabled={true}
+                                            />
+
+                                            <FormTextareaField
+                                                label="Grading Notes (Optional)"
+                                                name="gradingNotes"
+                                                placeholder="Text input"
+                                                value={submission.gradingNotes}
+                                                isRequired={true}
+                                                maxWidth="280px"
+                                                helpText={"Max 638 characters"}
+                                                disabled={true}
+                                                rows={4}
+                                            />
+
+                                            <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faBalanceScale} />&nbsp;Grading</p>
+                                            <hr />
+
+                                            <FormRadioField
+                                                label="Which type of grading scale would you prefer?"
+                                                name="gradingScale"
+                                                value={parseInt(submission.gradingScale)}
+                                                opt1Value={1}
+                                                opt1Label="Letter Grade (Poor-Near Mint)"
+                                                opt2Value={2}
+                                                opt2Label="Numbers (0.5-10.0)"
+                                                opt3Value={3}
+                                                opt3Label="CPS Percentage (5%-100%)"
                                                 maxWidth="180px"
                                             />
-                                        </>}
+
+                                            {submission && submission.gradingScale === 1 && <>
+                                                <FormSelectField
+                                                    label="Overall Letter Grade"
+                                                    name="overallLetterGrade"
+                                                    placeholder="Overall Letter Grade"
+                                                    selectedValue={submission.overallLetterGrade}
+                                                    helpText=""
+                                                    options={FINDING_OPTIONS}
+                                                    disabled={true}
+                                                />
+                                                {isNMPlusOpen && <>
+                                                    <FormCheckboxField
+                                                        label="Is Near Mint plus?"
+                                                        name="isOverallLetterGradeNearMintPlus"
+                                                        checked={submission.isOverallLetterGradeNearMintPlus}
+                                                        disabled={true}
+                                                        maxWidth="180px"
+                                                    />
+                                                </>}
+                                                </>
+                                            }
+
+                                            {submission && submission.gradingScale === 2 && <FormSelectField
+                                                label="Overall Number Grade"
+                                                name="overallNumberGrade"
+                                                placeholder="Overall Number Grade"
+                                                selectedValue={submission.overallNumberGrade}
+                                                helpText=""
+                                                options={OVERALL_NUMBER_GRADE_OPTIONS}
+                                                disabled={true}
+                                            />}
+
+                                            {submission && submission.gradingScale === 3 && <FormSelectField
+                                                label="CPS Percentage Grade"
+                                                name="cpsPercentageGrade"
+                                                placeholder="CPS Percentage Grade"
+                                                selectedValue={submission.cpsPercentageGrade}
+                                                helpText=""
+                                                options={CPS_PERCENTAGE_GRADE_OPTIONS}
+                                                disabled={true}
+                                            />}
                                         </>
                                     }
-
-                                    {submission && submission.gradingScale === 2 && <FormSelectField
-                                        label="Overall Number Grade"
-                                        name="overallNumberGrade"
-                                        placeholder="Overall Number Grade"
-                                        selectedValue={submission.overallNumberGrade}
-                                        helpText=""
-                                        options={OVERALL_NUMBER_GRADE_OPTIONS}
-                                        disabled={true}
-                                    />}
-
-                                    {submission && submission.gradingScale === 3 && <FormSelectField
-                                        label="CPS Percentage Grade"
-                                        name="cpsPercentageGrade"
-                                        placeholder="CPS Percentage Grade"
-                                        selectedValue={submission.cpsPercentageGrade}
-                                        helpText=""
-                                        options={CPS_PERCENTAGE_GRADE_OPTIONS}
-                                        disabled={true}
-                                    />}
 
                                     <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faCogs} />&nbsp;Settings</p>
                                     <hr />
