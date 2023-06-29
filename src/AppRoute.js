@@ -28,9 +28,14 @@ import AdminComicSubmissionDetail from "./Components/Admin/Submission/Comic/Deta
 import AdminComicSubmissionDetailForCommentList from "./Components/Admin/Submission/Comic/DetailForCommentList";
 import AdminComicSubmissionDetailForCustomer from "./Components/Admin/Submission/Comic/DetailForCustomer";
 import AdminComicSubmissionDetailForPDFFile from "./Components/Admin/Submission/Comic/DetailForPDFFile";
+import AdminSubmissionAttachmentAdd from "./Components/Admin/Submission/Comic/Attachment/Add";
+import AdminSubmissionAttachmentDetail from "./Components/Admin/Submission/Comic/Attachment/Detail";
+import AdminSubmissionAttachmentUpdate from "./Components/Admin/Submission/Comic/Attachment/Update";
+import AdminComicSubmissionDetailForAttachment from "./Components/Admin/Submission/Comic/DetailForAttachment";
 import AdminComicSubmissionUpdateForComicSubmission from "./Components/Admin/Submission/Comic/UpdateSubmission";
 import AdminComicSubmissionUpdatePickCustomerWithResult from "./Components/Admin/Submission/Comic/UpdatePickCustomerWithResult";
 import AdminComicSubmissionUpdatePickCustomerWithSearch from "./Components/Admin/Submission/Comic/UpdatePickCustomerWithSearch";
+import AdminSubmissionLaunchpad from "./Components/Admin/Submission/Launchpad";
 import AdminUserList from "./Components/Admin/User/List";
 import AdminUserAdd from "./Components/Admin/User/Add";
 import AdminUserDetail from "./Components/Admin/User/Detail";
@@ -112,6 +117,7 @@ function AppRoute() {
                                     <Route exact path="/admin/registry" element={<AdminRegistrySearch/>}/>
                                     <Route exact path="/admin/registry/:cpsn" element={<AdminRegistryResult/>}/>
                                     <Route exact path="/admin/submissions/pick-type-for-add" element={<AdminSubmissionPickTypeForAdd/>}/>
+                                    <Route exact path="/admin/submissions" element={<AdminSubmissionLaunchpad/>}/>
                                     <Route exact path="/admin/submissions/comics" element={<AdminComicSubmissionList/>}/>
                                     <Route exact path="/admin/submissions/comics/add/search" element={<AdminComicSubmissionAddStep1WithSearch/>}/>
                                     <Route exact path="/admin/submissions/comics/add/results" element={<AdminComicSubmissionAddStep1WithResult/>}/>
@@ -124,6 +130,10 @@ function AppRoute() {
                                     <Route exact path="/admin/submissions/comic/:id/comments" element={<AdminComicSubmissionDetailForCommentList/>}/>
                                     <Route exact path="/admin/submissions/comic/:id/cust" element={<AdminComicSubmissionDetailForCustomer/>}/>
                                     <Route exact path="/admin/submissions/comic/:id/file" element={<AdminComicSubmissionDetailForPDFFile/>}/>
+                                    <Route exact path="/admin/submissions/comic/:id/attachments" element={<AdminComicSubmissionDetailForAttachment/>}/>
+                                    <Route exact path="/admin/submissions/comic/:id/attachment/:aid/edit" element={<AdminSubmissionAttachmentUpdate/>}/>
+                                    <Route exact path="/admin/submissions/comic/:id/attachment/:aid" element={<AdminSubmissionAttachmentDetail/>}/>
+                                    <Route exact path="/admin/submissions/comic/:id/attachments/add" element={<AdminSubmissionAttachmentAdd/>}/>
                                     <Route exact path="/admin/submissions/cards" element={<NotImplementedError/>}/>
                                     <Route exact path="/admin/users" element={<AdminUserList/>}/>
                                     <Route exact path="/admin/users/add" element={<AdminUserAdd/>}/>

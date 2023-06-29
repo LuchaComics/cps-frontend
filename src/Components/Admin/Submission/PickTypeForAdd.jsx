@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate, useSearchParams } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTasks, faTachometer, faPlus, faTimesCircle, faCheckCircle, faGauge, faUsers, faEye, faCube, faMagnifyingGlass, faBalanceScale, faUser, faCogs, faBookOpen, faNewspaper, faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { faTasks, faBook, faTachometer, faPlus, faTimesCircle, faCheckCircle, faGauge, faUsers, faEye, faCube, faMagnifyingGlass, faBalanceScale, faUser, faCogs, faBookOpen, faNewspaper, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 
 import FormErrorBox from "../../Element/FormErrorBox";
@@ -68,6 +68,7 @@ function AdminSubmissionPickTypeForAdd() {
                            ?
                             <ul>
                                 <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
+                                <li class=""><Link to="/admin/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
                                 <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Submission</Link></li>
                             </ul>
                             :

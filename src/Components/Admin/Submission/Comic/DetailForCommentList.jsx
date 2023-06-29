@@ -194,7 +194,8 @@ function AdminComicSubmissionDetailForCommentList() {
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
                             <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
-                            <li class=""><Link to="/admin/submissions/comics" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</Link></li>
+                            <li class=""><Link to="/admin/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
+                            <li class=""><Link to="/admin/submissions/comics" aria-current="page"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comics</Link></li>
                             <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail (Comments)</Link></li>
                         </ul>
                     </nav>
@@ -221,6 +222,9 @@ function AdminComicSubmissionDetailForCommentList() {
                                         </li>
                                         <li>
                                             <Link to={`/admin/submissions/comic/${id}/file`}>File</Link>
+                                        </li>
+                                        <li>
+                                            <Link to={`/admin/submissions/comic/${id}/attachments`}>Attachments</Link>
                                         </li>
                                       </ul>
                                     </div>
