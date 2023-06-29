@@ -10,14 +10,14 @@ import { useParams } from 'react-router-dom';
 import useLocalStorage from "../../../../Hooks/useLocalStorage";
 import { postComicSubmissionCustomerSwapOperationAPI } from "../../../../API/ComicSubmission";
 import { getCustomerListAPI } from "../../../../API/customer";
-import FormErrorBox from "../../../Element/FormErrorBox";
-import FormInputField from "../../../Element/FormInputField";
-import FormTextareaField from "../../../Element/FormTextareaField";
-import FormRadioField from "../../../Element/FormRadioField";
-import FormMultiSelectField from "../../../Element/FormMultiSelectField";
-import FormSelectField from "../../../Element/FormSelectField";
-import FormInputFieldWithButton from "../../../Element/FormInputFieldWithButton";
-import PageLoadingContent from "../../../Element/PageLoadingContent";
+import FormErrorBox from "../../../Reusable/FormErrorBox";
+import FormInputField from "../../../Reusable/FormInputField";
+import FormTextareaField from "../../../Reusable/FormTextareaField";
+import FormRadioField from "../../../Reusable/FormRadioField";
+import FormMultiSelectField from "../../../Reusable/FormMultiSelectField";
+import FormSelectField from "../../../Reusable/FormSelectField";
+import FormInputFieldWithButton from "../../../Reusable/FormInputFieldWithButton";
+import PageLoadingContent from "../../../Reusable/PageLoadingContent";
 import { topAlertMessageState, topAlertStatusState } from "../../../../AppState";
 
 

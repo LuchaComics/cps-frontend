@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { postEmailVerificationAPI } from "../../API/gateway";
-import FormErrorBox from "../Element/FormErrorBox";
+import FormErrorBox from "../Reusable/FormErrorBox";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 

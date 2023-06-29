@@ -7,7 +7,7 @@ EXAMPLE OF USAGE:
 #################
 
 // STEP 1
-import FormCheckboxField from "../Element/FormCheckboxField";
+import FormCheckboxField from "../Reusable/FormCheckboxField";
 
 // STEP 2
 const [errors, setErrors] = useState({

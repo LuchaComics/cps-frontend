@@ -7,7 +7,7 @@ EXAMPLE OF USAGE:
 #################
 
 // STEP 1
-import FormRadioField from "../Element/FormRadioField";
+import FormRadioField from "../Reusable/FormRadioField";
 
 // STEP 2
 const [errors, setErrors] = useState({

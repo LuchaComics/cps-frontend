@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTasks, faBook, faTachometer, faPlus, faTimesCircle, faCheckCircle, faGauge, faUsers, faEye, faCube, faMagnifyingGlass, faBalanceScale, faUser, faCogs, faBookOpen, faNewspaper, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 
-import FormErrorBox from "../../Element/FormErrorBox";
-import PageLoadingContent from "../../Element/PageLoadingContent";
+import FormErrorBox from "../../Reusable/FormErrorBox";
+import PageLoadingContent from "../../Reusable/PageLoadingContent";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 
 

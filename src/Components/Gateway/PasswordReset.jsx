@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faArrowLeft, faEnvelope, faKey, faTriangleExclamation, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { useRecoilState } from 'recoil';
 
-import FormErrorBox from "../Element/FormErrorBox";
+import FormErrorBox from "../Reusable/FormErrorBox";
 import useLocalStorage from "../../Hooks/useLocalStorage";
 import { postPasswordResetAPI } from "../../API/gateway";
 import { topAlertMessageState, topAlertStatusState } from "../../AppState";

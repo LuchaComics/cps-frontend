@@ -4,7 +4,7 @@ import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTasks, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight, faBarcode } from '@fortawesome/free-solid-svg-icons';
 
-import FormErrorBox from "../Element/FormErrorBox";
+import FormErrorBox from "../Reusable/FormErrorBox";
 import { getVersionAPI } from "../../API/gateway";
 
 

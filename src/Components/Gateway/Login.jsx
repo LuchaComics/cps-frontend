@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faEnvelope, faKey, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { useRecoilState } from 'recoil';
 
-import FormErrorBox from "../Element/FormErrorBox";
+import FormErrorBox from "../Reusable/FormErrorBox";
 import useLocalStorage from "../../Hooks/useLocalStorage";
 import { postLoginAPI } from "../../API/gateway";
 import { onHamburgerClickedState, currentUserState } from "../../AppState";

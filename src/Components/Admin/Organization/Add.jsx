@@ -7,14 +7,14 @@ import { useRecoilState } from 'recoil';
 
 import useLocalStorage from "../../../Hooks/useLocalStorage";
 import { getOrganizationDetailAPI, postOrganizationCreateAPI } from "../../../API/organization";
-import FormErrorBox from "../../Element/FormErrorBox";
-import FormInputField from "../../Element/FormInputField";
-import FormTextareaField from "../../Element/FormTextareaField";
-import FormRadioField from "../../Element/FormRadioField";
-import FormMultiSelectField from "../../Element/FormMultiSelectField";
-import FormSelectField from "../../Element/FormSelectField";
-import FormCheckboxField from "../../Element/FormCheckboxField";
-import PageLoadingContent from "../../Element/PageLoadingContent";
+import FormErrorBox from "../../Reusable/FormErrorBox";
+import FormInputField from "../../Reusable/FormInputField";
+import FormTextareaField from "../../Reusable/FormTextareaField";
+import FormRadioField from "../../Reusable/FormRadioField";
+import FormMultiSelectField from "../../Reusable/FormMultiSelectField";
+import FormSelectField from "../../Reusable/FormSelectField";
+import FormCheckboxField from "../../Reusable/FormCheckboxField";
+import PageLoadingContent from "../../Reusable/PageLoadingContent";
 import { HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS } from "../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 

@@ -7,8 +7,8 @@ import { useRecoilState } from 'recoil';
 
 import { getComicSubmissionListAPI, deleteComicSubmissionAPI } from "../../../../API/ComicSubmission";
 import { topAlertMessageState, topAlertStatusState } from "../../../../AppState";
-import PageLoadingContent from "../../../Element/PageLoadingContent";
-import FormErrorBox from "../../../Element/FormErrorBox";
+import PageLoadingContent from "../../../Reusable/PageLoadingContent";
+import FormErrorBox from "../../../Reusable/FormErrorBox";
 import { SUBMISSION_STATES, PAGE_SIZE_OPTIONS } from "../../../../Constants/FieldOptions";
 
 

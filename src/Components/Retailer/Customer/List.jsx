@@ -8,8 +8,8 @@ import { useRecoilState } from 'recoil';
 import { getCustomerListAPI, deleteCustomerAPI } from "../../../API/customer";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
 import { PAGE_SIZE_OPTIONS } from "../../../Constants/FieldOptions";
-import FormErrorBox from "../../Element/FormErrorBox";
-import PageLoadingContent from "../../Element/PageLoadingContent";
+import FormErrorBox from "../../Reusable/FormErrorBox";
+import PageLoadingContent from "../../Reusable/PageLoadingContent";
 
 
 function RetailerCustomerList() {

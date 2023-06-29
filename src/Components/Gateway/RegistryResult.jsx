@@ -4,12 +4,12 @@ import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTasks, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight, faBarcode, faArrowLeft, faMagnifyingGlass, faBook, faBalanceScale } from '@fortawesome/free-solid-svg-icons';
 
-import FormErrorBox from "../Element/FormErrorBox";
-import FormInputField from "../Element/FormInputField";
-import FormDateField from "../Element/FormDateField";
-import FormSelectField from "../Element/FormSelectField";
-import FormRadioField from "../Element/FormRadioField";
-import FormTextareaField from "../Element/FormTextareaField";
+import FormErrorBox from "../Reusable/FormErrorBox";
+import FormInputField from "../Reusable/FormInputField";
+import FormDateField from "../Reusable/FormDateField";
+import FormSelectField from "../Reusable/FormSelectField";
+import FormRadioField from "../Reusable/FormRadioField";
+import FormTextareaField from "../Reusable/FormTextareaField";
 import { getRegistryAPI } from "../../API/registry";
 import {
     FINDING_OPTIONS,

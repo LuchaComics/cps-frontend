@@ -9,15 +9,15 @@ import { useParams } from 'react-router-dom';
 
 import useLocalStorage from "../../../../Hooks/useLocalStorage";
 import { getComicSubmissionDetailAPI } from "../../../../API/ComicSubmission";
-import FormErrorBox from "../../../Element/FormErrorBox";
-import FormInputField from "../../../Element/FormInputField";
-import FormTextareaField from "../../../Element/FormTextareaField";
-import FormRadioField from "../../../Element/FormRadioField";
-import FormMultiSelectField from "../../../Element/FormMultiSelectField";
-import FormCheckboxField from "../../../Element/FormCheckboxField";
-import FormSelectField from "../../../Element/FormSelectField";
-import FormDateField from "../../../Element/FormDateField";
-import PageLoadingContent from "../../../Element/PageLoadingContent";
+import FormErrorBox from "../../../Reusable/FormErrorBox";
+import FormInputField from "../../../Reusable/FormInputField";
+import FormTextareaField from "../../../Reusable/FormTextareaField";
+import FormRadioField from "../../../Reusable/FormRadioField";
+import FormMultiSelectField from "../../../Reusable/FormMultiSelectField";
+import FormCheckboxField from "../../../Reusable/FormCheckboxField";
+import FormSelectField from "../../../Reusable/FormSelectField";
+import FormDateField from "../../../Reusable/FormDateField";
+import PageLoadingContent from "../../../Reusable/PageLoadingContent";
 import {
     FINDING_OPTIONS,
     OVERALL_NUMBER_GRADE_OPTIONS,

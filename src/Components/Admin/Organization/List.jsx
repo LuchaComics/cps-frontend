@@ -7,8 +7,8 @@ import { useRecoilState } from 'recoil';
 
 import { getOrganizationListAPI, deleteOrganizationAPI } from "../../../API/organization";
 import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
-import FormErrorBox from "../../Element/FormErrorBox";
-import PageLoadingContent from "../../Element/PageLoadingContent";
+import FormErrorBox from "../../Reusable/FormErrorBox";
+import PageLoadingContent from "../../Reusable/PageLoadingContent";
 import { PAGE_SIZE_OPTIONS } from "../../../Constants/FieldOptions";
 
 
