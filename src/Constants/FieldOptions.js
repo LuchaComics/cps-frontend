@@ -337,3 +337,8 @@ export const PAGE_SIZE_OPTIONS = [
     { value: 100, label: '100 Rows' },
     { value: 250, label: '250 Rows' },
 ];
+
+export const ATTACHMENT_STATES = {
+    1: "Active",
+    2: "Archived"
+}

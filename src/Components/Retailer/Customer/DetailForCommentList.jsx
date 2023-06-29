@@ -240,6 +240,9 @@ function RetailerCustomerDetailForCommentList() {
                                         <li class="is-active">
                                             <Link><b>Comments</b></Link>
                                         </li>
+                                        <li>
+                                            <Link to={`/customer/${id}/attachments`}>Attachments</Link>
+                                        </li>
                                       </ul>
                                     </div>
 

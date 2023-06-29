@@ -153,6 +153,9 @@ function RetailerCustomerDetail() {
                                         <li>
                                             <Link to={`/customer/${customer.id}/comments`}>Comments</Link>
                                         </li>
+                                        <li>
+                                            <Link to={`/customer/${id}/attachments`}>Attachments</Link>
+                                        </li>
                                       </ul>
                                     </div>
 

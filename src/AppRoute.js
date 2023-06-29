@@ -58,7 +58,11 @@ import RetailerCustomerAdd from "./Components/Retailer/Customer/Add";
 import RetailerCustomerDetail from "./Components/Retailer/Customer/Detail";
 import RetailerCustomerDetailForComicSubmission from "./Components/Retailer/Customer/DetailForComicSubmission";
 import RetailerCustomerDetailForCommentList from "./Components/Retailer/Customer/DetailForCommentList";
+import RetailerCustomerDetailForAttachment from "./Components/Retailer/Customer/DetailForAttachment";
 import RetailerCustomerUpdate from "./Components/Retailer/Customer/Update";
+import RetailerCustomerAttachmentAdd from "./Components/Retailer/Customer/Attachment/Add";
+import RetailerCustomerAttachmentDetail from "./Components/Retailer/Customer/Attachment/Detail";
+import RetailerCustomerAttachmentUpdate from "./Components/Retailer/Customer/Attachment/Update";
 import LogoutRedirector from "./Components/Gateway/LogoutRedirector";
 import Login from "./Components/Gateway/Login";
 import Register from "./Components/Gateway/Register";
@@ -146,6 +150,10 @@ function AppRoute() {
                                     <Route exact path="/customer/:id/comics" element={<RetailerCustomerDetailForComicSubmission/>}/>
                                     <Route exact path="/customer/:id/edit" element={<RetailerCustomerUpdate/>}/>
                                     <Route exact path="/customer/:id/comments" element={<RetailerCustomerDetailForCommentList/>}/>
+                                    <Route exact path="/customer/:id/attachments" element={<RetailerCustomerDetailForAttachment/>}/>
+                                    <Route exact path="/customer/:id/attachments/add" element={<RetailerCustomerAttachmentAdd/>}/>
+                                    <Route exact path="/customer/:id/attachment/:aid" element={<RetailerCustomerAttachmentDetail/>}/>
+                                    <Route exact path="/customer/:id/attachment/:aid/edit" element={<RetailerCustomerAttachmentUpdate/>}/>
                                     <Route exact path="/account" element={<AccountDetail/>}/>
                                     <Route exact path="/account/update" element={<AccountUpdate/>}/>
                                     <Route exact path="/account/change-password" element={<AccountChangePassword/>}/>

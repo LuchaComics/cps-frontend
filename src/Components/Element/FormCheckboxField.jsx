@@ -92,7 +92,8 @@ function FormCheckboxField({
     errorText,      // The error message to display
     wasValidated,   // Boolean indicates if this element was successfully validated or not.
     helpText,       // The special help task to include.
-    onChange        // The function to call when a selection occurs.
+    onChange,       // The function to call when a selection occurs.
+    disabled
 }) {
     return (
         <div class="field pb-4">
@@ -103,6 +104,7 @@ function FormCheckboxField({
                     <input type="checkbox"
                         checked={checked}
                            name={name}
+                       disabled={disabled}
                        onChange={onChange} />&nbsp;
                             {errorText
                                 ? <span style={{color:"#f14668"}} >{label}</span>
