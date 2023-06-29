@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faRightFromBracket, faTachometer, faTasks, faSignOut, faUserCircle, faUsers, faBuilding, faBarcode } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faBook, faRightFromBracket, faTachometer, faTasks, faSignOut, faUserCircle, faUsers, faBuilding, faBarcode } from '@fortawesome/free-solid-svg-icons'
 import { useRecoilState } from 'recoil';
 
 import { onHamburgerClickedState, currentUserState } from "../../AppState";
@@ -130,14 +130,16 @@ export default props => {
                                 <ul>
                                     <li>
                                         <a href="/admin/submissions/comics" class={`has-text-grey-light ${location.pathname.includes("submissions/comic") && "is-active"}`}>
-                                            <FontAwesomeIcon className="fas" icon={faTachometer} />&nbsp;Comics
+                                            <FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comics
                                         </a>
                                     </li>
+                                    {/*
                                     <li>
                                         <a href="/admin/submissions/cards" class={`has-text-grey-light ${location.pathname.includes("card") && "is-active"}`}>
                                             <FontAwesomeIcon className="fas" icon={faTachometer} />&nbsp;Cards
                                         </a>
                                     </li>
+                                    */}
                                 </ul>
                             </li>
                         </ul>
@@ -202,20 +204,22 @@ export default props => {
                                 </a>
                             </li>
                             <li>
-                                <a class={`has-text-grey-light`}>
+                                <a href="/submissions" class={`has-text-grey-light ${(location.pathname.includes("submissions") && !location.pathname.includes("comic") && !location.pathname.includes("card")) && "is-active"}`}>
                                     <FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions
                                 </a>
                                 <ul>
                                     <li>
                                         <a href="/submissions/comics" class={`has-text-grey-light ${location.pathname.includes("submissions/comic") && "is-active"}`}>
-                                            <FontAwesomeIcon className="fas" icon={faTachometer} />&nbsp;Comics
+                                            <FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comics
                                         </a>
                                     </li>
+                                    {/*
                                     <li>
                                         <a href="/submissions/cards" class={`has-text-grey-light ${location.pathname.includes("card") && "is-active"}`}>
                                             <FontAwesomeIcon className="fas" icon={faTachometer} />&nbsp;Cards
                                         </a>
                                     </li>
+                                    */}
                                 </ul>
                             </li>
                         </ul>

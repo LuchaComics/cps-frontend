@@ -47,6 +47,7 @@ import RetailerComicSubmissionAddStep1WithResult from "./Components/Retailer/Sub
 import RetailerComicSubmissionAddStep2 from "./Components/Retailer/Submission/Comic/AddStep2";
 import RetailerComicSubmissionAddStep3 from "./Components/Retailer/Submission/Comic/AddStep3";
 import RetailerComicSubmissionDetail from "./Components/Retailer/Submission/Comic/Detail";
+import RetailerSubmissionLaunchpad from "./Components/Retailer/Submission/Launchpad";
 import RetailerSubmissionAttachmentAdd from "./Components/Retailer/Submission/Comic/Attachment/Add";
 import RetailerSubmissionAttachmentDetail from "./Components/Retailer/Submission/Comic/Attachment/Detail";
 import RetailerSubmissionAttachmentUpdate from "./Components/Retailer/Submission/Comic/Attachment/Update";
@@ -134,6 +135,7 @@ function AppRoute() {
                                     <Route exact path="/dashboard" element={<RetailerDashboard/>}/>
                                     <Route exact path="/registry" element={<RetailerRegistrySearch/>}/>
                                     <Route exact path="/registry/:cpsn" element={<RetailerRegistryResult/>}/>
+                                    <Route exact path="/submissions" element={<RetailerSubmissionLaunchpad/>}/>
                                     <Route exact path="/submissions/pick-type-for-add" element={<RetailerSubmissionPickTypeForAdd/>}/>
                                     <Route exact path="/submissions/comics" element={<RetailerComicSubmissionList/>}/>
                                     <Route exact path="/submissions/comics/add/search" element={<RetailerComicSubmissionAddStep1WithSearch/>}/>
