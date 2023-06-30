@@ -116,14 +116,14 @@ function AdminComicSubmissionAddStep2() {
             paperQualityFinding: isCpsIndieMintGem ? "nm" : paperQualityFinding,
             spineFinding: isCpsIndieMintGem ? "nm" : spineFinding,
             coverFinding: isCpsIndieMintGem ? "nm" : coverFinding,
-            gradingScale: isCpsIndieMintGem ? 2 : parseInt(gradingScale),
+            gradingScale: isCpsIndieMintGem ? 2 : parseInt(gradingScale), // 2=Number Grading Scale
             overallLetterGrade: overallLetterGrade,
             isOverallLetterGradeNearMintPlus: isOverallLetterGradeNearMintPlus,
             overallNumberGrade: isCpsIndieMintGem ? 10 : parseFloat(overallNumberGrade),
             cpsPercentageGrade: parseFloat(cpsPercentageGrade),
             showsSignsOfTamperingOrRestoration: isCpsIndieMintGem ? 2 : parseInt(showsSignsOfTamperingOrRestoration), // 2=No
             status: status,
-            serviceType: serviceType,
+            serviceType: isCpsIndieMintGem ? 4 : serviceType, // 4=Indie Mint Gem
             organizationID: organizationID,
             CollectibleType: 1, // 1=Comic, 2=Card
         };
@@ -415,11 +415,6 @@ function AdminComicSubmissionAddStep2() {
                                         rows={4}
                                     />
 
-                                    <FormComicSignaturesTable
-                                        data={signatures}
-                                        onDataChange={setSignatures}
-                                    />
-
                                     <FormCheckboxField
                                         label="Is CPS Indie Mint Gem?"
                                         name="isCpsIndieMintGem"
@@ -427,6 +422,11 @@ function AdminComicSubmissionAddStep2() {
                                         errorText={errors && errors.isCpsIndieMintGem}
                                         onChange={(e)=>setIsCpsIndieMintGem(!isCpsIndieMintGem)}
                                         maxWidth="180px"
+                                    />
+
+                                    <FormComicSignaturesTable
+                                        data={signatures}
+                                        onDataChange={setSignatures}
                                     />
 
                                     {isCpsIndieMintGem === false &&
@@ -725,18 +725,24 @@ function AdminComicSubmissionAddStep2() {
                                         options={organizationSelectOptions}
                                         disabled={(orgID !== undefined && orgID !== "" && orgID !== null) || organizationSelectOptions.length === 0}
                                     />
-                                    <FormRadioField
+                                    {isCpsIndieMintGem === false && <FormRadioField
                                         label="Service Type"
                                         name="role"
                                         value={serviceType}
                                         opt1Value={1}
                                         opt1Label="Pre-Screening Service"
                                         opt2Value={2}
-                                        opt2Label="Pedigree Service"
+                                        opt2Label="CPS Pedigree Service"
+                                        opt3Value={3}
+                                        opt3Label="CPS Capsule"
+                                        opt4Value={4}
+                                        opt4Label="CPS Capsule Indie Mint Gem"
+                                        opt5Value={5}
+                                        opt5Label="CPS Capsule Signature Collection"
                                         errorText={errors && errors.serviceType}
                                         onChange={(e)=>setServiceType(parseInt(e.target.value))}
                                         maxWidth="180px"
-                                    />
+                                    />}
                                     <FormRadioField
                                         label="Status"
                                         name="status"

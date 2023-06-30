@@ -279,16 +279,16 @@ function AdminComicSubmissionDetail() {
                                         rows={4}
                                     />
 
-                                    <FormComicSignaturesTable
-                                        data={submission.signatures}
-                                        disabled={true}
-                                    />
-
                                     <FormCheckboxField
                                         label="Is CPS Indie Mint Gem?"
                                         name="isCpsIndieMintGem"
                                         checked={submission.isCpsIndieMintGem}
                                         maxWidth="180px"
+                                        disabled={true}
+                                    />
+
+                                    <FormComicSignaturesTable
+                                        data={submission.signatures}
                                         disabled={true}
                                     />
 
@@ -562,7 +562,7 @@ function AdminComicSubmissionDetail() {
                                         }]}
                                         disabled={true}
                                     />
-                                    <FormRadioField
+                                    {submission.isCpsIndieMintGem === false && <FormRadioField
                                         label="Service Type"
                                         name="role"
                                         value={submission.serviceType}
@@ -572,7 +572,7 @@ function AdminComicSubmissionDetail() {
                                         opt2Label="Pedigree Service"
                                         maxWidth="180px"
                                         disabled={true}
-                                    />
+                                    />}
                                     <FormRadioField
                                         label="Status"
                                         name="status"

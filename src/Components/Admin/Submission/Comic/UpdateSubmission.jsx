@@ -113,14 +113,14 @@ function AdminComicSubmissionUpdateForComicSubmission() {
             paper_quality_finding: isCpsIndieMintGem ? "nm" : paperQualityFinding,
             spine_finding: isCpsIndieMintGem ? "nm" : spineFinding,
             cover_finding: isCpsIndieMintGem ? "nm" : coverFinding,
-            grading_scale: isCpsIndieMintGem ? 2 : parseInt(gradingScale),
+            grading_scale: isCpsIndieMintGem ? 2 : parseInt(gradingScale), // 2=Number Grading Scale
             overall_letter_grade: overallLetterGrade,
             is_overall_letter_grade_near_mint_plus: isOverallLetterGradeNearMintPlus,
             overall_number_grade: isCpsIndieMintGem ? 10 : parseFloat(overallNumberGrade),
             cps_percentage_grade: parseFloat(cpsPercentageGrade),
             shows_signs_of_tampering_or_restoration: isCpsIndieMintGem ? 2 : parseInt(showsSignsOfTamperingOrRestoration),
             status: status,
-            service_type: serviceType,
+            service_type: isCpsIndieMintGem ? 4 : serviceType, // 4=Indie Mint Gem
             organization_id: organizationID,
             signatures: signatures,
         };
@@ -419,11 +419,6 @@ function AdminComicSubmissionUpdateForComicSubmission() {
                                         rows={4}
                                     />
 
-                                    <FormComicSignaturesTable
-                                        data={signatures}
-                                        onDataChange={setSignatures}
-                                    />
-
                                     <FormCheckboxField
                                         label="Is CPS Indie Mint Gem?"
                                         name="isCpsIndieMintGem"
@@ -431,6 +426,11 @@ function AdminComicSubmissionUpdateForComicSubmission() {
                                         errorText={errors && errors.isCpsIndieMintGem}
                                         onChange={(e)=>setIsCpsIndieMintGem(!isCpsIndieMintGem)}
                                         maxWidth="180px"
+                                    />
+
+                                    <FormComicSignaturesTable
+                                        data={signatures}
+                                        onDataChange={setSignatures}
                                     />
 
                                     {isCpsIndieMintGem === false &&
@@ -727,7 +727,7 @@ function AdminComicSubmissionUpdateForComicSubmission() {
                                         options={organizationSelectOptions}
                                         disabled={organizationSelectOptions.length === 0}
                                     />
-                                    <FormRadioField
+                                    {isCpsIndieMintGem === false && <FormRadioField
                                         label="Service Type"
                                         name="role"
                                         value={serviceType}
@@ -735,10 +735,16 @@ function AdminComicSubmissionUpdateForComicSubmission() {
                                         opt1Label="Pre-Screening Service"
                                         opt2Value={2}
                                         opt2Label="CPS Pedigree Service"
+                                        opt3Value={3}
+                                        opt3Label="CPS Capsule"
+                                        opt4Value={4}
+                                        opt4Label="CPS Capsule Indie Mint Gem"
+                                        opt5Value={5}
+                                        opt5Label="CPS Capsule Signature Collection"
                                         errorText={errors && errors.serviceType}
                                         onChange={(e)=>setServiceType(parseInt(e.target.value))}
                                         maxWidth="180px"
-                                    />
+                                    />}
                                     <FormRadioField
                                         label="Status"
                                         name="status"

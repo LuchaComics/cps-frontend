@@ -39,62 +39,8 @@ export const SIGNATURE_ROLES_WITH_EMPTY_OPTIONS = [
     onDataChange - needs to look something like this in your JSX:
         onDataChange={(data)=>onDataChange(data)}
 
-
-
-    onListInputFieldChange - needs to look something like this:
-        const onListInputFieldChange = (e, i) => {
-            // For debugging purposes.
-            console.log(e, i);
-
-            // Make a copy of the "array of strings" into a mutable array.
-            const copyOfArr = [...previewDescription];
-
-            // Update record.
-            copyOfArr[i] = e
-
-            // Save to our react state.
-            setPreviewDescription(copyOfArr);
-        }
-
-    onRemoveListInputFieldChange - this function is used to remove user selected data:
-        const onRemoveListInputFieldChange = (i) => {
-            // For debugging purposes.
-            console.log(i);
-
-            // Make a copy of the "array of strings" into a mutable array.
-            const copyOfArr = [...previewDescription];
-
-            // Delete record.
-            const x = copyOfArr.splice(i, 1);
-
-            // For debugging purposes.
-            console.log(x);
-
-            // Save to our react state.
-            setPreviewDescription(copyOfArr);
-        }
-
-    onAddListInputFieldClick - this function is used to add data:
-        const onAddListInputFieldClick = () => {
-            // For debugging purposes.
-            console.log("add");
-
-            // Make a copy of the "array of strings" into a mutable array.
-            const copyOfArr = [...previewDescription];
-
-            // Add empty record.
-            copyOfArr.push("");
-
-            // For debugging purposes.
-            console.log(copyOfArr);
-
-            // Save to our react state.
-            setPreviewDescription(copyOfArr);
-        }
-
-
 */
-function FormComicSignaturesTable({ data, onDataChange, disabled=false }) {
+function FormComicSignaturesTable({ data=[], onDataChange=null, disabled=false }) {
 
     ////
     //// Component states.
@@ -239,7 +185,7 @@ function FormComicSignaturesTable({ data, onDataChange, disabled=false }) {
                     </>
                     :
                     <>
-                        <button class="button is-primary is-small" onClick={(e)=>setShowAddModal(true)}><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Signature</button>
+                        <button class="button is-primary is-small" onClick={(e)=>setShowAddModal(true)} disabled={disabled}><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Signature</button>
                     </>
                 }
                 <p class="help">Include any signatures on the comic submission</p>
