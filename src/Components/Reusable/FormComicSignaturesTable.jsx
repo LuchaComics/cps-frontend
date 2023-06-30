@@ -94,13 +94,13 @@ export const SIGNATURE_ROLES_WITH_EMPTY_OPTIONS = [
 
 
 */
-function FormComicSignaturesTable({ data, onDataChange, }) {
+function FormComicSignaturesTable({ data, onDataChange, disabled=false }) {
 
     ////
     //// Component states.
     ////
 
-    const [showAddModal, setShowAddModal] = useState(true);
+    const [showAddModal, setShowAddModal] = useState(false);
     const [errors, setErrors] = useState({});
     const [role, setRole] = useState("");
     const [name, setName] = useState("");
@@ -110,8 +110,51 @@ function FormComicSignaturesTable({ data, onDataChange, }) {
     ////
 
     const onSubmitClick = () => {
-        console.log("Adding...");
-        setShowAddModal(!showAddModal);
+        console.log("onSubmitClick...");
+        let newErrors = {};
+        if (name === undefined || name === null || name === "") {
+            newErrors["name"] = "missing value";
+        }
+        if (role === undefined || role === null || role === "") {
+            newErrors["role"] = "missing value";
+        }
+        if (Object.keys(newErrors).length === 0) {
+            // Make a copy of the "array of strings" into a mutable array.
+            let copyOfArr = [...data];
+
+            // Update record.
+            copyOfArr.push({"name": name, role: role});
+
+            // Run callback.
+            onDataChange(copyOfArr);
+
+            // Reset errors.
+            setErrors({});
+
+            // Reset fields and close the modal.
+            setName("");
+            setRole("");
+            setShowAddModal(false);
+            return;
+        }
+        setErrors(newErrors);
+    }
+
+    const onRemoveRowClick = (i) => {
+        // For debugging purposes.
+        console.log(i);
+
+        // Make a copy of the "array of strings" into a mutable array.
+        const copyOfArr = [...data];
+
+        // Delete record.
+        const x = copyOfArr.splice(i, 1);
+
+        // For debugging purposes.
+        console.log(x);
+
+        // Save
+        onDataChange(copyOfArr);
     }
 
     ////
@@ -131,7 +174,7 @@ function FormComicSignaturesTable({ data, onDataChange, }) {
                     <section class="modal-card-body">
 
                     <FormInputField
-                        label="name"
+                        label="Name of Signature"
                         name="name"
                         placeholder="Text input"
                         value={name}
@@ -143,13 +186,13 @@ function FormComicSignaturesTable({ data, onDataChange, }) {
                     />
 
                     <FormSelectField
-                        label="Role"
+                        label="Role of Signer"
                         name="role"
                         placeholder="Pick role"
                         selectedValue={role}
                         errorText={errors && errors.role}
                         helpText=""
-                        onChange={(e)=>setRole(parseInt(e.target.value))}
+                        onChange={(e)=>setRole(e.target.value)}
                         options={SIGNATURE_ROLES_WITH_EMPTY_OPTIONS}
                         isRequired={true}
                         maxWidth="110px"
@@ -164,57 +207,44 @@ function FormComicSignaturesTable({ data, onDataChange, }) {
             </div>
 
             <div class="pb-4">
-                <label class="label">Comic Signatures &nbsp;
+                <label class="label">Comic Signatures (Optional)
                     {/*<button class="button is-success is-small" onClick={onAddListInputFieldClick} disabled={disabled}><FontAwesomeIcon className="fas" icon={faPlus} /></button>*/}
                 </label>
-                <p class="control is-expanded">
 
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th><abbr title="Signature Role">Role</abbr></th>
-                                <th>Signed By</th>
-                                <th>
-                                    <button class="button is-success is-small" onClick={(m)=>setShowAddModal(!showAddModal)}>Add Signature</button>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {data && data.map(function(datum, i){
-                            return <tr>
-                                <th>1</th>
-                                <td>test</td>
-                                <td>
-                                    <button class="delete"></button>
-                                </td>
-                            </tr>
-                        })}
-                     </tbody>
-                  </table>
-
-                </p>
-                {/*
-                    return <div class="field has-addons pb-4" key={i}>
-                        <p class="control is-expanded">
-                            <input class={`${classNameText} is-centered`}
-                                    name={name}
-                                    type={type}
-                             placeholder={placeholder}
-                                   value={datum}
-                                onChange={(e)=>onListInputFieldChange(e.target.value, i)}
-                                disabled={disabled}
-                            autoComplete="off"
-                                   style={{maxWidth:maxWidth}}
-                                disabled={disabled} />
-                        </p>
-                        <p class="control">
-                            <button class="button is-danger" onClick={(e)=>onRemoveListInputFieldChange(i)} disabled={disabled}>
-                                <FontAwesomeIcon className="fas" icon={faMinus} />
-                            </button>
-                        </p>
-                    </div>
-                */}
+                {data !== undefined && data !== null && data !== "" && data.length > 0
+                    ?
+                    <>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th><abbr title="Signature Role">Role</abbr></th>
+                                    <th>Signed By</th>
+                                    {disabled === false && <th>
+                                        <button class="button is-success is-small" onClick={(m)=>setShowAddModal(!showAddModal)}><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</button>
+                                    </th>}
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {data && data.map(function(datum, i){
+                                return <tr>
+                                    <th>{datum.role}</th>
+                                    <td>{datum.name}</td>
+                                    {disabled === false &&<td>
+                                        <button class="button is-danger is-small" onClick={(n)=>onRemoveRowClick(i)}><FontAwesomeIcon className="fas" icon={faMinus} />&nbsp;Delete</button>
+                                    </td>}
+                                </tr>
+                            })}
+                         </tbody>
+                      </table>
+                    </>
+                    :
+                    <>
+                        <button class="button is-primary is-small" onClick={(e)=>setShowAddModal(true)}><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Signature</button>
+                    </>
+                }
+                <p class="help">Include any signatures on the comic submission</p>
             </div>
+
         </>
     );
 }

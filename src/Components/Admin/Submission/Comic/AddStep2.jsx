@@ -106,6 +106,7 @@ function AdminComicSubmissionAddStep2() {
             publisherNameOther: publisherNameOther,
             specialNotes: specialNotes,
             gradingNotes: gradingNotes,
+            signatures: signatures,
             isCpsIndieMintGem: isCpsIndieMintGem,
             creasesFinding: isCpsIndieMintGem ? "nm" : creasesFinding,
             tearsFinding: isCpsIndieMintGem ? "nm" : tearsFinding,
@@ -315,13 +316,6 @@ function AdminComicSubmissionAddStep2() {
                                     <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comic Book Information</p>
                                     <hr />
 
-                                    {/*
-                                    <FormComicSignaturesTable
-                                        data={signatures}
-                                        onDataChange={setSignatures}
-                                    />
-                                    */}
-
                                     <FormInputField
                                         label="Series Title"
                                         name="seriesTitle"
@@ -419,6 +413,11 @@ function AdminComicSubmissionAddStep2() {
                                         maxWidth="280px"
                                         helpText={"Max 638 characters"}
                                         rows={4}
+                                    />
+
+                                    <FormComicSignaturesTable
+                                        data={signatures}
+                                        onDataChange={setSignatures}
                                     />
 
                                     <FormCheckboxField

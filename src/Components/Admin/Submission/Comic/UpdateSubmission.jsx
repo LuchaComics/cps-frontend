@@ -19,6 +19,7 @@ import FormMultiSelectField from "../../../Reusable/FormMultiSelectField";
 import FormSelectField from "../../../Reusable/FormSelectField";
 import FormDateField from "../../../Reusable/FormDateField";
 import FormCheckboxField from "../../../Reusable/FormCheckboxField";
+import FormComicSignaturesTable from "../../../Reusable/FormComicSignaturesTable";
 import PageLoadingContent from "../../../Reusable/PageLoadingContent";
 import {
     FINDING_OPTIONS,
@@ -80,6 +81,7 @@ function AdminComicSubmissionUpdateForComicSubmission() {
     const [organizationID, setOrganizationID] = useState("");
     const [serviceType, setServiceType] = useState(0);
     const [isCpsIndieMintGem, setIsCpsIndieMintGem] = useState(false);
+    const [signatures, setSignatures] = useState([]);
 
     ////
     //// Event handling.
@@ -120,6 +122,7 @@ function AdminComicSubmissionUpdateForComicSubmission() {
             status: status,
             service_type: serviceType,
             organization_id: organizationID,
+            signatures: signatures,
         };
 
         // Submit to the backend.
@@ -159,6 +162,7 @@ function AdminComicSubmissionUpdateForComicSubmission() {
         setStatus(response.status);
         setServiceType(response.serviceType);
         setOrganizationID(response.organizationId);
+        setSignatures(response.signatures);
     }
 
     function onComicSubmissionDetailError(apiErr) {
@@ -413,6 +417,11 @@ function AdminComicSubmissionUpdateForComicSubmission() {
                                         maxWidth="280px"
                                         helpText={"Max 638 characters"}
                                         rows={4}
+                                    />
+
+                                    <FormComicSignaturesTable
+                                        data={signatures}
+                                        onDataChange={setSignatures}
                                     />
 
                                     <FormCheckboxField

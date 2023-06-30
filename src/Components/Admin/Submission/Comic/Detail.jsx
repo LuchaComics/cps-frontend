@@ -17,6 +17,7 @@ import FormMultiSelectField from "../../../Reusable/FormMultiSelectField";
 import FormCheckboxField from "../../../Reusable/FormCheckboxField";
 import FormSelectField from "../../../Reusable/FormSelectField";
 import FormDateField from "../../../Reusable/FormDateField";
+import FormComicSignaturesTable from "../../../Reusable/FormComicSignaturesTable";
 import PageLoadingContent from "../../../Reusable/PageLoadingContent";
 import {
     FINDING_OPTIONS,
@@ -276,6 +277,11 @@ function AdminComicSubmissionDetail() {
                                         helpText={"Max 638 characters"}
                                         disabled={true}
                                         rows={4}
+                                    />
+
+                                    <FormComicSignaturesTable
+                                        data={submission.signatures}
+                                        disabled={true}
                                     />
 
                                     <FormCheckboxField
