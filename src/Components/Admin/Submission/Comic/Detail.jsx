@@ -26,7 +26,8 @@ import {
     CPS_PERCENTAGE_GRADE_OPTIONS,
     HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS,
     ISSUE_COVER_YEAR_OPTIONS,
-    ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS
+    ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS,
+    SPECIAL_DETAILS_WITH_EMPTY_OPTIONS
 } from "../../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState } from "../../../../AppState";
 
@@ -261,6 +262,27 @@ function AdminComicSubmissionDetail() {
                                         name="publisherNameOther"
                                         placeholder="Text input"
                                         value={submission.publisherNameOther}
+                                        helpText=""
+                                        isRequired={true}
+                                        maxWidth="280px"
+                                        disabled={true}
+                                    />}
+
+                                    <FormSelectField
+                                        label="Special Details"
+                                        name="specialDetails"
+                                        placeholder="Text input"
+                                        selectedValue={submission.specialDetails}
+                                        helpText=""
+                                        options={SPECIAL_DETAILS_WITH_EMPTY_OPTIONS}
+                                        disabled={true}
+                                    />
+
+                                    {submission.specialDetails === 1 && <FormInputField
+                                        label="Special Details (Other)"
+                                        name="specialDetailsOther"
+                                        placeholder="Text input"
+                                        value={submission.specialDetailsOther}
                                         helpText=""
                                         isRequired={true}
                                         maxWidth="280px"

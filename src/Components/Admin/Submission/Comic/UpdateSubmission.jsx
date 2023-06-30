@@ -27,7 +27,8 @@ import {
     PUBLISHER_NAME_OPTIONS,
     CPS_PERCENTAGE_GRADE_OPTIONS,
     ISSUE_COVER_YEAR_OPTIONS,
-    ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS
+    ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS,
+    SPECIAL_DETAILS_WITH_EMPTY_OPTIONS
 } from "../../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState } from "../../../../AppState";
 
@@ -82,6 +83,8 @@ function AdminComicSubmissionUpdateForComicSubmission() {
     const [serviceType, setServiceType] = useState(0);
     const [isCpsIndieMintGem, setIsCpsIndieMintGem] = useState(false);
     const [signatures, setSignatures] = useState([]);
+    const [specialDetails, setSpecialDetails] = useState(0);
+    const [specialDetailsOther, setSpecialDetailsOther] = useState("");
 
     ////
     //// Event handling.
@@ -123,6 +126,8 @@ function AdminComicSubmissionUpdateForComicSubmission() {
             service_type: isCpsIndieMintGem ? 4 : serviceType, // 4=Indie Mint Gem
             organization_id: organizationID,
             signatures: signatures,
+            special_details: specialDetails,
+            special_details_other: specialDetailsOther,
         };
 
         // Submit to the backend.
@@ -163,6 +168,8 @@ function AdminComicSubmissionUpdateForComicSubmission() {
         setServiceType(response.serviceType);
         setOrganizationID(response.organizationId);
         setSignatures(response.signatures);
+        setSpecialDetails(response.specialDetails);
+        setSpecialDetailsOther(response.specialDetailsOther);
     }
 
     function onComicSubmissionDetailError(apiErr) {

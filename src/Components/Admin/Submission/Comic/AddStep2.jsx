@@ -23,7 +23,8 @@ import {
     CPS_PERCENTAGE_GRADE_WITH_EMPTY_OPTIONS,
     ISSUE_COVER_YEAR_OPTIONS,
     ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS,
-    USER_STATE_WITH_EMPTY_OPTIONS
+    USER_STATE_WITH_EMPTY_OPTIONS,
+    SPECIAL_DETAILS_WITH_EMPTY_OPTIONS
 } from "../../../../Constants/FieldOptions";
 import PageLoadingContent from "../../../Reusable/PageLoadingContent";
 import { topAlertMessageState, topAlertStatusState } from "../../../../AppState";
@@ -84,6 +85,8 @@ function AdminComicSubmissionAddStep2() {
     const [serviceType, setServiceType] = useState(0);
     const [isCpsIndieMintGem, setIsCpsIndieMintGem] = useState(false);
     const [signatures, setSignatures] = useState([]);
+    const [specialDetails, setSpecialDetails] = useState(0);
+    const [specialDetailsOther, setSpecialDetailsOther] = useState("");
 
     ////
     //// Event handling.
@@ -125,7 +128,9 @@ function AdminComicSubmissionAddStep2() {
             status: status,
             serviceType: isCpsIndieMintGem ? 4 : serviceType, // 4=Indie Mint Gem
             organizationID: organizationID,
-            CollectibleType: 1, // 1=Comic, 2=Card
+            collectibleType: 1, // 1=Comic, 2=Card
+            specialDetails: specialDetails,
+            specialDetailsOther: specialDetailsOther,
         };
 
         console.log("onSubmitClick: Attaching user identification.");
@@ -397,6 +402,29 @@ function AdminComicSubmissionAddStep2() {
                                         errorText={errors && errors.publisherNameOther}
                                         helpText=""
                                         onChange={(e)=>setPublisherNameOther(e.target.value)}
+                                        isRequired={true}
+                                        maxWidth="280px"
+                                    />}
+
+                                    <FormSelectField
+                                        label="Special Details"
+                                        name="specialDetails"
+                                        placeholder="Text input"
+                                        selectedValue={specialDetails}
+                                        errorText={errors && errors.specialDetails}
+                                        helpText=""
+                                        onChange={(e)=>setSpecialDetails(parseInt(e.target.value))}
+                                        options={SPECIAL_DETAILS_WITH_EMPTY_OPTIONS}
+                                    />
+
+                                    {specialDetails === 1 && <FormInputField
+                                        label="Special Details (Other)"
+                                        name="specialDetailsOther"
+                                        placeholder="Text input"
+                                        value={specialDetailsOther}
+                                        errorText={errors && errors.specialDetailsOther}
+                                        helpText=""
+                                        onChange={(e)=>setSpecialDetailsOther(e.target.value)}
                                         isRequired={true}
                                         maxWidth="280px"
                                     />}

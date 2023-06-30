@@ -112,7 +112,7 @@ function AdminSubmissionPickTypeForAdd() {
                                                 ?
                                                 <Link to={`/admin/submissions/comics/add/search`} class="card-footer-item">Select&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
                                                 :
-                                                <Link to={`/admin/submissions/comics/add-comic?user_id=${userID}`} class="card-footer-item">Select&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
+                                                <Link to={`/admin/submissions/comics/add?user_id=${userID}`} class="card-footer-item">Select&nbsp;<FontAwesomeIcon className="fas" icon={faArrowRight} /></Link>
                                             }
                                         </footer>
                                     </div>

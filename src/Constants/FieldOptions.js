@@ -342,3 +342,19 @@ export const ATTACHMENT_STATES = {
     1: "Active",
     2: "Archived"
 }
+
+export const SPECIAL_DETAILS_OPTIONS = [
+    { value: 1, label: 'Other' },
+    { value: 2, label: 'Regular Edition' },
+    { value: 3, label: 'Direct Edition' },
+    { value: 4, label: 'Newsstand Edition' },
+    { value: 5, label: 'Variant Cover' },
+    { value: 6, label: 'Canadian Price Variant' },
+    { value: 7, label: '250 Facsimile' },
+    { value: 8, label: 'Reprint' },
+];
+
+export const SPECIAL_DETAILS_WITH_EMPTY_OPTIONS = [
+    { value: "", label: "Please select" }, // EMPTY OPTION
+    ...SPECIAL_DETAILS_OPTIONS
+];
