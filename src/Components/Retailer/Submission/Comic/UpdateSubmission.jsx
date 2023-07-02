@@ -25,7 +25,7 @@ import {
     CPS_PERCENTAGE_GRADE_OPTIONS,
     ISSUE_COVER_YEAR_OPTIONS,
     ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS,
-    SERVICE_TYPE_WITH_EMPTY_OPTIONS
+    SERVICE_TYPE_OPTIONS
 } from "../../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState, currentUserState } from "../../../../AppState";
 
@@ -636,7 +636,7 @@ function RetailerComicSubmissionUpdateForComicSubmission() {
                                         selectedValue={serviceType}
                                         errorText={errors && errors.serviceType}
                                         onChange={(e)=>setServiceType(parseInt(e.target.value))}
-                                        options={SERVICE_TYPE_WITH_EMPTY_OPTIONS}
+                                        options={SERVICE_TYPE_OPTIONS}
                                         maxWidth="400px"
                                     />
                                     <div class="columns pt-5">

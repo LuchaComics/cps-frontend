@@ -372,3 +372,14 @@ export const SERVICE_TYPE_WITH_EMPTY_OPTIONS = [
     { value: "", label: "Please select" }, // EMPTY OPTION
     ...SERVICE_TYPE_OPTIONS
 ];
+
+export const RETAILER_AVAILABLE_SERVICE_TYPE_OPTIONS = [
+    { value: 1, label: 'Pre-Screening Service' },
+    { value: 2, label: 'CPS Pedigree Service' },
+    { value: 3, label: 'CPS Capsule' },
+];
+
+export const RETAILER_AVAILABLE_SERVICE_TYPE_WITH_EMPTY_OPTIONS = [
+    { value: "", label: "Please select" }, // EMPTY OPTION
+    ...RETAILER_AVAILABLE_SERVICE_TYPE_OPTIONS
+];
