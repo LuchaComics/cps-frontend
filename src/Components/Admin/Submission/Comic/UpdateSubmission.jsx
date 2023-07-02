@@ -28,7 +28,8 @@ import {
     CPS_PERCENTAGE_GRADE_OPTIONS,
     ISSUE_COVER_YEAR_OPTIONS,
     ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS,
-    SPECIAL_DETAILS_WITH_EMPTY_OPTIONS
+    SPECIAL_DETAILS_WITH_EMPTY_OPTIONS,
+    SERVICE_TYPE_WITH_EMPTY_OPTIONS
 } from "../../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState } from "../../../../AppState";
 
@@ -734,23 +735,14 @@ function AdminComicSubmissionUpdateForComicSubmission() {
                                         options={organizationSelectOptions}
                                         disabled={organizationSelectOptions.length === 0}
                                     />
-                                    {isCpsIndieMintGem === false && <FormRadioField
+                                    {isCpsIndieMintGem === false && <FormSelectField
                                         label="Service Type"
-                                        name="role"
-                                        value={serviceType}
-                                        opt1Value={1}
-                                        opt1Label="Pre-Screening Service"
-                                        opt2Value={2}
-                                        opt2Label="CPS Pedigree Service"
-                                        opt3Value={3}
-                                        opt3Label="CPS Capsule"
-                                        opt4Value={4}
-                                        opt4Label="CPS Capsule Indie Mint Gem"
-                                        opt5Value={5}
-                                        opt5Label="CPS Capsule Signature Collection"
+                                        name="serviceType"
+                                        selectedValue={serviceType}
                                         errorText={errors && errors.serviceType}
                                         onChange={(e)=>setServiceType(parseInt(e.target.value))}
-                                        maxWidth="180px"
+                                        options={SERVICE_TYPE_WITH_EMPTY_OPTIONS}
+                                        maxWidth="400px"
                                     />}
                                     <FormRadioField
                                         label="Status"

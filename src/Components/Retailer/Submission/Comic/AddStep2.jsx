@@ -22,7 +22,8 @@ import {
     PUBLISHER_NAME_WITH_EMPTY_OPTIONS,
     CPS_PERCENTAGE_GRADE_WITH_EMPTY_OPTIONS,
     ISSUE_COVER_YEAR_OPTIONS,
-    ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS
+    ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS,
+    SERVICE_TYPE_WITH_EMPTY_OPTIONS
 } from "../../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState, currentUserState } from "../../../../AppState";
 
@@ -75,6 +76,7 @@ function RetailerComicSubmissionAddStep3() {
     const [showsSignsOfTamperingOrRestoration, setShowsSignsOfTamperingOrRestoration] = useState("");
     const [showCancelWarning, setShowCancelWarning] = useState(false);
     const [isOverallLetterGradeNearMintPlus, setIsOverallLetterGradeNearMintPlus] = useState(false);
+    const [serviceType, setServiceType] = useState(0);
 
     ////
     //// Event handling.
@@ -112,7 +114,7 @@ function RetailerComicSubmissionAddStep3() {
             cpsPercentageGrade: parseFloat(cpsPercentageGrade),
             showsSignsOfTamperingOrRestoration: parseInt(showsSignsOfTamperingOrRestoration),
             status: 1, // 1 = Pending.
-            serviceType: 1, // 1 = Pre-Screening Service
+            serviceType: serviceType, // 1 = Pre-Screening Service
             organizationID: currentUser.organizationId,
             collectibleType: 1, // 1=, 2=Card
         };
@@ -644,6 +646,16 @@ function RetailerComicSubmissionAddStep3() {
                                         onChange={(e)=>setCpsPercentageGrade(e.target.value)}
                                         options={CPS_PERCENTAGE_GRADE_WITH_EMPTY_OPTIONS}
                                     />}
+
+                                    <FormSelectField
+                                        label="Service Type"
+                                        name="serviceType"
+                                        selectedValue={serviceType}
+                                        errorText={errors && errors.serviceType}
+                                        onChange={(e)=>setServiceType(parseInt(e.target.value))}
+                                        options={SERVICE_TYPE_WITH_EMPTY_OPTIONS}
+                                        maxWidth="400px"
+                                    />
 
                                     <div class="columns pt-5">
                                         <div class="column is-half">

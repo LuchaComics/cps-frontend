@@ -27,7 +27,8 @@ import {
     HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS,
     ISSUE_COVER_YEAR_OPTIONS,
     ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS,
-    SPECIAL_DETAILS_WITH_EMPTY_OPTIONS
+    SPECIAL_DETAILS_WITH_EMPTY_OPTIONS,
+    SERVICE_TYPE_WITH_EMPTY_OPTIONS
 } from "../../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState } from "../../../../AppState";
 
@@ -584,15 +585,12 @@ function AdminComicSubmissionDetail() {
                                         }]}
                                         disabled={true}
                                     />
-                                    {submission.isCpsIndieMintGem === false && <FormRadioField
+                                    {submission.isCpsIndieMintGem === false && <FormSelectField
                                         label="Service Type"
-                                        name="role"
-                                        value={submission.serviceType}
-                                        opt1Value={1}
-                                        opt1Label="Pre-Screening Service"
-                                        opt2Value={2}
-                                        opt2Label="Pedigree Service"
-                                        maxWidth="180px"
+                                        name="serviceType"
+                                        selectedValue={submission.serviceType}
+                                        options={SERVICE_TYPE_WITH_EMPTY_OPTIONS}
+                                        maxWidth="400px"
                                         disabled={true}
                                     />}
                                     <FormRadioField

@@ -25,7 +25,8 @@ import {
     CPS_PERCENTAGE_GRADE_OPTIONS,
     HOW_DID_YOU_HEAR_ABOUT_US_WITH_EMPTY_OPTIONS,
     ISSUE_COVER_YEAR_OPTIONS,
-    ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS
+    ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS,
+    SERVICE_TYPE_WITH_EMPTY_OPTIONS
 } from "../../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState } from "../../../../AppState";
 
@@ -530,6 +531,14 @@ function RetailerComicSubmissionDetail() {
                                         maxWidth="200px"
                                         disabled={true}
                                     />}
+                                    <FormSelectField
+                                        label="Service Type"
+                                        name="serviceType"
+                                        selectedValue={submission.serviceType}
+                                        options={SERVICE_TYPE_WITH_EMPTY_OPTIONS}
+                                        maxWidth="400px"
+                                        disabled={true}
+                                    />
                                     <FormRadioField
                                         label="Status"
                                         name="status"

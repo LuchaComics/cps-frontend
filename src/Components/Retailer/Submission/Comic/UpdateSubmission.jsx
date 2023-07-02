@@ -24,7 +24,8 @@ import {
     PUBLISHER_NAME_OPTIONS,
     CPS_PERCENTAGE_GRADE_OPTIONS,
     ISSUE_COVER_YEAR_OPTIONS,
-    ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS
+    ISSUE_COVER_MONTH_WITH_EMPTY_OPTIONS,
+    SERVICE_TYPE_WITH_EMPTY_OPTIONS
 } from "../../../../Constants/FieldOptions";
 import { topAlertMessageState, topAlertStatusState, currentUserState } from "../../../../AppState";
 
@@ -74,6 +75,7 @@ function RetailerComicSubmissionUpdateForComicSubmission() {
     const [gradingNotes, setGradingNotes] = useState("");
     const [showsSignsOfTamperingOrRestoration, setShowsSignsOfTamperingOrRestoration] = useState("");
     const [status, setStatus] = useState(0);
+    const [serviceType, setServiceType] = useState(0);
 
     ////
     //// Event handling.
@@ -110,7 +112,7 @@ function RetailerComicSubmissionUpdateForComicSubmission() {
             cps_percentage_grade: parseFloat(cpsPercentageGrade),
             shows_signs_of_tampering_or_restoration: parseInt(showsSignsOfTamperingOrRestoration),
             status: status,
-            service_type: 1, // 1 = Pre-Screening Service
+            service_type: serviceType,
             organization_id: currentUser.organizationID,
         };
 
@@ -147,6 +149,7 @@ function RetailerComicSubmissionUpdateForComicSubmission() {
         setShowsSignsOfTamperingOrRestoration(response.showsSignsOfTamperingOrRestoration);
         setGradingNotes(response.gradingNotes);
         setStatus(response.status);
+        setServiceType(response.serviceType);
     }
 
     function onComicSubmissionDetailError(apiErr) {
@@ -627,6 +630,15 @@ function RetailerComicSubmissionUpdateForComicSubmission() {
                                         onChange={(e)=>setCpsPercentageGrade(e.target.value)}
                                         options={CPS_PERCENTAGE_GRADE_OPTIONS}
                                     />}
+                                    <FormSelectField
+                                        label="Service Type"
+                                        name="serviceType"
+                                        selectedValue={serviceType}
+                                        errorText={errors && errors.serviceType}
+                                        onChange={(e)=>setServiceType(parseInt(e.target.value))}
+                                        options={SERVICE_TYPE_WITH_EMPTY_OPTIONS}
+                                        maxWidth="400px"
+                                    />
                                     <div class="columns pt-5">
                                         <div class="column is-half">
                                             <Link to={`/submissions/comic/${id}`} class="button is-medium is-hidden-touch"><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>

@@ -358,3 +358,17 @@ export const SPECIAL_DETAILS_WITH_EMPTY_OPTIONS = [
     { value: "", label: "Please select" }, // EMPTY OPTION
     ...SPECIAL_DETAILS_OPTIONS
 ];
+
+export const SERVICE_TYPE_OPTIONS = [
+    { value: 1, label: 'Pre-Screening Service' },
+    { value: 2, label: 'CPS Pedigree Service' },
+    { value: 3, label: 'CPS Capsule' },
+    { value: 4, label: 'CPS Capsule Indie Mint Gem' },
+    { value: 5, label: 'CPS Capsule Signature Collection' },
+    { value: 6, label: 'CPS Capsule You Grade' },
+];
+
+export const SERVICE_TYPE_WITH_EMPTY_OPTIONS = [
+    { value: "", label: "Please select" }, // EMPTY OPTION
+    ...SERVICE_TYPE_OPTIONS
+];
