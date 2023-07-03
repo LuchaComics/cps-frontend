@@ -413,6 +413,29 @@ function AdminComicSubmissionUpdateForComicSubmission() {
                                         maxWidth="280px"
                                     />}
 
+                                    <FormSelectField
+                                        label="Special Details"
+                                        name="specialDetails"
+                                        placeholder="Text input"
+                                        selectedValue={specialDetails}
+                                        errorText={errors && errors.specialDetails}
+                                        helpText=""
+                                        onChange={(e)=>setSpecialDetails(parseInt(e.target.value))}
+                                        options={SPECIAL_DETAILS_WITH_EMPTY_OPTIONS}
+                                    />
+
+                                    {specialDetails === 1 && <FormInputField
+                                        label="Special Details (Other)"
+                                        name="specialDetailsOther"
+                                        placeholder="Text input"
+                                        value={specialDetailsOther}
+                                        errorText={errors && errors.specialDetailsOther}
+                                        helpText=""
+                                        onChange={(e)=>setSpecialDetailsOther(e.target.value)}
+                                        isRequired={true}
+                                        maxWidth="280px"
+                                    />}
+
                                     <FormTextareaField
                                         label="Special Notes (Optional)"
                                         name="specialNotes"
