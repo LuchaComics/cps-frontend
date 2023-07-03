@@ -344,14 +344,14 @@ export const ATTACHMENT_STATES = {
 }
 
 export const SPECIAL_DETAILS_OPTIONS = [
-    { value: 1, label: 'Other' },
     { value: 2, label: 'Regular Edition' },
     { value: 3, label: 'Direct Edition' },
     { value: 4, label: 'Newsstand Edition' },
     { value: 5, label: 'Variant Cover' },
     { value: 6, label: 'Canadian Price Variant' },
-    { value: 7, label: '250 Facsimile' },
+    { value: 7, label: 'Facsimile' },
     { value: 8, label: 'Reprint' },
+    { value: 1, label: 'Other' },
 ];
 
 export const SPECIAL_DETAILS_WITH_EMPTY_OPTIONS = [
