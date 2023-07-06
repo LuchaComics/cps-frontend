@@ -11,7 +11,8 @@ import PageLoadingContent from "../../../Reusable/PageLoadingContent";
 import FormErrorBox from "../../../Reusable/FormErrorBox";
 import FormInputFieldWithButton from "../../../Reusable/FormInputFieldWithButton";
 import FormSelectField from "../../../Reusable/FormSelectField";
-import { SUBMISSION_STATES, PAGE_SIZE_OPTIONS, SUBMISSION_STATUS_OPTIONS } from "../../../../Constants/FieldOptions";
+import FormDateField from "../../../Reusable/FormDateField";
+import { SUBMISSION_STATES, PAGE_SIZE_OPTIONS, SUBMISSION_STATUS_LIST_OPTIONS } from "../../../../Constants/FieldOptions";
 
 
 function RetailerComicSubmissionList() {
@@ -36,11 +37,12 @@ function RetailerComicSubmissionList() {
     const [previousCursors, setPreviousCursors] = useState([]);             // Pagination
     const [nextCursor, setNextCursor] = useState("");                       // Pagination
     const [currentCursor, setCurrentCursor] = useState("");                 // Pagination
-    const [showFilter, setShowFilter] = useState(true);                    // Filtering + Searching
+    const [showFilter, setShowFilter] = useState(false);                    // Filtering + Searching
     const [sortField, setSortField] = useState("created");                  // Sorting
     const [temporarySearchText, setTemporarySearchText] = useState("");     // Searching - The search field value as your writes their query.
     const [actualSearchText, setActualSearchText] = useState("");           // Searching - The actual search query value to submit to the API.
     const [status, setStatus] = useState("");                               // Filtering
+    const [createdAtGTE, setCreatedAtGTE] = useState(null);                 // Filtering
 
     ////
     //// API.
@@ -84,7 +86,7 @@ function RetailerComicSubmissionList() {
         }, 2000);
 
         // Fetch again an updated list.
-        fetchList(currentCursor, pageSize, actualSearchText, status);
+        fetchList(currentCursor, pageSize, actualSearchText, status, createdAtGTE);
     }
 
     function onComicSubmissionDeleteError(apiErr) {
@@ -115,7 +117,7 @@ function RetailerComicSubmissionList() {
     //// Event handling.
     ////
 
-    const fetchList = (cur, limit, keywords, s) => {
+    const fetchList = (cur, limit, keywords, s, cagte) => {
         setFetching(true);
         setErrors({});
 
@@ -133,6 +135,10 @@ function RetailerComicSubmissionList() {
         }
         if (s !== undefined && s !== null && s !== "") {
             params.set("status", s);
+        }
+        if (cagte !== undefined && cagte !== null && cagte !== "") {
+            const cagteStr = cagte.getTime();
+            params.set("created_at_gte", cagteStr);
         }
 
         getComicSubmissionListAPI(
@@ -194,11 +200,11 @@ function RetailerComicSubmissionList() {
 
         if (mounted) {
             window.scrollTo(0, 0);  // Start the page at the top of the page.
-            fetchList(currentCursor, pageSize, actualSearchText, status);
+            fetchList(currentCursor, pageSize, actualSearchText, status, createdAtGTE);
         }
 
         return () => { mounted = false; }
-    }, [currentCursor, pageSize, actualSearchText, status]);
+    }, [currentCursor, pageSize, actualSearchText, status, createdAtGTE]);
 
     ////
     //// Component rendering.
@@ -238,7 +244,7 @@ function RetailerComicSubmissionList() {
                                 <h1 class="title is-4"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions List</h1>
                             </div>
                             <div class="column has-text-right">
-                                <button onClick={()=>fetchList(currentCursor, pageSize, actualSearchText, status)} class="button is-small is-info" type="button">
+                                <button onClick={()=>fetchList(currentCursor, pageSize, actualSearchText, status, createdAtGTE)} class="button is-small is-info" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faRefresh} />
                                 </button>
                                 &nbsp;
@@ -277,8 +283,20 @@ function RetailerComicSubmissionList() {
                                         selectedValue={status}
                                         helpText=""
                                         onChange={(e)=>setStatus(parseInt(e.target.value))}
-                                        options={SUBMISSION_STATUS_OPTIONS}
+                                        options={SUBMISSION_STATUS_LIST_OPTIONS}
                                         isRequired={true}
+                                    />
+                                </div>
+                                <div class="column">
+                                    <FormDateField
+                                        label="Created After"
+                                        name="createdAtGTE"
+                                        placeholder="Text input"
+                                        value={createdAtGTE}
+                                        helpText=""
+                                        onChange={(date)=>setCreatedAtGTE(date)}
+                                        isRequired={true}
+                                        maxWidth="120px"
                                     />
                                 </div>
                             </div>

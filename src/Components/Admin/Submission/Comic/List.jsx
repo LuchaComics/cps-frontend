@@ -7,7 +7,7 @@ import { useRecoilState } from 'recoil';
 
 import { getComicSubmissionListAPI, deleteComicSubmissionAPI } from "../../../../API/ComicSubmission";
 import { topAlertMessageState, topAlertStatusState, currentUserState } from "../../../../AppState";
-import { SUBMISSION_STATES, PAGE_SIZE_OPTIONS, SUBMISSION_STATUS_OPTIONS } from "../../../../Constants/FieldOptions";
+import { SUBMISSION_STATES, PAGE_SIZE_OPTIONS, SUBMISSION_STATUS_LIST_OPTIONS } from "../../../../Constants/FieldOptions";
 import FormErrorBox from "../../../Reusable/FormErrorBox";
 import FormInputFieldWithButton from "../../../Reusable/FormInputFieldWithButton";
 import FormSelectField from "../../../Reusable/FormSelectField";
@@ -283,7 +283,7 @@ function AdminComicSubmissionList() {
                                         selectedValue={status}
                                         helpText=""
                                         onChange={(e)=>setStatus(parseInt(e.target.value))}
-                                        options={SUBMISSION_STATUS_OPTIONS}
+                                        options={SUBMISSION_STATUS_LIST_OPTIONS}
                                         isRequired={true}
                                     />
                                 </div>

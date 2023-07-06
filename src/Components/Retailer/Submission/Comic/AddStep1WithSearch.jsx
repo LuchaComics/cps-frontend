@@ -151,7 +151,7 @@ function RetailerComicSubmissionAddStep1WithSearch() {
                             <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
                             <li class=""><Link to="/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
                             <li class=""><Link to="/submissions/comics" aria-current="page"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comics</Link></li>
-                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
+                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;New</Link></li>
                         </ul>
                     </nav>
 
@@ -173,7 +173,7 @@ function RetailerComicSubmissionAddStep1WithSearch() {
                             </div>
                         </div>
 
-                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comic Submission</p>
+                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;New Comic Submission</p>
                         <FormErrorBox errors={errors} />
 
                         <div class="container pb-6">

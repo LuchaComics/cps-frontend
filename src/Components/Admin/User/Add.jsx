@@ -226,13 +226,13 @@ function AdminUserAdd() {
                                 <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
                                 <li class=""><Link to="/admin/organizations" aria-current="page"><FontAwesomeIcon className="fas" icon={faBuilding} />&nbsp;Organizations</Link></li>
                                 <li class=""><Link to={`/admin/organization/${orgID}/users`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail (Users)</Link></li>
-                                <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add User</Link></li>
+                                <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;New User</Link></li>
                             </ul>
                             :
                             <ul>
                                 <li class=""><Link to="/admin/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</Link></li>
                                 <li class=""><Link to="/admin/users" aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Users</Link></li>
-                                <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
+                                <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;New</Link></li>
                             </ul>
                         }
                     </nav>
@@ -259,7 +259,7 @@ function AdminUserAdd() {
                             </div>
                         </div>
 
-                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add User</p>
+                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;New User</p>
                         <FormErrorBox errors={errors} />
 
                         {/* <p class="pb-4 has-text-grey">Please fill out all the required fields before submitting this form.</p> */}

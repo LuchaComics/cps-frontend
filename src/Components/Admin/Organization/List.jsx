@@ -11,7 +11,8 @@ import FormErrorBox from "../../Reusable/FormErrorBox";
 import PageLoadingContent from "../../Reusable/PageLoadingContent";
 import FormInputFieldWithButton from "../../Reusable/FormInputFieldWithButton";
 import FormSelectField from "../../Reusable/FormSelectField";
-import { PAGE_SIZE_OPTIONS, ORGANIZATION_STATUS_OPTIONS } from "../../../Constants/FieldOptions";
+import FormDateField from "../../Reusable/FormDateField";
+import { PAGE_SIZE_OPTIONS, ORGANIZATION_STATUS_LIST_OPTIONS } from "../../../Constants/FieldOptions";
 
 
 function AdminOrganizationList() {
@@ -41,6 +42,7 @@ function AdminOrganizationList() {
     const [temporarySearchText, setTemporarySearchText] = useState("");     // Searching - The search field value as your writes their query.
     const [actualSearchText, setActualSearchText] = useState("");           // Searching - The actual search query value to submit to the API.
     const [status, setStatus] = useState("");                               // Filtering
+    const [createdAtGTE, setCreatedAtGTE] = useState(null);                 // Filtering
 
 
     ////
@@ -86,7 +88,7 @@ function AdminOrganizationList() {
         }, 2000);
 
         // Fetch again an updated list.
-        fetchList(currentCursor, pageSize, actualSearchText, status);
+        fetchList(currentCursor, pageSize, actualSearchText, status, createdAtGTE);
     }
 
     function onOrganizationDeleteError(apiErr) {
@@ -117,7 +119,7 @@ function AdminOrganizationList() {
     //// Event handling.
     ////
 
-    const fetchList = (cur, limit, keywords, s) => {
+    const fetchList = (cur, limit, keywords, s, cagte) => {
         setFetching(true);
         setErrors({});
 
@@ -135,6 +137,10 @@ function AdminOrganizationList() {
         }
         if (s !== undefined && s !== null && s !== "") {
             params.set("status", s);
+        }
+        if (cagte !== undefined && cagte !== null && cagte !== "") {
+            const cagteStr = cagte.getTime();
+            params.set("created_at_gte", cagteStr);
         }
 
         getOrganizationListAPI(
@@ -196,11 +202,11 @@ function AdminOrganizationList() {
 
         if (mounted) {
             window.scrollTo(0, 0);  // Start the page at the top of the page.
-            fetchList(currentCursor, pageSize, actualSearchText, status);
+            fetchList(currentCursor, pageSize, actualSearchText, status, createdAtGTE);
         }
 
         return () => { mounted = false; }
-    }, [currentCursor, pageSize, actualSearchText, status]);
+    }, [currentCursor, pageSize, actualSearchText, status, createdAtGTE]);
 
     ////
     //// Component rendering.
@@ -239,7 +245,7 @@ function AdminOrganizationList() {
                                 <h1 class="title is-4"><FontAwesomeIcon className="fas" icon={faBuilding} />&nbsp;Organizations List</h1>
                             </div>
                             <div class="column has-text-right">
-                                <button onClick={()=>fetchList(currentCursor, pageSize, actualSearchText, status)} class="button is-small is-info" type="button">
+                                <button onClick={()=>fetchList(currentCursor, pageSize, actualSearchText, status, createdAtGTE)} class="button is-small is-info" type="button">
                                     <FontAwesomeIcon className="mdi" icon={faRefresh} />
                                 </button>
                                 &nbsp;
@@ -278,8 +284,20 @@ function AdminOrganizationList() {
                                         selectedValue={status}
                                         helpText=""
                                         onChange={(e)=>setStatus(parseInt(e.target.value))}
-                                        options={ORGANIZATION_STATUS_OPTIONS}
+                                        options={ORGANIZATION_STATUS_LIST_OPTIONS}
                                         isRequired={true}
+                                    />
+                                </div>
+                                <div class="column">
+                                    <FormDateField
+                                        label="Created After"
+                                        name="createdAtGTE"
+                                        placeholder="Text input"
+                                        value={createdAtGTE}
+                                        helpText=""
+                                        onChange={(date)=>setCreatedAtGTE(date)}
+                                        isRequired={true}
+                                        maxWidth="120px"
                                     />
                                 </div>
                             </div>

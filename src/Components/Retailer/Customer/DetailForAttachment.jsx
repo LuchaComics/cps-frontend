@@ -273,11 +273,11 @@ function RetailerCustomerDetailForAttachment() {
                             {customer && <div class="column has-text-right">
                                 {/* Mobile Specific */}
                                 <Link to={`/customer/${id}/attachments/add`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
-                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add Attachment
+                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;New Attachment
                                 </Link>
                                 {/* Desktop Specific */}
                                 <Link to={`/customer/${id}/attachments/add`} class="button is-small is-success is-hidden-touch" type="button">
-                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add Attachment
+                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;New Attachment
                                 </Link>
                             </div>}
                         </div>
@@ -399,8 +399,8 @@ function RetailerCustomerDetailForAttachment() {
                                             <Link class="button is-fullwidth is-hidden-desktop" to={`/customers`}><FontAwesomeIcon className="fas" icon={faArrowLeft} />&nbsp;Back</Link>
                                         </div>
                                         <div class="column is-half has-text-right">
-                                            <Link to={`/customer/${id}/attachments/add`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Attachment</Link>
-                                            <Link to={`/customer/${id}/attachments/add`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Attachment</Link>
+                                            <Link to={`/customer/${id}/attachments/add`} class="button is-primary is-hidden-touch"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;New Attachment</Link>
+                                            <Link to={`/customer/${id}/attachments/add`} class="button is-primary is-fullwidth is-hidden-desktop"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;New Attachment</Link>
                                         </div>
                                     </div>
 

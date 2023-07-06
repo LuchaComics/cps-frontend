@@ -151,11 +151,11 @@ function RetailerCustomerAttachmentAdd() {
                             <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
                             <li class=""><Link to="/customers" aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers</Link></li>
                             <li class=""><Link to={`/customer/${id}/attachments`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail (Attachments)</Link></li>
-                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
+                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;New</Link></li>
                         </ul>
                     </nav>
                     <nav class="box">
-                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Attachment</p>
+                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;New Attachment</p>
                         <FormErrorBox errors={errors} />
 
                         {/* <p class="pb-4 has-text-grey">Please fill out all the required fields before submitting this form.</p> */}

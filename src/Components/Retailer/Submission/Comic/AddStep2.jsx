@@ -233,14 +233,14 @@ function RetailerComicSubmissionAddStep3() {
                                 <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
                                 <li class=""><Link to="/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
                                 <li class=""><Link to="/submissions/comics" aria-current="page"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comics</Link></li>
-                                <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
+                                <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;New</Link></li>
                             </ul>
                             :
                             <ul>
                                 <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
                                 <li class=""><Link to="/customers" aria-current="page"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customers</Link></li>
                                 <li class=""><Link to={`/customer/${customerID}/comics`} aria-current="page"><FontAwesomeIcon className="fas" icon={faEye} />&nbsp;Detail (Comics)</Link></li>
-                                <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
+                                <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;New</Link></li>
                             </ul>
                         }
                     </nav>
@@ -267,7 +267,7 @@ function RetailerComicSubmissionAddStep3() {
                             </div>
                         </div>
 
-                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comic Submission</p>
+                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;New Comic Submission</p>
 
 
                         {isFetching

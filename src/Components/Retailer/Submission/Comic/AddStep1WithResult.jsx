@@ -150,7 +150,7 @@ function RetailerComicSubmissionAddStep1WithResult() {
                             <li class=""><Link to="/dashboard" aria-current="page"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Dashboard</Link></li>
                             <li class=""><Link to="/submissions" aria-current="page"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submissions</Link></li>
                             <li class=""><Link to="/submissions/comics" aria-current="page"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comics</Link></li>
-                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add</Link></li>
+                            <li class="is-active"><Link aria-current="page"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;New</Link></li>
                         </ul>
                     </nav>
 
@@ -172,7 +172,7 @@ function RetailerComicSubmissionAddStep1WithResult() {
                             </div>
                         </div>
 
-                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comic Submission</p>
+                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;New Comic Submission</p>
                         <p class="pb-4 has-text-grey">Please select the customer from the following results.</p>
                         <FormErrorBox errors={errors} />
 
