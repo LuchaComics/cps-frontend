@@ -61,7 +61,7 @@ function RegisterSuccessful() {
                                     <div class="is-rounded column is-two-third-tablet">
                                         <article class="message is-primary">
                                           <div class="message-body">
-                                                <h1 className="title is-2 has-text-centered has-text-success"><FontAwesomeIcon className="fas" icon={faEnvelope} />&nbsp;Email Sent</h1>
+                                                <h1 className="title is-4 has-text-centered has-text-success"><FontAwesomeIcon className="fas" icon={faEnvelope} />&nbsp;Email Sent</h1>
                                                 <FormErrorBox errors={errors} />
                                                 <p>Thank you for registering - an <b>activation email</b> has bee sent to you. Please be sure to check your social, promotions and spam folders if it does not arrive within 5 minutes.</p>
                                                 <p>

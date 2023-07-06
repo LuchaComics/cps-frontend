@@ -130,7 +130,7 @@ function AdminSubmissionAttachmentDetail() {
                         </ul>
                     </nav>
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faFile} />&nbsp;Attachment</p>
+                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faFile} />&nbsp;Attachment</p>
 
                         {/* <p class="pb-4 has-text-grey">Please fill out all the required fields before submitting this form.</p> */}
 

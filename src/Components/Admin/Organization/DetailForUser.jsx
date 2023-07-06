@@ -270,7 +270,7 @@ function AdminOrganizationDetailForUserList() {
                     <nav class="box">
                         <div class="columns">
                             <div class="column">
-                                <p class="title is-2"><FontAwesomeIcon className="fas" icon={faBuilding} />&nbsp;Organization</p>
+                                <p class="title is-4"><FontAwesomeIcon className="fas" icon={faBuilding} />&nbsp;Organization</p>
                             </div>
                             <div class="column has-text-right">
                                 {/* Mobile Specific */}
@@ -313,7 +313,7 @@ function AdminOrganizationDetailForUserList() {
                                       </ul>
                                     </div>
 
-                                    <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Users</p>
+                                    <p class="subtitle is-6 pt-4"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Users</p>
                                     <hr />
 
                                     {!isFetching && users && users.results && (users.results.length > 0 || previousCursors.length > 0)

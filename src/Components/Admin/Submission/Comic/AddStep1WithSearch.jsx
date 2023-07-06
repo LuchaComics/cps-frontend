@@ -172,11 +172,11 @@ function AdminComicSubmissionAddStep1WithSearch() {
                             </div>
                         </div>
 
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comic Submission</p>
+                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comic Submission</p>
                         <FormErrorBox errors={errors} />
 
                         <div class="container pb-6">
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customer Options</p>
+                            <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Customer Options</p>
                             <hr />
 
                             <Link class="is-medium is-warning" to="/admin/users/add" target="_blank" rel="noreferrer">Create a customer&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} /></Link>&nbsp;&nbsp;<br /><br />
@@ -184,7 +184,7 @@ function AdminComicSubmissionAddStep1WithSearch() {
                         </div>
 
                         <div class="container pb-5">
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search Customers</p>
+                            <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search Customers</p>
                             <hr />
 
                             <FormInputField
@@ -201,7 +201,7 @@ function AdminComicSubmissionAddStep1WithSearch() {
                         </div>
 
                         <div class="container pb-6">
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faFilter} />&nbsp;Filter Customers</p>
+                            <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faFilter} />&nbsp;Filter Customers</p>
                             <hr />
 
                             <FormInputField

@@ -233,7 +233,7 @@ function RetailerComicSubmissionUpdatePickCustomerWithResult() {
                             </div>
                         </div>
 
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update Comic Submission</p>
+                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update Comic Submission</p>
                         <p class="pb-4 has-text-grey">Please select the customer from the following results.</p>
                         <FormErrorBox errors={errors} />
 
@@ -243,7 +243,7 @@ function RetailerComicSubmissionUpdatePickCustomerWithResult() {
                             :
                             <>
                                 <div class="container pb-5">
-                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Results</p>
+                                    <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Results</p>
                                     <hr />
                                     <div class="columns">
                                         {customers && customers.results && customers.results.map(function(customer, i){

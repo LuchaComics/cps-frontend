@@ -200,7 +200,7 @@ function AdminComicSubmissionDetailForCommentList() {
                         </ul>
                     </nav>
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submission</p>
+                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submission</p>
                         <FormErrorBox errors={errors} />
 
                         {isFetching
@@ -229,7 +229,7 @@ function AdminComicSubmissionDetailForCommentList() {
                                       </ul>
                                     </div>
 
-                                    <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faComments} />&nbsp;Comments</p>
+                                    <p class="subtitle is-6 pt-4"><FontAwesomeIcon className="fas" icon={faComments} />&nbsp;Comments</p>
                                     <hr />
 
                                     {submission.comments && submission.comments.length > 0 && <>

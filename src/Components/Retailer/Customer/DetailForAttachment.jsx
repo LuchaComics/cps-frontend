@@ -268,7 +268,7 @@ function RetailerCustomerDetailForAttachment() {
                     <nav class="box">
                         <div class="columns">
                             <div class="column">
-                                <p class="title is-2"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Customer</p>
+                                <p class="title is-4"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Customer</p>
                             </div>
                             {customer && <div class="column has-text-right">
                                 {/* Mobile Specific */}
@@ -312,7 +312,7 @@ function RetailerCustomerDetailForAttachment() {
                                         ?
                                         <div class="container">
 
-                                            <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faFile} />&nbsp;Attachments</p>
+                                            <p class="subtitle is-6 pt-4"><FontAwesomeIcon className="fas" icon={faFile} />&nbsp;Attachments</p>
                                             <hr />
 
                                             <div class="b-table">

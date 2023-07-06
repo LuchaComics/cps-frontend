@@ -137,7 +137,7 @@ function AccountChangePassword() {
                         </ul>
                     </nav>
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Account</p>
+                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Account</p>
                         <FormErrorBox errors={errors} />
 
                         {/* <p class="pb-4">Please fill out all the required fields before submitting this form.</p> */}
@@ -149,7 +149,7 @@ function AccountChangePassword() {
                             <>
                                 <div class="container">
 
-                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faKey} />&nbsp;Change Password</p>
+                                    <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faKey} />&nbsp;Change Password</p>
                                     <hr />
 
                                     <FormInputField

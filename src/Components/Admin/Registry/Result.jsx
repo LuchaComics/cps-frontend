@@ -126,7 +126,7 @@ function AdminRegistryResult() {
                         </ul>
                     </nav>
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission</p>
+                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Submission</p>
                         <FormErrorBox errors={errors} />
 
                         {isFetching
@@ -136,7 +136,7 @@ function AdminRegistryResult() {
                             <>
                                 {submission && <div class="container">
 
-                                    <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comic Book Information</p>
+                                    <p class="subtitle is-6 pt-4"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comic Book Information</p>
                                     <hr />
 
                                     {submission && <FormInputField
@@ -229,7 +229,7 @@ function AdminRegistryResult() {
                                         rows={4}
                                     />
 
-                                    <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faMagnifyingGlass} />&nbsp;Summary of Findings</p>
+                                    <p class="subtitle is-6 pt-4"><FontAwesomeIcon className="fas" icon={faMagnifyingGlass} />&nbsp;Summary of Findings</p>
                                     <hr />
 
                                     <FormRadioField
@@ -256,7 +256,7 @@ function AdminRegistryResult() {
                                         rows={4}
                                     />
 
-                                    <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faBalanceScale} />&nbsp;Grading</p>
+                                    <p class="subtitle is-6 pt-4"><FontAwesomeIcon className="fas" icon={faBalanceScale} />&nbsp;Grading</p>
                                     <hr />
 
                                     <FormRadioField

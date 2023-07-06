@@ -157,11 +157,11 @@ function AdminComicSubmissionUpdatePickCustomerWithSearch() {
                     </nav>
 
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update Comic Submission</p>
+                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Update Comic Submission</p>
                         <FormErrorBox errors={errors} />
 
                         <div class="container pb-5">
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search</p>
+                            <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Search</p>
                             <hr />
 
                             <FormInputField
@@ -178,7 +178,7 @@ function AdminComicSubmissionUpdatePickCustomerWithSearch() {
                         </div>
 
                         <div class="container pb-5">
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faFilter} />&nbsp;Filter</p>
+                            <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faFilter} />&nbsp;Filter</p>
                             <hr />
 
                             <FormInputField

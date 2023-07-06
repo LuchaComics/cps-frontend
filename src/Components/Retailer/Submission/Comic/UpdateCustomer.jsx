@@ -392,7 +392,7 @@ function RetailerComicSubmissionUpdateForCustomer() {
                         </ul>
                     </nav>
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submission</p>
+                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submission</p>
                         <FormErrorBox errors={errors} />
 
                         <p class="pb-4 has-text-grey">Please fill out all the required fields before submitting this form.</p>
@@ -404,7 +404,7 @@ function RetailerComicSubmissionUpdateForCustomer() {
                             <>
                                 <div class="container">
 
-                                    <p class="subtitle is-3">Comic Book Information</p>
+                                    <p class="subtitle is-6">Comic Book Information</p>
                                     <hr />
 
                                     <FormInputField
@@ -543,7 +543,7 @@ function RetailerComicSubmissionUpdateForCustomer() {
                                         helpText={"Max 17 characters"}
                                     />
 
-                                    <p class="subtitle is-3">Summary of Findings</p>
+                                    <p class="subtitle is-6">Summary of Findings</p>
                                     <hr />
 
                                     <FormRadioField
@@ -808,7 +808,7 @@ function RetailerComicSubmissionUpdateForCustomer() {
                                         helpText={"Max 17 characters"}
                                     />
 
-                                    <p class="subtitle is-3">Grading</p>
+                                    <p class="subtitle is-6">Grading</p>
                                     <hr />
 
                                     <FormRadioField

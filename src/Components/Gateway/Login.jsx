@@ -217,7 +217,7 @@ function Login() {
                                             </nav>
                                             {/* End Logo */}
                                             <form>
-                                                <h1 className="title is-2 has-text-centered">Sign In</h1>
+                                                <h1 className="title is-4 has-text-centered">Sign In</h1>
                                                 {isUnauthorized === "true" &&
                                                     <article class="message is-danger">
                                                       <div class="message-body"><FontAwesomeIcon className="fas" icon={faTriangleExclamation} />&nbsp;Your session has ended.<br/>Please login again</div>

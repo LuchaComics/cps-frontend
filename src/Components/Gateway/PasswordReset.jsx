@@ -186,7 +186,7 @@ function PasswordReset() {
                                                 ?
                                                 <>
                                                     <form>
-                                                        <h1 className="title is-2 has-text-centered">Password Reset</h1>
+                                                        <h1 className="title is-4 has-text-centered">Password Reset</h1>
                                                         <p className="pb-5 has-text-grey">Please enter a new password.</p>
                                                         <FormErrorBox errors={errors} />
 

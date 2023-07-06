@@ -81,12 +81,12 @@ function RetailerSubmissionPickTypeForAdd() {
                         }
                     </nav>
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Submission</p>
+                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Submission</p>
                         <div class="container">
 
                             <p class="pb-4 has-text-grey">Please select the type of collectible product you would like to submit to CPS.</p>
 
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faCube} />&nbsp;Product Type</p>
+                            <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faCube} />&nbsp;Product Type</p>
                             <hr />
 
                             <div class="columns pt-5">

@@ -171,7 +171,7 @@ function AdminOrganizationUpdate() {
                         </ul>
                     </nav>
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faBuilding} />&nbsp;Organization</p>
+                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faBuilding} />&nbsp;Organization</p>
                         <FormErrorBox errors={errors} />
 
                         {/* <p class="pb-4">Please fill out all the required fields before submitting this form.</p> */}
@@ -183,7 +183,7 @@ function AdminOrganizationUpdate() {
                             <>
                                 <div class="container">
 
-                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Identification</p>
+                                    <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Identification</p>
                                     <hr />
 
                                     <FormInputField

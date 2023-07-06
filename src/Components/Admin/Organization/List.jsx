@@ -2,14 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Scroll from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUsers, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight, faTable, faBuilding } from '@fortawesome/free-solid-svg-icons';
+import { faUsers, faTachometer, faEye, faPencil, faTrashCan, faPlus, faGauge, faArrowRight, faTable, faBuilding, faRefresh, faFilter, faSearch  } from '@fortawesome/free-solid-svg-icons';
 import { useRecoilState } from 'recoil';
 
 import { getOrganizationListAPI, deleteOrganizationAPI } from "../../../API/organization";
-import { topAlertMessageState, topAlertStatusState } from "../../../AppState";
+import { topAlertMessageState, topAlertStatusState, currentUserState } from "../../../AppState";
 import FormErrorBox from "../../Reusable/FormErrorBox";
 import PageLoadingContent from "../../Reusable/PageLoadingContent";
-import { PAGE_SIZE_OPTIONS } from "../../../Constants/FieldOptions";
+import FormInputFieldWithButton from "../../Reusable/FormInputFieldWithButton";
+import FormSelectField from "../../Reusable/FormSelectField";
+import { PAGE_SIZE_OPTIONS, ORGANIZATION_STATUS_OPTIONS } from "../../../Constants/FieldOptions";
 
 
 function AdminOrganizationList() {
@@ -20,6 +22,7 @@ function AdminOrganizationList() {
 
     const [topAlertMessage, setTopAlertMessage] = useRecoilState(topAlertMessageState);
     const [topAlertStatus, setTopAlertStatus] = useRecoilState(topAlertStatusState);
+    const [currentUser] = useRecoilState(currentUserState);
 
     ////
     //// Component states.
@@ -29,10 +32,16 @@ function AdminOrganizationList() {
     const [organizations, setOrganizations] = useState("");
     const [selectedOrganizationForDeletion, setSelectedOrganizationForDeletion] = useState("");
     const [isFetching, setFetching] = useState(false);
-    const [pageSize, setPageSize] = useState(10);               // Pagination
-    const [previousCursors, setPreviousCursors] = useState([]); // Pagination
-    const [nextCursor, setNextCursor] = useState("");           // Pagination
-    const [currentCursor, setCurrentCursor] = useState("");     // Pagination
+    const [pageSize, setPageSize] = useState(10);                           // Pagination
+    const [previousCursors, setPreviousCursors] = useState([]);             // Pagination
+    const [nextCursor, setNextCursor] = useState("");                       // Pagination
+    const [currentCursor, setCurrentCursor] = useState("");                 // Pagination
+    const [showFilter, setShowFilter] = useState(false);                    // Filtering + Searching
+    const [sortField, setSortField] = useState("created");                  // Sorting
+    const [temporarySearchText, setTemporarySearchText] = useState("");     // Searching - The search field value as your writes their query.
+    const [actualSearchText, setActualSearchText] = useState("");           // Searching - The actual search query value to submit to the API.
+    const [status, setStatus] = useState("");                               // Filtering
+
 
     ////
     //// API.
@@ -77,7 +86,7 @@ function AdminOrganizationList() {
         }, 2000);
 
         // Fetch again an updated list.
-        fetchList(currentCursor, pageSize);
+        fetchList(currentCursor, pageSize, actualSearchText, status);
     }
 
     function onOrganizationDeleteError(apiErr) {
@@ -108,15 +117,24 @@ function AdminOrganizationList() {
     //// Event handling.
     ////
 
-    const fetchList = (cur, limit) => {
+    const fetchList = (cur, limit, keywords, s) => {
         setFetching(true);
         setErrors({});
 
         let params = new Map();
-        params.set("page_size", limit);
+        params.set("page_size", limit);     // Pagination
+        params.set("sort_field", "created") // Sorting
 
-        if (cur !== "") {
+        if (cur !== "") { // Pagination
             params.set("cursor", cur);
+        }
+
+        // Filtering
+        if (keywords !== undefined && keywords !== null && keywords !== "") { // Searhcing
+            params.set("search", keywords);
+        }
+        if (s !== undefined && s !== null && s !== "") {
+            params.set("status", s);
         }
 
         getOrganizationListAPI(
@@ -151,6 +169,11 @@ function AdminOrganizationList() {
         setSelectedOrganizationForDeletion("");
     }
 
+    const onSearchButtonClick = (e) => { // Searching
+        console.log("Search button clicked...");
+        setActualSearchText(temporarySearchText);
+    }
+
     const onDeleteConfirmButtonClick = (e) => {
         console.log("onDeleteConfirmButtonClick"); // For debugging purposes only.
 
@@ -173,11 +196,11 @@ function AdminOrganizationList() {
 
         if (mounted) {
             window.scrollTo(0, 0);  // Start the page at the top of the page.
-            fetchList(currentCursor, pageSize);
+            fetchList(currentCursor, pageSize, actualSearchText, status);
         }
 
         return () => { mounted = false; }
-    }, [currentCursor, pageSize]);
+    }, [currentCursor, pageSize, actualSearchText, status]);
 
     ////
     //// Component rendering.
@@ -211,29 +234,63 @@ function AdminOrganizationList() {
                             </div>
                         </div>
 
-                        <div class="columns">
+                        <div class="columns is-mobile">
                             <div class="column">
-                                <h1 class="title is-2"><FontAwesomeIcon className="fas" icon={faBuilding} />&nbsp;Organizations List</h1>
+                                <h1 class="title is-4"><FontAwesomeIcon className="fas" icon={faBuilding} />&nbsp;Organizations List</h1>
                             </div>
-                            {/* HIDDEN */}
-                            <div class="is-hidden column has-text-right">
-                                {/* Mobile Specific */}
-                                <Link to={`/admin/organizations/add`} class="button is-small is-success is-fullwidth is-hidden-desktop" type="button">
-                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add Organization
-                                </Link>
-                                {/* Desktop Specific */}
-                                <Link to={`/admin/organizations/add`} class="button is-small is-success is-hidden-touch" type="button">
-                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;Add Organization
+                            <div class="column has-text-right">
+                                <button onClick={()=>fetchList(currentCursor, pageSize, actualSearchText, status)} class="button is-small is-info" type="button">
+                                    <FontAwesomeIcon className="mdi" icon={faRefresh} />
+                                </button>
+                                &nbsp;
+                                <button onClick={(e)=>setShowFilter(!showFilter)} class="button is-small is-success" type="button">
+                                    <FontAwesomeIcon className="mdi" icon={faFilter} />&nbsp;Filter
+                                </button>
+                                &nbsp;
+                                <Link to={`/admin/organizations/add`} class="button is-small is-primary" type="button">
+                                    <FontAwesomeIcon className="mdi" icon={faPlus} />&nbsp;New Organization
                                 </Link>
                             </div>
                         </div>
-                        <FormErrorBox errors={errors} />
+
+                        {showFilter &&
+                            <div class="columns has-background-white-bis" style={{borderRadius:"15px", padding:"20px"}}>
+                                <div class="column">
+                                    <FormInputFieldWithButton
+                                        label={"Search"}
+                                        name="temporarySearchText"
+                                        type="text"
+                                        placeholder="Search by name"
+                                        value={temporarySearchText}
+                                        helpText=""
+                                        onChange={(e)=>setTemporarySearchText(e.target.value)}
+                                        isRequired={true}
+                                        maxWidth="100%"
+                                        buttonLabel={<><FontAwesomeIcon className="fas" icon={faSearch} /></>}
+                                        onButtonClick={onSearchButtonClick}
+                                    />
+                                </div>
+                                <div class="column">
+                                    <FormSelectField
+                                        label="Status"
+                                        name="status"
+                                        placeholder="Pick status"
+                                        selectedValue={status}
+                                        helpText=""
+                                        onChange={(e)=>setStatus(parseInt(e.target.value))}
+                                        options={ORGANIZATION_STATUS_OPTIONS}
+                                        isRequired={true}
+                                    />
+                                </div>
+                            </div>
+                        }
 
                         {isFetching
                             ?
                             <PageLoadingContent displayMessage={"Loading..."} />
                             :
                             <>
+                                <FormErrorBox errors={errors} />
                                 {organizations && organizations.results && (organizations.results.length > 0 || previousCursors.length > 0)
                                     ?
                                     <div class="container">

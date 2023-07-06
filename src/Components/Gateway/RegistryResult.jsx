@@ -121,9 +121,9 @@ function PublicRegistryResult() {
                                             {submission
                                                 ?
                                                 <form>
-                                                    <h1 className="title is-2 has-text-centered">Registry:</h1>
+                                                    <h1 className="title is-4 has-text-centered">Registry:</h1>
 
-                                                    <p class="subtitle is-3 pt-4 has-text-centered"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comic Book Information</p>
+                                                    <p class="subtitle is-6 pt-4 has-text-centered"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comic Book Information</p>
                                                     <hr />
 
                                                     <div class="field pb-4">
@@ -234,7 +234,7 @@ function PublicRegistryResult() {
                                                         rows={4}
                                                     />
 
-                                                    <p class="subtitle is-3 pt-4 has-text-centered"><FontAwesomeIcon className="fas" icon={faMagnifyingGlass} />&nbsp;Summary of Findings</p>
+                                                    <p class="subtitle is-6 pt-4 has-text-centered"><FontAwesomeIcon className="fas" icon={faMagnifyingGlass} />&nbsp;Summary of Findings</p>
                                                     <hr />
 
                                                     <FormRadioField
@@ -261,7 +261,7 @@ function PublicRegistryResult() {
                                                         rows={4}
                                                     />
 
-                                                    <p class="subtitle is-3 pt-4 has-text-centered"><FontAwesomeIcon className="fas" icon={faBalanceScale} />&nbsp;Grading</p>
+                                                    <p class="subtitle is-6 pt-4 has-text-centered"><FontAwesomeIcon className="fas" icon={faBalanceScale} />&nbsp;Grading</p>
                                                     <hr />
 
                                                     <FormRadioField
@@ -310,7 +310,7 @@ function PublicRegistryResult() {
                                                 </form>
                                                 :
                                                 <>
-                                                    <h1 className="title is-2 has-text-centered">Registry:</h1>
+                                                    <h1 className="title is-4 has-text-centered">Registry:</h1>
                                                     <article class="message is-danger">
                                                         <div class="message-body">
                                                         No registry record found for this CSPR #.

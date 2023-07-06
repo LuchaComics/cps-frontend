@@ -174,13 +174,13 @@ function Register() {
                 <section class="section">
 
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Register</p>
+                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Register</p>
                         <FormErrorBox errors={errors} />
 
                         {isFetching && <PageLoadingContent displayMessage={"Submitting..."} />}
 
                         {!isFetching && <div class="container">
-                            <p class="subtitle is-3">Details</p>
+                            <p class="subtitle is-6">Details</p>
 
                             <FormInputField
                                 label="First Name"
@@ -232,7 +232,7 @@ function Register() {
                                 maxWidth="380px"
                             />
 
-                            <p class="subtitle is-3">Contact Information</p>
+                            <p class="subtitle is-6">Contact Information</p>
 
                             <FormInputField
                                 label="Email"
@@ -259,7 +259,7 @@ function Register() {
                                 maxWidth="150px"
                             />
 
-                            <p class="subtitle is-3">Address</p>
+                            <p class="subtitle is-6">Address</p>
 
                             <FormCountryField
                                 priorityOptions={["CA","US","MX"]}
@@ -335,7 +335,7 @@ function Register() {
                                 maxWidth="80px"
                             />
 
-                            <p class="subtitle is-3">Company & Misc.</p>
+                            <p class="subtitle is-6">Company & Misc.</p>
 
                             <FormInputField
                                 label="Company Name"

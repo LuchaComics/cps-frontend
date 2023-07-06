@@ -172,12 +172,12 @@ function AdminComicSubmissionAddStep1WithResult() {
                             </div>
                         </div>
 
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comic Submission</p>
+                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comic Submission</p>
                         <p class="pb-4 has-text-grey">Please select the user from the following results.</p>
                         <FormErrorBox errors={errors} />
 
                         <div class="container pb-5">
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Results</p>
+                            <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Results</p>
                             <hr />
 
                             {isFetching

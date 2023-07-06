@@ -212,7 +212,7 @@ function AdminUserList() {
 
                         <div class="columns">
                             <div class="column">
-                                <h1 class="title is-2"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Users List</h1>
+                                <h1 class="title is-4"><FontAwesomeIcon className="fas" icon={faUsers} />&nbsp;Users List</h1>
                             </div>
                             <div class="column has-text-right">
                                 {/* Mobile Specific */}

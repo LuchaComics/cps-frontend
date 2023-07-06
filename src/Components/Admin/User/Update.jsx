@@ -263,7 +263,7 @@ function AdminUserUpdate() {
                         </ul>
                     </nav>
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;User</p>
+                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;User</p>
                         <FormErrorBox errors={errors} />
 
                         {/* <p class="pb-4">Please fill out all the required fields before submitting this form.</p> */}
@@ -274,7 +274,7 @@ function AdminUserUpdate() {
                             :
                             <>
                                 <div class="container">
-                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faCogs} />&nbsp;Settings</p>
+                                    <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faCogs} />&nbsp;Settings</p>
                                     <hr />
 
                                     <FormSelectField
@@ -314,7 +314,7 @@ function AdminUserUpdate() {
                                         maxWidth="180px"
                                     />
 
-                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Full Name</p>
+                                    <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Full Name</p>
                                     <hr />
 
                                     <FormInputField
@@ -341,7 +341,7 @@ function AdminUserUpdate() {
                                         maxWidth="380px"
                                     />
 
-                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faContactCard} />&nbsp;Contact Information</p>
+                                    <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faContactCard} />&nbsp;Contact Information</p>
                                     <hr />
 
                                     <FormInputField
@@ -368,7 +368,7 @@ function AdminUserUpdate() {
                                         maxWidth="150px"
                                     />
 
-                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faAddressBook} />&nbsp;Address</p>
+                                    <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faAddressBook} />&nbsp;Address</p>
                                     <hr />
 
                                     <FormCountryField
@@ -445,7 +445,7 @@ function AdminUserUpdate() {
                                         maxWidth="80px"
                                     />
 
-                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faChartPie} />&nbsp;Metrics</p>
+                                    <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faChartPie} />&nbsp;Metrics</p>
                                     <hr />
 
                                     <FormSelectField

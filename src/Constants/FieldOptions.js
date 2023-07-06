@@ -21,6 +21,24 @@ export const SUBMISSION_STATES = {
     5: "Sent back"
 }
 
+export const ORGANIZATION_STATUS_OPTIONS = [
+    { value: 0, label: 'All' },
+    { value: 1, label: 'Waiting for receiving' },
+    { value: 2, label: 'Processing' },
+    { value: 3, label: 'In Review' },
+    { value: 4, label: 'Reviewed' },
+    { value: 5, label: 'Sent back' },
+];
+
+export const SUBMISSION_STATUS_OPTIONS = [
+    { value: 0, label: 'All' },
+    { value: 1, label: 'Waiting for receiving' },
+    { value: 2, label: 'Processing' },
+    { value: 3, label: 'In Review' },
+    { value: 4, label: 'Reviewed' },
+    { value: 5, label: 'Sent back' },
+];
+
 export const OVERALL_NUMBER_GRADE_OPTIONS = [
     { value: 0.5, label: '0.5' },
     { value: 1.0, label: '1.0' },

@@ -267,7 +267,7 @@ function RetailerCustomerDetailForComicSubmission() {
                     <nav class="box">
                         <div class="columns">
                             <div class="column">
-                                <p class="title is-2"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Customer</p>
+                                <p class="title is-4"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Customer</p>
                             </div>
                             <div class="column has-text-right">
                                 {/* Mobile Specific */}

@@ -159,7 +159,7 @@ function RetailerComicSubmissionDetail() {
                         </ul>
                     </nav>
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submission</p>
+                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submission</p>
                         <FormErrorBox errors={errors} />
 
                         {isFetching
@@ -188,7 +188,7 @@ function RetailerComicSubmissionDetail() {
                                       </ul>
                                     </div>
 
-                                    <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comic Book Information</p>
+                                    <p class="subtitle is-6 pt-4"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comic Book Information</p>
                                     <hr />
 
                                     {submission && <FormInputField
@@ -318,7 +318,7 @@ function RetailerComicSubmissionDetail() {
                                     {submission.isCpsIndieMintGem === false &&
                                         <>
 
-                                        <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faMagnifyingGlass} />&nbsp;Summary of Findings</p>
+                                        <p class="subtitle is-6 pt-4"><FontAwesomeIcon className="fas" icon={faMagnifyingGlass} />&nbsp;Summary of Findings</p>
                                         <hr />
 
                                         {submission && <FormRadioField
@@ -499,7 +499,7 @@ function RetailerComicSubmissionDetail() {
                                             rows={4}
                                         />
 
-                                        <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faBalanceScale} />&nbsp;Grading</p>
+                                        <p class="subtitle is-6 pt-4"><FontAwesomeIcon className="fas" icon={faBalanceScale} />&nbsp;Grading</p>
                                         <hr />
 
                                         <FormRadioField
@@ -558,7 +558,7 @@ function RetailerComicSubmissionDetail() {
                                         />}
                                     </>}
 
-                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faCogs} />&nbsp;Settings</p>
+                                    <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faCogs} />&nbsp;Settings</p>
                                     <hr />
 
                                     {submission && <FormInputField

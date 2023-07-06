@@ -272,7 +272,7 @@ function AdminOrganizationDetailForComicSubmission() {
                     <nav class="box">
                         <div class="columns">
                             <div class="column">
-                                <p class="title is-2"><FontAwesomeIcon className="fas" icon={faBuilding} />&nbsp;Organization</p>
+                                <p class="title is-4"><FontAwesomeIcon className="fas" icon={faBuilding} />&nbsp;Organization</p>
                             </div>
                             <div class="column has-text-right">
                                 {/* Mobile Specific */}
@@ -315,7 +315,7 @@ function AdminOrganizationDetailForComicSubmission() {
                                       </ul>
                                     </div>
 
-                                    <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</p>
+                                    <p class="subtitle is-6 pt-4"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submissions</p>
                                     <hr />
 
                                     {!isFetching && submissions && submissions.results && (submissions.results.length > 0 || previousCursors.length > 0)

@@ -170,7 +170,7 @@ function ForgotPassword() {
                                                 ?
                                                 <>
                                                     <form>
-                                                        <h1 className="title is-2 has-text-centered">Forgot Password</h1>
+                                                        <h1 className="title is-4 has-text-centered">Forgot Password</h1>
                                                         <p className="pb-5 has-text-grey">Please enter your email and we will send you a password reset email.</p>
                                                         {isUnauthorized === "true" &&
                                                             <article class="message is-danger">

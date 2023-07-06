@@ -268,7 +268,7 @@ function AdminComicSubmissionDetailForAttachment() {
                     <nav class="box">
                         <div class="columns">
                             <div class="column">
-                                <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submission</p>
+                                <p class="title is-4"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submission</p>
                             </div>
                             {submission && <div class="column has-text-right">
                                 {/* Mobile Specific */}
@@ -315,7 +315,7 @@ function AdminComicSubmissionDetailForAttachment() {
                                         ?
                                         <div class="container">
 
-                                            <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faFile} />&nbsp;Attachments</p>
+                                            <p class="subtitle is-6 pt-4"><FontAwesomeIcon className="fas" icon={faFile} />&nbsp;Attachments</p>
                                             <hr />
 
                                             <div class="b-table">

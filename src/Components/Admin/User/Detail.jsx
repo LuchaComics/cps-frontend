@@ -157,7 +157,7 @@ function AdminUserDetail() {
                     <nav class="box">
                         {user && <div class="columns">
                             <div class="column">
-                                <p class="title is-2"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;User</p>
+                                <p class="title is-4"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;User</p>
                             </div>
                             <div class="column has-text-right">
                                 {/* Mobile Specific */}
@@ -197,7 +197,7 @@ function AdminUserDetail() {
                                       </ul>
                                     </div>
 
-                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faCogs} />&nbsp;Settings</p>
+                                    <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faCogs} />&nbsp;Settings</p>
                                     <hr />
 
                                     <FormSelectField
@@ -234,7 +234,7 @@ function AdminUserDetail() {
                                         disabled={true}
                                     />
 
-                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Full Name</p>
+                                    <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Full Name</p>
                                     <hr />
 
                                     <FormInputField
@@ -258,7 +258,7 @@ function AdminUserDetail() {
                                         disabled={true}
                                     />
 
-                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faContactCard} />&nbsp;Contact Information</p>
+                                    <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faContactCard} />&nbsp;Contact Information</p>
                                     <hr />
 
                                     <FormInputField
@@ -283,7 +283,7 @@ function AdminUserDetail() {
                                         disabled={true}
                                     />
 
-                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faAddressBook} />&nbsp;Address</p>
+                                    <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faAddressBook} />&nbsp;Address</p>
                                     <hr />
 
                                     <FormCountryField
@@ -356,7 +356,7 @@ function AdminUserDetail() {
                                         disabled={true}
                                     />
 
-                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faChartPie} />&nbsp;Metrics</p>
+                                    <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faChartPie} />&nbsp;Metrics</p>
                                     <hr />
 
                                     <FormCheckboxField

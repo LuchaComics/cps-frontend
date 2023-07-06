@@ -135,7 +135,7 @@ function AdminComicSubmissionAddStep3() {
                     </nav>
 
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comic Submission (Confirmation)</p>
+                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faPlus} />&nbsp;Add Comic Submission (Confirmation)</p>
                         <FormErrorBox errors={errors} />
 
                         {isFetching

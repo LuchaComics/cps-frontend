@@ -140,7 +140,7 @@ function AdminComicSubmissionDetailForPDFFile() {
                         </ul>
                     </nav>
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submission</p>
+                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submission</p>
                         <FormErrorBox errors={errors} />
 
                         {isFetching
@@ -169,7 +169,7 @@ function AdminComicSubmissionDetailForPDFFile() {
                                       </ul>
                                     </div>
 
-                                    <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faFile} />&nbsp;File</p>
+                                    <p class="subtitle is-6 pt-4"><FontAwesomeIcon className="fas" icon={faFile} />&nbsp;File</p>
                                     <hr />
                                     <p class="pb-4 has-text-grey">Click the following "Download PDF" button to start downloading a copy of this submission in PDF file format to your computer.</p>
 

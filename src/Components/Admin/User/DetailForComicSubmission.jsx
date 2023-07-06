@@ -270,7 +270,7 @@ function AdminUserDetailForComicSubmission() {
                     <nav class="box">
                         <div class="columns">
                             <div class="column">
-                                <p class="title is-2"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;User</p>
+                                <p class="title is-4"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;User</p>
                             </div>
                             <div class="column has-text-right">
                                 {/* Mobile Specific */}

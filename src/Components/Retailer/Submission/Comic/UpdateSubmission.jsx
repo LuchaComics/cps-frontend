@@ -275,7 +275,7 @@ function RetailerComicSubmissionUpdateForComicSubmission() {
                         </ul>
                     </nav>
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submission</p>
+                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faTasks} />&nbsp;Comic Submission</p>
                         <FormErrorBox errors={errors} />
 
                         <p class="pb-4 has-text-grey">Please fill out all the required fields before submitting this form.</p>
@@ -287,7 +287,7 @@ function RetailerComicSubmissionUpdateForComicSubmission() {
                             <>
                                 <div class="container">
 
-                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comic Book Information</p>
+                                    <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faBook} />&nbsp;Comic Book Information</p>
                                     <hr />
 
                                     <FormInputField
@@ -429,7 +429,7 @@ function RetailerComicSubmissionUpdateForComicSubmission() {
                                     {isCpsIndieMintGem === false &&
                                         <>
 
-                                        <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faMagnifyingGlass} />&nbsp;Summary of Findings</p>
+                                        <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faMagnifyingGlass} />&nbsp;Summary of Findings</p>
                                         <hr />
 
                                         <FormRadioField
@@ -643,7 +643,7 @@ function RetailerComicSubmissionUpdateForComicSubmission() {
                                             rows={4}
                                         />
 
-                                        <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faBalanceScale} />&nbsp;Grading</p>
+                                        <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faBalanceScale} />&nbsp;Grading</p>
                                         <hr />
 
                                         <FormRadioField

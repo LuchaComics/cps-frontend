@@ -112,7 +112,7 @@ function AccountDetail() {
                     <nav class="box">
                         {currentUser && <div class="columns">
                             <div class="column">
-                                <p class="title is-2"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Account</p>
+                                <p class="title is-4"><FontAwesomeIcon className="fas" icon={faUserCircle} />&nbsp;Account</p>
                             </div>
                             <div class="column has-text-right">
                                 {/* Mobile Specific */}
@@ -136,7 +136,7 @@ function AccountDetail() {
                             <>
                                 {currentUser && <div class="container">
 
-                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Full Name</p>
+                                    <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Full Name</p>
                                     <hr />
 
                                     <FormInputField
@@ -160,7 +160,7 @@ function AccountDetail() {
                                         disabled={true}
                                     />
 
-                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faContactCard} />&nbsp;Contact Information</p>
+                                    <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faContactCard} />&nbsp;Contact Information</p>
                                     <hr />
 
                                     <FormInputField
@@ -185,7 +185,7 @@ function AccountDetail() {
                                         disabled={true}
                                     />
 
-                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faAddressBook} />&nbsp;Address</p>
+                                    <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faAddressBook} />&nbsp;Address</p>
                                     <hr />
 
                                     <FormCountryField
@@ -258,7 +258,7 @@ function AccountDetail() {
                                         disabled={true}
                                     />
 
-                                    <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faChartPie} />&nbsp;Metrics</p>
+                                    <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faChartPie} />&nbsp;Metrics</p>
                                     <hr />
 
                                     <FormCheckboxField

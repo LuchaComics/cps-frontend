@@ -62,7 +62,7 @@ function AdminDashboard() {
                     <nav class="box">
                         <div class="columns">
                             <div class="column">
-                                <h1 class="title is-2"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</h1>
+                                <h1 class="title is-4"><FontAwesomeIcon className="fas" icon={faGauge} />&nbsp;Admin Dashboard</h1>
                             </div>
                         </div>
 

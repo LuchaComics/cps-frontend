@@ -140,7 +140,7 @@ function Index() {
                                             </nav>
                                             {/* End Logo */}
                                             <form>
-                                                <h1 className="title is-2 has-text-centered">Welcome</h1>
+                                                <h1 className="title is-4 has-text-centered">Welcome</h1>
 
 
                                                 <Link class="button is-medium is-block is-fullwidth is-primary" type="button" to="/login" style={{backgroundColor:"#FF0000"}}>

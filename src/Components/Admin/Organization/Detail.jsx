@@ -117,7 +117,7 @@ function AdminOrganizationDetail() {
                     <nav class="box">
                         {organization && <div class="columns">
                             <div class="column">
-                                <p class="title is-2"><FontAwesomeIcon className="fas" icon={faBuilding} />&nbsp;Organization</p>
+                                <p class="title is-4"><FontAwesomeIcon className="fas" icon={faBuilding} />&nbsp;Organization</p>
                             </div>
                             {/* HIDDEN */}
                             <div class="is-hidden column has-text-right">
@@ -161,7 +161,7 @@ function AdminOrganizationDetail() {
                                       </ul>
                                     </div>
 
-                                    <p class="subtitle is-3 pt-4"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Identification</p>
+                                    <p class="subtitle is-6 pt-4"><FontAwesomeIcon className="fas" icon={faIdCard} />&nbsp;Identification</p>
                                     <hr />
 
                                     <FormInputField

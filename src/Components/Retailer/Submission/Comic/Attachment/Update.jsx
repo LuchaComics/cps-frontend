@@ -201,7 +201,7 @@ function RetailerSubmissionAttachmentUpdate() {
                         </ul>
                     </nav>
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Attachment</p>
+                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faPencil} />&nbsp;Edit Attachment</p>
                         <FormErrorBox errors={errors} />
 
                         {/* <p class="pb-4 has-text-grey">Please fill out all the required fields before submitting this form.</p> */}

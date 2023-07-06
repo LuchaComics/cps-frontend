@@ -122,10 +122,10 @@ function RetailerRegistrySearch() {
                     </nav>
 
                     <nav class="box">
-                        <p class="title is-2"><FontAwesomeIcon className="fas" icon={faBarcode} />&nbsp;Registry</p>
+                        <p class="title is-4"><FontAwesomeIcon className="fas" icon={faBarcode} />&nbsp;Registry</p>
                         <FormErrorBox errors={errors} />
                         <div class="container pb-5">
-                            <p class="subtitle is-3"><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Lookup Submission</p>
+                            <p class="subtitle is-6"><FontAwesomeIcon className="fas" icon={faSearch} />&nbsp;Lookup Submission</p>
                             <hr />
 
                             <FormInputField

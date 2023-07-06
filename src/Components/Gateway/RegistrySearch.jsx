@@ -142,7 +142,7 @@ function PublicRegistrySearch() {
                                             </nav>
                                             {/* End Logo */}
                                             <form>
-                                                <h1 className="title is-2 has-text-centered">Check your Grading</h1>
+                                                <h1 className="title is-4 has-text-centered">Check your Grading</h1>
                                                 <FormErrorBox errors={errors} />
                                                 <div class="field">
                                                     <label class="label is-small has-text-grey-light">CPS Registry #</label>
