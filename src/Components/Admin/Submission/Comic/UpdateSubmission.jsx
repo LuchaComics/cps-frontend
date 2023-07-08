@@ -341,7 +341,7 @@ function AdminComicSubmissionUpdateForComicSubmission() {
                                     />
 
                                     <FormInputField
-                                        label="Issue Vol"
+                                        label="Issue Volume"
                                         name="issueVol"
                                         placeholder="Text input"
                                         value={issueVol}
@@ -353,7 +353,7 @@ function AdminComicSubmissionUpdateForComicSubmission() {
                                     />
 
                                     <FormInputField
-                                        label="Issue No"
+                                        label="Issue No."
                                         name="issueNo"
                                         placeholder="Text input"
                                         value={issueNo}

@@ -203,7 +203,7 @@ function AdminComicSubmissionDetail() {
                                     />}
 
                                     {submission && <FormInputField
-                                        label="Issue Vol"
+                                        label="Issue Volume"
                                         name="issueVol"
                                         placeholder="Text input"
                                         value={submission.issueVol}
@@ -214,7 +214,7 @@ function AdminComicSubmissionDetail() {
                                     />}
 
                                     {submission && <FormInputField
-                                        label="Issue No"
+                                        label="Issue No."
                                         name="issueNo"
                                         placeholder="Text input"
                                         value={submission.issueNo}

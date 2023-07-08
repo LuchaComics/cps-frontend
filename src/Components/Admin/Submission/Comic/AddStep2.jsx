@@ -335,7 +335,7 @@ function AdminComicSubmissionAddStep2() {
                                     />
 
                                     <FormInputField
-                                        label="Issue Vol"
+                                        label="Issue Volume"
                                         name="issueVol"
                                         placeholder="Text input"
                                         value={issueVol}
@@ -347,7 +347,7 @@ function AdminComicSubmissionAddStep2() {
                                     />
 
                                     <FormInputField
-                                        label="Issue No"
+                                        label="Issue No."
                                         name="issueNo"
                                         placeholder="Text input"
                                         value={issueNo}
