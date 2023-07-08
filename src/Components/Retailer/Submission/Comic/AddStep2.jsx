@@ -366,6 +366,17 @@ function RetailerComicSubmissionAddStep3() {
                                         maxWidth="280px"
                                     />}
 
+                                    <FormSelectField
+                                        label="Special Details"
+                                        name="specialDetails"
+                                        placeholder="Text input"
+                                        selectedValue={specialDetails}
+                                        errorText={errors && errors.specialDetails}
+                                        helpText=""
+                                        onChange={(e)=>setSpecialDetails(parseInt(e.target.value))}
+                                        options={SPECIAL_DETAILS_WITH_EMPTY_OPTIONS}
+                                    />
+
                                     <FormTextareaField
                                         label="Special Note (Optional)"
                                         name="specialNotes"
@@ -378,17 +389,6 @@ function RetailerComicSubmissionAddStep3() {
                                         maxWidth="280px"
                                         helpText={"Max 638 characters"}
                                         rows={4}
-                                    />
-
-                                    <FormSelectField
-                                        label="Special Details"
-                                        name="specialDetails"
-                                        placeholder="Text input"
-                                        selectedValue={specialDetails}
-                                        errorText={errors && errors.specialDetails}
-                                        helpText=""
-                                        onChange={(e)=>setSpecialDetails(parseInt(e.target.value))}
-                                        options={SPECIAL_DETAILS_WITH_EMPTY_OPTIONS}
                                     />
 
                                     {specialDetails === 1 && <FormInputField
