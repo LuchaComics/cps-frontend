@@ -269,6 +269,14 @@ function AdminComicSubmissionDetail() {
                                         disabled={true}
                                     />}
 
+                                    <FormCheckboxField
+                                        label="Is Key Issue?"
+                                        name="isKeyIssue"
+                                        checked={submission.isKeyIssue}
+                                        maxWidth="180px"
+                                        disabled={true}
+                                    />
+
                                     <FormSelectField
                                         label="Primary Label Details"
                                         name="primaryLabelDetails"

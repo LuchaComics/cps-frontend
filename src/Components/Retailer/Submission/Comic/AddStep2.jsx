@@ -61,6 +61,9 @@ function RetailerComicSubmissionAddStep3() {
     const [issueCoverMonth, setIssueCoverMonth] = useState(0);
     const [publisherName, setPublisherName] = useState(0);
     const [publisherNameOther, setPublisherNameOther] = useState("");
+    const [isKeyIssue, setIsKeyIssue] = useState(false);
+    const [primaryLabelDetails, setPrimaryLabelDetails] = useState(0);
+    const [primaryLabelDetailsOther, setPrimaryLabelDetailsOther] = useState("");
     const [creasesFinding, setCreasesFinding] = useState("");
     const [tearsFinding, setTearsFinding] = useState("");
     const [missingPartsFinding, setMissingPartsFinding] = useState("");
@@ -81,8 +84,6 @@ function RetailerComicSubmissionAddStep3() {
     const [serviceType, setServiceType] = useState(0);
     const [isCpsIndieMintGem, setIsCpsIndieMintGem] = useState(false);
     const [signatures, setSignatures] = useState([]);
-    const [primaryLabelDetails, setPrimaryLabelDetails] = useState(0);
-    const [primaryLabelDetailsOther, setPrimaryLabelDetailsOther] = useState("");
 
     ////
     //// Event handling.
@@ -103,6 +104,9 @@ function RetailerComicSubmissionAddStep3() {
             issueCoverMonth: issueCoverMonth,
             publisherName: publisherName,
             publisherNameOther: publisherNameOther,
+            isKeyIssue: isKeyIssue,
+            primaryLabelDetails: primaryLabelDetails,
+            primaryLabelDetailsOther: primaryLabelDetailsOther,
             specialNotes: specialNotes,
             gradingNotes: gradingNotes,
             signatures: signatures,
@@ -125,8 +129,6 @@ function RetailerComicSubmissionAddStep3() {
             serviceType: isCpsIndieMintGem ? 4 : serviceType, // 4=Indie Mint Gem
             organizationID: currentUser.organizationId,
             collectibleType: 1, // 1=Comic, 2=Card
-            primaryLabelDetails: primaryLabelDetails,
-            primaryLabelDetailsOther: primaryLabelDetailsOther,
         };
 
         console.log("onSubmitClick: Attaching customer identification.");
@@ -365,6 +367,15 @@ function RetailerComicSubmissionAddStep3() {
                                         isRequired={true}
                                         maxWidth="280px"
                                     />}
+
+                                    <FormCheckboxField
+                                        label="Is Key Issue?"
+                                        name="isKeyIssue"
+                                        checked={isKeyIssue}
+                                        errorText={errors && errors.isKeyIssue}
+                                        onChange={(e)=>setIsKeyIssue(!isKeyIssue)}
+                                        maxWidth="180px"
+                                    />
 
                                     <FormSelectField
                                         label="Primary Label Details"

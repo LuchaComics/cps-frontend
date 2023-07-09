@@ -62,6 +62,9 @@ function AdminComicSubmissionUpdateForComicSubmission() {
     const [issueCoverMonth, setIssueCoverMonth] = useState(0);
     const [publisherName, setPublisherName] = useState(0);
     const [publisherNameOther, setPublisherNameOther] = useState("");
+    const [isKeyIssue, setIsKeyIssue] = useState(false);
+    const [primaryLabelDetails, setPrimaryLabelDetails] = useState(0);
+    const [primaryLabelDetailsOther, setPrimaryLabelDetailsOther] = useState("");
     const [creasesFinding, setCreasesFinding] = useState("");
     const [tearsFinding, setTearsFinding] = useState("");
     const [missingPartsFinding, setMissingPartsFinding] = useState("");
@@ -84,8 +87,6 @@ function AdminComicSubmissionUpdateForComicSubmission() {
     const [serviceType, setServiceType] = useState(0);
     const [isCpsIndieMintGem, setIsCpsIndieMintGem] = useState(false);
     const [signatures, setSignatures] = useState([]);
-    const [primaryLabelDetails, setPrimaryLabelDetails] = useState(0);
-    const [primaryLabelDetailsOther, setPrimaryLabelDetailsOther] = useState("");
 
     ////
     //// Event handling.
@@ -106,6 +107,9 @@ function AdminComicSubmissionUpdateForComicSubmission() {
             issue_cover_month: issueCoverMonth,
             publisher_name: publisherName,
             publisher_name_other: publisherNameOther,
+            is_key_issue: isKeyIssue,
+            primary_label_details: primaryLabelDetails,
+            primary_label_details_other: primaryLabelDetailsOther,
             special_notes: specialNotes,
             grading_notes: gradingNotes,
             is_cps_indie_mint_gem: isCpsIndieMintGem,
@@ -127,8 +131,6 @@ function AdminComicSubmissionUpdateForComicSubmission() {
             service_type: isCpsIndieMintGem ? 4 : serviceType, // 4=Indie Mint Gem
             organization_id: organizationID,
             signatures: signatures,
-            primary_label_details: primaryLabelDetails,
-            primary_label_details_other: primaryLabelDetailsOther,
         };
 
         // Submit to the backend.
@@ -149,6 +151,9 @@ function AdminComicSubmissionUpdateForComicSubmission() {
         setIssueCoverMonth(response.issueCoverMonth);
         setPublisherName(response.publisherName);
         setPublisherNameOther(response.publisherNameOther);
+        setIsKeyIssue(response.isKeyIssue);
+        setPrimaryLabelDetails(response.primaryLabelDetails);
+        setPrimaryLabelDetailsOther(response.primaryLabelDetailsOther);
         setIsCpsIndieMintGem(response.isCpsIndieMintGem);
         setCreasesFinding(response.creasesFinding);
         setTearsFinding(response.tearsFinding);
@@ -169,8 +174,6 @@ function AdminComicSubmissionUpdateForComicSubmission() {
         setServiceType(response.serviceType);
         setOrganizationID(response.organizationId);
         setSignatures(response.signatures);
-        setPrimaryLabelDetails(response.primaryLabelDetails);
-        setPrimaryLabelDetailsOther(response.primaryLabelDetailsOther);
     }
 
     function onComicSubmissionDetailError(apiErr) {
@@ -412,6 +415,15 @@ function AdminComicSubmissionUpdateForComicSubmission() {
                                         isRequired={true}
                                         maxWidth="280px"
                                     />}
+
+                                    <FormCheckboxField
+                                        label="Is Key Issue?"
+                                        name="isKeyIssue"
+                                        checked={isKeyIssue}
+                                        errorText={errors && errors.isKeyIssue}
+                                        onChange={(e)=>setIsKeyIssue(!isKeyIssue)}
+                                        maxWidth="180px"
+                                    />
 
                                     <FormSelectField
                                         label="Primary Label Details"
