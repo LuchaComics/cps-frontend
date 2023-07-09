@@ -270,20 +270,20 @@ function RetailerComicSubmissionDetail() {
                                     />}
 
                                     <FormSelectField
-                                        label="Special Details"
-                                        name="specialDetails"
+                                        label="Primary Label Details"
+                                        name="primaryLabelDetails"
                                         placeholder="Text input"
-                                        selectedValue={submission.specialDetails}
+                                        selectedValue={submission.primaryLabelDetails}
                                         helpText=""
                                         options={SPECIAL_DETAILS_WITH_EMPTY_OPTIONS}
                                         disabled={true}
                                     />
 
-                                    {submission.specialDetails === 1 && <FormInputField
-                                        label="Special Details (Other)"
-                                        name="specialDetailsOther"
+                                    {submission.primaryLabelDetails === 1 && <FormInputField
+                                        label="Primary Label Details (Other)"
+                                        name="primaryLabelDetailsOther"
                                         placeholder="Text input"
-                                        value={submission.specialDetailsOther}
+                                        value={submission.primaryLabelDetailsOther}
                                         helpText=""
                                         isRequired={true}
                                         maxWidth="280px"

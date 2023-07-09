@@ -36,7 +36,7 @@ function AdminComicSubmissionList() {
     const [previousCursors, setPreviousCursors] = useState([]);             // Pagination
     const [nextCursor, setNextCursor] = useState("");                       // Pagination
     const [currentCursor, setCurrentCursor] = useState("");                 // Pagination
-    const [showFilter, setShowFilter] = useState(true);                    // Filtering + Searching
+    const [showFilter, setShowFilter] = useState(false);                    // Filtering + Searching
     const [sortField, setSortField] = useState("created");                  // Sorting
     const [temporarySearchText, setTemporarySearchText] = useState("");     // Searching - The search field value as your writes their query.
     const [actualSearchText, setActualSearchText] = useState("");           // Searching - The actual search query value to submit to the API.

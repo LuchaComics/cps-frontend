@@ -86,8 +86,8 @@ function AdminComicSubmissionAddStep2() {
     const [serviceType, setServiceType] = useState(0);
     const [isCpsIndieMintGem, setIsCpsIndieMintGem] = useState(false);
     const [signatures, setSignatures] = useState([]);
-    const [specialDetails, setSpecialDetails] = useState(0);
-    const [specialDetailsOther, setSpecialDetailsOther] = useState("");
+    const [primaryLabelDetails, setPrimaryLabelDetails] = useState(0);
+    const [primaryLabelDetailsOther, setPrimaryLabelDetailsOther] = useState("");
 
     ////
     //// Event handling.
@@ -130,8 +130,8 @@ function AdminComicSubmissionAddStep2() {
             serviceType: isCpsIndieMintGem ? 4 : serviceType, // 4=Indie Mint Gem
             organizationID: organizationID,
             collectibleType: 1, // 1=Comic, 2=Card
-            specialDetails: specialDetails,
-            specialDetailsOther: specialDetailsOther,
+            primaryLabelDetails: primaryLabelDetails,
+            primaryLabelDetailsOther: primaryLabelDetailsOther,
         };
 
         console.log("onSubmitClick: Attaching user identification.");
@@ -408,24 +408,24 @@ function AdminComicSubmissionAddStep2() {
                                     />}
 
                                     <FormSelectField
-                                        label="Special Details"
-                                        name="specialDetails"
+                                        label="Primary Label Details"
+                                        name="primaryLabelDetails"
                                         placeholder="Text input"
-                                        selectedValue={specialDetails}
-                                        errorText={errors && errors.specialDetails}
+                                        selectedValue={primaryLabelDetails}
+                                        errorText={errors && errors.primaryLabelDetails}
                                         helpText=""
-                                        onChange={(e)=>setSpecialDetails(parseInt(e.target.value))}
+                                        onChange={(e)=>setPrimaryLabelDetails(parseInt(e.target.value))}
                                         options={SPECIAL_DETAILS_WITH_EMPTY_OPTIONS}
                                     />
 
-                                    {specialDetails === 1 && <FormInputField
-                                        label="Special Details (Other)"
-                                        name="specialDetailsOther"
+                                    {primaryLabelDetails === 1 && <FormInputField
+                                        label="Primary Label Details (Other)"
+                                        name="primaryLabelDetailsOther"
                                         placeholder="Text input"
-                                        value={specialDetailsOther}
-                                        errorText={errors && errors.specialDetailsOther}
+                                        value={primaryLabelDetailsOther}
+                                        errorText={errors && errors.primaryLabelDetailsOther}
                                         helpText=""
-                                        onChange={(e)=>setSpecialDetailsOther(e.target.value)}
+                                        onChange={(e)=>setPrimaryLabelDetailsOther(e.target.value)}
                                         isRequired={true}
                                         maxWidth="280px"
                                     />}
