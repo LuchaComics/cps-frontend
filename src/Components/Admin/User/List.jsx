@@ -332,6 +332,8 @@ function AdminUserList() {
                                                     <thead>
                                                         <tr>
                                                             <th>Name</th>
+                                                            <th>Email</th>
+                                                            <th>Phone</th>
                                                             <th>Organization</th>
                                                             <th>Role</th>
                                                             <th>Joined</th>
@@ -343,7 +345,8 @@ function AdminUserList() {
                                                         {users && users.results && users.results.map(function(user, i){
                                                             return <tr>
                                                                 <td data-label="Name">{user.name}</td>
-
+                                                                <td data-label="Email"><Link to={`mailto:${user.email}`}>{user.email}</Link></td>
+                                                                <td data-label="Phone"><Link to={`tel:${user.phone}`}>{user.phone}</Link></td>
                                                                 <td data-label="Organization">
                                                                     {user.organizationId !== "000000000000000000000000" && <Link to={`/admin/organization/${user.organizationId}`} target="_blank" rel="noreferrer" class="is-small">
                                                                         {user.organizationName}&nbsp;<FontAwesomeIcon className="fas" icon={faArrowUpRightFromSquare} />

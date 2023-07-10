@@ -324,6 +324,7 @@ function RetailerCustomerList() {
                                                         <tr>
                                                             <th>Name</th>
                                                             <th>Email</th>
+                                                            <th>Phone</th>
                                                             <th>Created</th>
                                                             <th></th>
                                                         </tr>
@@ -333,7 +334,12 @@ function RetailerCustomerList() {
                                                         {customers && customers.results && customers.results.map(function(customer, i){
                                                             return <tr>
                                                                 <td data-label="Name">{customer.name}</td>
-                                                                <td data-label="Email">{customer.email}</td>
+                                                                <td data-label="Email">
+                                                                    <Link to={`mailto:${customer.email}`}>{customer.email}</Link>
+                                                                </td>
+                                                                <td data-label="Phone">
+                                                                    <Link to={`tel:${customer.phone}`}>{customer.phone}</Link>
+                                                                </td>
                                                                 <td data-label="Created">{customer.createdAt}</td>
                                                                 <td class="is-actions-cell">
                                                                     <div class="buttons is-right">
